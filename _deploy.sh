@@ -3,7 +3,7 @@
 set -e
 
 [ -z "${GITHUB_PAT}" ] && exit 0
-[ "${TRAVIS_BRANCH}" != "master" ] && exit 0
+[ "${TRAVIS_BRANCH}" != "master" ] && exit 1
 
 git config --global user.email "hicks.daniel.j@gmail.com""
 git config --global user.name "Dan Hicks"
