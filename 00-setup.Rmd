@@ -35,6 +35,7 @@ With this way, R and RStudio are installed and run on virtual computers (called 
 In this course, lectures will be based around *live coding*.  This means that I (or whoever's doing the lecturing) will be writing code in real time, and you'll follow along, transcribing the code into RStudio (or whatever) on your local machine and running it at the same time as me.  
 
 Live coding is a great way to learn coding practices.  But it requires you to have quick access to 3-5 different things:  
+
 * My screenshare (so you can see what I'm typing)
 * The course chat (so you can ask for help or other questions, or make comments)
 * Possibly a separate way to put up a flag so that I can see immediately that you have a question
