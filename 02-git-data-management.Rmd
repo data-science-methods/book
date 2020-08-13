@@ -1,4 +1,124 @@
+# (PART) Some fundamental tools {-}
+
+# R Basics #
+
+## Let's get started with RStudio ##
+
+* Quick tour of RStudio's UI
+* Let's plot a thing
+
+```{r}
+data(anscombe) ## <https://en.wikipedia.org/wiki/Anscombe%27s_quartet>
+
+anscombe
+str(anscombe)
+summary(anscombe)
+
+library(ggplot2)
+ggplot(data = anscombe, aes(x = x1, y = y1)) +
+    geom_point()
+```
+
+**Exercise:** plot the other three datasets
+
+```{r}
+anscombe$x1
+anscombe[['x1']]
+
+anscombe[,'x1']
+anscombe[,1]
+
+mean(anscombe$x1)
+mean(anscombe$x2)
+
+sd(anscombe$y1)
+sd(anscombe$y2)
+
+cor(anscombe$x1, anscombe$y1)
+```
+
+**Exercise**: Calculate correlations for all four x-y pairs
+
+* Some idiosyncracies of my code
+    - `'` rather than `"`
+    - `##` for documentation comment
+    - `=` not `<-` for assignment
+
+* Essential Global Options
+    - Never save .Rdata, load workspace
+* Super useful custom keyboard commands: 
+    - Tools $\to$ Modify Keyboard Shortcuts...
+    - ⌘+1, ⌘+2, ⌘+3
+
+## Base R data types ##
+
+### Numerics
+```{r}
+foo = 2
+bar = 3
+foobar = foo + bar
+foo / bar
+try(foo / 0)
+```
+
+### Vectors
+```{r}
+foo = c(2, 3, 4)
+bar = c(5, 6, 7)
+foo[2]
+foo[2:3]
+try(foo[1, 3])
+foo[c(1, 3)]
+
+foo + bar
+foo * bar
+## NB difference between vector and length-1 comparisons
+bar == foo + 3
+identical(bar, foo + 3)
+
+c(foo, bar)
+```
+
+### Strings
+```{r}
+foo = c('monkey', 'banana')
+bar = c('house')
+## How to put these together? 
+try(foo + bar)
+c(foo, bar)
+paste(foo, bar)
+paste0(foo, bar)
+```
+
+### Factors
+```{r}
+foo_str = c('foo', 'foo', 'bar', 'zoo')
+as.integer(foo_str)
+foo_fct = as.factor(foo_str)
+as.integer(foo)
+levels(foo_fct)
+```
+
+### Lists 
+*[todo]*
+
+### Data frames
+*[todo]*
+
+
+### *[examining variables]*
+- length
+- str
+- class, typeof
+- [challenge](https://gge-ucd.github.io/R-DAVIS/lesson_how_r_thinks_about_data.html#challenge)
+
+### *[Missing data]*
+
+<https://gge-ucd.github.io/R-DAVIS/lesson_how_r_thinks_about_data.html#missing_data>
+
 # Git and Data Management #
 
+# Functional Programming and Data Science #
 
+# Warnings, Errors, and Getting Help #
 

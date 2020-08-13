@@ -1,6 +1,6 @@
 # Week 0: Setting up {-}
 
-Before the first day of class, you'll need to set up three things:  **R, RStudio, and a GitHub account**.  R is the primary piece of software we'll be learning to use.  RStudio is an IDE (integrated development environment) for using R.  (Think of R as the engine of a car and RStudio as the dashboard, steering wheel, and pedals.)  GitHub is a service for sharing and collaborating on software engineering.  
+Before the first day of class, you'll need to set up a few things:  **R, RStudio, Slack, Zoom, and a GitHub account**.  I'd also like you to fill out a **pre-class survey**.  R is the primary piece of software we'll be learning to use.  RStudio is an IDE (integrated development environment) for using R.  (Think of R as the engine of a car and RStudio as the dashboard, steering wheel, and pedals.)  Slack will be the main way we communicate; we'll use Zoom for class time.  GitHub is a service for sharing and collaborating on software engineering projects.  
 
 I'll assume you have R and RStudio installed using either *the cloud way* or *the Mac way*.  If your computer is running Windows, Linux, or some other operating system that isn't Mac OS, I'm going to assume you have things set up the cloud way. These other operating systems are perfectly fine.  But I don't use them, which makes it much harder for me to help you if things aren't working. And Windows handles things like file paths and text file formats in idiosyncratic ways that can cause weird errors.  
 
@@ -24,20 +24,26 @@ With this way, R and RStudio are installed and run on virtual computers (called 
 
 [^google]: RStudio gives you the option to log in with Google or GitHub.  As a general practice, I recommend always keeping your accounts separate.  Use a password manager to generate separate, strong passwords for each site.  I use [LastPass](https://www.lastpass.com/). 
 
+## Slack ##
+
+For Fall 2020, the class Slack channel is at <https://datascienceme-ke13588.slack.com>.  Please use your UC Merced email to sign up.  
+
 ## GitHub ##
 
-1. Go to [`github.com`](https://github.com/). You can create a new account right on the front page.  
+1. Go to [`github.com`](https://github.com/). You can create a new account right on the front page.  I don't care what email address you use here.  
 
 2. You can fill in your profile if you want.  
 
+3. You'll send me the email address associated with your Github account in the pre-class survey.  
+
 ## Screen Layouts ##
 
-In this course, lectures will be based around *live coding*.  This means that I (or whoever's doing the lecturing) will be writing code in real time, and you'll follow along, transcribing the code into RStudio (or whatever) on your local machine and running it at the same time as me.  
+In this course, a significant amount of time will be spent on *live coding*.  This means that I (or whoever's doing the lecturing) will be writing code in real time, and you'll follow along, transcribing the code into RStudio (or whatever) on your local machine and running it at the same time as me.  
 
 Live coding is a great way to learn coding practices.  But it requires you to have quick access to 3-5 different things:  
 
 * My screenshare (so you can see what I'm typing)
-* The course chat (so you can ask for help or other questions, or make comments)
+* The course Slack (so you can ask for help or other questions, or make comments)
 * Possibly a separate way to put up a flag so that I can see immediately that you have a question
 * Your own workspace (RStudio or whatever)
 * Possibly a separate app for taking notes
@@ -46,9 +52,13 @@ In an ordinary classroom, the first three things would all be handled by the cla
 
 The most effective way to do this is to have multiple displays.  This is also the most expensive.  
 
-[This blog post](https://carpentries.org/blog/2020/06/online-workshop-logistics-and_screen-layouts/) discusses alternatives to multiple displays.  In particular, [this window layout](https://carpentries.org/images//blog/2020/06/screen_layouts/02-student-with_participantlist-1366x768.jpg) fits the screenshare, chat, and your workspace on to a single laptop display.  You can also have a separate text file open in RStudio for notes.  
+[This blog post](https://carpentries.org/blog/2020/06/online-workshop-logistics-and_screen-layouts/) discusses alternatives to multiple displays.  In particular, the window layout below fits the screenshare, chat, and your workspace on to a single laptop display.  You can also have a separate text file open in RStudio for notes. You might consider having Slack open on your phone — so that you can keep an eye on the chat — as well in the background on your computer — so that you can alt-tab to it to actually type things.  
+
+![Source: https://carpentries.org/images//blog/2020/06/screen_layouts/02-student-with_participantlist-1366x768.jpg](images/layout.jpg)
 
 
+## Pre-Class Survey ##
 
+Please take a few minutes to fill out this survey:  <https://ucmerced.az1.qualtrics.com/jfe/form/SV_eVU8JWREUu4UNH7>. 
 
 

@@ -1,0 +1,10 @@
+# (PART) Exploratory Data Analysis # {-}
+
+# Waterfalls, Spirals, and Philosophy of Science #
+
+- Waterfall model of development: <https://en.wikipedia.org/wiki/Waterfall_model>
+- Spiral model of development [@BoehmSpiralModelSoftware1988]
+- "The Scientific Method": <https://plato.stanford.edu/entries/scientific-method/#MetMetEndMet>
+
+# Exploratory Data Analysis and the Ladder of Models #
+
