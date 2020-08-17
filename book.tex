@@ -114,7 +114,7 @@
 
 \title{Data Science Methods for Cognitive Science}
 \author{Dan Hicks, \href{mailto:hicks.daniel.j@gmail.com}{\nolinkurl{hicks.daniel.j@gmail.com}}}
-\date{2020-08-13}
+\date{2020-08-17}
 
 \begin{document}
 \maketitle
@@ -141,6 +141,8 @@ In either case, all of the software and services we'll be using are either free 
 
 \hypertarget{r-and-rstudio-the-mac-way}{%
 \section{R and RStudio: The Mac Way}\label{r-and-rstudio-the-mac-way}}
+
+You can find some notes on accessibility and RStudio here: \url{https://support.rstudio.com/hc/en-us/articles/360044226673-RStudio-Accessibility-Features}.
 
 With this way, R and RStudio are installed and run on your computer, and all of the data files that you work with will also be on your computer. Unless you're running a Chromebook or similar, your computer is almost certainly more powerful than the default instance that RStudio Cloud gives you (see below), and you can use familiar tools to do things like organize folders and preview files. But sometimes particular details about the way your computer is set up can cause R and RStudio to do weird things, and these problems can be very difficult to diagnose and solve.
 
@@ -170,6 +172,8 @@ With this way, R and RStudio are installed and run on virtual computers (called 
 \section{Slack}\label{slack}}
 
 For Fall 2020, the class Slack channel is at \url{https://datascienceme-ke13588.slack.com}. Please use your UC Merced email to sign up.
+
+If you use a screenreader, here are some notes on accessibility and Slack: \url{https://www.marcozehe.de/status-of-the-accessibility-of-slack/}.
 
 \hypertarget{github}{%
 \section{GitHub}\label{github}}
@@ -221,6 +225,15 @@ The most effective way to do this is to have multiple displays. This is also the
 \section{Pre-Class Survey}\label{pre-class-survey}}
 
 Please take a few minutes to fill out this survey: \url{https://ucmerced.az1.qualtrics.com/jfe/form/SV_eVU8JWREUu4UNH7}.
+
+\hypertarget{a-note-on-accessibility}{%
+\section{A Note on Accessibility}\label{a-note-on-accessibility}}
+
+I chose the tools and platforms for this course in part because they're industry-standard. If you pursue a career as a data scientist in industry, you'll be expected to use Slack and Github on a daily basis. And RStudio is by far the most commonly used IDE (``integrated development environment'') for R.
+
+However, like many other technologies, they were originally developed using ableist assumptions about ``normal'' computer users. In response to criticism, the developers of these systems and tools have gone back and made their technologies more accessible. But there may still be barriers to accessibility that I have not anticipated. And of course the pandemic has created additional barriers, such as dependency on screensharing.
+
+If you encounter a barrier to participating in this course --- even a small inconvenience --- please let me know. Similarly, if you have ideas for making the course more accessible, please share them with me.
 
 \hypertarget{introduction}{%
 \chapter{Introduction}\label{introduction}}
@@ -875,7 +888,7 @@ By the end of the course, students will be able to
 \emph{{[}todo{]}}
 
 \hypertarget{examining-variables}{%
-\subsection{\texorpdfstring{\emph{{[}examining variables{]}}}{{[}examining variables{]}}}\label{examining-variables}}
+\section{\texorpdfstring{\emph{{[}examining variables{]}}}{{[}examining variables{]}}}\label{examining-variables}}
 
 \begin{itemize}
 \tightlist
@@ -890,18 +903,294 @@ By the end of the course, students will be able to
 \end{itemize}
 
 \hypertarget{missing-data}{%
-\subsection{\texorpdfstring{\emph{{[}Missing data{]}}}{{[}Missing data{]}}}\label{missing-data}}
+\section{\texorpdfstring{\emph{{[}Missing data{]}}}{{[}Missing data{]}}}\label{missing-data}}
 
 \url{https://gge-ucd.github.io/R-DAVIS/lesson_how_r_thinks_about_data.html\#missing_data}
 
-\hypertarget{git-and-data-management}{%
-\chapter{Git and Data Management}\label{git-and-data-management}}
+\hypertarget{git-and-version-control}{%
+\chapter{Git and Version Control}\label{git-and-version-control}}
+
+\begin{itemize}
+\item
+  \emph{{[}motivating example{]}}
+\item
+  Version control
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Basic idea: Tools for tracking changes to code over time
+  \item
+    Useful for identifying and reversing breaking changes
+  \item
+    Implementations upload to cloud, track who contributes code
+  \item
+    Good for collaboration, publishing code
+  \end{itemize}
+\item
+  git
+
+  \begin{itemize}
+  \tightlist
+  \item
+    One of many version control systems
+  \item
+    Very popular in part thanks to GitHub, which provides free hosting for open-source projects
+  \end{itemize}
+\item
+  git interfaces
+
+  \begin{itemize}
+  \tightlist
+  \item
+    command line
+  \item
+    RStudio projects
+  \item
+    GUIs: GitHub, Sourcetree
+  \end{itemize}
+\item
+  How to do things with git
+
+  \begin{itemize}
+  \tightlist
+  \item
+    setup
+
+    \begin{itemize}
+    \tightlist
+    \item
+      installation
+    \item
+      user config
+    \end{itemize}
+  \item
+    \texttt{git\ init}
+  \item
+    \texttt{add}
+  \item
+    \texttt{commit}
+  \item
+    \texttt{.gitignore}
+  \item
+    \texttt{fetch} and \texttt{pull}
+  \item
+    \texttt{push}
+  \item
+    forking
+  \item
+    pull requests
+  \item
+    browsing history on GitHub
+  \item
+    stretch goals: \texttt{branch}; \texttt{checkout}
+  \end{itemize}
+\end{itemize}
 
 \hypertarget{functional-programming-and-data-science}{%
 \chapter{Functional Programming and Data Science}\label{functional-programming-and-data-science}}
 
+\begin{itemize}
+\item
+  Recommended reading: \textcite{ChambersObjectOrientedProgrammingFunctional2014}; parts II and III of \textcite{WickhamAdvanced2014}
+\item
+  Programming paradigms
+
+  \begin{itemize}
+  \item
+    Procedural: Software is a series of instructions (``procedures''), which the computer carries out in order. Special instructions (if-then, loops) are used to change the order based on inputs or other conditions.
+  \item
+    Object-oriented: Software is made up of objects, which have properties (``attributes,'' including other objects) and do things (``methods'').
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Example: A board game consists of 1 or more players, a board, and a deck of cards.
+
+      \begin{itemize}
+      \tightlist
+      \item
+        Players each have a hand of cards (attribute), can draw cards from the deck into their hand (method, which also changes the deck's attributes), and can play cards to manipulate tokens on the board (method, which also changes the board's attributes).\\
+      \item
+        The game itself is an object, with the players, board, and deck for its attributes and methods to things up, run turns in sequence, determine the winner.\\
+      \item
+        Separate objects might be responsible for displaying the current state of the game and getting input from the users.\\
+      \end{itemize}
+    \item
+      Much better than procedural paradigms for \emph{encapsulation}: When a player draws a card from the deck, we just need to know the inputs and outputs for \texttt{Deck.draw()}, not the details of how the deck tracks the order of cards and which ones have already been drawn.
+    \item
+      Much easier to reason about systems with lots of dynamic, interacting parts.\\
+    \item
+      Examples (mostly): Python, C++, Java
+    \end{itemize}
+  \item
+    Functional: Software is made up of functions, which are run sequentially on the inputs
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Example: Raw data are read in, cleaned, and then a regression model is fit. The model coefficients are tested for statistical significance, and a table and plot are written out to disk.\\
+    \item
+      \textbf{Data analysis as a building series of pipes}
+    \item
+      Examples (mostly): R, Lisp, Haskell
+    \end{itemize}
+  \item
+    A couple of extra rules for functional programming
+
+    \begin{itemize}
+    \tightlist
+    \item
+      \emph{Immutability}: Once the value is assigned to a variable, that value cannot be changed
+    \item
+      \emph{No side effects}: Functions don't change anything outside of themselves; they only return a value
+    \end{itemize}
+  \end{itemize}
+\end{itemize}
+
 \hypertarget{warnings-errors-and-getting-help}{%
 \chapter{Warnings, Errors, and Getting Help}\label{warnings-errors-and-getting-help}}
+
+\hypertarget{recommended-reading-and-watching}{%
+\section{Recommended reading and watching}\label{recommended-reading-and-watching}}
+
+\begin{itemize}
+\tightlist
+\item
+  \url{https://stackoverflow.com/a/5963610/3187973}
+\item
+  \url{https://github.com/jennybc/debugging\#video}
+\end{itemize}
+
+\hypertarget{messages-warnings-and-errors}{%
+\section{Messages, warnings, and errors}\label{messages-warnings-and-errors}}
+
+\begin{itemize}
+\tightlist
+\item
+  \emph{Message}: Things are fine, but here's some information you should know
+\item
+  \emph{Warning}: Uhhhh I'm gonna keep going, but maybe this isn't what you want
+\item
+  \emph{Error}: Nope. I'm stopping here. You need to fix the thing.
+\end{itemize}
+
+\hypertarget{where-to-go-for-help}{%
+\section{Where to go for help}\label{where-to-go-for-help}}
+
+\begin{itemize}
+\tightlist
+\item
+  Isolate the problem
+\item
+  Restart your session: Session \(\to\) Restart R
+\item
+  Local help: \texttt{?fun}
+\item
+  StackOverflow: \url{https://stackoverflow.com/questions/tagged/r}
+\item
+  CRAN \(\to\) BugReports (usually GitHub Issues)
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(lubridate)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Attaching package: 'lubridate'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:base':
+## 
+##     date, intersect, setdiff, union
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{some\_data =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{\textquotesingle{}June 2002\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}May 15, 2007\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}August 2007\textquotesingle{}}\NormalTok{)}
+\KeywordTok{mdy}\NormalTok{(some\_data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "2002-06-20" "2007-05-15" "2007-08-20"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{parse\_date\_time}\NormalTok{(some\_data, }\DataTypeTok{orders =} \StringTok{\textquotesingle{}mdY\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: 2 failed to parse.
+\end{verbatim}
+
+\begin{verbatim}
+## [1] NA               "2007-05-15 UTC" NA
+\end{verbatim}
+
+Let's try SO: \url{https://stackoverflow.com/search?q=\%5BR\%5D+lubridate+month-year}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{parse\_date\_time}\NormalTok{(some\_data, }\DataTypeTok{orders =} \KeywordTok{c}\NormalTok{(}\StringTok{\textquotesingle{}mY\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}mdY\textquotesingle{}}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "2002-06-01 UTC" "2007-05-15 UTC" "2007-08-01 UTC"
+\end{verbatim}
+
+Here's another one:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{more\_data =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{\textquotesingle{}May 7, 2017\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}May 19, 2017\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}May Fifth, 2017\textquotesingle{}}\NormalTok{)}
+\KeywordTok{mdy}\NormalTok{(more\_data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "2017-05-07" "2017-05-19" "2017-05-20"
+\end{verbatim}
+
+SO doesn't seem so helpful: \url{https://stackoverflow.com/search?q=\%5BR\%5D+lubridate+written+days}
+
+Let's check the CRAN page for \texttt{lubridate}: \url{https://cran.r-project.org/web/packages/lubridate/index.html}
+
+\begin{figure}
+\centering
+\includegraphics[width=0.5\textwidth,height=\textheight]{images/lubridate_cran.png}
+\caption{Screenshot of \texttt{lubridate} on CRAN, highlighting the BugReports field}
+\end{figure}
+
+Trying a couple of searches gives us a promising result: \url{https://github.com/tidyverse/lubridate/issues?q=is\%3Aissue+is\%3Aopen+mdy}
+
+\begin{figure}
+\centering
+\includegraphics[width=0.5\textwidth,height=\textheight]{images/lubridate_issues.png}
+\caption{Screenshot of \texttt{lubridate} issues page, showing a relevant search result}
+\end{figure}
+
+This is a known bug; it looks like they're thinking about doing something about it, but the only workaround is to create an NA: \url{https://github.com/tidyverse/lubridate/issues/685}
+
+\hypertarget{writing-a-reproducible-example-reprex}{%
+\section{\texorpdfstring{Writing a reproducible example: \texttt{reprex}}{Writing a reproducible example: reprex}}\label{writing-a-reproducible-example-reprex}}
+
+\begin{itemize}
+\tightlist
+\item
+  \url{https://reprex.tidyverse.org/}
+\item
+  \url{https://reprex.tidyverse.org/articles/articles/learn-reprex.html}
+\item
+  \url{https://reprex.tidyverse.org/articles/reprex-dos-and-donts.html}
+\end{itemize}
 
 \hypertarget{part-exploratory-data-analysis}{%
 \part{Exploratory Data Analysis}\label{part-exploratory-data-analysis}}

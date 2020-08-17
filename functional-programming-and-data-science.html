@@ -24,14 +24,14 @@
 <meta name="author" content="Dan Hicks, hicks.daniel.j@gmail.com" />
 
 
-<meta name="date" content="2020-08-13" />
+<meta name="date" content="2020-08-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="git-and-data-management.html"/>
+<link rel="prev" href="git-and-version-control.html"/>
 <link rel="next" href="warnings-errors-and-getting-help.html"/>
 <script src="libs/header-attrs-2.3/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
@@ -140,6 +140,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="0.4" data-path="week-0-setting-up.html"><a href="week-0-setting-up.html#github"><i class="fa fa-check"></i><b>0.4</b> GitHub</a></li>
 <li class="chapter" data-level="0.5" data-path="week-0-setting-up.html"><a href="week-0-setting-up.html#screen-layouts"><i class="fa fa-check"></i><b>0.5</b> Screen Layouts</a></li>
 <li class="chapter" data-level="0.6" data-path="week-0-setting-up.html"><a href="week-0-setting-up.html#pre-class-survey"><i class="fa fa-check"></i><b>0.6</b> Pre-Class Survey</a></li>
+<li class="chapter" data-level="0.7" data-path="week-0-setting-up.html"><a href="week-0-setting-up.html#a-note-on-accessibility"><i class="fa fa-check"></i><b>0.7</b> A Note on Accessibility</a></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
 <ul>
@@ -154,10 +155,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="2.1" data-path="r-basics.html"><a href="r-basics.html#lets-get-started-with-rstudio"><i class="fa fa-check"></i><b>2.1</b> Let’s get started with RStudio</a></li>
 <li class="chapter" data-level="2.2" data-path="r-basics.html"><a href="r-basics.html#base-r-data-types"><i class="fa fa-check"></i><b>2.2</b> Base R data types</a></li>
+<li class="chapter" data-level="2.3" data-path="r-basics.html"><a href="r-basics.html#examining-variables"><i class="fa fa-check"></i><b>2.3</b> <em>[examining variables]</em></a></li>
+<li class="chapter" data-level="2.4" data-path="r-basics.html"><a href="r-basics.html#missing-data"><i class="fa fa-check"></i><b>2.4</b> <em>[Missing data]</em></a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="git-and-data-management.html"><a href="git-and-data-management.html"><i class="fa fa-check"></i><b>3</b> Git and Data Management</a></li>
+<li class="chapter" data-level="3" data-path="git-and-version-control.html"><a href="git-and-version-control.html"><i class="fa fa-check"></i><b>3</b> Git and Version Control</a></li>
 <li class="chapter" data-level="4" data-path="functional-programming-and-data-science.html"><a href="functional-programming-and-data-science.html"><i class="fa fa-check"></i><b>4</b> Functional Programming and Data Science</a></li>
-<li class="chapter" data-level="5" data-path="warnings-errors-and-getting-help.html"><a href="warnings-errors-and-getting-help.html"><i class="fa fa-check"></i><b>5</b> Warnings, Errors, and Getting Help</a></li>
+<li class="chapter" data-level="5" data-path="warnings-errors-and-getting-help.html"><a href="warnings-errors-and-getting-help.html"><i class="fa fa-check"></i><b>5</b> Warnings, Errors, and Getting Help</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="warnings-errors-and-getting-help.html"><a href="warnings-errors-and-getting-help.html#recommended-reading-and-watching"><i class="fa fa-check"></i><b>5.1</b> Recommended reading and watching</a></li>
+<li class="chapter" data-level="5.2" data-path="warnings-errors-and-getting-help.html"><a href="warnings-errors-and-getting-help.html#messages-warnings-and-errors"><i class="fa fa-check"></i><b>5.2</b> Messages, warnings, and errors</a></li>
+<li class="chapter" data-level="5.3" data-path="warnings-errors-and-getting-help.html"><a href="warnings-errors-and-getting-help.html#where-to-go-for-help"><i class="fa fa-check"></i><b>5.3</b> Where to go for help</a></li>
+<li class="chapter" data-level="5.4" data-path="warnings-errors-and-getting-help.html"><a href="warnings-errors-and-getting-help.html#writing-a-reproducible-example-reprex"><i class="fa fa-check"></i><b>5.4</b> Writing a reproducible example: <code>reprex</code></a></li>
+</ul></li>
 <li class="part"><span><b>II Exploratory Data Analysis</b></span></li>
 <li class="chapter" data-level="6" data-path="waterfalls-spirals-and-philosophy-of-science.html"><a href="waterfalls-spirals-and-philosophy-of-science.html"><i class="fa fa-check"></i><b>6</b> Waterfalls, Spirals, and Philosophy of Science</a></li>
 <li class="chapter" data-level="7" data-path="exploratory-data-analysis-and-the-ladder-of-models.html"><a href="exploratory-data-analysis-and-the-ladder-of-models.html"><i class="fa fa-check"></i><b>7</b> Exploratory Data Analysis and the Ladder of Models</a></li>
@@ -187,13 +196,57 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="functional-programming-and-data-science" class="section level1" number="4">
 <h1><span class="header-section-number">Week 4</span> Functional Programming and Data Science</h1>
+<ul>
+<li><p>Recommended reading: <span class="citation">Chambers (<a href="#ref-ChambersObjectOrientedProgrammingFunctional2014" role="doc-biblioref">2014</a>)</span>; parts II and III of <span class="citation">Wickham (<a href="#ref-WickhamAdvanced2014" role="doc-biblioref">2014</a>)</span></p></li>
+<li><p>Programming paradigms</p>
+<ul>
+<li><p>Procedural: Software is a series of instructions (“procedures”), which the computer carries out in order. Special instructions (if-then, loops) are used to change the order based on inputs or other conditions.</p></li>
+<li><p>Object-oriented: Software is made up of objects, which have properties (“attributes,” including other objects) and do things (“methods”).</p>
+<ul>
+<li>Example: A board game consists of 1 or more players, a board, and a deck of cards.
+<ul>
+<li>Players each have a hand of cards (attribute), can draw cards from the deck into their hand (method, which also changes the deck’s attributes), and can play cards to manipulate tokens on the board (method, which also changes the board’s attributes).<br />
+</li>
+<li>The game itself is an object, with the players, board, and deck for its attributes and methods to things up, run turns in sequence, determine the winner.<br />
+</li>
+<li>Separate objects might be responsible for displaying the current state of the game and getting input from the users.<br />
+</li>
+</ul></li>
+<li>Much better than procedural paradigms for <em>encapsulation</em>: When a player draws a card from the deck, we just need to know the inputs and outputs for <code>Deck.draw()</code>, not the details of how the deck tracks the order of cards and which ones have already been drawn.</li>
+<li>Much easier to reason about systems with lots of dynamic, interacting parts.<br />
+</li>
+<li>Examples (mostly): Python, C++, Java</li>
+</ul></li>
+<li><p>Functional: Software is made up of functions, which are run sequentially on the inputs</p>
+<ul>
+<li>Example: Raw data are read in, cleaned, and then a regression model is fit. The model coefficients are tested for statistical significance, and a table and plot are written out to disk.<br />
+</li>
+<li><strong>Data analysis as a building series of pipes</strong></li>
+<li>Examples (mostly): R, Lisp, Haskell</li>
+</ul></li>
+<li><p>A couple of extra rules for functional programming</p>
+<ul>
+<li><em>Immutability</em>: Once the value is assigned to a variable, that value cannot be changed</li>
+<li><em>No side effects</em>: Functions don’t change anything outside of themselves; they only return a value</li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-ChambersObjectOrientedProgrammingFunctional2014">
+<p>Chambers, John M. 2014. “Object-Oriented Programming, Functional Programming and R.” <em>Statistical Science</em> 29 (2): 167–80. <a href="https://doi.org/10.1214/13-STS452">https://doi.org/10.1214/13-STS452</a>.</p>
+</div>
+<div id="ref-WickhamAdvanced2014">
+<p>Wickham, Hadley. 2014. <em>Advanced R</em>. CRC Press. <a href="https://adv-r.hadley.nz">https://adv-r.hadley.nz</a>.</p>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="git-and-data-management.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="git-and-version-control.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="warnings-errors-and-getting-help.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>

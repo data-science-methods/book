@@ -24,7 +24,7 @@
 <meta name="author" content="Dan Hicks, hicks.daniel.j@gmail.com" />
 
 
-<meta name="date" content="2020-08-13" />
+<meta name="date" content="2020-08-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -140,6 +140,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="0.4" data-path="week-0-setting-up.html"><a href="week-0-setting-up.html#github"><i class="fa fa-check"></i><b>0.4</b> GitHub</a></li>
 <li class="chapter" data-level="0.5" data-path="week-0-setting-up.html"><a href="week-0-setting-up.html#screen-layouts"><i class="fa fa-check"></i><b>0.5</b> Screen Layouts</a></li>
 <li class="chapter" data-level="0.6" data-path="week-0-setting-up.html"><a href="week-0-setting-up.html#pre-class-survey"><i class="fa fa-check"></i><b>0.6</b> Pre-Class Survey</a></li>
+<li class="chapter" data-level="0.7" data-path="week-0-setting-up.html"><a href="week-0-setting-up.html#a-note-on-accessibility"><i class="fa fa-check"></i><b>0.7</b> A Note on Accessibility</a></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
 <ul>
@@ -154,10 +155,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="2.1" data-path="r-basics.html"><a href="r-basics.html#lets-get-started-with-rstudio"><i class="fa fa-check"></i><b>2.1</b> Let’s get started with RStudio</a></li>
 <li class="chapter" data-level="2.2" data-path="r-basics.html"><a href="r-basics.html#base-r-data-types"><i class="fa fa-check"></i><b>2.2</b> Base R data types</a></li>
+<li class="chapter" data-level="2.3" data-path="r-basics.html"><a href="r-basics.html#examining-variables"><i class="fa fa-check"></i><b>2.3</b> <em>[examining variables]</em></a></li>
+<li class="chapter" data-level="2.4" data-path="r-basics.html"><a href="r-basics.html#missing-data"><i class="fa fa-check"></i><b>2.4</b> <em>[Missing data]</em></a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="git-and-data-management.html"><a href="git-and-data-management.html"><i class="fa fa-check"></i><b>3</b> Git and Data Management</a></li>
+<li class="chapter" data-level="3" data-path="git-and-version-control.html"><a href="git-and-version-control.html"><i class="fa fa-check"></i><b>3</b> Git and Version Control</a></li>
 <li class="chapter" data-level="4" data-path="functional-programming-and-data-science.html"><a href="functional-programming-and-data-science.html"><i class="fa fa-check"></i><b>4</b> Functional Programming and Data Science</a></li>
-<li class="chapter" data-level="5" data-path="warnings-errors-and-getting-help.html"><a href="warnings-errors-and-getting-help.html"><i class="fa fa-check"></i><b>5</b> Warnings, Errors, and Getting Help</a></li>
+<li class="chapter" data-level="5" data-path="warnings-errors-and-getting-help.html"><a href="warnings-errors-and-getting-help.html"><i class="fa fa-check"></i><b>5</b> Warnings, Errors, and Getting Help</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="warnings-errors-and-getting-help.html"><a href="warnings-errors-and-getting-help.html#recommended-reading-and-watching"><i class="fa fa-check"></i><b>5.1</b> Recommended reading and watching</a></li>
+<li class="chapter" data-level="5.2" data-path="warnings-errors-and-getting-help.html"><a href="warnings-errors-and-getting-help.html#messages-warnings-and-errors"><i class="fa fa-check"></i><b>5.2</b> Messages, warnings, and errors</a></li>
+<li class="chapter" data-level="5.3" data-path="warnings-errors-and-getting-help.html"><a href="warnings-errors-and-getting-help.html#where-to-go-for-help"><i class="fa fa-check"></i><b>5.3</b> Where to go for help</a></li>
+<li class="chapter" data-level="5.4" data-path="warnings-errors-and-getting-help.html"><a href="warnings-errors-and-getting-help.html#writing-a-reproducible-example-reprex"><i class="fa fa-check"></i><b>5.4</b> Writing a reproducible example: <code>reprex</code></a></li>
+</ul></li>
 <li class="part"><span><b>II Exploratory Data Analysis</b></span></li>
 <li class="chapter" data-level="6" data-path="waterfalls-spirals-and-philosophy-of-science.html"><a href="waterfalls-spirals-and-philosophy-of-science.html"><i class="fa fa-check"></i><b>6</b> Waterfalls, Spirals, and Philosophy of Science</a></li>
 <li class="chapter" data-level="7" data-path="exploratory-data-analysis-and-the-ladder-of-models.html"><a href="exploratory-data-analysis-and-the-ladder-of-models.html"><i class="fa fa-check"></i><b>7</b> Exploratory Data Analysis and the Ladder of Models</a></li>
@@ -187,7 +196,71 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="warnings-errors-and-getting-help" class="section level1" number="5">
 <h1><span class="header-section-number">Week 5</span> Warnings, Errors, and Getting Help</h1>
+<div id="recommended-reading-and-watching" class="section level2" number="5.1">
+<h2><span class="header-section-number">5.1</span> Recommended reading and watching</h2>
+<ul>
+<li><a href="https://stackoverflow.com/a/5963610/3187973" class="uri">https://stackoverflow.com/a/5963610/3187973</a></li>
+<li><a href="https://github.com/jennybc/debugging#video" class="uri">https://github.com/jennybc/debugging#video</a></li>
+</ul>
+</div>
+<div id="messages-warnings-and-errors" class="section level2" number="5.2">
+<h2><span class="header-section-number">5.2</span> Messages, warnings, and errors</h2>
+<ul>
+<li><em>Message</em>: Things are fine, but here’s some information you should know</li>
+<li><em>Warning</em>: Uhhhh I’m gonna keep going, but maybe this isn’t what you want</li>
+<li><em>Error</em>: Nope. I’m stopping here. You need to fix the thing.</li>
+</ul>
+</div>
+<div id="where-to-go-for-help" class="section level2" number="5.3">
+<h2><span class="header-section-number">5.3</span> Where to go for help</h2>
+<ul>
+<li>Isolate the problem</li>
+<li>Restart your session: Session <span class="math inline">\(\to\)</span> Restart R</li>
+<li>Local help: <code>?fun</code></li>
+<li>StackOverflow: <a href="https://stackoverflow.com/questions/tagged/r" class="uri">https://stackoverflow.com/questions/tagged/r</a></li>
+<li>CRAN <span class="math inline">\(\to\)</span> BugReports (usually GitHub Issues)</li>
+</ul>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="warnings-errors-and-getting-help.html#cb64-1"></a><span class="kw">library</span>(lubridate)</span></code></pre></div>
+<pre><code>## 
+## Attaching package: &#39;lubridate&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     date, intersect, setdiff, union</code></pre>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="warnings-errors-and-getting-help.html#cb67-1"></a>some_data =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;June 2002&#39;</span>, <span class="st">&#39;May 15, 2007&#39;</span>, <span class="st">&#39;August 2007&#39;</span>)</span>
+<span id="cb67-2"><a href="warnings-errors-and-getting-help.html#cb67-2"></a><span class="kw">mdy</span>(some_data)</span></code></pre></div>
+<pre><code>## [1] &quot;2002-06-20&quot; &quot;2007-05-15&quot; &quot;2007-08-20&quot;</code></pre>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="warnings-errors-and-getting-help.html#cb69-1"></a><span class="kw">parse_date_time</span>(some_data, <span class="dt">orders =</span> <span class="st">&#39;mdY&#39;</span>)</span></code></pre></div>
+<pre><code>## Warning: 2 failed to parse.</code></pre>
+<pre><code>## [1] NA               &quot;2007-05-15 UTC&quot; NA</code></pre>
+<p>Let’s try SO: <a href="https://stackoverflow.com/search?q=%5BR%5D+lubridate+month-year" class="uri">https://stackoverflow.com/search?q=%5BR%5D+lubridate+month-year</a></p>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="warnings-errors-and-getting-help.html#cb72-1"></a><span class="kw">parse_date_time</span>(some_data, <span class="dt">orders =</span> <span class="kw">c</span>(<span class="st">&#39;mY&#39;</span>, <span class="st">&#39;mdY&#39;</span>))</span></code></pre></div>
+<pre><code>## [1] &quot;2002-06-01 UTC&quot; &quot;2007-05-15 UTC&quot; &quot;2007-08-01 UTC&quot;</code></pre>
+<p>Here’s another one:</p>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="warnings-errors-and-getting-help.html#cb74-1"></a>more_data =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;May 7, 2017&#39;</span>, <span class="st">&#39;May 19, 2017&#39;</span>, <span class="st">&#39;May Fifth, 2017&#39;</span>)</span>
+<span id="cb74-2"><a href="warnings-errors-and-getting-help.html#cb74-2"></a><span class="kw">mdy</span>(more_data)</span></code></pre></div>
+<pre><code>## [1] &quot;2017-05-07&quot; &quot;2017-05-19&quot; &quot;2017-05-20&quot;</code></pre>
+<p>SO doesn’t seem so helpful: <a href="https://stackoverflow.com/search?q=%5BR%5D+lubridate+written+days" class="uri">https://stackoverflow.com/search?q=%5BR%5D+lubridate+written+days</a></p>
+<p>Let’s check the CRAN page for <code>lubridate</code>: <a href="https://cran.r-project.org/web/packages/lubridate/index.html" class="uri">https://cran.r-project.org/web/packages/lubridate/index.html</a></p>
+<div class="figure">
+<img src="images/lubridate_cran.png" style="width:50.0%" alt="" />
+<p class="caption">Screenshot of <code>lubridate</code> on CRAN, highlighting the BugReports field</p>
+</div>
+<p>Trying a couple of searches gives us a promising result: <a href="https://github.com/tidyverse/lubridate/issues?q=is%3Aissue+is%3Aopen+mdy" class="uri">https://github.com/tidyverse/lubridate/issues?q=is%3Aissue+is%3Aopen+mdy</a></p>
+<div class="figure">
+<img src="images/lubridate_issues.png" style="width:50.0%" alt="" />
+<p class="caption">Screenshot of <code>lubridate</code> issues page, showing a relevant search result</p>
+</div>
+<p>This is a known bug; it looks like they’re thinking about doing something about it, but the only workaround is to create an NA: <a href="https://github.com/tidyverse/lubridate/issues/685" class="uri">https://github.com/tidyverse/lubridate/issues/685</a></p>
+</div>
+<div id="writing-a-reproducible-example-reprex" class="section level2" number="5.4">
+<h2><span class="header-section-number">5.4</span> Writing a reproducible example: <code>reprex</code></h2>
+<ul>
+<li><a href="https://reprex.tidyverse.org/" class="uri">https://reprex.tidyverse.org/</a></li>
+<li><a href="https://reprex.tidyverse.org/articles/articles/learn-reprex.html" class="uri">https://reprex.tidyverse.org/articles/articles/learn-reprex.html</a></li>
+<li><a href="https://reprex.tidyverse.org/articles/reprex-dos-and-donts.html" class="uri">https://reprex.tidyverse.org/articles/reprex-dos-and-donts.html</a></li>
+</ul>
 
+</div>
 </div>
 
 

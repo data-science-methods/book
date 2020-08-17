@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Data Science Methods for Cognitive Science</title>
+  <title>Week 3 Git and Version Control | Data Science Methods for Cognitive Science</title>
   <meta name="description" content="This document is a set of notes (and perhaps later a textbook) for a course on data science methods for graduate students in social and behavioral sciences." />
   <meta name="generator" content="bookdown 0.20.2 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Data Science Methods for Cognitive Science" />
+  <meta property="og:title" content="Week 3 Git and Version Control | Data Science Methods for Cognitive Science" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Data Science Methods for Cognitive Science" />
+  <meta name="twitter:title" content="Week 3 Git and Version Control | Data Science Methods for Cognitive Science" />
   
   <meta name="twitter:description" content="This document is a set of notes (and perhaps later a textbook) for a course on data science methods for graduate students in social and behavioral sciences." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="week-0-setting-up.html"/>
+<link rel="prev" href="r-basics.html"/>
+<link rel="next" href="functional-programming-and-data-science.html"/>
 <script src="libs/header-attrs-2.3/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -194,23 +194,55 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Data Science Methods for Cognitive Science</h1>
-<p class="author"><em>Dan Hicks, <a href="mailto:hicks.daniel.j@gmail.com" class="email">hicks.daniel.j@gmail.com</a></em></p>
-<p class="date"><em>2020-08-17</em></p>
-</div>
-<div id="preface" class="section level1 unnumbered" number="">
-<h1>Preface</h1>
-<p>This document is a set of notes (and perhaps later a textbook) for a course on data science methods for graduate students in social and behavioral sciences, taught by Professor Dan Hicks (they/them), UC Merced.</p>
-
+<div id="git-and-version-control" class="section level1" number="3">
+<h1><span class="header-section-number">Week 3</span> Git and Version Control</h1>
+<ul>
+<li><p><em>[motivating example]</em></p></li>
+<li><p>Version control</p>
+<ul>
+<li>Basic idea: Tools for tracking changes to code over time</li>
+<li>Useful for identifying and reversing breaking changes</li>
+<li>Implementations upload to cloud, track who contributes code</li>
+<li>Good for collaboration, publishing code</li>
+</ul></li>
+<li><p>git</p>
+<ul>
+<li>One of many version control systems</li>
+<li>Very popular in part thanks to GitHub, which provides free hosting for open-source projects</li>
+</ul></li>
+<li><p>git interfaces</p>
+<ul>
+<li>command line</li>
+<li>RStudio projects</li>
+<li>GUIs: GitHub, Sourcetree</li>
+</ul></li>
+<li><p>How to do things with git</p>
+<ul>
+<li>setup
+<ul>
+<li>installation</li>
+<li>user config</li>
+</ul></li>
+<li><code>git init</code></li>
+<li><code>add</code></li>
+<li><code>commit</code></li>
+<li><code>.gitignore</code></li>
+<li><code>fetch</code> and <code>pull</code></li>
+<li><code>push</code></li>
+<li>forking</li>
+<li>pull requests</li>
+<li>browsing history on GitHub</li>
+<li>stretch goals: <code>branch</code>; <code>checkout</code></li>
+</ul></li>
+</ul>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="week-0-setting-up.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="r-basics.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="functional-programming-and-data-science.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
