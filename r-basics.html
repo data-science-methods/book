@@ -200,7 +200,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">2.1</span> Let’s get started with RStudio</h2>
 <ul>
 <li>Quick tour of RStudio’s UI</li>
-<li>Let’s plot a thing</li>
+<li>Let’s plot a thing (below)</li>
+<li>Some idiosyncracies of my code
+<ul>
+<li><code>'</code> rather than <code>"</code></li>
+<li><code>##</code> for documentation comment</li>
+<li><code>=</code> not <code>&lt;-</code> for assignment</li>
+</ul></li>
+<li>Essential Global Options
+<ul>
+<li>Never save .Rdata, load workspace</li>
+<li><img src="images/Rstudio_config.png" title="fig:" style="width:50.0%" alt="Recommended RStudio configuration" /></li>
+</ul></li>
+<li>Super useful keyboard commands:
+<ul>
+<li>Insert a pipe: ⌘+Shift+m</li>
+<li>Comment/uncomment: ⌘+Shift+c</li>
+<li>Tools <span class="math inline">\(\to\)</span> Modify Keyboard Shortcuts…
+<ul>
+<li>⌘+1, ⌘+2, ⌘+3</li>
+</ul></li>
+<li>Cheatsheet: <a href="https://raw.githubusercontent.com/rstudio/cheatsheets/master/rstudio-ide.pdf" class="uri">https://raw.githubusercontent.com/rstudio/cheatsheets/master/rstudio-ide.pdf</a></li>
+</ul></li>
 </ul>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="r-basics.html#cb1-1"></a><span class="kw">data</span>(anscombe) <span class="co">## &lt;https://en.wikipedia.org/wiki/Anscombe%27s_quartet&gt;</span></span>
 <span id="cb1-2"><a href="r-basics.html#cb1-2"></a></span>
@@ -266,23 +287,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="r-basics.html#cb24-1"></a><span class="kw">cor</span>(anscombe<span class="op">$</span>x1, anscombe<span class="op">$</span>y1)</span></code></pre></div>
 <pre><code>## [1] 0.8164205</code></pre>
 <p><strong>Exercise</strong>: Calculate correlations for all four x-y pairs</p>
-<ul>
-<li>Some idiosyncracies of my code
-<ul>
-<li><code>'</code> rather than <code>"</code></li>
-<li><code>##</code> for documentation comment</li>
-<li><code>=</code> not <code>&lt;-</code> for assignment</li>
-</ul></li>
-<li>Essential Global Options
-<ul>
-<li>Never save .Rdata, load workspace</li>
-</ul></li>
-<li>Super useful custom keyboard commands:
-<ul>
-<li>Tools <span class="math inline">\(\to\)</span> Modify Keyboard Shortcuts…</li>
-<li>⌘+1, ⌘+2, ⌘+3</li>
-</ul></li>
-</ul>
 </div>
 <div id="base-r-data-types" class="section level2" number="2.2">
 <h2><span class="header-section-number">2.2</span> Base R data types</h2>
