@@ -8,6 +8,8 @@ In either case, all of the software and services we'll be using are either free 
 
 ## R and RStudio: The Mac Way ##
 
+You can find some notes on accessibility and RStudio here:  <https://support.rstudio.com/hc/en-us/articles/360044226673-RStudio-Accessibility-Features>.  
+
 With this way, R and RStudio are installed and run on your computer, and all of the data files that you work with will also be on your computer.  Unless you're running a Chromebook or similar, your computer is almost certainly more powerful than the default instance that RStudio Cloud gives you (see below), and you can use familiar tools to do things like organize folders and preview files.  But sometimes particular details about the way your computer is set up can cause R and RStudio to do weird things, and these problems can be very difficult to diagnose and solve.  
 
 1. Go to <https://cran.r-project.org/>.  Download and install the latest release of R for your operating system (which should be Mac OS if you're following this way).  As of 2020-06-02, the latest release is 4.0.0.  
@@ -27,6 +29,8 @@ With this way, R and RStudio are installed and run on virtual computers (called 
 ## Slack ##
 
 For Fall 2020, the class Slack channel is at <https://datascienceme-ke13588.slack.com>.  Please use your UC Merced email to sign up.  
+
+If you use a screenreader, here are some notes on accessibility and Slack:  <https://www.marcozehe.de/status-of-the-accessibility-of-slack/>.  
 
 ## GitHub ##
 
@@ -56,9 +60,15 @@ The most effective way to do this is to have multiple displays.  This is also th
 
 ![Source: https://carpentries.org/images//blog/2020/06/screen_layouts/02-student-with_participantlist-1366x768.jpg](images/layout.jpg)
 
-
 ## Pre-Class Survey ##
 
 Please take a few minutes to fill out this survey:  <https://ucmerced.az1.qualtrics.com/jfe/form/SV_eVU8JWREUu4UNH7>. 
 
 
+## A Note on Accessibility ##
+
+I chose the tools and platforms for this course in part because they're industry-standard.  If you pursue a career as a data scientist in industry, you'll be expected to use Slack and Github on a daily basis.  And RStudio is by far the most commonly used IDE ("integrated development environment") for R.  
+
+However, like many other technologies, they were originally developed using ableist assumptions about "normal" computer users.  In response to criticism, the developers of these systems and tools have gone back and made their technologies more accessible.  But there may still be barriers to accessibility that I have not anticipated.  And of course the pandemic has created additional barriers, such as dependency on screensharing.  
+
+If you encounter a barrier to participating in this course — even a small inconvenience — please let me know.  Similarly, if you have ideas for making the course more accessible, please share them with me.  
