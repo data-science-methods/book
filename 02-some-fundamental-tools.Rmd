@@ -5,7 +5,21 @@
 ## Let's get started with RStudio ##
 
 * Quick tour of RStudio's UI
-* Let's plot a thing
+* Let's plot a thing (below)
+* Some idiosyncracies of my code
+    - `'` rather than `"`
+    - `##` for documentation comment
+    - `=` not `<-` for assignment
+
+* Essential Global Options
+    - Never save .Rdata, load workspace
+    - ![Recommended RStudio configuration](images/Rstudio_config.png){ width=50% }
+* Super useful keyboard commands: 
+    - Insert a pipe: ⌘+Shift+m
+    - Comment/uncomment: ⌘+Shift+c
+    - Tools $\to$ Modify Keyboard Shortcuts...
+        - ⌘+1, ⌘+2, ⌘+3
+    - Cheatsheet: <https://raw.githubusercontent.com/rstudio/cheatsheets/master/rstudio-ide.pdf>
 
 ```{r}
 data(anscombe) ## <https://en.wikipedia.org/wiki/Anscombe%27s_quartet>
@@ -38,17 +52,6 @@ cor(anscombe$x1, anscombe$y1)
 ```
 
 **Exercise**: Calculate correlations for all four x-y pairs
-
-* Some idiosyncracies of my code
-    - `'` rather than `"`
-    - `##` for documentation comment
-    - `=` not `<-` for assignment
-
-* Essential Global Options
-    - Never save .Rdata, load workspace
-* Super useful custom keyboard commands: 
-    - Tools $\to$ Modify Keyboard Shortcuts...
-    - ⌘+1, ⌘+2, ⌘+3
 
 ## Base R data types ##
 
