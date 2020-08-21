@@ -1,4 +1,4 @@
-all: gitbook
+all: gitbook pdf
 
 gitbook: 
 	Rscript -e "bookdown::render_book('index.Rmd', 'bookdown::gitbook')"
@@ -6,6 +6,5 @@ gitbook:
 pdf:
 	Rscript -e "bookdown::render_book('index.Rmd', 'bookdown::pdf_book')"
 
-epub:
-	Rscript -e "bookdown::render_book('index.Rmd', 'bookdown::epub_book')"
-
+slides:
+	Rscript -e "bookdown::render_book('index.Rmd', 'rmarkdown::beamer_presentation', output_file = 'docs/slides')"
