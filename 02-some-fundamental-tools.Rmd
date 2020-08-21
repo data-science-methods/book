@@ -1,3 +1,8 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
 # (PART) Some fundamental tools {-}
 
 # R Basics #
@@ -21,7 +26,7 @@
         - ⌘+1, ⌘+2, ⌘+3
     - Cheatsheet: <https://raw.githubusercontent.com/rstudio/cheatsheets/master/rstudio-ide.pdf>
 
-```{r}
+```{r, eval=FALSE}
 data(anscombe) ## <https://en.wikipedia.org/wiki/Anscombe%27s_quartet>
 
 anscombe
@@ -33,9 +38,12 @@ ggplot(data = anscombe, aes(x = x1, y = y1)) +
     geom_point()
 ```
 
-**Exercise:** plot the other three datasets
+### Exercise ### 
+Plot the other three datasets
 
-```{r}
+* Selecting variables, `mean`, `sd`, and correlation
+
+```{r, eval=FALSE}
 anscombe$x1
 anscombe[['x1']]
 
@@ -51,12 +59,14 @@ sd(anscombe$y2)
 cor(anscombe$x1, anscombe$y1)
 ```
 
-**Exercise**: Calculate correlations for all four x-y pairs
+### Exercise ### 
+
+Calculate correlations for all four x-y pairs
 
 ## Base R data types ##
 
 ### Numerics
-```{r}
+```{r, eval=FALSE}
 foo = 2
 bar = 3
 foobar = foo + bar
@@ -65,7 +75,7 @@ try(foo / 0)
 ```
 
 ### Vectors
-```{r}
+```{r, eval=FALSE}
 foo = c(2, 3, 4)
 bar = c(5, 6, 7)
 foo[2]
@@ -83,7 +93,7 @@ c(foo, bar)
 ```
 
 ### Strings
-```{r}
+```{r, eval=FALSE}
 foo = c('monkey', 'banana')
 bar = c('house')
 ## How to put these together? 
@@ -94,7 +104,7 @@ paste0(foo, bar)
 ```
 
 ### Factors
-```{r}
+```{r, eval=FALSE}
 foo_str = c('foo', 'foo', 'bar', 'zoo')
 as.integer(foo_str)
 foo_fct = as.factor(foo_str)
@@ -118,6 +128,8 @@ levels(foo_fct)
 ## *[Missing data]*
 
 <https://gge-ucd.github.io/R-DAVIS/lesson_how_r_thinks_about_data.html#missing_data>
+
+
 
 # Git and Version Control #
 
@@ -159,9 +171,9 @@ levels(foo_fct)
 - Recommended reading:  @ChambersObjectOrientedProgrammingFunctional2014; parts II and III of @WickhamAdvanced2014
 
 - Programming paradigms
-    - Procedural:  Software is a series of instructions ("procedures"), which the computer carries out in order.  Special instructions (if-then, loops) are used to change the order based on inputs or other conditions.  
+    - *Procedural*:  Software is a series of instructions ("procedures"), which the computer carries out in order.  Special instructions (if-then, loops) are used to change the order based on inputs or other conditions.  
 
-    - Object-oriented:  Software is made up of objects, which have properties ("attributes," including other objects) and do things ("methods").  
+    - *Object-oriented*:  Software is made up of objects, which have properties ("attributes," including other objects) and do things ("methods").  
         - Example: A board game consists of 1 or more players, a board, and a deck of cards.  
             - Players each have a hand of cards (attribute), can draw cards from the deck into their hand (method, which also changes the deck's attributes), and can play cards to manipulate tokens on the board (method, which also changes the board's attributes).  
             - The game itself is an object, with the players, board, and deck for its attributes and methods to things up, run turns in sequence, determine the winner.  
@@ -170,7 +182,7 @@ levels(foo_fct)
         - Much easier to reason about systems with lots of dynamic, interacting parts.  
         - Examples (mostly): Python, C++, Java
     
-    - Functional: Software is made up of functions, which are run sequentially on the inputs
+    - *Functional*: Software is made up of functions, which are run sequentially on the inputs
         - Example: Raw data are read in, cleaned, and then a regression model is fit.  The model coefficients are tested for statistical significance, and a table and plot are written out to disk.  
         - **Data analysis as a building series of pipes**
         - Examples (mostly): R, Lisp, Haskell
@@ -202,7 +214,7 @@ levels(foo_fct)
 - StackOverflow: <https://stackoverflow.com/questions/tagged/r>
 - CRAN $\to$ BugReports (usually GitHub Issues)
     
-```{r}
+```{r, eval=FALSE}
 library(lubridate)
 
 some_data = c('June 2002', 'May 15, 2007', 'August 2007')
@@ -211,12 +223,12 @@ parse_date_time(some_data, orders = 'mdY')
 ```
 
 Let's try SO: <https://stackoverflow.com/search?q=%5BR%5D+lubridate+month-year>
-```{r}
+```{r, eval=FALSE}
 parse_date_time(some_data, orders = c('mY', 'mdY'))
 ```
 
 Here's another one:  
-```{r}
+```{r, eval=FALSE}
 more_data = c('May 7, 2017', 'May 19, 2017', 'May Fifth, 2017')
 mdy(more_data)
 ```
