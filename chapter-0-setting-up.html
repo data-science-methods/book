@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 4 Functional Programming and Data Science | Data Science Methods for Cognitive Science</title>
+  <title>Chapter 0: Setting up | Data Science Methods for Cognitive Science</title>
   <meta name="description" content="This document is a set of notes (and perhaps later a textbook) for a course on data science methods for graduate students in social and behavioral sciences." />
   <meta name="generator" content="bookdown 0.20.3 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 4 Functional Programming and Data Science | Data Science Methods for Cognitive Science" />
+  <meta property="og:title" content="Chapter 0: Setting up | Data Science Methods for Cognitive Science" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 4 Functional Programming and Data Science | Data Science Methods for Cognitive Science" />
+  <meta name="twitter:title" content="Chapter 0: Setting up | Data Science Methods for Cognitive Science" />
   
   <meta name="twitter:description" content="This document is a set of notes (and perhaps later a textbook) for a course on data science methods for graduate students in social and behavioral sciences." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="git-and-version-control.html"/>
-<link rel="next" href="warnings-errors-and-getting-help.html"/>
+<link rel="prev" href="index.html"/>
+<link rel="next" href="introduction.html"/>
 <script src="libs/header-attrs-2.3/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -195,60 +195,137 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="functional-programming-and-data-science" class="section level1" number="4">
-<h1><span class="header-section-number">Chapter 4</span> Functional Programming and Data Science</h1>
+<div id="chapter-0-setting-up" class="section level1 unnumbered" number="">
+<h1>Chapter 0: Setting up</h1>
+<p>Before the first day of class, you’ll need to set up a few things: <strong>R, RStudio, Slack, Zoom, and a GitHub account</strong>. I’d also like you to fill out a <strong>pre-class survey</strong>. R is the primary piece of software we’ll be learning to use. RStudio is an IDE (integrated development environment) for using R. (Think of R as the engine of a car and RStudio as the dashboard, steering wheel, and pedals.) Slack will be the main way we communicate; we’ll use Zoom for class time. GitHub is a service for sharing and collaborating on software engineering projects.</p>
+<hr />
+<table>
+<caption>Key links for setup</caption>
+<tbody>
+<tr class="odd">
+<td>R</td>
+<td><a href="https://cran.r-project.org/" class="uri">https://cran.r-project.org/</a></td>
+</tr>
+<tr class="even">
+<td>RStudio</td>
+<td><a href="https://rstudio.com/products/rstudio/download/" class="uri">https://rstudio.com/products/rstudio/download/</a></td>
+</tr>
+<tr class="odd">
+<td>Slack</td>
+<td><a href="http://datascienceme-ke13588.slack.com/" class="uri">http://datascienceme-ke13588.slack.com/</a></td>
+</tr>
+<tr class="even">
+<td>GitHub</td>
+<td><a href="https://github.com/" class="uri">https://github.com/</a>; <a href="https://github.com/data-science-methods" class="uri">https://github.com/data-science-methods</a></td>
+</tr>
+<tr class="odd">
+<td>Survey</td>
+<td><a href="https://ucmerced.az1.qualtrics.com/jfe/form/SV_eVU8JWREUu4UNH7" class="uri">https://ucmerced.az1.qualtrics.com/jfe/form/SV_eVU8JWREUu4UNH7</a></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p>I’ll assume you have R and RStudio installed using either <em>the cloud way</em> or <em>the Mac way</em>. If your computer is running Windows, Linux, or some other operating system that isn’t Mac OS, I’m going to assume you have things set up the cloud way. These other operating systems are perfectly fine. But I don’t use them, which makes it much harder for me to help you if things aren’t working. And <a href="https://www.jimhester.com/post/2020-08-20-best-os-for-r/">Windows handles things like dependencies, file paths, text file formats in idiosyncratic ways that can cause weird errors</a>.</p>
+<p>In either case, all of the software and services we’ll be using are either free or freemium. You won’t need any of the paid extras for this course.</p>
+<div id="a-note-on-accessibility" class="section level2" number="0.1">
+<h2><span class="header-section-number">0.1</span> A Note on Accessibility</h2>
+<p>I chose the tools and platforms for this course in part because they’re industry-standard. If you pursue a career as a data scientist in industry, you’ll be expected to use Slack and Github on a daily basis. And RStudio is by far the most commonly used IDE (“integrated development environment”) for R.</p>
+<p>However, like many other technologies, they were originally developed using ableist assumptions about “normal” computer users. In response to criticism, the developers of these systems and tools have gone back and made their technologies more accessible. But there may still be barriers to accessibility that I have not anticipated. And of course the pandemic has created additional barriers, such as dependency on screensharing.</p>
+<p>If you encounter a barrier to participating in this course — even a small inconvenience — please let me know. Similarly, if you have ideas for making the course more accessible, please share them with me.</p>
+</div>
+<div id="hardware-recommendations" class="section level2" number="0.2">
+<h2><span class="header-section-number">0.2</span> Hardware Recommendations</h2>
 <ul>
-<li><p>Recommended reading: <span class="citation">Chambers (<a href="#ref-ChambersObjectOrientedProgrammingFunctional2014" role="doc-biblioref">2014</a>)</span>; parts II and III of <span class="citation">Wickham (<a href="#ref-WickhamAdvanced2014" role="doc-biblioref">2014</a>)</span></p></li>
-<li><p>Programming paradigms</p>
+<li>I strongly recommend <em>against</em> tablets (iPad, Surface) for this course</li>
+<li>If you use RStudio Cloud, you have more flexibility for hardware. You can probably get away with using a netbook (Chromebook) if you take this approach.
 <ul>
-<li><p><em>Procedural</em>: Software is a series of instructions (“procedures”), which the computer carries out in order. Special instructions (if-then, loops) are used to change the order based on inputs or other conditions.</p></li>
-<li><p><em>Object-oriented</em>: Software is made up of objects, which have properties (“attributes,” including other objects) and do things (“methods”).</p>
-<ul>
-<li>Example: A board game consists of 1 or more players, a board, and a deck of cards.
-<ul>
-<li>Players each have a hand of cards (attribute), can draw cards from the deck into their hand (method, which also changes the deck’s attributes), and can play cards to manipulate tokens on the board (method, which also changes the board’s attributes).<br />
-</li>
-<li>The game itself is an object, with the players, board, and deck for its attributes and methods to things up, run turns in sequence, determine the winner.<br />
-</li>
-<li>Separate objects might be responsible for displaying the current state of the game and getting input from the users.<br />
-</li>
+<li>Though see the note below about usage limits for RStudio Cloud.</li>
 </ul></li>
-<li>Much better than procedural paradigms for <em>encapsulation</em>: When a player draws a card from the deck, we just need to know the inputs and outputs for <code>Deck.draw()</code>, not the details of how the deck tracks the order of cards and which ones have already been drawn.</li>
-<li>Much easier to reason about systems with lots of dynamic, interacting parts.<br />
-</li>
-<li>Examples (mostly): Python, C++, Java</li>
-</ul></li>
-<li><p><em>Functional</em>: Software is made up of functions, which are run sequentially on the inputs</p>
+<li>Otherwise, at the start of the semester, I recommend that your machine have at least
 <ul>
-<li>Example: Raw data are read in, cleaned, and then a regression model is fit. The model coefficients are tested for statistical significance, and a table and plot are written out to disk.<br />
-</li>
-<li><strong>Data analysis as a building series of pipes</strong></li>
-<li>Examples (mostly): R, Lisp, Haskell</li>
-</ul></li>
-<li><p>A couple of extra rules for functional programming</p>
+<li>200 GB free hard drive space</li>
+<li>8 GB RAM</li>
+<li>Intel i5 processor</li>
+<li>Operating system capable of running R 4.0.0
 <ul>
-<li><em>Immutability</em>: Once the value is assigned to a variable, that value cannot be changed</li>
-<li><em>No side effects</em>: Functions don’t change anything outside of themselves; they only return a value</li>
+<li>Mac: 10.13 (High Sierra) or more recent</li>
+<li>Windows: See <a href="https://cran.r-project.org/bin/windows/base/rw-FAQ.html#Does-R-run-under-Windows-Vista_003f">here</a> or consider just using RStudio Cloud</li>
+<li>If you’re running Linux I’m going to assume you can figure this out yourself; or consider just using RStudio Cloud</li>
 </ul></li>
 </ul></li>
 </ul>
 </div>
-<h3>References</h3>
-<div id="refs" class="references">
-<div id="ref-ChambersObjectOrientedProgrammingFunctional2014">
-<p>Chambers, John M. 2014. “Object-Oriented Programming, Functional Programming and R.” <em>Statistical Science</em> 29 (2): 167–80. <a href="https://doi.org/10.1214/13-STS452">https://doi.org/10.1214/13-STS452</a>.</p>
+<div id="r-and-rstudio" class="section level2" number="0.3">
+<h2><span class="header-section-number">0.3</span> R and RStudio</h2>
+<div id="the-mac-way" class="section level3" number="0.3.1">
+<h3><span class="header-section-number">0.3.1</span> The Mac Way</h3>
+<p>You can find some notes on accessibility and RStudio here: <a href="https://support.rstudio.com/hc/en-us/articles/360044226673-RStudio-Accessibility-Features" class="uri">https://support.rstudio.com/hc/en-us/articles/360044226673-RStudio-Accessibility-Features</a>.</p>
+<p>With this way, R and RStudio are installed and run on your computer, and all of the data files that you work with will also be on your computer. Unless you’re running a Chromebook or similar, your computer is almost certainly more powerful than the default instance that RStudio Cloud gives you (see below), and you can use familiar tools to do things like organize folders and preview files. But sometimes particular details about the way your computer is set up can cause R and RStudio to do weird things, and these problems can be very difficult to diagnose and solve.</p>
+<ol style="list-style-type: decimal">
+<li><p>Go to <a href="https://cran.r-project.org/" class="uri">https://cran.r-project.org/</a>. Download and install the latest release of R for your operating system (which should be Mac OS if you’re following this way). As of 2020-06-02, the latest release is 4.0.0.</p></li>
+<li><p>Go to <a href="https://rstudio.com/products/rstudio/download/#download"><code>rstudio.com</code></a>. Download and install the latest release of RStudio Desktop for your operating system (which should be Mac OS if you’re following this way). As of 2020-06-02, the latest release is 1.3.959.</p></li>
+</ol>
 </div>
-<div id="ref-WickhamAdvanced2014">
-<p>Wickham, Hadley. 2014. <em>Advanced R</em>. CRC Press. <a href="https://adv-r.hadley.nz">https://adv-r.hadley.nz</a>.</p>
+<div id="the-cloud-way" class="section level3" number="0.3.2">
+<h3><span class="header-section-number">0.3.2</span> The Cloud Way</h3>
+<p>(<strong>Note 2017-07-07</strong> Starting in August, RStudio Cloud is moving out of beta and becoming a regular subscription service. Information on pricing is at <a href="https://rstudio.cloud/plans/free" class="uri">https://rstudio.cloud/plans/free</a>. We’ll have to try it out, but it seems likely that the Free tier won’t give you enough compute time (“project hours”) for this course. I can subscribe to the Instructor tier, but that has its own limitations. We’ll have to see how things go.)</p>
+<p>With this way, R and RStudio are installed and run on virtual computers (called <em>instances</em>) on a big server somewhere. Each project can have its own instance, meaning that it runs on a nice clean computer and shouldn’t have any weirdness. The RStudio Cloud service is currently in beta; it’s free to use, but not completely guaranteed to be free of bugs. In order to use the service, you have to be connected to the internet, and you’ll have to use the RStudio interface or a terminal window to do things like move files around. Also, the instances aren’t very powerful, and so they’ll be slow if you try to work with large data sets or do a complex analysis.</p>
+<ol style="list-style-type: decimal">
+<li>Go to <a href="https://rstudio.cloud/"><code>rstudio.cloud</code></a>. Look for “Sign Up” in the upper right.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></li>
+</ol>
 </div>
+</div>
+<div id="slack" class="section level2" number="0.4">
+<h2><span class="header-section-number">0.4</span> Slack</h2>
+<p>For Fall 2020, the class Slack channel is at <a href="https://datascienceme-ke13588.slack.com" class="uri">https://datascienceme-ke13588.slack.com</a>. Please use your UC Merced email to sign up.</p>
+<p>If you use a screenreader, here are some notes on accessibility and Slack: <a href="https://www.marcozehe.de/status-of-the-accessibility-of-slack/" class="uri">https://www.marcozehe.de/status-of-the-accessibility-of-slack/</a>.</p>
+</div>
+<div id="github" class="section level2" number="0.5">
+<h2><span class="header-section-number">0.5</span> GitHub</h2>
+<ol style="list-style-type: decimal">
+<li><p>Go to <a href="https://github.com/"><code>github.com</code></a>. You can create a new account right on the front page. I don’t care what email address you use here.</p></li>
+<li><p>You can fill in your profile if you want.</p></li>
+<li><p>You’ll send me the email address associated with your Github account in the pre-class survey.</p></li>
+</ol>
+</div>
+<div id="screen-layouts" class="section level2" number="0.6">
+<h2><span class="header-section-number">0.6</span> Screen Layouts</h2>
+<p>In this course, a significant amount of time will be spent on <em>live coding</em>. This means that I (or whoever’s doing the lecturing) will be writing code in real time, and you’ll follow along, transcribing the code into RStudio (or whatever) on your local machine and running it at the same time as me.</p>
+<p>Live coding is a great way to learn coding practices. But it requires you to have quick access to 3-5 different things:</p>
+<ul>
+<li>My screenshare (so you can see what I’m typing)</li>
+<li>The course Slack (so you can ask for help or other questions, or make comments)</li>
+<li>Possibly a separate way to put up a flag so that I can see immediately that you have a question</li>
+<li>Your own workspace (RStudio or whatever)</li>
+<li>Possibly a separate app for taking notes</li>
+</ul>
+<p>In an ordinary classroom, the first three things would all be handled by the classroom environment. In a fully online setting, everything needs to be handled on your computer.</p>
+<p>The most effective way to do this is to have multiple displays. This is also the most expensive.</p>
+<p><a href="https://carpentries.org/blog/2020/06/online-workshop-logistics-and_screen-layouts/">This blog post</a> discusses alternatives to multiple displays. In particular, the window layout below fits the screenshare, chat, and your workspace on to a single laptop display. You can also have a separate text file open in RStudio for notes. You might consider having Slack open on your phone — so that you can keep an eye on the chat — as well in the background on your computer — so that you can alt-tab to it to actually type things.</p>
+<div class="figure">
+<img src="images/layout.jpg" alt="" />
+<p class="caption">Source: <a href="https://carpentries.org/images//blog/2020/06/screen_layouts/02-student-with_participantlist-1366x768.jpg" class="uri">https://carpentries.org/images//blog/2020/06/screen_layouts/02-student-with_participantlist-1366x768.jpg</a></p>
+</div>
+</div>
+<div id="pre-class-survey" class="section level2" number="0.7">
+<h2><span class="header-section-number">0.7</span> Pre-Class Survey</h2>
+<p>Please take a few minutes to fill out this survey: <a href="https://ucmerced.az1.qualtrics.com/jfe/form/SV_eVU8JWREUu4UNH7" class="uri">https://ucmerced.az1.qualtrics.com/jfe/form/SV_eVU8JWREUu4UNH7</a>.</p>
+
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p>RStudio gives you the option to log in with Google or GitHub. As a general practice, I recommend always keeping your accounts separate. Use a password manager to generate separate, strong passwords for each site. I use <a href="https://www.lastpass.com/">LastPass</a>.<a href="chapter-0-setting-up.html#fnref1" class="footnote-back">↩︎</a></p></li>
+</ol>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="git-and-version-control.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="warnings-errors-and-getting-help.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="introduction.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

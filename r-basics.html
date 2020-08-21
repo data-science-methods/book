@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Week 2 R Basics | Data Science Methods for Cognitive Science</title>
+  <title>Chapter 2 R Basics | Data Science Methods for Cognitive Science</title>
   <meta name="description" content="This document is a set of notes (and perhaps later a textbook) for a course on data science methods for graduate students in social and behavioral sciences." />
-  <meta name="generator" content="bookdown 0.20.2 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.20.3 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Week 2 R Basics | Data Science Methods for Cognitive Science" />
+  <meta property="og:title" content="Chapter 2 R Basics | Data Science Methods for Cognitive Science" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Week 2 R Basics | Data Science Methods for Cognitive Science" />
+  <meta name="twitter:title" content="Chapter 2 R Basics | Data Science Methods for Cognitive Science" />
   
   <meta name="twitter:description" content="This document is a set of notes (and perhaps later a textbook) for a course on data science methods for graduate students in social and behavioral sciences." />
   
@@ -24,7 +24,7 @@
 <meta name="author" content="Dan Hicks, hicks.daniel.j@gmail.com" />
 
 
-<meta name="date" content="2020-08-17" />
+<meta name="date" content="2020-08-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -132,15 +132,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <ul class="summary">
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
-<li class="chapter" data-level="" data-path="week-0-setting-up.html"><a href="week-0-setting-up.html"><i class="fa fa-check"></i>Week 0: Setting up</a>
+<li class="chapter" data-level="" data-path="chapter-0-setting-up.html"><a href="chapter-0-setting-up.html"><i class="fa fa-check"></i>Chapter 0: Setting up</a>
 <ul>
-<li class="chapter" data-level="0.1" data-path="week-0-setting-up.html"><a href="week-0-setting-up.html#r-and-rstudio-the-mac-way"><i class="fa fa-check"></i><b>0.1</b> R and RStudio: The Mac Way</a></li>
-<li class="chapter" data-level="0.2" data-path="week-0-setting-up.html"><a href="week-0-setting-up.html#r-and-rstudio-the-cloud-way"><i class="fa fa-check"></i><b>0.2</b> R and RStudio: The Cloud Way</a></li>
-<li class="chapter" data-level="0.3" data-path="week-0-setting-up.html"><a href="week-0-setting-up.html#slack"><i class="fa fa-check"></i><b>0.3</b> Slack</a></li>
-<li class="chapter" data-level="0.4" data-path="week-0-setting-up.html"><a href="week-0-setting-up.html#github"><i class="fa fa-check"></i><b>0.4</b> GitHub</a></li>
-<li class="chapter" data-level="0.5" data-path="week-0-setting-up.html"><a href="week-0-setting-up.html#screen-layouts"><i class="fa fa-check"></i><b>0.5</b> Screen Layouts</a></li>
-<li class="chapter" data-level="0.6" data-path="week-0-setting-up.html"><a href="week-0-setting-up.html#pre-class-survey"><i class="fa fa-check"></i><b>0.6</b> Pre-Class Survey</a></li>
-<li class="chapter" data-level="0.7" data-path="week-0-setting-up.html"><a href="week-0-setting-up.html#a-note-on-accessibility"><i class="fa fa-check"></i><b>0.7</b> A Note on Accessibility</a></li>
+<li class="chapter" data-level="0.1" data-path="chapter-0-setting-up.html"><a href="chapter-0-setting-up.html#a-note-on-accessibility"><i class="fa fa-check"></i><b>0.1</b> A Note on Accessibility</a></li>
+<li class="chapter" data-level="0.2" data-path="chapter-0-setting-up.html"><a href="chapter-0-setting-up.html#hardware-recommendations"><i class="fa fa-check"></i><b>0.2</b> Hardware Recommendations</a></li>
+<li class="chapter" data-level="0.3" data-path="chapter-0-setting-up.html"><a href="chapter-0-setting-up.html#r-and-rstudio"><i class="fa fa-check"></i><b>0.3</b> R and RStudio</a></li>
+<li class="chapter" data-level="0.4" data-path="chapter-0-setting-up.html"><a href="chapter-0-setting-up.html#slack"><i class="fa fa-check"></i><b>0.4</b> Slack</a></li>
+<li class="chapter" data-level="0.5" data-path="chapter-0-setting-up.html"><a href="chapter-0-setting-up.html#github"><i class="fa fa-check"></i><b>0.5</b> GitHub</a></li>
+<li class="chapter" data-level="0.6" data-path="chapter-0-setting-up.html"><a href="chapter-0-setting-up.html#screen-layouts"><i class="fa fa-check"></i><b>0.6</b> Screen Layouts</a></li>
+<li class="chapter" data-level="0.7" data-path="chapter-0-setting-up.html"><a href="chapter-0-setting-up.html#pre-class-survey"><i class="fa fa-check"></i><b>0.7</b> Pre-Class Survey</a></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
 <ul>
@@ -149,6 +149,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.3" data-path="introduction.html"><a href="introduction.html#what-this-course-isnt-and-is"><i class="fa fa-check"></i><b>1.3</b> What this course isn’t, and is</a></li>
 <li class="chapter" data-level="1.4" data-path="introduction.html"><a href="introduction.html#learning-outcomes"><i class="fa fa-check"></i><b>1.4</b> Learning outcomes</a></li>
 <li class="chapter" data-level="1.5" data-path="introduction.html"><a href="introduction.html#notes-on-some-course-design-decisions"><i class="fa fa-check"></i><b>1.5</b> Notes on some course design decisions</a></li>
+<li class="chapter" data-level="1.6" data-path="introduction.html"><a href="introduction.html#data-science-wtf"><i class="fa fa-check"></i><b>1.6</b> Data Science WTF</a></li>
 </ul></li>
 <li class="part"><span><b>I Some fundamental tools</b></span></li>
 <li class="chapter" data-level="2" data-path="r-basics.html"><a href="r-basics.html"><i class="fa fa-check"></i><b>2</b> R Basics</a>
@@ -195,7 +196,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="r-basics" class="section level1" number="2">
-<h1><span class="header-section-number">Week 2</span> R Basics</h1>
+<h1><span class="header-section-number">Chapter 2</span> R Basics</h1>
 <div id="lets-get-started-with-rstudio" class="section level2" number="2.1">
 <h2><span class="header-section-number">2.1</span> Let’s get started with RStudio</h2>
 <ul>
@@ -225,131 +226,82 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="r-basics.html#cb1-1"></a><span class="kw">data</span>(anscombe) <span class="co">## &lt;https://en.wikipedia.org/wiki/Anscombe%27s_quartet&gt;</span></span>
 <span id="cb1-2"><a href="r-basics.html#cb1-2"></a></span>
-<span id="cb1-3"><a href="r-basics.html#cb1-3"></a>anscombe</span></code></pre></div>
-<pre><code>##    x1 x2 x3 x4    y1   y2    y3    y4
-## 1  10 10 10  8  8.04 9.14  7.46  6.58
-## 2   8  8  8  8  6.95 8.14  6.77  5.76
-## 3  13 13 13  8  7.58 8.74 12.74  7.71
-## 4   9  9  9  8  8.81 8.77  7.11  8.84
-## 5  11 11 11  8  8.33 9.26  7.81  8.47
-## 6  14 14 14  8  9.96 8.10  8.84  7.04
-## 7   6  6  6  8  7.24 6.13  6.08  5.25
-## 8   4  4  4 19  4.26 3.10  5.39 12.50
-## 9  12 12 12  8 10.84 9.13  8.15  5.56
-## 10  7  7  7  8  4.82 7.26  6.42  7.91
-## 11  5  5  5  8  5.68 4.74  5.73  6.89</code></pre>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="r-basics.html#cb3-1"></a><span class="kw">str</span>(anscombe)</span></code></pre></div>
-<pre><code>## &#39;data.frame&#39;:    11 obs. of  8 variables:
-##  $ x1: num  10 8 13 9 11 14 6 4 12 7 ...
-##  $ x2: num  10 8 13 9 11 14 6 4 12 7 ...
-##  $ x3: num  10 8 13 9 11 14 6 4 12 7 ...
-##  $ x4: num  8 8 8 8 8 8 8 19 8 8 ...
-##  $ y1: num  8.04 6.95 7.58 8.81 8.33 ...
-##  $ y2: num  9.14 8.14 8.74 8.77 9.26 8.1 6.13 3.1 9.13 7.26 ...
-##  $ y3: num  7.46 6.77 12.74 7.11 7.81 ...
-##  $ y4: num  6.58 5.76 7.71 8.84 8.47 7.04 5.25 12.5 5.56 7.91 ...</code></pre>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="r-basics.html#cb5-1"></a><span class="kw">summary</span>(anscombe)</span></code></pre></div>
-<pre><code>##        x1             x2             x3             x4           y1        
-##  Min.   : 4.0   Min.   : 4.0   Min.   : 4.0   Min.   : 8   Min.   : 4.260  
-##  1st Qu.: 6.5   1st Qu.: 6.5   1st Qu.: 6.5   1st Qu.: 8   1st Qu.: 6.315  
-##  Median : 9.0   Median : 9.0   Median : 9.0   Median : 8   Median : 7.580  
-##  Mean   : 9.0   Mean   : 9.0   Mean   : 9.0   Mean   : 9   Mean   : 7.501  
-##  3rd Qu.:11.5   3rd Qu.:11.5   3rd Qu.:11.5   3rd Qu.: 8   3rd Qu.: 8.570  
-##  Max.   :14.0   Max.   :14.0   Max.   :14.0   Max.   :19   Max.   :10.840  
-##        y2              y3              y4        
-##  Min.   :3.100   Min.   : 5.39   Min.   : 5.250  
-##  1st Qu.:6.695   1st Qu.: 6.25   1st Qu.: 6.170  
-##  Median :8.140   Median : 7.11   Median : 7.040  
-##  Mean   :7.501   Mean   : 7.50   Mean   : 7.501  
-##  3rd Qu.:8.950   3rd Qu.: 7.98   3rd Qu.: 8.190  
-##  Max.   :9.260   Max.   :12.74   Max.   :12.500</code></pre>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="r-basics.html#cb7-1"></a><span class="kw">library</span>(ggplot2)</span>
-<span id="cb7-2"><a href="r-basics.html#cb7-2"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> anscombe, <span class="kw">aes</span>(<span class="dt">x =</span> x1, <span class="dt">y =</span> y1)) <span class="op">+</span></span>
-<span id="cb7-3"><a href="r-basics.html#cb7-3"></a><span class="st">    </span><span class="kw">geom_point</span>()</span></code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
-<p><strong>Exercise:</strong> plot the other three datasets</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="r-basics.html#cb8-1"></a>anscombe<span class="op">$</span>x1</span></code></pre></div>
-<pre><code>##  [1] 10  8 13  9 11 14  6  4 12  7  5</code></pre>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="r-basics.html#cb10-1"></a>anscombe[[<span class="st">&#39;x1&#39;</span>]]</span></code></pre></div>
-<pre><code>##  [1] 10  8 13  9 11 14  6  4 12  7  5</code></pre>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="r-basics.html#cb12-1"></a>anscombe[,<span class="st">&#39;x1&#39;</span>]</span></code></pre></div>
-<pre><code>##  [1] 10  8 13  9 11 14  6  4 12  7  5</code></pre>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="r-basics.html#cb14-1"></a>anscombe[,<span class="dv">1</span>]</span></code></pre></div>
-<pre><code>##  [1] 10  8 13  9 11 14  6  4 12  7  5</code></pre>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="r-basics.html#cb16-1"></a><span class="kw">mean</span>(anscombe<span class="op">$</span>x1)</span></code></pre></div>
-<pre><code>## [1] 9</code></pre>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="r-basics.html#cb18-1"></a><span class="kw">mean</span>(anscombe<span class="op">$</span>x2)</span></code></pre></div>
-<pre><code>## [1] 9</code></pre>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="r-basics.html#cb20-1"></a><span class="kw">sd</span>(anscombe<span class="op">$</span>y1)</span></code></pre></div>
-<pre><code>## [1] 2.031568</code></pre>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="r-basics.html#cb22-1"></a><span class="kw">sd</span>(anscombe<span class="op">$</span>y2)</span></code></pre></div>
-<pre><code>## [1] 2.031657</code></pre>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="r-basics.html#cb24-1"></a><span class="kw">cor</span>(anscombe<span class="op">$</span>x1, anscombe<span class="op">$</span>y1)</span></code></pre></div>
-<pre><code>## [1] 0.8164205</code></pre>
-<p><strong>Exercise</strong>: Calculate correlations for all four x-y pairs</p>
+<span id="cb1-3"><a href="r-basics.html#cb1-3"></a>anscombe</span>
+<span id="cb1-4"><a href="r-basics.html#cb1-4"></a><span class="kw">str</span>(anscombe)</span>
+<span id="cb1-5"><a href="r-basics.html#cb1-5"></a><span class="kw">summary</span>(anscombe)</span>
+<span id="cb1-6"><a href="r-basics.html#cb1-6"></a></span>
+<span id="cb1-7"><a href="r-basics.html#cb1-7"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb1-8"><a href="r-basics.html#cb1-8"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> anscombe, <span class="kw">aes</span>(<span class="dt">x =</span> x1, <span class="dt">y =</span> y1)) <span class="op">+</span></span>
+<span id="cb1-9"><a href="r-basics.html#cb1-9"></a><span class="st">    </span><span class="kw">geom_point</span>()</span></code></pre></div>
+<div id="exercise" class="section level3" number="2.1.1">
+<h3><span class="header-section-number">2.1.1</span> Exercise</h3>
+<p>Plot the other three datasets</p>
+<ul>
+<li>Selecting variables, <code>mean</code>, <code>sd</code>, and correlation</li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="r-basics.html#cb2-1"></a>anscombe<span class="op">$</span>x1</span>
+<span id="cb2-2"><a href="r-basics.html#cb2-2"></a>anscombe[[<span class="st">&#39;x1&#39;</span>]]</span>
+<span id="cb2-3"><a href="r-basics.html#cb2-3"></a></span>
+<span id="cb2-4"><a href="r-basics.html#cb2-4"></a>anscombe[,<span class="st">&#39;x1&#39;</span>]</span>
+<span id="cb2-5"><a href="r-basics.html#cb2-5"></a>anscombe[,<span class="dv">1</span>]</span>
+<span id="cb2-6"><a href="r-basics.html#cb2-6"></a></span>
+<span id="cb2-7"><a href="r-basics.html#cb2-7"></a><span class="kw">mean</span>(anscombe<span class="op">$</span>x1)</span>
+<span id="cb2-8"><a href="r-basics.html#cb2-8"></a><span class="kw">mean</span>(anscombe<span class="op">$</span>x2)</span>
+<span id="cb2-9"><a href="r-basics.html#cb2-9"></a></span>
+<span id="cb2-10"><a href="r-basics.html#cb2-10"></a><span class="kw">sd</span>(anscombe<span class="op">$</span>y1)</span>
+<span id="cb2-11"><a href="r-basics.html#cb2-11"></a><span class="kw">sd</span>(anscombe<span class="op">$</span>y2)</span>
+<span id="cb2-12"><a href="r-basics.html#cb2-12"></a></span>
+<span id="cb2-13"><a href="r-basics.html#cb2-13"></a><span class="kw">cor</span>(anscombe<span class="op">$</span>x1, anscombe<span class="op">$</span>y1)</span></code></pre></div>
+</div>
+<div id="exercise-1" class="section level3" number="2.1.2">
+<h3><span class="header-section-number">2.1.2</span> Exercise</h3>
+<p>Calculate correlations for all four x-y pairs</p>
+</div>
 </div>
 <div id="base-r-data-types" class="section level2" number="2.2">
 <h2><span class="header-section-number">2.2</span> Base R data types</h2>
 <div id="numerics" class="section level3" number="2.2.1">
 <h3><span class="header-section-number">2.2.1</span> Numerics</h3>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="r-basics.html#cb26-1"></a>foo =<span class="st"> </span><span class="dv">2</span></span>
-<span id="cb26-2"><a href="r-basics.html#cb26-2"></a>bar =<span class="st"> </span><span class="dv">3</span></span>
-<span id="cb26-3"><a href="r-basics.html#cb26-3"></a>foobar =<span class="st"> </span>foo <span class="op">+</span><span class="st"> </span>bar</span>
-<span id="cb26-4"><a href="r-basics.html#cb26-4"></a>foo <span class="op">/</span><span class="st"> </span>bar</span></code></pre></div>
-<pre><code>## [1] 0.6666667</code></pre>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="r-basics.html#cb28-1"></a><span class="kw">try</span>(foo <span class="op">/</span><span class="st"> </span><span class="dv">0</span>)</span></code></pre></div>
-<pre><code>## [1] Inf</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="r-basics.html#cb3-1"></a>foo =<span class="st"> </span><span class="dv">2</span></span>
+<span id="cb3-2"><a href="r-basics.html#cb3-2"></a>bar =<span class="st"> </span><span class="dv">3</span></span>
+<span id="cb3-3"><a href="r-basics.html#cb3-3"></a>foobar =<span class="st"> </span>foo <span class="op">+</span><span class="st"> </span>bar</span>
+<span id="cb3-4"><a href="r-basics.html#cb3-4"></a>foo <span class="op">/</span><span class="st"> </span>bar</span>
+<span id="cb3-5"><a href="r-basics.html#cb3-5"></a><span class="kw">try</span>(foo <span class="op">/</span><span class="st"> </span><span class="dv">0</span>)</span></code></pre></div>
 </div>
 <div id="vectors" class="section level3" number="2.2.2">
 <h3><span class="header-section-number">2.2.2</span> Vectors</h3>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="r-basics.html#cb30-1"></a>foo =<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>)</span>
-<span id="cb30-2"><a href="r-basics.html#cb30-2"></a>bar =<span class="st"> </span><span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>)</span>
-<span id="cb30-3"><a href="r-basics.html#cb30-3"></a>foo[<span class="dv">2</span>]</span></code></pre></div>
-<pre><code>## [1] 3</code></pre>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="r-basics.html#cb32-1"></a>foo[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>]</span></code></pre></div>
-<pre><code>## [1] 3 4</code></pre>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="r-basics.html#cb34-1"></a><span class="kw">try</span>(foo[<span class="dv">1</span>, <span class="dv">3</span>])</span></code></pre></div>
-<pre><code>## Error in foo[1, 3] : incorrect number of dimensions</code></pre>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="r-basics.html#cb36-1"></a>foo[<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>)]</span></code></pre></div>
-<pre><code>## [1] 2 4</code></pre>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="r-basics.html#cb38-1"></a>foo <span class="op">+</span><span class="st"> </span>bar</span></code></pre></div>
-<pre><code>## [1]  7  9 11</code></pre>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="r-basics.html#cb40-1"></a>foo <span class="op">*</span><span class="st"> </span>bar</span></code></pre></div>
-<pre><code>## [1] 10 18 28</code></pre>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="r-basics.html#cb42-1"></a><span class="co">## NB difference between vector and length-1 comparisons</span></span>
-<span id="cb42-2"><a href="r-basics.html#cb42-2"></a>bar <span class="op">==</span><span class="st"> </span>foo <span class="op">+</span><span class="st"> </span><span class="dv">3</span></span></code></pre></div>
-<pre><code>## [1] TRUE TRUE TRUE</code></pre>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="r-basics.html#cb44-1"></a><span class="kw">identical</span>(bar, foo <span class="op">+</span><span class="st"> </span><span class="dv">3</span>)</span></code></pre></div>
-<pre><code>## [1] TRUE</code></pre>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="r-basics.html#cb46-1"></a><span class="kw">c</span>(foo, bar)</span></code></pre></div>
-<pre><code>## [1] 2 3 4 5 6 7</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="r-basics.html#cb4-1"></a>foo =<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>)</span>
+<span id="cb4-2"><a href="r-basics.html#cb4-2"></a>bar =<span class="st"> </span><span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>)</span>
+<span id="cb4-3"><a href="r-basics.html#cb4-3"></a>foo[<span class="dv">2</span>]</span>
+<span id="cb4-4"><a href="r-basics.html#cb4-4"></a>foo[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>]</span>
+<span id="cb4-5"><a href="r-basics.html#cb4-5"></a><span class="kw">try</span>(foo[<span class="dv">1</span>, <span class="dv">3</span>])</span>
+<span id="cb4-6"><a href="r-basics.html#cb4-6"></a>foo[<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>)]</span>
+<span id="cb4-7"><a href="r-basics.html#cb4-7"></a></span>
+<span id="cb4-8"><a href="r-basics.html#cb4-8"></a>foo <span class="op">+</span><span class="st"> </span>bar</span>
+<span id="cb4-9"><a href="r-basics.html#cb4-9"></a>foo <span class="op">*</span><span class="st"> </span>bar</span>
+<span id="cb4-10"><a href="r-basics.html#cb4-10"></a><span class="co">## NB difference between vector and length-1 comparisons</span></span>
+<span id="cb4-11"><a href="r-basics.html#cb4-11"></a>bar <span class="op">==</span><span class="st"> </span>foo <span class="op">+</span><span class="st"> </span><span class="dv">3</span></span>
+<span id="cb4-12"><a href="r-basics.html#cb4-12"></a><span class="kw">identical</span>(bar, foo <span class="op">+</span><span class="st"> </span><span class="dv">3</span>)</span>
+<span id="cb4-13"><a href="r-basics.html#cb4-13"></a></span>
+<span id="cb4-14"><a href="r-basics.html#cb4-14"></a><span class="kw">c</span>(foo, bar)</span></code></pre></div>
 </div>
 <div id="strings" class="section level3" number="2.2.3">
 <h3><span class="header-section-number">2.2.3</span> Strings</h3>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="r-basics.html#cb48-1"></a>foo =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;monkey&#39;</span>, <span class="st">&#39;banana&#39;</span>)</span>
-<span id="cb48-2"><a href="r-basics.html#cb48-2"></a>bar =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;house&#39;</span>)</span>
-<span id="cb48-3"><a href="r-basics.html#cb48-3"></a><span class="co">## How to put these together? </span></span>
-<span id="cb48-4"><a href="r-basics.html#cb48-4"></a><span class="kw">try</span>(foo <span class="op">+</span><span class="st"> </span>bar)</span></code></pre></div>
-<pre><code>## Error in foo + bar : non-numeric argument to binary operator</code></pre>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="r-basics.html#cb50-1"></a><span class="kw">c</span>(foo, bar)</span></code></pre></div>
-<pre><code>## [1] &quot;monkey&quot; &quot;banana&quot; &quot;house&quot;</code></pre>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="r-basics.html#cb52-1"></a><span class="kw">paste</span>(foo, bar)</span></code></pre></div>
-<pre><code>## [1] &quot;monkey house&quot; &quot;banana house&quot;</code></pre>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="r-basics.html#cb54-1"></a><span class="kw">paste0</span>(foo, bar)</span></code></pre></div>
-<pre><code>## [1] &quot;monkeyhouse&quot; &quot;bananahouse&quot;</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="r-basics.html#cb5-1"></a>foo =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;monkey&#39;</span>, <span class="st">&#39;banana&#39;</span>)</span>
+<span id="cb5-2"><a href="r-basics.html#cb5-2"></a>bar =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;house&#39;</span>)</span>
+<span id="cb5-3"><a href="r-basics.html#cb5-3"></a><span class="co">## How to put these together? </span></span>
+<span id="cb5-4"><a href="r-basics.html#cb5-4"></a><span class="kw">try</span>(foo <span class="op">+</span><span class="st"> </span>bar)</span>
+<span id="cb5-5"><a href="r-basics.html#cb5-5"></a><span class="kw">c</span>(foo, bar)</span>
+<span id="cb5-6"><a href="r-basics.html#cb5-6"></a><span class="kw">paste</span>(foo, bar)</span>
+<span id="cb5-7"><a href="r-basics.html#cb5-7"></a><span class="kw">paste0</span>(foo, bar)</span></code></pre></div>
 </div>
 <div id="factors" class="section level3" number="2.2.4">
 <h3><span class="header-section-number">2.2.4</span> Factors</h3>
-<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="r-basics.html#cb56-1"></a>foo_str =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;foo&#39;</span>, <span class="st">&#39;foo&#39;</span>, <span class="st">&#39;bar&#39;</span>, <span class="st">&#39;zoo&#39;</span>)</span>
-<span id="cb56-2"><a href="r-basics.html#cb56-2"></a><span class="kw">as.integer</span>(foo_str)</span></code></pre></div>
-<pre><code>## Warning: NAs introduced by coercion</code></pre>
-<pre><code>## [1] NA NA NA NA</code></pre>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="r-basics.html#cb59-1"></a>foo_fct =<span class="st"> </span><span class="kw">as.factor</span>(foo_str)</span>
-<span id="cb59-2"><a href="r-basics.html#cb59-2"></a><span class="kw">as.integer</span>(foo)</span></code></pre></div>
-<pre><code>## Warning: NAs introduced by coercion</code></pre>
-<pre><code>## [1] NA NA</code></pre>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="r-basics.html#cb62-1"></a><span class="kw">levels</span>(foo_fct)</span></code></pre></div>
-<pre><code>## [1] &quot;bar&quot; &quot;foo&quot; &quot;zoo&quot;</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="r-basics.html#cb6-1"></a>foo_str =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;foo&#39;</span>, <span class="st">&#39;foo&#39;</span>, <span class="st">&#39;bar&#39;</span>, <span class="st">&#39;zoo&#39;</span>)</span>
+<span id="cb6-2"><a href="r-basics.html#cb6-2"></a><span class="kw">as.integer</span>(foo_str)</span>
+<span id="cb6-3"><a href="r-basics.html#cb6-3"></a>foo_fct =<span class="st"> </span><span class="kw">as.factor</span>(foo_str)</span>
+<span id="cb6-4"><a href="r-basics.html#cb6-4"></a><span class="kw">as.integer</span>(foo)</span>
+<span id="cb6-5"><a href="r-basics.html#cb6-5"></a><span class="kw">levels</span>(foo_fct)</span></code></pre></div>
 </div>
 <div id="lists" class="section level3" number="2.2.5">
 <h3><span class="header-section-number">2.2.5</span> Lists</h3>
@@ -422,7 +374,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["book.pdf", "book.epub"],
+"download": ["book.pdf"],
 "toc": {
 "collapse": "subsection"
 }
