@@ -1,4 +1,4 @@
-# Introduction
+# Introduction #
 
 ## Land Acknowledgement ##
 
@@ -115,38 +115,3 @@ However,
 - Notebooks encourage bad software engineering habits and discourage good ones [@GrusDonNotebooksJoel; @HiltchJupyterNotebookCancer2019]
 
 
-## Data Science WTF ##
-
-- Standard definition
-    - ![Data science, defined as the intersection of CS, stats, and "business knowledge"](images/Abisiga.jpg){ width=30% }
-    - Source: <https://www.kdnuggets.com/2020/08/top-10-lists-data-science.html>
-    - The intersection of computer science/software engineering, statistics, and "business knowledge"
-    - But this focuses on the tools and techniques, not the epistemic and practical *goals* of data science
-
-- To understand my definition, first let's talk about *data*
-    - *Representational view*: data are "reliable representations of reality which are produced via the interaction between humans and the world"
-        - "the production of data is equivalent to 'capturing' features of the world that can be used for systematic study"
-        - "data as 'raw' products of research, which are as close as it gets to unmediated knowledge of reality"
-        - data provide "an objective foundation for the acquisition of knowledge"
-        - **data become data when they're produced according to a standardized measurement process**
-
-    - *Relational view*: "data are objects that are treated as potential or actual evidence for scientific claims in ways that can, at least in principle, be scrutinised and accounted for"
-        - "any object can be used as a datum, or stop being used as such, depending on the circumstances"
-        - **data become data when they're used as evidence** [@LeonelliScientificResearchBig2020]
-        - Note implications for ideas of "unmediated knowledge" and "objective foundation"
-        
-- Data science ≠ lab science (often)
-    - data collection isn't standardized
-        - found (or bought), not made
-        - data as byproduct
-        - ex: scraping from Twitter, Wikipedia, administrative records
-    - remixing and recombining data
-        - ex: pesticide use + Census data in @HicksCensusDemographicsChlorpyrifos2020
-    - data first, questions later
-    - **relational view is often a better fit**
-    
-- The goal of data science
-    - to *produce data*
-    - to transform objects such that they can be used as evidence
-    
-    

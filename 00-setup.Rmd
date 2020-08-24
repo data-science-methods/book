@@ -1,4 +1,4 @@
-# Chapter 0: Setting up {-}
+# Setting up {-}
 
 Before the first day of class, you'll need to set up a few things:  **R, RStudio, Slack, Zoom, and a GitHub account**.  I'd also like you to fill out a **pre-class survey**.  R is the primary piece of software we'll be learning to use.  RStudio is an IDE (integrated development environment) for using R.  (Think of R as the engine of a car and RStudio as the dashboard, steering wheel, and pedals.)  Slack will be the main way we communicate; we'll use Zoom for class time.  GitHub is a service for sharing and collaborating on software engineering projects.  
 
