@@ -20,15 +20,17 @@ I use they/them pronouns and identify as nonbinary.  I grew up in Placerville, a
 
 Is Not: 
 
-- statistics (in the way you think)
-- general introduction to software engineering
+- a statistics course (in the way you think)
+- a general introduction to software engineering
 - a basic introduction to R? (Unless that's what you all need?)
+- carefully planned out from beginning to end
 
 Is: 
 
 - an introduction to data science
-- data cleaning, data management, and exploratory data analysis
+- about data cleaning, data management, and exploratory data analysis
 - habituation to some good software engineering practices that are especially valuable for data science work
+- in the [pre-alpha stage of development](https://en.wikipedia.org/wiki/Software_release_life_cycle#Pre-alpha)
 
 ## Learning outcomes ##
 
@@ -61,6 +63,15 @@ By the end of the course, students will be able to
 	- critically discuss profiling and thresholds [@PiersonLargescaleAnalysisRacial2020] as potential explanation for differences in "base rates" of recidivism
 	- critically locate discussions of fairness and recidivism in a broader social context, and identify implications for working data scientists [@SelbstFairnessAbstractionSociotechnical2018; @HoffmannWhereFairnessFails2019; @HannaCriticalRaceMethodology2019]
 
+## Workflow ##
+
+- The first ~10 weeks of the course will focus on skill development, with a mix of livecoding lectures and labs.  
+    - Labs will be set up to give you automated feedback.  
+    - There will probably be asynchronous discussion using Slack for some of the labs. 
+- On November 10 we'll be working on project with Hanna Gunn's Data Ethics course.  
+- The last few weeks of the course will be devoted to term projects.  
+    - Tentative idea for this:  go find some data; clean it, explore it; produce a codebook and reproducible exploratory data analysis
+
 
 ## Notes on some course design decisions ##
 
@@ -68,6 +79,8 @@ By the end of the course, students will be able to
 
 - Python is a perfectly good language for general programming
     - And has some advantages over R in certain data science aspects, including working with strings and developing custom data structures
+
+However, 
 
 - R is a better language for doing data science [@ShotwellWhyUse2019]
     - Vectors, data frames, and common statistical models are installed and loaded by default
@@ -77,12 +90,11 @@ By the end of the course, students will be able to
     - [CRAN](https://twitter.com/kccarrell/status/1030482372775620613)
     - RStudio
     
-    
 ### Tidyverse R, not base R ###
 
 - "Base R" refers to the central code for R and the packages included when you install it
     - Base R is universal and free of additional dependencies.  Code written entirely in base R will run on any other R installation (with the same version). 
-    - Because the R Core Development Team has always thought backwards-compatibility is important, base R has some idiosyncracies [@KeyesRbitraryStandards2016]
+    - However, because the R Core Development Team has always thought backwards-compatibility is important, base R has some idiosyncracies [@KeyesRbitraryStandards2016]
     
 - `tidyverse` is a suite of packages developed by the manufacturers of RStudio
     - A very useful set of general tools can be loaded simply by calling `library(tidyverse)`
@@ -92,15 +104,15 @@ By the end of the course, students will be able to
     - However, several of its tools use something called "non-standard evaluation" (NSE). 
         - NSE makes tidyverse code easier to write for beginners, because you don't have to think as much about where exactly your variables are located
         - At the same time, NSE creates problems for intermediate coders, because passing tidyverse-style "bare names" through function arguments causes cryptic errors
-        
 
-    
 ### Scripts, not notebooks ###
 
 - Quite a few scientists like the way notebooks mix together code, visualizations, tables, and text [@PerkelWhyJupyterData2018]
 
+However, 
+
 - Notebooks do not play nicely with version control  [@AhemadVersionControlJupyter2018; @WhitmoreJupyterNotebookBest2015]
-- Notebooks encourage bad habits and discourage good ones [@GrusDonNotebooksJoel; @HiltchJupyterNotebookCancer2019]
+- Notebooks encourage bad software engineering habits and discourage good ones [@GrusDonNotebooksJoel; @HiltchJupyterNotebookCancer2019]
 
 
 ## Data Science WTF ##

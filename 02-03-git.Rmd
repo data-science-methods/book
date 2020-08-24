@@ -1,0 +1,34 @@
+# Git and Version Control #
+
+- *[motivating example]*
+
+- Version control
+    - Basic idea: Tools for tracking changes to code over time
+    - Useful for identifying and reversing breaking changes
+    - Implementations upload to cloud, track who contributes code
+    - Good for collaboration, publishing code
+    
+- git
+    - One of many version control systems
+    - Very popular in part thanks to GitHub, which provides free hosting for open-source projects
+    
+- git interfaces
+    - command line
+    - RStudio projects
+    - GUIs: GitHub, Sourcetree
+    
+- How to do things with git
+    - Terminal/command line
+    - setup
+        - installation
+        - user config
+    - `git init`
+    - `add`
+    - `commit`
+    - `.gitignore`
+    - `fetch` and `pull`
+    - `push`
+    - forking
+    - pull requests
+    - browsing history on GitHub
+    - stretch goals: `branch`; `checkout`

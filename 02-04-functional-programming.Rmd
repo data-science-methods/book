@@ -1,0 +1,26 @@
+# Functional Programming and Data Science #
+
+- Recommended reading:  @ChambersObjectOrientedProgrammingFunctional2014; parts II and III of @WickhamAdvanced2014
+
+- Programming paradigms
+    - *Procedural*:  Software is a series of instructions ("procedures"), which the computer carries out in order.  Special instructions (if-then, loops) are used to change the order based on inputs or other conditions.  
+
+    - *Object-oriented*:  Software is made up of objects, which have properties ("attributes," including other objects) and do things ("methods").  
+        - Example: A board game consists of 1 or more players, a board, and a deck of cards.  
+            - Players each have a hand of cards (attribute), can draw cards from the deck into their hand (method, which also changes the deck's attributes), and can play cards to manipulate tokens on the board (method, which also changes the board's attributes).  
+            - The game itself is an object, with the players, board, and deck for its attributes and methods to things up, run turns in sequence, determine the winner.  
+            - Separate objects might be responsible for displaying the current state of the game and getting input from the users.  
+        - Much better than procedural paradigms for *encapsulation*: When a player draws a card from the deck, we just need to know the inputs and outputs for `Deck.draw()`, not the details of how the deck tracks the order of cards and which ones have already been drawn. 
+        - Much easier to reason about systems with lots of dynamic, interacting parts.  
+        - Examples (mostly): Python, C++, Java
+    
+    - *Functional*: Software is made up of functions, which are run sequentially on the inputs
+        - Example: Raw data are read in, cleaned, and then a regression model is fit.  The model coefficients are tested for statistical significance, and a table and plot are written out to disk.  
+        - **Data analysis as a building series of pipes**
+        - Examples (mostly): R, Lisp, Haskell
+    
+    - A couple of extra rules for functional programming
+        - *Immutability*:  Once the value is assigned to a variable, that value cannot be changed
+        - *No side effects*:  Functions don't change anything outside of themselves; they only return a value
+
+
