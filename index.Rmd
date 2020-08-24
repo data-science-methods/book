@@ -1,7 +1,7 @@
 --- 
 title: "Data Science Methods for Cognitive Science"
 author: "Dan Hicks, <hicks.daniel.j@gmail.com>"
-date: "`r Sys.Date()`"
+date: "`r date()`"
 site: bookdown::bookdown_site
 # documentclass: book
 bibliography: [book.bib, packages.bib]
