@@ -118,7 +118,7 @@
 
 \title{Data Science Methods for Cognitive Science}
 \author{Dan Hicks, \href{mailto:hicks.daniel.j@gmail.com}{\nolinkurl{hicks.daniel.j@gmail.com}}}
-\date{2020-08-21}
+\date{2020-08-24}
 
 \begin{document}
 \maketitle
@@ -332,11 +332,13 @@ Is Not:
 \begin{itemize}
 \tightlist
 \item
-  statistics (in the way you think)
+  a statistics course (in the way you think)
 \item
-  general introduction to software engineering
+  a general introduction to software engineering
 \item
   a basic introduction to R? (Unless that's what you all need?)
+\item
+  carefully planned out from beginning to end
 \end{itemize}
 
 Is:
@@ -346,9 +348,11 @@ Is:
 \item
   an introduction to data science
 \item
-  data cleaning, data management, and exploratory data analysis
+  about data cleaning, data management, and exploratory data analysis
 \item
   habituation to some good software engineering practices that are especially valuable for data science work
+\item
+  in the \href{https://en.wikipedia.org/wiki/Software_release_life_cycle\#Pre-alpha}{pre-alpha stage of development}
 \end{itemize}
 
 \hypertarget{learning-outcomes}{%
@@ -420,6 +424,33 @@ By the end of the course, students will be able to
   \end{itemize}
 \end{enumerate}
 
+\hypertarget{workflow}{%
+\subsection{Workflow}\label{workflow}}
+
+\begin{itemize}
+\tightlist
+\item
+  The first \textasciitilde10 weeks of the course will focus on skill development, with a mix of livecoding lectures and labs.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Labs will be set up to give you automated feedback.\\
+  \item
+    There will probably be asynchronous discussion using Slack for some of the labs.
+  \end{itemize}
+\item
+  On November 10 we'll be working on project with Hanna Gunn's Data Ethics course.\\
+\item
+  The last few weeks of the course will be devoted to term projects.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Tentative idea for this: go find some data; clean it, explore it; produce a codebook and reproducible exploratory data analysis
+  \end{itemize}
+\end{itemize}
+
 \hypertarget{notes-on-some-course-design-decisions}{%
 \subsection{Notes on some course design decisions}\label{notes-on-some-course-design-decisions}}
 
@@ -436,6 +467,12 @@ By the end of the course, students will be able to
   \item
     And has some advantages over R in certain data science aspects, including working with strings and developing custom data structures
   \end{itemize}
+\end{itemize}
+
+However,
+
+\begin{itemize}
+\tightlist
 \item
   R is a better language for doing data science (Shotwell \protect\hyperlink{ref-ShotwellWhyUse2019}{2019})
 
@@ -471,7 +508,7 @@ By the end of the course, students will be able to
   \item
     Base R is universal and free of additional dependencies. Code written entirely in base R will run on any other R installation (with the same version).
   \item
-    Because the R Core Development Team has always thought backwards-compatibility is important, base R has some idiosyncracies (Keyes \protect\hyperlink{ref-KeyesRbitraryStandards2016}{2016})
+    However, because the R Core Development Team has always thought backwards-compatibility is important, base R has some idiosyncracies (Keyes \protect\hyperlink{ref-KeyesRbitraryStandards2016}{2016})
   \end{itemize}
 \item
   \texttt{tidyverse} is a suite of packages developed by the manufacturers of RStudio
@@ -507,12 +544,19 @@ By the end of the course, students will be able to
 \subsubsection{Scripts, not notebooks}\label{scripts-not-notebooks}}
 
 \begin{itemize}
+\tightlist
 \item
   Quite a few scientists like the way notebooks mix together code, visualizations, tables, and text (Perkel \protect\hyperlink{ref-PerkelWhyJupyterData2018}{2018})
+\end{itemize}
+
+However,
+
+\begin{itemize}
+\tightlist
 \item
   Notebooks do not play nicely with version control (Ahemad \protect\hyperlink{ref-AhemadVersionControlJupyter2018}{2018}; Whitmore \protect\hyperlink{ref-WhitmoreJupyterNotebookBest2015}{2015})
 \item
-  Notebooks encourage bad habits and discourage good ones (Grus \protect\hyperlink{ref-GrusDonNotebooksJoel}{n.d.}; Hiltch \protect\hyperlink{ref-HiltchJupyterNotebookCancer2019}{2019})
+  Notebooks encourage bad software engineering habits and discourage good ones (Grus \protect\hyperlink{ref-GrusDonNotebooksJoel}{n.d.}; Hiltch \protect\hyperlink{ref-HiltchJupyterNotebookCancer2019}{2019})
 \end{itemize}
 
 \hypertarget{data-science-wtf}{%
@@ -669,51 +713,55 @@ By the end of the course, students will be able to
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{data}\NormalTok{(anscombe) }\CommentTok{\#\# \textless{}https://en.wikipedia.org/wiki/Anscombe\%27s\_quartet\textgreater{}}
+\KeywordTok{library}\NormalTok{(tidyverse)}
+\KeywordTok{library}\NormalTok{(gapminder)}
 
-\NormalTok{anscombe}
-\KeywordTok{str}\NormalTok{(anscombe)}
-\KeywordTok{summary}\NormalTok{(anscombe)}
+\KeywordTok{data}\NormalTok{(gapminder) }\CommentTok{\#\# Gets a dataset from a loaded package}
+\NormalTok{gapminder}
+\NormalTok{?gapminder}
 
-\KeywordTok{library}\NormalTok{(ggplot2)}
-\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ anscombe, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ x1, }\DataTypeTok{y =}\NormalTok{ y1)) }\OperatorTok{+}
-\StringTok{    }\KeywordTok{geom\_point}\NormalTok{()}
+\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ gapminder, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ gdpPercap, }\DataTypeTok{y =}\NormalTok{ lifeExp, }\DataTypeTok{color =}\NormalTok{ continent, }
+                             \DataTypeTok{size =} \KeywordTok{log10}\NormalTok{(pop))) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom\_point}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{facet\_wrap}\NormalTok{(}\KeywordTok{vars}\NormalTok{(continent))}
+
+\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ gapminder, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ year, }\DataTypeTok{y =}\NormalTok{ lifeExp, }\DataTypeTok{color =}\NormalTok{ continent)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom\_line}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{group =}\NormalTok{ country)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{facet\_wrap}\NormalTok{(}\KeywordTok{vars}\NormalTok{(continent))}
 \end{Highlighting}
 \end{Shaded}
 
 \hypertarget{exercise}{%
 \subsubsection{Exercise}\label{exercise}}
 
-Plot the other three datasets
-
 \begin{itemize}
-\tightlist
 \item
-  Selecting variables, \texttt{mean}, \texttt{sd}, and correlation
+  Moar plots
+\item
+  Selecting variables, and some common math functions
 \end{itemize}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{anscombe}\OperatorTok{$}\NormalTok{x1}
-\NormalTok{anscombe[[}\StringTok{\textquotesingle{}x1\textquotesingle{}}\NormalTok{]]}
+\NormalTok{gapminder}\OperatorTok{$}\NormalTok{lifeExp}
+\CommentTok{\#\# These are useful in certain circumstances, but harder to read}
+\NormalTok{gapminder[[}\StringTok{\textquotesingle{}lifeExp\textquotesingle{}}\NormalTok{]]}
+\NormalTok{gapminder[,}\StringTok{\textquotesingle{}lifeExp\textquotesingle{}}\NormalTok{]}
+\NormalTok{gapminder[,}\DecValTok{4}\NormalTok{]}
 
-\NormalTok{anscombe[,}\StringTok{\textquotesingle{}x1\textquotesingle{}}\NormalTok{]}
-\NormalTok{anscombe[,}\DecValTok{1}\NormalTok{]}
+\KeywordTok{mean}\NormalTok{(gapminder}\OperatorTok{$}\NormalTok{lifeExp)}
+\KeywordTok{sd}\NormalTok{(gapminder}\OperatorTok{$}\NormalTok{lifeExp)}
+\KeywordTok{log}\NormalTok{(gapminder}\OperatorTok{$}\NormalTok{lifeExp)}
+\NormalTok{gapminder}\OperatorTok{$}\NormalTok{lifeExp }\OperatorTok{/}\StringTok{ }\DecValTok{100}
 
-\KeywordTok{mean}\NormalTok{(anscombe}\OperatorTok{$}\NormalTok{x1)}
-\KeywordTok{mean}\NormalTok{(anscombe}\OperatorTok{$}\NormalTok{x2)}
-
-\KeywordTok{sd}\NormalTok{(anscombe}\OperatorTok{$}\NormalTok{y1)}
-\KeywordTok{sd}\NormalTok{(anscombe}\OperatorTok{$}\NormalTok{y2)}
-
-\KeywordTok{cor}\NormalTok{(anscombe}\OperatorTok{$}\NormalTok{x1, anscombe}\OperatorTok{$}\NormalTok{y1)}
+\KeywordTok{cor}\NormalTok{(gapminder}\OperatorTok{$}\NormalTok{lifeExp, gapminder}\OperatorTok{$}\NormalTok{year)}
 \end{Highlighting}
 \end{Shaded}
 
 \hypertarget{exercise-1}{%
 \subsubsection{Exercise}\label{exercise-1}}
 
-Calculate correlations for all four x-y pairs
+Calculate correlations between life expectancy, population, and GDP per capita
 
 \hypertarget{base-r-data-types}{%
 \subsection{Base R data types}\label{base-r-data-types}}
@@ -784,32 +832,145 @@ Calculate correlations for all four x-y pairs
 \hypertarget{lists}{%
 \subsubsection{Lists}\label{lists}}
 
-\emph{{[}todo{]}}
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{some\_list =}\StringTok{ }\KeywordTok{list}\NormalTok{(}\StringTok{\textquotesingle{}foo\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}bar\textquotesingle{}}\NormalTok{, }\DecValTok{12}\NormalTok{)}
+\NormalTok{some\_list}
+\NormalTok{some\_list[}\DecValTok{2}\NormalTok{]}
+
+\NormalTok{nested\_list =}\StringTok{ }\KeywordTok{list}\NormalTok{(}\StringTok{\textquotesingle{}foo\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}bar\textquotesingle{}}\NormalTok{, some\_list)}
+\NormalTok{nested\_list}
+\NormalTok{nested\_list[[}\DecValTok{3}\NormalTok{]]}
+
+\NormalTok{moar\_list =}\StringTok{ }\KeywordTok{list}\NormalTok{(}\StringTok{\textquotesingle{}foo\textquotesingle{}}\NormalTok{ =}\StringTok{ }\DecValTok{12}\NormalTok{, }\StringTok{\textquotesingle{}bar\textquotesingle{}}\NormalTok{ =}\StringTok{ }\DecValTok{13}\NormalTok{)}
+\NormalTok{moar\_list}\OperatorTok{$}\NormalTok{foo}
+\end{Highlighting}
+\end{Shaded}
 
 \hypertarget{data-frames}{%
 \subsubsection{Data frames}\label{data-frames}}
 
-\emph{{[}todo{]}}
+\begin{itemize}
+\tightlist
+\item
+  \texttt{gapminder} is a data frame
+\item
+  Technical point: a data frame is a list
+
+  \begin{itemize}
+  \tightlist
+  \item
+    ``Columns'' = list elements
+  \item
+    Restriction: all of the elements must have the same length
+  \end{itemize}
+\item
+  A tibble (\texttt{tbl\_df}) is a data frame with nice printing (part of the tidyverse)
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Plus some technical restrictions that make it nicer to work with
+  \end{itemize}
+\end{itemize}
 
 \hypertarget{examining-variables}{%
-\subsection{\texorpdfstring{\emph{{[}examining variables{]}}}{{[}examining variables{]}}}\label{examining-variables}}
+\subsection{Examining variables}\label{examining-variables}}
 
 \begin{itemize}
 \tightlist
 \item
-  length
+  \texttt{length()}, \texttt{dim()}
 \item
-  str
+  \texttt{str()}
 \item
-  class, typeof
+  \texttt{class()}
+\item
+  \texttt{head()}
 \item
   \href{https://gge-ucd.github.io/R-DAVIS/lesson_how_r_thinks_about_data.html\#challenge}{challenge}
 \end{itemize}
 
+\hypertarget{exercise-2}{%
+\subsubsection{Exercise}\label{exercise-2}}
+
+\begin{itemize}
+\tightlist
+\item
+  What's the difference between \texttt{gapminder{[}\textquotesingle{}country\textquotesingle{}{]}} (single brackets) and \texttt{gapminder{[}{[}\textquotesingle{}country\textquotesingle{}{]}{]}} (double brackets)?
+\end{itemize}
+
+\hypertarget{logical-operators}{%
+\subsection{Logical operators}\label{logical-operators}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{ (}\OtherTok{TRUE}\NormalTok{) \{}
+  \KeywordTok{print}\NormalTok{(}\StringTok{\textquotesingle{}it}\CharTok{\textbackslash{}\textquotesingle{}}\StringTok{s true!\textquotesingle{}}\NormalTok{)}
+\NormalTok{\} }\ControlFlowTok{else}\NormalTok{ \{}
+  \KeywordTok{print}\NormalTok{(}\StringTok{\textquotesingle{}it}\CharTok{\textbackslash{}\textquotesingle{}}\StringTok{s false!\textquotesingle{}}\NormalTok{)}
+\NormalTok{\}}
+
+\NormalTok{foo =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{{-}1}\NormalTok{, }\DecValTok{{-}3}\NormalTok{)}
+\NormalTok{foo }\OperatorTok{\textgreater{}}\StringTok{ }\DecValTok{0}
+\ControlFlowTok{if}\NormalTok{ (foo }\OperatorTok{\textgreater{}}\StringTok{ }\DecValTok{0}\NormalTok{) \{}
+  \KeywordTok{print}\NormalTok{(}\StringTok{\textquotesingle{}greater than zero!\textquotesingle{}}\NormalTok{)}
+\NormalTok{\}}
+
+\ControlFlowTok{if}\NormalTok{ (}\KeywordTok{any}\NormalTok{(foo }\OperatorTok{\textgreater{}}\StringTok{ }\DecValTok{0}\NormalTok{)) \{}
+  \KeywordTok{print}\NormalTok{(}\StringTok{\textquotesingle{}at least one is greater than zero!\textquotesingle{}}\NormalTok{)}
+\NormalTok{\}}
+\ControlFlowTok{if}\NormalTok{ (}\KeywordTok{all}\NormalTok{(foo }\OperatorTok{\textgreater{}}\StringTok{ }\DecValTok{0}\NormalTok{)) \{}
+  \KeywordTok{print}\NormalTok{(}\StringTok{\textquotesingle{}all are greater than zero!\textquotesingle{}}\NormalTok{)}
+\NormalTok{\} }\ControlFlowTok{else}\NormalTok{ \{}
+  \KeywordTok{print}\NormalTok{(}\StringTok{\textquotesingle{}at least one is not greater than zero!\textquotesingle{}}\NormalTok{)}
+\NormalTok{\}}
+
+\ControlFlowTok{if}\NormalTok{ (foo }\OperatorTok{\textgreater{}}\StringTok{ }\DecValTok{0} \OperatorTok{|}\StringTok{ }\NormalTok{foo }\OperatorTok{\textless{}}\StringTok{ }\DecValTok{0}\NormalTok{) \{}
+  \KeywordTok{print}\NormalTok{(}\StringTok{\textquotesingle{}non{-}zero\textquotesingle{}}\NormalTok{)}
+\NormalTok{\}}
+\ControlFlowTok{if}\NormalTok{ (foo }\OperatorTok{\textgreater{}}\StringTok{ }\DecValTok{0} \OperatorTok{||}\StringTok{ }\NormalTok{foo }\OperatorTok{\textless{}}\StringTok{ }\DecValTok{0}\NormalTok{) \{}
+  \KeywordTok{print}\NormalTok{(}\StringTok{\textquotesingle{}non{-}zero\textquotesingle{}}\NormalTok{)}
+\NormalTok{\}}
+
+\ControlFlowTok{if}\NormalTok{ (foo }\OperatorTok{!=}\StringTok{ }\DecValTok{0}\NormalTok{) \{}
+  \KeywordTok{print}\NormalTok{(}\StringTok{\textquotesingle{}non{-}zero\textquotesingle{}}\NormalTok{)}
+\NormalTok{\}}
+\ControlFlowTok{if}\NormalTok{ (}\KeywordTok{all}\NormalTok{(foo }\OperatorTok{!=}\StringTok{ }\DecValTok{0}\NormalTok{)) \{}
+  \KeywordTok{print}\NormalTok{(}\StringTok{\textquotesingle{}non{-}zero\textquotesingle{}}\NormalTok{)}
+\NormalTok{\}}
+
+\NormalTok{bar =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{17}\NormalTok{, }\DecValTok{25}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{{-}14}\NormalTok{)}
+\KeywordTok{ifelse}\NormalTok{(bar }\OperatorTok{\textgreater{}}\StringTok{ }\DecValTok{0}\NormalTok{, }\StringTok{\textquotesingle{}positive\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}negative or zero\textquotesingle{}}\NormalTok{)}
+\KeywordTok{case\_when}\NormalTok{(bar }\OperatorTok{\textgreater{}}\StringTok{ }\DecValTok{0}  \OperatorTok{\textasciitilde{}}\StringTok{ \textquotesingle{}positive\textquotesingle{}}\NormalTok{, }
+\NormalTok{          bar }\OperatorTok{==}\StringTok{ }\DecValTok{0} \OperatorTok{\textasciitilde{}}\StringTok{ \textquotesingle{}zero\textquotesingle{}}\NormalTok{, }
+\NormalTok{          bar }\OperatorTok{\textless{}}\StringTok{ }\DecValTok{0}  \OperatorTok{\textasciitilde{}}\StringTok{ \textquotesingle{}negative\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
 \hypertarget{missing-data}{%
-\subsection{\texorpdfstring{\emph{{[}Missing data{]}}}{{[}Missing data{]}}}\label{missing-data}}
+\subsection{Missing data}\label{missing-data}}
 
 \url{https://gge-ucd.github.io/R-DAVIS/lesson_how_r_thinks_about_data.html\#missing_data}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{missing =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{7}\NormalTok{, }\DecValTok{17}\NormalTok{, }\OtherTok{NA}\NormalTok{, }\DecValTok{12}\NormalTok{)}
+\NormalTok{missing}
+\KeywordTok{mean}\NormalTok{(missing)}
+\KeywordTok{mean}\NormalTok{(missing, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{)}
+\KeywordTok{is.na}\NormalTok{(missing)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{exercise-3}{%
+\subsubsection{Exercise}\label{exercise-3}}
+
+\begin{itemize}
+\tightlist
+\item
+  What do the logical operators do with \texttt{NA}s?
+\end{itemize}
 
 \hypertarget{git-and-version-control}{%
 \section{Git and Version Control}\label{git-and-version-control}}
@@ -858,6 +1019,8 @@ Calculate correlations for all four x-y pairs
 
   \begin{itemize}
   \tightlist
+  \item
+    Terminal/command line
   \item
     setup
 
@@ -962,8 +1125,12 @@ Calculate correlations for all four x-y pairs
 \tightlist
 \item
   \url{https://stackoverflow.com/a/5963610/3187973}
-\item
-  \url{https://github.com/jennybc/debugging\#video}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \url{https://github.com/jennybc/debugging\#video}
+  \end{itemize}
 \end{itemize}
 
 \hypertarget{messages-warnings-and-errors}{%
@@ -992,8 +1159,12 @@ Calculate correlations for all four x-y pairs
   Local help: \texttt{?fun}
 \item
   StackOverflow: \url{https://stackoverflow.com/questions/tagged/r}
-\item
-  CRAN \(\to\) BugReports (usually GitHub Issues)
+
+  \begin{itemize}
+  \tightlist
+  \item
+    CRAN \(\to\) BugReports (usually GitHub Issues)
+  \end{itemize}
 \end{itemize}
 
 \begin{Shaded}
@@ -1016,30 +1187,26 @@ Let's try SO: \url{https://stackoverflow.com/search?q=\%5BR\%5D+lubridate+month-
 
 Here's another one:
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{more\_data =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{\textquotesingle{}May 7, 2017\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}May 19, 2017\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}May Fifth, 2017\textquotesingle{}}\NormalTok{)}
-\KeywordTok{mdy}\NormalTok{(more\_data)}
-\end{Highlighting}
-\end{Shaded}
+\begin{verbatim}
+```r
+more_data = c('May 7, 2017', 'May 19, 2017', 'May Fifth, 2017')
+mdy(more_data)
+```
+\end{verbatim}
 
 SO doesn't seem so helpful: \url{https://stackoverflow.com/search?q=\%5BR\%5D+lubridate+written+days}
 
 Let's check the CRAN page for \texttt{lubridate}: \url{https://cran.r-project.org/web/packages/lubridate/index.html}
 
-\begin{figure}
-\centering
-\includegraphics[width=0.5\textwidth,height=\textheight]{images/lubridate_cran.png}
-\caption{Screenshot of \texttt{lubridate} on CRAN, highlighting the BugReports field}
-\end{figure}
+\begin{verbatim}
+![Screenshot of `lubridate` on CRAN, highlighting the BugReports field](images/lubridate_cran.png){ width=50% }
+\end{verbatim}
 
 Trying a couple of searches gives us a promising result: \url{https://github.com/tidyverse/lubridate/issues?q=is\%3Aissue+is\%3Aopen+mdy}
 
-\begin{figure}
-\centering
-\includegraphics[width=0.5\textwidth,height=\textheight]{images/lubridate_issues.png}
-\caption{Screenshot of \texttt{lubridate} issues page, showing a relevant search result}
-\end{figure}
+\begin{verbatim}
+![Screenshot of `lubridate` issues page, showing a relevant search result](images/lubridate_issues.png){ width=50% }
+\end{verbatim}
 
 This is a known bug; it looks like they're thinking about doing something about it, but the only workaround is to create an NA: \url{https://github.com/tidyverse/lubridate/issues/685}
 

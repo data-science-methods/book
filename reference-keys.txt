@@ -12,6 +12,7 @@ land-acknowledgement
 about-me
 what-this-course-isnt-and-is
 learning-outcomes
+workflow
 notes-on-some-course-design-decisions
 r-not-python
 tidyverse-r-not-base-r
@@ -29,7 +30,10 @@ factors
 lists
 data-frames
 examining-variables
+exercise-2
+logical-operators
 missing-data
+exercise-3
 git-and-version-control
 functional-programming-and-data-science
 warnings-errors-and-getting-help

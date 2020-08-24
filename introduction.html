@@ -24,7 +24,7 @@
 <meta name="author" content="Dan Hicks, hicks.daniel.j@gmail.com" />
 
 
-<meta name="date" content="2020-08-21" />
+<meta name="date" content="2020-08-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -148,16 +148,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#about-me"><i class="fa fa-check"></i><b>1.2</b> About me</a></li>
 <li class="chapter" data-level="1.3" data-path="introduction.html"><a href="introduction.html#what-this-course-isnt-and-is"><i class="fa fa-check"></i><b>1.3</b> What this course isn’t, and is</a></li>
 <li class="chapter" data-level="1.4" data-path="introduction.html"><a href="introduction.html#learning-outcomes"><i class="fa fa-check"></i><b>1.4</b> Learning outcomes</a></li>
-<li class="chapter" data-level="1.5" data-path="introduction.html"><a href="introduction.html#notes-on-some-course-design-decisions"><i class="fa fa-check"></i><b>1.5</b> Notes on some course design decisions</a></li>
-<li class="chapter" data-level="1.6" data-path="introduction.html"><a href="introduction.html#data-science-wtf"><i class="fa fa-check"></i><b>1.6</b> Data Science WTF</a></li>
+<li class="chapter" data-level="1.5" data-path="introduction.html"><a href="introduction.html#workflow"><i class="fa fa-check"></i><b>1.5</b> Workflow</a></li>
+<li class="chapter" data-level="1.6" data-path="introduction.html"><a href="introduction.html#notes-on-some-course-design-decisions"><i class="fa fa-check"></i><b>1.6</b> Notes on some course design decisions</a></li>
+<li class="chapter" data-level="1.7" data-path="introduction.html"><a href="introduction.html#data-science-wtf"><i class="fa fa-check"></i><b>1.7</b> Data Science WTF</a></li>
 </ul></li>
 <li class="part"><span><b>I Some fundamental tools</b></span></li>
 <li class="chapter" data-level="2" data-path="r-basics.html"><a href="r-basics.html"><i class="fa fa-check"></i><b>2</b> R Basics</a>
 <ul>
 <li class="chapter" data-level="2.1" data-path="r-basics.html"><a href="r-basics.html#lets-get-started-with-rstudio"><i class="fa fa-check"></i><b>2.1</b> Let’s get started with RStudio</a></li>
 <li class="chapter" data-level="2.2" data-path="r-basics.html"><a href="r-basics.html#base-r-data-types"><i class="fa fa-check"></i><b>2.2</b> Base R data types</a></li>
-<li class="chapter" data-level="2.3" data-path="r-basics.html"><a href="r-basics.html#examining-variables"><i class="fa fa-check"></i><b>2.3</b> <em>[examining variables]</em></a></li>
-<li class="chapter" data-level="2.4" data-path="r-basics.html"><a href="r-basics.html#missing-data"><i class="fa fa-check"></i><b>2.4</b> <em>[Missing data]</em></a></li>
+<li class="chapter" data-level="2.3" data-path="r-basics.html"><a href="r-basics.html#examining-variables"><i class="fa fa-check"></i><b>2.3</b> Examining variables</a></li>
+<li class="chapter" data-level="2.4" data-path="r-basics.html"><a href="r-basics.html#logical-operators"><i class="fa fa-check"></i><b>2.4</b> Logical operators</a></li>
+<li class="chapter" data-level="2.5" data-path="r-basics.html"><a href="r-basics.html#missing-data"><i class="fa fa-check"></i><b>2.5</b> Missing data</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="git-and-version-control.html"><a href="git-and-version-control.html"><i class="fa fa-check"></i><b>3</b> Git and Version Control</a></li>
 <li class="chapter" data-level="4" data-path="functional-programming-and-data-science.html"><a href="functional-programming-and-data-science.html"><i class="fa fa-check"></i><b>4</b> Functional Programming and Data Science</a></li>
@@ -215,15 +217,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">1.3</span> What this course isn’t, and is</h2>
 <p>Is Not:</p>
 <ul>
-<li>statistics (in the way you think)</li>
-<li>general introduction to software engineering</li>
+<li>a statistics course (in the way you think)</li>
+<li>a general introduction to software engineering</li>
 <li>a basic introduction to R? (Unless that’s what you all need?)</li>
+<li>carefully planned out from beginning to end</li>
 </ul>
 <p>Is:</p>
 <ul>
 <li>an introduction to data science</li>
-<li>data cleaning, data management, and exploratory data analysis</li>
+<li>about data cleaning, data management, and exploratory data analysis</li>
 <li>habituation to some good software engineering practices that are especially valuable for data science work</li>
+<li>in the <a href="https://en.wikipedia.org/wiki/Software_release_life_cycle#Pre-alpha">pre-alpha stage of development</a></li>
 </ul>
 </div>
 <div id="learning-outcomes" class="section level2" number="1.4">
@@ -262,15 +266,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ol>
 </div>
-<div id="notes-on-some-course-design-decisions" class="section level2" number="1.5">
-<h2><span class="header-section-number">1.5</span> Notes on some course design decisions</h2>
-<div id="r-not-python" class="section level3" number="1.5.1">
-<h3><span class="header-section-number">1.5.1</span> R, not Python</h3>
+<div id="workflow" class="section level2" number="1.5">
+<h2><span class="header-section-number">1.5</span> Workflow</h2>
+<ul>
+<li>The first ~10 weeks of the course will focus on skill development, with a mix of livecoding lectures and labs.
+<ul>
+<li>Labs will be set up to give you automated feedback.<br />
+</li>
+<li>There will probably be asynchronous discussion using Slack for some of the labs.</li>
+</ul></li>
+<li>On November 10 we’ll be working on project with Hanna Gunn’s Data Ethics course.<br />
+</li>
+<li>The last few weeks of the course will be devoted to term projects.
+<ul>
+<li>Tentative idea for this: go find some data; clean it, explore it; produce a codebook and reproducible exploratory data analysis</li>
+</ul></li>
+</ul>
+</div>
+<div id="notes-on-some-course-design-decisions" class="section level2" number="1.6">
+<h2><span class="header-section-number">1.6</span> Notes on some course design decisions</h2>
+<div id="r-not-python" class="section level3" number="1.6.1">
+<h3><span class="header-section-number">1.6.1</span> R, not Python</h3>
 <ul>
 <li>Python is a perfectly good language for general programming
 <ul>
 <li>And has some advantages over R in certain data science aspects, including working with strings and developing custom data structures</li>
 </ul></li>
+</ul>
+<p>However,</p>
+<ul>
 <li>R is a better language for doing data science <span class="citation">(Shotwell <a href="#ref-ShotwellWhyUse2019" role="doc-biblioref">2019</a>)</span>
 <ul>
 <li>Vectors, data frames, and common statistical models are installed and loaded by default</li>
@@ -283,13 +307,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul>
 </div>
-<div id="tidyverse-r-not-base-r" class="section level3" number="1.5.2">
-<h3><span class="header-section-number">1.5.2</span> Tidyverse R, not base R</h3>
+<div id="tidyverse-r-not-base-r" class="section level3" number="1.6.2">
+<h3><span class="header-section-number">1.6.2</span> Tidyverse R, not base R</h3>
 <ul>
 <li>“Base R” refers to the central code for R and the packages included when you install it
 <ul>
 <li>Base R is universal and free of additional dependencies. Code written entirely in base R will run on any other R installation (with the same version).</li>
-<li>Because the R Core Development Team has always thought backwards-compatibility is important, base R has some idiosyncracies <span class="citation">(Keyes <a href="#ref-KeyesRbitraryStandards2016" role="doc-biblioref">2016</a>)</span></li>
+<li>However, because the R Core Development Team has always thought backwards-compatibility is important, base R has some idiosyncracies <span class="citation">(Keyes <a href="#ref-KeyesRbitraryStandards2016" role="doc-biblioref">2016</a>)</span></li>
 </ul></li>
 <li><code>tidyverse</code> is a suite of packages developed by the manufacturers of RStudio
 <ul>
@@ -307,17 +331,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul>
 </div>
-<div id="scripts-not-notebooks" class="section level3" number="1.5.3">
-<h3><span class="header-section-number">1.5.3</span> Scripts, not notebooks</h3>
+<div id="scripts-not-notebooks" class="section level3" number="1.6.3">
+<h3><span class="header-section-number">1.6.3</span> Scripts, not notebooks</h3>
 <ul>
-<li><p>Quite a few scientists like the way notebooks mix together code, visualizations, tables, and text <span class="citation">(Perkel <a href="#ref-PerkelWhyJupyterData2018" role="doc-biblioref">2018</a>)</span></p></li>
-<li><p>Notebooks do not play nicely with version control <span class="citation">(Ahemad <a href="#ref-AhemadVersionControlJupyter2018" role="doc-biblioref">2018</a>; Whitmore <a href="#ref-WhitmoreJupyterNotebookBest2015" role="doc-biblioref">2015</a>)</span></p></li>
-<li><p>Notebooks encourage bad habits and discourage good ones <span class="citation">(Grus <a href="#ref-GrusDonNotebooksJoel" role="doc-biblioref">n.d.</a>; Hiltch <a href="#ref-HiltchJupyterNotebookCancer2019" role="doc-biblioref">2019</a>)</span></p></li>
+<li>Quite a few scientists like the way notebooks mix together code, visualizations, tables, and text <span class="citation">(Perkel <a href="#ref-PerkelWhyJupyterData2018" role="doc-biblioref">2018</a>)</span></li>
+</ul>
+<p>However,</p>
+<ul>
+<li>Notebooks do not play nicely with version control <span class="citation">(Ahemad <a href="#ref-AhemadVersionControlJupyter2018" role="doc-biblioref">2018</a>; Whitmore <a href="#ref-WhitmoreJupyterNotebookBest2015" role="doc-biblioref">2015</a>)</span></li>
+<li>Notebooks encourage bad software engineering habits and discourage good ones <span class="citation">(Grus <a href="#ref-GrusDonNotebooksJoel" role="doc-biblioref">n.d.</a>; Hiltch <a href="#ref-HiltchJupyterNotebookCancer2019" role="doc-biblioref">2019</a>)</span></li>
 </ul>
 </div>
 </div>
-<div id="data-science-wtf" class="section level2" number="1.6">
-<h2><span class="header-section-number">1.6</span> Data Science WTF</h2>
+<div id="data-science-wtf" class="section level2" number="1.7">
+<h2><span class="header-section-number">1.7</span> Data Science WTF</h2>
 <ul>
 <li>Standard definition
 <ul>
@@ -369,6 +396,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 
 
+</div>
 <h3>References</h3>
 <div id="refs" class="references">
 <div id="ref-AhemadVersionControlJupyter2018">

@@ -24,7 +24,7 @@
 <meta name="author" content="Dan Hicks, hicks.daniel.j@gmail.com" />
 
 
-<meta name="date" content="2020-08-21" />
+<meta name="date" content="2020-08-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -148,16 +148,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#about-me"><i class="fa fa-check"></i><b>1.2</b> About me</a></li>
 <li class="chapter" data-level="1.3" data-path="introduction.html"><a href="introduction.html#what-this-course-isnt-and-is"><i class="fa fa-check"></i><b>1.3</b> What this course isn’t, and is</a></li>
 <li class="chapter" data-level="1.4" data-path="introduction.html"><a href="introduction.html#learning-outcomes"><i class="fa fa-check"></i><b>1.4</b> Learning outcomes</a></li>
-<li class="chapter" data-level="1.5" data-path="introduction.html"><a href="introduction.html#notes-on-some-course-design-decisions"><i class="fa fa-check"></i><b>1.5</b> Notes on some course design decisions</a></li>
-<li class="chapter" data-level="1.6" data-path="introduction.html"><a href="introduction.html#data-science-wtf"><i class="fa fa-check"></i><b>1.6</b> Data Science WTF</a></li>
+<li class="chapter" data-level="1.5" data-path="introduction.html"><a href="introduction.html#workflow"><i class="fa fa-check"></i><b>1.5</b> Workflow</a></li>
+<li class="chapter" data-level="1.6" data-path="introduction.html"><a href="introduction.html#notes-on-some-course-design-decisions"><i class="fa fa-check"></i><b>1.6</b> Notes on some course design decisions</a></li>
+<li class="chapter" data-level="1.7" data-path="introduction.html"><a href="introduction.html#data-science-wtf"><i class="fa fa-check"></i><b>1.7</b> Data Science WTF</a></li>
 </ul></li>
 <li class="part"><span><b>I Some fundamental tools</b></span></li>
 <li class="chapter" data-level="2" data-path="r-basics.html"><a href="r-basics.html"><i class="fa fa-check"></i><b>2</b> R Basics</a>
 <ul>
 <li class="chapter" data-level="2.1" data-path="r-basics.html"><a href="r-basics.html#lets-get-started-with-rstudio"><i class="fa fa-check"></i><b>2.1</b> Let’s get started with RStudio</a></li>
 <li class="chapter" data-level="2.2" data-path="r-basics.html"><a href="r-basics.html#base-r-data-types"><i class="fa fa-check"></i><b>2.2</b> Base R data types</a></li>
-<li class="chapter" data-level="2.3" data-path="r-basics.html"><a href="r-basics.html#examining-variables"><i class="fa fa-check"></i><b>2.3</b> <em>[examining variables]</em></a></li>
-<li class="chapter" data-level="2.4" data-path="r-basics.html"><a href="r-basics.html#missing-data"><i class="fa fa-check"></i><b>2.4</b> <em>[Missing data]</em></a></li>
+<li class="chapter" data-level="2.3" data-path="r-basics.html"><a href="r-basics.html#examining-variables"><i class="fa fa-check"></i><b>2.3</b> Examining variables</a></li>
+<li class="chapter" data-level="2.4" data-path="r-basics.html"><a href="r-basics.html#logical-operators"><i class="fa fa-check"></i><b>2.4</b> Logical operators</a></li>
+<li class="chapter" data-level="2.5" data-path="r-basics.html"><a href="r-basics.html#missing-data"><i class="fa fa-check"></i><b>2.5</b> Missing data</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="git-and-version-control.html"><a href="git-and-version-control.html"><i class="fa fa-check"></i><b>3</b> Git and Version Control</a></li>
 <li class="chapter" data-level="4" data-path="functional-programming-and-data-science.html"><a href="functional-programming-and-data-science.html"><i class="fa fa-check"></i><b>4</b> Functional Programming and Data Science</a></li>
@@ -200,8 +202,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="recommended-reading-and-watching" class="section level2" number="5.1">
 <h2><span class="header-section-number">5.1</span> Recommended reading and watching</h2>
 <ul>
-<li><a href="https://stackoverflow.com/a/5963610/3187973" class="uri">https://stackoverflow.com/a/5963610/3187973</a></li>
+<li><a href="https://stackoverflow.com/a/5963610/3187973" class="uri">https://stackoverflow.com/a/5963610/3187973</a>
+<ul>
 <li><a href="https://github.com/jennybc/debugging#video" class="uri">https://github.com/jennybc/debugging#video</a></li>
+</ul></li>
 </ul>
 </div>
 <div id="messages-warnings-and-errors" class="section level2" number="5.2">
@@ -218,30 +222,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Isolate the problem</li>
 <li>Restart your session: Session <span class="math inline">\(\to\)</span> Restart R</li>
 <li>Local help: <code>?fun</code></li>
-<li>StackOverflow: <a href="https://stackoverflow.com/questions/tagged/r" class="uri">https://stackoverflow.com/questions/tagged/r</a></li>
+<li>StackOverflow: <a href="https://stackoverflow.com/questions/tagged/r" class="uri">https://stackoverflow.com/questions/tagged/r</a>
+<ul>
 <li>CRAN <span class="math inline">\(\to\)</span> BugReports (usually GitHub Issues)</li>
+</ul></li>
 </ul>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="warnings-errors-and-getting-help.html#cb7-1"></a><span class="kw">library</span>(lubridate)</span>
-<span id="cb7-2"><a href="warnings-errors-and-getting-help.html#cb7-2"></a></span>
-<span id="cb7-3"><a href="warnings-errors-and-getting-help.html#cb7-3"></a>some_data =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;June 2002&#39;</span>, <span class="st">&#39;May 15, 2007&#39;</span>, <span class="st">&#39;August 2007&#39;</span>)</span>
-<span id="cb7-4"><a href="warnings-errors-and-getting-help.html#cb7-4"></a><span class="kw">mdy</span>(some_data)</span>
-<span id="cb7-5"><a href="warnings-errors-and-getting-help.html#cb7-5"></a><span class="kw">parse_date_time</span>(some_data, <span class="dt">orders =</span> <span class="st">&#39;mdY&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="warnings-errors-and-getting-help.html#cb10-1"></a><span class="kw">library</span>(lubridate)</span>
+<span id="cb10-2"><a href="warnings-errors-and-getting-help.html#cb10-2"></a></span>
+<span id="cb10-3"><a href="warnings-errors-and-getting-help.html#cb10-3"></a>some_data =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;June 2002&#39;</span>, <span class="st">&#39;May 15, 2007&#39;</span>, <span class="st">&#39;August 2007&#39;</span>)</span>
+<span id="cb10-4"><a href="warnings-errors-and-getting-help.html#cb10-4"></a><span class="kw">mdy</span>(some_data)</span>
+<span id="cb10-5"><a href="warnings-errors-and-getting-help.html#cb10-5"></a><span class="kw">parse_date_time</span>(some_data, <span class="dt">orders =</span> <span class="st">&#39;mdY&#39;</span>)</span></code></pre></div>
 <p>Let’s try SO: <a href="https://stackoverflow.com/search?q=%5BR%5D+lubridate+month-year" class="uri">https://stackoverflow.com/search?q=%5BR%5D+lubridate+month-year</a></p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="warnings-errors-and-getting-help.html#cb8-1"></a><span class="kw">parse_date_time</span>(some_data, <span class="dt">orders =</span> <span class="kw">c</span>(<span class="st">&#39;mY&#39;</span>, <span class="st">&#39;mdY&#39;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="warnings-errors-and-getting-help.html#cb11-1"></a><span class="kw">parse_date_time</span>(some_data, <span class="dt">orders =</span> <span class="kw">c</span>(<span class="st">&#39;mY&#39;</span>, <span class="st">&#39;mdY&#39;</span>))</span></code></pre></div>
 <p>Here’s another one:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="warnings-errors-and-getting-help.html#cb9-1"></a>more_data =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;May 7, 2017&#39;</span>, <span class="st">&#39;May 19, 2017&#39;</span>, <span class="st">&#39;May Fifth, 2017&#39;</span>)</span>
-<span id="cb9-2"><a href="warnings-errors-and-getting-help.html#cb9-2"></a><span class="kw">mdy</span>(more_data)</span></code></pre></div>
+<pre><code>```r
+more_data = c(&#39;May 7, 2017&#39;, &#39;May 19, 2017&#39;, &#39;May Fifth, 2017&#39;)
+mdy(more_data)
+```</code></pre>
 <p>SO doesn’t seem so helpful: <a href="https://stackoverflow.com/search?q=%5BR%5D+lubridate+written+days" class="uri">https://stackoverflow.com/search?q=%5BR%5D+lubridate+written+days</a></p>
 <p>Let’s check the CRAN page for <code>lubridate</code>: <a href="https://cran.r-project.org/web/packages/lubridate/index.html" class="uri">https://cran.r-project.org/web/packages/lubridate/index.html</a></p>
-<div class="figure">
-<img src="images/lubridate_cran.png" style="width:50.0%" alt="" />
-<p class="caption">Screenshot of <code>lubridate</code> on CRAN, highlighting the BugReports field</p>
-</div>
+<pre><code>![Screenshot of `lubridate` on CRAN, highlighting the BugReports field](images/lubridate_cran.png){ width=50% }</code></pre>
 <p>Trying a couple of searches gives us a promising result: <a href="https://github.com/tidyverse/lubridate/issues?q=is%3Aissue+is%3Aopen+mdy" class="uri">https://github.com/tidyverse/lubridate/issues?q=is%3Aissue+is%3Aopen+mdy</a></p>
-<div class="figure">
-<img src="images/lubridate_issues.png" style="width:50.0%" alt="" />
-<p class="caption">Screenshot of <code>lubridate</code> issues page, showing a relevant search result</p>
-</div>
+<pre><code>![Screenshot of `lubridate` issues page, showing a relevant search result](images/lubridate_issues.png){ width=50% }</code></pre>
 <p>This is a known bug; it looks like they’re thinking about doing something about it, but the only workaround is to create an NA: <a href="https://github.com/tidyverse/lubridate/issues/685" class="uri">https://github.com/tidyverse/lubridate/issues/685</a></p>
 </div>
 <div id="writing-a-reproducible-example-reprex" class="section level2" number="5.4">
