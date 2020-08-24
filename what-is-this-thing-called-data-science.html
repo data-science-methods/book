@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 5 Functional Programming and Data Science | Data Science Methods for Cognitive Science</title>
+  <title>Chapter 2 What is this thing called data science? | Data Science Methods for Cognitive Science</title>
   <meta name="description" content="This document is a set of notes (and perhaps later a textbook) for a course on data science methods for graduate students in social and behavioral sciences." />
   <meta name="generator" content="bookdown 0.20.3 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 5 Functional Programming and Data Science | Data Science Methods for Cognitive Science" />
+  <meta property="og:title" content="Chapter 2 What is this thing called data science? | Data Science Methods for Cognitive Science" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 5 Functional Programming and Data Science | Data Science Methods for Cognitive Science" />
+  <meta name="twitter:title" content="Chapter 2 What is this thing called data science? | Data Science Methods for Cognitive Science" />
   
   <meta name="twitter:description" content="This document is a set of notes (and perhaps later a textbook) for a course on data science methods for graduate students in social and behavioral sciences." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="git-and-version-control.html"/>
-<link rel="next" href="warnings-errors-and-getting-help.html"/>
+<link rel="prev" href="introduction.html"/>
+<link rel="next" href="r-basics.html"/>
 <script src="libs/header-attrs-2.3/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -202,52 +202,73 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="functional-programming-and-data-science" class="section level1" number="5">
-<h1><span class="header-section-number">Chapter 5</span> Functional Programming and Data Science</h1>
+<div id="what-is-this-thing-called-data-science" class="section level1" number="2">
+<h1><span class="header-section-number">Chapter 2</span> What is this thing called data science?</h1>
+<div id="standard-definition" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> Standard definition</h2>
 <ul>
-<li><p>Recommended reading: <span class="citation">Chambers (<a href="#ref-ChambersObjectOrientedProgrammingFunctional2014" role="doc-biblioref">2014</a>)</span>; parts II and III of <span class="citation">Wickham (<a href="#ref-WickhamAdvanced2014" role="doc-biblioref">2014</a>)</span></p></li>
-<li><p>Programming paradigms</p>
+<li><img src="images/Abisiga.jpg" title="fig:" style="width:30.0%" alt="Data science, defined as the intersection of CS, stats, and “business knowledge”" /></li>
+<li>Source: <a href="https://www.kdnuggets.com/2020/08/top-10-lists-data-science.html" class="uri">https://www.kdnuggets.com/2020/08/top-10-lists-data-science.html</a></li>
+<li>The intersection of computer science/software engineering, statistics, and “business knowledge”</li>
+<li>But this focuses on <em>tools and techniques</em>, not the epistemic and practical <em>goals</em> of data science</li>
+</ul>
+</div>
+<div id="wait-whats-data" class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> Wait, what’s “data”?</h2>
 <ul>
-<li><p><em>Procedural</em>: Software is a series of instructions (“procedures”), which the computer carries out in order. Special instructions (if-then, loops) are used to change the order based on inputs or other conditions.</p></li>
-<li><p><em>Object-oriented</em>: Software is made up of objects, which have properties (“attributes,” including other objects) and do things (“methods”).</p>
+<li><em>Representational view</em>: data are “reliable representations of reality which are produced via the interaction between humans and the world”
 <ul>
-<li>Example: A board game consists of 1 or more players, a board, and a deck of cards.
-<ul>
-<li>Players each have a hand of cards (attribute), can draw cards from the deck into their hand (method, which also changes the deck’s attributes), and can play cards to manipulate tokens on the board (method, which also changes the board’s attributes).<br />
-</li>
-<li>The game itself is an object, with the players, board, and deck for its attributes and methods to things up, run turns in sequence, determine the winner.<br />
-</li>
-<li>Separate objects might be responsible for displaying the current state of the game and getting input from the users.<br />
-</li>
+<li>“the production of data is equivalent to ‘capturing’ features of the world that can be used for systematic study”</li>
+<li>“data as ‘raw’ products of research, which are as close as it gets to unmediated knowledge of reality”</li>
+<li>data provide “an objective foundation for the acquisition of knowledge” <span class="citation">(Leonelli <a href="#ref-LeonelliScientificResearchBig2020" role="doc-biblioref">2020</a>)</span></li>
+<li><strong>data become data when they’re produced according to a standardized measurement process</strong></li>
 </ul></li>
-<li>Much better than procedural paradigms for <em>encapsulation</em>: When a player draws a card from the deck, we just need to know the inputs and outputs for <code>Deck.draw()</code>, not the details of how the deck tracks the order of cards and which ones have already been drawn.</li>
-<li>Much easier to reason about systems with lots of dynamic, interacting parts.<br />
-</li>
-<li>Examples (mostly): Python, C++, Java</li>
-</ul></li>
-<li><p><em>Functional</em>: Software is made up of functions, which are run sequentially on the inputs</p>
+<li><em>Relational view</em>: “data are objects that are treated as potential or actual evidence for scientific claims in ways that can, at least in principle, be scrutinised and accounted for”
 <ul>
-<li>Example: Raw data are read in, cleaned, and then a regression model is fit. The model coefficients are tested for statistical significance, and a table and plot are written out to disk.<br />
-</li>
-<li><strong>Data analysis as a building series of pipes</strong></li>
-<li>Examples (mostly): R, Lisp, Haskell</li>
+<li>“any object can be used as a datum, or stop being used as such, depending on the circumstances”</li>
+<li><strong>data become data when they’re used as evidence</strong> <span class="citation">(Leonelli <a href="#ref-LeonelliScientificResearchBig2020" role="doc-biblioref">2020</a>)</span></li>
+<li>Note implications for ideas of “unmediated knowledge” and “objective foundation”</li>
 </ul></li>
-<li><p>A couple of extra rules for functional programming</p>
+</ul>
+</div>
+<div id="back-to-data-science" class="section level2" number="2.3">
+<h2><span class="header-section-number">2.3</span> Back to “data science”</h2>
 <ul>
-<li><em>Immutability</em>: Once the value is assigned to a variable, that value cannot be changed</li>
-<li><em>No side effects</em>: Functions don’t change anything outside of themselves; they only return a value</li>
+<li>Data science ≠ lab science (often)
+<ul>
+<li>data collection isn’t standardized
+<ul>
+<li>found (or bought), not made</li>
+<li>data as byproduct</li>
+<li>ex: scraping from Twitter, Wikipedia, administrative records</li>
 </ul></li>
+<li>remixing and recombining data
+<ul>
+<li>ex: pesticide use + Census data in <span class="citation">Hicks (<a href="#ref-HicksCensusDemographicsChlorpyrifos2020" role="doc-biblioref">2020</a>)</span></li>
+</ul></li>
+<li>data first, questions later</li>
+<li><strong>relational view is often a better fit</strong></li>
+</ul></li>
+<li>The goal of data science is to <strong>produce data</strong>
+<ul>
+<li>ie, to create and transform objects such that they can be used as evidence</li>
+<li>Can be done experimentally in a lab, but in other ways too</li>
 </ul></li>
 </ul>
 
 </div>
+</div>
+
+
+
+</div>
 <h3>References</h3>
 <div id="refs" class="references">
-<div id="ref-ChambersObjectOrientedProgrammingFunctional2014">
-<p>Chambers, John M. 2014. “Object-Oriented Programming, Functional Programming and R.” <em>Statistical Science</em> 29 (2): 167–80. <a href="https://doi.org/10.1214/13-STS452">https://doi.org/10.1214/13-STS452</a>.</p>
+<div id="ref-HicksCensusDemographicsChlorpyrifos2020">
+<p>Hicks, Daniel J. 2020. “Census Demographics and Chlorpyrifos Use in California’s Central Valley, 2011–15: A Distributional Environmental Justice Analysis.” <em>International Journal of Environmental Research and Public Health</em> 17 (7, 7): 2593. <a href="https://doi.org/10.3390/ijerph17072593">https://doi.org/10.3390/ijerph17072593</a>.</p>
 </div>
-<div id="ref-WickhamAdvanced2014">
-<p>Wickham, Hadley. 2014. <em>Advanced R</em>. CRC Press. <a href="https://adv-r.hadley.nz">https://adv-r.hadley.nz</a>.</p>
+<div id="ref-LeonelliScientificResearchBig2020">
+<p>Leonelli, Sabina. 2020. “Scientific Research and Big Data.” In <em>The Stanford Encyclopedia of Philosophy</em>, edited by Edward N. Zalta, Summer 2020. Metaphysics Research Lab, Stanford University. <a href="https://plato.stanford.edu/archives/sum2020/entries/science-big-data/">https://plato.stanford.edu/archives/sum2020/entries/science-big-data/</a>.</p>
 </div>
 </div>
             </section>
@@ -255,8 +276,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="git-and-version-control.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="warnings-errors-and-getting-help.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="introduction.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="r-basics.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

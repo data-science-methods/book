@@ -17,7 +17,10 @@ notes-on-some-course-design-decisions
 r-not-python
 tidyverse-r-not-base-r
 scripts-not-notebooks
-data-science-wtf
+what-is-this-thing-called-data-science
+standard-definition
+wait-whats-data
+back-to-data-science
 r-basics
 lets-get-started-with-rstudio
 exercise

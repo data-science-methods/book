@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 2 R Basics | Data Science Methods for Cognitive Science</title>
+  <title>Chapter 3 R Basics | Data Science Methods for Cognitive Science</title>
   <meta name="description" content="This document is a set of notes (and perhaps later a textbook) for a course on data science methods for graduate students in social and behavioral sciences." />
   <meta name="generator" content="bookdown 0.20.3 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 2 R Basics | Data Science Methods for Cognitive Science" />
+  <meta property="og:title" content="Chapter 3 R Basics | Data Science Methods for Cognitive Science" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 2 R Basics | Data Science Methods for Cognitive Science" />
+  <meta name="twitter:title" content="Chapter 3 R Basics | Data Science Methods for Cognitive Science" />
   
   <meta name="twitter:description" content="This document is a set of notes (and perhaps later a textbook) for a course on data science methods for graduate students in social and behavioral sciences." />
   
@@ -31,7 +31,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="introduction.html"/>
+<link rel="prev" href="what-is-this-thing-called-data-science.html"/>
 <link rel="next" href="git-and-version-control.html"/>
 <script src="libs/header-attrs-2.3/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
@@ -132,15 +132,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <ul class="summary">
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
-<li class="chapter" data-level="" data-path="chapter-0-setting-up.html"><a href="chapter-0-setting-up.html"><i class="fa fa-check"></i>Chapter 0: Setting up</a>
+<li class="chapter" data-level="" data-path="setting-up.html"><a href="setting-up.html"><i class="fa fa-check"></i>Setting up</a>
 <ul>
-<li class="chapter" data-level="0.1" data-path="chapter-0-setting-up.html"><a href="chapter-0-setting-up.html#a-note-on-accessibility"><i class="fa fa-check"></i><b>0.1</b> A Note on Accessibility</a></li>
-<li class="chapter" data-level="0.2" data-path="chapter-0-setting-up.html"><a href="chapter-0-setting-up.html#hardware-recommendations"><i class="fa fa-check"></i><b>0.2</b> Hardware Recommendations</a></li>
-<li class="chapter" data-level="0.3" data-path="chapter-0-setting-up.html"><a href="chapter-0-setting-up.html#r-and-rstudio"><i class="fa fa-check"></i><b>0.3</b> R and RStudio</a></li>
-<li class="chapter" data-level="0.4" data-path="chapter-0-setting-up.html"><a href="chapter-0-setting-up.html#slack"><i class="fa fa-check"></i><b>0.4</b> Slack</a></li>
-<li class="chapter" data-level="0.5" data-path="chapter-0-setting-up.html"><a href="chapter-0-setting-up.html#github"><i class="fa fa-check"></i><b>0.5</b> GitHub</a></li>
-<li class="chapter" data-level="0.6" data-path="chapter-0-setting-up.html"><a href="chapter-0-setting-up.html#screen-layouts"><i class="fa fa-check"></i><b>0.6</b> Screen Layouts</a></li>
-<li class="chapter" data-level="0.7" data-path="chapter-0-setting-up.html"><a href="chapter-0-setting-up.html#pre-class-survey"><i class="fa fa-check"></i><b>0.7</b> Pre-Class Survey</a></li>
+<li class="chapter" data-level="0.1" data-path="setting-up.html"><a href="setting-up.html#a-note-on-accessibility"><i class="fa fa-check"></i><b>0.1</b> A Note on Accessibility</a></li>
+<li class="chapter" data-level="0.2" data-path="setting-up.html"><a href="setting-up.html#hardware-recommendations"><i class="fa fa-check"></i><b>0.2</b> Hardware Recommendations</a></li>
+<li class="chapter" data-level="0.3" data-path="setting-up.html"><a href="setting-up.html#r-and-rstudio"><i class="fa fa-check"></i><b>0.3</b> R and RStudio</a></li>
+<li class="chapter" data-level="0.4" data-path="setting-up.html"><a href="setting-up.html#slack"><i class="fa fa-check"></i><b>0.4</b> Slack</a></li>
+<li class="chapter" data-level="0.5" data-path="setting-up.html"><a href="setting-up.html#github"><i class="fa fa-check"></i><b>0.5</b> GitHub</a></li>
+<li class="chapter" data-level="0.6" data-path="setting-up.html"><a href="setting-up.html#screen-layouts"><i class="fa fa-check"></i><b>0.6</b> Screen Layouts</a></li>
+<li class="chapter" data-level="0.7" data-path="setting-up.html"><a href="setting-up.html#pre-class-survey"><i class="fa fa-check"></i><b>0.7</b> Pre-Class Survey</a></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
 <ul>
@@ -150,29 +150,34 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.4" data-path="introduction.html"><a href="introduction.html#learning-outcomes"><i class="fa fa-check"></i><b>1.4</b> Learning outcomes</a></li>
 <li class="chapter" data-level="1.5" data-path="introduction.html"><a href="introduction.html#workflow"><i class="fa fa-check"></i><b>1.5</b> Workflow</a></li>
 <li class="chapter" data-level="1.6" data-path="introduction.html"><a href="introduction.html#notes-on-some-course-design-decisions"><i class="fa fa-check"></i><b>1.6</b> Notes on some course design decisions</a></li>
-<li class="chapter" data-level="1.7" data-path="introduction.html"><a href="introduction.html#data-science-wtf"><i class="fa fa-check"></i><b>1.7</b> Data Science WTF</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="what-is-this-thing-called-data-science.html"><a href="what-is-this-thing-called-data-science.html"><i class="fa fa-check"></i><b>2</b> What is this thing called data science?</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="what-is-this-thing-called-data-science.html"><a href="what-is-this-thing-called-data-science.html#standard-definition"><i class="fa fa-check"></i><b>2.1</b> Standard definition</a></li>
+<li class="chapter" data-level="2.2" data-path="what-is-this-thing-called-data-science.html"><a href="what-is-this-thing-called-data-science.html#wait-whats-data"><i class="fa fa-check"></i><b>2.2</b> Wait, what’s “data”?</a></li>
+<li class="chapter" data-level="2.3" data-path="what-is-this-thing-called-data-science.html"><a href="what-is-this-thing-called-data-science.html#back-to-data-science"><i class="fa fa-check"></i><b>2.3</b> Back to “data science”</a></li>
 </ul></li>
 <li class="part"><span><b>I Some fundamental tools</b></span></li>
-<li class="chapter" data-level="2" data-path="r-basics.html"><a href="r-basics.html"><i class="fa fa-check"></i><b>2</b> R Basics</a>
+<li class="chapter" data-level="3" data-path="r-basics.html"><a href="r-basics.html"><i class="fa fa-check"></i><b>3</b> R Basics</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="r-basics.html"><a href="r-basics.html#lets-get-started-with-rstudio"><i class="fa fa-check"></i><b>2.1</b> Let’s get started with RStudio</a></li>
-<li class="chapter" data-level="2.2" data-path="r-basics.html"><a href="r-basics.html#base-r-data-types"><i class="fa fa-check"></i><b>2.2</b> Base R data types</a></li>
-<li class="chapter" data-level="2.3" data-path="r-basics.html"><a href="r-basics.html#examining-variables"><i class="fa fa-check"></i><b>2.3</b> Examining variables</a></li>
-<li class="chapter" data-level="2.4" data-path="r-basics.html"><a href="r-basics.html#logical-operators"><i class="fa fa-check"></i><b>2.4</b> Logical operators</a></li>
-<li class="chapter" data-level="2.5" data-path="r-basics.html"><a href="r-basics.html#missing-data"><i class="fa fa-check"></i><b>2.5</b> Missing data</a></li>
+<li class="chapter" data-level="3.1" data-path="r-basics.html"><a href="r-basics.html#lets-get-started-with-rstudio"><i class="fa fa-check"></i><b>3.1</b> Let’s get started with RStudio</a></li>
+<li class="chapter" data-level="3.2" data-path="r-basics.html"><a href="r-basics.html#base-r-data-types"><i class="fa fa-check"></i><b>3.2</b> Base R data types</a></li>
+<li class="chapter" data-level="3.3" data-path="r-basics.html"><a href="r-basics.html#examining-variables"><i class="fa fa-check"></i><b>3.3</b> Examining variables</a></li>
+<li class="chapter" data-level="3.4" data-path="r-basics.html"><a href="r-basics.html#logical-operators"><i class="fa fa-check"></i><b>3.4</b> Logical operators</a></li>
+<li class="chapter" data-level="3.5" data-path="r-basics.html"><a href="r-basics.html#missing-data"><i class="fa fa-check"></i><b>3.5</b> Missing data</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="git-and-version-control.html"><a href="git-and-version-control.html"><i class="fa fa-check"></i><b>3</b> Git and Version Control</a></li>
-<li class="chapter" data-level="4" data-path="functional-programming-and-data-science.html"><a href="functional-programming-and-data-science.html"><i class="fa fa-check"></i><b>4</b> Functional Programming and Data Science</a></li>
-<li class="chapter" data-level="5" data-path="warnings-errors-and-getting-help.html"><a href="warnings-errors-and-getting-help.html"><i class="fa fa-check"></i><b>5</b> Warnings, Errors, and Getting Help</a>
+<li class="chapter" data-level="4" data-path="git-and-version-control.html"><a href="git-and-version-control.html"><i class="fa fa-check"></i><b>4</b> Git and Version Control</a></li>
+<li class="chapter" data-level="5" data-path="functional-programming-and-data-science.html"><a href="functional-programming-and-data-science.html"><i class="fa fa-check"></i><b>5</b> Functional Programming and Data Science</a></li>
+<li class="chapter" data-level="6" data-path="warnings-errors-and-getting-help.html"><a href="warnings-errors-and-getting-help.html"><i class="fa fa-check"></i><b>6</b> Warnings, Errors, and Getting Help</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="warnings-errors-and-getting-help.html"><a href="warnings-errors-and-getting-help.html#recommended-reading-and-watching"><i class="fa fa-check"></i><b>5.1</b> Recommended reading and watching</a></li>
-<li class="chapter" data-level="5.2" data-path="warnings-errors-and-getting-help.html"><a href="warnings-errors-and-getting-help.html#messages-warnings-and-errors"><i class="fa fa-check"></i><b>5.2</b> Messages, warnings, and errors</a></li>
-<li class="chapter" data-level="5.3" data-path="warnings-errors-and-getting-help.html"><a href="warnings-errors-and-getting-help.html#where-to-go-for-help"><i class="fa fa-check"></i><b>5.3</b> Where to go for help</a></li>
-<li class="chapter" data-level="5.4" data-path="warnings-errors-and-getting-help.html"><a href="warnings-errors-and-getting-help.html#writing-a-reproducible-example-reprex"><i class="fa fa-check"></i><b>5.4</b> Writing a reproducible example: <code>reprex</code></a></li>
+<li class="chapter" data-level="6.1" data-path="warnings-errors-and-getting-help.html"><a href="warnings-errors-and-getting-help.html#recommended-reading-and-watching"><i class="fa fa-check"></i><b>6.1</b> Recommended reading and watching</a></li>
+<li class="chapter" data-level="6.2" data-path="warnings-errors-and-getting-help.html"><a href="warnings-errors-and-getting-help.html#messages-warnings-and-errors"><i class="fa fa-check"></i><b>6.2</b> Messages, warnings, and errors</a></li>
+<li class="chapter" data-level="6.3" data-path="warnings-errors-and-getting-help.html"><a href="warnings-errors-and-getting-help.html#where-to-go-for-help"><i class="fa fa-check"></i><b>6.3</b> Where to go for help</a></li>
+<li class="chapter" data-level="6.4" data-path="warnings-errors-and-getting-help.html"><a href="warnings-errors-and-getting-help.html#writing-a-reproducible-example-reprex"><i class="fa fa-check"></i><b>6.4</b> Writing a reproducible example: <code>reprex</code></a></li>
 </ul></li>
 <li class="part"><span><b>II Exploratory Data Analysis</b></span></li>
-<li class="chapter" data-level="6" data-path="waterfalls-spirals-and-philosophy-of-science.html"><a href="waterfalls-spirals-and-philosophy-of-science.html"><i class="fa fa-check"></i><b>6</b> Waterfalls, Spirals, and Philosophy of Science</a></li>
-<li class="chapter" data-level="7" data-path="exploratory-data-analysis-and-the-ladder-of-models.html"><a href="exploratory-data-analysis-and-the-ladder-of-models.html"><i class="fa fa-check"></i><b>7</b> Exploratory Data Analysis and the Ladder of Models</a></li>
+<li class="chapter" data-level="7" data-path="waterfalls-spirals-and-philosophy-of-science.html"><a href="waterfalls-spirals-and-philosophy-of-science.html"><i class="fa fa-check"></i><b>7</b> Waterfalls, Spirals, and Philosophy of Science</a></li>
+<li class="chapter" data-level="8" data-path="exploratory-data-analysis-and-the-ladder-of-models.html"><a href="exploratory-data-analysis-and-the-ladder-of-models.html"><i class="fa fa-check"></i><b>8</b> Exploratory Data Analysis and the Ladder of Models</a></li>
 <li class="part"><span><b>III Cleaning Data</b></span></li>
 <li class="part"><span><b>IV Reproducibility</b></span></li>
 <li class="part"><span><b>V Case Study: The COMPAS Dataset</b></span></li>
@@ -197,10 +202,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="r-basics" class="section level1" number="2">
-<h1><span class="header-section-number">Chapter 2</span> R Basics</h1>
-<div id="lets-get-started-with-rstudio" class="section level2" number="2.1">
-<h2><span class="header-section-number">2.1</span> Let’s get started with RStudio</h2>
+<div id="r-basics" class="section level1" number="3">
+<h1><span class="header-section-number">Chapter 3</span> R Basics</h1>
+<div id="lets-get-started-with-rstudio" class="section level2" number="3.1">
+<h2><span class="header-section-number">3.1</span> Let’s get started with RStudio</h2>
 <ul>
 <li>Quick tour of RStudio’s UI</li>
 <li>Let’s plot a thing (below)</li>
@@ -241,8 +246,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-13"><a href="r-basics.html#cb1-13"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> gapminder, <span class="kw">aes</span>(<span class="dt">x =</span> year, <span class="dt">y =</span> lifeExp, <span class="dt">color =</span> continent)) <span class="op">+</span></span>
 <span id="cb1-14"><a href="r-basics.html#cb1-14"></a><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">group =</span> country)) <span class="op">+</span></span>
 <span id="cb1-15"><a href="r-basics.html#cb1-15"></a><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="kw">vars</span>(continent))</span></code></pre></div>
-<div id="exercise" class="section level3" number="2.1.1">
-<h3><span class="header-section-number">2.1.1</span> Exercise</h3>
+<div id="exercise" class="section level3" number="3.1.1">
+<h3><span class="header-section-number">3.1.1</span> Exercise</h3>
 <ul>
 <li><p>Moar plots</p></li>
 <li><p>Selecting variables, and some common math functions</p></li>
@@ -260,23 +265,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb2-11"><a href="r-basics.html#cb2-11"></a></span>
 <span id="cb2-12"><a href="r-basics.html#cb2-12"></a><span class="kw">cor</span>(gapminder<span class="op">$</span>lifeExp, gapminder<span class="op">$</span>year)</span></code></pre></div>
 </div>
-<div id="exercise-1" class="section level3" number="2.1.2">
-<h3><span class="header-section-number">2.1.2</span> Exercise</h3>
+<div id="exercise-1" class="section level3" number="3.1.2">
+<h3><span class="header-section-number">3.1.2</span> Exercise</h3>
 <p>Calculate correlations between life expectancy, population, and GDP per capita</p>
 </div>
 </div>
-<div id="base-r-data-types" class="section level2" number="2.2">
-<h2><span class="header-section-number">2.2</span> Base R data types</h2>
-<div id="numerics" class="section level3" number="2.2.1">
-<h3><span class="header-section-number">2.2.1</span> Numerics</h3>
+<div id="base-r-data-types" class="section level2" number="3.2">
+<h2><span class="header-section-number">3.2</span> Base R data types</h2>
+<div id="numerics" class="section level3" number="3.2.1">
+<h3><span class="header-section-number">3.2.1</span> Numerics</h3>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="r-basics.html#cb3-1"></a>foo =<span class="st"> </span><span class="dv">2</span></span>
 <span id="cb3-2"><a href="r-basics.html#cb3-2"></a>bar =<span class="st"> </span><span class="dv">3</span></span>
 <span id="cb3-3"><a href="r-basics.html#cb3-3"></a>foobar =<span class="st"> </span>foo <span class="op">+</span><span class="st"> </span>bar</span>
 <span id="cb3-4"><a href="r-basics.html#cb3-4"></a>foo <span class="op">/</span><span class="st"> </span>bar</span>
 <span id="cb3-5"><a href="r-basics.html#cb3-5"></a><span class="kw">try</span>(foo <span class="op">/</span><span class="st"> </span><span class="dv">0</span>)</span></code></pre></div>
 </div>
-<div id="vectors" class="section level3" number="2.2.2">
-<h3><span class="header-section-number">2.2.2</span> Vectors</h3>
+<div id="vectors" class="section level3" number="3.2.2">
+<h3><span class="header-section-number">3.2.2</span> Vectors</h3>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="r-basics.html#cb4-1"></a>foo =<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>)</span>
 <span id="cb4-2"><a href="r-basics.html#cb4-2"></a>bar =<span class="st"> </span><span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>)</span>
 <span id="cb4-3"><a href="r-basics.html#cb4-3"></a>foo[<span class="dv">2</span>]</span>
@@ -292,8 +297,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb4-13"><a href="r-basics.html#cb4-13"></a></span>
 <span id="cb4-14"><a href="r-basics.html#cb4-14"></a><span class="kw">c</span>(foo, bar)</span></code></pre></div>
 </div>
-<div id="strings" class="section level3" number="2.2.3">
-<h3><span class="header-section-number">2.2.3</span> Strings</h3>
+<div id="strings" class="section level3" number="3.2.3">
+<h3><span class="header-section-number">3.2.3</span> Strings</h3>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="r-basics.html#cb5-1"></a>foo =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;monkey&#39;</span>, <span class="st">&#39;banana&#39;</span>)</span>
 <span id="cb5-2"><a href="r-basics.html#cb5-2"></a>bar =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;house&#39;</span>)</span>
 <span id="cb5-3"><a href="r-basics.html#cb5-3"></a><span class="co">## How to put these together? </span></span>
@@ -302,16 +307,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb5-6"><a href="r-basics.html#cb5-6"></a><span class="kw">paste</span>(foo, bar)</span>
 <span id="cb5-7"><a href="r-basics.html#cb5-7"></a><span class="kw">paste0</span>(foo, bar)</span></code></pre></div>
 </div>
-<div id="factors" class="section level3" number="2.2.4">
-<h3><span class="header-section-number">2.2.4</span> Factors</h3>
+<div id="factors" class="section level3" number="3.2.4">
+<h3><span class="header-section-number">3.2.4</span> Factors</h3>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="r-basics.html#cb6-1"></a>foo_str =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;foo&#39;</span>, <span class="st">&#39;foo&#39;</span>, <span class="st">&#39;bar&#39;</span>, <span class="st">&#39;zoo&#39;</span>)</span>
 <span id="cb6-2"><a href="r-basics.html#cb6-2"></a><span class="kw">as.integer</span>(foo_str)</span>
 <span id="cb6-3"><a href="r-basics.html#cb6-3"></a>foo_fct =<span class="st"> </span><span class="kw">as.factor</span>(foo_str)</span>
 <span id="cb6-4"><a href="r-basics.html#cb6-4"></a><span class="kw">as.integer</span>(foo)</span>
 <span id="cb6-5"><a href="r-basics.html#cb6-5"></a><span class="kw">levels</span>(foo_fct)</span></code></pre></div>
 </div>
-<div id="lists" class="section level3" number="2.2.5">
-<h3><span class="header-section-number">2.2.5</span> Lists</h3>
+<div id="lists" class="section level3" number="3.2.5">
+<h3><span class="header-section-number">3.2.5</span> Lists</h3>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="r-basics.html#cb7-1"></a>some_list =<span class="st"> </span><span class="kw">list</span>(<span class="st">&#39;foo&#39;</span>, <span class="st">&#39;bar&#39;</span>, <span class="dv">12</span>)</span>
 <span id="cb7-2"><a href="r-basics.html#cb7-2"></a>some_list</span>
 <span id="cb7-3"><a href="r-basics.html#cb7-3"></a>some_list[<span class="dv">2</span>]</span>
@@ -323,8 +328,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb7-9"><a href="r-basics.html#cb7-9"></a>moar_list =<span class="st"> </span><span class="kw">list</span>(<span class="st">&#39;foo&#39;</span> =<span class="st"> </span><span class="dv">12</span>, <span class="st">&#39;bar&#39;</span> =<span class="st"> </span><span class="dv">13</span>)</span>
 <span id="cb7-10"><a href="r-basics.html#cb7-10"></a>moar_list<span class="op">$</span>foo</span></code></pre></div>
 </div>
-<div id="data-frames" class="section level3" number="2.2.6">
-<h3><span class="header-section-number">2.2.6</span> Data frames</h3>
+<div id="data-frames" class="section level3" number="3.2.6">
+<h3><span class="header-section-number">3.2.6</span> Data frames</h3>
 <ul>
 <li><code>gapminder</code> is a data frame</li>
 <li>Technical point: a data frame is a list
@@ -339,8 +344,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 </div>
 </div>
-<div id="examining-variables" class="section level2" number="2.3">
-<h2><span class="header-section-number">2.3</span> Examining variables</h2>
+<div id="examining-variables" class="section level2" number="3.3">
+<h2><span class="header-section-number">3.3</span> Examining variables</h2>
 <ul>
 <li><code>length()</code>, <code>dim()</code></li>
 <li><code>str()</code></li>
@@ -348,15 +353,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>head()</code></li>
 <li><a href="https://gge-ucd.github.io/R-DAVIS/lesson_how_r_thinks_about_data.html#challenge">challenge</a></li>
 </ul>
-<div id="exercise-2" class="section level3" number="2.3.1">
-<h3><span class="header-section-number">2.3.1</span> Exercise</h3>
+<div id="exercise-2" class="section level3" number="3.3.1">
+<h3><span class="header-section-number">3.3.1</span> Exercise</h3>
 <ul>
 <li>What’s the difference between <code>gapminder['country']</code> (single brackets) and <code>gapminder[['country']]</code> (double brackets)?</li>
 </ul>
 </div>
 </div>
-<div id="logical-operators" class="section level2" number="2.4">
-<h2><span class="header-section-number">2.4</span> Logical operators</h2>
+<div id="logical-operators" class="section level2" number="3.4">
+<h2><span class="header-section-number">3.4</span> Logical operators</h2>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="r-basics.html#cb8-1"></a><span class="cf">if</span> (<span class="ot">TRUE</span>) {</span>
 <span id="cb8-2"><a href="r-basics.html#cb8-2"></a>  <span class="kw">print</span>(<span class="st">&#39;it</span><span class="ch">\&#39;</span><span class="st">s true!&#39;</span>)</span>
 <span id="cb8-3"><a href="r-basics.html#cb8-3"></a>} <span class="cf">else</span> {</span>
@@ -398,16 +403,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb8-39"><a href="r-basics.html#cb8-39"></a>          bar <span class="op">==</span><span class="st"> </span><span class="dv">0</span> <span class="op">~</span><span class="st"> &#39;zero&#39;</span>, </span>
 <span id="cb8-40"><a href="r-basics.html#cb8-40"></a>          bar <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>  <span class="op">~</span><span class="st"> &#39;negative&#39;</span>)</span></code></pre></div>
 </div>
-<div id="missing-data" class="section level2" number="2.5">
-<h2><span class="header-section-number">2.5</span> Missing data</h2>
+<div id="missing-data" class="section level2" number="3.5">
+<h2><span class="header-section-number">3.5</span> Missing data</h2>
 <p><a href="https://gge-ucd.github.io/R-DAVIS/lesson_how_r_thinks_about_data.html#missing_data" class="uri">https://gge-ucd.github.io/R-DAVIS/lesson_how_r_thinks_about_data.html#missing_data</a></p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="r-basics.html#cb9-1"></a>missing =<span class="st"> </span><span class="kw">c</span>(<span class="dv">7</span>, <span class="dv">17</span>, <span class="ot">NA</span>, <span class="dv">12</span>)</span>
 <span id="cb9-2"><a href="r-basics.html#cb9-2"></a>missing</span>
 <span id="cb9-3"><a href="r-basics.html#cb9-3"></a><span class="kw">mean</span>(missing)</span>
 <span id="cb9-4"><a href="r-basics.html#cb9-4"></a><span class="kw">mean</span>(missing, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</span>
 <span id="cb9-5"><a href="r-basics.html#cb9-5"></a><span class="kw">is.na</span>(missing)</span></code></pre></div>
-<div id="exercise-3" class="section level3" number="2.5.1">
-<h3><span class="header-section-number">2.5.1</span> Exercise</h3>
+<div id="exercise-3" class="section level3" number="3.5.1">
+<h3><span class="header-section-number">3.5.1</span> Exercise</h3>
 <ul>
 <li>What do the logical operators do with <code>NA</code>s?</li>
 </ul>
@@ -420,7 +425,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="introduction.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="what-is-this-thing-called-data-science.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="git-and-version-control.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>

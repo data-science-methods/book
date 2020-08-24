@@ -133,9 +133,9 @@
 
 This document is a set of notes (and perhaps later a textbook) for a course on data science methods for graduate students in social and behavioral sciences, taught by Professor Dan Hicks (they/them), UC Merced.
 
-\hypertarget{chapter-0-setting-up}{%
-\section*{Chapter 0: Setting up}\label{chapter-0-setting-up}}
-\addcontentsline{toc}{section}{Chapter 0: Setting up}
+\hypertarget{setting-up}{%
+\section*{Setting up}\label{setting-up}}
+\addcontentsline{toc}{section}{Setting up}
 
 Before the first day of class, you'll need to set up a few things: \textbf{R, RStudio, Slack, Zoom, and a GitHub account}. I'd also like you to fill out a \textbf{pre-class survey}. R is the primary piece of software we'll be learning to use. RStudio is an IDE (integrated development environment) for using R. (Think of R as the engine of a car and RStudio as the dashboard, steering wheel, and pedals.) Slack will be the main way we communicate; we'll use Zoom for class time. GitHub is a service for sharing and collaborating on software engineering projects.
 
@@ -559,57 +559,62 @@ However,
   Notebooks encourage bad software engineering habits and discourage good ones (Grus \protect\hyperlink{ref-GrusDonNotebooksJoel}{n.d.}; Hiltch \protect\hyperlink{ref-HiltchJupyterNotebookCancer2019}{2019})
 \end{itemize}
 
-\hypertarget{data-science-wtf}{%
-\subsection{Data Science WTF}\label{data-science-wtf}}
+\hypertarget{what-is-this-thing-called-data-science}{%
+\section{What is this thing called data science?}\label{what-is-this-thing-called-data-science}}
+
+\hypertarget{standard-definition}{%
+\subsection{Standard definition}\label{standard-definition}}
 
 \begin{itemize}
 \tightlist
 \item
-  Standard definition
+  \includegraphics[width=0.3\textwidth,height=\textheight]{images/Abisiga.jpg}
+\item
+  Source: \url{https://www.kdnuggets.com/2020/08/top-10-lists-data-science.html}
+\item
+  The intersection of computer science/software engineering, statistics, and ``business knowledge''
+\item
+  But this focuses on \emph{tools and techniques}, not the epistemic and practical \emph{goals} of data science
+\end{itemize}
+
+\hypertarget{wait-whats-data}{%
+\subsection{Wait, what's ``data''?}\label{wait-whats-data}}
+
+\begin{itemize}
+\tightlist
+\item
+  \emph{Representational view}: data are ``reliable representations of reality which are produced via the interaction between humans and the world''
 
   \begin{itemize}
   \tightlist
   \item
-    \includegraphics[width=0.3\textwidth,height=\textheight]{images/Abisiga.jpg}
+    ``the production of data is equivalent to `capturing' features of the world that can be used for systematic study''
   \item
-    Source: \url{https://www.kdnuggets.com/2020/08/top-10-lists-data-science.html}
+    ``data as `raw' products of research, which are as close as it gets to unmediated knowledge of reality''
   \item
-    The intersection of computer science/software engineering, statistics, and ``business knowledge''
+    data provide ``an objective foundation for the acquisition of knowledge'' (Leonelli \protect\hyperlink{ref-LeonelliScientificResearchBig2020}{2020})
   \item
-    But this focuses on the tools and techniques, not the epistemic and practical \emph{goals} of data science
+    \textbf{data become data when they're produced according to a standardized measurement process}
   \end{itemize}
 \item
-  To understand my definition, first let's talk about \emph{data}
+  \emph{Relational view}: ``data are objects that are treated as potential or actual evidence for scientific claims in ways that can, at least in principle, be scrutinised and accounted for''
 
   \begin{itemize}
   \tightlist
   \item
-    \emph{Representational view}: data are ``reliable representations of reality which are produced via the interaction between humans and the world''
-
-    \begin{itemize}
-    \tightlist
-    \item
-      ``the production of data is equivalent to `capturing' features of the world that can be used for systematic study''
-    \item
-      ``data as `raw' products of research, which are as close as it gets to unmediated knowledge of reality''
-    \item
-      data provide ``an objective foundation for the acquisition of knowledge''
-    \item
-      \textbf{data become data when they're produced according to a standardized measurement process}
-    \end{itemize}
+    ``any object can be used as a datum, or stop being used as such, depending on the circumstances''
   \item
-    \emph{Relational view}: ``data are objects that are treated as potential or actual evidence for scientific claims in ways that can, at least in principle, be scrutinised and accounted for''
-
-    \begin{itemize}
-    \tightlist
-    \item
-      ``any object can be used as a datum, or stop being used as such, depending on the circumstances''
-    \item
-      \textbf{data become data when they're used as evidence} (Leonelli \protect\hyperlink{ref-LeonelliScientificResearchBig2020}{2020})
-    \item
-      Note implications for ideas of ``unmediated knowledge'' and ``objective foundation''
-    \end{itemize}
+    \textbf{data become data when they're used as evidence} (Leonelli \protect\hyperlink{ref-LeonelliScientificResearchBig2020}{2020})
+  \item
+    Note implications for ideas of ``unmediated knowledge'' and ``objective foundation''
   \end{itemize}
+\end{itemize}
+
+\hypertarget{back-to-data-science}{%
+\subsection{Back to ``data science''}\label{back-to-data-science}}
+
+\begin{itemize}
+\tightlist
 \item
   Data science ≠ lab science (often)
 
@@ -641,14 +646,14 @@ However,
     \textbf{relational view is often a better fit}
   \end{itemize}
 \item
-  The goal of data science
+  The goal of data science is to \textbf{produce data}
 
   \begin{itemize}
   \tightlist
   \item
-    to \emph{produce data}
+    ie, to create and transform objects such that they can be used as evidence
   \item
-    to transform objects such that they can be used as evidence
+    Can be done experimentally in a lab, but in other ways too
   \end{itemize}
 \end{itemize}
 
