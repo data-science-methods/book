@@ -153,7 +153,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2" data-path="what-is-this-thing-called-data-science.html"><a href="what-is-this-thing-called-data-science.html"><i class="fa fa-check"></i><b>2</b> What is this thing called data science?</a>
 <ul>
 <li class="chapter" data-level="2.1" data-path="what-is-this-thing-called-data-science.html"><a href="what-is-this-thing-called-data-science.html#standard-definition"><i class="fa fa-check"></i><b>2.1</b> Standard definition</a></li>
-<li class="chapter" data-level="2.2" data-path="what-is-this-thing-called-data-science.html"><a href="what-is-this-thing-called-data-science.html#wait-whats-data"><i class="fa fa-check"></i><b>2.2</b> Wait, what’s “data”?</a></li>
+<li class="chapter" data-level="2.2" data-path="what-is-this-thing-called-data-science.html"><a href="what-is-this-thing-called-data-science.html#a-prior-question-what-is-this-thing-called-data"><i class="fa fa-check"></i><b>2.2</b> A prior question: What is this thing called “data”?</a></li>
 <li class="chapter" data-level="2.3" data-path="what-is-this-thing-called-data-science.html"><a href="what-is-this-thing-called-data-science.html#back-to-data-science"><i class="fa fa-check"></i><b>2.3</b> Back to “data science”</a></li>
 </ul></li>
 <li class="part"><span><b>I Some fundamental tools</b></span></li>
@@ -209,23 +209,45 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><img src="images/Abisiga.jpg" title="fig:" style="width:30.0%" alt="Data science, defined as the intersection of CS, stats, and “business knowledge”" /></li>
 <li>Source: <a href="https://www.kdnuggets.com/2020/08/top-10-lists-data-science.html" class="uri">https://www.kdnuggets.com/2020/08/top-10-lists-data-science.html</a></li>
 <li>The intersection of computer science/software engineering, statistics, and “business knowledge”</li>
-<li>But this focuses on <em>tools and techniques</em>, not the epistemic and practical <em>goals</em> of data science</li>
+</ul>
+<p>Or, more concretely,</p>
+<ul>
+<li><img src="images/Boykis.png" title="fig:" style="width:50.0%" alt="Boykis Twitter poll of “data scientists”; 67.3% said they spend most of their time cleaning data/moving data" />
+<ul>
+<li>Source: <a href="https://twitter.com/vboykis/status/1089920316644704256" class="uri">https://twitter.com/vboykis/status/1089920316644704256</a></li>
+</ul></li>
+<li><img src="images/Scott.png" title="fig:" style="width:50.0%" alt="Scott tweet: “One of the biggest failures I see in junior ML/CV engineers is a complete lack of interest in building data sets. While it is boring grunt work I think there is so much to be learned in putting together a dataset. It is like half the problem.”" />
+<ul>
+<li>Source: <a href="https://twitter.com/kscottz/status/1091423467772162049" class="uri">https://twitter.com/kscottz/status/1091423467772162049</a></li>
+</ul></li>
+<li><img src="images/Hudon.png" title="fig:" style="width:50.0%" alt="Hudon tweet containing a graphic labelled “Full Stack Data Science,” with categories “data engineer” (entries collect, build data pipeline), “data analyst” (entries reporting, data viz), “data scientist” (entries build models, run statistical tests), and “machine learning engineer” (entries deploy model, build model)" />
+<ul>
+<li>Source: <a href="https://twitter.com/beeonaposy/status/1298070348844457987" class="uri">https://twitter.com/beeonaposy/status/1298070348844457987</a></li>
+</ul></li>
+</ul>
+<p>However,</p>
+<ul>
+<li>This focuses on <em>tools and techniques</em>, not the epistemic and practical <em>goals</em> of data science
+<ul>
+<li>An ecologist spends most of their time collecting specimens in the field and processing them in a lab, vs. </li>
+<li>An ecologist studies interactions among organisms and their environment</li>
+</ul></li>
 </ul>
 </div>
-<div id="wait-whats-data" class="section level2" number="2.2">
-<h2><span class="header-section-number">2.2</span> Wait, what’s “data”?</h2>
+<div id="a-prior-question-what-is-this-thing-called-data" class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> A prior question: What is this thing called “data”?</h2>
 <ul>
-<li><em>Representational view</em>: data are “reliable representations of reality which are produced via the interaction between humans and the world”
+<li><em>Representational view</em>: Data are “reliable representations of reality which are produced via the interaction between humans and the world”
 <ul>
-<li>“the production of data is equivalent to ‘capturing’ features of the world that can be used for systematic study”</li>
-<li>“data as ‘raw’ products of research, which are as close as it gets to unmediated knowledge of reality”</li>
-<li>data provide “an objective foundation for the acquisition of knowledge” <span class="citation">(Leonelli <a href="#ref-LeonelliScientificResearchBig2020" role="doc-biblioref">2020</a>)</span></li>
-<li><strong>data become data when they’re produced according to a standardized measurement process</strong></li>
+<li>“The production of data is equivalent to ‘capturing’ features of the world that can be used for systematic study”</li>
+<li>“Data [are seen as] as ‘raw’ products of research, which are as close as it gets to unmediated knowledge of reality”</li>
+<li>Data provide “an objective foundation for the acquisition of knowledge” <span class="citation">(Leonelli <a href="#ref-LeonelliScientificResearchBig2020" role="doc-biblioref">2020</a>)</span></li>
+<li><strong>Data become data when they’re produced according to a reliable, standardized measurement process</strong></li>
 </ul></li>
-<li><em>Relational view</em>: “data are objects that are treated as potential or actual evidence for scientific claims in ways that can, at least in principle, be scrutinised and accounted for”
+<li><em>Relational view</em>: “Data are objects that are treated as potential or actual evidence for scientific claims in ways that can, at least in principle, be scrutinised and accounted for”
 <ul>
-<li>“any object can be used as a datum, or stop being used as such, depending on the circumstances”</li>
-<li><strong>data become data when they’re used as evidence</strong> <span class="citation">(Leonelli <a href="#ref-LeonelliScientificResearchBig2020" role="doc-biblioref">2020</a>)</span></li>
+<li>“Any object can be used as a datum, or stop being used as such, depending on the circumstances”</li>
+<li><strong>Data become data when they’re used as evidence</strong> <span class="citation">(Leonelli <a href="#ref-LeonelliScientificResearchBig2020" role="doc-biblioref">2020</a>)</span></li>
 <li>Note implications for ideas of “unmediated knowledge” and “objective foundation”</li>
 </ul></li>
 </ul>
@@ -235,22 +257,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>Data science ≠ lab science (often)
 <ul>
-<li>data collection isn’t standardized
+<li>Data collection isn’t standardized
 <ul>
-<li>found (or bought), not made</li>
-<li>data as byproduct</li>
+<li>Found (or bought), not made</li>
+<li>Data as byproduct</li>
+<li>This is the point of the tweets above</li>
 <li>ex: scraping from Twitter, Wikipedia, administrative records</li>
 </ul></li>
-<li>remixing and recombining data
+<li>Remixing and recombining data
 <ul>
 <li>ex: pesticide use + Census data in <span class="citation">Hicks (<a href="#ref-HicksCensusDemographicsChlorpyrifos2020" role="doc-biblioref">2020</a>)</span></li>
 </ul></li>
-<li>data first, questions later</li>
-<li><strong>relational view is often a better fit</strong></li>
+<li>Data first, questions later</li>
+<li><strong>Relational view is often a better fit</strong></li>
 </ul></li>
 <li>The goal of data science is to <strong>produce data</strong>
 <ul>
-<li>ie, to create and transform objects such that they can be used as evidence</li>
+<li>To create, transform, and juxtapose objects such that they can be used as evidence</li>
 <li>Can be done experimentally in a lab, but in other ways too</li>
 </ul></li>
 </ul>

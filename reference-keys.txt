@@ -19,7 +19,7 @@ tidyverse-r-not-base-r
 scripts-not-notebooks
 what-is-this-thing-called-data-science
 standard-definition
-wait-whats-data
+a-prior-question-what-is-this-thing-called-data
 back-to-data-science
 r-basics
 lets-get-started-with-rstudio
