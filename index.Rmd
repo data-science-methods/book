@@ -9,6 +9,10 @@ link-citations: yes
 description: "This document is a set of notes (and perhaps later a textbook) for a course on data science methods for graduate students in social and behavioral sciences."
 ---
 
+```{r knitr_config}
+knitr::opts_chunk$set(echo=TRUE, fig.align='center', fig.width=4)
+```
+
 # Preface # {-} 
 
 This document is a set of notes (and perhaps later a textbook) for a course on data science methods for graduate students in social and behavioral sciences, taught by Professor Dan Hicks (they/them), UC Merced. 
