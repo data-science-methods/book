@@ -173,6 +173,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.2" data-path="warnings-errors-and-getting-help.html"><a href="warnings-errors-and-getting-help.html#messages-warnings-and-errors"><i class="fa fa-check"></i><b>6.2</b> Messages, warnings, and errors</a></li>
 <li class="chapter" data-level="6.3" data-path="warnings-errors-and-getting-help.html"><a href="warnings-errors-and-getting-help.html#where-to-go-for-help"><i class="fa fa-check"></i><b>6.3</b> Where to go for help</a></li>
 <li class="chapter" data-level="6.4" data-path="warnings-errors-and-getting-help.html"><a href="warnings-errors-and-getting-help.html#writing-a-reproducible-example-reprex"><i class="fa fa-check"></i><b>6.4</b> Writing a reproducible example: <code>reprex</code></a></li>
+<li class="chapter" data-level="6.5" data-path="warnings-errors-and-getting-help.html"><a href="warnings-errors-and-getting-help.html#do-not-do-these-things-in-your-reprex"><i class="fa fa-check"></i><b>6.5</b> Do not do these things in your reprex</a></li>
 </ul></li>
 <li class="part"><span><b>II Exploratory Data Analysis</b></span></li>
 <li class="chapter" data-level="7" data-path="waterfalls-spirals-and-philosophy-of-science.html"><a href="waterfalls-spirals-and-philosophy-of-science.html"><i class="fa fa-check"></i><b>7</b> Waterfalls, Spirals, and Philosophy of Science</a></li>
@@ -341,6 +342,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Plus some technical restrictions that make it nicer to work with</li>
 </ul></li>
 </ul>
+<p>Like 99% of the time you create a data frame by loading data or manipulating another data frame. But it’s good to know how to create them by hand:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="r-basics.html#cb8-1"></a>foo =<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">5</span></span>
+<span id="cb8-2"><a href="r-basics.html#cb8-2"></a>bar =<span class="st"> </span>letters[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>]</span>
+<span id="cb8-3"><a href="r-basics.html#cb8-3"></a></span>
+<span id="cb8-4"><a href="r-basics.html#cb8-4"></a><span class="kw">data.frame</span>(foo, bar)</span>
+<span id="cb8-5"><a href="r-basics.html#cb8-5"></a><span class="kw">tibble</span>(foo, bar)</span>
+<span id="cb8-6"><a href="r-basics.html#cb8-6"></a></span>
+<span id="cb8-7"><a href="r-basics.html#cb8-7"></a><span class="co">## tribble() is super useful when you&#39;re creating a dataframe entirely by hand</span></span>
+<span id="cb8-8"><a href="r-basics.html#cb8-8"></a><span class="kw">tribble</span>(<span class="op">~</span>foo, <span class="op">~</span>bar, </span>
+<span id="cb8-9"><a href="r-basics.html#cb8-9"></a>        <span class="dv">1</span>, <span class="st">&#39;a&#39;</span>, </span>
+<span id="cb8-10"><a href="r-basics.html#cb8-10"></a>        <span class="dv">2</span>, <span class="st">&#39;b&#39;</span>, </span>
+<span id="cb8-11"><a href="r-basics.html#cb8-11"></a>        <span class="dv">3</span>, <span class="st">&#39;c&#39;</span>, </span>
+<span id="cb8-12"><a href="r-basics.html#cb8-12"></a>        <span class="dv">4</span>, <span class="st">&#39;d&#39;</span>, </span>
+<span id="cb8-13"><a href="r-basics.html#cb8-13"></a>        <span class="dv">5</span>, <span class="st">&#39;e&#39;</span>)</span></code></pre></div>
 </div>
 </div>
 <div id="examining-variables" class="section level2" number="3.3">
@@ -361,55 +376,55 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="logical-operators" class="section level2" number="3.4">
 <h2><span class="header-section-number">3.4</span> Logical operators</h2>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="r-basics.html#cb8-1"></a><span class="cf">if</span> (<span class="ot">TRUE</span>) {</span>
-<span id="cb8-2"><a href="r-basics.html#cb8-2"></a>  <span class="kw">print</span>(<span class="st">&#39;it</span><span class="ch">\&#39;</span><span class="st">s true!&#39;</span>)</span>
-<span id="cb8-3"><a href="r-basics.html#cb8-3"></a>} <span class="cf">else</span> {</span>
-<span id="cb8-4"><a href="r-basics.html#cb8-4"></a>  <span class="kw">print</span>(<span class="st">&#39;it</span><span class="ch">\&#39;</span><span class="st">s false!&#39;</span>)</span>
-<span id="cb8-5"><a href="r-basics.html#cb8-5"></a>}</span>
-<span id="cb8-6"><a href="r-basics.html#cb8-6"></a></span>
-<span id="cb8-7"><a href="r-basics.html#cb8-7"></a>foo =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">-1</span>, <span class="dv">-3</span>)</span>
-<span id="cb8-8"><a href="r-basics.html#cb8-8"></a>foo <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span></span>
-<span id="cb8-9"><a href="r-basics.html#cb8-9"></a><span class="cf">if</span> (foo <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) {</span>
-<span id="cb8-10"><a href="r-basics.html#cb8-10"></a>  <span class="kw">print</span>(<span class="st">&#39;greater than zero!&#39;</span>)</span>
-<span id="cb8-11"><a href="r-basics.html#cb8-11"></a>}</span>
-<span id="cb8-12"><a href="r-basics.html#cb8-12"></a></span>
-<span id="cb8-13"><a href="r-basics.html#cb8-13"></a><span class="cf">if</span> (<span class="kw">any</span>(foo <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)) {</span>
-<span id="cb8-14"><a href="r-basics.html#cb8-14"></a>  <span class="kw">print</span>(<span class="st">&#39;at least one is greater than zero!&#39;</span>)</span>
-<span id="cb8-15"><a href="r-basics.html#cb8-15"></a>}</span>
-<span id="cb8-16"><a href="r-basics.html#cb8-16"></a><span class="cf">if</span> (<span class="kw">all</span>(foo <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)) {</span>
-<span id="cb8-17"><a href="r-basics.html#cb8-17"></a>  <span class="kw">print</span>(<span class="st">&#39;all are greater than zero!&#39;</span>)</span>
-<span id="cb8-18"><a href="r-basics.html#cb8-18"></a>} <span class="cf">else</span> {</span>
-<span id="cb8-19"><a href="r-basics.html#cb8-19"></a>  <span class="kw">print</span>(<span class="st">&#39;at least one is not greater than zero!&#39;</span>)</span>
-<span id="cb8-20"><a href="r-basics.html#cb8-20"></a>}</span>
-<span id="cb8-21"><a href="r-basics.html#cb8-21"></a></span>
-<span id="cb8-22"><a href="r-basics.html#cb8-22"></a><span class="cf">if</span> (foo <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span> <span class="op">|</span><span class="st"> </span>foo <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>) {</span>
-<span id="cb8-23"><a href="r-basics.html#cb8-23"></a>  <span class="kw">print</span>(<span class="st">&#39;non-zero&#39;</span>)</span>
-<span id="cb8-24"><a href="r-basics.html#cb8-24"></a>}</span>
-<span id="cb8-25"><a href="r-basics.html#cb8-25"></a><span class="cf">if</span> (foo <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span> <span class="op">||</span><span class="st"> </span>foo <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>) {</span>
-<span id="cb8-26"><a href="r-basics.html#cb8-26"></a>  <span class="kw">print</span>(<span class="st">&#39;non-zero&#39;</span>)</span>
-<span id="cb8-27"><a href="r-basics.html#cb8-27"></a>}</span>
-<span id="cb8-28"><a href="r-basics.html#cb8-28"></a></span>
-<span id="cb8-29"><a href="r-basics.html#cb8-29"></a><span class="cf">if</span> (foo <span class="op">!=</span><span class="st"> </span><span class="dv">0</span>) {</span>
-<span id="cb8-30"><a href="r-basics.html#cb8-30"></a>  <span class="kw">print</span>(<span class="st">&#39;non-zero&#39;</span>)</span>
-<span id="cb8-31"><a href="r-basics.html#cb8-31"></a>}</span>
-<span id="cb8-32"><a href="r-basics.html#cb8-32"></a><span class="cf">if</span> (<span class="kw">all</span>(foo <span class="op">!=</span><span class="st"> </span><span class="dv">0</span>)) {</span>
-<span id="cb8-33"><a href="r-basics.html#cb8-33"></a>  <span class="kw">print</span>(<span class="st">&#39;non-zero&#39;</span>)</span>
-<span id="cb8-34"><a href="r-basics.html#cb8-34"></a>}</span>
-<span id="cb8-35"><a href="r-basics.html#cb8-35"></a></span>
-<span id="cb8-36"><a href="r-basics.html#cb8-36"></a>bar =<span class="st"> </span><span class="kw">c</span>(<span class="dv">17</span>, <span class="dv">25</span>, <span class="dv">0</span>, <span class="dv">-14</span>)</span>
-<span id="cb8-37"><a href="r-basics.html#cb8-37"></a><span class="kw">ifelse</span>(bar <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>, <span class="st">&#39;positive&#39;</span>, <span class="st">&#39;negative or zero&#39;</span>)</span>
-<span id="cb8-38"><a href="r-basics.html#cb8-38"></a><span class="kw">case_when</span>(bar <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>  <span class="op">~</span><span class="st"> &#39;positive&#39;</span>, </span>
-<span id="cb8-39"><a href="r-basics.html#cb8-39"></a>          bar <span class="op">==</span><span class="st"> </span><span class="dv">0</span> <span class="op">~</span><span class="st"> &#39;zero&#39;</span>, </span>
-<span id="cb8-40"><a href="r-basics.html#cb8-40"></a>          bar <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>  <span class="op">~</span><span class="st"> &#39;negative&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="r-basics.html#cb9-1"></a><span class="cf">if</span> (<span class="ot">TRUE</span>) {</span>
+<span id="cb9-2"><a href="r-basics.html#cb9-2"></a>  <span class="kw">print</span>(<span class="st">&#39;it</span><span class="ch">\&#39;</span><span class="st">s true!&#39;</span>)</span>
+<span id="cb9-3"><a href="r-basics.html#cb9-3"></a>} <span class="cf">else</span> {</span>
+<span id="cb9-4"><a href="r-basics.html#cb9-4"></a>  <span class="kw">print</span>(<span class="st">&#39;it</span><span class="ch">\&#39;</span><span class="st">s false!&#39;</span>)</span>
+<span id="cb9-5"><a href="r-basics.html#cb9-5"></a>}</span>
+<span id="cb9-6"><a href="r-basics.html#cb9-6"></a></span>
+<span id="cb9-7"><a href="r-basics.html#cb9-7"></a>foo =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">-1</span>, <span class="dv">-3</span>)</span>
+<span id="cb9-8"><a href="r-basics.html#cb9-8"></a>foo <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span></span>
+<span id="cb9-9"><a href="r-basics.html#cb9-9"></a><span class="cf">if</span> (foo <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) {</span>
+<span id="cb9-10"><a href="r-basics.html#cb9-10"></a>  <span class="kw">print</span>(<span class="st">&#39;greater than zero!&#39;</span>)</span>
+<span id="cb9-11"><a href="r-basics.html#cb9-11"></a>}</span>
+<span id="cb9-12"><a href="r-basics.html#cb9-12"></a></span>
+<span id="cb9-13"><a href="r-basics.html#cb9-13"></a><span class="cf">if</span> (<span class="kw">any</span>(foo <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)) {</span>
+<span id="cb9-14"><a href="r-basics.html#cb9-14"></a>  <span class="kw">print</span>(<span class="st">&#39;at least one is greater than zero!&#39;</span>)</span>
+<span id="cb9-15"><a href="r-basics.html#cb9-15"></a>}</span>
+<span id="cb9-16"><a href="r-basics.html#cb9-16"></a><span class="cf">if</span> (<span class="kw">all</span>(foo <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)) {</span>
+<span id="cb9-17"><a href="r-basics.html#cb9-17"></a>  <span class="kw">print</span>(<span class="st">&#39;all are greater than zero!&#39;</span>)</span>
+<span id="cb9-18"><a href="r-basics.html#cb9-18"></a>} <span class="cf">else</span> {</span>
+<span id="cb9-19"><a href="r-basics.html#cb9-19"></a>  <span class="kw">print</span>(<span class="st">&#39;at least one is not greater than zero!&#39;</span>)</span>
+<span id="cb9-20"><a href="r-basics.html#cb9-20"></a>}</span>
+<span id="cb9-21"><a href="r-basics.html#cb9-21"></a></span>
+<span id="cb9-22"><a href="r-basics.html#cb9-22"></a><span class="cf">if</span> (foo <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span> <span class="op">|</span><span class="st"> </span>foo <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>) {</span>
+<span id="cb9-23"><a href="r-basics.html#cb9-23"></a>  <span class="kw">print</span>(<span class="st">&#39;non-zero&#39;</span>)</span>
+<span id="cb9-24"><a href="r-basics.html#cb9-24"></a>}</span>
+<span id="cb9-25"><a href="r-basics.html#cb9-25"></a><span class="cf">if</span> (foo <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span> <span class="op">||</span><span class="st"> </span>foo <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>) {</span>
+<span id="cb9-26"><a href="r-basics.html#cb9-26"></a>  <span class="kw">print</span>(<span class="st">&#39;non-zero&#39;</span>)</span>
+<span id="cb9-27"><a href="r-basics.html#cb9-27"></a>}</span>
+<span id="cb9-28"><a href="r-basics.html#cb9-28"></a></span>
+<span id="cb9-29"><a href="r-basics.html#cb9-29"></a><span class="cf">if</span> (foo <span class="op">!=</span><span class="st"> </span><span class="dv">0</span>) {</span>
+<span id="cb9-30"><a href="r-basics.html#cb9-30"></a>  <span class="kw">print</span>(<span class="st">&#39;non-zero&#39;</span>)</span>
+<span id="cb9-31"><a href="r-basics.html#cb9-31"></a>}</span>
+<span id="cb9-32"><a href="r-basics.html#cb9-32"></a><span class="cf">if</span> (<span class="kw">all</span>(foo <span class="op">!=</span><span class="st"> </span><span class="dv">0</span>)) {</span>
+<span id="cb9-33"><a href="r-basics.html#cb9-33"></a>  <span class="kw">print</span>(<span class="st">&#39;non-zero&#39;</span>)</span>
+<span id="cb9-34"><a href="r-basics.html#cb9-34"></a>}</span>
+<span id="cb9-35"><a href="r-basics.html#cb9-35"></a></span>
+<span id="cb9-36"><a href="r-basics.html#cb9-36"></a>bar =<span class="st"> </span><span class="kw">c</span>(<span class="dv">17</span>, <span class="dv">25</span>, <span class="dv">0</span>, <span class="dv">-14</span>)</span>
+<span id="cb9-37"><a href="r-basics.html#cb9-37"></a><span class="kw">ifelse</span>(bar <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>, <span class="st">&#39;positive&#39;</span>, <span class="st">&#39;negative or zero&#39;</span>)</span>
+<span id="cb9-38"><a href="r-basics.html#cb9-38"></a><span class="kw">case_when</span>(bar <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>  <span class="op">~</span><span class="st"> &#39;positive&#39;</span>, </span>
+<span id="cb9-39"><a href="r-basics.html#cb9-39"></a>          bar <span class="op">==</span><span class="st"> </span><span class="dv">0</span> <span class="op">~</span><span class="st"> &#39;zero&#39;</span>, </span>
+<span id="cb9-40"><a href="r-basics.html#cb9-40"></a>          bar <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>  <span class="op">~</span><span class="st"> &#39;negative&#39;</span>)</span></code></pre></div>
 </div>
 <div id="missing-data" class="section level2" number="3.5">
 <h2><span class="header-section-number">3.5</span> Missing data</h2>
 <p><a href="https://gge-ucd.github.io/R-DAVIS/lesson_how_r_thinks_about_data.html#missing_data" class="uri">https://gge-ucd.github.io/R-DAVIS/lesson_how_r_thinks_about_data.html#missing_data</a></p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="r-basics.html#cb9-1"></a>missing =<span class="st"> </span><span class="kw">c</span>(<span class="dv">7</span>, <span class="dv">17</span>, <span class="ot">NA</span>, <span class="dv">12</span>)</span>
-<span id="cb9-2"><a href="r-basics.html#cb9-2"></a>missing</span>
-<span id="cb9-3"><a href="r-basics.html#cb9-3"></a><span class="kw">mean</span>(missing)</span>
-<span id="cb9-4"><a href="r-basics.html#cb9-4"></a><span class="kw">mean</span>(missing, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb9-5"><a href="r-basics.html#cb9-5"></a><span class="kw">is.na</span>(missing)</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="r-basics.html#cb10-1"></a>missing =<span class="st"> </span><span class="kw">c</span>(<span class="dv">7</span>, <span class="dv">17</span>, <span class="ot">NA</span>, <span class="dv">12</span>)</span>
+<span id="cb10-2"><a href="r-basics.html#cb10-2"></a>missing</span>
+<span id="cb10-3"><a href="r-basics.html#cb10-3"></a><span class="kw">mean</span>(missing)</span>
+<span id="cb10-4"><a href="r-basics.html#cb10-4"></a><span class="kw">mean</span>(missing, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb10-5"><a href="r-basics.html#cb10-5"></a><span class="kw">is.na</span>(missing)</span></code></pre></div>
 <div id="exercise-3" class="section level3" number="3.5.1">
 <h3><span class="header-section-number">3.5.1</span> Exercise</h3>
 <ul>

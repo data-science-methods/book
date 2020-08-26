@@ -173,6 +173,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.2" data-path="warnings-errors-and-getting-help.html"><a href="warnings-errors-and-getting-help.html#messages-warnings-and-errors"><i class="fa fa-check"></i><b>6.2</b> Messages, warnings, and errors</a></li>
 <li class="chapter" data-level="6.3" data-path="warnings-errors-and-getting-help.html"><a href="warnings-errors-and-getting-help.html#where-to-go-for-help"><i class="fa fa-check"></i><b>6.3</b> Where to go for help</a></li>
 <li class="chapter" data-level="6.4" data-path="warnings-errors-and-getting-help.html"><a href="warnings-errors-and-getting-help.html#writing-a-reproducible-example-reprex"><i class="fa fa-check"></i><b>6.4</b> Writing a reproducible example: <code>reprex</code></a></li>
+<li class="chapter" data-level="6.5" data-path="warnings-errors-and-getting-help.html"><a href="warnings-errors-and-getting-help.html#do-not-do-these-things-in-your-reprex"><i class="fa fa-check"></i><b>6.5</b> Do not do these things in your reprex</a></li>
 </ul></li>
 <li class="part"><span><b>II Exploratory Data Analysis</b></span></li>
 <li class="chapter" data-level="7" data-path="waterfalls-spirals-and-philosophy-of-science.html"><a href="waterfalls-spirals-and-philosophy-of-science.html"><i class="fa fa-check"></i><b>7</b> Waterfalls, Spirals, and Philosophy of Science</a></li>
@@ -231,13 +232,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>CRAN <span class="math inline">\(\to\)</span> BugReports (usually GitHub Issues)</li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="warnings-errors-and-getting-help.html#cb10-1"></a><span class="kw">library</span>(lubridate)</span>
-<span id="cb10-2"><a href="warnings-errors-and-getting-help.html#cb10-2"></a></span>
-<span id="cb10-3"><a href="warnings-errors-and-getting-help.html#cb10-3"></a>some_data =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;June 2002&#39;</span>, <span class="st">&#39;May 15, 2007&#39;</span>, <span class="st">&#39;August 2007&#39;</span>)</span>
-<span id="cb10-4"><a href="warnings-errors-and-getting-help.html#cb10-4"></a><span class="kw">mdy</span>(some_data)</span>
-<span id="cb10-5"><a href="warnings-errors-and-getting-help.html#cb10-5"></a><span class="kw">parse_date_time</span>(some_data, <span class="dt">orders =</span> <span class="st">&#39;mdY&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="warnings-errors-and-getting-help.html#cb11-1"></a><span class="kw">library</span>(lubridate)</span>
+<span id="cb11-2"><a href="warnings-errors-and-getting-help.html#cb11-2"></a></span>
+<span id="cb11-3"><a href="warnings-errors-and-getting-help.html#cb11-3"></a>some_data =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;June 2002&#39;</span>, <span class="st">&#39;May 15, 2007&#39;</span>, <span class="st">&#39;August 2007&#39;</span>)</span>
+<span id="cb11-4"><a href="warnings-errors-and-getting-help.html#cb11-4"></a><span class="kw">mdy</span>(some_data)</span>
+<span id="cb11-5"><a href="warnings-errors-and-getting-help.html#cb11-5"></a><span class="kw">parse_date_time</span>(some_data, <span class="dt">orders =</span> <span class="st">&#39;mdY&#39;</span>)</span></code></pre></div>
 <p>Let’s try SO: <a href="https://stackoverflow.com/search?q=%5BR%5D+lubridate+month-year" class="uri">https://stackoverflow.com/search?q=%5BR%5D+lubridate+month-year</a></p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="warnings-errors-and-getting-help.html#cb11-1"></a><span class="kw">parse_date_time</span>(some_data, <span class="dt">orders =</span> <span class="kw">c</span>(<span class="st">&#39;mY&#39;</span>, <span class="st">&#39;mdY&#39;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="warnings-errors-and-getting-help.html#cb12-1"></a><span class="kw">parse_date_time</span>(some_data, <span class="dt">orders =</span> <span class="kw">c</span>(<span class="st">&#39;mY&#39;</span>, <span class="st">&#39;mdY&#39;</span>))</span></code></pre></div>
 <p>Here’s another one:</p>
 <pre><code>```r
 more_data = c(&#39;May 7, 2017&#39;, &#39;May 19, 2017&#39;, &#39;May Fifth, 2017&#39;)
@@ -256,6 +257,29 @@ mdy(more_data)
 <li><a href="https://reprex.tidyverse.org/" class="uri">https://reprex.tidyverse.org/</a></li>
 <li><a href="https://reprex.tidyverse.org/articles/articles/learn-reprex.html" class="uri">https://reprex.tidyverse.org/articles/articles/learn-reprex.html</a></li>
 <li><a href="https://reprex.tidyverse.org/articles/reprex-dos-and-donts.html" class="uri">https://reprex.tidyverse.org/articles/reprex-dos-and-donts.html</a></li>
+</ul>
+</div>
+<div id="do-not-do-these-things-in-your-reprex" class="section level2" number="6.5">
+<h2><span class="header-section-number">6.5</span> Do not do these things in your reprex</h2>
+<p>If you do them, <a href="https://www.tidyverse.org/blog/2017/12/workflow-vs-script/">Jenny Bryan will come to your office and set your computer on fire</a>.</p>
+<ul>
+<li><code>setwd('/users/danhicks/projects/catsaregreat/myscript/')</code>
+<ul>
+<li>Used to ensure that R is running where your file is</li>
+<li>Unnecessary if you’re opening different projects in different RStudio sessions</li>
+<li>Will cause irrelevant errors on any other system</li>
+<li>Aside: use <code>file.path()</code> or <code>here::here()</code> to build paths</li>
+</ul></li>
+<li><code>rm(list=ls())</code>
+<ul>
+<li>Used because people think it clears out the global environment</li>
+<li>Unnecessary if you’re regularly using Session <span class="math inline">\(\to\)</span> Restart R</li>
+<li>Also unnecessary at the top of a <code>Rmd</code> file, which is always knit in a new session</li>
+<li>Doesn’t actually clear out the global environment
+<ul>
+<li>eg, doesn’t unload packages or reset <code>options()</code></li>
+</ul></li>
+</ul></li>
 </ul>
 
 </div>

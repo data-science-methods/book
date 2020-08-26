@@ -118,7 +118,7 @@
 
 \title{Data Science Methods for Cognitive Science}
 \author{Dan Hicks, \href{mailto:hicks.daniel.j@gmail.com}{\nolinkurl{hicks.daniel.j@gmail.com}}}
-\date{Tue Aug 25 15:05:23 2020}
+\date{Wed Aug 26 00:39:29 2020}
 
 \begin{document}
 \maketitle
@@ -925,6 +925,26 @@ Calculate correlations between life expectancy, population, and GDP per capita
   \end{itemize}
 \end{itemize}
 
+Like 99\% of the time you create a data frame by loading data or manipulating another data frame. But it's good to know how to create them by hand:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{foo =}\StringTok{ }\DecValTok{1}\OperatorTok{:}\DecValTok{5}
+\NormalTok{bar =}\StringTok{ }\NormalTok{letters[}\DecValTok{1}\OperatorTok{:}\DecValTok{5}\NormalTok{]}
+
+\KeywordTok{data.frame}\NormalTok{(foo, bar)}
+\KeywordTok{tibble}\NormalTok{(foo, bar)}
+
+\CommentTok{\#\# tribble() is super useful when you\textquotesingle{}re creating a dataframe entirely by hand}
+\KeywordTok{tribble}\NormalTok{(}\OperatorTok{\textasciitilde{}}\NormalTok{foo, }\OperatorTok{\textasciitilde{}}\NormalTok{bar, }
+        \DecValTok{1}\NormalTok{, }\StringTok{\textquotesingle{}a\textquotesingle{}}\NormalTok{, }
+        \DecValTok{2}\NormalTok{, }\StringTok{\textquotesingle{}b\textquotesingle{}}\NormalTok{, }
+        \DecValTok{3}\NormalTok{, }\StringTok{\textquotesingle{}c\textquotesingle{}}\NormalTok{, }
+        \DecValTok{4}\NormalTok{, }\StringTok{\textquotesingle{}d\textquotesingle{}}\NormalTok{, }
+        \DecValTok{5}\NormalTok{, }\StringTok{\textquotesingle{}e\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
 \hypertarget{examining-variables}{%
 \subsection{Examining variables}\label{examining-variables}}
 
@@ -1272,6 +1292,49 @@ This is a known bug; it looks like they're thinking about doing something about 
   \url{https://reprex.tidyverse.org/articles/articles/learn-reprex.html}
 \item
   \url{https://reprex.tidyverse.org/articles/reprex-dos-and-donts.html}
+\end{itemize}
+
+\hypertarget{do-not-do-these-things-in-your-reprex}{%
+\subsection{Do not do these things in your reprex}\label{do-not-do-these-things-in-your-reprex}}
+
+If you do them, \href{https://www.tidyverse.org/blog/2017/12/workflow-vs-script/}{Jenny Bryan will come to your office and set your computer on fire}.
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{setwd(\textquotesingle{}/users/danhicks/projects/catsaregreat/myscript/\textquotesingle{})}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Used to ensure that R is running where your file is
+  \item
+    Unnecessary if you're opening different projects in different RStudio sessions
+  \item
+    Will cause irrelevant errors on any other system
+  \item
+    Aside: use \texttt{file.path()} or \texttt{here::here()} to build paths
+  \end{itemize}
+\item
+  \texttt{rm(list=ls())}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Used because people think it clears out the global environment
+  \item
+    Unnecessary if you're regularly using Session \(\to\) Restart R
+  \item
+    Also unnecessary at the top of a \texttt{Rmd} file, which is always knit in a new session
+  \item
+    Doesn't actually clear out the global environment
+
+    \begin{itemize}
+    \tightlist
+    \item
+      eg, doesn't unload packages or reset \texttt{options()}
+    \end{itemize}
+  \end{itemize}
 \end{itemize}
 
 \hypertarget{part-exploratory-data-analysis}{%
