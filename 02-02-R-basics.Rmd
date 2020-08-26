@@ -11,7 +11,11 @@
 
 * Essential Global Options
     - Never save .Rdata, load workspace
-    - ![Recommended RStudio configuration](images/Rstudio_config.png){ width=50% }
+
+```{r, echo=FALSE, fig.cap='Recommended RStudio configuration'}
+knitr::include_graphics('images/Rstudio_config.png')
+```
+
 * Super useful keyboard commands: 
     - Insert a pipe: ⌘+Shift+m
     - Comment/uncomment: ⌘+Shift+c
