@@ -73,3 +73,14 @@ If you do them, [Jenny Bryan will come to your office and set your computer on f
     - Also unnecessary at the top of a `Rmd` file, which is always knit in a new session
     - Doesn't actually clear out the global environment
         - eg, doesn't unload packages or reset `options()`
+        
+Not on Bryan's list, but a bonus thing to not do: 
+
+- `require(package)`
+    - If `package` is installed, will act just like `library()`
+    - If not, will return `FALSE`
+        - which generally means the script will keep going until you get some kind of error about a missing function sometime later
+        - probably not the error you wanted help with
+        - annoying to debug because I have no idea where the function is supposed to come from
+    - If `library()` can't find the package, it immediately raises an error
+        - I can tell right away what package needs to be installed
