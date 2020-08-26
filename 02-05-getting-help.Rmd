@@ -57,4 +57,19 @@ This is a known bug; it looks like they're thinking about doing something about 
 - <https://reprex.tidyverse.org/articles/articles/learn-reprex.html>
 - <https://reprex.tidyverse.org/articles/reprex-dos-and-donts.html>
 
+## Do not do these things in your reprex
 
+If you do them, [Jenny Bryan will come to your office and set your computer on fire](https://www.tidyverse.org/blog/2017/12/workflow-vs-script/). 
+
+- `setwd('/users/danhicks/projects/catsaregreat/myscript/')`
+    - Used to ensure that R is running where your file is
+    - Unnecessary if you're opening different projects in different RStudio sessions
+    - Will cause irrelevant errors on any other system
+    - Aside:  use `file.path()` or `here::here()` to build paths
+    
+- `rm(list=ls())`
+    - Used because people think it clears out the global environment
+    - Unnecessary if you're regularly using Session $\to$ Restart R
+    - Also unnecessary at the top of a `Rmd` file, which is always knit in a new session
+    - Doesn't actually clear out the global environment
+        - eg, doesn't unload packages or reset `options()`

@@ -133,6 +133,24 @@ moar_list$foo
 - A tibble (`tbl_df`) is a data frame with nice printing (part of the tidyverse)
   - Plus some technical restrictions that make it nicer to work with
   
+Like 99% of the time you create a data frame by loading data or manipulating another data frame.  But it's good to know how to create them by hand:  
+
+```{r, eval=FALSE}
+foo = 1:5
+bar = letters[1:5]
+
+data.frame(foo, bar)
+tibble(foo, bar)
+
+## tribble() is super useful when you're creating a dataframe entirely by hand
+tribble(~foo, ~bar, 
+        1, 'a', 
+        2, 'b', 
+        3, 'c', 
+        4, 'd', 
+        5, 'e')
+```
+  
 ## Examining variables
 - `length()`, `dim()`
 - `str()`
