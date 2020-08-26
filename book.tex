@@ -118,7 +118,7 @@
 
 \title{Data Science Methods for Cognitive Science}
 \author{Dan Hicks, \href{mailto:hicks.daniel.j@gmail.com}{\nolinkurl{hicks.daniel.j@gmail.com}}}
-\date{Wed Aug 26 00:39:29 2020}
+\date{Wed Aug 26 22:16:41 2020}
 
 \begin{document}
 \maketitle
@@ -127,6 +127,12 @@
 \setcounter{tocdepth}{2}
 \tableofcontents
 }
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{knitr}\OperatorTok{::}\NormalTok{opts\_chunk}\OperatorTok{$}\KeywordTok{set}\NormalTok{(}\DataTypeTok{echo=}\OtherTok{TRUE}\NormalTok{, }\DataTypeTok{fig.align=}\StringTok{\textquotesingle{}center\textquotesingle{}}\NormalTok{, }\DataTypeTok{fig.width=}\DecValTok{4}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
 \hypertarget{preface}{%
 \section*{Preface}\label{preface}}
 \addcontentsline{toc}{section}{Preface}
@@ -565,45 +571,49 @@ However,
 \hypertarget{standard-definition}{%
 \subsection{Standard definition}\label{standard-definition}}
 
+\begin{figure}
+
+{\centering \includegraphics{images/Abisiga} 
+
+}
+
+\caption{Data science, defined as the intersection of CS, stats, and "business knowledge." Source: <https://www.kdnuggets.com/2020/08/top-10-lists-data-science.html>}\label{fig:unnamed-chunk-1}
+\end{figure}
+
 \begin{itemize}
 \tightlist
-\item
-  \includegraphics[width=0.3\textwidth,height=\textheight]{images/Abisiga.jpg}
-\item
-  Source: \url{https://www.kdnuggets.com/2020/08/top-10-lists-data-science.html}
 \item
   The intersection of computer science/software engineering, statistics, and ``business knowledge''
 \end{itemize}
 
 Or, more concretely,
 
-\begin{itemize}
-\tightlist
-\item
-  \includegraphics[width=0.5\textwidth,height=\textheight]{images/Boykis.png}
+\textbackslash begin\{figure\}
 
-  \begin{itemize}
-  \tightlist
-  \item
-    Source: \url{https://twitter.com/vboykis/status/1089920316644704256}
-  \end{itemize}
-\item
-  \includegraphics[width=0.5\textwidth,height=\textheight]{images/Scott.png}
+\{\centering \includegraphics{images/Boykis}
 
-  \begin{itemize}
-  \tightlist
-  \item
-    Source: \url{https://twitter.com/kscottz/status/1091423467772162049}
-  \end{itemize}
-\item
-  \includegraphics[width=0.5\textwidth,height=\textheight]{images/Hudon.png}
+\}
 
-  \begin{itemize}
-  \tightlist
-  \item
-    Source: \url{https://twitter.com/beeonaposy/status/1298070348844457987}
-  \end{itemize}
-\end{itemize}
+\textbackslash caption\{Boykis Twitter poll of ``data scientists''; 67.3\% said they spend most of their time cleaning data/moving data. Source: \url{https://twitter.com/vboykis/status/1089920316644704256}\}\label{fig:unnamed-chunk-2}
+\textbackslash end\{figure\}
+
+\begin{figure}
+
+{\centering \includegraphics{images/Scott} 
+
+}
+
+\caption{Scott tweet: "One of the biggest failures I see in junior ML/CV engineers is a complete lack of interest in building data sets. While it is boring grunt work I think there is so much to be learned in putting together a dataset. It is like half the problem." Source: <https://twitter.com/kscottz/status/1091423467772162049>}\label{fig:unnamed-chunk-3}
+\end{figure}
+
+\begin{figure}
+
+{\centering \includegraphics{images/Hudon} 
+
+}
+
+\caption{Hudon tweet containing a graphic labelled "Full Stack Data Science," with categories "data engineer" (entries collect, build data pipeline), "data analyst" (entries reporting, data viz), "data scientist" (entries build models, run statistical tests), and "machine learning engineer" (entries deploy model, build model). Source: <https://twitter.com/beeonaposy/status/1298070348844457987>}\label{fig:unnamed-chunk-4}
+\end{figure}
 
 However,
 
@@ -737,9 +747,20 @@ However,
   \tightlist
   \item
     Never save .Rdata, load workspace
-  \item
-    \includegraphics[width=0.5\textwidth,height=\textheight]{images/Rstudio_config.png}
   \end{itemize}
+\end{itemize}
+
+\begin{figure}
+
+{\centering \includegraphics{images/Rstudio_config} 
+
+}
+
+\caption{Recommended RStudio configuration}\label{fig:unnamed-chunk-5}
+\end{figure}
+
+\begin{itemize}
+\tightlist
 \item
   Super useful keyboard commands:
 
@@ -1333,6 +1354,40 @@ If you do them, \href{https://www.tidyverse.org/blog/2017/12/workflow-vs-script/
     \tightlist
     \item
       eg, doesn't unload packages or reset \texttt{options()}
+    \end{itemize}
+  \end{itemize}
+\end{itemize}
+
+Not on Bryan's list, but a bonus thing to not do:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{require(package)}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    If \texttt{package} is installed, will act just like \texttt{library()}
+  \item
+    If not, will return \texttt{FALSE}
+
+    \begin{itemize}
+    \tightlist
+    \item
+      which generally means the script will keep going until you get some kind of error about a missing function sometime later
+    \item
+      probably not the error you wanted help with
+    \item
+      annoying to debug because I have no idea where the function is supposed to come from
+    \end{itemize}
+  \item
+    If \texttt{library()} can't find the package, it immediately raises an error
+
+    \begin{itemize}
+    \tightlist
+    \item
+      I can tell right away what package needs to be installed
     \end{itemize}
   \end{itemize}
 \end{itemize}
