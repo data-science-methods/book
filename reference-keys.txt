@@ -3,6 +3,8 @@ fig:unnamed-chunk-2
 fig:unnamed-chunk-3
 fig:unnamed-chunk-4
 fig:unnamed-chunk-5
+fig:unnamed-chunk-16
+fig:unnamed-chunk-17
 a-note-on-accessibility
 hardware-recommendations
 r-and-rstudio
@@ -43,6 +45,13 @@ logical-operators
 missing-data
 exercise-3
 git-and-version-control
+some-motivating-examples
+version-control
+how-to-do-things-with-git
+working-with-github-remotes
+working-with-your-own-repos
+working-with-someone-elses-repos
+moar-git-stuff
 functional-programming-and-data-science
 warnings-errors-and-getting-help
 recommended-reading-and-watching
