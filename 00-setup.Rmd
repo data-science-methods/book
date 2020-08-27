@@ -96,7 +96,11 @@ The most effective way to do this is to have multiple displays.  This is also th
 
 [This blog post](https://carpentries.org/blog/2020/06/online-workshop-logistics-and_screen-layouts/) discusses alternatives to multiple displays.  In particular, the window layout below fits the screenshare, chat, and your workspace on to a single laptop display.  You can also have a separate text file open in RStudio for notes. You might consider having Slack open on your phone — so that you can keep an eye on the chat — as well in the background on your computer — so that you can alt-tab to it to actually type things.  
 
-![Source: https://carpentries.org/images//blog/2020/06/screen_layouts/02-student-with_participantlist-1366x768.jpg](images/layout.jpg)
+
+```{r, echo=FALSE, fig.cap="Example of a multiwindow layout for following live coding via Zoom. Source: `carpentries.org`, <https://bit.ly/2YFh9Ea>"}
+knitr::include_graphics('images/layout.jpg')
+```
+
 
 ## Pre-Class Survey ##
 

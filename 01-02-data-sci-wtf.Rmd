@@ -10,9 +10,10 @@ knitr::include_graphics('images/Abisiga.jpg')
 
 Or, more concretely, 
 
-```{r, echo=FALSE, fig.cap='Boykis Twitter poll of "data scientists"; 67.3% said they spend most of their time cleaning data/moving data. Source: <https://twitter.com/vboykis/status/1089920316644704256>'}
+```{r, echo=FALSE, fig.cap='Boykis Twitter poll of "data scientists"; 67\\% said they spend most of their time cleaning data/moving data. Source: <https://twitter.com/vboykis/status/1089920316644704256>'}
 knitr::include_graphics('images/Boykis.png')
 ```
+
 
 ```{r, echo=FALSE, fig.cap='Scott tweet: "One of the biggest failures I see in junior ML/CV engineers is a complete lack of interest in building data sets. While it is boring grunt work I think there is so much to be learned in putting together a dataset. It is like half the problem." Source: <https://twitter.com/kscottz/status/1091423467772162049>'}
 knitr::include_graphics('images/Scott.png')
