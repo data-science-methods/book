@@ -109,6 +109,7 @@
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \setcounter{secnumdepth}{5}
 \usepackage{booktabs}
+\hypersetup{colorlinks=true}
 \newlength{\cslhangindent}
 \setlength{\cslhangindent}{1.5em}
 \newenvironment{cslreferences}%
@@ -118,7 +119,7 @@
 
 \title{Data Science Methods for Cognitive Science}
 \author{Dan Hicks, \href{mailto:hicks.daniel.j@gmail.com}{\nolinkurl{hicks.daniel.j@gmail.com}}}
-\date{Thu Aug 27 19:27:31 2020}
+\date{Thu Aug 27 20:07:56 2020}
 
 \begin{document}
 \maketitle
@@ -127,12 +128,6 @@
 \setcounter{tocdepth}{2}
 \tableofcontents
 }
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{knitr}\OperatorTok{::}\NormalTok{opts\_chunk}\OperatorTok{$}\KeywordTok{set}\NormalTok{(}\DataTypeTok{echo=}\OtherTok{TRUE}\NormalTok{, }\DataTypeTok{fig.align=}\StringTok{\textquotesingle{}center\textquotesingle{}}\NormalTok{, }\DataTypeTok{fig.width=}\DecValTok{4}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
 \hypertarget{preface}{%
 \section*{Preface}\label{preface}}
 \addcontentsline{toc}{section}{Preface}
@@ -293,9 +288,12 @@ The most effective way to do this is to have multiple displays. This is also the
 \href{https://carpentries.org/blog/2020/06/online-workshop-logistics-and_screen-layouts/}{This blog post} discusses alternatives to multiple displays. In particular, the window layout below fits the screenshare, chat, and your workspace on to a single laptop display. You can also have a separate text file open in RStudio for notes. You might consider having Slack open on your phone --- so that you can keep an eye on the chat --- as well in the background on your computer --- so that you can alt-tab to it to actually type things.
 
 \begin{figure}
-\centering
-\includegraphics{images/layout.jpg}
-\caption{Source: \url{https://carpentries.org/images//blog/2020/06/screen_layouts/02-student-with_participantlist-1366x768.jpg}}
+
+{\centering \includegraphics[width=0.6\linewidth]{images/layout} 
+
+}
+
+\caption{Example of a multiwindow layout for following live coding via Zoom. Source: `carpentries.org`, <https://bit.ly/2YFh9Ea>}\label{fig:unnamed-chunk-1}
 \end{figure}
 
 \hypertarget{pre-class-survey}{%
@@ -571,11 +569,11 @@ However,
 
 \begin{figure}
 
-{\centering \includegraphics{images/Abisiga} 
+{\centering \includegraphics[width=0.6\linewidth]{images/Abisiga} 
 
 }
 
-\caption{Data science, defined as the intersection of CS, stats, and "business knowledge." Source: <https://www.kdnuggets.com/2020/08/top-10-lists-data-science.html>}\label{fig:unnamed-chunk-1}
+\caption{Data science, defined as the intersection of CS, stats, and "business knowledge." Source: <https://www.kdnuggets.com/2020/08/top-10-lists-data-science.html>}\label{fig:unnamed-chunk-2}
 \end{figure}
 
 \begin{itemize}
@@ -586,31 +584,31 @@ However,
 
 Or, more concretely,
 
-\textbackslash begin\{figure\}
-
-\{\centering \includegraphics{images/Boykis}
-
-\}
-
-\textbackslash caption\{Boykis Twitter poll of ``data scientists''; 67.3\% said they spend most of their time cleaning data/moving data. Source: \url{https://twitter.com/vboykis/status/1089920316644704256}\}\label{fig:unnamed-chunk-2}
-\textbackslash end\{figure\}
-
 \begin{figure}
 
-{\centering \includegraphics{images/Scott} 
+{\centering \includegraphics[width=0.6\linewidth]{images/Boykis} 
 
 }
 
-\caption{Scott tweet: "One of the biggest failures I see in junior ML/CV engineers is a complete lack of interest in building data sets. While it is boring grunt work I think there is so much to be learned in putting together a dataset. It is like half the problem." Source: <https://twitter.com/kscottz/status/1091423467772162049>}\label{fig:unnamed-chunk-3}
+\caption{Boykis Twitter poll of "data scientists"; 67\% said they spend most of their time cleaning data/moving data. Source: <https://twitter.com/vboykis/status/1089920316644704256>}\label{fig:unnamed-chunk-3}
 \end{figure}
 
 \begin{figure}
 
-{\centering \includegraphics{images/Hudon} 
+{\centering \includegraphics[width=0.6\linewidth]{images/Scott} 
 
 }
 
-\caption{Hudon tweet containing a graphic labelled "Full Stack Data Science," with categories "data engineer" (entries collect, build data pipeline), "data analyst" (entries reporting, data viz), "data scientist" (entries build models, run statistical tests), and "machine learning engineer" (entries deploy model, build model). Source: <https://twitter.com/beeonaposy/status/1298070348844457987>}\label{fig:unnamed-chunk-4}
+\caption{Scott tweet: "One of the biggest failures I see in junior ML/CV engineers is a complete lack of interest in building data sets. While it is boring grunt work I think there is so much to be learned in putting together a dataset. It is like half the problem." Source: <https://twitter.com/kscottz/status/1091423467772162049>}\label{fig:unnamed-chunk-4}
+\end{figure}
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.6\linewidth]{images/Hudon} 
+
+}
+
+\caption{Hudon tweet containing a graphic labelled "Full Stack Data Science," with categories "data engineer" (entries collect, build data pipeline), "data analyst" (entries reporting, data viz), "data scientist" (entries build models, run statistical tests), and "machine learning engineer" (entries deploy model, build model). Source: <https://twitter.com/beeonaposy/status/1298070348844457987>}\label{fig:unnamed-chunk-5}
 \end{figure}
 
 However,
@@ -750,11 +748,11 @@ However,
 
 \begin{figure}
 
-{\centering \includegraphics{images/Rstudio_config} 
+{\centering \includegraphics[width=0.6\linewidth]{images/Rstudio_config} 
 
 }
 
-\caption{Recommended RStudio configuration}\label{fig:unnamed-chunk-5}
+\caption{Recommended RStudio configuration}\label{fig:unnamed-chunk-6}
 \end{figure}
 
 \begin{itemize}
@@ -1245,11 +1243,11 @@ GitHub lets you download someone else's repo (``clone''), and modify it locally,
 
 \begin{figure}
 
-{\centering \includegraphics{images/fork-and-clone} 
+{\centering \includegraphics[width=0.6\linewidth]{images/fork-and-clone} 
 
 }
 
-\caption{*Forking* copies a repository to your GitHub account.  Then you *clone* the copy to your local machine.  You can *push* to your remote copy as usual.  You can suggest changes to the original using a *pull request*.  Source: <https://happygitwithr.com/fork-and-clone.html>}\label{fig:unnamed-chunk-16}
+\caption{*Forking* copies a repository to your GitHub account.  Then you *clone* the copy to your local machine.  You can *push* to your remote copy as usual.  You can suggest changes to the original using a *pull request*.  Source: <https://happygitwithr.com/fork-and-clone.html>}\label{fig:unnamed-chunk-17}
 \end{figure}
 
 \begin{itemize}
@@ -1262,11 +1260,11 @@ GitHub lets you download someone else's repo (``clone''), and modify it locally,
 
 \begin{figure}
 
-{\centering \includegraphics{images/fork-button} 
+{\centering \includegraphics[width=0.6\linewidth]{images/fork-button} 
 
 }
 
-\caption{The *fork* button is near the upper-right corner of a GitHub repository page.  I wasn't able to find a keyboard shortcut for this.  :-(}\label{fig:unnamed-chunk-17}
+\caption{The *fork* button is near the upper-right corner of a GitHub repository page.  I wasn't able to find a keyboard shortcut for this.  :-(}\label{fig:unnamed-chunk-18}
 \end{figure}
 
 \begin{itemize}
