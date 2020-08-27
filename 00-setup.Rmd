@@ -2,8 +2,6 @@
 
 Before the first day of class, you'll need to set up a few things:  **R, RStudio, Slack, Zoom, and a GitHub account**.  I'd also like you to fill out a **pre-class survey**.  R is the primary piece of software we'll be learning to use.  RStudio is an IDE (integrated development environment) for using R.  (Think of R as the engine of a car and RStudio as the dashboard, steering wheel, and pedals.)  Slack will be the main way we communicate; we'll use Zoom for class time.  GitHub is a service for sharing and collaborating on software engineering projects.  
 
----
-
 Table: Key links for setup
 
 |         |                               |
@@ -14,7 +12,6 @@ Table: Key links for setup
 | GitHub  | <https://github.com/>; <https://github.com/data-science-methods> |
 | Survey  | <https://ucmerced.az1.qualtrics.com/jfe/form/SV_eVU8JWREUu4UNH7> |
 
----
 
 I'll assume you have R and RStudio installed using either *the cloud way* or *the Mac way*.  If your computer is running Windows, Linux, or some other operating system that isn't Mac OS, I'm going to assume you have things set up the cloud way. These other operating systems are perfectly fine.  But I don't use them, which makes it much harder for me to help you if things aren't working. And [Windows handles things like dependencies, file paths, text file formats in idiosyncratic ways that can cause weird errors](https://www.jimhester.com/post/2020-08-20-best-os-for-r/).  
 
@@ -78,6 +75,8 @@ If you use a screenreader, here are some notes on accessibility and Slack:  <htt
 2. You can fill in your profile if you want.  
 
 3. You'll send me the email address associated with your Github account in the pre-class survey.  
+
+NB If you're using Windows, you'll need to [download and install Git](https://gitforwindows.org/).  
 
 ## Screen Layouts ##
 
