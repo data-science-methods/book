@@ -28,6 +28,7 @@ knitr::include_graphics('images/Rstudio_config.png')
 ```{r, eval=FALSE}
 library(tidyverse)
 library(gapminder)
+library(plotly)
 
 data(gapminder) ## Gets a dataset from a loaded package
 gapminder
@@ -41,6 +42,8 @@ ggplot(data = gapminder, aes(x = gdpPercap, y = lifeExp, color = continent,
 ggplot(data = gapminder, aes(x = year, y = lifeExp, color = continent)) +
   geom_line(aes(group = country)) +
   facet_wrap(vars(continent))
+
+ggplotly()
 ```
 
 ### Exercise ### 

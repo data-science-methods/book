@@ -19,6 +19,9 @@
     
 ## How to do things with git ##
 
+- Getting help
+    - `git command -h`
+    - `man git-command` (hit `q` to exit)
 - Interfaces
     - Command line
     - RStudio projects
@@ -29,7 +32,10 @@
 ```
 $ git config --global user.name "Maria Hernandez"
 $ git config --global user.email mhernandez123@ucmerced.edu
+$ git config --global core.editor "nano"
 ```
+    - You don't have to use `nano`, but it's the best option for beginners.  For more on text editor options, see here <https://git-scm.com/book/en/v2/Appendix-C%3A-Git-Commands-Setup-and-Config#_core_editor>
+        
 
 - `git init`
     - Create a folder called `test` and open a terminal window there.  
@@ -48,6 +54,16 @@ $ git status
 $ git commit -m "my first commit"
 $ git status
 ```
+
+After adding a file, you can add all changes to tracked files using `-u`: 
+```
+$ git status
+$ git add -u
+$ git status
+$ git commit -m "-u is a shortcut"
+```
+
+NB You always need to `add` and then `commit`. Doing just one by itself doesn't do much. 
 
 - `.gitignore`
     - Create a subfolder `images` and put an image file of some kind in it. 
