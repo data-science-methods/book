@@ -22,6 +22,8 @@ knitr::include_graphics('images/Rstudio_config.png')
     - Tools $\to$ Modify Keyboard Shortcuts...
         - ⌘+1, ⌘+2, ⌘+3
     - Cheatsheet: <https://raw.githubusercontent.com/rstudio/cheatsheets/master/rstudio-ide.pdf>
+    
+* **If you're already familiar with the basics of R**, I recommend spending some time with @WickhamAdvanced2014. 
 
 ```{r, eval=FALSE}
 library(tidyverse)
