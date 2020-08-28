@@ -130,9 +130,6 @@ $ git status
 
 - *Push step*: Make changes locally, then push them back up to *your* GitHub copy of the repo
 
-- *Pull request*: *[todo]*
+## Lab ##
 
-## Moar git stuff ##
-*[todo]*
-- browsing history on GitHub
-- stretch goals: `branch`; `checkout`
+The lab for this section can be found at <https://github.com/data-science-methods/lab-w2-git>. 
