@@ -36,7 +36,7 @@ how-to-do-things-with-git
 working-with-github-remotes
 working-with-your-own-repos
 working-with-someone-elses-repos
-moar-git-stuff
+lab
 r-basics
 lets-get-started-with-rstudio
 exercise
