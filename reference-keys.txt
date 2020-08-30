@@ -39,7 +39,9 @@ working-with-someone-elses-repos
 lab
 r-basics
 lets-get-started-with-rstudio
+lets-plot-a-thing
 exercise
+selecting-elements-and-some-math
 exercise-1
 base-r-data-types
 numerics
@@ -61,4 +63,12 @@ where-to-go-for-help
 writing-a-reproducible-example-reprex
 do-not-do-these-things-in-your-reprex
 waterfalls-spirals-and-philosophy-of-science
-exploratory-data-analysis-and-the-ladder-of-models
+eda-as-hunting-phenomena
+two-eda-checklists
+inspecting-variables
+type-range-and-missingness
+constructing-aggregates
+visual-eda
+d-distributions
+d-distributions-1
+multivariate-distributions

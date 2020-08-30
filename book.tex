@@ -119,7 +119,7 @@
 
 \title{Data Science Methods for Cognitive Science}
 \author{Dan Hicks, \href{mailto:hicks.daniel.j@gmail.com}{\nolinkurl{hicks.daniel.j@gmail.com}}}
-\date{Fri Aug 28 19:11:53 2020}
+\date{Sun Aug 30 22:14:21 2020}
 
 \begin{document}
 \maketitle
@@ -979,6 +979,8 @@ The lab for this section can be found at \url{https://github.com/data-science-me
 \begin{itemize}
 \tightlist
 \item
+  Start installing \texttt{tidyverse}
+\item
   Quick tour of RStudio's UI
 \item
   Let's plot a thing (below)
@@ -1039,6 +1041,9 @@ The lab for this section can be found at \url{https://github.com/data-science-me
   \textbf{If you're already familiar with the basics of R}, I recommend spending some time with Wickham (\protect\hyperlink{ref-WickhamAdvanced2014}{2014}).
 \end{itemize}
 
+\hypertarget{lets-plot-a-thing}{%
+\subsubsection{Let's plot a thing}\label{lets-plot-a-thing}}
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{library}\NormalTok{(tidyverse)}
@@ -1066,11 +1071,13 @@ The lab for this section can be found at \url{https://github.com/data-science-me
 \subsubsection{Exercise}\label{exercise}}
 
 \begin{itemize}
+\tightlist
 \item
   Moar plots
-\item
-  Selecting variables, and some common math functions
 \end{itemize}
+
+\hypertarget{selecting-elements-and-some-math}{%
+\subsection{Selecting elements, and some math}\label{selecting-elements-and-some-math}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1084,6 +1091,7 @@ The lab for this section can be found at \url{https://github.com/data-science-me
 \KeywordTok{sd}\NormalTok{(gapminder}\OperatorTok{$}\NormalTok{lifeExp)}
 \KeywordTok{log}\NormalTok{(gapminder}\OperatorTok{$}\NormalTok{lifeExp)}
 \NormalTok{gapminder}\OperatorTok{$}\NormalTok{lifeExp }\OperatorTok{/}\StringTok{ }\DecValTok{100}
+\NormalTok{gapminder}\OperatorTok{$}\NormalTok{year}\OperatorTok{\^{}}\DecValTok{2}
 
 \KeywordTok{cor}\NormalTok{(gapminder}\OperatorTok{$}\NormalTok{lifeExp, gapminder}\OperatorTok{$}\NormalTok{year)}
 \end{Highlighting}
@@ -1092,7 +1100,7 @@ The lab for this section can be found at \url{https://github.com/data-science-me
 \hypertarget{exercise-1}{%
 \subsubsection{Exercise}\label{exercise-1}}
 
-Calculate correlations between life expectancy, population, and GDP per capita
+Calculate correlations between each pair of life expectancy, population, and GDP per capita
 
 \hypertarget{base-r-data-types}{%
 \subsection{Base R data types}\label{base-r-data-types}}
@@ -1569,24 +1577,134 @@ Not on Bryan's list, but a bonus thing to not do:
   \end{itemize}
 \end{itemize}
 
-\hypertarget{part-exploratory-data-analysis}{%
-\part{Exploratory Data Analysis}\label{part-exploratory-data-analysis}}
+\hypertarget{part-exploratory-data-analysis-eda}{%
+\part{Exploratory Data Analysis (EDA)}\label{part-exploratory-data-analysis-eda}}
 
 \hypertarget{waterfalls-spirals-and-philosophy-of-science}{%
 \section{Waterfalls, Spirals, and Philosophy of Science}\label{waterfalls-spirals-and-philosophy-of-science}}
 
 \begin{itemize}
-\tightlist
 \item
   Waterfall model of development: \url{https://en.wikipedia.org/wiki/Waterfall_model}
 \item
+  ``The Scientific Method'': \url{https://plato.stanford.edu/entries/scientific-method/\#MetMetEndMet}
+\item
   Spiral model of development (Boehm \protect\hyperlink{ref-BoehmSpiralModelSoftware1988}{1988})
 \item
-  ``The Scientific Method'': \url{https://plato.stanford.edu/entries/scientific-method/\#MetMetEndMet}
+  ({\textbf{???}}) ch.~2 (4-15)
+\item
+  \emph{{[}ElliottEpistemicMethodologicalIteration2012? BrownFunctionalComplexityScientific2015?{]}}
 \end{itemize}
 
-\hypertarget{exploratory-data-analysis-and-the-ladder-of-models}{%
-\section{Exploratory Data Analysis and the Ladder of Models}\label{exploratory-data-analysis-and-the-ladder-of-models}}
+\hypertarget{eda-as-hunting-phenomena}{%
+\section{EDA as Hunting Phenomena}\label{eda-as-hunting-phenomena}}
+
+\begin{itemize}
+\tightlist
+\item
+  BogenSavingPhenomena1988, §§ intro and III-IV (303-6, 315-25)
+\end{itemize}
+
+\hypertarget{two-eda-checklists}{%
+\section{Two EDA Checklists}\label{two-eda-checklists}}
+
+\begin{itemize}
+\tightlist
+\item
+  ({\textbf{???}}) ch.~4 (31-54)
+\item
+  Huebner, Vach, and le Cessie (\protect\hyperlink{ref-HuebnerSystematicApproachInitial2016}{2016})
+\end{itemize}
+
+\hypertarget{inspecting-variables}{%
+\section{Inspecting Variables}\label{inspecting-variables}}
+
+\hypertarget{type-range-and-missingness}{%
+\subsection{Type, range, and missingness}\label{type-range-and-missingness}}
+
+\begin{itemize}
+\item
+  \texttt{visdat}
+\item
+  \texttt{skimr}
+\item
+  Ames housing data
+\end{itemize}
+
+\hypertarget{constructing-aggregates}{%
+\subsection{Constructing aggregates}\label{constructing-aggregates}}
+
+\begin{itemize}
+\tightlist
+\item
+  filter, count, summarize, arrange, view
+
+  \begin{itemize}
+  \tightlist
+  \item
+    mutate + string operations + functions to parse dollars in NSF data
+  \item
+    class: NSF Mind and Brain Awards
+  \item
+    lab: Stanford Open Policing?
+  \end{itemize}
+\item
+  joins
+
+  \begin{itemize}
+  \tightlist
+  \item
+    class: college tuition?
+  \item
+    lab: covdata
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{visual-eda}{%
+\section{Visual EDA}\label{visual-eda}}
+
+\hypertarget{d-distributions}{%
+\subsection{1D distributions}\label{d-distributions}}
+
+\begin{itemize}
+\tightlist
+\item
+  categorical: barplot
+\item
+  numeric: histogram -\textgreater{} density plot -\textgreater{} ecdf
+\end{itemize}
+
+\hypertarget{d-distributions-1}{%
+\subsection{2D distributions}\label{d-distributions-1}}
+
+\begin{itemize}
+\tightlist
+\item
+  categorical x categorical: barplot
+\item
+  numeric x numeric: scatterplot -\textgreater{} contours
+\item
+  categorical x numeric: boxplot -\textgreater{} violin plot -\textgreater{} beeswarm
+\end{itemize}
+
+\hypertarget{multivariate-distributions}{%
+\subsection{Multivariate distributions}\label{multivariate-distributions}}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{ggforce::facet\_matrix()}
+\item
+  lab: correlation heat map + scatterplots
+
+  \begin{itemize}
+  \tightlist
+  \item
+    geom\_text
+  \end{itemize}
+\item
+  upset plots
+\end{itemize}
 
 \hypertarget{part-cleaning-data}{%
 \part{Cleaning Data}\label{part-cleaning-data}}
