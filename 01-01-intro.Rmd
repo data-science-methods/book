@@ -39,7 +39,7 @@ By the end of the course, students will be able to
 1. apply concepts from software engineering and philosophy of science to methodological decisions in data science, including
 	- functional vs. object-oriented programming paradigms [@ChambersObjectOrientedProgrammingFunctional2014]
 	- waterfall vs. spiral model of development
-	- ladder of models
+	- data/phenomena/theory distinction [@BogenSavingPhenomena1988]
 	- reproducibility vs. robustness vs. replicability
 	- value and hazards of open data
 	- thick data [@WangWhyBigData2016]
