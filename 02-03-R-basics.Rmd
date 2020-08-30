@@ -2,6 +2,7 @@
 
 ## Let's get started with RStudio ##
 
+* Start installing `tidyverse`
 * Quick tour of RStudio's UI
 * Let's plot a thing (below)
 * Some idiosyncracies of my code
@@ -24,6 +25,8 @@ knitr::include_graphics('images/Rstudio_config.png')
     - Cheatsheet: <https://raw.githubusercontent.com/rstudio/cheatsheets/master/rstudio-ide.pdf>
     
 * **If you're already familiar with the basics of R**, I recommend spending some time with @WickhamAdvanced2014. 
+
+### Let's plot a thing ###
 
 ```{r, eval=FALSE}
 library(tidyverse)
@@ -49,7 +52,8 @@ ggplotly()
 ### Exercise ### 
 * Moar plots
 
-* Selecting variables, and some common math functions
+
+## Selecting elements, and some math ##
 
 ```{r, eval=FALSE}
 gapminder$lifeExp
@@ -62,16 +66,17 @@ mean(gapminder$lifeExp)
 sd(gapminder$lifeExp)
 log(gapminder$lifeExp)
 gapminder$lifeExp / 100
+gapminder$year^2
 
 cor(gapminder$lifeExp, gapminder$year)
 ```
 
 ### Exercise ### 
 
-Calculate correlations between life expectancy, population, and GDP per capita
+Calculate correlations between each pair of life expectancy, population, and GDP per capita
+
 
 ## Base R data types ##
-
 ### Numerics
 ```{r, eval=FALSE}
 foo = 2
