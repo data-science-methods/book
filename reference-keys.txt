@@ -62,7 +62,7 @@ messages-warnings-and-errors
 where-to-go-for-help
 writing-a-reproducible-example-reprex
 do-not-do-these-things-in-your-reprex
-waterfalls-spirals-and-philosophy-of-science
+waterfalls-spirals-and-science
 eda-as-hunting-phenomena
 two-eda-checklists
 inspecting-variables

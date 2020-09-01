@@ -184,7 +184,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.5" data-path="warnings-errors-and-getting-help.html"><a href="warnings-errors-and-getting-help.html#do-not-do-these-things-in-your-reprex"><i class="fa fa-check"></i><b>6.5</b> Do not do these things in your reprex</a></li>
 </ul></li>
 <li class="part"><span><b>II Exploratory Data Analysis (EDA)</b></span></li>
-<li class="chapter" data-level="7" data-path="waterfalls-spirals-and-philosophy-of-science.html"><a href="waterfalls-spirals-and-philosophy-of-science.html"><i class="fa fa-check"></i><b>7</b> Waterfalls, Spirals, and Philosophy of Science</a></li>
+<li class="chapter" data-level="7" data-path="waterfalls-spirals-and-science.html"><a href="waterfalls-spirals-and-science.html"><i class="fa fa-check"></i><b>7</b> Waterfalls, Spirals, and Science</a></li>
 <li class="chapter" data-level="8" data-path="eda-as-hunting-phenomena.html"><a href="eda-as-hunting-phenomena.html"><i class="fa fa-check"></i><b>8</b> EDA as Hunting Phenomena</a></li>
 <li class="chapter" data-level="9" data-path="two-eda-checklists.html"><a href="two-eda-checklists.html"><i class="fa fa-check"></i><b>9</b> Two EDA Checklists</a></li>
 <li class="chapter" data-level="10" data-path="inspecting-variables.html"><a href="inspecting-variables.html"><i class="fa fa-check"></i><b>10</b> Inspecting Variables</a>
@@ -228,8 +228,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>Recommended reading: <span class="citation">Chambers (<a href="#ref-ChambersObjectOrientedProgrammingFunctional2014" role="doc-biblioref">2014</a>)</span>; parts II and III of <span class="citation">Wickham (<a href="#ref-WickhamAdvanced2014" role="doc-biblioref">2014</a>)</span></p></li>
 <li><p>Programming paradigms</p>
 <ul>
-<li><p><em>Procedural</em>: Software is a series of instructions (“procedures”), which the computer carries out in order. Special instructions (if-then, loops) are used to change the order based on inputs or other conditions.</p></li>
-<li><p><em>Object-oriented</em>: Software is made up of objects, which have properties (“attributes,” including other objects) and do things (“methods”).</p>
+<li><em>Procedural</em>: Software is a series of instructions (“procedures”), which the computer carries out in order. Special instructions (if-then, loops) are used to change the order based on inputs or other conditions.
+<ul>
+<li>Examples: FORTRAN, BASIC, Pascal, C</li>
+</ul></li>
+<li><em>Object-oriented</em>: Software is made up of objects, which have properties (“attributes,” including other objects) and do things (“methods”).
 <ul>
 <li>Example: A board game consists of 1 or more players, a board, and a deck of cards.
 <ul>
@@ -245,17 +248,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
 <li>Examples (mostly): Python, C++, Java</li>
 </ul></li>
-<li><p><em>Functional</em>: Software is made up of functions, which are run sequentially on the inputs</p>
+<li><em>Functional</em>: Software is made up of functions, which are run sequentially on the inputs
 <ul>
 <li>Example: Raw data are read in, cleaned, and then a regression model is fit. The model coefficients are tested for statistical significance, and a table and plot are written out to disk.<br />
 </li>
-<li><strong>Data analysis as a building series of pipes</strong></li>
+<li><strong>Data analysis as building a series of pipes</strong></li>
 <li>Examples (mostly): R, Lisp, Haskell</li>
 </ul></li>
-<li><p>A couple of extra rules for functional programming</p>
+<li>A couple of extra rules for functional programming
 <ul>
 <li><em>Immutability</em>: Once the value is assigned to a variable, that value cannot be changed</li>
-<li><em>No side effects</em>: Functions don’t change anything outside of themselves; they only return a value</li>
+<li><em>No side effects</em>: Functions don’t change anything; they only return a value</li>
 </ul></li>
 </ul></li>
 </ul>

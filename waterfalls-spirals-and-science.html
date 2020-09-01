@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 2 What is this thing called data science? | Data Science Methods for Cognitive Science</title>
+  <title>Chapter 7 Waterfalls, Spirals, and Science | Data Science Methods for Cognitive Science</title>
   <meta name="description" content="This document is a set of notes (and perhaps later a textbook) for a course on data science methods for graduate students in social and behavioral sciences." />
   <meta name="generator" content="bookdown 0.20.3 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 2 What is this thing called data science? | Data Science Methods for Cognitive Science" />
+  <meta property="og:title" content="Chapter 7 Waterfalls, Spirals, and Science | Data Science Methods for Cognitive Science" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 2 What is this thing called data science? | Data Science Methods for Cognitive Science" />
+  <meta name="twitter:title" content="Chapter 7 Waterfalls, Spirals, and Science | Data Science Methods for Cognitive Science" />
   
   <meta name="twitter:description" content="This document is a set of notes (and perhaps later a textbook) for a course on data science methods for graduate students in social and behavioral sciences." />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="introduction.html"/>
-<link rel="next" href="git-and-version-control.html"/>
+<link rel="prev" href="warnings-errors-and-getting-help.html"/>
+<link rel="next" href="eda-as-hunting-phenomena.html"/>
 <script src="libs/header-attrs-2.3/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -222,104 +222,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="what-is-this-thing-called-data-science" class="section level1" number="2">
-<h1><span class="header-section-number">Chapter 2</span> What is this thing called data science?</h1>
-<div id="standard-definition" class="section level2" number="2.1">
-<h2><span class="header-section-number">2.1</span> Standard definition</h2>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-2"></span>
-<img src="images/Abisiga.jpg" alt="Data science, defined as the intersection of CS, stats, and &quot;business knowledge.&quot; Source: &lt;https://www.kdnuggets.com/2020/08/top-10-lists-data-science.html&gt;" width="60%" />
-<p class="caption">
-Figure 2.1: Data science, defined as the intersection of CS, stats, and “business knowledge.” Source: <a href="https://www.kdnuggets.com/2020/08/top-10-lists-data-science.html" class="uri">https://www.kdnuggets.com/2020/08/top-10-lists-data-science.html</a>
-</p>
-</div>
+<div id="waterfalls-spirals-and-science" class="section level1" number="7">
+<h1><span class="header-section-number">Chapter 7</span> Waterfalls, Spirals, and Science</h1>
 <ul>
-<li>The intersection of computer science/software engineering, statistics, and “business knowledge”</li>
+<li><p>Waterfall model of development: <a href="https://en.wikipedia.org/wiki/Waterfall_model" class="uri">https://en.wikipedia.org/wiki/Waterfall_model</a></p></li>
+<li><p>“The Scientific Method”: <a href="https://plato.stanford.edu/entries/scientific-method/#MetMetEndMet" class="uri">https://plato.stanford.edu/entries/scientific-method/#MetMetEndMet</a></p></li>
+<li><p>Spiral model of development <span class="citation">(Boehm <a href="#ref-BoehmSpiralModelSoftware1988" role="doc-biblioref">1988</a>)</span></p></li>
+<li><p><span class="citation">(<span class="citeproc-not-found" data-reference-id="PengArtDataScience2016"><strong>???</strong></span>)</span> ch. 2 (4-15)</p></li>
+<li><p><em>[ElliottEpistemicMethodologicalIteration2012? BrownFunctionalComplexityScientific2015?]</em></p></li>
 </ul>
-<p>Or, more concretely,</p>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-3"></span>
-<img src="images/Boykis.png" alt="Boykis Twitter poll of &quot;data scientists&quot;; 67\% said they spend most of their time cleaning data/moving data. Source: &lt;https://twitter.com/vboykis/status/1089920316644704256&gt;" width="60%" />
-<p class="caption">
-Figure 2.2: Boykis Twitter poll of “data scientists”; 67% said they spend most of their time cleaning data/moving data. Source: <a href="https://twitter.com/vboykis/status/1089920316644704256" class="uri">https://twitter.com/vboykis/status/1089920316644704256</a>
-</p>
-</div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-4"></span>
-<img src="images/Scott.png" alt="Scott tweet: &quot;One of the biggest failures I see in junior ML/CV engineers is a complete lack of interest in building data sets. While it is boring grunt work I think there is so much to be learned in putting together a dataset. It is like half the problem.&quot; Source: &lt;https://twitter.com/kscottz/status/1091423467772162049&gt;" width="60%" />
-<p class="caption">
-Figure 2.3: Scott tweet: “One of the biggest failures I see in junior ML/CV engineers is a complete lack of interest in building data sets. While it is boring grunt work I think there is so much to be learned in putting together a dataset. It is like half the problem.” Source: <a href="https://twitter.com/kscottz/status/1091423467772162049" class="uri">https://twitter.com/kscottz/status/1091423467772162049</a>
-</p>
-</div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-5"></span>
-<img src="images/Hudon.png" alt="Hudon tweet containing a graphic labelled &quot;Full Stack Data Science,&quot; with categories &quot;data engineer&quot; (entries collect, build data pipeline), &quot;data analyst&quot; (entries reporting, data viz), &quot;data scientist&quot; (entries build models, run statistical tests), and &quot;machine learning engineer&quot; (entries deploy model, build model). Source: &lt;https://twitter.com/beeonaposy/status/1298070348844457987&gt;" width="60%" />
-<p class="caption">
-Figure 2.4: Hudon tweet containing a graphic labelled “Full Stack Data Science,” with categories “data engineer” (entries collect, build data pipeline), “data analyst” (entries reporting, data viz), “data scientist” (entries build models, run statistical tests), and “machine learning engineer” (entries deploy model, build model). Source: <a href="https://twitter.com/beeonaposy/status/1298070348844457987" class="uri">https://twitter.com/beeonaposy/status/1298070348844457987</a>
-</p>
-</div>
-<p>However,</p>
-<ul>
-<li>This focuses on <em>tools and techniques</em>, not the epistemic and practical <em>goals</em> of data science
-<ul>
-<li>An ecologist spends most of their time collecting specimens in the field and processing them in a lab, vs. </li>
-<li>An ecologist studies interactions among organisms and their environment</li>
-</ul></li>
-</ul>
-</div>
-<div id="a-prior-question-what-is-this-thing-called-data" class="section level2" number="2.2">
-<h2><span class="header-section-number">2.2</span> A prior question: What is this thing called “data”?</h2>
-<ul>
-<li><em>Representational view</em>: Data are “reliable representations of reality which are produced via the interaction between humans and the world”
-<ul>
-<li>“The production of data is equivalent to ‘capturing’ features of the world that can be used for systematic study”</li>
-<li>“Data [are seen as] as ‘raw’ products of research, which are as close as it gets to unmediated knowledge of reality”</li>
-<li>Data provide “an objective foundation for the acquisition of knowledge” <span class="citation">(Leonelli <a href="#ref-LeonelliScientificResearchBig2020" role="doc-biblioref">2020</a>)</span></li>
-<li><strong>Data become data when they’re produced according to a reliable, standardized measurement process</strong></li>
-</ul></li>
-<li><em>Relational view</em>: “Data are objects that are treated as potential or actual evidence for scientific claims in ways that can, at least in principle, be scrutinised and accounted for”
-<ul>
-<li>“Any object can be used as a datum, or stop being used as such, depending on the circumstances”</li>
-<li><strong>Data become data when they’re used as evidence</strong> <span class="citation">(Leonelli <a href="#ref-LeonelliScientificResearchBig2020" role="doc-biblioref">2020</a>)</span></li>
-<li>Note implications for ideas of “unmediated knowledge” and “objective foundation”</li>
-</ul></li>
-</ul>
-</div>
-<div id="back-to-data-science" class="section level2" number="2.3">
-<h2><span class="header-section-number">2.3</span> Back to “data science”</h2>
-<ul>
-<li>Data science ≠ lab science (often)
-<ul>
-<li>Data collection isn’t standardized
-<ul>
-<li>Found (or bought), not made</li>
-<li>Data as byproduct</li>
-<li>This is the point of the tweets above</li>
-<li>ex: scraping from Twitter, Wikipedia, administrative records</li>
-</ul></li>
-<li>Remixing and recombining data
-<ul>
-<li>ex: pesticide use + Census data in <span class="citation">Hicks (<a href="#ref-HicksCensusDemographicsChlorpyrifos2020" role="doc-biblioref">2020</a>)</span></li>
-</ul></li>
-<li>Data first, questions later</li>
-<li><strong>Relational view is often a better fit</strong></li>
-</ul></li>
-<li>The goal of data science is to <strong>produce data</strong>
-<ul>
-<li>To create, transform, and juxtapose objects such that they can be used as evidence</li>
-<li>Can be done experimentally in a lab, but in other ways too</li>
-</ul></li>
-</ul>
-
-</div>
-</div>
-
-
-
 </div>
 <h3>References</h3>
 <div id="refs" class="references">
-<div id="ref-HicksCensusDemographicsChlorpyrifos2020">
-<p>Hicks, Daniel J. 2020. “Census Demographics and Chlorpyrifos Use in California’s Central Valley, 2011–15: A Distributional Environmental Justice Analysis.” <em>International Journal of Environmental Research and Public Health</em> 17 (7, 7): 2593. <a href="https://doi.org/10.3390/ijerph17072593">https://doi.org/10.3390/ijerph17072593</a>.</p>
-</div>
-<div id="ref-LeonelliScientificResearchBig2020">
-<p>Leonelli, Sabina. 2020. “Scientific Research and Big Data.” In <em>The Stanford Encyclopedia of Philosophy</em>, edited by Edward N. Zalta, Summer 2020. Metaphysics Research Lab, Stanford University. <a href="https://plato.stanford.edu/archives/sum2020/entries/science-big-data/">https://plato.stanford.edu/archives/sum2020/entries/science-big-data/</a>.</p>
+<div id="ref-BoehmSpiralModelSoftware1988">
+<p>Boehm, B. W. 1988. “A Spiral Model of Software Development and Enhancement.” <em>Computer</em> 21 (5): 61–72. <a href="https://doi.org/10.1109/2.59">https://doi.org/10.1109/2.59</a>.</p>
 </div>
 </div>
             </section>
@@ -327,8 +243,8 @@ Figure 2.4: Hudon tweet containing a graphic labelled “Full Stack Data Science
           </div>
         </div>
       </div>
-<a href="introduction.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="git-and-version-control.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="warnings-errors-and-getting-help.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="eda-as-hunting-phenomena.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
