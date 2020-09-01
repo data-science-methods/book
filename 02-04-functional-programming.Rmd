@@ -4,6 +4,7 @@
 
 - Programming paradigms
     - *Procedural*:  Software is a series of instructions ("procedures"), which the computer carries out in order.  Special instructions (if-then, loops) are used to change the order based on inputs or other conditions.  
+        - Examples: FORTRAN, BASIC, Pascal, C
 
     - *Object-oriented*:  Software is made up of objects, which have properties ("attributes," including other objects) and do things ("methods").  
         - Example: A board game consists of 1 or more players, a board, and a deck of cards.  
@@ -16,11 +17,11 @@
     
     - *Functional*: Software is made up of functions, which are run sequentially on the inputs
         - Example: Raw data are read in, cleaned, and then a regression model is fit.  The model coefficients are tested for statistical significance, and a table and plot are written out to disk.  
-        - **Data analysis as a building series of pipes**
+        - **Data analysis as building a series of pipes**
         - Examples (mostly): R, Lisp, Haskell
     
     - A couple of extra rules for functional programming
         - *Immutability*:  Once the value is assigned to a variable, that value cannot be changed
-        - *No side effects*:  Functions don't change anything outside of themselves; they only return a value
+        - *No side effects*:  Functions don't change anything; they only return a value
 
 

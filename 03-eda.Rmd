@@ -1,6 +1,8 @@
 # (PART) Exploratory Data Analysis (EDA) # {-}
 
-# Waterfalls, Spirals, and Philosophy of Science #
+*[todo]*: split into multiple files
+
+# Waterfalls, Spirals, and Science #
 
 - Waterfall model of development: <https://en.wikipedia.org/wiki/Waterfall_model>
 - "The Scientific Method": <https://plato.stanford.edu/entries/scientific-method/#MetMetEndMet>
@@ -12,7 +14,16 @@
 
 # EDA as Hunting Phenomena #
 
-- BogenSavingPhenomena1988, §§ intro and III-IV (303-6, 315-25)
+- @BogenSavingPhenomena1988, §§ intro and III-IV (303-6, 315-25)
+
+- is "theory" the right term? 
+    - mechanisms; causal processes; explanations
+    
+- note on the stability of phenomena
+    - the pattern is present here and now
+    - the question is, will it be present elsewhere in the future? 
+    - replicability
+    - as an answer to worries about type I errors, p-hacking
 
 
 # Two EDA Checklists #
@@ -26,6 +37,7 @@
 
 - `visdat`
 - `skimr`
+- missing values that aren't NA
 
 - Ames housing data
 
