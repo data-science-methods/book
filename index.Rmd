@@ -9,9 +9,9 @@ link-citations: yes
 description: "This document is a set of notes (and perhaps later a textbook) for a course on data science methods for graduate students in social and behavioral sciences."
 ---
 
-```{r knitr_config, echo=FALSE}
-knitr::opts_chunk$set(echo=TRUE, fig.align='center', out.width='60%')
+```{r child = 'knitr_config.Rmd'}
 ```
+
 
 # Preface # {-} 
 
@@ -19,3 +19,4 @@ This document is a set of notes (and perhaps later a textbook) for a course on d
 
 The course overview (including reading and lab assignments) is available here:  <https://docs.google.com/spreadsheets/d/1iS_I-LgT7bBRBUOYEOyJNHBe7Q8X_c3B1E9jap4b6jw/edit?usp=sharing>
 
+PDF versions of each chapter can be found here:  </handouts>

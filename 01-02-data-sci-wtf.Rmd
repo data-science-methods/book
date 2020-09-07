@@ -1,5 +1,8 @@
 # What is this thing called data science? #
 
+```{r child = 'knitr_config.Rmd'}
+```
+
 ## Standard definition ##
 
 ```{r, echo=FALSE, fig.cap='Data science, defined as the intersection of CS, stats, and "business knowledge." Source: <https://www.kdnuggets.com/2020/08/top-10-lists-data-science.html>'}

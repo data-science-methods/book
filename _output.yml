@@ -13,8 +13,3 @@ bookdown::pdf_book:
     in_header: preamble.tex
   latex_engine: xelatex
   keep_tex: yes
-rmarkdown::beamer_presentation:
-  includes:
-    in_header: preamble.tex
-  latex_engine: xelatex
-  

@@ -1,5 +1,8 @@
 # Git and Version Control #
 
+```{r child = 'knitr_config.Rmd'}
+```
+
 ## Some motivating examples ##
 
 - While working on your analysis code, you accidentally delete the first 35 lines of the script.  You only discover this three days later, when you restart R and try to run the script from the top.  Because of the time you last half of your senior thesis, you've been saving every couple of minutes.  
