@@ -19,4 +19,6 @@ This document is a set of notes (and perhaps later a textbook) for a course on d
 
 The course overview (including reading and lab assignments) is available here:  <https://docs.google.com/spreadsheets/d/1iS_I-LgT7bBRBUOYEOyJNHBe7Q8X_c3B1E9jap4b6jw/edit?usp=sharing>
 
-PDF versions of each chapter can be found here:  [Handouts](handouts)
+PDF versions of each chapter can be found here:  [Handouts](handouts/index.html)
+
+(The URLs to the handouts are buggy.  To get to them, look for `handout/handout/` in the URL; delete the second `handout/`.)
