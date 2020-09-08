@@ -20,6 +20,7 @@
     - One of many version control systems
     - Very popular in part thanks to GitHub, which provided free hosting for open-source projects
         - In April 2020, GitHub also made private/closed-source repositories free
+        - Resources for students (and teachers):  <https://education.github.com/>
     
 ## How to do things with git ##
 
@@ -29,7 +30,7 @@
     - A good cheat sheet:  <https://www.atlassian.com/git/tutorials/atlassian-git-cheatsheet>
 - Interfaces
     - Command line
-    - RStudio projects
+    - [RStudio projects](https://support.rstudio.com/hc/en-us/articles/200526207-Using-Projects)
     - GUIs: [GitHub](https://desktop.github.com/), [Sourcetree](https://www.sourcetreeapp.com/)
 - Setup
     - [Installation](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
