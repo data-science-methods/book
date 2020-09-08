@@ -266,9 +266,19 @@ mdy(more_data)
 ```</code></pre>
 <p>SO doesn’t seem so helpful: <a href="https://stackoverflow.com/search?q=%5BR%5D+lubridate+written+days" class="uri">https://stackoverflow.com/search?q=%5BR%5D+lubridate+written+days</a></p>
 <p>Let’s check the CRAN page for <code>lubridate</code>: <a href="https://cran.r-project.org/web/packages/lubridate/index.html" class="uri">https://cran.r-project.org/web/packages/lubridate/index.html</a></p>
-<pre><code>![Screenshot of `lubridate` on CRAN, highlighting the BugReports field](images/lubridate_cran.png){ width=50% }</code></pre>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-27"></span>
+<img src="images/lubridate_cran.png" alt="Screenshot of `lubridate` on CRAN, highlighting the BugReports field" width="60%" />
+<p class="caption">
+Figure 6.1: Screenshot of <code>lubridate</code> on CRAN, highlighting the BugReports field
+</p>
+</div>
 <p>Trying a couple of searches gives us a promising result: <a href="https://github.com/tidyverse/lubridate/issues?q=is%3Aissue+is%3Aopen+mdy" class="uri">https://github.com/tidyverse/lubridate/issues?q=is%3Aissue+is%3Aopen+mdy</a></p>
-<pre><code>![Screenshot of `lubridate` issues page, showing a relevant search result](images/lubridate_issues.png){ width=50% }</code></pre>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-28"></span>
+<img src="images/lubridate_issues.png" alt="Screenshot of `lubridate` issues page, showing a relevant search result" width="60%" />
+<p class="caption">
+Figure 6.2: Screenshot of <code>lubridate</code> issues page, showing a relevant search result
+</p>
+</div>
 <p>This is a known bug; it looks like they’re thinking about doing something about it, but the only workaround is to create an NA: <a href="https://github.com/tidyverse/lubridate/issues/685" class="uri">https://github.com/tidyverse/lubridate/issues/685</a></p>
 </div>
 <div id="writing-a-reproducible-example-reprex" class="section level2" number="6.4">

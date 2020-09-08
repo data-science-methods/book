@@ -119,7 +119,7 @@
 
 \title{Data Science Methods for Cognitive Science}
 \author{Dan Hicks, \href{mailto:hicks.daniel.j@gmail.com}{\nolinkurl{hicks.daniel.j@gmail.com}}}
-\date{Tue Sep 8 18:01:03 2020}
+\date{Tue Sep 8 18:43:47 2020}
 
 \begin{document}
 \maketitle
@@ -1028,7 +1028,7 @@ The lab for this section can be found at \url{https://github.com/data-science-me
 
 }
 
-\caption{Recommended RStudio configuration}\label{fig:unnamed-chunk-11}
+\caption{Recommended RStudio configuration}\label{fig:unnamed-chunk-12}
 \end{figure}
 
 \begin{itemize}
@@ -1498,15 +1498,25 @@ SO doesn't seem so helpful: \url{https://stackoverflow.com/search?q=\%5BR\%5D+lu
 
 Let's check the CRAN page for \texttt{lubridate}: \url{https://cran.r-project.org/web/packages/lubridate/index.html}
 
-\begin{verbatim}
-![Screenshot of `lubridate` on CRAN, highlighting the BugReports field](images/lubridate_cran.png){ width=50% }
-\end{verbatim}
+\begin{figure}
+
+{\centering \includegraphics[width=0.6\linewidth]{images/lubridate_cran} 
+
+}
+
+\caption{Screenshot of `lubridate` on CRAN, highlighting the BugReports field}\label{fig:unnamed-chunk-27}
+\end{figure}
 
 Trying a couple of searches gives us a promising result: \url{https://github.com/tidyverse/lubridate/issues?q=is\%3Aissue+is\%3Aopen+mdy}
 
-\begin{verbatim}
-![Screenshot of `lubridate` issues page, showing a relevant search result](images/lubridate_issues.png){ width=50% }
-\end{verbatim}
+\begin{figure}
+
+{\centering \includegraphics[width=0.6\linewidth]{images/lubridate_issues} 
+
+}
+
+\caption{Screenshot of `lubridate` issues page, showing a relevant search result}\label{fig:unnamed-chunk-28}
+\end{figure}
 
 This is a known bug; it looks like they're thinking about doing something about it, but the only workaround is to create an NA: \url{https://github.com/tidyverse/lubridate/issues/685}
 
