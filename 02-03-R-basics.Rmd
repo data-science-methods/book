@@ -1,5 +1,8 @@
 # R Basics #
 
+```{r child = 'knitr_config.Rmd'}
+```
+
 ## Let's get started with RStudio ##
 
 * Start installing `tidyverse`
