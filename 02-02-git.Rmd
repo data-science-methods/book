@@ -18,13 +18,15 @@
     
 - git
     - One of many version control systems
-    - Very popular in part thanks to GitHub, which provides free hosting for open-source projects
+    - Very popular in part thanks to GitHub, which provided free hosting for open-source projects
+        - In April 2020, GitHub also made private/closed-source repositories free
     
 ## How to do things with git ##
 
 - Getting help
     - `git command -h`
     - `man git-command` (hit `q` to exit)
+    - A good cheat sheet:  <https://www.atlassian.com/git/tutorials/atlassian-git-cheatsheet>
 - Interfaces
     - Command line
     - RStudio projects
