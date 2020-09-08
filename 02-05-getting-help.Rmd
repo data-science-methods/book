@@ -32,12 +32,14 @@ parse_date_time(some_data, orders = 'mdY')
 ```
 
 Let's try SO: <https://stackoverflow.com/search?q=%5BR%5D+lubridate+month-year>
+
 ```{r, eval=FALSE}
 parse_date_time(some_data, orders = c('mY', 'mdY'))
 ```
 
 Here's another one:  
-    ```{r, eval=FALSE}
+
+```{r, eval=FALSE}
 more_data = c('May 7, 2017', 'May 19, 2017', 'May Fifth, 2017')
 mdy(more_data)
 ```
