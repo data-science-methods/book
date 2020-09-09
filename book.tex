@@ -119,7 +119,7 @@
 
 \title{Data Science Methods for Cognitive Science}
 \author{Dan Hicks, \href{mailto:hicks.daniel.j@gmail.com}{\nolinkurl{hicks.daniel.j@gmail.com}}}
-\date{Tue Sep 8 18:51:02 2020}
+\date{Wed Sep 9 19:03:06 2020}
 
 \begin{document}
 \maketitle
@@ -777,9 +777,11 @@ However,
   \begin{itemize}
   \tightlist
   \item
-    \texttt{git\ command\ -h}
+    \texttt{git\ fetch\ -h}
   \item
-    \texttt{man\ git-command} (hit \texttt{q} to exit)
+    On Mac/Unix: \texttt{man\ git-fetch} (hit \texttt{q} to exit)
+  \item
+    On Windows: \texttt{git\ help\ fetch}
   \item
     A good cheat sheet: \url{https://www.atlassian.com/git/tutorials/atlassian-git-cheatsheet}
   \end{itemize}
@@ -1613,26 +1615,296 @@ Not on Bryan's list, but a bonus thing to not do:
 \hypertarget{part-exploratory-data-analysis-eda}{%
 \part{Exploratory Data Analysis (EDA)}\label{part-exploratory-data-analysis-eda}}
 
-\emph{{[}todo{]}}: split into multiple files
+\hypertarget{exploratory-data-analysis}{%
+\section{Exploratory Data Analysis}\label{exploratory-data-analysis}}
 
-\hypertarget{waterfalls-spirals-and-science}{%
-\section{Waterfalls, Spirals, and Science}\label{waterfalls-spirals-and-science}}
+\begin{quote}
+This book is about exploratory data analysis, about looking at data to see what it seems to say. It concentrates on simple arithmetic and easy-to-draw pictures. It regards whatever appearances we have recognized as partial descriptions, and tries to look beneath them for new insights. Its concern is with appearance, not with confirmation. Tukey (\protect\hyperlink{ref-TukeyExploratoryDataAnalysis1977}{1977}) v
+\end{quote}
 
 \begin{itemize}
+\tightlist
 \item
-  Waterfall model of development: \url{https://en.wikipedia.org/wiki/Waterfall_model}
-\item
-  ``The Scientific Method'': \url{https://plato.stanford.edu/entries/scientific-method/\#MetMetEndMet}
-\item
-  Spiral model of development (Boehm \protect\hyperlink{ref-BoehmSpiralModelSoftware1988}{1988})
-\item
-  Peng and Matsui (\protect\hyperlink{ref-PengArtDataScience2016}{2016}) ch.~2 (4-15)
-\item
-  \emph{{[}ElliottEpistemicMethodologicalIteration2012? BrownFunctionalComplexityScientific2015?{]}}
+  Exploratory Data Analysis (EDA) is ``an attitude, AND a flexibility, AND some graph paper (or transparencies, or both)'' (Tukey \protect\hyperlink{ref-TukeyWeNeedBoth1980}{1980}) developed by statistician John Tukey
 \end{itemize}
 
-\hypertarget{eda-as-hunting-phenomena}{%
-\section{EDA as Hunting Phenomena}\label{eda-as-hunting-phenomena}}
+\hypertarget{exploratory-and-confirmatory-research}{%
+\subsection{Exploratory and Confirmatory Research}\label{exploratory-and-confirmatory-research}}
+
+\begin{itemize}
+\tightlist
+\item
+  Especially in the wake of the replication crisis, one common distinction is between exploratory and confirmatory research (Wagenmakers et al. \protect\hyperlink{ref-WagenmakersAgendaPurelyConfirmatory2012}{2012})
+\end{itemize}
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule
+\begin{minipage}[b]{0.42\columnwidth}\raggedright
+Confirmatory\strut
+\end{minipage} & \begin{minipage}[b]{0.29\columnwidth}\raggedright
+Exploratory\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.42\columnwidth}\raggedright
+hypothesis testing\strut
+\end{minipage} & \begin{minipage}[t]{0.29\columnwidth}\raggedright
+hypothesis development\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.42\columnwidth}\raggedright
+specified in advance\strut
+\end{minipage} & \begin{minipage}[t]{0.29\columnwidth}\raggedright
+adaptable\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.42\columnwidth}\raggedright
+algorithmic\strut
+\end{minipage} & \begin{minipage}[t]{0.29\columnwidth}\raggedright
+free, creative\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.42\columnwidth}\raggedright
+avoids inferential errors
+(type I, false positives)\strut
+\end{minipage} & \begin{minipage}[t]{0.29\columnwidth}\raggedright
+\emph{makes} errors?\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.42\columnwidth}\raggedright
+\emph{rigorous}\strut
+\end{minipage} & \begin{minipage}[t]{0.29\columnwidth}\raggedright
+\textbf{lacking rigor?}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.42\columnwidth}\raggedright
+\textbf{real science??}\strut
+\end{minipage} & \begin{minipage}[t]{0.29\columnwidth}\raggedright
+\textbf{h*cking around with data??}\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+\hypertarget{better-models-for-eda-i-risk-management-in-spiral-development}{%
+\subsection{Better Models for EDA I: Risk Management in Spiral Development}\label{better-models-for-eda-i-risk-management-in-spiral-development}}
+
+\textbackslash begin\{figure\}
+
+\{\centering \includegraphics[width=0.5\linewidth]{images/03-eda/waterfall} \includegraphics[width=0.5\linewidth]{images/03-eda/scientific_method}
+
+\}
+
+\textbackslash caption\{The waterfall model of software development resembles the elementary school model of ``the scientific method,'' with an inflexible, linear sequence of predefined steps. Source: \url{https://en.wikipedia.org/wiki/Waterfall_model}\}\label{fig:unnamed-chunk-31}
+\textbackslash end\{figure\}
+
+\textbackslash begin\{figure\}
+
+\{\centering \includegraphics[width=0.6\linewidth]{images/03-eda/spiral}
+
+\}
+
+\textbackslash caption\{Boehm's spiral model of software development, based on Boehm (\protect\hyperlink{ref-BoehmSpiralModelSoftware1988}{1988}), fig.~2. Source: \url{https://en.wikipedia.org/wiki/Spiral_model}\}\label{fig:unnamed-chunk-33}
+\textbackslash end\{figure\}
+
+\begin{itemize}
+\tightlist
+\item
+  Through the 1970s, software engineering relied on a ``waterfall model'' of development
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Resembles elementary school picture of ``the scientific method'': linear sequences of steps, specified in advance
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{boehmspiralmodelsoftware1988s-spiral-model}{%
+\subsubsection{\texorpdfstring{Boehm (\protect\hyperlink{ref-BoehmSpiralModelSoftware1988}{1988})'s ``spiral model''}{Boehm (1988)'s ``spiral model''}}\label{boehmspiralmodelsoftware1988s-spiral-model}}
+
+\begin{itemize}
+\tightlist
+\item
+  Critique: The waterfall model required extensive advance planning
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Couldn't be adapted as new problems were identified or requirements changed
+  \end{itemize}
+\item
+  \textbf{Basic idea: Software development works in an expanding spiral, moving from low-cost, low-risk proof of concept to usable demonstration to full product}
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Define outputs concurrently, not sequentially
+\item
+  4 basic activities in each cycle
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \tightlist
+  \item
+    Identify win conditions for all stakeholders
+  \item
+    Identify and evaluate alternative approaches
+  \item
+    \textbf{Identify and resolve risks for each approach}
+  \item
+    Obtain approval and commitment from all stakeholders
+  \end{enumerate}
+\item
+  \textbf{Risk determines level of effort}
+\item
+  Risk determines degree of details
+\item
+  Use anchor point milestones
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \tightlist
+  \item
+    Is there a sufficient definition of a technical and management approach to satisfying everyone's win conditions?
+  \item
+    Is there a sufficient definition of the preferred approach to satisfying everyone's win conditions, and are all significant risks eliminated or mitigated?
+  \item
+    Is there sufficient preparation of the software, site, users, operators, and maintainers to satisfy everyone's win conditions by launching the system?
+  \end{enumerate}
+\end{enumerate}
+
+\hypertarget{scientific-research-projects-using-the-spiral-model}{%
+\subsubsection{Scientific research projects using the spiral model}\label{scientific-research-projects-using-the-spiral-model}}
+
+\begin{itemize}
+\tightlist
+\item
+  Start small: pilot study, subset of big data
+\item
+  Stakeholders
+
+  \begin{itemize}
+  \tightlist
+  \item
+    PI, grad researchers, undergrad researchers
+  \item
+    Dissertation committee, advisor; tenure committee
+  \item
+    Journal editors and reviewers, funding agency, hiring committees
+  \item
+    Community partners? Policymakers? Industry?
+  \end{itemize}
+\item
+  \textbf{EDA: Identify and mitigate risks before you fully commit to an approach}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Do these data include the main variables we care about?
+  \item
+    How about additional covariates, predictors, identifiers we need?
+  \item
+    Where are the data errors? Can we fix them?\\
+  \item
+    Where are the missing values?
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{better-models-for-eda-ii-epicycle-of-analysis}{%
+\subsection{Better Models for EDA II: Epicycle of Analysis}\label{better-models-for-eda-ii-epicycle-of-analysis}}
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.6\linewidth]{images/03-eda/epicycle} 
+
+}
+
+\caption{Epicycle of analysis model, @PengArtDataScience2016, 5}\label{fig:unnamed-chunk-34}
+\end{figure}
+
+\begin{itemize}
+\tightlist
+\item
+  Peng and Matsui (\protect\hyperlink{ref-PengArtDataScience2016}{2016})
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Data analysis is organized into 5 activities
+  \item
+    Each activity involves the same 3-step ``epicycle'' process
+
+    \begin{enumerate}
+    \def\labelenumi{\arabic{enumi}.}
+    \tightlist
+    \item
+      Develop expectations
+    \item
+      Collect information
+    \item
+      Compare and revise expectations
+    \end{enumerate}
+  \item
+    Not ``the scientific method''! (Peng and Matsui \protect\hyperlink{ref-PengArtDataScience2016}{2016}, 4)
+
+    \begin{itemize}
+    \tightlist
+    \item
+      ``Highly iterative and non-linear''
+    \item
+      "information is learned at each step, which then informs
+
+      \begin{itemize}
+      \tightlist
+      \item
+        \textbf{whether (and how) to refine, and redo, the {[}previous{]} step} \ldots, or
+      \item
+        whether (and how) to proceed to the next step."
+      \end{itemize}
+    \end{itemize}
+  \end{itemize}
+\end{itemize}
+
+\begin{longtable}[]{@{}ll@{}}
+\caption{Aligning the goals of EDA with steps in the ``epicycle of analysis'' (Peng and Matsui \protect\hyperlink{ref-PengArtDataScience2016}{2016})}\tabularnewline
+\toprule
+\begin{minipage}[b]{0.43\columnwidth}\raggedright
+Goals of EDA\strut
+\end{minipage} & \begin{minipage}[b]{0.24\columnwidth}\raggedright
+Epicycle step\strut
+\end{minipage}\tabularnewline
+\midrule
+\endfirsthead
+\toprule
+\begin{minipage}[b]{0.43\columnwidth}\raggedright
+Goals of EDA\strut
+\end{minipage} & \begin{minipage}[b]{0.24\columnwidth}\raggedright
+Epicycle step\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.43\columnwidth}\raggedright
+Determine if there are
+problems with the data\strut
+\end{minipage} & \begin{minipage}[t]{0.24\columnwidth}\raggedright
+2. Collecting information\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.43\columnwidth}\raggedright
+Determine whether our
+question can be answered
+with these data\strut
+\end{minipage} & \begin{minipage}[t]{0.24\columnwidth}\raggedright
+3. Comparing and revising expectations\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.43\columnwidth}\raggedright
+Develop sketch of an
+answer\strut
+\end{minipage} & \begin{minipage}[t]{0.24\columnwidth}\raggedright
+1. Developing expectations\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+\hypertarget{better-models-for-eda-iii-phenomena-development}{%
+\subsection{Better Models for EDA III: Phenomena Development}\label{better-models-for-eda-iii-phenomena-development}}
+
+\emph{{[}todo{]}}
 
 \begin{itemize}
 \item
@@ -1662,15 +1934,59 @@ Not on Bryan's list, but a bonus thing to not do:
 \end{itemize}
 
 \hypertarget{two-eda-checklists}{%
-\section{Two EDA Checklists}\label{two-eda-checklists}}
+\section{Two EDA ``Checklists''}\label{two-eda-checklists}}
 
-\begin{itemize}
+\hypertarget{pengartdatascience2016}{%
+\subsection{\texorpdfstring{Peng and Matsui (\protect\hyperlink{ref-PengArtDataScience2016}{2016})}{Peng and Matsui (2016)}}\label{pengartdatascience2016}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  Peng and Matsui (\protect\hyperlink{ref-PengArtDataScience2016}{2016}) ch.~4 (31-54)
+  Formulate your question
 \item
-  Huebner, Vach, and le Cessie (\protect\hyperlink{ref-HuebnerSystematicApproachInitial2016}{2016})
-\end{itemize}
+  Read in your data
+\item
+  Check the packaging
+\item
+  Look at the top and the bottom of your data
+\item
+  Check your ``n''s
+\item
+  Validate with at least one external data source
+\item
+  Make a plot
+\item
+  Try the easy solution first
+\item
+  Follow up (Peng and Matsui \protect\hyperlink{ref-PengArtDataScience2016}{2016}, 33)
+\end{enumerate}
+
+\hypertarget{huebnersystematicapproachinitial2016}{%
+\subsection{\texorpdfstring{Huebner, Vach, and le Cessie (\protect\hyperlink{ref-HuebnerSystematicApproachInitial2016}{2016})}{Huebner, Vach, and le Cessie (2016)}}\label{huebnersystematicapproachinitial2016}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Duplicate records need to be eliminated
+\item
+  Direction of numerical codes for categorical and ordinal variables
+\item
+  Inconsistencies in date and time stamps
+\item
+  Presence of bimodal distributions
+\item
+  Presence of skewed distributions
+\item
+  Presence of ceilings and floors in continuous variables
+\item
+  Presence of outliers
+\item
+  Distribution of missing data
+\item
+  Indications of recording errors in the main variables (after Huebner, Vach, and le Cessie \protect\hyperlink{ref-HuebnerSystematicApproachInitial2016}{2016}, 26)
+\end{enumerate}
 
 \hypertarget{inspecting-variables}{%
 \section{Inspecting Variables}\label{inspecting-variables}}
@@ -1840,6 +2156,15 @@ Selbst, Andrew D., Danah Boyd, Sorelle Friedler, Suresh Venkatasubramanian, and 
 
 \leavevmode\hypertarget{ref-ShotwellWhyUse2019}{}%
 Shotwell, Gordon. 2019. ``Why I Use R.'' Title. December 30, 2019. \url{https://blog.shotwell.ca/posts/why_i_use_r/}.
+
+\leavevmode\hypertarget{ref-TukeyWeNeedBoth1980}{}%
+Tukey, John W. 1980. ``We Need Both Exploratory and Confirmatory.'' \emph{The American Statistician} 34 (1): 23--25. \url{https://doi.org/10.1080/00031305.1980.10482706}.
+
+\leavevmode\hypertarget{ref-TukeyExploratoryDataAnalysis1977}{}%
+Tukey, John Wilder. 1977. \emph{Exploratory Data Analysis}. Addison-Wesley Series in Behavioral Science. Reading, Mass: Addison-Wesley Pub. Co.
+
+\leavevmode\hypertarget{ref-WagenmakersAgendaPurelyConfirmatory2012}{}%
+Wagenmakers, Eric-Jan, Ruud Wetzels, Denny Borsboom, Han L. J. van der Maas, and Rogier A. Kievit. 2012. ``An Agenda for Purely Confirmatory Research.'' \emph{Perspectives on Psychological Science} 7 (6): 632--38. \url{https://doi.org/10.1177/1745691612463078}.
 
 \leavevmode\hypertarget{ref-WangWhyBigData2016}{}%
 Wang, Tricia. 2016. ``Why Big Data Needs Thick Data.'' Medium. January 20, 2016. \url{https://medium.com/ethnography-matters/why-big-data-needs-thick-data-b4b3e75e3d7\#.ur5gl84nj}.

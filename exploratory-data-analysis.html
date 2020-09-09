@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Week 5 Exploratory Data Analysis | Data Science Methods for Cognitive Science</title>
+  <title>Chapter 7 Exploratory Data Analysis | Data Science Methods for Cognitive Science</title>
   <meta name="description" content="This document is a set of notes (and perhaps later a textbook) for a course on data science methods for graduate students in social and behavioral sciences." />
-  <meta name="generator" content="bookdown 0.20.1 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.20.5 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Week 5 Exploratory Data Analysis | Data Science Methods for Cognitive Science" />
+  <meta property="og:title" content="Chapter 7 Exploratory Data Analysis | Data Science Methods for Cognitive Science" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Week 5 Exploratory Data Analysis | Data Science Methods for Cognitive Science" />
+  <meta name="twitter:title" content="Chapter 7 Exploratory Data Analysis | Data Science Methods for Cognitive Science" />
   
   <meta name="twitter:description" content="This document is a set of notes (and perhaps later a textbook) for a course on data science methods for graduate students in social and behavioral sciences." />
   
@@ -24,15 +24,14 @@
 <meta name="author" content="Dan Hicks, hicks.daniel.j@gmail.com" />
 
 
-<meta name="date" content="2020-07-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="errors-warnings-and-getting-help.html"/>
-<link rel="next" href="references.html"/>
+<link rel="prev" href="warnings-errors-and-getting-help.html"/>
+<link rel="next" href="two-eda-checklists.html"/>
 <script src="libs/header-attrs-2.3/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -132,24 +131,85 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <ul class="summary">
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
-<li class="chapter" data-level="" data-path="week-0-setting-up.html"><a href="week-0-setting-up.html"><i class="fa fa-check"></i>Week 0: Setting up</a>
+<li class="chapter" data-level="" data-path="setting-up.html"><a href="setting-up.html"><i class="fa fa-check"></i>Setting up</a>
 <ul>
-<li class="chapter" data-level="0.1" data-path="week-0-setting-up.html"><a href="week-0-setting-up.html#r-and-rstudio-the-mac-way"><i class="fa fa-check"></i><b>0.1</b> R and RStudio: The Mac Way</a></li>
-<li class="chapter" data-level="0.2" data-path="week-0-setting-up.html"><a href="week-0-setting-up.html#r-and-rstudio-the-cloud-way"><i class="fa fa-check"></i><b>0.2</b> R and RStudio: The Cloud Way</a></li>
-<li class="chapter" data-level="0.3" data-path="week-0-setting-up.html"><a href="week-0-setting-up.html#github"><i class="fa fa-check"></i><b>0.3</b> GitHub</a></li>
-<li class="chapter" data-level="0.4" data-path="week-0-setting-up.html"><a href="week-0-setting-up.html#screen-layouts"><i class="fa fa-check"></i><b>0.4</b> Screen Layouts</a></li>
+<li class="chapter" data-level="0.1" data-path="setting-up.html"><a href="setting-up.html#a-note-on-accessibility"><i class="fa fa-check"></i><b>0.1</b> A Note on Accessibility</a></li>
+<li class="chapter" data-level="0.2" data-path="setting-up.html"><a href="setting-up.html#hardware-recommendations"><i class="fa fa-check"></i><b>0.2</b> Hardware Recommendations</a></li>
+<li class="chapter" data-level="0.3" data-path="setting-up.html"><a href="setting-up.html#r-and-rstudio"><i class="fa fa-check"></i><b>0.3</b> R and RStudio</a></li>
+<li class="chapter" data-level="0.4" data-path="setting-up.html"><a href="setting-up.html#slack"><i class="fa fa-check"></i><b>0.4</b> Slack</a></li>
+<li class="chapter" data-level="0.5" data-path="setting-up.html"><a href="setting-up.html#github"><i class="fa fa-check"></i><b>0.5</b> GitHub</a></li>
+<li class="chapter" data-level="0.6" data-path="setting-up.html"><a href="setting-up.html#screen-layouts"><i class="fa fa-check"></i><b>0.6</b> Screen Layouts</a></li>
+<li class="chapter" data-level="0.7" data-path="setting-up.html"><a href="setting-up.html#pre-class-survey"><i class="fa fa-check"></i><b>0.7</b> Pre-Class Survey</a></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#what-this-course-isnt-and-is"><i class="fa fa-check"></i><b>1.1</b> What this course isn’t, and is</a></li>
-<li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#notes-on-some-design-decisions"><i class="fa fa-check"></i><b>1.2</b> Notes on some design decisions</a></li>
-<li class="chapter" data-level="1.3" data-path="introduction.html"><a href="introduction.html#lets-get-started-with-rstudio"><i class="fa fa-check"></i><b>1.3</b> Let’s get started with RStudio</a></li>
-<li class="chapter" data-level="1.4" data-path="introduction.html"><a href="introduction.html#base-r-data-types"><i class="fa fa-check"></i><b>1.4</b> Base R data types</a></li>
+<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#land-acknowledgement"><i class="fa fa-check"></i><b>1.1</b> Land Acknowledgement</a></li>
+<li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#about-me"><i class="fa fa-check"></i><b>1.2</b> About me</a></li>
+<li class="chapter" data-level="1.3" data-path="introduction.html"><a href="introduction.html#what-this-course-isnt-and-is"><i class="fa fa-check"></i><b>1.3</b> What this course isn’t, and is</a></li>
+<li class="chapter" data-level="1.4" data-path="introduction.html"><a href="introduction.html#learning-outcomes"><i class="fa fa-check"></i><b>1.4</b> Learning outcomes</a></li>
+<li class="chapter" data-level="1.5" data-path="introduction.html"><a href="introduction.html#workflow"><i class="fa fa-check"></i><b>1.5</b> Workflow</a></li>
+<li class="chapter" data-level="1.6" data-path="introduction.html"><a href="introduction.html#notes-on-some-course-design-decisions"><i class="fa fa-check"></i><b>1.6</b> Notes on some course design decisions</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="git-and-data-management.html"><a href="git-and-data-management.html"><i class="fa fa-check"></i><b>2</b> Git and Data Management</a></li>
-<li class="chapter" data-level="3" data-path="cleaning-data.html"><a href="cleaning-data.html"><i class="fa fa-check"></i><b>3</b> Cleaning Data</a></li>
-<li class="chapter" data-level="4" data-path="errors-warnings-and-getting-help.html"><a href="errors-warnings-and-getting-help.html"><i class="fa fa-check"></i><b>4</b> Errors, Warnings, and Getting Help</a></li>
-<li class="chapter" data-level="5" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html"><i class="fa fa-check"></i><b>5</b> Exploratory Data Analysis</a></li>
+<li class="chapter" data-level="2" data-path="what-is-this-thing-called-data-science.html"><a href="what-is-this-thing-called-data-science.html"><i class="fa fa-check"></i><b>2</b> What is this thing called data science?</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="what-is-this-thing-called-data-science.html"><a href="what-is-this-thing-called-data-science.html#standard-definition"><i class="fa fa-check"></i><b>2.1</b> Standard definition</a></li>
+<li class="chapter" data-level="2.2" data-path="what-is-this-thing-called-data-science.html"><a href="what-is-this-thing-called-data-science.html#a-prior-question-what-is-this-thing-called-data"><i class="fa fa-check"></i><b>2.2</b> A prior question: What is this thing called “data”?</a></li>
+<li class="chapter" data-level="2.3" data-path="what-is-this-thing-called-data-science.html"><a href="what-is-this-thing-called-data-science.html#back-to-data-science"><i class="fa fa-check"></i><b>2.3</b> Back to “data science”</a></li>
+</ul></li>
+<li class="part"><span><b>I Some fundamental tools</b></span></li>
+<li class="chapter" data-level="3" data-path="git-and-version-control.html"><a href="git-and-version-control.html"><i class="fa fa-check"></i><b>3</b> Git and Version Control</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="git-and-version-control.html"><a href="git-and-version-control.html#some-motivating-examples"><i class="fa fa-check"></i><b>3.1</b> Some motivating examples</a></li>
+<li class="chapter" data-level="3.2" data-path="git-and-version-control.html"><a href="git-and-version-control.html#version-control"><i class="fa fa-check"></i><b>3.2</b> Version control</a></li>
+<li class="chapter" data-level="3.3" data-path="git-and-version-control.html"><a href="git-and-version-control.html#how-to-do-things-with-git"><i class="fa fa-check"></i><b>3.3</b> How to do things with git</a></li>
+<li class="chapter" data-level="3.4" data-path="git-and-version-control.html"><a href="git-and-version-control.html#working-with-github-remotes"><i class="fa fa-check"></i><b>3.4</b> Working with GitHub remotes</a></li>
+<li class="chapter" data-level="3.5" data-path="git-and-version-control.html"><a href="git-and-version-control.html#lab"><i class="fa fa-check"></i><b>3.5</b> Lab</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="r-basics.html"><a href="r-basics.html"><i class="fa fa-check"></i><b>4</b> R Basics</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="r-basics.html"><a href="r-basics.html#lets-get-started-with-rstudio"><i class="fa fa-check"></i><b>4.1</b> Let’s get started with RStudio</a></li>
+<li class="chapter" data-level="4.2" data-path="r-basics.html"><a href="r-basics.html#selecting-elements-and-some-math"><i class="fa fa-check"></i><b>4.2</b> Selecting elements, and some math</a></li>
+<li class="chapter" data-level="4.3" data-path="r-basics.html"><a href="r-basics.html#base-r-data-types"><i class="fa fa-check"></i><b>4.3</b> Base R data types</a></li>
+<li class="chapter" data-level="4.4" data-path="r-basics.html"><a href="r-basics.html#examining-variables"><i class="fa fa-check"></i><b>4.4</b> Examining variables</a></li>
+<li class="chapter" data-level="4.5" data-path="r-basics.html"><a href="r-basics.html#logical-operators"><i class="fa fa-check"></i><b>4.5</b> Logical operators</a></li>
+<li class="chapter" data-level="4.6" data-path="r-basics.html"><a href="r-basics.html#missing-data"><i class="fa fa-check"></i><b>4.6</b> Missing data</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="functional-programming-and-data-science.html"><a href="functional-programming-and-data-science.html"><i class="fa fa-check"></i><b>5</b> Functional Programming and Data Science</a></li>
+<li class="chapter" data-level="6" data-path="warnings-errors-and-getting-help.html"><a href="warnings-errors-and-getting-help.html"><i class="fa fa-check"></i><b>6</b> Warnings, Errors, and Getting Help</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="warnings-errors-and-getting-help.html"><a href="warnings-errors-and-getting-help.html#recommended-reading-and-watching"><i class="fa fa-check"></i><b>6.1</b> Recommended reading and watching</a></li>
+<li class="chapter" data-level="6.2" data-path="warnings-errors-and-getting-help.html"><a href="warnings-errors-and-getting-help.html#messages-warnings-and-errors"><i class="fa fa-check"></i><b>6.2</b> Messages, warnings, and errors</a></li>
+<li class="chapter" data-level="6.3" data-path="warnings-errors-and-getting-help.html"><a href="warnings-errors-and-getting-help.html#where-to-go-for-help"><i class="fa fa-check"></i><b>6.3</b> Where to go for help</a></li>
+<li class="chapter" data-level="6.4" data-path="warnings-errors-and-getting-help.html"><a href="warnings-errors-and-getting-help.html#writing-a-reproducible-example-reprex"><i class="fa fa-check"></i><b>6.4</b> Writing a reproducible example: <code>reprex</code></a></li>
+<li class="chapter" data-level="6.5" data-path="warnings-errors-and-getting-help.html"><a href="warnings-errors-and-getting-help.html#do-not-do-these-things-in-your-reprex"><i class="fa fa-check"></i><b>6.5</b> Do not do these things in your reprex</a></li>
+</ul></li>
+<li class="part"><span><b>II Exploratory Data Analysis (EDA)</b></span></li>
+<li class="chapter" data-level="7" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html"><i class="fa fa-check"></i><b>7</b> Exploratory Data Analysis</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#exploratory-and-confirmatory-research"><i class="fa fa-check"></i><b>7.1</b> Exploratory and Confirmatory Research</a></li>
+<li class="chapter" data-level="7.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#better-models-for-eda-i-risk-management-in-spiral-development"><i class="fa fa-check"></i><b>7.2</b> Better Models for EDA I: Risk Management in Spiral Development</a></li>
+<li class="chapter" data-level="7.3" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#better-models-for-eda-ii-epicycle-of-analysis"><i class="fa fa-check"></i><b>7.3</b> Better Models for EDA II: Epicycle of Analysis</a></li>
+<li class="chapter" data-level="7.4" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#better-models-for-eda-iii-phenomena-development"><i class="fa fa-check"></i><b>7.4</b> Better Models for EDA III: Phenomena Development</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="two-eda-checklists.html"><a href="two-eda-checklists.html"><i class="fa fa-check"></i><b>8</b> Two EDA “Checklists”</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="two-eda-checklists.html"><a href="two-eda-checklists.html#pengartdatascience2016"><i class="fa fa-check"></i><b>8.1</b> <span class="citation">Peng and Matsui (<span>2016</span>)</span></a></li>
+<li class="chapter" data-level="8.2" data-path="two-eda-checklists.html"><a href="two-eda-checklists.html#huebnersystematicapproachinitial2016"><i class="fa fa-check"></i><b>8.2</b> <span class="citation">Huebner, Vach, and le Cessie (<span>2016</span>)</span></a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="inspecting-variables.html"><a href="inspecting-variables.html"><i class="fa fa-check"></i><b>9</b> Inspecting Variables</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="inspecting-variables.html"><a href="inspecting-variables.html#type-range-and-missingness"><i class="fa fa-check"></i><b>9.1</b> Type, range, and missingness</a></li>
+<li class="chapter" data-level="9.2" data-path="inspecting-variables.html"><a href="inspecting-variables.html#constructing-aggregates"><i class="fa fa-check"></i><b>9.2</b> Constructing aggregates</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="visual-eda.html"><a href="visual-eda.html"><i class="fa fa-check"></i><b>10</b> Visual EDA</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="visual-eda.html"><a href="visual-eda.html#d-distributions"><i class="fa fa-check"></i><b>10.1</b> 1D distributions</a></li>
+<li class="chapter" data-level="10.2" data-path="visual-eda.html"><a href="visual-eda.html#d-distributions-1"><i class="fa fa-check"></i><b>10.2</b> 2D distributions</a></li>
+<li class="chapter" data-level="10.3" data-path="visual-eda.html"><a href="visual-eda.html#multivariate-distributions"><i class="fa fa-check"></i><b>10.3</b> Multivariate distributions</a></li>
+</ul></li>
+<li class="part"><span><b>III Cleaning Data</b></span></li>
+<li class="part"><span><b>IV Reproducibility</b></span></li>
+<li class="part"><span><b>V Case Study: The COMPAS Dataset</b></span></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -171,17 +231,238 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="exploratory-data-analysis" class="section level1" number="5">
-<h1><span class="header-section-number">Week 5</span> Exploratory Data Analysis</h1>
+<div id="exploratory-data-analysis" class="section level1" number="7">
+<h1><span class="header-section-number">Chapter 7</span> Exploratory Data Analysis</h1>
+<blockquote>
+<p>This book is about exploratory data analysis, about looking at data to see what it seems to say. It concentrates on simple arithmetic and easy-to-draw pictures. It regards whatever appearances we have recognized as partial descriptions, and tries to look beneath them for new insights. Its concern is with appearance, not with confirmation. <span class="citation">Tukey (<a href="#ref-TukeyExploratoryDataAnalysis1977" role="doc-biblioref">1977</a>)</span> v</p>
+</blockquote>
+<ul>
+<li>Exploratory Data Analysis (EDA) is “an attitude, AND a flexibility, AND some graph paper (or transparencies, or both)” <span class="citation">(Tukey <a href="#ref-TukeyWeNeedBoth1980" role="doc-biblioref">1980</a>)</span> developed by statistician John Tukey</li>
+</ul>
+<div id="exploratory-and-confirmatory-research" class="section level2" number="7.1">
+<h2><span class="header-section-number">7.1</span> Exploratory and Confirmatory Research</h2>
+<ul>
+<li>Especially in the wake of the replication crisis, one common distinction is between exploratory and confirmatory research <span class="citation">(Wagenmakers et al. <a href="#ref-WagenmakersAgendaPurelyConfirmatory2012" role="doc-biblioref">2012</a>)</span></li>
+</ul>
+<table style="width:75%;">
+<colgroup>
+<col width="44%" />
+<col width="30%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Confirmatory</th>
+<th align="left">Exploratory</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">hypothesis testing</td>
+<td align="left">hypothesis development</td>
+</tr>
+<tr class="even">
+<td align="left">specified in advance</td>
+<td align="left">adaptable</td>
+</tr>
+<tr class="odd">
+<td align="left">algorithmic</td>
+<td align="left">free, creative</td>
+</tr>
+<tr class="even">
+<td align="left">avoids inferential errors
+(type I, false positives)</td>
+<td align="left"><em>makes</em> errors?</td>
+</tr>
+<tr class="odd">
+<td align="left"><em>rigorous</em></td>
+<td align="left"><strong>lacking rigor?</strong></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>real science??</strong></td>
+<td align="left"><strong>h*cking around with data??</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="better-models-for-eda-i-risk-management-in-spiral-development" class="section level2" number="7.2">
+<h2><span class="header-section-number">7.2</span> Better Models for EDA I: Risk Management in Spiral Development</h2>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-31"></span>
+<img src="images/03-eda/waterfall.png" alt="The waterfall model of software development resembles the elementary school model of &quot;the scientific method,&quot; with an inflexible, linear sequence of predefined steps.  Source: &lt;https://en.wikipedia.org/wiki/Waterfall_model&gt;" width="50%" /><img src="images/03-eda/scientific_method.png" alt="The waterfall model of software development resembles the elementary school model of &quot;the scientific method,&quot; with an inflexible, linear sequence of predefined steps.  Source: &lt;https://en.wikipedia.org/wiki/Waterfall_model&gt;" width="50%" />
+<p class="caption">
+Figure 7.1: The waterfall model of software development resembles the elementary school model of “the scientific method,” with an inflexible, linear sequence of predefined steps. Source: <a href="https://en.wikipedia.org/wiki/Waterfall_model" class="uri">https://en.wikipedia.org/wiki/Waterfall_model</a>
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-33"></span>
+<img src="images/03-eda/spiral.png" alt="Boehm's spiral model of software development, based on @BoehmSpiralModelSoftware1988, fig. 2.  Source: &lt;https://en.wikipedia.org/wiki/Spiral_model&gt;" width="60%" />
+<p class="caption">
+Figure 7.2: Boehm’s spiral model of software development, based on <span class="citation">Boehm (<a href="#ref-BoehmSpiralModelSoftware1988" role="doc-biblioref">1988</a>)</span>, fig. 2. Source: <a href="https://en.wikipedia.org/wiki/Spiral_model" class="uri">https://en.wikipedia.org/wiki/Spiral_model</a>
+</p>
+</div>
+<ul>
+<li>Through the 1970s, software engineering relied on a “waterfall model” of development
+<ul>
+<li>Resembles elementary school picture of “the scientific method”: linear sequences of steps, specified in advance</li>
+</ul></li>
+</ul>
+<div id="boehmspiralmodelsoftware1988s-spiral-model" class="section level3" number="7.2.1">
+<h3><span class="header-section-number">7.2.1</span> <span class="citation">Boehm (<a href="#ref-BoehmSpiralModelSoftware1988" role="doc-biblioref">1988</a>)</span>’s “spiral model”</h3>
+<ul>
+<li>Critique: The waterfall model required extensive advance planning
+<ul>
+<li>Couldn’t be adapted as new problems were identified or requirements changed</li>
+</ul></li>
+<li><strong>Basic idea: Software development works in an expanding spiral, moving from low-cost, low-risk proof of concept to usable demonstration to full product</strong></li>
+</ul>
+<ol style="list-style-type: decimal">
+<li>Define outputs concurrently, not sequentially</li>
+<li>4 basic activities in each cycle
+<ol style="list-style-type: lower-alpha">
+<li>Identify win conditions for all stakeholders</li>
+<li>Identify and evaluate alternative approaches</li>
+<li><strong>Identify and resolve risks for each approach</strong></li>
+<li>Obtain approval and commitment from all stakeholders</li>
+</ol></li>
+<li><strong>Risk determines level of effort</strong></li>
+<li>Risk determines degree of details</li>
+<li>Use anchor point milestones
+<ol style="list-style-type: lower-alpha">
+<li>Is there a sufficient definition of a technical and management approach to satisfying everyone’s win conditions?</li>
+<li>Is there a sufficient definition of the preferred approach to satisfying everyone’s win conditions, and are all significant risks eliminated or mitigated?</li>
+<li>Is there sufficient preparation of the software, site, users, operators, and maintainers to satisfy everyone’s win conditions by launching the system?</li>
+</ol></li>
+</ol>
+</div>
+<div id="scientific-research-projects-using-the-spiral-model" class="section level3" number="7.2.2">
+<h3><span class="header-section-number">7.2.2</span> Scientific research projects using the spiral model</h3>
+<ul>
+<li>Start small: pilot study, subset of big data</li>
+<li>Stakeholders
+<ul>
+<li>PI, grad researchers, undergrad researchers</li>
+<li>Dissertation committee, advisor; tenure committee</li>
+<li>Journal editors and reviewers, funding agency, hiring committees</li>
+<li>Community partners? Policymakers? Industry?</li>
+</ul></li>
+<li><strong>EDA: Identify and mitigate risks before you fully commit to an approach</strong>
+<ul>
+<li>Do these data include the main variables we care about?</li>
+<li>How about additional covariates, predictors, identifiers we need?</li>
+<li>Where are the data errors? Can we fix them?<br />
+</li>
+<li>Where are the missing values?</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="better-models-for-eda-ii-epicycle-of-analysis" class="section level2" number="7.3">
+<h2><span class="header-section-number">7.3</span> Better Models for EDA II: Epicycle of Analysis</h2>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-34"></span>
+<img src="images/03-eda/epicycle.png" alt="Epicycle of analysis model, @PengArtDataScience2016, 5" width="60%" />
+<p class="caption">
+Figure 7.3: Epicycle of analysis model, <span class="citation">Peng and Matsui (<a href="#ref-PengArtDataScience2016" role="doc-biblioref">2016</a>)</span>, 5
+</p>
+</div>
+<ul>
+<li><span class="citation">Peng and Matsui (<a href="#ref-PengArtDataScience2016" role="doc-biblioref">2016</a>)</span>
+<ul>
+<li>Data analysis is organized into 5 activities</li>
+<li>Each activity involves the same 3-step “epicycle” process
+<ol style="list-style-type: decimal">
+<li>Develop expectations</li>
+<li>Collect information</li>
+<li>Compare and revise expectations</li>
+</ol></li>
+<li>Not “the scientific method”! <span class="citation">(Peng and Matsui <a href="#ref-PengArtDataScience2016" role="doc-biblioref">2016</a>, 4)</span>
+<ul>
+<li>“Highly iterative and non-linear”</li>
+<li>"information is learned at each step, which then informs
+<ul>
+<li><strong>whether (and how) to refine, and redo, the [previous] step</strong> …, or</li>
+<li>whether (and how) to proceed to the next step."</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+<table style="width:71%;">
+<caption>Aligning the goals of EDA with steps in the “epicycle of analysis” <span class="citation">(Peng and Matsui <a href="#ref-PengArtDataScience2016" role="doc-biblioref">2016</a>)</span></caption>
+<colgroup>
+<col width="45%" />
+<col width="25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Goals of EDA</th>
+<th align="left">Epicycle step</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Determine if there are
+problems with the data</td>
+<td align="left">2. Collecting information</td>
+</tr>
+<tr class="even">
+<td align="left">Determine whether our
+question can be answered
+with these data</td>
+<td align="left">3. Comparing and revising expectations</td>
+</tr>
+<tr class="odd">
+<td align="left">Develop sketch of an
+answer</td>
+<td align="left">1. Developing expectations</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="better-models-for-eda-iii-phenomena-development" class="section level2" number="7.4">
+<h2><span class="header-section-number">7.4</span> Better Models for EDA III: Phenomena Development</h2>
+<p><em>[todo]</em></p>
+<ul>
+<li><p><span class="citation">Bogen and Woodward (<a href="#ref-BogenSavingPhenomena1988" role="doc-biblioref">1988</a>)</span>, §§ intro and III-IV (303-6, 315-25)</p></li>
+<li><p>is “theory” the right term?</p>
+<ul>
+<li>mechanisms; causal processes; explanations</li>
+</ul></li>
+<li><p>note on the stability of phenomena</p>
+<ul>
+<li>the pattern is present here and now</li>
+<li>the question is, will it be present elsewhere in the future?</li>
+<li>replicability</li>
+<li>as an answer to worries about type I errors, p-hacking</li>
+</ul></li>
+</ul>
 
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-BoehmSpiralModelSoftware1988">
+<p>Boehm, B. W. 1988. “A Spiral Model of Software Development and Enhancement.” <em>Computer</em> 21 (5): 61–72. <a href="https://doi.org/10.1109/2.59">https://doi.org/10.1109/2.59</a>.</p>
+</div>
+<div id="ref-BogenSavingPhenomena1988">
+<p>Bogen, James, and James Woodward. 1988. “Saving the Phenomena.” <em>The Philosophical Review</em> 97 (3): 303–52. <a href="http://www.jstor.org/stable/2185445">http://www.jstor.org/stable/2185445</a>.</p>
+</div>
+<div id="ref-PengArtDataScience2016">
+<p>Peng, Roger D., and Elizabeth Matsui. 2016. <em>The Art of Data Science: A Guide for Anyone Who Works with Data</em>. Leanpub. <a href="http://leanpub.com/artofdatascience">http://leanpub.com/artofdatascience</a>.</p>
+</div>
+<div id="ref-TukeyWeNeedBoth1980">
+<p>Tukey, John W. 1980. “We Need Both Exploratory and Confirmatory.” <em>The American Statistician</em> 34 (1): 23–25. <a href="https://doi.org/10.1080/00031305.1980.10482706">https://doi.org/10.1080/00031305.1980.10482706</a>.</p>
+</div>
+<div id="ref-TukeyExploratoryDataAnalysis1977">
+<p>Tukey, John Wilder. 1977. <em>Exploratory Data Analysis</em>. Addison-Wesley Series in Behavioral Science. Reading, Mass: Addison-Wesley Pub. Co.</p>
+</div>
+<div id="ref-WagenmakersAgendaPurelyConfirmatory2012">
+<p>Wagenmakers, Eric-Jan, Ruud Wetzels, Denny Borsboom, Han L. J. van der Maas, and Rogier A. Kievit. 2012. “An Agenda for Purely Confirmatory Research.” <em>Perspectives on Psychological Science</em> 7 (6): 632–38. <a href="https://doi.org/10.1177/1745691612463078">https://doi.org/10.1177/1745691612463078</a>.</p>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="errors-warnings-and-getting-help.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="warnings-errors-and-getting-help.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="two-eda-checklists.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -223,9 +504,10 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["book.pdf", "book.epub"],
+"download": ["book.pdf"],
 "toc": {
-"collapse": "subsection"
+"collapse": "section",
+"scroll_highlight": true
 }
 });
 });
