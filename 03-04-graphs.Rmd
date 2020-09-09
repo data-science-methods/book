@@ -1,0 +1,23 @@
+# Visual EDA #
+
+```{r child = 'knitr_config.Rmd'}
+```
+
+## 1D distributions ##
+
+- categorical: barplot
+- numeric: histogram -> density plot -> ecdf
+
+## 2D distributions ##
+
+- categorical x categorical: barplot
+- numeric x numeric: scatterplot -> contours
+- categorical x numeric: boxplot -> violin plot -> beeswarm
+
+## Multivariate distributions ##
+
+- `ggforce::facet_matrix()`
+- lab: correlation heat map + scatterplots
+    - geom_text
+
+- upset plots

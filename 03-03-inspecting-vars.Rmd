@@ -1,0 +1,24 @@
+# Inspecting Variables #
+
+```{r child = 'knitr_config.Rmd'}
+```
+
+## Type, range, and missingness ##
+
+- `visdat`
+- `skimr`
+- missing values that aren't NA
+
+- Ames housing data
+
+## Constructing aggregates ##
+- filter, count, summarize, arrange, view
+    - mutate + string operations + functions to parse dollars in NSF data
+    - class: NSF Mind and Brain Awards
+    - lab: Stanford Open Policing? 
+
+- joins 
+    - class: college tuition?
+    - lab: covdata
+
+

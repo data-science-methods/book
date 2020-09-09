@@ -1,0 +1,136 @@
+# Exploratory Data Analysis #
+
+```{r child = 'knitr_config.Rmd'}
+```
+
+> This book is about exploratory data analysis, about looking at data to see what it seems to say. It concentrates on simple arithmetic and easy-to-draw pictures. It regards whatever appearances we have recognized as partial descriptions, and tries to look beneath them for new insights. Its concern is with appearance, not with confirmation. @TukeyExploratoryDataAnalysis1977 v
+
+- Exploratory Data Analysis (EDA) is "an attitude, AND a flexibility, AND some graph paper (or transparencies, or both)" [@TukeyWeNeedBoth1980] developed by statistician John Tukey
+
+
+## Exploratory and Confirmatory Research ##
+
+- Especially in the wake of the replication crisis, one common distinction is between exploratory and confirmatory research [@WagenmakersAgendaPurelyConfirmatory2012]
+
+------------------------------------
+Confirmatory                    Exploratory
+---------------------           ---------------------
+hypothesis testing              hypothesis development
+
+specified in advance            adaptable
+
+algorithmic                     free, creative
+
+avoids inferential errors       *makes* errors?
+(type I, false positives)           
+
+*rigorous*                      **lacking rigor?**
+
+**real science??**              **h\*cking around with data??**
+------------------------------------
+
+
+## Better Models for EDA I:  Risk Management in Spiral Development ##
+
+```{r, echo=FALSE, fig.cap="The waterfall model of software development resembles the elementary school model of \"the scientific method,\" with an inflexible, linear sequence of predefined steps.  Source: <https://en.wikipedia.org/wiki/Waterfall_model>", out.width='50%', fig.show="hold"}
+knitr::include_graphics(file.path('images', '03-eda', 'waterfall.png'))
+knitr::include_graphics(file.path('images', '03-eda', 'scientific_method.png'))
+```
+
+```{r, echo=FALSE, out.width='20%', fig.cap="'The Scientific Method.' Source: "}
+```
+
+```{r, echo=FALSE, fig.cap="Boehm's spiral model of software development, based on @BoehmSpiralModelSoftware1988, fig. 2.  Source: <https://en.wikipedia.org/wiki/Spiral_model>"}
+knitr::include_graphics(file.path('images', '03-eda', 'spiral.png'))
+```
+
+- Through the 1970s, software engineering relied on a "waterfall model" of development
+    - Resembles elementary school picture of "the scientific method": linear sequences of steps, specified in advance
+
+### @BoehmSpiralModelSoftware1988's "spiral model" ###
+
+- Critique: The waterfall model required extensive advance planning
+    - Couldn't be adapted as new problems were identified or requirements changed
+- **Basic idea: Software development works in an expanding spiral, moving from low-cost, low-risk proof of concept to usable demonstration to full product**
+
+
+1. Define outputs concurrently, not sequentially
+2. 4 basic activities in each cycle
+    a. Identify win conditions for all stakeholders
+    b. Identify and evaluate alternative approaches
+    c. **Identify and resolve risks for each approach**
+    d. Obtain approval and commitment from all stakeholders
+3. **Risk determines level of effort**
+4. Risk determines degree of details
+5. Use anchor point milestones
+    a. Is there a sufficient definition of a technical and management approach to satisfying everyone's win conditions? 
+    b. Is there a sufficient definition of the preferred approach to satisfying everyone's win conditions, and are all significant risks eliminated or mitigated? 
+    c. Is there sufficient preparation of the software, site, users, operators, and maintainers to satisfy everyone's win conditions by launching the system? 
+        
+### Scientific research projects using the spiral model ###
+    
+- Start small: pilot study, subset of big data
+- Stakeholders
+    - PI, grad researchers, undergrad researchers
+    - Dissertation committee, advisor; tenure committee
+    - Journal editors and reviewers, funding agency, hiring committees
+    - Community partners? Policymakers? Industry? 
+- **EDA: Identify and mitigate risks before you fully commit to an approach**
+    - Do these data include the main variables we care about? 
+    - How about additional covariates, predictors, identifiers we need?
+    - Where are the data errors?  Can we fix them?  
+    - Where are the missing values?  
+
+## Better Models for EDA II: Epicycle of Analysis ##
+
+```{r, echo=FALSE, fig.cap="Epicycle of analysis model, @PengArtDataScience2016, 5"}
+knitr::include_graphics(file.path('images', '03-eda', 'epicycle.png'))
+```
+
+- @PengArtDataScience2016
+    - Data analysis is organized into 5 activities
+    - Each activity involves the same 3-step "epicycle" process
+        1. Develop expectations
+        2. Collect information
+        3. Compare and revise expectations
+    
+    - Not "the scientific method"! [@PengArtDataScience2016 4]
+        - "Highly iterative and non-linear"
+        - "information is learned at each step, which then informs
+            - **whether (and how) to refine, and redo, the [previous] step** ..., or
+            - whether (and how) to proceed to the next step." 
+
+
+Table: Aligning the goals of EDA with steps in the "epicycle of analysis" [@PengArtDataScience2016]
+
+----------------------------------------------------------------------- 
+Goals of EDA                     Epicycle step
+----------------                 -----------------
+Determine if there are           2. Collecting information
+problems with the data     
+     
+Determine whether our            3. Comparing and revising expectations
+question can be answered     
+with these data     
+     
+Develop sketch of an             1. Developing expectations
+answer
+------------------------------------------------------------------------
+
+
+## Better Models for EDA III: Phenomena Development ##
+
+*[todo]*
+
+- @BogenSavingPhenomena1988, §§ intro and III-IV (303-6, 315-25)
+
+- is "theory" the right term? 
+    - mechanisms; causal processes; explanations
+    
+- note on the stability of phenomena
+    - the pattern is present here and now
+    - the question is, will it be present elsewhere in the future? 
+    - replicability
+    - as an answer to worries about type I errors, p-hacking
+
+

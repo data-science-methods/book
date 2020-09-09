@@ -25,8 +25,9 @@
 ## How to do things with git ##
 
 - Getting help
-    - `git command -h`
-    - `man git-command` (hit `q` to exit)
+    - `git fetch -h`
+    - On Mac/Unix: `man git-fetch` (hit `q` to exit) 
+    - On Windows: `git help fetch`
     - A good cheat sheet:  <https://www.atlassian.com/git/tutorials/atlassian-git-cheatsheet>
 - Interfaces
     - Command line
