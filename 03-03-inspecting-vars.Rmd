@@ -14,6 +14,10 @@ library(vroom)       # for quickly reading large CSV files
 library(skimr)       # generate a text-based overview of the data
 library(visdat)      # generate plots visualizing data types and missingness
 library(tictoc)      # for timing how long R takes to do the thing
+
+## Set for the HTML output
+## In RStudio, this is overriden by the width of the console pane
+options(width = 100)  # wider output for skimr
 ```
 
 ## Get the Data ##
@@ -71,7 +75,7 @@ toc()
 
 @PengArtDataScience2016 use some base R functions to look at dimensions of the dataframe and column (variable) types.  `skimr` is more powerful. 
 
-```{r}
+```{r, render=knitr::normal_print}
 ## May take a couple of seconds
 skim(dataf)
 ```
@@ -176,7 +180,7 @@ Some of my observations:
 
 We can also use `skimr` to check data quality by looking at the minimum and maximum values.  Do these ranges make sense for what we expect the variable to be?  
 
-```{r}
+```{r, render=knitr::normal_print}
 skim(dataf)
 ```
 
