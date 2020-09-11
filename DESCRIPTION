@@ -5,6 +5,9 @@ Version: 0.0.1
 Remotes: rstudio/bookdown
 Imports: 
 	bookdown,
-	ggplot2, 
-	lubridate
+	tidyverse, 
+	vroom,
+	skimr,
+	visdat,
+	tictoc
 

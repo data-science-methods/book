@@ -3,9 +3,11 @@
 ```{r child = 'knitr_config.Rmd'}
 ```
 
+For this EDA, we'll work with data on police stops in Oakland, California, that have been pre-cleaned and released by the Stanford Open Policing Project.  Because this analysis focuses on categorical data and counts of observations, most of the elements in @HuebnerSystematicApproachInitial2016 don't really fit.  So we'll follow the checklist from @PengArtDataScience2016. 
+
 ## Packages ##
 
-```{r}
+```{r, echo=TRUE, message=FALSE}
 library(tidyverse)   # for working with the data
 library(lubridate)   # for working with datetime data
 library(vroom)       # for quickly reading large CSV files
@@ -188,14 +190,14 @@ skim(dataf)
 ## 5. Check your “n”s (and) 6. Validate with at least one external data source ##
 
 - @PengArtDataScience2016 use an air quality example with a regular sampling rate, 
-    - so they can calculate exactly how many observations they should have.  
+    - so they can calculate exactly how many observations they should have. 
 - We can't do that here
     - So we'll combine steps 5 and 6 together
     
 - A web search leads us to this City of Oakland page on police stop data:  <https://www.oaklandca.gov/resources/stop-data>
     - The page mentions a Stanford study that was released in June 2016
     - Recall we got our data from the Stanford Open Policing Project
-    - Our data runs through December 2017
+    - Our data run through December 2017
     - So there's a good chance we're using a superset of the "Stanford study" data
     
     - The page links to this report: <https://cao-94612.s3.amazonaws.com/documents/OPD-Racial-Impact-Report-2016-2018-Final-16Apr19.pdf>
@@ -257,9 +259,10 @@ We are interested in two rough questions:
 1. Whether Black people in Oakland might be more likely to be stopped than White people
 2. Whether Black people who are stopped might be more likely to have contraband
 
-- The easy solution is to count rows, using the tools we've already developed. 
-    - As a twist, we'll use `mutate()` after `count()` to calculate shares, ie, what fraction of the total are in each group
+- The easy solution is to count rows, mostly using the tools we've already developed. 
+    - We'll use `mutate()` after `count()` to calculate shares, ie, what fraction of the total are in each group
     - We'll also introduce the function `arrange()`, to sort the dataframe from greatest to smallest share
+    - And `group_by()` to calculate shares within racial groups
 
 ### Number of stops, by race ###
 
