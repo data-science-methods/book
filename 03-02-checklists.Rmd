@@ -8,7 +8,7 @@
 1. Formulate your question
 2. Read in your data
 3. Check the packaging
-4. Look at the top and the bottom of your data 
+4. Look at the top and the bottom of your data
 5. Check your “n”s
 6. Validate with at least one external data source 
 7. Make a plot
