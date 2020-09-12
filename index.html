@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Data Science Methods for Cognitive Science</title>
   <meta name="description" content="This document is a set of notes (and perhaps later a textbook) for a course on data science methods for graduate students in social and behavioral sciences." />
-  <meta name="generator" content="bookdown 0.20.5 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.20.6 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Data Science Methods for Cognitive Science" />
   <meta property="og:type" content="book" />
@@ -32,7 +32,7 @@
   
 
 <link rel="next" href="setting-up.html"/>
-<script src="libs/header-attrs-2.3/header-attrs.js"></script>
+<script src="libs/header-attrs-2.3.5/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -189,7 +189,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#exploratory-and-confirmatory-research"><i class="fa fa-check"></i><b>7.1</b> Exploratory and Confirmatory Research</a></li>
 <li class="chapter" data-level="7.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#better-models-for-eda-i-risk-management-in-spiral-development"><i class="fa fa-check"></i><b>7.2</b> Better Models for EDA I: Risk Management in Spiral Development</a></li>
 <li class="chapter" data-level="7.3" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#better-models-for-eda-ii-epicycle-of-analysis"><i class="fa fa-check"></i><b>7.3</b> Better Models for EDA II: Epicycle of Analysis</a></li>
-<li class="chapter" data-level="7.4" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#better-models-for-eda-iii-phenomena-development"><i class="fa fa-check"></i><b>7.4</b> Better Models for EDA III: Phenomena Development</a></li>
+<li class="chapter" data-level="7.4" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#better-models-for-eda-iii-developing-phenomena"><i class="fa fa-check"></i><b>7.4</b> Better Models for EDA III: Developing Phenomena</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="two-eda-checklists.html"><a href="two-eda-checklists.html"><i class="fa fa-check"></i><b>8</b> Two EDA “Checklists”</a>
 <ul>
@@ -198,8 +198,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="9" data-path="inspecting-variables.html"><a href="inspecting-variables.html"><i class="fa fa-check"></i><b>9</b> Inspecting Variables</a>
 <ul>
-<li class="chapter" data-level="9.1" data-path="inspecting-variables.html"><a href="inspecting-variables.html#type-range-and-missingness"><i class="fa fa-check"></i><b>9.1</b> Type, range, and missingness</a></li>
-<li class="chapter" data-level="9.2" data-path="inspecting-variables.html"><a href="inspecting-variables.html#constructing-aggregates"><i class="fa fa-check"></i><b>9.2</b> Constructing aggregates</a></li>
+<li class="chapter" data-level="9.1" data-path="inspecting-variables.html"><a href="inspecting-variables.html#packages"><i class="fa fa-check"></i><b>9.1</b> Packages</a></li>
+<li class="chapter" data-level="9.2" data-path="inspecting-variables.html"><a href="inspecting-variables.html#get-the-data"><i class="fa fa-check"></i><b>9.2</b> Get the Data</a></li>
+<li class="chapter" data-level="9.3" data-path="inspecting-variables.html"><a href="inspecting-variables.html#formulate-your-question"><i class="fa fa-check"></i><b>9.3</b> 1. Formulate your question</a></li>
+<li class="chapter" data-level="9.4" data-path="inspecting-variables.html"><a href="inspecting-variables.html#read-in-your-data"><i class="fa fa-check"></i><b>9.4</b> 2. Read in your data</a></li>
+<li class="chapter" data-level="9.5" data-path="inspecting-variables.html"><a href="inspecting-variables.html#check-the-packaging"><i class="fa fa-check"></i><b>9.5</b> 3. Check the packaging</a></li>
+<li class="chapter" data-level="9.6" data-path="inspecting-variables.html"><a href="inspecting-variables.html#filter-mutate-count-and-pipes"><i class="fa fa-check"></i><b>9.6</b> Filter, mutate, count, and pipes</a></li>
+<li class="chapter" data-level="9.7" data-path="inspecting-variables.html"><a href="inspecting-variables.html#look-at-the-top-and-the-bottom-of-your-data"><i class="fa fa-check"></i><b>9.7</b> 4. Look at the top and the bottom of your data</a></li>
+<li class="chapter" data-level="9.8" data-path="inspecting-variables.html"><a href="inspecting-variables.html#check-your-ns-and-6.-validate-with-at-least-one-external-data-source"><i class="fa fa-check"></i><b>9.8</b> 5. Check your “n”s (and) 6. Validate with at least one external data source</a></li>
+<li class="chapter" data-level="9.9" data-path="inspecting-variables.html"><a href="inspecting-variables.html#from-dates-to-years"><i class="fa fa-check"></i><b>9.9</b> From dates to years</a></li>
+<li class="chapter" data-level="9.10" data-path="inspecting-variables.html"><a href="inspecting-variables.html#make-a-plot"><i class="fa fa-check"></i><b>9.10</b> 7. Make a plot</a></li>
+<li class="chapter" data-level="9.11" data-path="inspecting-variables.html"><a href="inspecting-variables.html#try-the-easy-solution-first"><i class="fa fa-check"></i><b>9.11</b> 8. Try the easy solution first</a></li>
+<li class="chapter" data-level="9.12" data-path="inspecting-variables.html"><a href="inspecting-variables.html#follow-up"><i class="fa fa-check"></i><b>9.12</b> 9. Follow up</a></li>
+<li class="chapter" data-level="9.13" data-path="inspecting-variables.html"><a href="inspecting-variables.html#lab-1"><i class="fa fa-check"></i><b>9.13</b> Lab</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="visual-eda.html"><a href="visual-eda.html"><i class="fa fa-check"></i><b>10</b> Visual EDA</a>
 <ul>
@@ -234,7 +245,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title">Data Science Methods for Cognitive Science</h1>
 <p class="author"><em>Dan Hicks, <a href="mailto:hicks.daniel.j@gmail.com" class="email">hicks.daniel.j@gmail.com</a></em></p>
-<p class="date"><em>Wed Sep 9 19:03:03 2020</em></p>
+<p class="date"><em>Sat Sep 12 19:57:43 2020</em></p>
 </div>
 <div id="preface" class="section level1 unnumbered" number="">
 <h1>Preface</h1>

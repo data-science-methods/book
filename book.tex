@@ -119,7 +119,7 @@
 
 \title{Data Science Methods for Cognitive Science}
 \author{Dan Hicks, \href{mailto:hicks.daniel.j@gmail.com}{\nolinkurl{hicks.daniel.j@gmail.com}}}
-\date{Wed Sep 9 19:03:06 2020}
+\date{Sat Sep 12 19:58:00 2020}
 
 \begin{document}
 \maketitle
@@ -1901,8 +1901,8 @@ answer\strut
 \bottomrule
 \end{longtable}
 
-\hypertarget{better-models-for-eda-iii-phenomena-development}{%
-\subsection{Better Models for EDA III: Phenomena Development}\label{better-models-for-eda-iii-phenomena-development}}
+\hypertarget{better-models-for-eda-iii-developing-phenomena}{%
+\subsection{Better Models for EDA III: Developing Phenomena}\label{better-models-for-eda-iii-developing-phenomena}}
 
 \emph{{[}todo{]}}
 
@@ -1991,48 +1991,947 @@ answer\strut
 \hypertarget{inspecting-variables}{%
 \section{Inspecting Variables}\label{inspecting-variables}}
 
-\hypertarget{type-range-and-missingness}{%
-\subsection{Type, range, and missingness}\label{type-range-and-missingness}}
+For this EDA, we'll work with data on police stops in Oakland, California, that have been pre-cleaned and released by the Stanford Open Policing Project. Because this analysis focuses on categorical data and counts of observations, most of the elements in Huebner, Vach, and le Cessie (\protect\hyperlink{ref-HuebnerSystematicApproachInitial2016}{2016}) don't really fit. So we'll follow the checklist from Peng and Matsui (\protect\hyperlink{ref-PengArtDataScience2016}{2016}).
 
-\begin{itemize}
-\item
-  \texttt{visdat}
-\item
-  \texttt{skimr}
-\item
-  missing values that aren't NA
-\item
-  Ames housing data
-\end{itemize}
+We'll also be learning how to use three R packages: \texttt{skimr} and \texttt{visdat} for getting an overview of the data in a dataframe, and \texttt{dplyr} for manipulating dataframes. A good cheatsheet for \texttt{dplyr} is available here: \url{https://raw.githubusercontent.com/rstudio/cheatsheets/master/data-transformation.pdf}.
 
-\hypertarget{constructing-aggregates}{%
-\subsection{Constructing aggregates}\label{constructing-aggregates}}
+\hypertarget{packages}{%
+\subsection{Packages}\label{packages}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(tidyverse)   }\CommentTok{\# for working with the data}
+\KeywordTok{library}\NormalTok{(lubridate)   }\CommentTok{\# for working with datetime data}
+\KeywordTok{library}\NormalTok{(vroom)       }\CommentTok{\# for quickly reading large CSV files}
+\KeywordTok{library}\NormalTok{(skimr)       }\CommentTok{\# generate a text{-}based overview of the data}
+\KeywordTok{library}\NormalTok{(visdat)      }\CommentTok{\# generate plots visualizing data types and missingness}
+\KeywordTok{library}\NormalTok{(tictoc)      }\CommentTok{\# for timing how long R takes to do the thing}
+
+\CommentTok{\#\# Set for the HTML output}
+\CommentTok{\#\# In RStudio, this is overriden by the width of the console pane}
+\KeywordTok{options}\NormalTok{(}\DataTypeTok{width =} \DecValTok{100}\NormalTok{)  }\CommentTok{\# wider output for skimr}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{get-the-data}{%
+\subsection{Get the Data}\label{get-the-data}}
+
+We'll be using data on police stops in Oakland, California, collected and published by the Stanford Open Policing Project, \url{https://openpolicing.stanford.edu/}. We'll start by making a \texttt{data} folder and downloading the data, if necessary. The URL for the data file can be found on \url{https://openpolicing.stanford.edu/data/}. It will also be useful to have the readme handy, \url{https://github.com/stanford-policylab/opp/blob/master/data_readme.md}.
+
+Because the next chunk of code might be intimidating to type out, and you need the url, I encourage you to copy and paste.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data\_dir =}\StringTok{ \textquotesingle{}data\textquotesingle{}}
+\NormalTok{target\_file =}\StringTok{ }\KeywordTok{file.path}\NormalTok{(data\_dir, }\StringTok{\textquotesingle{}oakland.zip\textquotesingle{}}\NormalTok{)}
+
+\ControlFlowTok{if}\NormalTok{ (}\OperatorTok{!}\KeywordTok{dir.exists}\NormalTok{(data\_dir)) \{}
+    \KeywordTok{dir.create}\NormalTok{(data\_dir)}
+\NormalTok{\}}
+\ControlFlowTok{if}\NormalTok{ (}\OperatorTok{!}\KeywordTok{file.exists}\NormalTok{(target\_file)) \{}
+    \KeywordTok{download.file}\NormalTok{(}\StringTok{\textquotesingle{}https://stacks.stanford.edu/file/druid:yg821jf8611/yg821jf8611\_ca\_oakland\_2020\_04\_01.csv.zip\textquotesingle{}}\NormalTok{, }
+\NormalTok{                  target\_file)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{formulate-your-question}{%
+\subsection{1. Formulate your question}\label{formulate-your-question}}
+
+The Black Lives Matter protests over the last several years have made us aware of the racial aspects of policing. So we're interested in
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Whether Black people in Oakland might be more likely to be stopped than White people
+\item
+  Whether Black people who are stopped might be more likely to have contraband
+\end{enumerate}
+
+These rough questions will be enough to get us started.
+
+\hypertarget{read-in-your-data}{%
+\subsection{2. Read in your data}\label{read-in-your-data}}
+
+The dataset is a zipped \texttt{csv} or comma-separated value file. CSVs are structured like Excel spreadsheets, but are stored in plain text rather than Excel's format.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#\# The base R function \textasciigrave{}read.csv()\textasciigrave{} can\textquotesingle{}t read a zipped file, and returns gibberish}
+\KeywordTok{read.csv}\NormalTok{(target\_file)}
+
+\CommentTok{\#\# The \textasciigrave{}read\_csv()\textasciigrave{} function, part of the tidyverse, takes 1.7 seconds on my laptop, but misinterprets several columns as logicals, resulting in parsing problems.}
+\CommentTok{\#\# (What goes wrong?  By default, \textasciigrave{}read\_csv()\textasciigrave{} looks at the first 1,000 rows to guess what the type of each column should be.  As we\textquotesingle{}ll see below, columns like \textasciigrave{}beat\textasciigrave{} and \textasciigrave{}subject\_age\textasciigrave{} are missing on the first 5,000+ rows.  So \textasciigrave{}read\_csv()\textasciigrave{} sees 1,000 missing values and guesses that these columns are \textasciigrave{}logical\textasciigrave{}, with values \textasciigrave{}TRUE\textasciigrave{} or \textasciigrave{}FALSE\textasciigrave{}.  We could fix this by changing the \textasciigrave{}guess\_max\textasciigrave{} argument, but that would slow things down even more.)}
+\KeywordTok{tic}\NormalTok{()}
+\KeywordTok{read\_csv}\NormalTok{(target\_file)}
+\KeywordTok{toc}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#\# The vroom package is 10x faster on my laptop and doesn\textquotesingle{}t have the parsing problems}
+\KeywordTok{tic}\NormalTok{()}
+\NormalTok{dataf =}\StringTok{ }\KeywordTok{vroom}\NormalTok{(target\_file)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Rows: 133,407
+## Columns: 28
+## Delimiter: ","
+## chr  [16]: raw_row_number, location, beat, subject_race, subject_sex, officer_assignment, type, outcome, searc...
+## dbl  [ 3]: lat, lng, subject_age
+## lgl  [ 7]: arrest_made, citation_issued, warning_issued, contraband_found, contraband_drugs, contraband_weapon...
+## date [ 1]: date
+## time [ 1]: time
+## 
+## Use `spec()` to retrieve the guessed column specification
+## Pass a specification to the `col_types` argument to quiet this message
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{toc}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 0.348 sec elapsed
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# class(dataf$beat)}
+\CommentTok{\# class(dataf$subject\_age)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{check-the-packaging}{%
+\subsection{3. Check the packaging}\label{check-the-packaging}}
+
+Peng and Matsui (\protect\hyperlink{ref-PengArtDataScience2016}{2016}) use some base R functions to look at dimensions of the dataframe and column (variable) types. \texttt{skimr} is more powerful.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#\# May take a couple of seconds}
+\KeywordTok{skim}\NormalTok{(dataf)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## -- Data Summary ------------------------
+##                            Values
+## Name                       dataf 
+## Number of rows             133407
+## Number of columns          28    
+## _______________________          
+## Column type frequency:           
+##   character                16    
+##   Date                     1     
+##   difftime                 1     
+##   logical                  7     
+##   numeric                  3     
+## ________________________         
+## Group variables            None  
+## 
+## -- Variable type: character ------------------------------------------------------------------------
+##    skim_variable                 n_missing complete_rate   min   max empty n_unique whitespace
+##  1 raw_row_number                        0        1          1    71     0   133407          0
+##  2 location                             51        1.00       1    78     0    60723          0
+##  3 beat                              72424        0.457      3    19     0      129          0
+##  4 subject_race                          0        1          5    22     0        5          0
+##  5 subject_sex                          90        0.999      4     6     0        2          0
+##  6 officer_assignment               121431        0.0898     5    97     0       20          0
+##  7 type                              20066        0.850      9    10     0        2          0
+##  8 outcome                           34107        0.744      6     8     0        3          0
+##  9 search_basis                      92250        0.309      5    14     0        3          0
+## 10 reason_for_stop                       0        1         14   197     0      113          0
+## 11 use_of_force_description         116734        0.125     10    10     0        1          0
+## 12 raw_subject_sdrace                    0        1          1     1     0        7          0
+## 13 raw_subject_resultofencounter         0        1          7   213     0      315          0
+## 14 raw_subject_searchconducted           0        1          2    24     0       34          0
+## 15 raw_subject_typeofsearch          52186        0.609      2   112     0      417          0
+## 16 raw_subject_resultofsearch       111633        0.163      5    95     0      298          0
+## 
+## -- Variable type: Date -----------------------------------------------------------------------------
+##   skim_variable n_missing complete_rate min        max        median     n_unique
+## 1 date                  2          1.00 2013-04-01 2017-12-31 2015-07-19     1638
+## 
+## -- Variable type: difftime -------------------------------------------------------------------------
+##   skim_variable n_missing complete_rate min    max        median n_unique
+## 1 time                  2          1.00 0 secs 86340 secs 16:12      1439
+## 
+## -- Variable type: logical --------------------------------------------------------------------------
+##   skim_variable      n_missing complete_rate   mean count                  
+## 1 arrest_made                0         1     0.121  FAL: 117217, TRU: 16190
+## 2 citation_issued            0         1     0.394  FAL: 80836, TRU: 52571 
+## 3 warning_issued             0         1     0.231  FAL: 102545, TRU: 30862
+## 4 contraband_found       92250         0.309 0.149  FAL: 35005, TRU: 6152  
+## 5 contraband_drugs       92250         0.309 0.0844 FAL: 37684, TRU: 3473  
+## 6 contraband_weapons     92250         0.309 0.0299 FAL: 39928, TRU: 1229  
+## 7 search_conducted           0         1     0.309  FAL: 92250, TRU: 41157 
+## 
+## -- Variable type: numeric --------------------------------------------------------------------------
+##   skim_variable n_missing complete_rate   mean      sd     p0    p25    p50    p75   p100 hist 
+## 1 lat                 114         0.999   37.8  0.0284   37.4   37.8   37.8   37.8   38.1 ▁▁▇▁▁
+## 2 lng                 114         0.999 -122.   0.0432 -122.  -122.  -122.  -122.  -119.  ▇▁▁▁▁
+## 3 subject_age      102724         0.230   33.2 13.3      10     23     29     41     97   ▇▆▃▁▁
+\end{verbatim}
 
 \begin{itemize}
 \tightlist
 \item
-  filter, count, summarize, arrange, view
+  133k rows (observations); 28 columns (variables)
+\item
+  16 variables are handled as characters
 
   \begin{itemize}
   \tightlist
   \item
-    mutate + string operations + functions to parse dollars in NSF data
+    \texttt{raw\_row\_number} has 1 unique value per row
+
+    \begin{itemize}
+    \tightlist
+    \item
+      So it's probably some kind of identifier
+    \end{itemize}
   \item
-    class: NSF Mind and Brain Awards
+    \texttt{subject\_race} and \texttt{subject\_sex} have just 5 and 2 unique values
+
+    \begin{itemize}
+    \tightlist
+    \item
+      These are probably categorical variables represented as characters
+    \end{itemize}
   \item
-    lab: Stanford Open Policing?
+    Similarly with \texttt{type}, \texttt{outcome}, and \texttt{search\_basis}
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Though these have lots of missing values (high \texttt{n\_missing}, low \texttt{complete\_rate})
+    \end{itemize}
   \end{itemize}
 \item
-  joins
+  1 variable represents the date, and another is \texttt{difftime}
 
   \begin{itemize}
   \tightlist
   \item
-    class: college tuition?
+    \texttt{?difftime} tells us that \texttt{difftime} is used to represent intervals or ``time differences''
+  \end{itemize}
+\item
+  7 logical variables
+
+  \begin{itemize}
+  \tightlist
   \item
-    lab: covdata
+    A lot of these look like coded outcomes that we might be interested in, eg, \texttt{search\_conducted} and \texttt{contraband\_found}
+  \item
+    \texttt{search\_conducted} has no missing values, but \texttt{contraband\_found} has a lot of missing values
+  \end{itemize}
+\item
+  For our motivating questions
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Good: \texttt{subject\_race} is 100\% complete
+  \item
+    Also good: \texttt{search\_conducted} is also 100\% complete
+  \item
+    Potentially worrisome: \texttt{contraband\_found} is only 31\% complete
   \end{itemize}
 \end{itemize}
+
+Let's use \texttt{vis\_miss()}, from \texttt{visdat}, to visualize missing values and check out what's up with \texttt{contraband\_found}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#\# This raises a warning about large data}
+\CommentTok{\# vis\_miss(dataf)}
+\CommentTok{\#\# So we\textquotesingle{}ll use sample\_n() to draw a subset}
+\KeywordTok{set.seed}\NormalTok{(}\DecValTok{2020{-}09{-}10}\NormalTok{)}
+\NormalTok{dataf\_smol =}\StringTok{ }\KeywordTok{sample\_n}\NormalTok{(dataf, }\DecValTok{1000}\NormalTok{)}
+
+\KeywordTok{vis\_miss}\NormalTok{(dataf\_smol)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.6\linewidth]{book_files/figure-latex/unnamed-chunk-42-1} \end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#\# Arguments in vis\_miss() are useful for picking up patterns in missing values}
+\CommentTok{\#\# cluster = TRUE uses hierarchical clustering to order the rows}
+\KeywordTok{vis\_miss}\NormalTok{(dataf\_smol, }\DataTypeTok{cluster =} \OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.6\linewidth]{book_files/figure-latex/unnamed-chunk-42-2} \end{center}
+
+\begin{itemize}
+\tightlist
+\item
+  Several variables related to search outcomes are missing together
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{contraband\_found}, \texttt{contraband\_drugs}, \texttt{contraband\_weapons}, \texttt{search\_basis}, \texttt{use\_of\_force\_description}, \texttt{raw\_subject\_typeofsearch}, and \texttt{raw\_subject\_resultofsearch}
+  \item
+    However, \texttt{search\_conducted} is complete
+  \item
+    \textbf{Critical question: When a search has been conducted, do we know whether contraband was found?}
+  \item
+    Semi-translated: when \texttt{search\_conducted\ ==\ TRUE}, is \texttt{!is.na(contraband\_found)}?
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{filter-mutate-count-and-pipes}{%
+\subsection{Filter, mutate, count, and pipes}\label{filter-mutate-count-and-pipes}}
+
+If the answer to this \textbf{critical question} is \textbf{no} (for a lot of rows), then we probably can't use it to answer our motivating questions. We'll use 4 tools from the tidyverse to answer this critical question.
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{filter(dataf,\ condition1,\ condition2,\ ...)}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Returns a subset of \texttt{dataf} where all of the \texttt{condition}s are true
+  \item
+    We'll use this to construct a subset where \texttt{search\_conducted\ ==\ TRUE}
+  \end{itemize}
+\item
+  \texttt{mutate(dataf,\ newvar\ =\ f(oldvar))}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Adds the column \texttt{newvar}; it doesn't change \texttt{oldvar}
+  \item
+    We'll use this to add a variable, \texttt{contraband\_known}, indicating whether \texttt{contraband\_found} is missing.
+  \end{itemize}
+\item
+  \texttt{count(dataf,\ group1,\ group2,\ ...)}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Organizes \texttt{dataf} into groups based on the unique values of the \texttt{group} variables, then
+  \item
+    Counts the number of rows in each group
+  \item
+    We'll use this to count the number of rows in our subset where the value of \texttt{contraband\_found} is known or missing
+  \end{itemize}
+\item
+  The pipe \texttt{\%\textgreater{}\%}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Lets us string together a series of function calls
+  \item
+    The output of one function gets passed as the first argument to the next function
+  \item
+    The tidyverse functions are set up to be pipe-friendly: they take a dataframe as the first argument, and output a dataframe
+  \item
+    We'll use this to put the function calls together into a single analysis pipeline
+
+    \begin{itemize}
+    \tightlist
+    \item
+      More functional: We won't be changing \texttt{dataf}
+    \item
+      Less cluttered: We don't need to create intermediate variables for each step
+    \end{itemize}
+  \end{itemize}
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dataf }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{    }\KeywordTok{filter}\NormalTok{(search\_conducted) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{    }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{contraband\_known =} \OperatorTok{!}\KeywordTok{is.na}\NormalTok{(contraband\_found)) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{    }\KeywordTok{count}\NormalTok{(search\_conducted, contraband\_known)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 1 x 3
+##   search_conducted contraband_known     n
+##   <lgl>            <lgl>            <int>
+## 1 TRUE             TRUE             41157
+\end{verbatim}
+
+\hypertarget{look-at-the-top-and-the-bottom-of-your-data}{%
+\subsection{4. Look at the top and the bottom of your data}\label{look-at-the-top-and-the-bottom-of-your-data}}
+
+With 28 columns, the dataframe is too wide to print in a readable way. We could use the \texttt{select()} function (from the tidyverse) to extract and print a few columns at a time.
+
+Instead we'll use the base R function \texttt{View()} in an interactive session. This shows us an Excel-like spreadsheet presentation of a dataframe.
+
+\texttt{View()} can cause significant problems if you use it with a large dataframe on a slower machine. So we'll use a pipe: first extract the \texttt{head()} or \texttt{tail()} of the dataset, and then \texttt{View()} it. We'll also go ahead and view \texttt{dataf\_smol}, the subset we created for \texttt{visdat} above.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dataf }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{    }\KeywordTok{head}\NormalTok{() }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{    }\KeywordTok{View}\NormalTok{()}
+
+\NormalTok{dataf }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{    }\KeywordTok{tail}\NormalTok{() }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{    }\KeywordTok{View}\NormalTok{()}
+
+\KeywordTok{View}\NormalTok{(dataf\_smol)}
+\end{Highlighting}
+\end{Shaded}
+
+Some of my observations:
+
+\begin{itemize}
+\tightlist
+\item
+  The ID variable \texttt{raw\_row\_number} can't be turned into a numeric value
+\item
+  \texttt{location} is a mix of addresses and intersections (``Bond St @ 48TH AVE'')
+
+  \begin{itemize}
+  \tightlist
+  \item
+    If we were going to generate a map using this column, geocoding might be tricky
+  \item
+    Fortunately we also get latitude and longitude columns
+  \end{itemize}
+\item
+  \texttt{use\_of\_force\_description} doesn't seem to be a descriptive text field; instead it seems to be mostly missing or ``handcuffed''
+\end{itemize}
+
+We can also use \texttt{skimr} to check data quality by looking at the minimum and maximum values. Do these ranges make sense for what we expect the variable to be?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{skim}\NormalTok{(dataf)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## -- Data Summary ------------------------
+##                            Values
+## Name                       dataf 
+## Number of rows             133407
+## Number of columns          28    
+## _______________________          
+## Column type frequency:           
+##   character                16    
+##   Date                     1     
+##   difftime                 1     
+##   logical                  7     
+##   numeric                  3     
+## ________________________         
+## Group variables            None  
+## 
+## -- Variable type: character ------------------------------------------------------------------------
+##    skim_variable                 n_missing complete_rate   min   max empty n_unique whitespace
+##  1 raw_row_number                        0        1          1    71     0   133407          0
+##  2 location                             51        1.00       1    78     0    60723          0
+##  3 beat                              72424        0.457      3    19     0      129          0
+##  4 subject_race                          0        1          5    22     0        5          0
+##  5 subject_sex                          90        0.999      4     6     0        2          0
+##  6 officer_assignment               121431        0.0898     5    97     0       20          0
+##  7 type                              20066        0.850      9    10     0        2          0
+##  8 outcome                           34107        0.744      6     8     0        3          0
+##  9 search_basis                      92250        0.309      5    14     0        3          0
+## 10 reason_for_stop                       0        1         14   197     0      113          0
+## 11 use_of_force_description         116734        0.125     10    10     0        1          0
+## 12 raw_subject_sdrace                    0        1          1     1     0        7          0
+## 13 raw_subject_resultofencounter         0        1          7   213     0      315          0
+## 14 raw_subject_searchconducted           0        1          2    24     0       34          0
+## 15 raw_subject_typeofsearch          52186        0.609      2   112     0      417          0
+## 16 raw_subject_resultofsearch       111633        0.163      5    95     0      298          0
+## 
+## -- Variable type: Date -----------------------------------------------------------------------------
+##   skim_variable n_missing complete_rate min        max        median     n_unique
+## 1 date                  2          1.00 2013-04-01 2017-12-31 2015-07-19     1638
+## 
+## -- Variable type: difftime -------------------------------------------------------------------------
+##   skim_variable n_missing complete_rate min    max        median n_unique
+## 1 time                  2          1.00 0 secs 86340 secs 16:12      1439
+## 
+## -- Variable type: logical --------------------------------------------------------------------------
+##   skim_variable      n_missing complete_rate   mean count                  
+## 1 arrest_made                0         1     0.121  FAL: 117217, TRU: 16190
+## 2 citation_issued            0         1     0.394  FAL: 80836, TRU: 52571 
+## 3 warning_issued             0         1     0.231  FAL: 102545, TRU: 30862
+## 4 contraband_found       92250         0.309 0.149  FAL: 35005, TRU: 6152  
+## 5 contraband_drugs       92250         0.309 0.0844 FAL: 37684, TRU: 3473  
+## 6 contraband_weapons     92250         0.309 0.0299 FAL: 39928, TRU: 1229  
+## 7 search_conducted           0         1     0.309  FAL: 92250, TRU: 41157 
+## 
+## -- Variable type: numeric --------------------------------------------------------------------------
+##   skim_variable n_missing complete_rate   mean      sd     p0    p25    p50    p75   p100 hist 
+## 1 lat                 114         0.999   37.8  0.0284   37.4   37.8   37.8   37.8   38.1 ▁▁▇▁▁
+## 2 lng                 114         0.999 -122.   0.0432 -122.  -122.  -122.  -122.  -119.  ▇▁▁▁▁
+## 3 subject_age      102724         0.230   33.2 13.3      10     23     29     41     97   ▇▆▃▁▁
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  Date range is April 1, 2013 to December 31, 2017
+
+  \begin{itemize}
+  \tightlist
+  \item
+    If we break things down by year, we should expect 2013 to have fewer cases
+  \item
+    For some purposes, we might need to exclude 2013 data: \texttt{filter(dataf,\ date\ \textgreater{}=\ \textquotesingle{}2014-01-01\textquotesingle{})}
+  \end{itemize}
+\item
+  Age range is from 10 years old (!) to 97 (!)
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Median (\texttt{p50}) is 29; 50\% of values are between 23 and 41
+  \item
+    For some purposes, we might need to restrict the analysis to working-age adults: \texttt{filter(dataf,\ subject\_age\ \textgreater{}=\ 18,\ subject\_age\ \textless{}\ 65)}
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{check-your-ns-and-6.-validate-with-at-least-one-external-data-source}{%
+\subsection{5. Check your ``n''s (and) 6. Validate with at least one external data source}\label{check-your-ns-and-6.-validate-with-at-least-one-external-data-source}}
+
+\begin{itemize}
+\tightlist
+\item
+  Peng and Matsui (\protect\hyperlink{ref-PengArtDataScience2016}{2016}) use an air quality example with a regular sampling rate,
+
+  \begin{itemize}
+  \tightlist
+  \item
+    so they can calculate exactly how many observations they should have.
+  \end{itemize}
+\item
+  We can't do that here
+
+  \begin{itemize}
+  \tightlist
+  \item
+    So we'll combine steps 5 and 6 together
+  \end{itemize}
+\item
+  A web search leads us to this City of Oakland page on police stop data: \url{https://www.oaklandca.gov/resources/stop-data}
+
+  \begin{itemize}
+  \item
+    The page mentions a Stanford study that was released in June 2016
+  \item
+    Recall we got our data from the Stanford Open Policing Project
+  \item
+    Our data run through December 2017
+  \item
+    So there's a good chance we're using a superset of the ``Stanford study'' data
+  \item
+    The page links to this report: \url{https://cao-94612.s3.amazonaws.com/documents/OPD-Racial-Impact-Report-2016-2018-Final-16Apr19.pdf}
+  \item
+    Page 8 has two summary tables that we can compare to our data
+  \end{itemize}
+\end{itemize}
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.6\linewidth]{images/03-eda/Oakland_report_tables} 
+
+}
+
+\caption{Screenshot of the two summary tables from the Oakland report.  Source: <https://cao-94612.s3.amazonaws.com/documents/OPD-Racial-Impact-Report-2016-2018-Final-16Apr19.pdf>, page 8}\label{fig:unnamed-chunk-46}
+\end{figure}
+
+\hypertarget{from-dates-to-years}{%
+\subsection{From dates to years}\label{from-dates-to-years}}
+
+\begin{itemize}
+\tightlist
+\item
+  Our data has the particular date of each stop
+
+  \begin{itemize}
+  \tightlist
+  \item
+    We need to extract the year of each stop
+
+    \begin{itemize}
+    \tightlist
+    \item
+      \texttt{lubridate::year()} does exactly this
+    \end{itemize}
+  \item
+    Filter to the years in our data that overlap with the tables
+  \item
+    And then aggregate by year (and gender) using \texttt{count}
+  \end{itemize}
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dataf }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{    }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{year =} \KeywordTok{year}\NormalTok{(date)) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{    }\KeywordTok{filter}\NormalTok{(year }\OperatorTok{\%in\%}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{2016}\NormalTok{, }\DecValTok{2017}\NormalTok{)) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{    }\KeywordTok{count}\NormalTok{(year)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 2 x 2
+##    year     n
+##   <dbl> <int>
+## 1  2016 30268
+## 2  2017 30715
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dataf }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{    }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{year =} \KeywordTok{year}\NormalTok{(date)) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{    }\KeywordTok{filter}\NormalTok{(year }\OperatorTok{\%in\%}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{2016}\NormalTok{, }\DecValTok{2017}\NormalTok{)) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{    }\KeywordTok{count}\NormalTok{(year, subject\_sex)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 3
+##    year subject_sex     n
+##   <dbl> <chr>       <int>
+## 1  2016 female       7677
+## 2  2016 male        22563
+## 3  2016 <NA>           28
+## 4  2017 female       7879
+## 5  2017 male        22818
+## 6  2017 <NA>           18
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  \emph{For both years, we have fewer observations than the report table indicates}
+
+  \begin{itemize}
+  \item
+    Could our data have been pre-filtered?
+  \item
+    Let's check the documentation for our data: \url{https://github.com/stanford-policylab/opp/blob/master/data_readme.md\#oakland-ca}
+  \item
+    ``Data is deduplicated on raw columns contactdate, contacttime, streetname, subject\_sdrace, subject\_sex, and subject\_age, reducing the number of records by \textasciitilde5.2\%''
+
+    \begin{itemize}
+    \tightlist
+    \item
+      The difference with the report is on this order of magnitude,
+    \item
+      But varies within groups by several percentage points
+    \item
+      So deduplication \emph{might} explain the difference
+    \item
+      But in a more serious analysis we might want to check, eg, with the Stanford Open Policing folks
+    \end{itemize}
+  \end{itemize}
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#\# Men in 2016 in the report vs. our data: 8.2\%}
+\NormalTok{(}\DecValTok{24576} \OperatorTok{{-}}\StringTok{ }\DecValTok{22563}\NormalTok{) }\OperatorTok{/}\StringTok{ }\DecValTok{24576}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.08190918
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#\# Women in 2016 in the report vs. our data: 3.6\%}
+\NormalTok{(}\DecValTok{7965} \OperatorTok{{-}}\StringTok{ }\DecValTok{7677}\NormalTok{) }\OperatorTok{/}\StringTok{ }\DecValTok{7965}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.03615819
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#\# All of 2016 in the report vs. our data: 7.1\%}
+\NormalTok{(}\DecValTok{32569} \OperatorTok{{-}}\StringTok{ }\DecValTok{30268}\NormalTok{) }\OperatorTok{/}\StringTok{ }\DecValTok{32569}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.07065
+\end{verbatim}
+
+\hypertarget{make-a-plot}{%
+\subsection{7. Make a plot}\label{make-a-plot}}
+
+Plotting is a whole additional discussion. We'll talk about it next week.
+
+\hypertarget{try-the-easy-solution-first}{%
+\subsection{8. Try the easy solution first}\label{try-the-easy-solution-first}}
+
+We are interested in two rough questions:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Whether Black people in Oakland might be more likely to be stopped than White people
+\item
+  Whether Black people who are stopped might be more likely to have contraband
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  The easy solution is to count rows, mostly using the tools we've already developed.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    We'll use \texttt{mutate()} after \texttt{count()} to calculate shares, ie, what fraction of the total are in each group
+  \item
+    We'll also introduce the function \texttt{arrange()}, to sort the dataframe from greatest to smallest share
+  \item
+    And \texttt{group\_by()} to calculate shares within racial groups
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{number-of-stops-by-race}{%
+\subsubsection{Number of stops, by race}\label{number-of-stops-by-race}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dataf }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{    }\KeywordTok{count}\NormalTok{(subject\_race) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{    }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{share =}\NormalTok{ n }\OperatorTok{/}\StringTok{ }\KeywordTok{sum}\NormalTok{(n)) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{    }\KeywordTok{arrange}\NormalTok{(}\KeywordTok{desc}\NormalTok{(share))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 5 x 3
+##   subject_race               n  share
+##   <chr>                  <int>  <dbl>
+## 1 black                  78925 0.592 
+## 2 hispanic               26257 0.197 
+## 3 white                  15628 0.117 
+## 4 asian/pacific islander  8099 0.0607
+## 5 other                   4498 0.0337
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  Police stop demographics
+
+  \begin{itemize}
+  \tightlist
+  \item
+    60\% of subjects stopped by police are Black
+  \item
+    19\% are Hispanic
+  \item
+    12\% are White
+  \item
+    6\% are API
+  \end{itemize}
+\item
+  Oakland demographics: \url{https://en.wikipedia.org/wiki/Oakland,_California\#Race_and_ethnicity}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    23\% of residents are Black
+  \item
+    27\% are Hispanic
+  \item
+    29\% are non-Hispanic White
+  \item
+    15\% are Asian
+  \end{itemize}
+\item
+  Comparing the two
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \emph{Blacks are severely overrepresented in police stops}
+  \item
+    Hispanics and API folks are slightly underrepresented
+  \item
+    Whites are significantly underrepresented
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{contraband-search-results-by-race}{%
+\subsubsection{Contraband search results, by race}\label{contraband-search-results-by-race}}
+
+As a preliminary question, what fraction of stops had a search? Are there disparities by race there? We can answer the first question using tools we already have.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#\# What fraction of stops had a search? }
+\CommentTok{\#\# 31\%}
+\NormalTok{dataf }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{    }\KeywordTok{count}\NormalTok{(search\_conducted) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{    }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{share =}\NormalTok{ n)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 2 x 3
+##   search_conducted     n share
+##   <lgl>            <int> <int>
+## 1 FALSE            92250 92250
+## 2 TRUE             41157 41157
+\end{verbatim}
+
+Across all subjects, 31\% of stops involved a search.
+
+For the other question, we need to calculate something like \texttt{share} \emph{within} racial groups. That is, among all stops \emph{of Black folks}, what fraction involved a search? The \texttt{group\_by()} function divides the dataset into groups that other tidyverse functions respect. Specifically, \texttt{count()} and \texttt{mutate()} will both analyze each group defined by \texttt{subject\_race} separately.
+
+After using \texttt{group\_by()}, it's good practice to always call \texttt{ungroup()}. We don't want to accidentally work with the grouped version in another part of our analysis.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#\# What fraction of stops had a search, by race? }
+\CommentTok{\#\# Note that, for each racial group, \textasciigrave{}share\textasciigrave{} adds up to 100\%}
+\CommentTok{\#\# For all groups, most stops didn\textquotesingle{}t involve a search}
+\CommentTok{\#\# For Black subjects, 38\% of stops involved a search}
+\CommentTok{\#\# For White subjects, 15\% of stops involved a search}
+\NormalTok{dataf }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{    }\KeywordTok{group\_by}\NormalTok{(subject\_race) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{    }\KeywordTok{count}\NormalTok{(search\_conducted) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{    }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{share =}\NormalTok{ n }\OperatorTok{/}\StringTok{ }\KeywordTok{sum}\NormalTok{(n)) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{    }\KeywordTok{ungroup}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 10 x 4
+##    subject_race           search_conducted     n share
+##    <chr>                  <lgl>            <int> <dbl>
+##  1 asian/pacific islander FALSE             6795 0.839
+##  2 asian/pacific islander TRUE              1304 0.161
+##  3 black                  FALSE            48900 0.620
+##  4 black                  TRUE             30025 0.380
+##  5 hispanic               FALSE            19535 0.744
+##  6 hispanic               TRUE              6722 0.256
+##  7 other                  FALSE             3792 0.843
+##  8 other                  TRUE               706 0.157
+##  9 white                  FALSE            13228 0.846
+## 10 white                  TRUE              2400 0.154
+\end{verbatim}
+
+\begin{itemize}
+\item
+  For all groups, most stops didn't involve a search
+\item
+  For Black subjects, 38\% of stops involved a search
+\item
+  For White subjects, 15\% of stops involved a search
+\item
+  \emph{So police were much more likely to search stopped Black subjects than White subjects}
+\end{itemize}
+
+Finally, let's consider our second main question: contraband results from searches. Note that we want to restrict ourselves to only stops where \texttt{search\_conducted} is true.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#\# Contraband results from searches, by race}
+\NormalTok{dataf }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{    }\KeywordTok{filter}\NormalTok{(search\_conducted) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{    }\KeywordTok{count}\NormalTok{(subject\_race, contraband\_found) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{    }\KeywordTok{group\_by}\NormalTok{(subject\_race) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{    }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{share =}\NormalTok{ n }\OperatorTok{/}\StringTok{ }\KeywordTok{sum}\NormalTok{(n)) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{    }\KeywordTok{ungroup}\NormalTok{() }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{    }\KeywordTok{filter}\NormalTok{(contraband\_found)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 5 x 4
+##   subject_race           contraband_found     n share
+##   <chr>                  <lgl>            <int> <dbl>
+## 1 asian/pacific islander TRUE               176 0.135
+## 2 black                  TRUE              4364 0.145
+## 3 hispanic               TRUE              1116 0.166
+## 4 other                  TRUE                85 0.120
+## 5 white                  TRUE               411 0.171
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  For Black subjects who were searched, contraband was found 15\% of the time
+\item
+  For White subjects, 17\% of the time
+\end{itemize}
+
+\textbf{This preliminary analysis indicates that Black subjects were more likely to be searched than White subjects; but, when they were searched, White subjects were more likely to have contraband.}
+
+\hypertarget{follow-up}{%
+\subsection{9. Follow up}\label{follow-up}}
+
+\begin{itemize}
+\tightlist
+\item
+  There are several directions we could take this analysis:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Investigate outstanding questions about quality and reliability of the data
+
+    \begin{itemize}
+    \tightlist
+    \item
+      eg, follow up with Stanford Open Policing Project about the difference in row counts
+    \item
+      Fits with \emph{risk management} (spiral model): spend a little more time checking to make sure the data aren't corrupted
+    \end{itemize}
+  \item
+    Break down our question into more fine-grained analyses
+
+    \begin{itemize}
+    \tightlist
+    \item
+      eg, the Oakland web site and report talk about policy changes; do we see changes by year in the data?
+    \item
+      Fits with \emph{epicycle of analysis}: refine and specify research questions
+    \end{itemize}
+  \item
+    Apply more sophisticated statistical analysis
+
+    \begin{itemize}
+    \tightlist
+    \item
+      eg, a regression model to control for age, gender, and other covariates
+    \item
+      Fits with \emph{phenomena development}: reducing data, eliminating noise, in order to identity phenomena candidates
+    \end{itemize}
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{lab-1}{%
+\subsection{Lab}\label{lab-1}}
+
+The lab related to this material is available at \url{https://github.com/data-science-methods/lab-w04-eda}.
 
 \hypertarget{visual-eda}{%
 \section{Visual EDA}\label{visual-eda}}
