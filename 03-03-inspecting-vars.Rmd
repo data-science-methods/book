@@ -5,6 +5,8 @@
 
 For this EDA, we'll work with data on police stops in Oakland, California, that have been pre-cleaned and released by the Stanford Open Policing Project.  Because this analysis focuses on categorical data and counts of observations, most of the elements in @HuebnerSystematicApproachInitial2016 don't really fit.  So we'll follow the checklist from @PengArtDataScience2016. 
 
+We'll also be learning how to use three R packages:  `skimr` and `visdat` for getting an overview of the data in a dataframe, and `dplyr` for manipulating dataframes.  A good cheatsheet for `dplyr` is available here:  <https://raw.githubusercontent.com/rstudio/cheatsheets/master/data-transformation.pdf>. 
+
 ## Packages ##
 
 ```{r, echo=TRUE, message=FALSE}
@@ -353,26 +355,19 @@ dataf %>%
 - There are several directions we could take this analysis:  
     - Investigate outstanding questions about quality and reliability of the data
         - eg, follow up with Stanford Open Policing Project about the difference in row counts
-        - Fits with the *risk management* perspective of Boehm's spiral development model
+        - Fits with *risk management* (spiral model): spend a little more time checking to make sure the data aren't corrupted
 
-    - Break down our question into sub-analyses
+    - Break down our question into more fine-grained analyses
         - eg, the Oakland web site and report talk about policy changes; do we see changes by year in the data? 
-        - Fits with Bogen and Woodward's *data-phenomena-theory* model
+        - Fits with *epicycle of analysis*: refine and specify research questions
 
-    - Apply more sophisticated analysis
+    - Apply more sophisticated statistical analysis
         - eg, a regression model to control for age, gender, and other covariates
-        - Fits with all three models of EDA
+        - Fits with *phenomena development*: reducing data, eliminating noise, in order to identity phenomena candidates
 
-*[todo]*: lab
 
-## Constructing aggregates ##
-- filter, count, summarize, arrange, view
-    - mutate + string operations + functions to parse dollars in NSF data
-    - class: NSF Mind and Brain Awards
-    - lab: Stanford Open Policing? 
+## Lab ##
 
-- joins 
-    - class: college tuition?
-    - lab: covdata
+The lab related to this material is available at <https://github.com/data-science-methods/lab-w04-eda>. 
 
 

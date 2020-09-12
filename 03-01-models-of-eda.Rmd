@@ -118,7 +118,7 @@ answer
 ------------------------------------------------------------------------
 
 
-## Better Models for EDA III: Phenomena Development ##
+## Better Models for EDA III: Developing Phenomena ##
 
 *[todo]*
 
