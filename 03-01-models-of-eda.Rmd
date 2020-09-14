@@ -32,15 +32,16 @@ avoids inferential errors       *makes* errors?
 
 ## Better Models for EDA I:  Risk Management in Spiral Development ##
 
-```{r, echo=FALSE, fig.cap="The waterfall model of software development resembles the elementary school model of \"the scientific method,\" with an inflexible, linear sequence of predefined steps.  Source: <https://en.wikipedia.org/wiki/Waterfall_model>", out.width='50%', fig.show="hold"}
+(ref:waterfall) The waterfall model of software development resembles the elementary school model of "the scientific method," with an inflexible, linear sequence of predefined steps.  Source: <https://en.wikipedia.org/wiki/Waterfall_model>
+
+```{r, echo=FALSE, fig.cap='(ref:waterfall)', out.width='50%', fig.show="hold", sanitize=TRUE}
 knitr::include_graphics(file.path('images', '03-eda', 'waterfall.png'))
 knitr::include_graphics(file.path('images', '03-eda', 'scientific_method.png'))
 ```
 
-```{r, echo=FALSE, out.width='20%', fig.cap="'The Scientific Method.' Source: "}
-```
+(ref:boehm) Boehm's spiral model of software development, based on @BoehmSpiralModelSoftware1988, fig. 2.  Source: <https://en.wikipedia.org/wiki/Spiral_model>
 
-```{r, echo=FALSE, fig.cap="Boehm's spiral model of software development, based on @BoehmSpiralModelSoftware1988, fig. 2.  Source: <https://en.wikipedia.org/wiki/Spiral_model>"}
+```{r, echo=FALSE, fig.cap="(ref:boehm)", sanitize=TRUE}
 knitr::include_graphics(file.path('images', '03-eda', 'spiral.png'))
 ```
 
@@ -67,7 +68,7 @@ knitr::include_graphics(file.path('images', '03-eda', 'spiral.png'))
     b. Is there a sufficient definition of the preferred approach to satisfying everyone's win conditions, and are all significant risks eliminated or mitigated? 
     c. Is there sufficient preparation of the software, site, users, operators, and maintainers to satisfy everyone's win conditions by launching the system? 
         
-### Scientific research projects using the spiral model ###
+### Academic science in terms of the spiral model ###
     
 - Start small: pilot study, subset of big data
 - Stakeholders
@@ -84,7 +85,8 @@ knitr::include_graphics(file.path('images', '03-eda', 'spiral.png'))
 ## Better Models for EDA II: Epicycle of Analysis ##
 
 ```{r, echo=FALSE, fig.cap="Epicycle of analysis model, @PengArtDataScience2016, 5"}
-knitr::include_graphics(file.path('images', '03-eda', 'epicycle.png'))
+knitr::include_graphics(file.path('images', '03-eda', 'epicycle.png'), 
+                        auto_pdf = FALSE)
 ```
 
 - @PengArtDataScience2016
@@ -120,17 +122,38 @@ answer
 
 ## Better Models for EDA III: Developing Phenomena ##
 
-*[todo]*
+- @BogenSavingPhenomena1988
+    - *data*
+        - observed
+        - not explainable (because of random error and idiosyncracies of data collection)
+        - local to a time, place, sample, data collection procedure
+        - provide evidence for phenomena
+        - example:  a spreadsheet of numbers, downloaded from Qualtrics
 
-- @BogenSavingPhenomena1988, §§ intro and III-IV (303-6, 315-25)
+    - *phenomena*
+        - not observed
+        - constructed using techniques for data analysis
+        - explainable by theories
+        - stable over a broader or narrow range of times, places, samples, procedures
+        - provide evidence for theories
+        - don't explain anything
+        - example:  correlation between partisan identification and sharing covid misinformation
 
-- is "theory" the right term? 
-    - mechanisms; causal processes; explanations
-    
-- note on the stability of phenomena
-    - the pattern is present here and now
-    - the question is, will it be present elsewhere in the future? 
-    - replicability
-    - as an answer to worries about type I errors, p-hacking
+    - *theories*
+        - not observed
+        - constructed to explain phenomena
+        - *might* explain deductively (eg, some parts of physics)
+            - or might enable a "detailed tracing of the causal mechanisms responsible for the facts to be explained" (324)
+        - stable over a broader or narrow range of times, places, samples, procedures
+        - example:  conservative messaging -> anxiety -> susceptibility to conspiracy theories
+
+- **EDA as developing phenomena**
+    - starting to mitigate random error and idiosyncracies
+    - identifying *local* patterns ("local phenomena")
+    - **not yet claiming these will be stable and appear elsewhere**
+    - not yet worrying (much) about explanations
 
 
+## Discussion questions ##
+
+1. For each of these models, how well do they fit the way you've been taught to do science?  How do they challenge the way you've been taught to do science? 

@@ -1,6 +1,7 @@
 --- 
 title: "Data Science Methods for Cognitive Science"
 author: "Dan Hicks, <hicks.daniel.j@gmail.com>"
+github-repo: data-science-methods/book
 date: "`r date()`"
 site: bookdown::bookdown_site
 # documentclass: book
