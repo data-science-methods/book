@@ -2,6 +2,11 @@ language: r
 cache: packages
 pandoc_version: 2.9.2
 
+before_install:
+- tlmgr update --all || true     # one package fails to update but that doesn't affect the outcome
+- tlmgr install unicode-math lualatex-math pdftexcmds infwarerr luaotfload
+- luaotfload-tool --update
+
 before_script:
   - chmod +x ./_build.sh
   - chmod +x ./_deploy.sh
