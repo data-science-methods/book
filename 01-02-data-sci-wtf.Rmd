@@ -5,7 +5,9 @@
 
 ## Standard definition ##
 
-```{r, echo=FALSE, fig.cap='Data science, defined as the intersection of CS, stats, and "business knowledge." Source: <https://www.kdnuggets.com/2020/08/top-10-lists-data-science.html>'}
+(ref:ds-standard) Data science, defined as the intersection of CS, stats, and "business knowledge." Source: <https://www.kdnuggets.com/2020/08/top-10-lists-data-science.html>
+
+```{r, echo=FALSE, fig.cap='(ref:ds-standard)'}
 knitr::include_graphics('images/Abisiga.jpg')
 ```
 
@@ -13,16 +15,22 @@ knitr::include_graphics('images/Abisiga.jpg')
 
 Or, more concretely, 
 
-```{r, echo=FALSE, fig.cap='Boykis Twitter poll of "data scientists"; 67\\% said they spend most of their time cleaning data/moving data. Source: <https://twitter.com/vboykis/status/1089920316644704256>'}
+(ref:boykis) Boykis Twitter poll of "data scientists"; 67% said they spend most of their time cleaning data/moving data. Source: <https://twitter.com/vboykis/status/1089920316644704256>
+
+```{r, echo=FALSE, fig.cap='(ref:boykis)'}
 knitr::include_graphics('images/Boykis.png')
 ```
 
 
-```{r, echo=FALSE, fig.cap='Scott tweet: "One of the biggest failures I see in junior ML/CV engineers is a complete lack of interest in building data sets. While it is boring grunt work I think there is so much to be learned in putting together a dataset. It is like half the problem." Source: <https://twitter.com/kscottz/status/1091423467772162049>'}
+(ref:scott) Scott tweet: "One of the biggest failures I see in junior ML/CV engineers is a complete lack of interest in building data sets. While it is boring grunt work I think there is so much to be learned in putting together a dataset. It is like half the problem." Source: <https://twitter.com/kscottz/status/1091423467772162049>
+
+```{r, echo=FALSE, fig.cap='(ref:scott)'}
 knitr::include_graphics('images/Scott.png')
 ```
 
-```{r, echo=FALSE, fig.cap='Hudon tweet containing a graphic labelled "Full Stack Data Science," with categories "data engineer" (entries collect, build data pipeline), "data analyst" (entries reporting, data viz), "data scientist" (entries build models, run statistical tests), and "machine learning engineer" (entries deploy model, build model). Source: <https://twitter.com/beeonaposy/status/1298070348844457987>'}
+(ref:hudon) Hudon tweet containing a graphic labelled "Full Stack Data Science," with categories "data engineer" (entries collect, build data pipeline), "data analyst" (entries reporting, data viz), "data scientist" (entries build models, run statistical tests), and "machine learning engineer" (entries deploy model, build model). Source: <https://twitter.com/beeonaposy/status/1298070348844457987>
+
+```{r, echo=FALSE, fig.cap='(ref:hudon)'}
 knitr::include_graphics('images/Hudon.png')
 ```
 
