@@ -13,7 +13,7 @@
   
   
   <meta property="og:description" content="This document is a set of notes (and perhaps later a textbook) for a course on data science methods for graduate students in social and behavioral sciences." />
-  
+  <meta name="github-repo" content="data-science-methods/book" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Chapter 7 Exploratory Data Analysis | Data Science Methods for Cognitive Science" />
@@ -190,6 +190,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#better-models-for-eda-i-risk-management-in-spiral-development"><i class="fa fa-check"></i><b>7.2</b> Better Models for EDA I: Risk Management in Spiral Development</a></li>
 <li class="chapter" data-level="7.3" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#better-models-for-eda-ii-epicycle-of-analysis"><i class="fa fa-check"></i><b>7.3</b> Better Models for EDA II: Epicycle of Analysis</a></li>
 <li class="chapter" data-level="7.4" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#better-models-for-eda-iii-developing-phenomena"><i class="fa fa-check"></i><b>7.4</b> Better Models for EDA III: Developing Phenomena</a></li>
+<li class="chapter" data-level="7.5" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#discussion-questions"><i class="fa fa-check"></i><b>7.5</b> Discussion questions</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="two-eda-checklists.html"><a href="two-eda-checklists.html"><i class="fa fa-check"></i><b>8</b> Two EDA “Checklists”</a>
 <ul>
@@ -210,7 +211,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.10" data-path="inspecting-variables.html"><a href="inspecting-variables.html#make-a-plot"><i class="fa fa-check"></i><b>9.10</b> 7. Make a plot</a></li>
 <li class="chapter" data-level="9.11" data-path="inspecting-variables.html"><a href="inspecting-variables.html#try-the-easy-solution-first"><i class="fa fa-check"></i><b>9.11</b> 8. Try the easy solution first</a></li>
 <li class="chapter" data-level="9.12" data-path="inspecting-variables.html"><a href="inspecting-variables.html#follow-up"><i class="fa fa-check"></i><b>9.12</b> 9. Follow up</a></li>
-<li class="chapter" data-level="9.13" data-path="inspecting-variables.html"><a href="inspecting-variables.html#lab-1"><i class="fa fa-check"></i><b>9.13</b> Lab</a></li>
+<li class="chapter" data-level="9.13" data-path="inspecting-variables.html"><a href="inspecting-variables.html#discussion-questions-1"><i class="fa fa-check"></i><b>9.13</b> Discussion questions</a></li>
+<li class="chapter" data-level="9.14" data-path="inspecting-variables.html"><a href="inspecting-variables.html#lab-1"><i class="fa fa-check"></i><b>9.14</b> Lab</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="visual-eda.html"><a href="visual-eda.html"><i class="fa fa-check"></i><b>10</b> Visual EDA</a>
 <ul>
@@ -297,14 +299,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="better-models-for-eda-i-risk-management-in-spiral-development" class="section level2" number="7.2">
 <h2><span class="header-section-number">7.2</span> Better Models for EDA I: Risk Management in Spiral Development</h2>
+
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-31"></span>
-<img src="images/03-eda/waterfall.png" alt="The waterfall model of software development resembles the elementary school model of &quot;the scientific method,&quot; with an inflexible, linear sequence of predefined steps.  Source: &lt;https://en.wikipedia.org/wiki/Waterfall_model&gt;" width="50%" /><img src="images/03-eda/scientific_method.png" alt="The waterfall model of software development resembles the elementary school model of &quot;the scientific method,&quot; with an inflexible, linear sequence of predefined steps.  Source: &lt;https://en.wikipedia.org/wiki/Waterfall_model&gt;" width="50%" />
+<img src="images/03-eda/waterfall.png" alt="The waterfall model of software development resembles the elementary school model of “the scientific method,” with an inflexible, linear sequence of predefined steps. Source: https://en.wikipedia.org/wiki/Waterfall_model" width="50%" /><img src="images/03-eda/scientific_method.png" alt="The waterfall model of software development resembles the elementary school model of “the scientific method,” with an inflexible, linear sequence of predefined steps. Source: https://en.wikipedia.org/wiki/Waterfall_model" width="50%" />
 <p class="caption">
 Figure 7.1: The waterfall model of software development resembles the elementary school model of “the scientific method,” with an inflexible, linear sequence of predefined steps. Source: <a href="https://en.wikipedia.org/wiki/Waterfall_model" class="uri">https://en.wikipedia.org/wiki/Waterfall_model</a>
 </p>
 </div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-33"></span>
-<img src="images/03-eda/spiral.png" alt="Boehm's spiral model of software development, based on @BoehmSpiralModelSoftware1988, fig. 2.  Source: &lt;https://en.wikipedia.org/wiki/Spiral_model&gt;" width="60%" />
+
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-32"></span>
+<img src="images/03-eda/spiral.png" alt="Boehm’s spiral model of software development, based on Boehm (1988), fig. 2. Source: https://en.wikipedia.org/wiki/Spiral_model" width="60%" />
 <p class="caption">
 Figure 7.2: Boehm’s spiral model of software development, based on <span class="citation">Boehm (<a href="#ref-BoehmSpiralModelSoftware1988" role="doc-biblioref">1988</a>)</span>, fig. 2. Source: <a href="https://en.wikipedia.org/wiki/Spiral_model" class="uri">https://en.wikipedia.org/wiki/Spiral_model</a>
 </p>
@@ -343,8 +347,8 @@ Figure 7.2: Boehm’s spiral model of software development, based on <span class
 </ol></li>
 </ol>
 </div>
-<div id="scientific-research-projects-using-the-spiral-model" class="section level3" number="7.2.2">
-<h3><span class="header-section-number">7.2.2</span> Scientific research projects using the spiral model</h3>
+<div id="academic-science-in-terms-of-the-spiral-model" class="section level3" number="7.2.2">
+<h3><span class="header-section-number">7.2.2</span> Academic science in terms of the spiral model</h3>
 <ul>
 <li>Start small: pilot study, subset of big data</li>
 <li>Stakeholders
@@ -367,7 +371,7 @@ Figure 7.2: Boehm’s spiral model of software development, based on <span class
 </div>
 <div id="better-models-for-eda-ii-epicycle-of-analysis" class="section level2" number="7.3">
 <h2><span class="header-section-number">7.3</span> Better Models for EDA II: Epicycle of Analysis</h2>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-34"></span>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-33"></span>
 <img src="images/03-eda/epicycle.png" alt="Epicycle of analysis model, @PengArtDataScience2016, 5" width="60%" />
 <p class="caption">
 Figure 7.3: Epicycle of analysis model, <span class="citation">Peng and Matsui (<a href="#ref-PengArtDataScience2016" role="doc-biblioref">2016</a>)</span>, 5
@@ -428,21 +432,53 @@ answer</td>
 </div>
 <div id="better-models-for-eda-iii-developing-phenomena" class="section level2" number="7.4">
 <h2><span class="header-section-number">7.4</span> Better Models for EDA III: Developing Phenomena</h2>
-<p><em>[todo]</em></p>
 <ul>
-<li><p><span class="citation">Bogen and Woodward (<a href="#ref-BogenSavingPhenomena1988" role="doc-biblioref">1988</a>)</span>, §§ intro and III-IV (303-6, 315-25)</p></li>
-<li><p>is “theory” the right term?</p>
+<li><span class="citation">Bogen and Woodward (<a href="#ref-BogenSavingPhenomena1988" role="doc-biblioref">1988</a>)</span>
 <ul>
-<li>mechanisms; causal processes; explanations</li>
+<li><em>data</em>
+<ul>
+<li>observed</li>
+<li>not explainable (because of random error and idiosyncracies of data collection)</li>
+<li>local to a time, place, sample, data collection procedure</li>
+<li>provide evidence for phenomena</li>
+<li>example: a spreadsheet of numbers, downloaded from Qualtrics</li>
 </ul></li>
-<li><p>note on the stability of phenomena</p>
+<li><em>phenomena</em>
 <ul>
-<li>the pattern is present here and now</li>
-<li>the question is, will it be present elsewhere in the future?</li>
-<li>replicability</li>
-<li>as an answer to worries about type I errors, p-hacking</li>
+<li>not observed</li>
+<li>constructed using techniques for data analysis</li>
+<li>explainable by theories</li>
+<li>stable over a broader or narrow range of times, places, samples, procedures</li>
+<li>provide evidence for theories</li>
+<li>don’t explain anything</li>
+<li>example: correlation between partisan identification and sharing covid misinformation</li>
+</ul></li>
+<li><em>theories</em>
+<ul>
+<li>not observed</li>
+<li>constructed to explain phenomena</li>
+<li><em>might</em> explain deductively (eg, some parts of physics)
+<ul>
+<li>or might enable a “detailed tracing of the causal mechanisms responsible for the facts to be explained” (324)</li>
+</ul></li>
+<li>stable over a broader or narrow range of times, places, samples, procedures</li>
+<li>example: conservative messaging -&gt; anxiety -&gt; susceptibility to conspiracy theories</li>
+</ul></li>
+</ul></li>
+<li><strong>EDA as developing phenomena</strong>
+<ul>
+<li>starting to mitigate random error and idiosyncracies</li>
+<li>identifying <em>local</em> patterns (“local phenomena”)</li>
+<li><strong>not yet claiming these will be stable and appear elsewhere</strong></li>
+<li>not yet worrying (much) about explanations</li>
 </ul></li>
 </ul>
+</div>
+<div id="discussion-questions" class="section level2" number="7.5">
+<h2><span class="header-section-number">7.5</span> Discussion questions</h2>
+<ol style="list-style-type: decimal">
+<li>For each of these models, how well do they fit the way you’ve been taught to do science? How do they challenge the way you’ve been taught to do science?</li>
+</ol>
 
 </div>
 </div>
@@ -504,8 +540,8 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": null,
-"text": null
+"link": "https://github.com/data-science-methods/book/blob/master/03-01-models-of-eda.Rmd",
+"text": "Edit"
 },
 "history": {
 "link": null,

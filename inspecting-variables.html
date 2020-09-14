@@ -13,7 +13,7 @@
   
   
   <meta property="og:description" content="This document is a set of notes (and perhaps later a textbook) for a course on data science methods for graduate students in social and behavioral sciences." />
-  
+  <meta name="github-repo" content="data-science-methods/book" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Chapter 9 Inspecting Variables | Data Science Methods for Cognitive Science" />
@@ -190,6 +190,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#better-models-for-eda-i-risk-management-in-spiral-development"><i class="fa fa-check"></i><b>7.2</b> Better Models for EDA I: Risk Management in Spiral Development</a></li>
 <li class="chapter" data-level="7.3" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#better-models-for-eda-ii-epicycle-of-analysis"><i class="fa fa-check"></i><b>7.3</b> Better Models for EDA II: Epicycle of Analysis</a></li>
 <li class="chapter" data-level="7.4" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#better-models-for-eda-iii-developing-phenomena"><i class="fa fa-check"></i><b>7.4</b> Better Models for EDA III: Developing Phenomena</a></li>
+<li class="chapter" data-level="7.5" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#discussion-questions"><i class="fa fa-check"></i><b>7.5</b> Discussion questions</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="two-eda-checklists.html"><a href="two-eda-checklists.html"><i class="fa fa-check"></i><b>8</b> Two EDA “Checklists”</a>
 <ul>
@@ -210,7 +211,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.10" data-path="inspecting-variables.html"><a href="inspecting-variables.html#make-a-plot"><i class="fa fa-check"></i><b>9.10</b> 7. Make a plot</a></li>
 <li class="chapter" data-level="9.11" data-path="inspecting-variables.html"><a href="inspecting-variables.html#try-the-easy-solution-first"><i class="fa fa-check"></i><b>9.11</b> 8. Try the easy solution first</a></li>
 <li class="chapter" data-level="9.12" data-path="inspecting-variables.html"><a href="inspecting-variables.html#follow-up"><i class="fa fa-check"></i><b>9.12</b> 9. Follow up</a></li>
-<li class="chapter" data-level="9.13" data-path="inspecting-variables.html"><a href="inspecting-variables.html#lab-1"><i class="fa fa-check"></i><b>9.13</b> Lab</a></li>
+<li class="chapter" data-level="9.13" data-path="inspecting-variables.html"><a href="inspecting-variables.html#discussion-questions-1"><i class="fa fa-check"></i><b>9.13</b> Discussion questions</a></li>
+<li class="chapter" data-level="9.14" data-path="inspecting-variables.html"><a href="inspecting-variables.html#lab-1"><i class="fa fa-check"></i><b>9.14</b> Lab</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="visual-eda.html"><a href="visual-eda.html"><i class="fa fa-check"></i><b>10</b> Visual EDA</a>
 <ul>
@@ -309,7 +311,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Use `spec()` to retrieve the guessed column specification
 ## Pass a specification to the `col_types` argument to quiet this message</code></pre>
 <div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="inspecting-variables.html#cb28-1"></a><span class="kw">toc</span>()</span></code></pre></div>
-<pre><code>## 0.4 sec elapsed</code></pre>
+<pre><code>## 0.395 sec elapsed</code></pre>
 <div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="inspecting-variables.html#cb30-1"></a><span class="co"># class(dataf$beat)</span></span>
 <span id="cb30-2"><a href="inspecting-variables.html#cb30-2"></a><span class="co"># class(dataf$subject_age)</span></span></code></pre></div>
 </div>
@@ -416,11 +418,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb33-5"><a href="inspecting-variables.html#cb33-5"></a>dataf_smol =<span class="st"> </span><span class="kw">sample_n</span>(dataf, <span class="dv">1000</span>)</span>
 <span id="cb33-6"><a href="inspecting-variables.html#cb33-6"></a></span>
 <span id="cb33-7"><a href="inspecting-variables.html#cb33-7"></a><span class="kw">vis_miss</span>(dataf_smol)</span></code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-42-1.png" width="60%" style="display: block; margin: auto;" /></p>
+<p><img src="book_files/figure-html/unnamed-chunk-41-1.png" width="60%" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="inspecting-variables.html#cb34-1"></a><span class="co">## Arguments in vis_miss() are useful for picking up patterns in missing values</span></span>
 <span id="cb34-2"><a href="inspecting-variables.html#cb34-2"></a><span class="co">## cluster = TRUE uses hierarchical clustering to order the rows</span></span>
 <span id="cb34-3"><a href="inspecting-variables.html#cb34-3"></a><span class="kw">vis_miss</span>(dataf_smol, <span class="dt">cluster =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-42-2.png" width="60%" style="display: block; margin: auto;" /></p>
+<p><img src="book_files/figure-html/unnamed-chunk-41-2.png" width="60%" style="display: block; margin: auto;" /></p>
 <ul>
 <li>Several variables related to search outcomes are missing together
 <ul>
@@ -589,7 +591,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>Page 8 has two summary tables that we can compare to our data</p></li>
 </ul></li>
 </ul>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-46"></span>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-45"></span>
 <img src="images/03-eda/Oakland_report_tables.png" alt="Screenshot of the two summary tables from the Oakland report.  Source: &lt;https://cao-94612.s3.amazonaws.com/documents/OPD-Racial-Impact-Report-2016-2018-Final-16Apr19.pdf&gt;, page 8" width="60%" />
 <p class="caption">
 Figure 9.1: Screenshot of the two summary tables from the Oakland report. Source: <a href="https://cao-94612.s3.amazonaws.com/documents/OPD-Racial-Impact-Report-2016-2018-Final-16Apr19.pdf" class="uri">https://cao-94612.s3.amazonaws.com/documents/OPD-Racial-Impact-Report-2016-2018-Final-16Apr19.pdf</a>, page 8
@@ -798,13 +800,30 @@ Figure 9.1: Screenshot of the two summary tables from the Oakland report. Source
 <li>Apply more sophisticated statistical analysis
 <ul>
 <li>eg, a regression model to control for age, gender, and other covariates</li>
-<li>Fits with <em>phenomena development</em>: reducing data, eliminating noise, in order to identity phenomena candidates</li>
+<li>Fits with <em>phenomena development</em>: reducing data, eliminating noise, in order to identity local phenomena</li>
 </ul></li>
 </ul></li>
 </ul>
 </div>
-<div id="lab-1" class="section level2" number="9.13">
-<h2><span class="header-section-number">9.13</span> Lab</h2>
+<div id="discussion-questions-1" class="section level2" number="9.13">
+<h2><span class="header-section-number">9.13</span> Discussion questions</h2>
+<p>Time permitting, we’ll discuss these during class. But more likely we’ll talk about them via Slack.</p>
+<ol style="list-style-type: decimal">
+<li><p>Suppose you’ve conducted this EDA because you’re working with an activist organization that promotes defunding the police and prison abolition. Should you report the preliminary findings above to your organization contacts?</p></li>
+<li><p>What influence should the following factors make to your answer?</p>
+<ul>
+<li>Funding: Whether you’re being paid as a consultant vs. volunteering your expertise</li>
+<li>Values: Your own views about policing and prisons</li>
+<li>Relationships: Whether you are friends with members of the activist organization and/or police</li>
+<li>Communications: The degree to which you can control whether and how the organization will publish your preliminary findings</li>
+<li>Timeliness: Whether these findings are relevant to a pending law or policy change</li>
+<li>Other factors to take into account? Or not?</li>
+</ul></li>
+<li><p>How has this “raw data” been shaped by upstream decisions? (Think of Leonelli’s relational account of data.)</p></li>
+</ol>
+</div>
+<div id="lab-1" class="section level2" number="9.14">
+<h2><span class="header-section-number">9.14</span> Lab</h2>
 <p>The lab related to this material is available at <a href="https://github.com/data-science-methods/lab-w04-eda" class="uri">https://github.com/data-science-methods/lab-w04-eda</a>.</p>
 
 </div>
@@ -855,8 +874,8 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": null,
-"text": null
+"link": "https://github.com/data-science-methods/book/blob/master/03-03-inspecting-vars.Rmd",
+"text": "Edit"
 },
 "history": {
 "link": null,

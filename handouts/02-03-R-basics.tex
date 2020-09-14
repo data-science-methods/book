@@ -1,0 +1,482 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs}
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+\usepackage{booktabs}
+\hypersetup{colorlinks=true}
+
+\author{}
+\date{\vspace{-2.5em}}
+
+\begin{document}
+
+{
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+\hypertarget{r-basics}{%
+\section{R Basics}\label{r-basics}}
+
+\hypertarget{lets-get-started-with-rstudio}{%
+\subsection{Let's get started with RStudio}\label{lets-get-started-with-rstudio}}
+
+\begin{itemize}
+\tightlist
+\item
+  Start installing \texttt{tidyverse}
+\item
+  Quick tour of RStudio's UI
+\item
+  Let's plot a thing (below)
+\item
+  Some idiosyncracies of my code
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{\textquotesingle{}} rather than \texttt{"}
+  \item
+    \texttt{\#\#} for documentation comment
+  \item
+    \texttt{=} not \texttt{\textless{}-} for assignment
+  \end{itemize}
+\item
+  Essential Global Options
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Never save .Rdata, load workspace
+  \end{itemize}
+\end{itemize}
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.6\linewidth]{images/Rstudio_config} 
+
+}
+
+\caption{Recommended RStudio configuration}\label{fig:unnamed-chunk-2}
+\end{figure}
+
+\begin{itemize}
+\tightlist
+\item
+  Super useful keyboard commands:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Insert a pipe: ⌘+Shift+m
+  \item
+    Comment/uncomment: ⌘+Shift+c
+  \item
+    Tools \(\to\) Modify Keyboard Shortcuts\ldots{}
+
+    \begin{itemize}
+    \tightlist
+    \item
+      ⌘+1, ⌘+2, ⌘+3
+    \end{itemize}
+  \item
+    Cheatsheet: \url{https://raw.githubusercontent.com/rstudio/cheatsheets/master/rstudio-ide.pdf}
+  \end{itemize}
+\item
+  \textbf{If you're already familiar with the basics of R}, I recommend spending some time with @WickhamAdvanced2014.
+\end{itemize}
+
+\hypertarget{lets-plot-a-thing}{%
+\subsubsection{Let's plot a thing}\label{lets-plot-a-thing}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(tidyverse)}
+\KeywordTok{library}\NormalTok{(gapminder)}
+\KeywordTok{library}\NormalTok{(plotly)}
+
+\KeywordTok{data}\NormalTok{(gapminder) }\CommentTok{\#\# Gets a dataset from a loaded package}
+\NormalTok{gapminder}
+\NormalTok{?gapminder}
+
+\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ gapminder, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ gdpPercap, }\DataTypeTok{y =}\NormalTok{ lifeExp, }\DataTypeTok{color =}\NormalTok{ continent, }
+                             \DataTypeTok{size =} \KeywordTok{log10}\NormalTok{(pop))) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom\_point}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{facet\_wrap}\NormalTok{(}\KeywordTok{vars}\NormalTok{(continent))}
+
+\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ gapminder, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ year, }\DataTypeTok{y =}\NormalTok{ lifeExp, }\DataTypeTok{color =}\NormalTok{ continent)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom\_line}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{group =}\NormalTok{ country)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{facet\_wrap}\NormalTok{(}\KeywordTok{vars}\NormalTok{(continent))}
+
+\KeywordTok{ggplotly}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{exercise}{%
+\subsubsection{Exercise}\label{exercise}}
+
+\begin{itemize}
+\tightlist
+\item
+  Moar plots
+\end{itemize}
+
+\hypertarget{selecting-elements-and-some-math}{%
+\subsection{Selecting elements, and some math}\label{selecting-elements-and-some-math}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{gapminder}\OperatorTok{$}\NormalTok{lifeExp}
+\CommentTok{\#\# These are useful in certain circumstances, but harder to read}
+\NormalTok{gapminder[[}\StringTok{\textquotesingle{}lifeExp\textquotesingle{}}\NormalTok{]]}
+\NormalTok{gapminder[,}\StringTok{\textquotesingle{}lifeExp\textquotesingle{}}\NormalTok{]}
+\NormalTok{gapminder[,}\DecValTok{4}\NormalTok{]}
+
+\KeywordTok{mean}\NormalTok{(gapminder}\OperatorTok{$}\NormalTok{lifeExp)}
+\KeywordTok{sd}\NormalTok{(gapminder}\OperatorTok{$}\NormalTok{lifeExp)}
+\KeywordTok{log}\NormalTok{(gapminder}\OperatorTok{$}\NormalTok{lifeExp)}
+\NormalTok{gapminder}\OperatorTok{$}\NormalTok{lifeExp }\OperatorTok{/}\StringTok{ }\DecValTok{100}
+\NormalTok{gapminder}\OperatorTok{$}\NormalTok{year}\OperatorTok{\^{}}\DecValTok{2}
+
+\KeywordTok{cor}\NormalTok{(gapminder}\OperatorTok{$}\NormalTok{lifeExp, gapminder}\OperatorTok{$}\NormalTok{year)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{exercise-1}{%
+\subsubsection{Exercise}\label{exercise-1}}
+
+Calculate correlations between each pair of life expectancy, population, and GDP per capita
+
+\hypertarget{base-r-data-types}{%
+\subsection{Base R data types}\label{base-r-data-types}}
+
+\hypertarget{numerics}{%
+\subsubsection{Numerics}\label{numerics}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{foo =}\StringTok{ }\DecValTok{2}
+\NormalTok{bar =}\StringTok{ }\DecValTok{3}
+\NormalTok{foobar =}\StringTok{ }\NormalTok{foo }\OperatorTok{+}\StringTok{ }\NormalTok{bar}
+\NormalTok{foo }\OperatorTok{/}\StringTok{ }\NormalTok{bar}
+\KeywordTok{try}\NormalTok{(foo }\OperatorTok{/}\StringTok{ }\DecValTok{0}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{vectors}{%
+\subsubsection{Vectors}\label{vectors}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{foo =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{)}
+\NormalTok{bar =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{5}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{7}\NormalTok{)}
+\NormalTok{foo[}\DecValTok{2}\NormalTok{]}
+\NormalTok{foo[}\DecValTok{2}\OperatorTok{:}\DecValTok{3}\NormalTok{]}
+\KeywordTok{try}\NormalTok{(foo[}\DecValTok{1}\NormalTok{, }\DecValTok{3}\NormalTok{])}
+\NormalTok{foo[}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{3}\NormalTok{)]}
+
+\NormalTok{foo }\OperatorTok{+}\StringTok{ }\NormalTok{bar}
+\NormalTok{foo }\OperatorTok{*}\StringTok{ }\NormalTok{bar}
+\CommentTok{\#\# NB difference between vector and length{-}1 comparisons}
+\NormalTok{bar }\OperatorTok{==}\StringTok{ }\NormalTok{foo }\OperatorTok{+}\StringTok{ }\DecValTok{3}
+\KeywordTok{identical}\NormalTok{(bar, foo }\OperatorTok{+}\StringTok{ }\DecValTok{3}\NormalTok{)}
+
+\KeywordTok{c}\NormalTok{(foo, bar)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{strings}{%
+\subsubsection{Strings}\label{strings}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{foo =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{\textquotesingle{}monkey\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}banana\textquotesingle{}}\NormalTok{)}
+\NormalTok{bar =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{\textquotesingle{}house\textquotesingle{}}\NormalTok{)}
+\CommentTok{\#\# How to put these together? }
+\KeywordTok{try}\NormalTok{(foo }\OperatorTok{+}\StringTok{ }\NormalTok{bar)}
+\KeywordTok{c}\NormalTok{(foo, bar)}
+\KeywordTok{paste}\NormalTok{(foo, bar)}
+\KeywordTok{paste0}\NormalTok{(foo, bar)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{factors}{%
+\subsubsection{Factors}\label{factors}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{foo\_str =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{\textquotesingle{}foo\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}foo\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}bar\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}zoo\textquotesingle{}}\NormalTok{)}
+\KeywordTok{as.integer}\NormalTok{(foo\_str)}
+\NormalTok{foo\_fct =}\StringTok{ }\KeywordTok{as.factor}\NormalTok{(foo\_str)}
+\KeywordTok{as.integer}\NormalTok{(foo)}
+\KeywordTok{levels}\NormalTok{(foo\_fct)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{lists}{%
+\subsubsection{Lists}\label{lists}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{some\_list =}\StringTok{ }\KeywordTok{list}\NormalTok{(}\StringTok{\textquotesingle{}foo\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}bar\textquotesingle{}}\NormalTok{, }\DecValTok{12}\NormalTok{)}
+\NormalTok{some\_list}
+\NormalTok{some\_list[}\DecValTok{2}\NormalTok{]}
+
+\NormalTok{nested\_list =}\StringTok{ }\KeywordTok{list}\NormalTok{(}\StringTok{\textquotesingle{}foo\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}bar\textquotesingle{}}\NormalTok{, some\_list)}
+\NormalTok{nested\_list}
+\NormalTok{nested\_list[[}\DecValTok{3}\NormalTok{]]}
+
+\NormalTok{moar\_list =}\StringTok{ }\KeywordTok{list}\NormalTok{(}\StringTok{\textquotesingle{}foo\textquotesingle{}}\NormalTok{ =}\StringTok{ }\DecValTok{12}\NormalTok{, }\StringTok{\textquotesingle{}bar\textquotesingle{}}\NormalTok{ =}\StringTok{ }\DecValTok{13}\NormalTok{)}
+\NormalTok{moar\_list}\OperatorTok{$}\NormalTok{foo}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{data-frames}{%
+\subsubsection{Data frames}\label{data-frames}}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{gapminder} is a data frame
+\item
+  Technical point: a data frame is a list
+
+  \begin{itemize}
+  \tightlist
+  \item
+    ``Columns'' = list elements
+  \item
+    Restriction: all of the elements must have the same length
+  \end{itemize}
+\item
+  A tibble (\texttt{tbl\_df}) is a data frame with nice printing (part of the tidyverse)
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Plus some technical restrictions that make it nicer to work with
+  \end{itemize}
+\end{itemize}
+
+Like 99\% of the time you create a data frame by loading data or manipulating another data frame. But it's good to know how to create them by hand:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{foo =}\StringTok{ }\DecValTok{1}\OperatorTok{:}\DecValTok{5}
+\NormalTok{bar =}\StringTok{ }\NormalTok{letters[}\DecValTok{1}\OperatorTok{:}\DecValTok{5}\NormalTok{]}
+
+\KeywordTok{data.frame}\NormalTok{(foo, bar)}
+\KeywordTok{tibble}\NormalTok{(foo, bar)}
+
+\CommentTok{\#\# tribble() is super useful when you\textquotesingle{}re creating a dataframe entirely by hand}
+\KeywordTok{tribble}\NormalTok{(}\OperatorTok{\textasciitilde{}}\NormalTok{foo, }\OperatorTok{\textasciitilde{}}\NormalTok{bar, }
+        \DecValTok{1}\NormalTok{, }\StringTok{\textquotesingle{}a\textquotesingle{}}\NormalTok{, }
+        \DecValTok{2}\NormalTok{, }\StringTok{\textquotesingle{}b\textquotesingle{}}\NormalTok{, }
+        \DecValTok{3}\NormalTok{, }\StringTok{\textquotesingle{}c\textquotesingle{}}\NormalTok{, }
+        \DecValTok{4}\NormalTok{, }\StringTok{\textquotesingle{}d\textquotesingle{}}\NormalTok{, }
+        \DecValTok{5}\NormalTok{, }\StringTok{\textquotesingle{}e\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{examining-variables}{%
+\subsection{Examining variables}\label{examining-variables}}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{length()}, \texttt{dim()}
+\item
+  \texttt{str()}
+\item
+  \texttt{class()}
+\item
+  \texttt{head()}
+\item
+  \href{https://gge-ucd.github.io/R-DAVIS/lesson_how_r_thinks_about_data.html\#challenge}{challenge}
+\end{itemize}
+
+\hypertarget{exercise-2}{%
+\subsubsection{Exercise}\label{exercise-2}}
+
+\begin{itemize}
+\tightlist
+\item
+  What's the difference between \texttt{gapminder{[}\textquotesingle{}country\textquotesingle{}{]}} (single brackets) and \texttt{gapminder{[}{[}\textquotesingle{}country\textquotesingle{}{]}{]}} (double brackets)?
+\end{itemize}
+
+\hypertarget{logical-operators}{%
+\subsection{Logical operators}\label{logical-operators}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{ (}\OtherTok{TRUE}\NormalTok{) \{}
+  \KeywordTok{print}\NormalTok{(}\StringTok{\textquotesingle{}it}\CharTok{\textbackslash{}\textquotesingle{}}\StringTok{s true!\textquotesingle{}}\NormalTok{)}
+\NormalTok{\} }\ControlFlowTok{else}\NormalTok{ \{}
+  \KeywordTok{print}\NormalTok{(}\StringTok{\textquotesingle{}it}\CharTok{\textbackslash{}\textquotesingle{}}\StringTok{s false!\textquotesingle{}}\NormalTok{)}
+\NormalTok{\}}
+
+\NormalTok{foo =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{{-}1}\NormalTok{, }\DecValTok{{-}3}\NormalTok{)}
+\NormalTok{foo }\OperatorTok{\textgreater{}}\StringTok{ }\DecValTok{0}
+\ControlFlowTok{if}\NormalTok{ (foo }\OperatorTok{\textgreater{}}\StringTok{ }\DecValTok{0}\NormalTok{) \{}
+  \KeywordTok{print}\NormalTok{(}\StringTok{\textquotesingle{}greater than zero!\textquotesingle{}}\NormalTok{)}
+\NormalTok{\}}
+
+\ControlFlowTok{if}\NormalTok{ (}\KeywordTok{any}\NormalTok{(foo }\OperatorTok{\textgreater{}}\StringTok{ }\DecValTok{0}\NormalTok{)) \{}
+  \KeywordTok{print}\NormalTok{(}\StringTok{\textquotesingle{}at least one is greater than zero!\textquotesingle{}}\NormalTok{)}
+\NormalTok{\}}
+\ControlFlowTok{if}\NormalTok{ (}\KeywordTok{all}\NormalTok{(foo }\OperatorTok{\textgreater{}}\StringTok{ }\DecValTok{0}\NormalTok{)) \{}
+  \KeywordTok{print}\NormalTok{(}\StringTok{\textquotesingle{}all are greater than zero!\textquotesingle{}}\NormalTok{)}
+\NormalTok{\} }\ControlFlowTok{else}\NormalTok{ \{}
+  \KeywordTok{print}\NormalTok{(}\StringTok{\textquotesingle{}at least one is not greater than zero!\textquotesingle{}}\NormalTok{)}
+\NormalTok{\}}
+
+\ControlFlowTok{if}\NormalTok{ (foo }\OperatorTok{\textgreater{}}\StringTok{ }\DecValTok{0} \OperatorTok{|}\StringTok{ }\NormalTok{foo }\OperatorTok{\textless{}}\StringTok{ }\DecValTok{0}\NormalTok{) \{}
+  \KeywordTok{print}\NormalTok{(}\StringTok{\textquotesingle{}non{-}zero\textquotesingle{}}\NormalTok{)}
+\NormalTok{\}}
+\ControlFlowTok{if}\NormalTok{ (foo }\OperatorTok{\textgreater{}}\StringTok{ }\DecValTok{0} \OperatorTok{||}\StringTok{ }\NormalTok{foo }\OperatorTok{\textless{}}\StringTok{ }\DecValTok{0}\NormalTok{) \{}
+  \KeywordTok{print}\NormalTok{(}\StringTok{\textquotesingle{}non{-}zero\textquotesingle{}}\NormalTok{)}
+\NormalTok{\}}
+
+\ControlFlowTok{if}\NormalTok{ (foo }\OperatorTok{!=}\StringTok{ }\DecValTok{0}\NormalTok{) \{}
+  \KeywordTok{print}\NormalTok{(}\StringTok{\textquotesingle{}non{-}zero\textquotesingle{}}\NormalTok{)}
+\NormalTok{\}}
+\ControlFlowTok{if}\NormalTok{ (}\KeywordTok{all}\NormalTok{(foo }\OperatorTok{!=}\StringTok{ }\DecValTok{0}\NormalTok{)) \{}
+  \KeywordTok{print}\NormalTok{(}\StringTok{\textquotesingle{}non{-}zero\textquotesingle{}}\NormalTok{)}
+\NormalTok{\}}
+
+\NormalTok{bar =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{17}\NormalTok{, }\DecValTok{25}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{{-}14}\NormalTok{)}
+\KeywordTok{ifelse}\NormalTok{(bar }\OperatorTok{\textgreater{}}\StringTok{ }\DecValTok{0}\NormalTok{, }\StringTok{\textquotesingle{}positive\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}negative or zero\textquotesingle{}}\NormalTok{)}
+\KeywordTok{case\_when}\NormalTok{(bar }\OperatorTok{\textgreater{}}\StringTok{ }\DecValTok{0}  \OperatorTok{\textasciitilde{}}\StringTok{ \textquotesingle{}positive\textquotesingle{}}\NormalTok{, }
+\NormalTok{          bar }\OperatorTok{==}\StringTok{ }\DecValTok{0} \OperatorTok{\textasciitilde{}}\StringTok{ \textquotesingle{}zero\textquotesingle{}}\NormalTok{, }
+\NormalTok{          bar }\OperatorTok{\textless{}}\StringTok{ }\DecValTok{0}  \OperatorTok{\textasciitilde{}}\StringTok{ \textquotesingle{}negative\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{missing-data}{%
+\subsection{Missing data}\label{missing-data}}
+
+\url{https://gge-ucd.github.io/R-DAVIS/lesson_how_r_thinks_about_data.html\#missing_data}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{missing =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{7}\NormalTok{, }\DecValTok{17}\NormalTok{, }\OtherTok{NA}\NormalTok{, }\DecValTok{12}\NormalTok{)}
+\NormalTok{missing}
+\KeywordTok{mean}\NormalTok{(missing)}
+\KeywordTok{mean}\NormalTok{(missing, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{)}
+\KeywordTok{is.na}\NormalTok{(missing)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{exercise-3}{%
+\subsubsection{Exercise}\label{exercise-3}}
+
+\begin{itemize}
+\tightlist
+\item
+  What do the logical operators do with \texttt{NA}s?
+\end{itemize}
+
+\end{document}

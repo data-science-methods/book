@@ -13,7 +13,7 @@
   
   
   <meta property="og:description" content="This document is a set of notes (and perhaps later a textbook) for a course on data science methods for graduate students in social and behavioral sciences." />
-  
+  <meta name="github-repo" content="data-science-methods/book" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Chapter 2 What is this thing called data science? | Data Science Methods for Cognitive Science" />
@@ -190,6 +190,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#better-models-for-eda-i-risk-management-in-spiral-development"><i class="fa fa-check"></i><b>7.2</b> Better Models for EDA I: Risk Management in Spiral Development</a></li>
 <li class="chapter" data-level="7.3" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#better-models-for-eda-ii-epicycle-of-analysis"><i class="fa fa-check"></i><b>7.3</b> Better Models for EDA II: Epicycle of Analysis</a></li>
 <li class="chapter" data-level="7.4" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#better-models-for-eda-iii-developing-phenomena"><i class="fa fa-check"></i><b>7.4</b> Better Models for EDA III: Developing Phenomena</a></li>
+<li class="chapter" data-level="7.5" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#discussion-questions"><i class="fa fa-check"></i><b>7.5</b> Discussion questions</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="two-eda-checklists.html"><a href="two-eda-checklists.html"><i class="fa fa-check"></i><b>8</b> Two EDA “Checklists”</a>
 <ul>
@@ -210,7 +211,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.10" data-path="inspecting-variables.html"><a href="inspecting-variables.html#make-a-plot"><i class="fa fa-check"></i><b>9.10</b> 7. Make a plot</a></li>
 <li class="chapter" data-level="9.11" data-path="inspecting-variables.html"><a href="inspecting-variables.html#try-the-easy-solution-first"><i class="fa fa-check"></i><b>9.11</b> 8. Try the easy solution first</a></li>
 <li class="chapter" data-level="9.12" data-path="inspecting-variables.html"><a href="inspecting-variables.html#follow-up"><i class="fa fa-check"></i><b>9.12</b> 9. Follow up</a></li>
-<li class="chapter" data-level="9.13" data-path="inspecting-variables.html"><a href="inspecting-variables.html#lab-1"><i class="fa fa-check"></i><b>9.13</b> Lab</a></li>
+<li class="chapter" data-level="9.13" data-path="inspecting-variables.html"><a href="inspecting-variables.html#discussion-questions-1"><i class="fa fa-check"></i><b>9.13</b> Discussion questions</a></li>
+<li class="chapter" data-level="9.14" data-path="inspecting-variables.html"><a href="inspecting-variables.html#lab-1"><i class="fa fa-check"></i><b>9.14</b> Lab</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="visual-eda.html"><a href="visual-eda.html"><i class="fa fa-check"></i><b>10</b> Visual EDA</a>
 <ul>
@@ -246,8 +248,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">Chapter 2</span> What is this thing called data science?</h1>
 <div id="standard-definition" class="section level2" number="2.1">
 <h2><span class="header-section-number">2.1</span> Standard definition</h2>
+
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-4"></span>
-<img src="images/Abisiga.jpg" alt="Data science, defined as the intersection of CS, stats, and &quot;business knowledge.&quot; Source: &lt;https://www.kdnuggets.com/2020/08/top-10-lists-data-science.html&gt;" width="60%" />
+<img src="images/Abisiga.jpg" alt="Data science, defined as the intersection of CS, stats, and “business knowledge.” Source: https://www.kdnuggets.com/2020/08/top-10-lists-data-science.html" width="60%" />
 <p class="caption">
 Figure 2.1: Data science, defined as the intersection of CS, stats, and “business knowledge.” Source: <a href="https://www.kdnuggets.com/2020/08/top-10-lists-data-science.html" class="uri">https://www.kdnuggets.com/2020/08/top-10-lists-data-science.html</a>
 </p>
@@ -256,20 +259,23 @@ Figure 2.1: Data science, defined as the intersection of CS, stats, and “busin
 <li>The intersection of computer science/software engineering, statistics, and “business knowledge”</li>
 </ul>
 <p>Or, more concretely,</p>
+
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-5"></span>
-<img src="images/Boykis.png" alt="Boykis Twitter poll of &quot;data scientists&quot;; 67\% said they spend most of their time cleaning data/moving data. Source: &lt;https://twitter.com/vboykis/status/1089920316644704256&gt;" width="60%" />
+<img src="images/Boykis.png" alt="Boykis Twitter poll of “data scientists”; 67% said they spend most of their time cleaning data/moving data. Source: https://twitter.com/vboykis/status/1089920316644704256" width="60%" />
 <p class="caption">
 Figure 2.2: Boykis Twitter poll of “data scientists”; 67% said they spend most of their time cleaning data/moving data. Source: <a href="https://twitter.com/vboykis/status/1089920316644704256" class="uri">https://twitter.com/vboykis/status/1089920316644704256</a>
 </p>
 </div>
+
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-6"></span>
-<img src="images/Scott.png" alt="Scott tweet: &quot;One of the biggest failures I see in junior ML/CV engineers is a complete lack of interest in building data sets. While it is boring grunt work I think there is so much to be learned in putting together a dataset. It is like half the problem.&quot; Source: &lt;https://twitter.com/kscottz/status/1091423467772162049&gt;" width="60%" />
+<img src="images/Scott.png" alt="Scott tweet: “One of the biggest failures I see in junior ML/CV engineers is a complete lack of interest in building data sets. While it is boring grunt work I think there is so much to be learned in putting together a dataset. It is like half the problem.” Source: https://twitter.com/kscottz/status/1091423467772162049" width="60%" />
 <p class="caption">
 Figure 2.3: Scott tweet: “One of the biggest failures I see in junior ML/CV engineers is a complete lack of interest in building data sets. While it is boring grunt work I think there is so much to be learned in putting together a dataset. It is like half the problem.” Source: <a href="https://twitter.com/kscottz/status/1091423467772162049" class="uri">https://twitter.com/kscottz/status/1091423467772162049</a>
 </p>
 </div>
+
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-7"></span>
-<img src="images/Hudon.png" alt="Hudon tweet containing a graphic labelled &quot;Full Stack Data Science,&quot; with categories &quot;data engineer&quot; (entries collect, build data pipeline), &quot;data analyst&quot; (entries reporting, data viz), &quot;data scientist&quot; (entries build models, run statistical tests), and &quot;machine learning engineer&quot; (entries deploy model, build model). Source: &lt;https://twitter.com/beeonaposy/status/1298070348844457987&gt;" width="60%" />
+<img src="images/Hudon.png" alt="Hudon tweet containing a graphic labelled “Full Stack Data Science,” with categories “data engineer” (entries collect, build data pipeline), “data analyst” (entries reporting, data viz), “data scientist” (entries build models, run statistical tests), and “machine learning engineer” (entries deploy model, build model). Source: https://twitter.com/beeonaposy/status/1298070348844457987" width="60%" />
 <p class="caption">
 Figure 2.4: Hudon tweet containing a graphic labelled “Full Stack Data Science,” with categories “data engineer” (entries collect, build data pipeline), “data analyst” (entries reporting, data viz), “data scientist” (entries build models, run statistical tests), and “machine learning engineer” (entries deploy model, build model). Source: <a href="https://twitter.com/beeonaposy/status/1298070348844457987" class="uri">https://twitter.com/beeonaposy/status/1298070348844457987</a>
 </p>
@@ -379,8 +385,8 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": null,
-"text": null
+"link": "https://github.com/data-science-methods/book/blob/master/01-02-data-sci-wtf.Rmd",
+"text": "Edit"
 },
 "history": {
 "link": null,
