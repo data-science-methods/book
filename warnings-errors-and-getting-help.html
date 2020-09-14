@@ -50,7 +50,6 @@
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 
 
 <style type="text/css">
@@ -274,16 +273,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>CRAN <span class="math inline">\(\to\)</span> BugReports (usually GitHub Issues)</li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="warnings-errors-and-getting-help.html#cb20-1"></a><span class="kw">library</span>(lubridate)</span>
-<span id="cb20-2"><a href="warnings-errors-and-getting-help.html#cb20-2"></a></span>
-<span id="cb20-3"><a href="warnings-errors-and-getting-help.html#cb20-3"></a>some_data =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;June 2002&#39;</span>, <span class="st">&#39;May 15, 2007&#39;</span>, <span class="st">&#39;August 2007&#39;</span>)</span>
-<span id="cb20-4"><a href="warnings-errors-and-getting-help.html#cb20-4"></a><span class="kw">mdy</span>(some_data)</span>
-<span id="cb20-5"><a href="warnings-errors-and-getting-help.html#cb20-5"></a><span class="kw">parse_date_time</span>(some_data, <span class="dt">orders =</span> <span class="st">&#39;mdY&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="warnings-errors-and-getting-help.html#cb20-1" aria-hidden="true"></a><span class="kw">library</span>(lubridate)</span>
+<span id="cb20-2"><a href="warnings-errors-and-getting-help.html#cb20-2" aria-hidden="true"></a></span>
+<span id="cb20-3"><a href="warnings-errors-and-getting-help.html#cb20-3" aria-hidden="true"></a>some_data =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;June 2002&#39;</span>, <span class="st">&#39;May 15, 2007&#39;</span>, <span class="st">&#39;August 2007&#39;</span>)</span>
+<span id="cb20-4"><a href="warnings-errors-and-getting-help.html#cb20-4" aria-hidden="true"></a><span class="kw">mdy</span>(some_data)</span>
+<span id="cb20-5"><a href="warnings-errors-and-getting-help.html#cb20-5" aria-hidden="true"></a><span class="kw">parse_date_time</span>(some_data, <span class="dt">orders =</span> <span class="st">&#39;mdY&#39;</span>)</span></code></pre></div>
 <p>Let’s try SO: <a href="https://stackoverflow.com/search?q=%5BR%5D+lubridate+month-year" class="uri">https://stackoverflow.com/search?q=%5BR%5D+lubridate+month-year</a></p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="warnings-errors-and-getting-help.html#cb21-1"></a><span class="kw">parse_date_time</span>(some_data, <span class="dt">orders =</span> <span class="kw">c</span>(<span class="st">&#39;mY&#39;</span>, <span class="st">&#39;mdY&#39;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="warnings-errors-and-getting-help.html#cb21-1" aria-hidden="true"></a><span class="kw">parse_date_time</span>(some_data, <span class="dt">orders =</span> <span class="kw">c</span>(<span class="st">&#39;mY&#39;</span>, <span class="st">&#39;mdY&#39;</span>))</span></code></pre></div>
 <p>Here’s another one:</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="warnings-errors-and-getting-help.html#cb22-1"></a>more_data =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;May 7, 2017&#39;</span>, <span class="st">&#39;May 19, 2017&#39;</span>, <span class="st">&#39;May Fifth, 2017&#39;</span>)</span>
-<span id="cb22-2"><a href="warnings-errors-and-getting-help.html#cb22-2"></a><span class="kw">mdy</span>(more_data)</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="warnings-errors-and-getting-help.html#cb22-1" aria-hidden="true"></a>more_data =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;May 7, 2017&#39;</span>, <span class="st">&#39;May 19, 2017&#39;</span>, <span class="st">&#39;May Fifth, 2017&#39;</span>)</span>
+<span id="cb22-2"><a href="warnings-errors-and-getting-help.html#cb22-2" aria-hidden="true"></a><span class="kw">mdy</span>(more_data)</span></code></pre></div>
 <p>SO doesn’t seem so helpful: <a href="https://stackoverflow.com/search?q=%5BR%5D+lubridate+written+days" class="uri">https://stackoverflow.com/search?q=%5BR%5D+lubridate+written+days</a></p>
 <p>Let’s check the CRAN page for <code>lubridate</code>: <a href="https://cran.r-project.org/web/packages/lubridate/index.html" class="uri">https://cran.r-project.org/web/packages/lubridate/index.html</a></p>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-27"></span>

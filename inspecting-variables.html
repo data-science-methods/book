@@ -50,7 +50,6 @@
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 
 
 <style type="text/css">
@@ -250,31 +249,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>We’ll also be learning how to use three R packages: <code>skimr</code> and <code>visdat</code> for getting an overview of the data in a dataframe, and <code>dplyr</code> for manipulating dataframes. A good cheatsheet for <code>dplyr</code> is available here: <a href="https://raw.githubusercontent.com/rstudio/cheatsheets/master/data-transformation.pdf" class="uri">https://raw.githubusercontent.com/rstudio/cheatsheets/master/data-transformation.pdf</a>.</p>
 <div id="packages" class="section level2" number="9.1">
 <h2><span class="header-section-number">9.1</span> Packages</h2>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="inspecting-variables.html#cb23-1"></a><span class="kw">library</span>(tidyverse)   <span class="co"># for working with the data</span></span>
-<span id="cb23-2"><a href="inspecting-variables.html#cb23-2"></a><span class="kw">library</span>(lubridate)   <span class="co"># for working with datetime data</span></span>
-<span id="cb23-3"><a href="inspecting-variables.html#cb23-3"></a><span class="kw">library</span>(vroom)       <span class="co"># for quickly reading large CSV files</span></span>
-<span id="cb23-4"><a href="inspecting-variables.html#cb23-4"></a><span class="kw">library</span>(skimr)       <span class="co"># generate a text-based overview of the data</span></span>
-<span id="cb23-5"><a href="inspecting-variables.html#cb23-5"></a><span class="kw">library</span>(visdat)      <span class="co"># generate plots visualizing data types and missingness</span></span>
-<span id="cb23-6"><a href="inspecting-variables.html#cb23-6"></a><span class="kw">library</span>(tictoc)      <span class="co"># for timing how long R takes to do the thing</span></span>
-<span id="cb23-7"><a href="inspecting-variables.html#cb23-7"></a></span>
-<span id="cb23-8"><a href="inspecting-variables.html#cb23-8"></a><span class="co">## Set for the HTML output</span></span>
-<span id="cb23-9"><a href="inspecting-variables.html#cb23-9"></a><span class="co">## In RStudio, this is overriden by the width of the console pane</span></span>
-<span id="cb23-10"><a href="inspecting-variables.html#cb23-10"></a><span class="kw">options</span>(<span class="dt">width =</span> <span class="dv">100</span>)  <span class="co"># wider output for skimr</span></span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="inspecting-variables.html#cb23-1" aria-hidden="true"></a><span class="kw">library</span>(tidyverse)   <span class="co"># for working with the data</span></span>
+<span id="cb23-2"><a href="inspecting-variables.html#cb23-2" aria-hidden="true"></a><span class="kw">library</span>(lubridate)   <span class="co"># for working with datetime data</span></span>
+<span id="cb23-3"><a href="inspecting-variables.html#cb23-3" aria-hidden="true"></a><span class="kw">library</span>(vroom)       <span class="co"># for quickly reading large CSV files</span></span>
+<span id="cb23-4"><a href="inspecting-variables.html#cb23-4" aria-hidden="true"></a><span class="kw">library</span>(skimr)       <span class="co"># generate a text-based overview of the data</span></span>
+<span id="cb23-5"><a href="inspecting-variables.html#cb23-5" aria-hidden="true"></a><span class="kw">library</span>(visdat)      <span class="co"># generate plots visualizing data types and missingness</span></span>
+<span id="cb23-6"><a href="inspecting-variables.html#cb23-6" aria-hidden="true"></a><span class="kw">library</span>(tictoc)      <span class="co"># for timing how long R takes to do the thing</span></span>
+<span id="cb23-7"><a href="inspecting-variables.html#cb23-7" aria-hidden="true"></a></span>
+<span id="cb23-8"><a href="inspecting-variables.html#cb23-8" aria-hidden="true"></a><span class="co">## Set for the HTML output</span></span>
+<span id="cb23-9"><a href="inspecting-variables.html#cb23-9" aria-hidden="true"></a><span class="co">## In RStudio, this is overriden by the width of the console pane</span></span>
+<span id="cb23-10"><a href="inspecting-variables.html#cb23-10" aria-hidden="true"></a><span class="kw">options</span>(<span class="dt">width =</span> <span class="dv">100</span>)  <span class="co"># wider output for skimr</span></span></code></pre></div>
 </div>
 <div id="get-the-data" class="section level2" number="9.2">
 <h2><span class="header-section-number">9.2</span> Get the Data</h2>
 <p>We’ll be using data on police stops in Oakland, California, collected and published by the Stanford Open Policing Project, <a href="https://openpolicing.stanford.edu/" class="uri">https://openpolicing.stanford.edu/</a>. We’ll start by making a <code>data</code> folder and downloading the data, if necessary. The URL for the data file can be found on <a href="https://openpolicing.stanford.edu/data/" class="uri">https://openpolicing.stanford.edu/data/</a>. It will also be useful to have the readme handy, <a href="https://github.com/stanford-policylab/opp/blob/master/data_readme.md" class="uri">https://github.com/stanford-policylab/opp/blob/master/data_readme.md</a>.</p>
 <p>Because the next chunk of code might be intimidating to type out, and you need the url, I encourage you to copy and paste.</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="inspecting-variables.html#cb24-1"></a>data_dir =<span class="st"> &#39;data&#39;</span></span>
-<span id="cb24-2"><a href="inspecting-variables.html#cb24-2"></a>target_file =<span class="st"> </span><span class="kw">file.path</span>(data_dir, <span class="st">&#39;oakland.zip&#39;</span>)</span>
-<span id="cb24-3"><a href="inspecting-variables.html#cb24-3"></a></span>
-<span id="cb24-4"><a href="inspecting-variables.html#cb24-4"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">dir.exists</span>(data_dir)) {</span>
-<span id="cb24-5"><a href="inspecting-variables.html#cb24-5"></a>    <span class="kw">dir.create</span>(data_dir)</span>
-<span id="cb24-6"><a href="inspecting-variables.html#cb24-6"></a>}</span>
-<span id="cb24-7"><a href="inspecting-variables.html#cb24-7"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">file.exists</span>(target_file)) {</span>
-<span id="cb24-8"><a href="inspecting-variables.html#cb24-8"></a>    <span class="kw">download.file</span>(<span class="st">&#39;https://stacks.stanford.edu/file/druid:yg821jf8611/yg821jf8611_ca_oakland_2020_04_01.csv.zip&#39;</span>, </span>
-<span id="cb24-9"><a href="inspecting-variables.html#cb24-9"></a>                  target_file)</span>
-<span id="cb24-10"><a href="inspecting-variables.html#cb24-10"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="inspecting-variables.html#cb24-1" aria-hidden="true"></a>data_dir =<span class="st"> &#39;data&#39;</span></span>
+<span id="cb24-2"><a href="inspecting-variables.html#cb24-2" aria-hidden="true"></a>target_file =<span class="st"> </span><span class="kw">file.path</span>(data_dir, <span class="st">&#39;oakland.zip&#39;</span>)</span>
+<span id="cb24-3"><a href="inspecting-variables.html#cb24-3" aria-hidden="true"></a></span>
+<span id="cb24-4"><a href="inspecting-variables.html#cb24-4" aria-hidden="true"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">dir.exists</span>(data_dir)) {</span>
+<span id="cb24-5"><a href="inspecting-variables.html#cb24-5" aria-hidden="true"></a>    <span class="kw">dir.create</span>(data_dir)</span>
+<span id="cb24-6"><a href="inspecting-variables.html#cb24-6" aria-hidden="true"></a>}</span>
+<span id="cb24-7"><a href="inspecting-variables.html#cb24-7" aria-hidden="true"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">file.exists</span>(target_file)) {</span>
+<span id="cb24-8"><a href="inspecting-variables.html#cb24-8" aria-hidden="true"></a>    <span class="kw">download.file</span>(<span class="st">&#39;https://stacks.stanford.edu/file/druid:yg821jf8611/yg821jf8611_ca_oakland_2020_04_01.csv.zip&#39;</span>, </span>
+<span id="cb24-9"><a href="inspecting-variables.html#cb24-9" aria-hidden="true"></a>                  target_file)</span>
+<span id="cb24-10"><a href="inspecting-variables.html#cb24-10" aria-hidden="true"></a>}</span></code></pre></div>
 </div>
 <div id="formulate-your-question" class="section level2" number="9.3">
 <h2><span class="header-section-number">9.3</span> 1. Formulate your question</h2>
@@ -288,17 +287,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="read-in-your-data" class="section level2" number="9.4">
 <h2><span class="header-section-number">9.4</span> 2. Read in your data</h2>
 <p>The dataset is a zipped <code>csv</code> or comma-separated value file. CSVs are structured like Excel spreadsheets, but are stored in plain text rather than Excel’s format.</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="inspecting-variables.html#cb25-1"></a><span class="co">## The base R function `read.csv()` can&#39;t read a zipped file, and returns gibberish</span></span>
-<span id="cb25-2"><a href="inspecting-variables.html#cb25-2"></a><span class="kw">read.csv</span>(target_file)</span>
-<span id="cb25-3"><a href="inspecting-variables.html#cb25-3"></a></span>
-<span id="cb25-4"><a href="inspecting-variables.html#cb25-4"></a><span class="co">## The `read_csv()` function, part of the tidyverse, takes 1.7 seconds on my laptop, but misinterprets several columns as logicals, resulting in parsing problems.</span></span>
-<span id="cb25-5"><a href="inspecting-variables.html#cb25-5"></a><span class="co">## (What goes wrong?  By default, `read_csv()` looks at the first 1,000 rows to guess what the type of each column should be.  As we&#39;ll see below, columns like `beat` and `subject_age` are missing on the first 5,000+ rows.  So `read_csv()` sees 1,000 missing values and guesses that these columns are `logical`, with values `TRUE` or `FALSE`.  We could fix this by changing the `guess_max` argument, but that would slow things down even more.)</span></span>
-<span id="cb25-6"><a href="inspecting-variables.html#cb25-6"></a><span class="kw">tic</span>()</span>
-<span id="cb25-7"><a href="inspecting-variables.html#cb25-7"></a><span class="kw">read_csv</span>(target_file)</span>
-<span id="cb25-8"><a href="inspecting-variables.html#cb25-8"></a><span class="kw">toc</span>()</span></code></pre></div>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="inspecting-variables.html#cb26-1"></a><span class="co">## The vroom package is 10x faster on my laptop and doesn&#39;t have the parsing problems</span></span>
-<span id="cb26-2"><a href="inspecting-variables.html#cb26-2"></a><span class="kw">tic</span>()</span>
-<span id="cb26-3"><a href="inspecting-variables.html#cb26-3"></a>dataf =<span class="st"> </span><span class="kw">vroom</span>(target_file)</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="inspecting-variables.html#cb25-1" aria-hidden="true"></a><span class="co">## The base R function `read.csv()` can&#39;t read a zipped file, and returns gibberish</span></span>
+<span id="cb25-2"><a href="inspecting-variables.html#cb25-2" aria-hidden="true"></a><span class="kw">read.csv</span>(target_file)</span>
+<span id="cb25-3"><a href="inspecting-variables.html#cb25-3" aria-hidden="true"></a></span>
+<span id="cb25-4"><a href="inspecting-variables.html#cb25-4" aria-hidden="true"></a><span class="co">## The `read_csv()` function, part of the tidyverse, takes 1.7 seconds on my laptop, but misinterprets several columns as logicals, resulting in parsing problems.</span></span>
+<span id="cb25-5"><a href="inspecting-variables.html#cb25-5" aria-hidden="true"></a><span class="co">## (What goes wrong?  By default, `read_csv()` looks at the first 1,000 rows to guess what the type of each column should be.  As we&#39;ll see below, columns like `beat` and `subject_age` are missing on the first 5,000+ rows.  So `read_csv()` sees 1,000 missing values and guesses that these columns are `logical`, with values `TRUE` or `FALSE`.  We could fix this by changing the `guess_max` argument, but that would slow things down even more.)</span></span>
+<span id="cb25-6"><a href="inspecting-variables.html#cb25-6" aria-hidden="true"></a><span class="kw">tic</span>()</span>
+<span id="cb25-7"><a href="inspecting-variables.html#cb25-7" aria-hidden="true"></a><span class="kw">read_csv</span>(target_file)</span>
+<span id="cb25-8"><a href="inspecting-variables.html#cb25-8" aria-hidden="true"></a><span class="kw">toc</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="inspecting-variables.html#cb26-1" aria-hidden="true"></a><span class="co">## The vroom package is 10x faster on my laptop and doesn&#39;t have the parsing problems</span></span>
+<span id="cb26-2"><a href="inspecting-variables.html#cb26-2" aria-hidden="true"></a><span class="kw">tic</span>()</span>
+<span id="cb26-3"><a href="inspecting-variables.html#cb26-3" aria-hidden="true"></a>dataf =<span class="st"> </span><span class="kw">vroom</span>(target_file)</span></code></pre></div>
 <pre><code>## Rows: 133,407
 ## Columns: 28
 ## Delimiter: &quot;,&quot;
@@ -310,16 +309,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 
 ## Use `spec()` to retrieve the guessed column specification
 ## Pass a specification to the `col_types` argument to quiet this message</code></pre>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="inspecting-variables.html#cb28-1"></a><span class="kw">toc</span>()</span></code></pre></div>
-<pre><code>## 0.396 sec elapsed</code></pre>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="inspecting-variables.html#cb30-1"></a><span class="co"># class(dataf$beat)</span></span>
-<span id="cb30-2"><a href="inspecting-variables.html#cb30-2"></a><span class="co"># class(dataf$subject_age)</span></span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="inspecting-variables.html#cb28-1" aria-hidden="true"></a><span class="kw">toc</span>()</span></code></pre></div>
+<pre><code>## 0.405 sec elapsed</code></pre>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="inspecting-variables.html#cb30-1" aria-hidden="true"></a><span class="co"># class(dataf$beat)</span></span>
+<span id="cb30-2"><a href="inspecting-variables.html#cb30-2" aria-hidden="true"></a><span class="co"># class(dataf$subject_age)</span></span></code></pre></div>
 </div>
 <div id="check-the-packaging" class="section level2" number="9.5">
 <h2><span class="header-section-number">9.5</span> 3. Check the packaging</h2>
 <p><span class="citation">Peng and Matsui (<a href="#ref-PengArtDataScience2016" role="doc-biblioref">2016</a>)</span> use some base R functions to look at dimensions of the dataframe and column (variable) types. <code>skimr</code> is more powerful.</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="inspecting-variables.html#cb31-1"></a><span class="co">## May take a couple of seconds</span></span>
-<span id="cb31-2"><a href="inspecting-variables.html#cb31-2"></a><span class="kw">skim</span>(dataf)</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="inspecting-variables.html#cb31-1" aria-hidden="true"></a><span class="co">## May take a couple of seconds</span></span>
+<span id="cb31-2"><a href="inspecting-variables.html#cb31-2" aria-hidden="true"></a><span class="kw">skim</span>(dataf)</span></code></pre></div>
 <pre><code>## ── Data Summary ────────────────────────
 ##                            Values
 ## Name                       dataf 
@@ -411,17 +410,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul>
 <p>Let’s use <code>vis_miss()</code>, from <code>visdat</code>, to visualize missing values and check out what’s up with <code>contraband_found</code>.</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="inspecting-variables.html#cb33-1"></a><span class="co">## This raises a warning about large data</span></span>
-<span id="cb33-2"><a href="inspecting-variables.html#cb33-2"></a><span class="co"># vis_miss(dataf)</span></span>
-<span id="cb33-3"><a href="inspecting-variables.html#cb33-3"></a><span class="co">## So we&#39;ll use sample_n() to draw a subset</span></span>
-<span id="cb33-4"><a href="inspecting-variables.html#cb33-4"></a><span class="kw">set.seed</span>(<span class="dv">2020-09-10</span>)</span>
-<span id="cb33-5"><a href="inspecting-variables.html#cb33-5"></a>dataf_smol =<span class="st"> </span><span class="kw">sample_n</span>(dataf, <span class="dv">1000</span>)</span>
-<span id="cb33-6"><a href="inspecting-variables.html#cb33-6"></a></span>
-<span id="cb33-7"><a href="inspecting-variables.html#cb33-7"></a><span class="kw">vis_miss</span>(dataf_smol)</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="inspecting-variables.html#cb33-1" aria-hidden="true"></a><span class="co">## This raises a warning about large data</span></span>
+<span id="cb33-2"><a href="inspecting-variables.html#cb33-2" aria-hidden="true"></a><span class="co"># vis_miss(dataf)</span></span>
+<span id="cb33-3"><a href="inspecting-variables.html#cb33-3" aria-hidden="true"></a><span class="co">## So we&#39;ll use sample_n() to draw a subset</span></span>
+<span id="cb33-4"><a href="inspecting-variables.html#cb33-4" aria-hidden="true"></a><span class="kw">set.seed</span>(<span class="dv">2020-09-10</span>)</span>
+<span id="cb33-5"><a href="inspecting-variables.html#cb33-5" aria-hidden="true"></a>dataf_smol =<span class="st"> </span><span class="kw">sample_n</span>(dataf, <span class="dv">1000</span>)</span>
+<span id="cb33-6"><a href="inspecting-variables.html#cb33-6" aria-hidden="true"></a></span>
+<span id="cb33-7"><a href="inspecting-variables.html#cb33-7" aria-hidden="true"></a><span class="kw">vis_miss</span>(dataf_smol)</span></code></pre></div>
 <p><img src="book_files/figure-html/unnamed-chunk-41-1.png" width="60%" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="inspecting-variables.html#cb34-1"></a><span class="co">## Arguments in vis_miss() are useful for picking up patterns in missing values</span></span>
-<span id="cb34-2"><a href="inspecting-variables.html#cb34-2"></a><span class="co">## cluster = TRUE uses hierarchical clustering to order the rows</span></span>
-<span id="cb34-3"><a href="inspecting-variables.html#cb34-3"></a><span class="kw">vis_miss</span>(dataf_smol, <span class="dt">cluster =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="inspecting-variables.html#cb34-1" aria-hidden="true"></a><span class="co">## Arguments in vis_miss() are useful for picking up patterns in missing values</span></span>
+<span id="cb34-2"><a href="inspecting-variables.html#cb34-2" aria-hidden="true"></a><span class="co">## cluster = TRUE uses hierarchical clustering to order the rows</span></span>
+<span id="cb34-3"><a href="inspecting-variables.html#cb34-3" aria-hidden="true"></a><span class="kw">vis_miss</span>(dataf_smol, <span class="dt">cluster =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <p><img src="book_files/figure-html/unnamed-chunk-41-2.png" width="60%" style="display: block; margin: auto;" /></p>
 <ul>
 <li>Several variables related to search outcomes are missing together
@@ -465,10 +464,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="inspecting-variables.html#cb35-1"></a>dataf <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb35-2"><a href="inspecting-variables.html#cb35-2"></a><span class="st">    </span><span class="kw">filter</span>(search_conducted) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb35-3"><a href="inspecting-variables.html#cb35-3"></a><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">contraband_known =</span> <span class="op">!</span><span class="kw">is.na</span>(contraband_found)) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb35-4"><a href="inspecting-variables.html#cb35-4"></a><span class="st">    </span><span class="kw">count</span>(search_conducted, contraband_known)</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="inspecting-variables.html#cb35-1" aria-hidden="true"></a>dataf <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb35-2"><a href="inspecting-variables.html#cb35-2" aria-hidden="true"></a><span class="st">    </span><span class="kw">filter</span>(search_conducted) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb35-3"><a href="inspecting-variables.html#cb35-3" aria-hidden="true"></a><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">contraband_known =</span> <span class="op">!</span><span class="kw">is.na</span>(contraband_found)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb35-4"><a href="inspecting-variables.html#cb35-4" aria-hidden="true"></a><span class="st">    </span><span class="kw">count</span>(search_conducted, contraband_known)</span></code></pre></div>
 <pre><code>## # A tibble: 1 x 3
 ##   search_conducted contraband_known     n
 ##   &lt;lgl&gt;            &lt;lgl&gt;            &lt;int&gt;
@@ -479,15 +478,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>With 28 columns, the dataframe is too wide to print in a readable way. We could use the <code>select()</code> function (from the tidyverse) to extract and print a few columns at a time.</p>
 <p>Instead we’ll use the base R function <code>View()</code> in an interactive session. This shows us an Excel-like spreadsheet presentation of a dataframe.</p>
 <p><code>View()</code> can cause significant problems if you use it with a large dataframe on a slower machine. So we’ll use a pipe: first extract the <code>head()</code> or <code>tail()</code> of the dataset, and then <code>View()</code> it. We’ll also go ahead and view <code>dataf_smol</code>, the subset we created for <code>visdat</code> above.</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="inspecting-variables.html#cb37-1"></a>dataf <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb37-2"><a href="inspecting-variables.html#cb37-2"></a><span class="st">    </span><span class="kw">head</span>() <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb37-3"><a href="inspecting-variables.html#cb37-3"></a><span class="st">    </span><span class="kw">View</span>()</span>
-<span id="cb37-4"><a href="inspecting-variables.html#cb37-4"></a></span>
-<span id="cb37-5"><a href="inspecting-variables.html#cb37-5"></a>dataf <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb37-6"><a href="inspecting-variables.html#cb37-6"></a><span class="st">    </span><span class="kw">tail</span>() <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb37-7"><a href="inspecting-variables.html#cb37-7"></a><span class="st">    </span><span class="kw">View</span>()</span>
-<span id="cb37-8"><a href="inspecting-variables.html#cb37-8"></a></span>
-<span id="cb37-9"><a href="inspecting-variables.html#cb37-9"></a><span class="kw">View</span>(dataf_smol)</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="inspecting-variables.html#cb37-1" aria-hidden="true"></a>dataf <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb37-2"><a href="inspecting-variables.html#cb37-2" aria-hidden="true"></a><span class="st">    </span><span class="kw">head</span>() <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb37-3"><a href="inspecting-variables.html#cb37-3" aria-hidden="true"></a><span class="st">    </span><span class="kw">View</span>()</span>
+<span id="cb37-4"><a href="inspecting-variables.html#cb37-4" aria-hidden="true"></a></span>
+<span id="cb37-5"><a href="inspecting-variables.html#cb37-5" aria-hidden="true"></a>dataf <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb37-6"><a href="inspecting-variables.html#cb37-6" aria-hidden="true"></a><span class="st">    </span><span class="kw">tail</span>() <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb37-7"><a href="inspecting-variables.html#cb37-7" aria-hidden="true"></a><span class="st">    </span><span class="kw">View</span>()</span>
+<span id="cb37-8"><a href="inspecting-variables.html#cb37-8" aria-hidden="true"></a></span>
+<span id="cb37-9"><a href="inspecting-variables.html#cb37-9" aria-hidden="true"></a><span class="kw">View</span>(dataf_smol)</span></code></pre></div>
 <p>Some of my observations:</p>
 <ul>
 <li>The ID variable <code>raw_row_number</code> can’t be turned into a numeric value</li>
@@ -499,7 +498,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>use_of_force_description</code> doesn’t seem to be a descriptive text field; instead it seems to be mostly missing or “handcuffed”</li>
 </ul>
 <p>We can also use <code>skimr</code> to check data quality by looking at the minimum and maximum values. Do these ranges make sense for what we expect the variable to be?</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="inspecting-variables.html#cb38-1"></a><span class="kw">skim</span>(dataf)</span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="inspecting-variables.html#cb38-1" aria-hidden="true"></a><span class="kw">skim</span>(dataf)</span></code></pre></div>
 <pre><code>## ── Data Summary ────────────────────────
 ##                            Values
 ## Name                       dataf 
@@ -611,19 +610,19 @@ Figure 9.1: Screenshot of the two summary tables from the Oakland report. Source
 <li>And then aggregate by year (and gender) using <code>count</code></li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="inspecting-variables.html#cb40-1"></a>dataf <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb40-2"><a href="inspecting-variables.html#cb40-2"></a><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">year =</span> <span class="kw">year</span>(date)) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb40-3"><a href="inspecting-variables.html#cb40-3"></a><span class="st">    </span><span class="kw">filter</span>(year <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">2016</span>, <span class="dv">2017</span>)) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb40-4"><a href="inspecting-variables.html#cb40-4"></a><span class="st">    </span><span class="kw">count</span>(year)</span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="inspecting-variables.html#cb40-1" aria-hidden="true"></a>dataf <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb40-2"><a href="inspecting-variables.html#cb40-2" aria-hidden="true"></a><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">year =</span> <span class="kw">year</span>(date)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb40-3"><a href="inspecting-variables.html#cb40-3" aria-hidden="true"></a><span class="st">    </span><span class="kw">filter</span>(year <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">2016</span>, <span class="dv">2017</span>)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb40-4"><a href="inspecting-variables.html#cb40-4" aria-hidden="true"></a><span class="st">    </span><span class="kw">count</span>(year)</span></code></pre></div>
 <pre><code>## # A tibble: 2 x 2
 ##    year     n
 ##   &lt;dbl&gt; &lt;int&gt;
 ## 1  2016 30268
 ## 2  2017 30715</code></pre>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="inspecting-variables.html#cb42-1"></a>dataf <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb42-2"><a href="inspecting-variables.html#cb42-2"></a><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">year =</span> <span class="kw">year</span>(date)) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb42-3"><a href="inspecting-variables.html#cb42-3"></a><span class="st">    </span><span class="kw">filter</span>(year <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">2016</span>, <span class="dv">2017</span>)) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb42-4"><a href="inspecting-variables.html#cb42-4"></a><span class="st">    </span><span class="kw">count</span>(year, subject_sex)</span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="inspecting-variables.html#cb42-1" aria-hidden="true"></a>dataf <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb42-2"><a href="inspecting-variables.html#cb42-2" aria-hidden="true"></a><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">year =</span> <span class="kw">year</span>(date)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb42-3"><a href="inspecting-variables.html#cb42-3" aria-hidden="true"></a><span class="st">    </span><span class="kw">filter</span>(year <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">2016</span>, <span class="dv">2017</span>)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb42-4"><a href="inspecting-variables.html#cb42-4" aria-hidden="true"></a><span class="st">    </span><span class="kw">count</span>(year, subject_sex)</span></code></pre></div>
 <pre><code>## # A tibble: 6 x 3
 ##    year subject_sex     n
 ##   &lt;dbl&gt; &lt;chr&gt;       &lt;int&gt;
@@ -647,14 +646,14 @@ Figure 9.1: Screenshot of the two summary tables from the Oakland report. Source
 </ul></li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="inspecting-variables.html#cb44-1"></a><span class="co">## Men in 2016 in the report vs. our data: 8.2%</span></span>
-<span id="cb44-2"><a href="inspecting-variables.html#cb44-2"></a>(<span class="dv">24576</span> <span class="op">-</span><span class="st"> </span><span class="dv">22563</span>) <span class="op">/</span><span class="st"> </span><span class="dv">24576</span></span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="inspecting-variables.html#cb44-1" aria-hidden="true"></a><span class="co">## Men in 2016 in the report vs. our data: 8.2%</span></span>
+<span id="cb44-2"><a href="inspecting-variables.html#cb44-2" aria-hidden="true"></a>(<span class="dv">24576</span> <span class="op">-</span><span class="st"> </span><span class="dv">22563</span>) <span class="op">/</span><span class="st"> </span><span class="dv">24576</span></span></code></pre></div>
 <pre><code>## [1] 0.08190918</code></pre>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="inspecting-variables.html#cb46-1"></a><span class="co">## Women in 2016 in the report vs. our data: 3.6%</span></span>
-<span id="cb46-2"><a href="inspecting-variables.html#cb46-2"></a>(<span class="dv">7965</span> <span class="op">-</span><span class="st"> </span><span class="dv">7677</span>) <span class="op">/</span><span class="st"> </span><span class="dv">7965</span></span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="inspecting-variables.html#cb46-1" aria-hidden="true"></a><span class="co">## Women in 2016 in the report vs. our data: 3.6%</span></span>
+<span id="cb46-2"><a href="inspecting-variables.html#cb46-2" aria-hidden="true"></a>(<span class="dv">7965</span> <span class="op">-</span><span class="st"> </span><span class="dv">7677</span>) <span class="op">/</span><span class="st"> </span><span class="dv">7965</span></span></code></pre></div>
 <pre><code>## [1] 0.03615819</code></pre>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="inspecting-variables.html#cb48-1"></a><span class="co">## All of 2016 in the report vs. our data: 7.1%</span></span>
-<span id="cb48-2"><a href="inspecting-variables.html#cb48-2"></a>(<span class="dv">32569</span> <span class="op">-</span><span class="st"> </span><span class="dv">30268</span>) <span class="op">/</span><span class="st"> </span><span class="dv">32569</span></span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="inspecting-variables.html#cb48-1" aria-hidden="true"></a><span class="co">## All of 2016 in the report vs. our data: 7.1%</span></span>
+<span id="cb48-2"><a href="inspecting-variables.html#cb48-2" aria-hidden="true"></a>(<span class="dv">32569</span> <span class="op">-</span><span class="st"> </span><span class="dv">30268</span>) <span class="op">/</span><span class="st"> </span><span class="dv">32569</span></span></code></pre></div>
 <pre><code>## [1] 0.07065</code></pre>
 </div>
 <div id="make-a-plot" class="section level2" number="9.10">
@@ -678,10 +677,10 @@ Figure 9.1: Screenshot of the two summary tables from the Oakland report. Source
 </ul>
 <div id="number-of-stops-by-race" class="section level3" number="9.11.1">
 <h3><span class="header-section-number">9.11.1</span> Number of stops, by race</h3>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="inspecting-variables.html#cb50-1"></a>dataf <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb50-2"><a href="inspecting-variables.html#cb50-2"></a><span class="st">    </span><span class="kw">count</span>(subject_race) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb50-3"><a href="inspecting-variables.html#cb50-3"></a><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">share =</span> n <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(n)) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb50-4"><a href="inspecting-variables.html#cb50-4"></a><span class="st">    </span><span class="kw">arrange</span>(<span class="kw">desc</span>(share))</span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="inspecting-variables.html#cb50-1" aria-hidden="true"></a>dataf <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb50-2"><a href="inspecting-variables.html#cb50-2" aria-hidden="true"></a><span class="st">    </span><span class="kw">count</span>(subject_race) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb50-3"><a href="inspecting-variables.html#cb50-3" aria-hidden="true"></a><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">share =</span> n <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(n)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb50-4"><a href="inspecting-variables.html#cb50-4" aria-hidden="true"></a><span class="st">    </span><span class="kw">arrange</span>(<span class="kw">desc</span>(share))</span></code></pre></div>
 <pre><code>## # A tibble: 5 x 3
 ##   subject_race               n  share
 ##   &lt;chr&gt;                  &lt;int&gt;  &lt;dbl&gt;
@@ -716,11 +715,11 @@ Figure 9.1: Screenshot of the two summary tables from the Oakland report. Source
 <div id="contraband-search-results-by-race" class="section level3" number="9.11.2">
 <h3><span class="header-section-number">9.11.2</span> Contraband search results, by race</h3>
 <p>As a preliminary question, what fraction of stops had a search? Are there disparities by race there? We can answer the first question using tools we already have.</p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="inspecting-variables.html#cb52-1"></a><span class="co">## What fraction of stops had a search? </span></span>
-<span id="cb52-2"><a href="inspecting-variables.html#cb52-2"></a><span class="co">## 31%</span></span>
-<span id="cb52-3"><a href="inspecting-variables.html#cb52-3"></a>dataf <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb52-4"><a href="inspecting-variables.html#cb52-4"></a><span class="st">    </span><span class="kw">count</span>(search_conducted) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb52-5"><a href="inspecting-variables.html#cb52-5"></a><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">share =</span> n)</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="inspecting-variables.html#cb52-1" aria-hidden="true"></a><span class="co">## What fraction of stops had a search? </span></span>
+<span id="cb52-2"><a href="inspecting-variables.html#cb52-2" aria-hidden="true"></a><span class="co">## 31%</span></span>
+<span id="cb52-3"><a href="inspecting-variables.html#cb52-3" aria-hidden="true"></a>dataf <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb52-4"><a href="inspecting-variables.html#cb52-4" aria-hidden="true"></a><span class="st">    </span><span class="kw">count</span>(search_conducted) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb52-5"><a href="inspecting-variables.html#cb52-5" aria-hidden="true"></a><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">share =</span> n)</span></code></pre></div>
 <pre><code>## # A tibble: 2 x 3
 ##   search_conducted     n share
 ##   &lt;lgl&gt;            &lt;int&gt; &lt;int&gt;
@@ -729,16 +728,16 @@ Figure 9.1: Screenshot of the two summary tables from the Oakland report. Source
 <p>Across all subjects, 31% of stops involved a search.</p>
 <p>For the other question, we need to calculate something like <code>share</code> <em>within</em> racial groups. That is, among all stops <em>of Black folks</em>, what fraction involved a search? The <code>group_by()</code> function divides the dataset into groups that other tidyverse functions respect. Specifically, <code>count()</code> and <code>mutate()</code> will both analyze each group defined by <code>subject_race</code> separately.</p>
 <p>After using <code>group_by()</code>, it’s good practice to always call <code>ungroup()</code>. We don’t want to accidentally work with the grouped version in another part of our analysis.</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="inspecting-variables.html#cb54-1"></a><span class="co">## What fraction of stops had a search, by race? </span></span>
-<span id="cb54-2"><a href="inspecting-variables.html#cb54-2"></a><span class="co">## Note that, for each racial group, `share` adds up to 100%</span></span>
-<span id="cb54-3"><a href="inspecting-variables.html#cb54-3"></a><span class="co">## For all groups, most stops didn&#39;t involve a search</span></span>
-<span id="cb54-4"><a href="inspecting-variables.html#cb54-4"></a><span class="co">## For Black subjects, 38% of stops involved a search</span></span>
-<span id="cb54-5"><a href="inspecting-variables.html#cb54-5"></a><span class="co">## For White subjects, 15% of stops involved a search</span></span>
-<span id="cb54-6"><a href="inspecting-variables.html#cb54-6"></a>dataf <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb54-7"><a href="inspecting-variables.html#cb54-7"></a><span class="st">    </span><span class="kw">group_by</span>(subject_race) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb54-8"><a href="inspecting-variables.html#cb54-8"></a><span class="st">    </span><span class="kw">count</span>(search_conducted) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb54-9"><a href="inspecting-variables.html#cb54-9"></a><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">share =</span> n <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(n)) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb54-10"><a href="inspecting-variables.html#cb54-10"></a><span class="st">    </span><span class="kw">ungroup</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="inspecting-variables.html#cb54-1" aria-hidden="true"></a><span class="co">## What fraction of stops had a search, by race? </span></span>
+<span id="cb54-2"><a href="inspecting-variables.html#cb54-2" aria-hidden="true"></a><span class="co">## Note that, for each racial group, `share` adds up to 100%</span></span>
+<span id="cb54-3"><a href="inspecting-variables.html#cb54-3" aria-hidden="true"></a><span class="co">## For all groups, most stops didn&#39;t involve a search</span></span>
+<span id="cb54-4"><a href="inspecting-variables.html#cb54-4" aria-hidden="true"></a><span class="co">## For Black subjects, 38% of stops involved a search</span></span>
+<span id="cb54-5"><a href="inspecting-variables.html#cb54-5" aria-hidden="true"></a><span class="co">## For White subjects, 15% of stops involved a search</span></span>
+<span id="cb54-6"><a href="inspecting-variables.html#cb54-6" aria-hidden="true"></a>dataf <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb54-7"><a href="inspecting-variables.html#cb54-7" aria-hidden="true"></a><span class="st">    </span><span class="kw">group_by</span>(subject_race) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb54-8"><a href="inspecting-variables.html#cb54-8" aria-hidden="true"></a><span class="st">    </span><span class="kw">count</span>(search_conducted) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb54-9"><a href="inspecting-variables.html#cb54-9" aria-hidden="true"></a><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">share =</span> n <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(n)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb54-10"><a href="inspecting-variables.html#cb54-10" aria-hidden="true"></a><span class="st">    </span><span class="kw">ungroup</span>()</span></code></pre></div>
 <pre><code>## # A tibble: 10 x 4
 ##    subject_race           search_conducted     n share
 ##    &lt;chr&gt;                  &lt;lgl&gt;            &lt;int&gt; &lt;dbl&gt;
@@ -759,14 +758,14 @@ Figure 9.1: Screenshot of the two summary tables from the Oakland report. Source
 <li><p><em>So police were much more likely to search stopped Black subjects than White subjects</em></p></li>
 </ul>
 <p>Finally, let’s consider our second main question: contraband results from searches. Note that we want to restrict ourselves to only stops where <code>search_conducted</code> is true.</p>
-<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="inspecting-variables.html#cb56-1"></a><span class="co">## Contraband results from searches, by race</span></span>
-<span id="cb56-2"><a href="inspecting-variables.html#cb56-2"></a>dataf <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb56-3"><a href="inspecting-variables.html#cb56-3"></a><span class="st">    </span><span class="kw">filter</span>(search_conducted) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb56-4"><a href="inspecting-variables.html#cb56-4"></a><span class="st">    </span><span class="kw">count</span>(subject_race, contraband_found) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb56-5"><a href="inspecting-variables.html#cb56-5"></a><span class="st">    </span><span class="kw">group_by</span>(subject_race) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb56-6"><a href="inspecting-variables.html#cb56-6"></a><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">share =</span> n <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(n)) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb56-7"><a href="inspecting-variables.html#cb56-7"></a><span class="st">    </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb56-8"><a href="inspecting-variables.html#cb56-8"></a><span class="st">    </span><span class="kw">filter</span>(contraband_found)</span></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="inspecting-variables.html#cb56-1" aria-hidden="true"></a><span class="co">## Contraband results from searches, by race</span></span>
+<span id="cb56-2"><a href="inspecting-variables.html#cb56-2" aria-hidden="true"></a>dataf <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb56-3"><a href="inspecting-variables.html#cb56-3" aria-hidden="true"></a><span class="st">    </span><span class="kw">filter</span>(search_conducted) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb56-4"><a href="inspecting-variables.html#cb56-4" aria-hidden="true"></a><span class="st">    </span><span class="kw">count</span>(subject_race, contraband_found) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb56-5"><a href="inspecting-variables.html#cb56-5" aria-hidden="true"></a><span class="st">    </span><span class="kw">group_by</span>(subject_race) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb56-6"><a href="inspecting-variables.html#cb56-6" aria-hidden="true"></a><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">share =</span> n <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(n)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb56-7"><a href="inspecting-variables.html#cb56-7" aria-hidden="true"></a><span class="st">    </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb56-8"><a href="inspecting-variables.html#cb56-8" aria-hidden="true"></a><span class="st">    </span><span class="kw">filter</span>(contraband_found)</span></code></pre></div>
 <pre><code>## # A tibble: 5 x 4
 ##   subject_race           contraband_found     n share
 ##   &lt;chr&gt;                  &lt;lgl&gt;            &lt;int&gt; &lt;dbl&gt;
