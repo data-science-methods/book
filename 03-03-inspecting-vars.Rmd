@@ -55,6 +55,7 @@ These rough questions will be enough to get us started.
 The dataset is a zipped `csv` or comma-separated value file.  CSVs are structured like Excel spreadsheets, but are stored in plain text rather than Excel's format.  
 
 ```{r, eval=FALSE}
+## Not run
 ## The base R function `read.csv()` can't read a zipped file, and returns gibberish
 read.csv(target_file)
 
@@ -73,6 +74,7 @@ toc()
 # class(dataf$beat)
 # class(dataf$subject_age)
 ```
+
 ## 3. Check the packaging ##
 
 @PengArtDataScience2016 use some base R functions to look at dimensions of the dataframe and column (variable) types.  `skimr` is more powerful. 
