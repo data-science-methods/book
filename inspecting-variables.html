@@ -287,14 +287,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="read-in-your-data" class="section level2" number="9.4">
 <h2><span class="header-section-number">9.4</span> 2. Read in your data</h2>
 <p>The dataset is a zipped <code>csv</code> or comma-separated value file. CSVs are structured like Excel spreadsheets, but are stored in plain text rather than Excel’s format.</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="inspecting-variables.html#cb25-1" aria-hidden="true"></a><span class="co">## The base R function `read.csv()` can&#39;t read a zipped file, and returns gibberish</span></span>
-<span id="cb25-2"><a href="inspecting-variables.html#cb25-2" aria-hidden="true"></a><span class="kw">read.csv</span>(target_file)</span>
-<span id="cb25-3"><a href="inspecting-variables.html#cb25-3" aria-hidden="true"></a></span>
-<span id="cb25-4"><a href="inspecting-variables.html#cb25-4" aria-hidden="true"></a><span class="co">## The `read_csv()` function, part of the tidyverse, takes 1.7 seconds on my laptop, but misinterprets several columns as logicals, resulting in parsing problems.</span></span>
-<span id="cb25-5"><a href="inspecting-variables.html#cb25-5" aria-hidden="true"></a><span class="co">## (What goes wrong?  By default, `read_csv()` looks at the first 1,000 rows to guess what the type of each column should be.  As we&#39;ll see below, columns like `beat` and `subject_age` are missing on the first 5,000+ rows.  So `read_csv()` sees 1,000 missing values and guesses that these columns are `logical`, with values `TRUE` or `FALSE`.  We could fix this by changing the `guess_max` argument, but that would slow things down even more.)</span></span>
-<span id="cb25-6"><a href="inspecting-variables.html#cb25-6" aria-hidden="true"></a><span class="kw">tic</span>()</span>
-<span id="cb25-7"><a href="inspecting-variables.html#cb25-7" aria-hidden="true"></a><span class="kw">read_csv</span>(target_file)</span>
-<span id="cb25-8"><a href="inspecting-variables.html#cb25-8" aria-hidden="true"></a><span class="kw">toc</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="inspecting-variables.html#cb25-1" aria-hidden="true"></a><span class="co">## Not run</span></span>
+<span id="cb25-2"><a href="inspecting-variables.html#cb25-2" aria-hidden="true"></a><span class="co">## The base R function `read.csv()` can&#39;t read a zipped file, and returns gibberish</span></span>
+<span id="cb25-3"><a href="inspecting-variables.html#cb25-3" aria-hidden="true"></a><span class="kw">read.csv</span>(target_file)</span>
+<span id="cb25-4"><a href="inspecting-variables.html#cb25-4" aria-hidden="true"></a></span>
+<span id="cb25-5"><a href="inspecting-variables.html#cb25-5" aria-hidden="true"></a><span class="co">## The `read_csv()` function, part of the tidyverse, takes 1.7 seconds on my laptop, but misinterprets several columns as logicals, resulting in parsing problems.</span></span>
+<span id="cb25-6"><a href="inspecting-variables.html#cb25-6" aria-hidden="true"></a><span class="co">## (What goes wrong?  By default, `read_csv()` looks at the first 1,000 rows to guess what the type of each column should be.  As we&#39;ll see below, columns like `beat` and `subject_age` are missing on the first 5,000+ rows.  So `read_csv()` sees 1,000 missing values and guesses that these columns are `logical`, with values `TRUE` or `FALSE`.  We could fix this by changing the `guess_max` argument, but that would slow things down even more.)</span></span>
+<span id="cb25-7"><a href="inspecting-variables.html#cb25-7" aria-hidden="true"></a><span class="kw">tic</span>()</span>
+<span id="cb25-8"><a href="inspecting-variables.html#cb25-8" aria-hidden="true"></a><span class="kw">read_csv</span>(target_file)</span>
+<span id="cb25-9"><a href="inspecting-variables.html#cb25-9" aria-hidden="true"></a><span class="kw">toc</span>()</span></code></pre></div>
 <div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="inspecting-variables.html#cb26-1" aria-hidden="true"></a><span class="co">## The vroom package is 10x faster on my laptop and doesn&#39;t have the parsing problems</span></span>
 <span id="cb26-2"><a href="inspecting-variables.html#cb26-2" aria-hidden="true"></a><span class="kw">tic</span>()</span>
 <span id="cb26-3"><a href="inspecting-variables.html#cb26-3" aria-hidden="true"></a>dataf =<span class="st"> </span><span class="kw">vroom</span>(target_file)</span></code></pre></div>
@@ -310,7 +311,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Use `spec()` to retrieve the guessed column specification
 ## Pass a specification to the `col_types` argument to quiet this message</code></pre>
 <div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="inspecting-variables.html#cb28-1" aria-hidden="true"></a><span class="kw">toc</span>()</span></code></pre></div>
-<pre><code>## 0.407 sec elapsed</code></pre>
+<pre><code>## 0.393 sec elapsed</code></pre>
 <div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="inspecting-variables.html#cb30-1" aria-hidden="true"></a><span class="co"># class(dataf$beat)</span></span>
 <span id="cb30-2"><a href="inspecting-variables.html#cb30-2" aria-hidden="true"></a><span class="co"># class(dataf$subject_age)</span></span></code></pre></div>
 </div>
