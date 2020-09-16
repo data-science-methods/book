@@ -1,4 +1,4 @@
-# Exploratory Data Analysis #
+# Exploratory Data Analysis # {#eda-models}
 
 ```{r child = 'knitr_config.Rmd'}
 ```

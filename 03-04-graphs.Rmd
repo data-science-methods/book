@@ -1,7 +1,95 @@
 # Visual EDA #
 
+- Recommended reading: @WeissgerberBarLineGraphs2015; @WickhamLayeredGrammarGraphics2010
+- Further reading: @HealyDataVisualizationPractical2018, ch. 1; @MatejkaSameStatsDifferent
+
 ```{r child = 'knitr_config.Rmd'}
 ```
+
+## The Role of Visuals in EDA ##
+
+- @TukeyExploratoryDataAnalysis1977 emphasized visual methods for EDA
+- Including not just graphs but also structured tables, such as [stem-and-leaf displays](https://en.wikipedia.org/wiki/Stem-and-leaf_display)
+
+- In terms of our 3 models of EDA (ch. \@ref(eda-models))
+    - Risk management:  With the right plot, our visual system can very efficiently detect aspects of the data that don't show up easily with summary statistics but will break models
+        - Outliers 
+        - Degeneracies (eg, perfect correlation)
+        - Skew or bimodal distributions
+        - Non-linear relationships
+
+    - Epicycle of analysis:  
+        - Check expectations about the distribution of variables
+        - Develop expectations about relationships between variables
+
+    - Phenomena development: 
+        - *[something]*
+
+
+## Plot Your Data ##
+
+- Summary statistics almost always focus only on central tendency (mean, median) and dispersion (standard deviation, IQR)
+    - This is all you would need if the world were made of normal distributions
+    - The world is not made of normal distributions [@LyonWhyAreNormal2014]
+
+- We'll illustrate this using The Datasaurus Dozen, a collection of 13 datasets
+    - Each dataset has two variables, `x` and `y`
+
+```{r}
+library(tidyverse)
+library(datasauRus)
+dataf = datasaurus_dozen
+
+dataf
+count(dataf, dataset)
+```
+
+- The datasets have the same means, standard deviations, and (Pearson) correlation coefficient
+    - p-value of the correlation coefficient is not statistically significant
+
+```{r}
+dataf %>% 
+    group_by(dataset) %>% 
+    ## This is a more complex summarize() call than we've seen before
+    ## 1. Number of rows
+    ## 2. "Summarize across the columns x and y, using the functions mean and sd"
+    ## 3. Correlation between x and y
+    ## 4. p-value for t-test of the null that the correlation = 0
+    summarize(n = n(), 
+              across(.cols = c(x, y), 
+                     .fns = lst(mean, sd)), 
+              cor_xy = cor(x, y), 
+              p_value = cor.test(x, y)$p.value) %>% 
+    ungroup()
+```
+
+```{r}
+ggplot(dataf, aes(x, y)) +
+    geom_point() +
+    facet_wrap(vars(dataset))
+```
+
+
+## The Grammar of Graphics ##
+
+- @WilkinsonGrammarGraphics1999; @WickhamLayeredGrammarGraphics2010
+
+```{r, echo = FALSE, fig.cap = 'The Grammar of Graphics regards graphs as mappings from variables in the data to features of geometric objects. This means that every graph is a model.'}
+knitr::include_graphics(file.path('images', '03-eda', 'grammar_of_graphics.png'))
+```
+
+- *Graphs are maps*
+    - A graph maps variables in the data to features of geometric objects
+    - An individual map is called an *aesthetic*
+    - So a graph is a collection of aesthetics applied to a dataset
+
+- **Graphs are models**
+    - Simplifications of the data
+    - Designed to fit with our cognitive capabilities
+    - In ways that support pattern detection, inference
+    - Recall Leonelli's relational view of data
+    - (Cog sci folks: would you use the term "cognitive affordance" here?)
+
 
 ## 1D distributions ##
 
@@ -18,6 +106,6 @@
 
 - `ggforce::facet_matrix()`
 - lab: correlation heat map + scatterplots
-    - geom_text
+- geom_text
 
 - upset plots
