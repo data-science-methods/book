@@ -119,7 +119,7 @@
 
 \title{Data Science Methods for Cognitive Science}
 \author{Dan Hicks, \href{mailto:hicks.daniel.j@gmail.com}{\nolinkurl{hicks.daniel.j@gmail.com}}}
-\date{Tue Sep 15 18:44:40 2020}
+\date{Thu Sep 17 19:16:13 2020}
 
 \begin{document}
 \maketitle
@@ -139,6 +139,27 @@ The course overview (including reading and lab assignments) is available here: \
 PDF versions of each chapter can be found here: \href{handouts/index.html}{Handouts}
 
 (The URLs to the handouts are buggy. To get to them, look for \texttt{handout/handout/} in the URL; delete the second \texttt{handout/}.)
+
+These notes were written in \href{http://www.rstudio.com/ide/}{RStudio} using \href{http://bookdown.org/}{bookdown}. The complete source is available on \href{https://github.com/data-science-methods/book/}{GitHub} and is automatically rebuilt using \href{https://github.com/data-science-methods/book/}{Travis CI}.
+
+This version of the book was built with R version 4.0.2 (2020-06-22), \href{https://pandoc.org/}{pandoc} version 2.10, and the following packages:
+
+\begin{longtable}[]{@{}lll@{}}
+\toprule
+package & version & source\tabularnewline
+\midrule
+\endhead
+bookdown & 0.20.6 & Github (rstudio/bookdown@57f1217)\tabularnewline
+datasauRus & 0.1.4 & CRAN (R 4.0.2)\tabularnewline
+desc & 1.2.0 & CRAN (R 4.0.2)\tabularnewline
+sessioninfo & 1.1.1 & CRAN (R 4.0.2)\tabularnewline
+skimr & 2.1.2 & CRAN (R 4.0.2)\tabularnewline
+tictoc & 1.0 & CRAN (R 4.0.2)\tabularnewline
+tidyverse & 1.3.0 & CRAN (R 4.0.2)\tabularnewline
+visdat & 0.5.3 & CRAN (R 4.0.2)\tabularnewline
+vroom & 1.3.1 & CRAN (R 4.0.2)\tabularnewline
+\bottomrule
+\end{longtable}
 
 \hypertarget{setting-up}{%
 \section*{Setting up}\label{setting-up}}
@@ -1623,8 +1644,8 @@ Not on Bryan's list, but a bonus thing to not do:
 \hypertarget{part-exploratory-data-analysis-eda}{%
 \part{Exploratory Data Analysis (EDA)}\label{part-exploratory-data-analysis-eda}}
 
-\hypertarget{exploratory-data-analysis}{%
-\section{Exploratory Data Analysis}\label{exploratory-data-analysis}}
+\hypertarget{eda-models}{%
+\section{Exploratory Data Analysis}\label{eda-models}}
 
 \begin{quote}
 This book is about exploratory data analysis, about looking at data to see what it seems to say. It concentrates on simple arithmetic and easy-to-draw pictures. It regards whatever appearances we have recognized as partial descriptions, and tries to look beneath them for new insights. Its concern is with appearance, not with confirmation. Tukey (\protect\hyperlink{ref-TukeyExploratoryDataAnalysis1977}{1977}) v
@@ -2174,7 +2195,7 @@ The dataset is a zipped \texttt{csv} or comma-separated value file. CSVs are str
 \end{Shaded}
 
 \begin{verbatim}
-## 0.343 sec elapsed
+## 0.371 sec elapsed
 \end{verbatim}
 
 \begin{Shaded}
@@ -3043,6 +3064,252 @@ The lab related to this material is available at \url{https://github.com/data-sc
 \hypertarget{visual-eda}{%
 \section{Visual EDA}\label{visual-eda}}
 
+\begin{itemize}
+\tightlist
+\item
+  Recommended reading: Weissgerber et al. (\protect\hyperlink{ref-WeissgerberBarLineGraphs2015}{2015}); Wickham (\protect\hyperlink{ref-WickhamLayeredGrammarGraphics2010}{2010})
+\item
+  Further reading: Healy (\protect\hyperlink{ref-HealyDataVisualizationPractical2018}{2018}), ch.~1; ({\textbf{???}})
+\end{itemize}
+
+\hypertarget{the-role-of-visuals-in-eda}{%
+\subsection{The Role of Visuals in EDA}\label{the-role-of-visuals-in-eda}}
+
+\begin{itemize}
+\item
+  Tukey (\protect\hyperlink{ref-TukeyExploratoryDataAnalysis1977}{1977}) emphasized visual methods for EDA
+\item
+  Including not just graphs but also structured tables, such as \href{https://en.wikipedia.org/wiki/Stem-and-leaf_display}{stem-and-leaf displays}
+\item
+  In terms of our 3 models of EDA (ch.~\ref{eda-models})
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Risk management: With the right plot, our visual system can very efficiently detect aspects of the data that don't show up easily with summary statistics but will break models
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Outliers
+    \item
+      Degeneracies (eg, perfect correlation)
+    \item
+      Skew or bimodal distributions
+    \item
+      Non-linear relationships
+    \end{itemize}
+  \item
+    Epicycle of analysis:
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Check expectations about the distribution of variables
+    \item
+      Develop expectations about relationships between variables
+    \end{itemize}
+  \item
+    Phenomena development:
+
+    \begin{itemize}
+    \tightlist
+    \item
+      \emph{{[}something{]}}
+    \end{itemize}
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{plot-your-data}{%
+\subsection{Plot Your Data}\label{plot-your-data}}
+
+\begin{itemize}
+\tightlist
+\item
+  Summary statistics almost always focus only on central tendency (mean, median) and dispersion (standard deviation, IQR)
+
+  \begin{itemize}
+  \tightlist
+  \item
+    This is all you would need if the world were made of normal distributions
+  \item
+    The world is not made of normal distributions (Lyon \protect\hyperlink{ref-LyonWhyAreNormal2014}{2014})
+  \end{itemize}
+\item
+  We'll illustrate this using The Datasaurus Dozen, a collection of 13 datasets
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Each dataset has two variables, \texttt{x} and \texttt{y}
+  \end{itemize}
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(tidyverse)}
+\KeywordTok{library}\NormalTok{(datasauRus)}
+\NormalTok{dataf =}\StringTok{ }\NormalTok{datasaurus\_dozen}
+
+\NormalTok{dataf}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 1,846 x 3
+##    dataset     x     y
+##    <chr>   <dbl> <dbl>
+##  1 dino     55.4  97.2
+##  2 dino     51.5  96.0
+##  3 dino     46.2  94.5
+##  4 dino     42.8  91.4
+##  5 dino     40.8  88.3
+##  6 dino     38.7  84.9
+##  7 dino     35.6  79.9
+##  8 dino     33.1  77.6
+##  9 dino     29.0  74.5
+## 10 dino     26.2  71.4
+## # ... with 1,836 more rows
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{count}\NormalTok{(dataf, dataset)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 13 x 2
+##    dataset        n
+##    <chr>      <int>
+##  1 away         142
+##  2 bullseye     142
+##  3 circle       142
+##  4 dino         142
+##  5 dots         142
+##  6 h_lines      142
+##  7 high_lines   142
+##  8 slant_down   142
+##  9 slant_up     142
+## 10 star         142
+## 11 v_lines      142
+## 12 wide_lines   142
+## 13 x_shape      142
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  The datasets have the same means, standard deviations, and (Pearson) correlation coefficient
+
+  \begin{itemize}
+  \tightlist
+  \item
+    p-value of the correlation coefficient is not statistically significant
+  \end{itemize}
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dataf }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{    }\KeywordTok{group\_by}\NormalTok{(dataset) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{    }\CommentTok{\#\# This is a more complex summarize() call than we\textquotesingle{}ve seen before}
+\StringTok{    }\CommentTok{\#\# 1. Number of rows}
+\StringTok{    }\CommentTok{\#\# 2. "Summarize across the columns x and y, using the functions mean and sd"}
+\StringTok{    }\CommentTok{\#\# 3. Correlation between x and y}
+\StringTok{    }\CommentTok{\#\# 4. p{-}value for t{-}test of the null that the correlation = 0}
+\StringTok{    }\KeywordTok{summarize}\NormalTok{(}\DataTypeTok{n =} \KeywordTok{n}\NormalTok{(), }
+              \KeywordTok{across}\NormalTok{(}\DataTypeTok{.cols =} \KeywordTok{c}\NormalTok{(x, y), }
+                     \DataTypeTok{.fns =} \KeywordTok{lst}\NormalTok{(mean, sd)), }
+              \DataTypeTok{cor\_xy =} \KeywordTok{cor}\NormalTok{(x, y), }
+              \DataTypeTok{p\_value =} \KeywordTok{cor.test}\NormalTok{(x, y)}\OperatorTok{$}\NormalTok{p.value) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{    }\KeywordTok{ungroup}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `summarise()` ungrouping output (override with `.groups` argument)
+\end{verbatim}
+
+\begin{verbatim}
+## # A tibble: 13 x 8
+##    dataset        n x_mean  x_sd y_mean  y_sd  cor_xy p_value
+##    <chr>      <int>  <dbl> <dbl>  <dbl> <dbl>   <dbl>   <dbl>
+##  1 away         142   54.3  16.8   47.8  26.9 -0.0641   0.448
+##  2 bullseye     142   54.3  16.8   47.8  26.9 -0.0686   0.417
+##  3 circle       142   54.3  16.8   47.8  26.9 -0.0683   0.419
+##  4 dino         142   54.3  16.8   47.8  26.9 -0.0645   0.446
+##  5 dots         142   54.3  16.8   47.8  26.9 -0.0603   0.476
+##  6 h_lines      142   54.3  16.8   47.8  26.9 -0.0617   0.466
+##  7 high_lines   142   54.3  16.8   47.8  26.9 -0.0685   0.418
+##  8 slant_down   142   54.3  16.8   47.8  26.9 -0.0690   0.415
+##  9 slant_up     142   54.3  16.8   47.8  26.9 -0.0686   0.417
+## 10 star         142   54.3  16.8   47.8  26.9 -0.0630   0.457
+## 11 v_lines      142   54.3  16.8   47.8  26.9 -0.0694   0.412
+## 12 wide_lines   142   54.3  16.8   47.8  26.9 -0.0666   0.431
+## 13 x_shape      142   54.3  16.8   47.8  26.9 -0.0656   0.438
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(dataf, }\KeywordTok{aes}\NormalTok{(x, y)) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{geom\_point}\NormalTok{() }\OperatorTok{+}
+\StringTok{    }\KeywordTok{facet\_wrap}\NormalTok{(}\KeywordTok{vars}\NormalTok{(dataset))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.6\linewidth]{book_files/figure-latex/unnamed-chunk-55-1} \end{center}
+
+\hypertarget{the-grammar-of-graphics}{%
+\subsection{The Grammar of Graphics}\label{the-grammar-of-graphics}}
+
+\begin{itemize}
+\tightlist
+\item
+  ({\textbf{???}}); Wickham (\protect\hyperlink{ref-WickhamLayeredGrammarGraphics2010}{2010})
+\end{itemize}
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.6\linewidth]{images/03-eda/grammar_of_graphics} 
+
+}
+
+\caption{The Grammar of Graphics regards graphs as mappings from variables in the data to features of geometric objects. This means that every graph is a model.}\label{fig:unnamed-chunk-56}
+\end{figure}
+
+\begin{itemize}
+\tightlist
+\item
+  \emph{Graphs are maps}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    A graph maps variables in the data to features of geometric objects
+  \item
+    An individual map is called an \emph{aesthetic}
+  \item
+    So a graph is a collection of aesthetics applied to a dataset
+  \end{itemize}
+\item
+  \textbf{Graphs are models}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Simplifications of the data
+  \item
+    Designed to fit with our cognitive capabilities
+  \item
+    In ways that support pattern detection, inference
+  \item
+    Recall Leonelli's relational view of data
+  \item
+    (Cog sci folks: would you use the term ``cognitive affordance'' here?)
+  \end{itemize}
+\end{itemize}
+
 \hypertarget{d-distributions}{%
 \subsection{1D distributions}\label{d-distributions}}
 
@@ -3071,17 +3338,12 @@ The lab related to this material is available at \url{https://github.com/data-sc
 \subsection{Multivariate distributions}\label{multivariate-distributions}}
 
 \begin{itemize}
-\tightlist
 \item
   \texttt{ggforce::facet\_matrix()}
 \item
   lab: correlation heat map + scatterplots
-
-  \begin{itemize}
-  \tightlist
-  \item
-    geom\_text
-  \end{itemize}
+\item
+  geom\_text
 \item
   upset plots
 \end{itemize}
@@ -3124,6 +3386,9 @@ Grus, Joel. n.d. ``I Don't Like Notebooks - Joel Grus - \#JupyterCon 2018.'' Goo
 \leavevmode\hypertarget{ref-HannaCriticalRaceMethodology2019}{}%
 Hanna, Alex, Emily Denton, Andrew Smart, and Jamila Smith-Loud. 2019. ``Towards a Critical Race Methodology in Algorithmic Fairness,'' December. \url{https://doi.org/10.1145/3351095.3372826}.
 
+\leavevmode\hypertarget{ref-HealyDataVisualizationPractical2018}{}%
+Healy, Kieran. 2018. \emph{Data Visualization: A Practical Introduction}. Princeton University Press. \url{http://books.google.com?id=3XOYDwAAQBAJ}.
+
 \leavevmode\hypertarget{ref-HicksCensusDemographicsChlorpyrifos2020}{}%
 Hicks, Daniel J. 2020. ``Census Demographics and Chlorpyrifos Use in California's Central Valley, 2011--15: A Distributional Environmental Justice Analysis.'' \emph{International Journal of Environmental Research and Public Health} 17 (7, 7): 2593. \url{https://doi.org/10.3390/ijerph17072593}.
 
@@ -3144,6 +3409,9 @@ Kleinberg, Jon, Sendhil Mullainathan, and Manish Raghavan. 2016. ``Inherent Trad
 
 \leavevmode\hypertarget{ref-LeonelliScientificResearchBig2020}{}%
 Leonelli, Sabina. 2020. ``Scientific Research and Big Data.'' In \emph{The Stanford Encyclopedia of Philosophy}, edited by Edward N. Zalta, Summer 2020. Metaphysics Research Lab, Stanford University. \url{https://plato.stanford.edu/archives/sum2020/entries/science-big-data/}.
+
+\leavevmode\hypertarget{ref-LyonWhyAreNormal2014}{}%
+Lyon, A. 2014. ``Why Are Normal Distributions Normal?'' \emph{The British Journal for the Philosophy of Science} 65 (3): 621--49. \url{https://doi.org/10.1093/bjps/axs046}.
 
 \leavevmode\hypertarget{ref-PaleologoWhatDifferenceMachine2018}{}%
 Paleologo, Giuseppe. 2018. ``What's the Difference Between Machine Learning in Python and R?'' February 28, 2018. \url{https://www.quora.com/Whats-the-difference-between-machine-learning-in-Python-and-R/answer/Giuseppe-Paleologo}.
@@ -3167,7 +3435,7 @@ Shotwell, Gordon. 2019. ``Why I Use R.'' Title. December 30, 2019. \url{https://
 Tukey, John W. 1980. ``We Need Both Exploratory and Confirmatory.'' \emph{The American Statistician} 34 (1): 23--25. \url{https://doi.org/10.1080/00031305.1980.10482706}.
 
 \leavevmode\hypertarget{ref-TukeyExploratoryDataAnalysis1977}{}%
-Tukey, John Wilder. 1977. \emph{Exploratory Data Analysis}. Addison-Wesley Series in Behavioral Science. Reading, Mass: Addison-Wesley Pub. Co.
+Tukey, John Wilder. 1977. \emph{Exploratory Data Analysis}. Addison-Wesley Series in Behavioral Science. Reading, Mass: Addison-Wesley Pub. Co. \url{https://archive.org/details/exploratorydataa00tuke_0}.
 
 \leavevmode\hypertarget{ref-WagenmakersAgendaPurelyConfirmatory2012}{}%
 Wagenmakers, Eric-Jan, Ruud Wetzels, Denny Borsboom, Han L. J. van der Maas, and Rogier A. Kievit. 2012. ``An Agenda for Purely Confirmatory Research.'' \emph{Perspectives on Psychological Science} 7 (6): 632--38. \url{https://doi.org/10.1177/1745691612463078}.
@@ -3175,11 +3443,17 @@ Wagenmakers, Eric-Jan, Ruud Wetzels, Denny Borsboom, Han L. J. van der Maas, and
 \leavevmode\hypertarget{ref-WangWhyBigData2016}{}%
 Wang, Tricia. 2016. ``Why Big Data Needs Thick Data.'' Medium. January 20, 2016. \url{https://medium.com/ethnography-matters/why-big-data-needs-thick-data-b4b3e75e3d7\#.ur5gl84nj}.
 
+\leavevmode\hypertarget{ref-WeissgerberBarLineGraphs2015}{}%
+Weissgerber, Tracey L., Natasa M. Milic, Stacey J. Winham, and Vesna D. Garovic. 2015. ``Beyond Bar and Line Graphs: Time for a New Data Presentation Paradigm.'' \emph{PLoS Biol} 13 (4): e1002128. \url{https://doi.org/10.1371/journal.pbio.1002128}.
+
 \leavevmode\hypertarget{ref-WhitmoreJupyterNotebookBest2015}{}%
 Whitmore, Jonathan. 2015. ``Jupyter Notebook Best Practices for Data Science.'' Silicon Valley Data Science. September 10, 2015. \url{https://www.svds.com/jupyter-notebook-best-practices-for-data-science/}.
 
+\leavevmode\hypertarget{ref-WickhamLayeredGrammarGraphics2010}{}%
+Wickham, Hadley. 2010. ``A Layered Grammar of Graphics.'' \emph{Journal of Computational and Graphical Statistics} 19 (1): 3--28. \url{https://doi.org/10.1198/jcgs.2009.07098}.
+
 \leavevmode\hypertarget{ref-WickhamAdvanced2014}{}%
-Wickham, Hadley. 2014. \emph{Advanced R}. CRC Press. \url{https://adv-r.hadley.nz}.
+---------. 2014. \emph{Advanced R}. CRC Press. \url{https://adv-r.hadley.nz}.
 
 \leavevmode\hypertarget{ref-WilkinsonFAIRGuidingPrinciples2016}{}%
 Wilkinson, Mark D., Michel Dumontier, IJsbrand Jan Aalbersberg, Gabrielle Appleton, Myles Axton, Arie Baak, Niklas Blomberg, et al. 2016. ``The FAIR Guiding Principles for Scientific Data Management and Stewardship.'' \emph{Scientific Data} 3 (1, 1): 1--9. \url{https://doi.org/10.1038/sdata.2016.18}.
