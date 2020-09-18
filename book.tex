@@ -119,7 +119,7 @@
 
 \title{Data Science Methods for Cognitive Science}
 \author{Dan Hicks, \href{mailto:hicks.daniel.j@gmail.com}{\nolinkurl{hicks.daniel.j@gmail.com}}}
-\date{Thu Sep 17 19:16:13 2020}
+\date{Fri Sep 18 15:27:36 2020}
 
 \begin{document}
 \maketitle
@@ -2195,7 +2195,7 @@ The dataset is a zipped \texttt{csv} or comma-separated value file. CSVs are str
 \end{Shaded}
 
 \begin{verbatim}
-## 0.371 sec elapsed
+## 0.355 sec elapsed
 \end{verbatim}
 
 \begin{Shaded}
@@ -3348,6 +3348,526 @@ The lab related to this material is available at \url{https://github.com/data-sc
   upset plots
 \end{itemize}
 
+\hypertarget{intermediate-visualization-in-r}{%
+\section{Intermediate Visualization in R}\label{intermediate-visualization-in-r}}
+
+This chapter is based on a \href{https://github.com/dsidavis/RGraphicsWorkshop}{workshop} that I ran at \href{https://www.youtube.com/watch?v=grEmJSL4Lwc}{UC Davis} in February 2019. We won't be covering it in class. But it gives some more background on visualization in R and presents some more advanced uses of ggplot.
+
+To work through the plots, I recommend commenting out everything and turning off the comments one line at a time. This is the best way to understand how each layer modified the plot.
+
+Some of the plots include alternative layers, mostly geoms, to illustrate how different ways of representing the data provide different visual affordances.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(ggplot2)}
+
+\NormalTok{data\_dir =}\StringTok{ \textquotesingle{}data\textquotesingle{}}
+\NormalTok{data\_files =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{\textquotesingle{}papers\textquotesingle{}}\NormalTok{ =}\StringTok{ \textquotesingle{}paper\_counts.Rds\textquotesingle{}}\NormalTok{, }
+               \StringTok{\textquotesingle{}stations\textquotesingle{}}\NormalTok{ =}\StringTok{ \textquotesingle{}stations.Rds\textquotesingle{}}\NormalTok{, }
+               \StringTok{\textquotesingle{}stations.utm\textquotesingle{}}\NormalTok{ =}\StringTok{ \textquotesingle{}stations.utm.Rds\textquotesingle{}}\NormalTok{, }
+               \StringTok{\textquotesingle{}temperature\textquotesingle{}}\NormalTok{ =}\StringTok{ \textquotesingle{}temp.Rds\textquotesingle{}}\NormalTok{)}
+\NormalTok{data\_paths =}\StringTok{ }\KeywordTok{file.path}\NormalTok{(data\_dir, data\_files)}
+\KeywordTok{names}\NormalTok{(data\_paths) =}\StringTok{ }\KeywordTok{names}\NormalTok{(data\_files)}
+\NormalTok{data\_urls =}\StringTok{ }\KeywordTok{paste0}\NormalTok{(}\StringTok{\textquotesingle{}https://github.com/dsidavis/RGraphicsWorkshop/raw/master/data/\textquotesingle{}}\NormalTok{, data\_files)}
+
+\CommentTok{\#\# The repo includes a script \textasciigrave{}climate\_data.R\textasciigrave{} that creates the final 3 datasets}
+
+\CommentTok{\#\# \textasciigrave{}if\textasciigrave{} isn\textquotesingle{}t vectorized, so we have to loop over this manually}
+\NormalTok{download\_file =}\StringTok{ }\ControlFlowTok{function}\NormalTok{(path, url) \{}
+    \ControlFlowTok{if}\NormalTok{ (}\OperatorTok{!}\KeywordTok{file.exists}\NormalTok{(path)) \{}
+        \KeywordTok{download.file}\NormalTok{(url, path)}
+\NormalTok{    \}}
+\NormalTok{\}}
+\NormalTok{purrr}\OperatorTok{::}\KeywordTok{walk2}\NormalTok{(data\_paths, data\_urls, download\_file)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{base-graphics-vs.-ggplot2}{%
+\subsection{\texorpdfstring{Base graphics vs.~\texttt{ggplot2}}{Base graphics vs.~ggplot2}}\label{base-graphics-vs.-ggplot2}}
+
+\begin{itemize}
+\tightlist
+\item
+  R comes with a standard set of visualization tools, called \emph{base graphics}.\footnote{Strictly speaking, \texttt{base} is the name of a particular package; ``base graphics'' aren't included in this package, but instead are in the \texttt{graphics} package. So ``base graphics'' is strictly incorrect. But ``graphics graphics'' sounds silly, and the \texttt{graphics} package is loaded automatically when you launch R, so everyone just calls it ``base graphics.''}\\
+\item
+  Base graphics' approach to visualization is often called an ``artist's palette'' model
+
+  \begin{itemize}
+  \tightlist
+  \item
+    A set of low-level tools
+
+    \begin{itemize}
+    \tightlist
+    \item
+      \texttt{points()}, \texttt{lines()}, \texttt{polygon()}
+    \item
+      \texttt{abline()}, \texttt{curve()}
+    \end{itemize}
+  \item
+    Define a canvas first, then use these tools to paint elements on the canvas
+  \end{itemize}
+\item
+  Advantages of base graphics
+
+  \begin{itemize}
+  \tightlist
+  \item
+    One-liners
+
+    \begin{itemize}
+    \tightlist
+    \item
+      \texttt{plot(some\_object)} often does something useful
+
+      \begin{itemize}
+      \tightlist
+      \item
+        Try it with dataframes, regression models, principal components results, hierarchical clusterings, igraph networks, \ldots{}
+      \end{itemize}
+    \item
+      \texttt{hist()}, \texttt{pairs()}, \texttt{barplot()}, \texttt{boxplot()}, \texttt{pie()}(!)
+    \end{itemize}
+  \item
+    Straightforward to extend to custom classes
+  \item
+    No\(^*\) dependencies; works on any\(^*\) R installation
+  \item
+    Very flexible for unusual visualizations or combinations of plots
+
+    \begin{itemize}
+    \tightlist
+    \item
+      triplots/barycentric coordinates
+    \item
+      scatterplots with marginal densities
+    \item
+      heatmaps with marginal dendrograms
+    \item
+      map with inset plots of local data
+    \end{itemize}
+  \end{itemize}
+\item
+  Disadvantages of base graphics
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Parameters aren't perspicuous
+
+    \begin{itemize}
+    \tightlist
+    \item
+      fill color is \texttt{bg} (background?)
+    \item
+      point shape is \texttt{pch} (uhhh point-character?)
+    \item
+      point size is \texttt{cex} (???)
+    \end{itemize}
+  \item
+    ``Ugly defaults''
+  \item
+    Plots as \href{https://en.wikipedia.org/wiki/Side_effect_(computer_science)}{side effects}
+  \end{itemize}
+\end{itemize}
+
+\begin{itemize}
+\tightlist
+\item
+  Advantages of \texttt{ggplot2}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Conceptual model
+  \item
+    Facets
+  \item
+    Themes and palettes
+  \item
+    Plots are \href{https://en.wikipedia.org/wiki/First-class_citizen}{first-class objects}
+  \item
+    ``Pretty defaults''
+  \end{itemize}
+\item
+  Disadvantages of \texttt{ggplot2}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Only\(^*\) for data frames in \href{https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html}{\emph{long format}}
+  \item
+    Programming with \texttt{ggplot2} requires understanding \href{https://www.tidyverse.org/blog/2018/07/ggplot2-tidy-evaluation/}{tidy evaluation}
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{plot-1-dumbbell-plot}{%
+\subsection{Plot 1: Dumbbell plot}\label{plot-1-dumbbell-plot}}
+
+\begin{itemize}
+\tightlist
+\item
+  Hicks, Stahmer, and Smith (\protect\hyperlink{ref-HicksImpactingCapabilitiesConceptual2018}{2018}) figure 2
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{counts\_df =}\StringTok{ }\KeywordTok{readRDS}\NormalTok{(data\_paths[}\StringTok{\textquotesingle{}papers\textquotesingle{}}\NormalTok{])}
+
+\NormalTok{counts\_df}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 27 x 3
+##    subject_area   full sample
+##    <fct>         <dbl>  <dbl>
+##  1 MEDI         0.159  0.114 
+##  2 BIOC         0.127  0.0851
+##  3 AGRI         0.131  0.0723
+##  4 ENGI         0.0582 0.0620
+##  5 PHYS         0.0632 0.0574
+##  6 CHEM         0.0401 0.0531
+##  7 ENVI         0.0529 0.0498
+##  8 MATE         0.0384 0.0483
+##  9 SOCI         0.0344 0.0446
+## 10 COMP         0.0324 0.0380
+## # ... with 17 more rows
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(counts\_df, }\KeywordTok{aes}\NormalTok{(subject\_area)) }\OperatorTok{+}\StringTok{ }
+\StringTok{    }\CommentTok{\#\# geoms}
+\StringTok{    }\KeywordTok{geom\_point}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{y =}\NormalTok{ full, }\DataTypeTok{color =} \StringTok{\textquotesingle{}Full\textquotesingle{}}\NormalTok{), }\DataTypeTok{size =} \DecValTok{3}\NormalTok{) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{geom\_point}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{y =}\NormalTok{ sample, }\DataTypeTok{color =} \StringTok{\textquotesingle{}Sample\textquotesingle{}}\NormalTok{), }\DataTypeTok{size =} \DecValTok{3}\NormalTok{) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{geom\_segment}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ subject\_area, }\DataTypeTok{xend =}\NormalTok{ subject\_area, }
+                     \DataTypeTok{y =}\NormalTok{ full, }\DataTypeTok{yend =}\NormalTok{ sample), }
+                 \DataTypeTok{arrow =} \KeywordTok{arrow}\NormalTok{(}\DataTypeTok{angle =} \DecValTok{15}\NormalTok{, }\DataTypeTok{type =} \StringTok{\textquotesingle{}closed\textquotesingle{}}\NormalTok{, }
+                               \DataTypeTok{length =} \KeywordTok{unit}\NormalTok{(.}\DecValTok{025}\NormalTok{, }\StringTok{\textquotesingle{}snpc\textquotesingle{}}\NormalTok{))) }\OperatorTok{+}
+\StringTok{    }\CommentTok{\#\# scales}
+\StringTok{    }\KeywordTok{xlab}\NormalTok{(}\StringTok{\textquotesingle{}ASJC subject area\textquotesingle{}}\NormalTok{) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{scale\_y\_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ scales}\OperatorTok{::}\KeywordTok{percent\_format}\NormalTok{(), }
+                       \DataTypeTok{name =} \StringTok{\textquotesingle{}Papers in dataset\textquotesingle{}}\NormalTok{) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{scale\_color\_brewer}\NormalTok{(}\DataTypeTok{palette =} \StringTok{\textquotesingle{}Set1\textquotesingle{}}\NormalTok{, }
+                       \DataTypeTok{name =} \StringTok{\textquotesingle{}Dataset\textquotesingle{}}\NormalTok{) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{coord\_flip}\NormalTok{() }\OperatorTok{+}\StringTok{ }
+\StringTok{    }\CommentTok{\#\# annotations and theme}
+\StringTok{    }\KeywordTok{ggtitle}\NormalTok{(}\StringTok{\textquotesingle{}Sampling improves balance across subject areas\textquotesingle{}}\NormalTok{, }
+            \DataTypeTok{subtitle =} \KeywordTok{Sys.time}\NormalTok{()) }\OperatorTok{+}
+\StringTok{    }\CommentTok{\# annotate(geom = \textquotesingle{}label\textquotesingle{}, x = \textquotesingle{}HEAL\textquotesingle{}, y = .12, label = Sys.time()) +}
+\StringTok{    }\KeywordTok{theme\_minimal}\NormalTok{() }\OperatorTok{+}
+\StringTok{    }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{legend.position =} \KeywordTok{c}\NormalTok{(.}\DecValTok{8}\NormalTok{, }\FloatTok{.2}\NormalTok{), }
+          \DataTypeTok{legend.background =} \KeywordTok{element\_rect}\NormalTok{(}\DataTypeTok{fill =} \StringTok{\textquotesingle{}white\textquotesingle{}}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.6\linewidth]{book_files/figure-latex/unnamed-chunk-57-1} \end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# ggsave(paste0(plots\_dir, \textquotesingle{}plot\_1.png\textquotesingle{}), height = 7, width = 7)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{discussion}{%
+\subsubsection{Discussion}\label{discussion}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  What design decisions are being used to highlight the message of this plot?\\
+\item
+  What alternative designs could be used to communicate the same message?
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Are any of these alternative designs better than the one I used?\\
+  \item
+    Try implementing your idea in ggplot
+  \end{itemize}
+\item
+  How does this plot omit, distort, or mislead?
+\end{enumerate}
+
+\hypertarget{plot-2-high-density-scatterplots}{%
+\subsection{Plot 2: High-density scatterplots}\label{plot-2-high-density-scatterplots}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#\# Code to construct this dataset is in \textasciigrave{}climate\_data.R\textasciigrave{}}
+\NormalTok{temp\_df =}\StringTok{ }\KeywordTok{readRDS}\NormalTok{(data\_paths[}\StringTok{\textquotesingle{}temperature\textquotesingle{}}\NormalTok{])}
+
+\CommentTok{\#\# 15k observations lead to lots of overplotting and long render times}
+\KeywordTok{str}\NormalTok{(temp\_df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 'data.frame':    14577 obs. of  12 variables:
+##  $ id           : chr  "USC00042294" "USC00042294" "USC00042294" "USC00042294" ...
+##  $ name         : chr  "Davis" "Davis" "Davis" "Davis" ...
+##  $ date         : Date, format: "2009-01-01" "2009-01-02" "2009-01-03" ...
+##  $ year         : num  2009 2009 2009 2009 2009 ...
+##  $ month        : chr  "January" "January" "January" "January" ...
+##  $ day          : num  1 2 3 4 5 6 7 8 9 10 ...
+##  $ temp_min     : num  3.3 3.9 0.6 -2.8 -2.2 1.7 0 3.9 0.6 -2.8 ...
+##  $ temp_max     : num  6.1 6.7 10.6 11.1 10 7.2 12.8 7.2 10 16.7 ...
+##  $ temp_delta   : num  2.8 2.8 10 13.9 12.2 5.5 12.8 3.3 9.4 19.5 ...
+##  $ precipitation: num  0 0 0 0 5 8 0 0 0 0 ...
+##  $ lat          : num  38.5 38.5 38.5 38.5 38.5 ...
+##  $ lon          : num  -122 -122 -122 -122 -122 ...
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(temp\_df, }\KeywordTok{aes}\NormalTok{(temp\_max, temp\_delta)) }\OperatorTok{+}
+\StringTok{    }\CommentTok{\#\# geoms}
+\StringTok{    }\CommentTok{\# geom\_point() +}
+\StringTok{    }\CommentTok{\# geom\_count() +}
+\StringTok{    }\CommentTok{\# geom\_bin2d() +}
+\StringTok{    }\CommentTok{\# geom\_hex(aes(color = after\_stat(count))) +}
+\StringTok{    }\CommentTok{\# geom\_density2d(size = 1) +}
+\StringTok{    }\CommentTok{\# stat\_density2d(contour = FALSE, geom = \textquotesingle{}raster\textquotesingle{},}
+\StringTok{    }\CommentTok{\#                aes(fill = after\_stat(density)), }
+\StringTok{    }\CommentTok{\#                show.legend = FALSE) +}
+\StringTok{    }\KeywordTok{stat\_density2d}\NormalTok{(}\DataTypeTok{geom =} \StringTok{\textquotesingle{}polygon\textquotesingle{}}\NormalTok{,}
+                   \KeywordTok{aes}\NormalTok{(}\DataTypeTok{fill =} \KeywordTok{after\_stat}\NormalTok{(level)),}
+                   \DataTypeTok{show.legend =} \OtherTok{FALSE}\NormalTok{) }\OperatorTok{+}
+\StringTok{    }\CommentTok{\#\# facets}
+\StringTok{    }\KeywordTok{facet\_wrap}\NormalTok{(}\OperatorTok{\textasciitilde{}}\StringTok{ }\NormalTok{name) }\OperatorTok{+}
+\StringTok{    }\CommentTok{\#\# Annotations are repeated within each facet}
+\StringTok{    }\CommentTok{\# annotate(geom = \textquotesingle{}label\textquotesingle{}, x = 200, y = 5, label = Sys.time()) +}
+\StringTok{    }\CommentTok{\#\# scales}
+\StringTok{    }\KeywordTok{xlab}\NormalTok{(}\StringTok{\textquotesingle{}Daily maximum temperature (ºC)\textquotesingle{}}\NormalTok{) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{ylab}\NormalTok{(}\StringTok{\textquotesingle{}Daily temperature difference (ºC)\textquotesingle{}}\NormalTok{) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{scale\_color\_viridis\_c}\NormalTok{(}\DataTypeTok{option =} \StringTok{\textquotesingle{}A\textquotesingle{}}\NormalTok{) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{scale\_fill\_viridis\_c}\NormalTok{(}\DataTypeTok{option =} \StringTok{\textquotesingle{}A\textquotesingle{}}\NormalTok{) }\OperatorTok{+}
+\StringTok{    }\CommentTok{\#\# themes}
+\StringTok{    }\KeywordTok{theme\_bw}\NormalTok{() }\OperatorTok{+}
+\StringTok{    }\KeywordTok{ggtitle}\NormalTok{(}\StringTok{\textquotesingle{}Temperature difference is associated with maximum daily temperature\textquotesingle{}}\NormalTok{, }
+            \DataTypeTok{subtitle =} \KeywordTok{Sys.time}\NormalTok{())}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Removed 104 rows containing non-finite values (stat_density2d).
+\end{verbatim}
+
+\begin{center}\includegraphics[width=0.6\linewidth]{book_files/figure-latex/unnamed-chunk-58-1} \end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# ggsave(paste0(plots\_dir, \textquotesingle{}plot\_2.png\textquotesingle{}), height = 7, width = 7)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{discussion-1}{%
+\subsubsection{Discussion}\label{discussion-1}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  What are the strengths and weaknesses of each different option?
+\end{enumerate}
+
+\hypertarget{plot-3-time-series-model-predictions}{%
+\subsection{Plot 3: Time series + model predictions}\label{plot-3-time-series-model-predictions}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#\# Hack to get month labels on day{-}as{-}year}
+\CommentTok{\#\# \textless{}https://stackoverflow.com/a/39861306/3187973\textgreater{}}
+\NormalTok{temp\_df}\OperatorTok{$}\NormalTok{day.date =}\StringTok{ }\KeywordTok{as.Date}\NormalTok{(temp\_df}\OperatorTok{$}\NormalTok{day, }\StringTok{\textquotesingle{}2009{-}01{-}01\textquotesingle{}}\NormalTok{)}
+
+\CommentTok{\#\# Model **for Sacramento alone**}
+\NormalTok{model =}\StringTok{ }\KeywordTok{lm}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ temp\_df, temp\_delta }\OperatorTok{\textasciitilde{}}\StringTok{ }\NormalTok{day }\OperatorTok{+}\StringTok{ }\KeywordTok{I}\NormalTok{(day}\OperatorTok{\^{}}\DecValTok{2}\NormalTok{), }
+           \DataTypeTok{subset =}\NormalTok{ name }\OperatorTok{==}\StringTok{ \textquotesingle{}Sacramento\textquotesingle{}}\NormalTok{)}
+
+\CommentTok{\#\# The director of the center where I gave this talk (who was also my postdoc supervisor) is part of the R Core Team. He doesn\textquotesingle{}t like tidyverse, so I did everything except ggplot using base R. }
+\CommentTok{\#\# This is a good illustration of how tidyverse makes R more functional}
+\NormalTok{predictions =}\StringTok{ }\KeywordTok{predict}\NormalTok{(model, }\DataTypeTok{interval =} \StringTok{\textquotesingle{}confidence\textquotesingle{}}\NormalTok{, }\DataTypeTok{level =} \FloatTok{.95}\NormalTok{)}
+\NormalTok{predictions =}\StringTok{ }\KeywordTok{as.data.frame}\NormalTok{(predictions)}
+\NormalTok{predictions}\OperatorTok{$}\NormalTok{day =}\StringTok{ }\NormalTok{model}\OperatorTok{$}\NormalTok{model}\OperatorTok{$}\NormalTok{day}
+\NormalTok{predictions}\OperatorTok{$}\NormalTok{day.date =}\StringTok{ }\KeywordTok{as.Date}\NormalTok{(predictions}\OperatorTok{$}\NormalTok{day, }\StringTok{\textquotesingle{}2009{-}01{-}01\textquotesingle{}}\NormalTok{)}
+
+\KeywordTok{ggplot}\NormalTok{(temp\_df, }\KeywordTok{aes}\NormalTok{(day.date, temp\_delta)) }\OperatorTok{+}
+\StringTok{    }\CommentTok{\#\# geoms}
+\StringTok{    }\KeywordTok{geom\_path}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{color =}\NormalTok{ month, }\DataTypeTok{group =}\NormalTok{ year), }\DataTypeTok{alpha =} \FloatTok{.3}\NormalTok{, }\DataTypeTok{show.legend =} \OtherTok{FALSE}\NormalTok{) }\OperatorTok{+}
+\StringTok{    }\CommentTok{\#\# Separate models for each panel}
+\StringTok{    }\KeywordTok{geom\_smooth}\NormalTok{(}\DataTypeTok{method =}\NormalTok{ lm, }\DataTypeTok{formula =}\NormalTok{ y }\OperatorTok{\textasciitilde{}}\StringTok{ }\NormalTok{x }\OperatorTok{+}\StringTok{ }\KeywordTok{I}\NormalTok{(x}\OperatorTok{\^{}}\DecValTok{2}\NormalTok{),}
+                \DataTypeTok{color =} \StringTok{\textquotesingle{}red\textquotesingle{}}\NormalTok{, }\DataTypeTok{size =} \DecValTok{1}\NormalTok{) }\OperatorTok{+}
+\StringTok{    }\CommentTok{\#\# Sacramento{-}only model}
+\StringTok{    }\CommentTok{\#\# Use the smooth geom to get curve + ribbon}
+\StringTok{    }\CommentTok{\#\# But set \textasciigrave{}stat = \textquotesingle{}identity\textquotesingle{}\textasciigrave{} because we don\textquotesingle{}t want to fit a (new) model}
+\StringTok{    }\KeywordTok{geom\_smooth}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ predictions, }\DataTypeTok{stat =} \StringTok{\textquotesingle{}identity\textquotesingle{}}\NormalTok{,}
+                \KeywordTok{aes}\NormalTok{(}\DataTypeTok{y =}\NormalTok{ fit, }\DataTypeTok{ymax =}\NormalTok{ upr, }\DataTypeTok{ymin =}\NormalTok{ lwr),}
+                \DataTypeTok{color =} \StringTok{\textquotesingle{}blue\textquotesingle{}}\NormalTok{, }\DataTypeTok{fill =} \StringTok{\textquotesingle{}blue\textquotesingle{}}\NormalTok{, }\DataTypeTok{size =} \DecValTok{1}\NormalTok{) }\OperatorTok{+}
+\StringTok{    }\CommentTok{\#\# facets}
+\StringTok{    }\KeywordTok{facet\_wrap}\NormalTok{(}\OperatorTok{\textasciitilde{}}\StringTok{ }\NormalTok{name) }\OperatorTok{+}
+\StringTok{    }\CommentTok{\#\# scales}
+\StringTok{    }\KeywordTok{scale\_x\_date}\NormalTok{(}\DataTypeTok{name =} \StringTok{\textquotesingle{}Month\textquotesingle{}}\NormalTok{, }\DataTypeTok{date\_breaks =} \StringTok{\textquotesingle{}3 month\textquotesingle{}}\NormalTok{, }\DataTypeTok{date\_labels =} \StringTok{\textquotesingle{}\%b\textquotesingle{}}\NormalTok{) }\OperatorTok{+}\StringTok{  }
+\StringTok{    }\KeywordTok{scale\_y\_continuous}\NormalTok{(}\DataTypeTok{name =} \StringTok{\textquotesingle{}Daily temperature difference (max {-} min)\textquotesingle{}}\NormalTok{, }
+                       \DataTypeTok{labels =}\NormalTok{ scales}\OperatorTok{::}\KeywordTok{math\_format}\NormalTok{(}\DataTypeTok{expr =}\NormalTok{ .x}\OperatorTok{*}\NormalTok{degree}\OperatorTok{*}\NormalTok{C)) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{scale\_color\_viridis\_d}\NormalTok{(}\DataTypeTok{limits =}\NormalTok{ month.name,}
+                          \DataTypeTok{option =} \StringTok{\textquotesingle{}E\textquotesingle{}}\NormalTok{,}
+                          \DataTypeTok{direction =} \DecValTok{{-}1}\NormalTok{) }\OperatorTok{+}
+\StringTok{    }\CommentTok{\# coord\_polar() +}
+\StringTok{    }\CommentTok{\#\# themes}
+\StringTok{    }\KeywordTok{theme\_bw}\NormalTok{() }\OperatorTok{+}
+\StringTok{    }\KeywordTok{ggtitle}\NormalTok{(}\StringTok{\textquotesingle{}Sacramento has smaller temperature differences than other sites\textquotesingle{}}\NormalTok{, }
+            \DataTypeTok{subtitle =} \KeywordTok{Sys.time}\NormalTok{())}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Removed 104 rows containing non-finite values (stat_smooth).
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: Removed 1 row(s) containing missing values (geom_path).
+\end{verbatim}
+
+\begin{center}\includegraphics[width=0.6\linewidth]{book_files/figure-latex/unnamed-chunk-59-1} \end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#\# Note effect of aspect ratios on perception}
+\CommentTok{\# ggsave(paste0(plots\_dir, \textquotesingle{}plot\_3.png\textquotesingle{}), height = 7, width = 7)}
+\CommentTok{\# ggsave(paste0(plots\_dir, \textquotesingle{}plot\_3a.png\textquotesingle{}), height = 7, width = 12)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{discussion-2}{%
+\subsubsection{Discussion}\label{discussion-2}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  What are the dangers of using models internal to the plot?\\
+\item
+  Aspect ratios change our perception of the plot. Does this mean one aspect ratio is misleading?
+\end{enumerate}
+
+\hypertarget{plot-4-visualizing-spatial-data-in-r}{%
+\subsection{Plot 4: Visualizing spatial data in R}\label{plot-4-visualizing-spatial-data-in-r}}
+
+\begin{itemize}
+\tightlist
+\item
+  I don't recommend visualizing spatial data until you've learned a bit about coordinate systems and projections
+\item
+  Definitely don't try to do math on spatial coordinates unless you know what you're doing!
+\item
+  The \texttt{sf} package for working with spatial data has a ton of dependencies, so I'm going to disable all of the code blocks below.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    They're here for you to explore on your own if interested.\\
+  \item
+    \textbf{This code has not been checked for errors.}
+  \end{itemize}
+\item
+  As of version 3, \texttt{ggplot2} can plot vector spatial data from \texttt{sf} objects using \texttt{geom\_sf()}
+\item
+  This section looks at two different ways of adding basemaps under \texttt{geom\_sf()} plots
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{ (}\KeywordTok{packageVersion}\NormalTok{(}\StringTok{\textquotesingle{}ggplot2\textquotesingle{}}\NormalTok{) }\OperatorTok{\textless{}}\StringTok{ }\KeywordTok{package\_version}\NormalTok{(}\StringTok{\textquotesingle{}3.0.0\textquotesingle{}}\NormalTok{)) \{}
+    \KeywordTok{stop}\NormalTok{(}\StringTok{\textquotesingle{}ggplot2 version 3 or later is required for this section\textquotesingle{}}\NormalTok{)}
+\NormalTok{\} }\ControlFlowTok{else}\NormalTok{ \{}
+    \KeywordTok{library}\NormalTok{(sf)}
+    \KeywordTok{library}\NormalTok{(ggmap)}
+    \KeywordTok{library}\NormalTok{(ggspatial)}
+\NormalTok{\}}
+
+\NormalTok{stations =}\StringTok{ }\KeywordTok{readRDS}\NormalTok{(data\_files[}\StringTok{\textquotesingle{}stations\textquotesingle{}}\NormalTok{])}
+\NormalTok{stations.utm =}\StringTok{ }\KeywordTok{readRDS}\NormalTok{(data\_files[}\StringTok{\textquotesingle{}stations.utm\textquotesingle{}}\NormalTok{])}
+
+\NormalTok{stations}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{ggmap-approach}{%
+\subsubsection{\texorpdfstring{\texttt{ggmap} approach}{ggmap approach}}\label{ggmap-approach}}
+
+\begin{itemize}
+\tightlist
+\item
+  Services other than Google Maps are deprecated
+\item
+  Requires Google account, API key
+\item
+  Doesn't seem to play nicely with coordinates other than lat/lon
+\item
+  See \texttt{?register\_google} for links and instructions
+\item
+  \textbf{\emph{DO NOT SHARE YOUR API KEY}}
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# register\_google(key = \textquotesingle{}notarealkey\textquotesingle{}, write = TRUE)}
+\ControlFlowTok{if}\NormalTok{ (}\OperatorTok{!}\KeywordTok{has\_google\_key}\NormalTok{()) \{}
+    \KeywordTok{stop}\NormalTok{(}\StringTok{\textquotesingle{}You need a Google Maps API key.  See ?register\_google\textquotesingle{}}\NormalTok{)}
+\NormalTok{\}}
+
+\NormalTok{basemap =}\StringTok{ }\KeywordTok{get\_map}\NormalTok{(}\DataTypeTok{location =} \KeywordTok{c}\NormalTok{(}\OperatorTok{{-}}\FloatTok{121.4183}\NormalTok{, }\FloatTok{38.5552}\NormalTok{), }
+                  \DataTypeTok{maptype =} \StringTok{\textquotesingle{}terrain\textquotesingle{}}\NormalTok{,}
+                  \DataTypeTok{zoom =} \DecValTok{8}\NormalTok{)}
+
+\KeywordTok{ggmap}\NormalTok{(basemap) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{geom\_sf}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ stations, }\DataTypeTok{inherit.aes =} \OtherTok{FALSE}\NormalTok{) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{geom\_sf\_label}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ stations, }
+                  \KeywordTok{aes}\NormalTok{(}\DataTypeTok{label =}\NormalTok{ name), }\DataTypeTok{nudge\_y =} \FloatTok{{-}.1}\NormalTok{, }\DataTypeTok{size =} \DecValTok{3}\NormalTok{)}
+\CommentTok{\# ggsave(paste0(plots\_dir, \textquotesingle{}plot\_4\_ggmap.png\textquotesingle{}), height = 7, width = 7)}
+
+\CommentTok{\#\# Example with UTM coordinates}
+\CommentTok{\# ggmap(basemap) +}
+\CommentTok{\#     geom\_sf(data = stations.utm, inherit.aes = FALSE)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{ggspatial-approach}{%
+\subsubsection{\texorpdfstring{\texttt{ggspatial} approach}{ggspatial approach}}\label{ggspatial-approach}}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{annotation\_map\_tile()} is slow, even with cached images
+\item
+  See \texttt{rosm::osm.types()} for a list of basemap types
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ stations) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{annotation\_map\_tile}\NormalTok{(}\DataTypeTok{type =} \StringTok{\textquotesingle{}osm\textquotesingle{}}\NormalTok{, }\DataTypeTok{zoom =} \DecValTok{10}\NormalTok{) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{geom\_sf\_label}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ stations, }
+                  \KeywordTok{aes}\NormalTok{(}\DataTypeTok{label =}\NormalTok{ name), }\DataTypeTok{nudge\_y =} \FloatTok{.03}\NormalTok{, }\DataTypeTok{size =} \DecValTok{3}\NormalTok{) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{geom\_sf}\NormalTok{() }\OperatorTok{+}
+\StringTok{    }\KeywordTok{annotation\_scale}\NormalTok{(}\DataTypeTok{location =} \StringTok{\textquotesingle{}tl\textquotesingle{}}\NormalTok{) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{annotation\_north\_arrow}\NormalTok{(}\DataTypeTok{location =} \StringTok{\textquotesingle{}br\textquotesingle{}}\NormalTok{, }\DataTypeTok{which\_north =} \StringTok{\textquotesingle{}true\textquotesingle{}}\NormalTok{, }
+                           \DataTypeTok{style =}\NormalTok{ north\_arrow\_minimal)}
+\CommentTok{\# ggsave(paste0(plots\_dir, \textquotesingle{}plot\_4\_ggspatial.png\textquotesingle{}), height = 7, width = 7)}
+
+\CommentTok{\#\# Example with UTM coordinates}
+\CommentTok{\# ggplot(data = stations.utm) +}
+\CommentTok{\#     annotation\_map\_tile(type = \textquotesingle{}osm\textquotesingle{}, zoom = 10,}
+\CommentTok{\#                         cachedir = system.file(\textquotesingle{}rosm.cache\textquotesingle{}, package = \textquotesingle{}ggspatial\textquotesingle{})) +}
+\CommentTok{\#     geom\_sf\_label(data = stations,}
+\CommentTok{\#                   aes(label = name), nudge\_y = 1000, size = 3) +}
+\CommentTok{\#     geom\_sf()}
+\end{Highlighting}
+\end{Shaded}
+
 \hypertarget{part-cleaning-data}{%
 \part{Cleaning Data}\label{part-cleaning-data}}
 
@@ -3391,6 +3911,9 @@ Healy, Kieran. 2018. \emph{Data Visualization: A Practical Introduction}. Prince
 
 \leavevmode\hypertarget{ref-HicksCensusDemographicsChlorpyrifos2020}{}%
 Hicks, Daniel J. 2020. ``Census Demographics and Chlorpyrifos Use in California's Central Valley, 2011--15: A Distributional Environmental Justice Analysis.'' \emph{International Journal of Environmental Research and Public Health} 17 (7, 7): 2593. \url{https://doi.org/10.3390/ijerph17072593}.
+
+\leavevmode\hypertarget{ref-HicksImpactingCapabilitiesConceptual2018}{}%
+Hicks, Daniel J., Carl Stahmer, and MacKenzie Smith. 2018. ``Impacting Capabilities: A Conceptual Framework for the Social Value of Research.'' \emph{Frontiers in Research Metrics and Analytics}. \url{https://doi.org/10.3389/frma.2018.00024}.
 
 \leavevmode\hypertarget{ref-HiltchJupyterNotebookCancer2019}{}%
 Hiltch, Or. 2019. ``Jupyter Notebook Is the Cancer of ML Engineering.'' Medium. October 17, 2019. \url{https://medium.com/@_orcaman/jupyter-notebook-is-the-cancer-of-ml-engineering-70b98685ee71}.

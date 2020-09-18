@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 11 Intermediate Visualization in R | Data Science Methods for Cognitive Science</title>
+  <meta name="description" content="This document is a set of notes (and perhaps later a textbook) for a course on data science methods for graduate students in social and behavioral sciences." />
+  <meta name="generator" content="bookdown 0.20.6 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 11 Intermediate Visualization in R | Data Science Methods for Cognitive Science" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This document is a set of notes (and perhaps later a textbook) for a course on data science methods for graduate students in social and behavioral sciences." />
+  <meta name="github-repo" content="data-science-methods/book" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 11 Intermediate Visualization in R | Data Science Methods for Cognitive Science" />
+  
+  <meta name="twitter:description" content="This document is a set of notes (and perhaps later a textbook) for a course on data science methods for graduate students in social and behavioral sciences." />
+  
+
+<meta name="author" content="Dan Hicks, hicks.daniel.j@gmail.com" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="visual-eda.html"/>
+<link rel="next" href="references.html"/>
+<script src="libs/header-attrs-2.3.6/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="" data-path="setting-up.html"><a href="setting-up.html"><i class="fa fa-check"></i>Setting up</a>
+<ul>
+<li class="chapter" data-level="0.1" data-path="setting-up.html"><a href="setting-up.html#a-note-on-accessibility"><i class="fa fa-check"></i><b>0.1</b> A Note on Accessibility</a></li>
+<li class="chapter" data-level="0.2" data-path="setting-up.html"><a href="setting-up.html#hardware-recommendations"><i class="fa fa-check"></i><b>0.2</b> Hardware Recommendations</a></li>
+<li class="chapter" data-level="0.3" data-path="setting-up.html"><a href="setting-up.html#r-and-rstudio"><i class="fa fa-check"></i><b>0.3</b> R and RStudio</a></li>
+<li class="chapter" data-level="0.4" data-path="setting-up.html"><a href="setting-up.html#slack"><i class="fa fa-check"></i><b>0.4</b> Slack</a></li>
+<li class="chapter" data-level="0.5" data-path="setting-up.html"><a href="setting-up.html#github"><i class="fa fa-check"></i><b>0.5</b> GitHub</a></li>
+<li class="chapter" data-level="0.6" data-path="setting-up.html"><a href="setting-up.html#screen-layouts"><i class="fa fa-check"></i><b>0.6</b> Screen Layouts</a></li>
+<li class="chapter" data-level="0.7" data-path="setting-up.html"><a href="setting-up.html#pre-class-survey"><i class="fa fa-check"></i><b>0.7</b> Pre-Class Survey</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#land-acknowledgement"><i class="fa fa-check"></i><b>1.1</b> Land Acknowledgement</a></li>
+<li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#about-me"><i class="fa fa-check"></i><b>1.2</b> About me</a></li>
+<li class="chapter" data-level="1.3" data-path="introduction.html"><a href="introduction.html#what-this-course-isnt-and-is"><i class="fa fa-check"></i><b>1.3</b> What this course isn’t, and is</a></li>
+<li class="chapter" data-level="1.4" data-path="introduction.html"><a href="introduction.html#learning-outcomes"><i class="fa fa-check"></i><b>1.4</b> Learning outcomes</a></li>
+<li class="chapter" data-level="1.5" data-path="introduction.html"><a href="introduction.html#workflow"><i class="fa fa-check"></i><b>1.5</b> Workflow</a></li>
+<li class="chapter" data-level="1.6" data-path="introduction.html"><a href="introduction.html#notes-on-some-course-design-decisions"><i class="fa fa-check"></i><b>1.6</b> Notes on some course design decisions</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="what-is-this-thing-called-data-science.html"><a href="what-is-this-thing-called-data-science.html"><i class="fa fa-check"></i><b>2</b> What is this thing called data science?</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="what-is-this-thing-called-data-science.html"><a href="what-is-this-thing-called-data-science.html#standard-definition"><i class="fa fa-check"></i><b>2.1</b> Standard definition</a></li>
+<li class="chapter" data-level="2.2" data-path="what-is-this-thing-called-data-science.html"><a href="what-is-this-thing-called-data-science.html#a-prior-question-what-is-this-thing-called-data"><i class="fa fa-check"></i><b>2.2</b> A prior question: What is this thing called “data”?</a></li>
+<li class="chapter" data-level="2.3" data-path="what-is-this-thing-called-data-science.html"><a href="what-is-this-thing-called-data-science.html#back-to-data-science"><i class="fa fa-check"></i><b>2.3</b> Back to “data science”</a></li>
+</ul></li>
+<li class="part"><span><b>I Some fundamental tools</b></span></li>
+<li class="chapter" data-level="3" data-path="git-and-version-control.html"><a href="git-and-version-control.html"><i class="fa fa-check"></i><b>3</b> Git and Version Control</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="git-and-version-control.html"><a href="git-and-version-control.html#some-motivating-examples"><i class="fa fa-check"></i><b>3.1</b> Some motivating examples</a></li>
+<li class="chapter" data-level="3.2" data-path="git-and-version-control.html"><a href="git-and-version-control.html#version-control"><i class="fa fa-check"></i><b>3.2</b> Version control</a></li>
+<li class="chapter" data-level="3.3" data-path="git-and-version-control.html"><a href="git-and-version-control.html#how-to-do-things-with-git"><i class="fa fa-check"></i><b>3.3</b> How to do things with git</a></li>
+<li class="chapter" data-level="3.4" data-path="git-and-version-control.html"><a href="git-and-version-control.html#working-with-github-remotes"><i class="fa fa-check"></i><b>3.4</b> Working with GitHub remotes</a></li>
+<li class="chapter" data-level="3.5" data-path="git-and-version-control.html"><a href="git-and-version-control.html#lab"><i class="fa fa-check"></i><b>3.5</b> Lab</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="r-basics.html"><a href="r-basics.html"><i class="fa fa-check"></i><b>4</b> R Basics</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="r-basics.html"><a href="r-basics.html#lets-get-started-with-rstudio"><i class="fa fa-check"></i><b>4.1</b> Let’s get started with RStudio</a></li>
+<li class="chapter" data-level="4.2" data-path="r-basics.html"><a href="r-basics.html#selecting-elements-and-some-math"><i class="fa fa-check"></i><b>4.2</b> Selecting elements, and some math</a></li>
+<li class="chapter" data-level="4.3" data-path="r-basics.html"><a href="r-basics.html#base-r-data-types"><i class="fa fa-check"></i><b>4.3</b> Base R data types</a></li>
+<li class="chapter" data-level="4.4" data-path="r-basics.html"><a href="r-basics.html#examining-variables"><i class="fa fa-check"></i><b>4.4</b> Examining variables</a></li>
+<li class="chapter" data-level="4.5" data-path="r-basics.html"><a href="r-basics.html#logical-operators"><i class="fa fa-check"></i><b>4.5</b> Logical operators</a></li>
+<li class="chapter" data-level="4.6" data-path="r-basics.html"><a href="r-basics.html#missing-data"><i class="fa fa-check"></i><b>4.6</b> Missing data</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="functional-programming-and-data-science.html"><a href="functional-programming-and-data-science.html"><i class="fa fa-check"></i><b>5</b> Functional Programming and Data Science</a></li>
+<li class="chapter" data-level="6" data-path="warnings-errors-and-getting-help.html"><a href="warnings-errors-and-getting-help.html"><i class="fa fa-check"></i><b>6</b> Warnings, Errors, and Getting Help</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="warnings-errors-and-getting-help.html"><a href="warnings-errors-and-getting-help.html#recommended-reading-and-watching"><i class="fa fa-check"></i><b>6.1</b> Recommended reading and watching</a></li>
+<li class="chapter" data-level="6.2" data-path="warnings-errors-and-getting-help.html"><a href="warnings-errors-and-getting-help.html#messages-warnings-and-errors"><i class="fa fa-check"></i><b>6.2</b> Messages, warnings, and errors</a></li>
+<li class="chapter" data-level="6.3" data-path="warnings-errors-and-getting-help.html"><a href="warnings-errors-and-getting-help.html#where-to-go-for-help"><i class="fa fa-check"></i><b>6.3</b> Where to go for help</a></li>
+<li class="chapter" data-level="6.4" data-path="warnings-errors-and-getting-help.html"><a href="warnings-errors-and-getting-help.html#writing-a-reproducible-example-reprex"><i class="fa fa-check"></i><b>6.4</b> Writing a reproducible example: <code>reprex</code></a></li>
+<li class="chapter" data-level="6.5" data-path="warnings-errors-and-getting-help.html"><a href="warnings-errors-and-getting-help.html#do-not-do-these-things-in-your-reprex"><i class="fa fa-check"></i><b>6.5</b> Do not do these things in your reprex</a></li>
+</ul></li>
+<li class="part"><span><b>II Exploratory Data Analysis (EDA)</b></span></li>
+<li class="chapter" data-level="7" data-path="eda-models.html"><a href="eda-models.html"><i class="fa fa-check"></i><b>7</b> Exploratory Data Analysis</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="eda-models.html"><a href="eda-models.html#exploratory-and-confirmatory-research"><i class="fa fa-check"></i><b>7.1</b> Exploratory and Confirmatory Research</a></li>
+<li class="chapter" data-level="7.2" data-path="eda-models.html"><a href="eda-models.html#better-models-for-eda-i-risk-management-in-spiral-development"><i class="fa fa-check"></i><b>7.2</b> Better Models for EDA I: Risk Management in Spiral Development</a></li>
+<li class="chapter" data-level="7.3" data-path="eda-models.html"><a href="eda-models.html#better-models-for-eda-ii-epicycle-of-analysis"><i class="fa fa-check"></i><b>7.3</b> Better Models for EDA II: Epicycle of Analysis</a></li>
+<li class="chapter" data-level="7.4" data-path="eda-models.html"><a href="eda-models.html#better-models-for-eda-iii-developing-phenomena"><i class="fa fa-check"></i><b>7.4</b> Better Models for EDA III: Developing Phenomena</a></li>
+<li class="chapter" data-level="7.5" data-path="eda-models.html"><a href="eda-models.html#discussion-questions"><i class="fa fa-check"></i><b>7.5</b> Discussion questions</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="two-eda-checklists.html"><a href="two-eda-checklists.html"><i class="fa fa-check"></i><b>8</b> Two EDA “Checklists”</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="two-eda-checklists.html"><a href="two-eda-checklists.html#pengartdatascience2016"><i class="fa fa-check"></i><b>8.1</b> <span class="citation">Peng and Matsui (<span>2016</span>)</span></a></li>
+<li class="chapter" data-level="8.2" data-path="two-eda-checklists.html"><a href="two-eda-checklists.html#huebnersystematicapproachinitial2016"><i class="fa fa-check"></i><b>8.2</b> <span class="citation">Huebner, Vach, and le Cessie (<span>2016</span>)</span></a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="inspecting-variables.html"><a href="inspecting-variables.html"><i class="fa fa-check"></i><b>9</b> Inspecting Variables</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="inspecting-variables.html"><a href="inspecting-variables.html#packages"><i class="fa fa-check"></i><b>9.1</b> Packages</a></li>
+<li class="chapter" data-level="9.2" data-path="inspecting-variables.html"><a href="inspecting-variables.html#get-the-data"><i class="fa fa-check"></i><b>9.2</b> Get the Data</a></li>
+<li class="chapter" data-level="9.3" data-path="inspecting-variables.html"><a href="inspecting-variables.html#formulate-your-question"><i class="fa fa-check"></i><b>9.3</b> 1. Formulate your question</a></li>
+<li class="chapter" data-level="9.4" data-path="inspecting-variables.html"><a href="inspecting-variables.html#read-in-your-data"><i class="fa fa-check"></i><b>9.4</b> 2. Read in your data</a></li>
+<li class="chapter" data-level="9.5" data-path="inspecting-variables.html"><a href="inspecting-variables.html#check-the-packaging"><i class="fa fa-check"></i><b>9.5</b> 3. Check the packaging</a></li>
+<li class="chapter" data-level="9.6" data-path="inspecting-variables.html"><a href="inspecting-variables.html#filter-mutate-count-and-pipes"><i class="fa fa-check"></i><b>9.6</b> Filter, mutate, count, and pipes</a></li>
+<li class="chapter" data-level="9.7" data-path="inspecting-variables.html"><a href="inspecting-variables.html#look-at-the-top-and-the-bottom-of-your-data"><i class="fa fa-check"></i><b>9.7</b> 4. Look at the top and the bottom of your data</a></li>
+<li class="chapter" data-level="9.8" data-path="inspecting-variables.html"><a href="inspecting-variables.html#check-your-ns-and-6.-validate-with-at-least-one-external-data-source"><i class="fa fa-check"></i><b>9.8</b> 5. Check your “n”s (and) 6. Validate with at least one external data source</a></li>
+<li class="chapter" data-level="9.9" data-path="inspecting-variables.html"><a href="inspecting-variables.html#from-dates-to-years"><i class="fa fa-check"></i><b>9.9</b> From dates to years</a></li>
+<li class="chapter" data-level="9.10" data-path="inspecting-variables.html"><a href="inspecting-variables.html#make-a-plot"><i class="fa fa-check"></i><b>9.10</b> 7. Make a plot</a></li>
+<li class="chapter" data-level="9.11" data-path="inspecting-variables.html"><a href="inspecting-variables.html#try-the-easy-solution-first"><i class="fa fa-check"></i><b>9.11</b> 8. Try the easy solution first</a></li>
+<li class="chapter" data-level="9.12" data-path="inspecting-variables.html"><a href="inspecting-variables.html#follow-up"><i class="fa fa-check"></i><b>9.12</b> 9. Follow up</a></li>
+<li class="chapter" data-level="9.13" data-path="inspecting-variables.html"><a href="inspecting-variables.html#discussion-questions-1"><i class="fa fa-check"></i><b>9.13</b> Discussion questions</a></li>
+<li class="chapter" data-level="9.14" data-path="inspecting-variables.html"><a href="inspecting-variables.html#lab-1"><i class="fa fa-check"></i><b>9.14</b> Lab</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="visual-eda.html"><a href="visual-eda.html"><i class="fa fa-check"></i><b>10</b> Visual EDA</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="visual-eda.html"><a href="visual-eda.html#the-role-of-visuals-in-eda"><i class="fa fa-check"></i><b>10.1</b> The Role of Visuals in EDA</a></li>
+<li class="chapter" data-level="10.2" data-path="visual-eda.html"><a href="visual-eda.html#plot-your-data"><i class="fa fa-check"></i><b>10.2</b> Plot Your Data</a></li>
+<li class="chapter" data-level="10.3" data-path="visual-eda.html"><a href="visual-eda.html#the-grammar-of-graphics"><i class="fa fa-check"></i><b>10.3</b> The Grammar of Graphics</a></li>
+<li class="chapter" data-level="10.4" data-path="visual-eda.html"><a href="visual-eda.html#d-distributions"><i class="fa fa-check"></i><b>10.4</b> 1D distributions</a></li>
+<li class="chapter" data-level="10.5" data-path="visual-eda.html"><a href="visual-eda.html#d-distributions-1"><i class="fa fa-check"></i><b>10.5</b> 2D distributions</a></li>
+<li class="chapter" data-level="10.6" data-path="visual-eda.html"><a href="visual-eda.html#multivariate-distributions"><i class="fa fa-check"></i><b>10.6</b> Multivariate distributions</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="intermediate-visualization-in-r.html"><a href="intermediate-visualization-in-r.html"><i class="fa fa-check"></i><b>11</b> Intermediate Visualization in R</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="intermediate-visualization-in-r.html"><a href="intermediate-visualization-in-r.html#base-graphics-vs.-ggplot2"><i class="fa fa-check"></i><b>11.1</b> Base graphics vs. <code>ggplot2</code></a></li>
+<li class="chapter" data-level="11.2" data-path="intermediate-visualization-in-r.html"><a href="intermediate-visualization-in-r.html#plot-1-dumbbell-plot"><i class="fa fa-check"></i><b>11.2</b> Plot 1: Dumbbell plot</a></li>
+<li class="chapter" data-level="11.3" data-path="intermediate-visualization-in-r.html"><a href="intermediate-visualization-in-r.html#plot-2-high-density-scatterplots"><i class="fa fa-check"></i><b>11.3</b> Plot 2: High-density scatterplots</a></li>
+<li class="chapter" data-level="11.4" data-path="intermediate-visualization-in-r.html"><a href="intermediate-visualization-in-r.html#plot-3-time-series-model-predictions"><i class="fa fa-check"></i><b>11.4</b> Plot 3: Time series + model predictions</a></li>
+<li class="chapter" data-level="11.5" data-path="intermediate-visualization-in-r.html"><a href="intermediate-visualization-in-r.html#plot-4-visualizing-spatial-data-in-r"><i class="fa fa-check"></i><b>11.5</b> Plot 4: Visualizing spatial data in R</a></li>
+</ul></li>
+<li class="part"><span><b>III Cleaning Data</b></span></li>
+<li class="part"><span><b>IV Reproducibility</b></span></li>
+<li class="part"><span><b>V Case Study: The COMPAS Dataset</b></span></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data Science Methods for Cognitive Science</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="intermediate-visualization-in-r" class="section level1" number="11">
+<h1><span class="header-section-number">Chapter 11</span> Intermediate Visualization in R</h1>
+<p>This chapter is based on a <a href="https://github.com/dsidavis/RGraphicsWorkshop">workshop</a> that I ran at <a href="https://www.youtube.com/watch?v=grEmJSL4Lwc">UC Davis</a> in February 2019. We won’t be covering it in class. But it gives some more background on visualization in R and presents some more advanced uses of ggplot.</p>
+<p>To work through the plots, I recommend commenting out everything and turning off the comments one line at a time. This is the best way to understand how each layer modified the plot.</p>
+<p>Some of the plots include alternative layers, mostly geoms, to illustrate how different ways of representing the data provide different visual affordances.</p>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="intermediate-visualization-in-r.html#cb66-1" aria-hidden="true"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb66-2"><a href="intermediate-visualization-in-r.html#cb66-2" aria-hidden="true"></a></span>
+<span id="cb66-3"><a href="intermediate-visualization-in-r.html#cb66-3" aria-hidden="true"></a>data_dir =<span class="st"> &#39;data&#39;</span></span>
+<span id="cb66-4"><a href="intermediate-visualization-in-r.html#cb66-4" aria-hidden="true"></a>data_files =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;papers&#39;</span> =<span class="st"> &#39;paper_counts.Rds&#39;</span>, </span>
+<span id="cb66-5"><a href="intermediate-visualization-in-r.html#cb66-5" aria-hidden="true"></a>               <span class="st">&#39;stations&#39;</span> =<span class="st"> &#39;stations.Rds&#39;</span>, </span>
+<span id="cb66-6"><a href="intermediate-visualization-in-r.html#cb66-6" aria-hidden="true"></a>               <span class="st">&#39;stations.utm&#39;</span> =<span class="st"> &#39;stations.utm.Rds&#39;</span>, </span>
+<span id="cb66-7"><a href="intermediate-visualization-in-r.html#cb66-7" aria-hidden="true"></a>               <span class="st">&#39;temperature&#39;</span> =<span class="st"> &#39;temp.Rds&#39;</span>)</span>
+<span id="cb66-8"><a href="intermediate-visualization-in-r.html#cb66-8" aria-hidden="true"></a>data_paths =<span class="st"> </span><span class="kw">file.path</span>(data_dir, data_files)</span>
+<span id="cb66-9"><a href="intermediate-visualization-in-r.html#cb66-9" aria-hidden="true"></a><span class="kw">names</span>(data_paths) =<span class="st"> </span><span class="kw">names</span>(data_files)</span>
+<span id="cb66-10"><a href="intermediate-visualization-in-r.html#cb66-10" aria-hidden="true"></a>data_urls =<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&#39;https://github.com/dsidavis/RGraphicsWorkshop/raw/master/data/&#39;</span>, data_files)</span>
+<span id="cb66-11"><a href="intermediate-visualization-in-r.html#cb66-11" aria-hidden="true"></a></span>
+<span id="cb66-12"><a href="intermediate-visualization-in-r.html#cb66-12" aria-hidden="true"></a><span class="co">## The repo includes a script `climate_data.R` that creates the final 3 datasets</span></span>
+<span id="cb66-13"><a href="intermediate-visualization-in-r.html#cb66-13" aria-hidden="true"></a></span>
+<span id="cb66-14"><a href="intermediate-visualization-in-r.html#cb66-14" aria-hidden="true"></a><span class="co">## `if` isn&#39;t vectorized, so we have to loop over this manually</span></span>
+<span id="cb66-15"><a href="intermediate-visualization-in-r.html#cb66-15" aria-hidden="true"></a>download_file =<span class="st"> </span><span class="cf">function</span>(path, url) {</span>
+<span id="cb66-16"><a href="intermediate-visualization-in-r.html#cb66-16" aria-hidden="true"></a>    <span class="cf">if</span> (<span class="op">!</span><span class="kw">file.exists</span>(path)) {</span>
+<span id="cb66-17"><a href="intermediate-visualization-in-r.html#cb66-17" aria-hidden="true"></a>        <span class="kw">download.file</span>(url, path)</span>
+<span id="cb66-18"><a href="intermediate-visualization-in-r.html#cb66-18" aria-hidden="true"></a>    }</span>
+<span id="cb66-19"><a href="intermediate-visualization-in-r.html#cb66-19" aria-hidden="true"></a>}</span>
+<span id="cb66-20"><a href="intermediate-visualization-in-r.html#cb66-20" aria-hidden="true"></a>purrr<span class="op">::</span><span class="kw">walk2</span>(data_paths, data_urls, download_file)</span></code></pre></div>
+<div id="base-graphics-vs.-ggplot2" class="section level2" number="11.1">
+<h2><span class="header-section-number">11.1</span> Base graphics vs. <code>ggplot2</code></h2>
+<ul>
+<li>R comes with a standard set of visualization tools, called <em>base graphics</em>.<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a><br />
+</li>
+<li>Base graphics’ approach to visualization is often called an “artist’s palette” model
+<ul>
+<li>A set of low-level tools
+<ul>
+<li><code>points()</code>, <code>lines()</code>, <code>polygon()</code></li>
+<li><code>abline()</code>, <code>curve()</code></li>
+</ul></li>
+<li>Define a canvas first, then use these tools to paint elements on the canvas</li>
+</ul></li>
+<li>Advantages of base graphics
+<ul>
+<li>One-liners
+<ul>
+<li><code>plot(some_object)</code> often does something useful
+<ul>
+<li>Try it with dataframes, regression models, principal components results, hierarchical clusterings, igraph networks, …</li>
+</ul></li>
+<li><code>hist()</code>, <code>pairs()</code>, <code>barplot()</code>, <code>boxplot()</code>, <code>pie()</code>(!)</li>
+</ul></li>
+<li>Straightforward to extend to custom classes</li>
+<li>No<span class="math inline">\(^*\)</span> dependencies; works on any<span class="math inline">\(^*\)</span> R installation</li>
+<li>Very flexible for unusual visualizations or combinations of plots
+<ul>
+<li>triplots/barycentric coordinates</li>
+<li>scatterplots with marginal densities</li>
+<li>heatmaps with marginal dendrograms</li>
+<li>map with inset plots of local data</li>
+</ul></li>
+</ul></li>
+<li>Disadvantages of base graphics
+<ul>
+<li>Parameters aren’t perspicuous
+<ul>
+<li>fill color is <code>bg</code> (background?)</li>
+<li>point shape is <code>pch</code> (uhhh point-character?)</li>
+<li>point size is <code>cex</code> (???)</li>
+</ul></li>
+<li>“Ugly defaults”</li>
+<li>Plots as <a href="https://en.wikipedia.org/wiki/Side_effect_(computer_science)">side effects</a></li>
+</ul></li>
+</ul>
+<ul>
+<li>Advantages of <code>ggplot2</code>
+<ul>
+<li>Conceptual model</li>
+<li>Facets</li>
+<li>Themes and palettes</li>
+<li>Plots are <a href="https://en.wikipedia.org/wiki/First-class_citizen">first-class objects</a></li>
+<li>“Pretty defaults”</li>
+</ul></li>
+<li>Disadvantages of <code>ggplot2</code>
+<ul>
+<li>Only<span class="math inline">\(^*\)</span> for data frames in <a href="https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html"><em>long format</em></a></li>
+<li>Programming with <code>ggplot2</code> requires understanding <a href="https://www.tidyverse.org/blog/2018/07/ggplot2-tidy-evaluation/">tidy evaluation</a></li>
+</ul></li>
+</ul>
+</div>
+<div id="plot-1-dumbbell-plot" class="section level2" number="11.2">
+<h2><span class="header-section-number">11.2</span> Plot 1: Dumbbell plot</h2>
+<ul>
+<li><span class="citation">Hicks, Stahmer, and Smith (<a href="#ref-HicksImpactingCapabilitiesConceptual2018" role="doc-biblioref">2018</a>)</span> figure 2</li>
+</ul>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="intermediate-visualization-in-r.html#cb67-1" aria-hidden="true"></a>counts_df =<span class="st"> </span><span class="kw">readRDS</span>(data_paths[<span class="st">&#39;papers&#39;</span>])</span>
+<span id="cb67-2"><a href="intermediate-visualization-in-r.html#cb67-2" aria-hidden="true"></a></span>
+<span id="cb67-3"><a href="intermediate-visualization-in-r.html#cb67-3" aria-hidden="true"></a>counts_df</span></code></pre></div>
+<pre><code>## # A tibble: 27 x 3
+##    subject_area   full sample
+##    &lt;fct&gt;         &lt;dbl&gt;  &lt;dbl&gt;
+##  1 MEDI         0.159  0.114 
+##  2 BIOC         0.127  0.0851
+##  3 AGRI         0.131  0.0723
+##  4 ENGI         0.0582 0.0620
+##  5 PHYS         0.0632 0.0574
+##  6 CHEM         0.0401 0.0531
+##  7 ENVI         0.0529 0.0498
+##  8 MATE         0.0384 0.0483
+##  9 SOCI         0.0344 0.0446
+## 10 COMP         0.0324 0.0380
+## # … with 17 more rows</code></pre>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="intermediate-visualization-in-r.html#cb69-1" aria-hidden="true"></a><span class="kw">ggplot</span>(counts_df, <span class="kw">aes</span>(subject_area)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb69-2"><a href="intermediate-visualization-in-r.html#cb69-2" aria-hidden="true"></a><span class="st">    </span><span class="co">## geoms</span></span>
+<span id="cb69-3"><a href="intermediate-visualization-in-r.html#cb69-3" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">y =</span> full, <span class="dt">color =</span> <span class="st">&#39;Full&#39;</span>), <span class="dt">size =</span> <span class="dv">3</span>) <span class="op">+</span></span>
+<span id="cb69-4"><a href="intermediate-visualization-in-r.html#cb69-4" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">y =</span> sample, <span class="dt">color =</span> <span class="st">&#39;Sample&#39;</span>), <span class="dt">size =</span> <span class="dv">3</span>) <span class="op">+</span></span>
+<span id="cb69-5"><a href="intermediate-visualization-in-r.html#cb69-5" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_segment</span>(<span class="kw">aes</span>(<span class="dt">x =</span> subject_area, <span class="dt">xend =</span> subject_area, </span>
+<span id="cb69-6"><a href="intermediate-visualization-in-r.html#cb69-6" aria-hidden="true"></a>                     <span class="dt">y =</span> full, <span class="dt">yend =</span> sample), </span>
+<span id="cb69-7"><a href="intermediate-visualization-in-r.html#cb69-7" aria-hidden="true"></a>                 <span class="dt">arrow =</span> <span class="kw">arrow</span>(<span class="dt">angle =</span> <span class="dv">15</span>, <span class="dt">type =</span> <span class="st">&#39;closed&#39;</span>, </span>
+<span id="cb69-8"><a href="intermediate-visualization-in-r.html#cb69-8" aria-hidden="true"></a>                               <span class="dt">length =</span> <span class="kw">unit</span>(.<span class="dv">025</span>, <span class="st">&#39;snpc&#39;</span>))) <span class="op">+</span></span>
+<span id="cb69-9"><a href="intermediate-visualization-in-r.html#cb69-9" aria-hidden="true"></a><span class="st">    </span><span class="co">## scales</span></span>
+<span id="cb69-10"><a href="intermediate-visualization-in-r.html#cb69-10" aria-hidden="true"></a><span class="st">    </span><span class="kw">xlab</span>(<span class="st">&#39;ASJC subject area&#39;</span>) <span class="op">+</span></span>
+<span id="cb69-11"><a href="intermediate-visualization-in-r.html#cb69-11" aria-hidden="true"></a><span class="st">    </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels =</span> scales<span class="op">::</span><span class="kw">percent_format</span>(), </span>
+<span id="cb69-12"><a href="intermediate-visualization-in-r.html#cb69-12" aria-hidden="true"></a>                       <span class="dt">name =</span> <span class="st">&#39;Papers in dataset&#39;</span>) <span class="op">+</span></span>
+<span id="cb69-13"><a href="intermediate-visualization-in-r.html#cb69-13" aria-hidden="true"></a><span class="st">    </span><span class="kw">scale_color_brewer</span>(<span class="dt">palette =</span> <span class="st">&#39;Set1&#39;</span>, </span>
+<span id="cb69-14"><a href="intermediate-visualization-in-r.html#cb69-14" aria-hidden="true"></a>                       <span class="dt">name =</span> <span class="st">&#39;Dataset&#39;</span>) <span class="op">+</span></span>
+<span id="cb69-15"><a href="intermediate-visualization-in-r.html#cb69-15" aria-hidden="true"></a><span class="st">    </span><span class="kw">coord_flip</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb69-16"><a href="intermediate-visualization-in-r.html#cb69-16" aria-hidden="true"></a><span class="st">    </span><span class="co">## annotations and theme</span></span>
+<span id="cb69-17"><a href="intermediate-visualization-in-r.html#cb69-17" aria-hidden="true"></a><span class="st">    </span><span class="kw">ggtitle</span>(<span class="st">&#39;Sampling improves balance across subject areas&#39;</span>, </span>
+<span id="cb69-18"><a href="intermediate-visualization-in-r.html#cb69-18" aria-hidden="true"></a>            <span class="dt">subtitle =</span> <span class="kw">Sys.time</span>()) <span class="op">+</span></span>
+<span id="cb69-19"><a href="intermediate-visualization-in-r.html#cb69-19" aria-hidden="true"></a><span class="st">    </span><span class="co"># annotate(geom = &#39;label&#39;, x = &#39;HEAL&#39;, y = .12, label = Sys.time()) +</span></span>
+<span id="cb69-20"><a href="intermediate-visualization-in-r.html#cb69-20" aria-hidden="true"></a><span class="st">    </span><span class="kw">theme_minimal</span>() <span class="op">+</span></span>
+<span id="cb69-21"><a href="intermediate-visualization-in-r.html#cb69-21" aria-hidden="true"></a><span class="st">    </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="kw">c</span>(.<span class="dv">8</span>, <span class="fl">.2</span>), </span>
+<span id="cb69-22"><a href="intermediate-visualization-in-r.html#cb69-22" aria-hidden="true"></a>          <span class="dt">legend.background =</span> <span class="kw">element_rect</span>(<span class="dt">fill =</span> <span class="st">&#39;white&#39;</span>))</span></code></pre></div>
+<p><img src="book_files/figure-html/unnamed-chunk-57-1.png" width="60%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="intermediate-visualization-in-r.html#cb70-1" aria-hidden="true"></a><span class="co"># ggsave(paste0(plots_dir, &#39;plot_1.png&#39;), height = 7, width = 7)</span></span></code></pre></div>
+<div id="discussion" class="section level3" number="11.2.1">
+<h3><span class="header-section-number">11.2.1</span> Discussion</h3>
+<ol style="list-style-type: decimal">
+<li>What design decisions are being used to highlight the message of this plot?<br />
+</li>
+<li>What alternative designs could be used to communicate the same message?
+<ul>
+<li>Are any of these alternative designs better than the one I used?<br />
+</li>
+<li>Try implementing your idea in ggplot</li>
+</ul></li>
+<li>How does this plot omit, distort, or mislead?</li>
+</ol>
+</div>
+</div>
+<div id="plot-2-high-density-scatterplots" class="section level2" number="11.3">
+<h2><span class="header-section-number">11.3</span> Plot 2: High-density scatterplots</h2>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="intermediate-visualization-in-r.html#cb71-1" aria-hidden="true"></a><span class="co">## Code to construct this dataset is in `climate_data.R`</span></span>
+<span id="cb71-2"><a href="intermediate-visualization-in-r.html#cb71-2" aria-hidden="true"></a>temp_df =<span class="st"> </span><span class="kw">readRDS</span>(data_paths[<span class="st">&#39;temperature&#39;</span>])</span>
+<span id="cb71-3"><a href="intermediate-visualization-in-r.html#cb71-3" aria-hidden="true"></a></span>
+<span id="cb71-4"><a href="intermediate-visualization-in-r.html#cb71-4" aria-hidden="true"></a><span class="co">## 15k observations lead to lots of overplotting and long render times</span></span>
+<span id="cb71-5"><a href="intermediate-visualization-in-r.html#cb71-5" aria-hidden="true"></a><span class="kw">str</span>(temp_df)</span></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    14577 obs. of  12 variables:
+##  $ id           : chr  &quot;USC00042294&quot; &quot;USC00042294&quot; &quot;USC00042294&quot; &quot;USC00042294&quot; ...
+##  $ name         : chr  &quot;Davis&quot; &quot;Davis&quot; &quot;Davis&quot; &quot;Davis&quot; ...
+##  $ date         : Date, format: &quot;2009-01-01&quot; &quot;2009-01-02&quot; &quot;2009-01-03&quot; ...
+##  $ year         : num  2009 2009 2009 2009 2009 ...
+##  $ month        : chr  &quot;January&quot; &quot;January&quot; &quot;January&quot; &quot;January&quot; ...
+##  $ day          : num  1 2 3 4 5 6 7 8 9 10 ...
+##  $ temp_min     : num  3.3 3.9 0.6 -2.8 -2.2 1.7 0 3.9 0.6 -2.8 ...
+##  $ temp_max     : num  6.1 6.7 10.6 11.1 10 7.2 12.8 7.2 10 16.7 ...
+##  $ temp_delta   : num  2.8 2.8 10 13.9 12.2 5.5 12.8 3.3 9.4 19.5 ...
+##  $ precipitation: num  0 0 0 0 5 8 0 0 0 0 ...
+##  $ lat          : num  38.5 38.5 38.5 38.5 38.5 ...
+##  $ lon          : num  -122 -122 -122 -122 -122 ...</code></pre>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="intermediate-visualization-in-r.html#cb73-1" aria-hidden="true"></a><span class="kw">ggplot</span>(temp_df, <span class="kw">aes</span>(temp_max, temp_delta)) <span class="op">+</span></span>
+<span id="cb73-2"><a href="intermediate-visualization-in-r.html#cb73-2" aria-hidden="true"></a><span class="st">    </span><span class="co">## geoms</span></span>
+<span id="cb73-3"><a href="intermediate-visualization-in-r.html#cb73-3" aria-hidden="true"></a><span class="st">    </span><span class="co"># geom_point() +</span></span>
+<span id="cb73-4"><a href="intermediate-visualization-in-r.html#cb73-4" aria-hidden="true"></a><span class="st">    </span><span class="co"># geom_count() +</span></span>
+<span id="cb73-5"><a href="intermediate-visualization-in-r.html#cb73-5" aria-hidden="true"></a><span class="st">    </span><span class="co"># geom_bin2d() +</span></span>
+<span id="cb73-6"><a href="intermediate-visualization-in-r.html#cb73-6" aria-hidden="true"></a><span class="st">    </span><span class="co"># geom_hex(aes(color = after_stat(count))) +</span></span>
+<span id="cb73-7"><a href="intermediate-visualization-in-r.html#cb73-7" aria-hidden="true"></a><span class="st">    </span><span class="co"># geom_density2d(size = 1) +</span></span>
+<span id="cb73-8"><a href="intermediate-visualization-in-r.html#cb73-8" aria-hidden="true"></a><span class="st">    </span><span class="co"># stat_density2d(contour = FALSE, geom = &#39;raster&#39;,</span></span>
+<span id="cb73-9"><a href="intermediate-visualization-in-r.html#cb73-9" aria-hidden="true"></a><span class="st">    </span><span class="co">#                aes(fill = after_stat(density)), </span></span>
+<span id="cb73-10"><a href="intermediate-visualization-in-r.html#cb73-10" aria-hidden="true"></a><span class="st">    </span><span class="co">#                show.legend = FALSE) +</span></span>
+<span id="cb73-11"><a href="intermediate-visualization-in-r.html#cb73-11" aria-hidden="true"></a><span class="st">    </span><span class="kw">stat_density2d</span>(<span class="dt">geom =</span> <span class="st">&#39;polygon&#39;</span>,</span>
+<span id="cb73-12"><a href="intermediate-visualization-in-r.html#cb73-12" aria-hidden="true"></a>                   <span class="kw">aes</span>(<span class="dt">fill =</span> <span class="kw">after_stat</span>(level)),</span>
+<span id="cb73-13"><a href="intermediate-visualization-in-r.html#cb73-13" aria-hidden="true"></a>                   <span class="dt">show.legend =</span> <span class="ot">FALSE</span>) <span class="op">+</span></span>
+<span id="cb73-14"><a href="intermediate-visualization-in-r.html#cb73-14" aria-hidden="true"></a><span class="st">    </span><span class="co">## facets</span></span>
+<span id="cb73-15"><a href="intermediate-visualization-in-r.html#cb73-15" aria-hidden="true"></a><span class="st">    </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>name) <span class="op">+</span></span>
+<span id="cb73-16"><a href="intermediate-visualization-in-r.html#cb73-16" aria-hidden="true"></a><span class="st">    </span><span class="co">## Annotations are repeated within each facet</span></span>
+<span id="cb73-17"><a href="intermediate-visualization-in-r.html#cb73-17" aria-hidden="true"></a><span class="st">    </span><span class="co"># annotate(geom = &#39;label&#39;, x = 200, y = 5, label = Sys.time()) +</span></span>
+<span id="cb73-18"><a href="intermediate-visualization-in-r.html#cb73-18" aria-hidden="true"></a><span class="st">    </span><span class="co">## scales</span></span>
+<span id="cb73-19"><a href="intermediate-visualization-in-r.html#cb73-19" aria-hidden="true"></a><span class="st">    </span><span class="kw">xlab</span>(<span class="st">&#39;Daily maximum temperature (ºC)&#39;</span>) <span class="op">+</span></span>
+<span id="cb73-20"><a href="intermediate-visualization-in-r.html#cb73-20" aria-hidden="true"></a><span class="st">    </span><span class="kw">ylab</span>(<span class="st">&#39;Daily temperature difference (ºC)&#39;</span>) <span class="op">+</span></span>
+<span id="cb73-21"><a href="intermediate-visualization-in-r.html#cb73-21" aria-hidden="true"></a><span class="st">    </span><span class="kw">scale_color_viridis_c</span>(<span class="dt">option =</span> <span class="st">&#39;A&#39;</span>) <span class="op">+</span></span>
+<span id="cb73-22"><a href="intermediate-visualization-in-r.html#cb73-22" aria-hidden="true"></a><span class="st">    </span><span class="kw">scale_fill_viridis_c</span>(<span class="dt">option =</span> <span class="st">&#39;A&#39;</span>) <span class="op">+</span></span>
+<span id="cb73-23"><a href="intermediate-visualization-in-r.html#cb73-23" aria-hidden="true"></a><span class="st">    </span><span class="co">## themes</span></span>
+<span id="cb73-24"><a href="intermediate-visualization-in-r.html#cb73-24" aria-hidden="true"></a><span class="st">    </span><span class="kw">theme_bw</span>() <span class="op">+</span></span>
+<span id="cb73-25"><a href="intermediate-visualization-in-r.html#cb73-25" aria-hidden="true"></a><span class="st">    </span><span class="kw">ggtitle</span>(<span class="st">&#39;Temperature difference is associated with maximum daily temperature&#39;</span>, </span>
+<span id="cb73-26"><a href="intermediate-visualization-in-r.html#cb73-26" aria-hidden="true"></a>            <span class="dt">subtitle =</span> <span class="kw">Sys.time</span>())</span></code></pre></div>
+<pre><code>## Warning: Removed 104 rows containing non-finite values (stat_density2d).</code></pre>
+<p><img src="book_files/figure-html/unnamed-chunk-58-1.png" width="60%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="intermediate-visualization-in-r.html#cb75-1" aria-hidden="true"></a><span class="co"># ggsave(paste0(plots_dir, &#39;plot_2.png&#39;), height = 7, width = 7)</span></span></code></pre></div>
+<div id="discussion-1" class="section level3" number="11.3.1">
+<h3><span class="header-section-number">11.3.1</span> Discussion</h3>
+<ol style="list-style-type: decimal">
+<li>What are the strengths and weaknesses of each different option?</li>
+</ol>
+</div>
+</div>
+<div id="plot-3-time-series-model-predictions" class="section level2" number="11.4">
+<h2><span class="header-section-number">11.4</span> Plot 3: Time series + model predictions</h2>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="intermediate-visualization-in-r.html#cb76-1" aria-hidden="true"></a><span class="co">## Hack to get month labels on day-as-year</span></span>
+<span id="cb76-2"><a href="intermediate-visualization-in-r.html#cb76-2" aria-hidden="true"></a><span class="co">## &lt;https://stackoverflow.com/a/39861306/3187973&gt;</span></span>
+<span id="cb76-3"><a href="intermediate-visualization-in-r.html#cb76-3" aria-hidden="true"></a>temp_df<span class="op">$</span>day.date =<span class="st"> </span><span class="kw">as.Date</span>(temp_df<span class="op">$</span>day, <span class="st">&#39;2009-01-01&#39;</span>)</span>
+<span id="cb76-4"><a href="intermediate-visualization-in-r.html#cb76-4" aria-hidden="true"></a></span>
+<span id="cb76-5"><a href="intermediate-visualization-in-r.html#cb76-5" aria-hidden="true"></a><span class="co">## Model **for Sacramento alone**</span></span>
+<span id="cb76-6"><a href="intermediate-visualization-in-r.html#cb76-6" aria-hidden="true"></a>model =<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data =</span> temp_df, temp_delta <span class="op">~</span><span class="st"> </span>day <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(day<span class="op">^</span><span class="dv">2</span>), </span>
+<span id="cb76-7"><a href="intermediate-visualization-in-r.html#cb76-7" aria-hidden="true"></a>           <span class="dt">subset =</span> name <span class="op">==</span><span class="st"> &#39;Sacramento&#39;</span>)</span>
+<span id="cb76-8"><a href="intermediate-visualization-in-r.html#cb76-8" aria-hidden="true"></a></span>
+<span id="cb76-9"><a href="intermediate-visualization-in-r.html#cb76-9" aria-hidden="true"></a><span class="co">## The director of the center where I gave this talk (who was also my postdoc supervisor) is part of the R Core Team. He doesn&#39;t like tidyverse, so I did everything except ggplot using base R. </span></span>
+<span id="cb76-10"><a href="intermediate-visualization-in-r.html#cb76-10" aria-hidden="true"></a><span class="co">## This is a good illustration of how tidyverse makes R more functional</span></span>
+<span id="cb76-11"><a href="intermediate-visualization-in-r.html#cb76-11" aria-hidden="true"></a>predictions =<span class="st"> </span><span class="kw">predict</span>(model, <span class="dt">interval =</span> <span class="st">&#39;confidence&#39;</span>, <span class="dt">level =</span> <span class="fl">.95</span>)</span>
+<span id="cb76-12"><a href="intermediate-visualization-in-r.html#cb76-12" aria-hidden="true"></a>predictions =<span class="st"> </span><span class="kw">as.data.frame</span>(predictions)</span>
+<span id="cb76-13"><a href="intermediate-visualization-in-r.html#cb76-13" aria-hidden="true"></a>predictions<span class="op">$</span>day =<span class="st"> </span>model<span class="op">$</span>model<span class="op">$</span>day</span>
+<span id="cb76-14"><a href="intermediate-visualization-in-r.html#cb76-14" aria-hidden="true"></a>predictions<span class="op">$</span>day.date =<span class="st"> </span><span class="kw">as.Date</span>(predictions<span class="op">$</span>day, <span class="st">&#39;2009-01-01&#39;</span>)</span>
+<span id="cb76-15"><a href="intermediate-visualization-in-r.html#cb76-15" aria-hidden="true"></a></span>
+<span id="cb76-16"><a href="intermediate-visualization-in-r.html#cb76-16" aria-hidden="true"></a><span class="kw">ggplot</span>(temp_df, <span class="kw">aes</span>(day.date, temp_delta)) <span class="op">+</span></span>
+<span id="cb76-17"><a href="intermediate-visualization-in-r.html#cb76-17" aria-hidden="true"></a><span class="st">    </span><span class="co">## geoms</span></span>
+<span id="cb76-18"><a href="intermediate-visualization-in-r.html#cb76-18" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_path</span>(<span class="kw">aes</span>(<span class="dt">color =</span> month, <span class="dt">group =</span> year), <span class="dt">alpha =</span> <span class="fl">.3</span>, <span class="dt">show.legend =</span> <span class="ot">FALSE</span>) <span class="op">+</span></span>
+<span id="cb76-19"><a href="intermediate-visualization-in-r.html#cb76-19" aria-hidden="true"></a><span class="st">    </span><span class="co">## Separate models for each panel</span></span>
+<span id="cb76-20"><a href="intermediate-visualization-in-r.html#cb76-20" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> lm, <span class="dt">formula =</span> y <span class="op">~</span><span class="st"> </span>x <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(x<span class="op">^</span><span class="dv">2</span>),</span>
+<span id="cb76-21"><a href="intermediate-visualization-in-r.html#cb76-21" aria-hidden="true"></a>                <span class="dt">color =</span> <span class="st">&#39;red&#39;</span>, <span class="dt">size =</span> <span class="dv">1</span>) <span class="op">+</span></span>
+<span id="cb76-22"><a href="intermediate-visualization-in-r.html#cb76-22" aria-hidden="true"></a><span class="st">    </span><span class="co">## Sacramento-only model</span></span>
+<span id="cb76-23"><a href="intermediate-visualization-in-r.html#cb76-23" aria-hidden="true"></a><span class="st">    </span><span class="co">## Use the smooth geom to get curve + ribbon</span></span>
+<span id="cb76-24"><a href="intermediate-visualization-in-r.html#cb76-24" aria-hidden="true"></a><span class="st">    </span><span class="co">## But set `stat = &#39;identity&#39;` because we don&#39;t want to fit a (new) model</span></span>
+<span id="cb76-25"><a href="intermediate-visualization-in-r.html#cb76-25" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_smooth</span>(<span class="dt">data =</span> predictions, <span class="dt">stat =</span> <span class="st">&#39;identity&#39;</span>,</span>
+<span id="cb76-26"><a href="intermediate-visualization-in-r.html#cb76-26" aria-hidden="true"></a>                <span class="kw">aes</span>(<span class="dt">y =</span> fit, <span class="dt">ymax =</span> upr, <span class="dt">ymin =</span> lwr),</span>
+<span id="cb76-27"><a href="intermediate-visualization-in-r.html#cb76-27" aria-hidden="true"></a>                <span class="dt">color =</span> <span class="st">&#39;blue&#39;</span>, <span class="dt">fill =</span> <span class="st">&#39;blue&#39;</span>, <span class="dt">size =</span> <span class="dv">1</span>) <span class="op">+</span></span>
+<span id="cb76-28"><a href="intermediate-visualization-in-r.html#cb76-28" aria-hidden="true"></a><span class="st">    </span><span class="co">## facets</span></span>
+<span id="cb76-29"><a href="intermediate-visualization-in-r.html#cb76-29" aria-hidden="true"></a><span class="st">    </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>name) <span class="op">+</span></span>
+<span id="cb76-30"><a href="intermediate-visualization-in-r.html#cb76-30" aria-hidden="true"></a><span class="st">    </span><span class="co">## scales</span></span>
+<span id="cb76-31"><a href="intermediate-visualization-in-r.html#cb76-31" aria-hidden="true"></a><span class="st">    </span><span class="kw">scale_x_date</span>(<span class="dt">name =</span> <span class="st">&#39;Month&#39;</span>, <span class="dt">date_breaks =</span> <span class="st">&#39;3 month&#39;</span>, <span class="dt">date_labels =</span> <span class="st">&#39;%b&#39;</span>) <span class="op">+</span><span class="st">  </span></span>
+<span id="cb76-32"><a href="intermediate-visualization-in-r.html#cb76-32" aria-hidden="true"></a><span class="st">    </span><span class="kw">scale_y_continuous</span>(<span class="dt">name =</span> <span class="st">&#39;Daily temperature difference (max - min)&#39;</span>, </span>
+<span id="cb76-33"><a href="intermediate-visualization-in-r.html#cb76-33" aria-hidden="true"></a>                       <span class="dt">labels =</span> scales<span class="op">::</span><span class="kw">math_format</span>(<span class="dt">expr =</span> .x<span class="op">*</span>degree<span class="op">*</span>C)) <span class="op">+</span></span>
+<span id="cb76-34"><a href="intermediate-visualization-in-r.html#cb76-34" aria-hidden="true"></a><span class="st">    </span><span class="kw">scale_color_viridis_d</span>(<span class="dt">limits =</span> month.name,</span>
+<span id="cb76-35"><a href="intermediate-visualization-in-r.html#cb76-35" aria-hidden="true"></a>                          <span class="dt">option =</span> <span class="st">&#39;E&#39;</span>,</span>
+<span id="cb76-36"><a href="intermediate-visualization-in-r.html#cb76-36" aria-hidden="true"></a>                          <span class="dt">direction =</span> <span class="dv">-1</span>) <span class="op">+</span></span>
+<span id="cb76-37"><a href="intermediate-visualization-in-r.html#cb76-37" aria-hidden="true"></a><span class="st">    </span><span class="co"># coord_polar() +</span></span>
+<span id="cb76-38"><a href="intermediate-visualization-in-r.html#cb76-38" aria-hidden="true"></a><span class="st">    </span><span class="co">## themes</span></span>
+<span id="cb76-39"><a href="intermediate-visualization-in-r.html#cb76-39" aria-hidden="true"></a><span class="st">    </span><span class="kw">theme_bw</span>() <span class="op">+</span></span>
+<span id="cb76-40"><a href="intermediate-visualization-in-r.html#cb76-40" aria-hidden="true"></a><span class="st">    </span><span class="kw">ggtitle</span>(<span class="st">&#39;Sacramento has smaller temperature differences than other sites&#39;</span>, </span>
+<span id="cb76-41"><a href="intermediate-visualization-in-r.html#cb76-41" aria-hidden="true"></a>            <span class="dt">subtitle =</span> <span class="kw">Sys.time</span>())</span></code></pre></div>
+<pre><code>## Warning: Removed 104 rows containing non-finite values (stat_smooth).</code></pre>
+<pre><code>## Warning: Removed 1 row(s) containing missing values (geom_path).</code></pre>
+<p><img src="book_files/figure-html/unnamed-chunk-59-1.png" width="60%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="intermediate-visualization-in-r.html#cb79-1" aria-hidden="true"></a><span class="co">## Note effect of aspect ratios on perception</span></span>
+<span id="cb79-2"><a href="intermediate-visualization-in-r.html#cb79-2" aria-hidden="true"></a><span class="co"># ggsave(paste0(plots_dir, &#39;plot_3.png&#39;), height = 7, width = 7)</span></span>
+<span id="cb79-3"><a href="intermediate-visualization-in-r.html#cb79-3" aria-hidden="true"></a><span class="co"># ggsave(paste0(plots_dir, &#39;plot_3a.png&#39;), height = 7, width = 12)</span></span></code></pre></div>
+<div id="discussion-2" class="section level3" number="11.4.1">
+<h3><span class="header-section-number">11.4.1</span> Discussion</h3>
+<ol style="list-style-type: decimal">
+<li>What are the dangers of using models internal to the plot?<br />
+</li>
+<li>Aspect ratios change our perception of the plot. Does this mean one aspect ratio is misleading?</li>
+</ol>
+</div>
+</div>
+<div id="plot-4-visualizing-spatial-data-in-r" class="section level2" number="11.5">
+<h2><span class="header-section-number">11.5</span> Plot 4: Visualizing spatial data in R</h2>
+<ul>
+<li>I don’t recommend visualizing spatial data until you’ve learned a bit about coordinate systems and projections</li>
+<li>Definitely don’t try to do math on spatial coordinates unless you know what you’re doing!</li>
+<li>The <code>sf</code> package for working with spatial data has a ton of dependencies, so I’m going to disable all of the code blocks below.
+<ul>
+<li>They’re here for you to explore on your own if interested.<br />
+</li>
+<li><strong>This code has not been checked for errors.</strong></li>
+</ul></li>
+<li>As of version 3, <code>ggplot2</code> can plot vector spatial data from <code>sf</code> objects using <code>geom_sf()</code></li>
+<li>This section looks at two different ways of adding basemaps under <code>geom_sf()</code> plots</li>
+</ul>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="intermediate-visualization-in-r.html#cb80-1" aria-hidden="true"></a><span class="cf">if</span> (<span class="kw">packageVersion</span>(<span class="st">&#39;ggplot2&#39;</span>) <span class="op">&lt;</span><span class="st"> </span><span class="kw">package_version</span>(<span class="st">&#39;3.0.0&#39;</span>)) {</span>
+<span id="cb80-2"><a href="intermediate-visualization-in-r.html#cb80-2" aria-hidden="true"></a>    <span class="kw">stop</span>(<span class="st">&#39;ggplot2 version 3 or later is required for this section&#39;</span>)</span>
+<span id="cb80-3"><a href="intermediate-visualization-in-r.html#cb80-3" aria-hidden="true"></a>} <span class="cf">else</span> {</span>
+<span id="cb80-4"><a href="intermediate-visualization-in-r.html#cb80-4" aria-hidden="true"></a>    <span class="kw">library</span>(sf)</span>
+<span id="cb80-5"><a href="intermediate-visualization-in-r.html#cb80-5" aria-hidden="true"></a>    <span class="kw">library</span>(ggmap)</span>
+<span id="cb80-6"><a href="intermediate-visualization-in-r.html#cb80-6" aria-hidden="true"></a>    <span class="kw">library</span>(ggspatial)</span>
+<span id="cb80-7"><a href="intermediate-visualization-in-r.html#cb80-7" aria-hidden="true"></a>}</span>
+<span id="cb80-8"><a href="intermediate-visualization-in-r.html#cb80-8" aria-hidden="true"></a></span>
+<span id="cb80-9"><a href="intermediate-visualization-in-r.html#cb80-9" aria-hidden="true"></a>stations =<span class="st"> </span><span class="kw">readRDS</span>(data_files[<span class="st">&#39;stations&#39;</span>])</span>
+<span id="cb80-10"><a href="intermediate-visualization-in-r.html#cb80-10" aria-hidden="true"></a>stations.utm =<span class="st"> </span><span class="kw">readRDS</span>(data_files[<span class="st">&#39;stations.utm&#39;</span>])</span>
+<span id="cb80-11"><a href="intermediate-visualization-in-r.html#cb80-11" aria-hidden="true"></a></span>
+<span id="cb80-12"><a href="intermediate-visualization-in-r.html#cb80-12" aria-hidden="true"></a>stations</span></code></pre></div>
+<div id="ggmap-approach" class="section level3" number="11.5.1">
+<h3><span class="header-section-number">11.5.1</span> <code>ggmap</code> approach</h3>
+<ul>
+<li>Services other than Google Maps are deprecated</li>
+<li>Requires Google account, API key</li>
+<li>Doesn’t seem to play nicely with coordinates other than lat/lon</li>
+<li>See <code>?register_google</code> for links and instructions</li>
+<li><strong><em>DO NOT SHARE YOUR API KEY</em></strong></li>
+</ul>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="intermediate-visualization-in-r.html#cb81-1" aria-hidden="true"></a><span class="co"># register_google(key = &#39;notarealkey&#39;, write = TRUE)</span></span>
+<span id="cb81-2"><a href="intermediate-visualization-in-r.html#cb81-2" aria-hidden="true"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">has_google_key</span>()) {</span>
+<span id="cb81-3"><a href="intermediate-visualization-in-r.html#cb81-3" aria-hidden="true"></a>    <span class="kw">stop</span>(<span class="st">&#39;You need a Google Maps API key.  See ?register_google&#39;</span>)</span>
+<span id="cb81-4"><a href="intermediate-visualization-in-r.html#cb81-4" aria-hidden="true"></a>}</span>
+<span id="cb81-5"><a href="intermediate-visualization-in-r.html#cb81-5" aria-hidden="true"></a></span>
+<span id="cb81-6"><a href="intermediate-visualization-in-r.html#cb81-6" aria-hidden="true"></a>basemap =<span class="st"> </span><span class="kw">get_map</span>(<span class="dt">location =</span> <span class="kw">c</span>(<span class="op">-</span><span class="fl">121.4183</span>, <span class="fl">38.5552</span>), </span>
+<span id="cb81-7"><a href="intermediate-visualization-in-r.html#cb81-7" aria-hidden="true"></a>                  <span class="dt">maptype =</span> <span class="st">&#39;terrain&#39;</span>,</span>
+<span id="cb81-8"><a href="intermediate-visualization-in-r.html#cb81-8" aria-hidden="true"></a>                  <span class="dt">zoom =</span> <span class="dv">8</span>)</span>
+<span id="cb81-9"><a href="intermediate-visualization-in-r.html#cb81-9" aria-hidden="true"></a></span>
+<span id="cb81-10"><a href="intermediate-visualization-in-r.html#cb81-10" aria-hidden="true"></a><span class="kw">ggmap</span>(basemap) <span class="op">+</span></span>
+<span id="cb81-11"><a href="intermediate-visualization-in-r.html#cb81-11" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_sf</span>(<span class="dt">data =</span> stations, <span class="dt">inherit.aes =</span> <span class="ot">FALSE</span>) <span class="op">+</span></span>
+<span id="cb81-12"><a href="intermediate-visualization-in-r.html#cb81-12" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_sf_label</span>(<span class="dt">data =</span> stations, </span>
+<span id="cb81-13"><a href="intermediate-visualization-in-r.html#cb81-13" aria-hidden="true"></a>                  <span class="kw">aes</span>(<span class="dt">label =</span> name), <span class="dt">nudge_y =</span> <span class="fl">-.1</span>, <span class="dt">size =</span> <span class="dv">3</span>)</span>
+<span id="cb81-14"><a href="intermediate-visualization-in-r.html#cb81-14" aria-hidden="true"></a><span class="co"># ggsave(paste0(plots_dir, &#39;plot_4_ggmap.png&#39;), height = 7, width = 7)</span></span>
+<span id="cb81-15"><a href="intermediate-visualization-in-r.html#cb81-15" aria-hidden="true"></a></span>
+<span id="cb81-16"><a href="intermediate-visualization-in-r.html#cb81-16" aria-hidden="true"></a><span class="co">## Example with UTM coordinates</span></span>
+<span id="cb81-17"><a href="intermediate-visualization-in-r.html#cb81-17" aria-hidden="true"></a><span class="co"># ggmap(basemap) +</span></span>
+<span id="cb81-18"><a href="intermediate-visualization-in-r.html#cb81-18" aria-hidden="true"></a><span class="co">#     geom_sf(data = stations.utm, inherit.aes = FALSE)</span></span></code></pre></div>
+</div>
+<div id="ggspatial-approach" class="section level3" number="11.5.2">
+<h3><span class="header-section-number">11.5.2</span> <code>ggspatial</code> approach</h3>
+<ul>
+<li><code>annotation_map_tile()</code> is slow, even with cached images</li>
+<li>See <code>rosm::osm.types()</code> for a list of basemap types</li>
+</ul>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="intermediate-visualization-in-r.html#cb82-1" aria-hidden="true"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> stations) <span class="op">+</span></span>
+<span id="cb82-2"><a href="intermediate-visualization-in-r.html#cb82-2" aria-hidden="true"></a><span class="st">    </span><span class="kw">annotation_map_tile</span>(<span class="dt">type =</span> <span class="st">&#39;osm&#39;</span>, <span class="dt">zoom =</span> <span class="dv">10</span>) <span class="op">+</span></span>
+<span id="cb82-3"><a href="intermediate-visualization-in-r.html#cb82-3" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_sf_label</span>(<span class="dt">data =</span> stations, </span>
+<span id="cb82-4"><a href="intermediate-visualization-in-r.html#cb82-4" aria-hidden="true"></a>                  <span class="kw">aes</span>(<span class="dt">label =</span> name), <span class="dt">nudge_y =</span> <span class="fl">.03</span>, <span class="dt">size =</span> <span class="dv">3</span>) <span class="op">+</span></span>
+<span id="cb82-5"><a href="intermediate-visualization-in-r.html#cb82-5" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_sf</span>() <span class="op">+</span></span>
+<span id="cb82-6"><a href="intermediate-visualization-in-r.html#cb82-6" aria-hidden="true"></a><span class="st">    </span><span class="kw">annotation_scale</span>(<span class="dt">location =</span> <span class="st">&#39;tl&#39;</span>) <span class="op">+</span></span>
+<span id="cb82-7"><a href="intermediate-visualization-in-r.html#cb82-7" aria-hidden="true"></a><span class="st">    </span><span class="kw">annotation_north_arrow</span>(<span class="dt">location =</span> <span class="st">&#39;br&#39;</span>, <span class="dt">which_north =</span> <span class="st">&#39;true&#39;</span>, </span>
+<span id="cb82-8"><a href="intermediate-visualization-in-r.html#cb82-8" aria-hidden="true"></a>                           <span class="dt">style =</span> north_arrow_minimal)</span>
+<span id="cb82-9"><a href="intermediate-visualization-in-r.html#cb82-9" aria-hidden="true"></a><span class="co"># ggsave(paste0(plots_dir, &#39;plot_4_ggspatial.png&#39;), height = 7, width = 7)</span></span>
+<span id="cb82-10"><a href="intermediate-visualization-in-r.html#cb82-10" aria-hidden="true"></a></span>
+<span id="cb82-11"><a href="intermediate-visualization-in-r.html#cb82-11" aria-hidden="true"></a><span class="co">## Example with UTM coordinates</span></span>
+<span id="cb82-12"><a href="intermediate-visualization-in-r.html#cb82-12" aria-hidden="true"></a><span class="co"># ggplot(data = stations.utm) +</span></span>
+<span id="cb82-13"><a href="intermediate-visualization-in-r.html#cb82-13" aria-hidden="true"></a><span class="co">#     annotation_map_tile(type = &#39;osm&#39;, zoom = 10,</span></span>
+<span id="cb82-14"><a href="intermediate-visualization-in-r.html#cb82-14" aria-hidden="true"></a><span class="co">#                         cachedir = system.file(&#39;rosm.cache&#39;, package = &#39;ggspatial&#39;)) +</span></span>
+<span id="cb82-15"><a href="intermediate-visualization-in-r.html#cb82-15" aria-hidden="true"></a><span class="co">#     geom_sf_label(data = stations,</span></span>
+<span id="cb82-16"><a href="intermediate-visualization-in-r.html#cb82-16" aria-hidden="true"></a><span class="co">#                   aes(label = name), nudge_y = 1000, size = 3) +</span></span>
+<span id="cb82-17"><a href="intermediate-visualization-in-r.html#cb82-17" aria-hidden="true"></a><span class="co">#     geom_sf()</span></span></code></pre></div>
+
+</div>
+</div>
+</div>
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+</div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-HicksImpactingCapabilitiesConceptual2018">
+<p>Hicks, Daniel J., Carl Stahmer, and MacKenzie Smith. 2018. “Impacting Capabilities: A Conceptual Framework for the Social Value of Research.” <em>Frontiers in Research Metrics and Analytics</em>. <a href="https://doi.org/10.3389/frma.2018.00024">https://doi.org/10.3389/frma.2018.00024</a>.</p>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="2">
+<li id="fn2"><p>Strictly speaking, <code>base</code> is the name of a particular package; “base graphics” aren’t included in this package, but instead are in the <code>graphics</code> package. So “base graphics” is strictly incorrect. But “graphics graphics” sounds silly, and the <code>graphics</code> package is loaded automatically when you launch R, so everyone just calls it “base graphics.”<a href="intermediate-visualization-in-r.html#fnref2" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="visual-eda.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/data-science-methods/book/blob/master/03-05-intermediate-vis.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["book.pdf"],
+"toc": {
+"collapse": "section",
+"scroll_highlight": true
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
