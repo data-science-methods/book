@@ -91,7 +91,7 @@ To examine these hazards, we'll use the `nycflights13` dataset, which includes a
 
 The dataset comprises 5 different tables, which of which can be linked to the others using joins.  We'll focus on combining `flights` with `airports` and `weather`. 
 
-```{r, echo = FALSE, fig.cap = 'Linking fields in the tables of the `nycflights13` dataset.`}
+```{r, echo = FALSE, fig.cap = 'Linking fields in the tables of the `nycflights13` dataset.'}
 knitr::include_graphics(file.path('images', '03-eda', 'relational-nycflights.png'))
 ```
 
