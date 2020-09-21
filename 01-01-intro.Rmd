@@ -37,18 +37,11 @@ Is:
 By the end of the course, students will be able to 
 
 1. apply concepts from software engineering and philosophy of science to methodological decisions in data science, including
-	- functional vs. object-oriented programming paradigms [@ChambersObjectOrientedProgrammingFunctional2014]
-	- waterfall vs. spiral model of development
-	- data/phenomena/theory distinction [@BogenSavingPhenomena1988]
 	- reproducibility vs. robustness vs. replicability
 	- value and hazards of open data
 	- thick data [@WangWhyBigData2016]
 
 3. use exploratory data analysis techniques and tools to identify potential data errors and potential phenomena for further analysis
-	- checklist [@HuebnerSystematicApproachInitial2016]
-	- `skimr`, `visdat`
-	- 1D summaries: histograms, density, ecdf plots
-	- 2D summaries: scatterplots, boxplot, violin plot, beeswarm, upset plots; pairs plot (<https://www.data-imaginist.com/2019/a-flurry-of-facets/>); correlation matrix
 
 2. clean raw data and produce a reproducible codebook for both downstream analysis and public release of data according to FAIR standards [@WilkinsonFAIRGuidingPrinciples2016]
 	- [create and use a cloud database to work with big data]
@@ -62,6 +55,16 @@ By the end of the course, students will be able to
 	- explain @KleinbergInherentTradeOffsFair2016 impossibility result (not necessarily the proof) and show that it applies to the COMPAS datas
 	- critically discuss profiling and thresholds [@PiersonLargescaleAnalysisRacial2020] as potential explanation for differences in "base rates" of recidivism
 	- critically locate discussions of fairness and recidivism in a broader social context, and identify implications for working data scientists [@SelbstFairnessAbstractionSociotechnical2018; @HoffmannWhereFairnessFails2019; @HannaCriticalRaceMethodology2019]
+
+<!--
+## Prerequisites ##
+
+This course assumes a basic familiarity with R.  
+
+- $10 Coursera "guided project": <https://www.coursera.org/projects/getting-started-with-r>
+- A Carpentries workshop that includes the "R for Social Scientists" lesson, or the equivalent: <https://datacarpentry.org/r-socialsci/>
+
+-->
 
 ## Workflow ##
 

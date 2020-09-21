@@ -38,6 +38,9 @@ purrr::walk2(data_paths, data_urls, download_file)
         - `points()`, `lines()`, `polygon()`
         - `abline()`, `curve()`
     - Define a canvas first, then use these tools to paint elements on the canvas
+    - The [common Python plotting packages](https://pbpython.com/visualization-tools-1.html) (`matplotlib`, `seaborn`, etc.) are object-oriented variations on this
+        - `matplotlib` was originally designed to work like plotting in MATLAB, in order to ease the transition for scientists coming from MATLAB
+
 - Advantages of base graphics
     - One-liners
         - `plot(some_object)` often does something useful
@@ -54,7 +57,7 @@ purrr::walk2(data_paths, data_urls, download_file)
     - Parameters aren't perspicuous
         - fill color is `bg` (background?)
         - point shape is `pch` (uhhh point-character?)
-        - point size is `cex` (???)
+        - point and text size is `cex` (???)
     - "Ugly defaults"
     - Plots as [side effects](https://en.wikipedia.org/wiki/Side_effect_(computer_science))
 
@@ -65,7 +68,7 @@ purrr::walk2(data_paths, data_urls, download_file)
     - Facets
     - Themes and palettes
     - Plots are [first-class objects](https://en.wikipedia.org/wiki/First-class_citizen)
-    - "Pretty defaults"
+    - "Pretty defaults" (though I disagree)
 - Disadvantages of `ggplot2`
     - Only$^*$ for data frames in [*long format*](https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html)
     - Programming with `ggplot2` requires understanding [tidy evaluation](https://www.tidyverse.org/blog/2018/07/ggplot2-tidy-evaluation/)

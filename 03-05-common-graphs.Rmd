@@ -1,0 +1,378 @@
+# Common (and less common) Graphs for EDA #
+
+One of the major advantages of the grammar of graphics — especially as implemented in the tidyverse package `ggplot2` — is that it enables us to rapidly create *and re-create* graphs.  This speed and flexibility is extremely useful for EDA.  
+
+```{r}
+# install.packages(c('tidyverse', 'skimr', 'gghighlight', 'ggbeeswarm', 'ggforce', 'ggupset'))
+library(tidyverse)
+
+library(skimr)
+
+library(gghighlight)
+library(ggbeeswarm)
+library(ggforce)
+library(ggupset)
+```
+
+While `ggplot2` is supposed to have "pretty defaults," for a long time its default color scales have been *terrible*, with bad color combinations for color-blind folks, poor rendering in black and white, and low contrast against the default gray background.  
+
+The options below should set a more color-blind-friendly default palette and a plain white background. 
+
+```{r}
+options(ggplot2.discrete.fill = partial(colorspace::scale_fill_discrete_qualitative, palette = 'Dark 2'), 
+        ggplot2.discrete.colour = partial(colorspace::scale_color_discrete_qualitative, palette = 'Dark 2'))
+
+theme_set(theme_bw())
+```
+
+## Data ##
+
+We'll be looking at a collection of US college tuition and diversity data.  I acquired the data from [TidyTuesday (2020-03-10)](https://github.com/rfordatascience/tidytuesday/tree/master/data/2020/2020-03-10), which in turn sourced it from some combination of [Tuition Tracker](https://www.tuitiontracker.org/) and the *Chronicle of Higher Education*.  
+
+The documentation in this TidyTuesday repo is quite poor, and doesn't actually say exactly where each dataset came from.  Some of the data is parsed from downloaded HTML files; other data is produced by non-reproducible scripts that clean CSV files.  My best guess is that the tuition data comes [a *Chronicle of Higher Education* table](https://www.chronicle.com/article/tuition-and-fees-1998-99-through-2018-19/) with AY 2018-19 "sticker prices" for tuition.  And I think the diversity data comes from [another *CHE* table](https://www.chronicle.com/article/student-diversity-at-4-725-institutions/) which reports counts of all students (not just undergrads) enrolled in Fall 2014.  
+
+To facilitate some later steps, I filtered the datasets we'll be using to *4-year colleges and universities* in *California*.  I also standardized the names of the Cal State (California State University, or CSU) and University of California campuses, and identified which "system" each school is in (CSU, UC, private, or for-profit).  The prepared data files (along with the cleaning script and draft versions of the plots below) is available [here](https://github.com/data-science-methods/ca-tuition-diversity). 
+
+```{r}
+data_dir = 'data'
+data_files = file.path(data_dir, c('diversity.Rds', 'tuition.Rds'))
+
+data_urls = str_c('https://github.com/data-science-methods/ca-tuition-diversity/raw/master/', data_files)
+
+## `if` isn't vectorized, so we have to loop over the files/URLs manually
+download_file = function(path, url) {
+    if (!file.exists(path)) {
+        download.file(url, path)
+    }
+}
+purrr::walk2(data_files, data_urls, download_file)
+
+div_df = read_rds(data_files[1])
+tuition_df = read_rds(data_files[2])
+```
+
+`tuition_df` contains data on tuition (the "sticker price," not what students actually pay).  There are 135 rows, 1 row for each of the public, private, and for-profit 4-year schools in California.  There are a few different calculations of tuition or cost; we'll only be looking at `in_state_tuition`. 
+In this dataset, `type` is either public, private, or for-profit.  All of the public 4-year colleges or universities in California belong to either the Cal State or UC system.  `system` distinguishes these two public systems, and also carries over the values from `type` for private and for-profit schools. 
+
+```{r, render=knitr::normal_print}
+skim(tuition_df)
+count(tuition_df, type, system)
+```
+
+`div_df` has 5027 rows, corresponding to unique combinations of school (`name`) and demographic group (`category`).  `share` gives the fraction of students enrolled at the school in the given group.  Because the TidyTuesday dataset didn't have the `degree_length` variable, I wasn't able to filter down to only 4-year schools.  That won't be a problem later.  
+
+```{r, render=knitr::normal_print}
+skim(div_df)
+count(div_df, name)
+count(div_df, category)
+```
+
+## 1D distributions ##
+
+### Categorical: Barplot ###
+
+Counts of observations for a single categorical variable. It's a bar geom with a count statistic. If we keep the statistic but change the geom, we get a point version of a barplot. 
+
+```{r, fig.show = 'hold', out.width = '50%'}
+ggplot(tuition_df, aes(system, fill = system)) +
+    geom_bar()
+ggplot(tuition_df, aes(system, fill = system)) +
+    stat_count(geom = 'bar')
+```
+
+If we keep the statistic but change the geom, we can make a point version of a barplot.  Or a version with text labels.  
+
+```{r, fig.show = 'hold', out.width = '50%'}
+ggplot(tuition_df, aes(system, color = system)) +
+    stat_count(geom = 'point', size = 3)
+ggplot(tuition_df, aes(system, color = system)) +
+    stat_count(geom = 'label', aes(label = after_stat(count)))
+```
+
+Because of ggplot's layering system, we're not restricted to just a barplot or one of these variations.  We can combine geoms into a single plot. 
+
+```{r}
+ggplot(tuition_df, aes(system)) +
+    stat_count(geom = 'bar', aes(fill = system)) +
+    stat_count(geom = 'label', aes(label = after_stat(count)), 
+               position = position_nudge(y = 5))
+```
+
+### Numeric: Histograms and density plots ###
+
+A histogram is a count of observations for a single categorical variable. It uses the same geom as the barplot, but a statistic of counts of *binned* values for a continuous variable.  
+
+```{r, fig.show = 'hold', out.width = '40%'}
+ggplot(tuition_df, aes(in_state_tuition)) +
+    geom_histogram()
+ggplot(tuition_df, aes(in_state_tuition)) +
+    stat_bin(geom = 'bar')
+```
+
+- `binwidth` can have a dramatic effect on the appearance of the plot
+- `binwidth` is a free parameter in constructing the histogram as a model of the data
+
+```{r}
+ggplot(tuition_df, aes(in_state_tuition)) +
+    geom_histogram(binwidth = 100)
+ggplot(tuition_df, aes(in_state_tuition)) +
+    geom_histogram(binwidth = 1000)
+ggplot(tuition_df, aes(in_state_tuition)) +
+    geom_histogram(binwidth = 10000)
+```
+
+A frequency polygon uses the same count statistic, but displays the result with a line rather than columns. 
+
+```{r}
+ggplot(tuition_df, aes(in_state_tuition)) +
+    stat_bin(geom = 'bar')
+ggplot(tuition_df, aes(in_state_tuition)) +
+    stat_bin(geom = 'line')
+ggplot(tuition_df, aes(in_state_tuition)) +
+    geom_freqpoly()
+```
+
+Density plots are a smoothed version of histograms. 
+
+- Often drawn with a rug, which indicates the locations of observed values on the x-axis
+- Like histogram, is a model of the data
+- Unlike histogram, people often overlook the free parameters (see `?density`)
+
+```{r}
+ggplot(tuition_df, aes(in_state_tuition)) +
+    geom_density() +
+    geom_rug()
+```
+
+A strip plot simply plots the values on a single axis.  
+
+- Unlike all of the other examples here, it doesn't involve any free parameters or other modeling decisions.  
+- But it's also not very useful
+
+```{r}
+ggplot(tuition_df, aes(in_state_tuition)) +
+    geom_point(y = 0) +
+    ylim(-.1, .1)
+```
+
+
+## 2D distributions: Categorical x Numeric ##
+
+When there are only a few values of a categorical variable, it can be useful to simply plot points for individual values.  
+
+```{r}
+ggplot(tuition_df, aes(fct_reorder(name, in_state_tuition),
+                       in_state_tuition, 
+                       color = system)) +
+    geom_point(aes(color = system)) +
+    coord_flip()
+```
+
+But we probably don't care about the names of individual schools.  One option is a stacked histogram, using color (fill) to indicate school system.  
+
+```{r}
+ggplot(tuition_df, aes(in_state_tuition, fill = system)) +
+    geom_histogram(binwidth = 1000)
+```
+
+These can be difficult to read when it's not clear whether the bars are stacked on top of each other or layered, one behind the other.  Here the bars are layered.  The differences are very subtle but potentially important. 
+
+```{r}
+ggplot(tuition_df, aes(in_state_tuition, fill = system)) +
+    geom_histogram(binwidth = 1000, position = 'identity')
+```
+
+So it's more common to put the categorical variable on the x-axis.  Here's a traditional boxplot. While color is strictly unnecessary, using color for the same categorical variable across plots helps us track relationships.  Notice that we can change the way color is used by simply changing which aesthetic gets `system`. 
+
+```{r, out.width = '45%', fig.show = 'hide'}
+ggplot(tuition_df, aes(system, in_state_tuition, color = system)) +
+    geom_boxplot()
+ggplot(tuition_df, aes(system, in_state_tuition, fill = system)) +
+    geom_boxplot()
+```
+
+However, bowplots have many of the problems that @WeissgerberBarLineGraphs2015 identify with bar-and-whisker plots.  Neither is actually very good at showing non-gaussian distributions of the underlying data.  
+
+A violin plot is better for this.  The violin plot calculates densities across the numerical variable (tuition) within groups defined by the categorical variable (system), and shows them symmetrically.  We can use the `draw_quantiles` argument to show the medians, and `scale = 'width'` to get them to have the same width (rather than the same area, the default).
+
+```{r}
+ggplot(tuition_df, aes(system, in_state_tuition, color = system)) +
+    geom_violin(draw_quantiles = .5, scale = 'width')
+```
+
+We can add points to this, using `position = 'jitter'` to reduce overplotting and `alpha = .5` to make them 50% transparent.  
+
+```{r}
+ggplot(tuition_df, aes(system, in_state_tuition, color = system)) +
+    geom_violin(draw_quantiles = .5, scale = 'width') +
+    geom_point(position = 'jitter', alpha = .5)
+```
+
+`ggforce::geom_sina()` tries to match the amount of jitter to the width of the violin plot, using the same `scale` argument.  It's a little better, because now the points aren't outside of the violin.  But it's still hard to see a visual pattern. 
+
+```{r}
+ggplot(tuition_df, aes(system, in_state_tuition, color = system)) +
+    geom_violin(draw_quantiles = .5, scale = 'width') +
+    geom_sina(scale = 'width')
+```
+
+A beeswarm plot positions the points so that they cluster close together in the x-direction without too much overplotting.  This allows us to show both the individual points and the density distribution, with roughly the same shape (after tweaking some parameters).  
+
+```{r}
+ggplot(tuition_df, aes(system, in_state_tuition, color = system)) +
+    geom_violin(draw_quantiles = .5, scale = 'width') +
+    geom_beeswarm(cex = 2)
+```
+
+Using ggplot it is possible to create the bar-and-whiskers plot that @WeissgerberBarLineGraphs2015 criticize. But now we have much better options. 
+
+```{r}
+ggplot(tuition_df, aes(system, in_state_tuition, 
+                       fill = system, color = system)) +
+    stat_summary(geom = 'bar') +
+    stat_summary(geom = 'errorbar', width = .2)
+```
+
+## Joins ##
+
+- The diversity data doesn't contain the `system` variable, or anything else to distinguish public vs. private vs. for-profit schools.  
+- However, we can combine it with the tuition data, matching by school name.
+- This is done using operations called *joins*.  
+
+```{r, echo = FALSE, fig.show = 'hold', out.width = '45%', fig.cap = 'Join operations combine two dataframes based on one or more matching columns.  Different join operations keep different rows from the combination.  Sources: <https://data-lessons.github.io/gapminder-R/>; <https://notchained.hatenablog.com/entry/2015/01/03/160700>'}
+knitr::include_graphics(file.path('images', '03-eda', 'join-rows.png'))
+knitr::include_graphics(file.path('images', '03-eda', 'join-venn.png'))
+```
+
+- Suppose we're joining two dataframes, `left` and `right`
+```{r}
+left = tribble(
+    ~animal, ~zoo,
+    'aardvark', 'Sacramento', 
+    'aardvark', 'San Diego',
+    'chimpanzee', 'San Diego',
+    'zebra', 'San Diego'
+)
+right = tribble(
+    ~animal, ~food, 
+    'aardvark', 'insects', 
+    'chimpanzee', 'insects', 
+    'chimpanzee', 'fruit', 
+    'velociraptor', 'animals'
+)
+```
+
+
+- *Left join*: keep all of the rows and columns from `left`; add columns from `right`
+```{r}
+left_join(left, right, by = 'animal')
+```
+
+- *Right join*: keep all of the rows and columns from `right`; add columns from `left`
+```{r}
+right_join(left, right, by = 'animal')
+```
+
+- *Full join*: keep all rows and columns from both `left` and `right`
+```{r}
+full_join(left, right, by = 'animal')
+```
+
+- *Inner join*: keep all columns, but only rows that match
+```{r}
+inner_join(left, right, by = 'animal')
+```
+
+- *Anti-join*: keep all columns from `left`, but only the rows that *don't* match
+```{r}
+anti_join(left, right, by = 'animal')
+```
+
+- Joins are powerful but can create hazards
+    - *Missing values* from left, right, and full joins
+        - In a left join, rows from `left` that don't match will have missing values in the columns from `right`
+    - *Row counts* can be difficult to predict in advance
+        - Rows will be copied if they match multiple times
+    - *Column names* can be changed if they're repeated across dataframes but not used for matching
+
+```{r}
+inner_join(tuition_df, div_df, by = 'name') %>% 
+    names()
+```
+
+- To manage these hazards
+    - Use `anti_join()` to figure out where missing values will be
+    - Use `select()` with `distinct()` to check for unexpected duplications
+    - Use `names()` to check column names
+    
+```{r}
+## Schools in tuition_df that will be missing after we join w/ div_df
+anti_join(tuition_df, div_df, by = 'name') %>% 
+    pull(name)
+
+## Because div_df isn't filtered down to 2-year schools, it's okay if a lot of its schools are left out
+anti_join(div_df, tuition_df, by = 'name') %>% 
+    nrow()
+
+## Checking duplications
+comb_df_draft = inner_join(tuition_df, div_df, by = 'name')
+nrow(comb_df_draft)
+nrow(distinct(comb_df_draft))
+
+## 135 schools in tuition_df, minus 20 rows not matched
+comb_df_draft %>% 
+    select(name) %>% 
+    distinct() %>% 
+    nrow()
+
+## We should have one row in comb_df_draft for each school-category combination
+comb_df_draft %>% 
+    select(name, category) %>% 
+    distinct() %>% 
+    nrow()
+
+## Check column names
+names(comb_df_draft)
+```
+
+After all that, we can create some plots for demographic categories against school system and in-state tuition. 
+
+```{r}
+comb_df = inner_join(div_df, tuition_df, by = c('name', 'state'))
+
+ggplot(comb_df, aes(system, share, color = system)) +
+    geom_violin(scale = 'width',
+                draw_quantiles = .5) +
+    geom_beeswarm(alpha = .25, cex = 2) +
+    facet_wrap(vars(category), scales = 'free')
+
+ggplot(comb_df, aes(in_state_tuition, share)) +
+    geom_point(aes(color = system)) +
+    geom_smooth(color = 'black') +
+    facet_wrap(vars(category), scales = 'free')
+```
+
+*[todo]*
+
+
+## Multivariate distributions ##
+
+- `ggforce::facet_matrix()`
+
+```{r}
+ggplot(tuition_df, aes(.panel_x, .panel_y, color = system)) +
+    geom_autopoint(color = 'blue') +
+    geom_autodensity(fill = NA, position = 'identity') +
+    geom_autopoint() +
+    geom_mark_ellipse(expand = .05) +
+    stat_function(fun = identity, inherit.aes = FALSE) +
+    facet_matrix(vars(in_state_tuition, in_state_total, 
+                      out_of_state_tuition, out_of_state_total), 
+                 layer.upper = c(1, 5),
+                 layer.diag = 2, 
+                 layer.lower = c(3, 4, 5))
+```
+
+- lab: correlation heat map + scatterplots
+- upset plots (ggupset)
+
