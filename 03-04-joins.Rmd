@@ -78,27 +78,35 @@ Joins can create a number of hazards.
     - Rows will be copied if they match multiple times
 - *Column names* can be changed if they're repeated across dataframes but not used for matching
 
-- To manage these hazards
-    - Use `anti_join()` to figure out where missing values will be
-    - Use `select()` with `distinct()` to check for unexpected duplications
-    - Use `names()` to check column names
+
+To manage these hazards
+
+- Use `anti_join()` to figure out where missing values will be
+- Use `select()` with `distinct()` to check for unexpected duplications
+- Use `names()` to check column names
     
 ### Data ###
 
-*[background; diagram of keys from <https://r4ds.had.co.nz/relational-data.html>]
+To examine these hazards, we'll use the `nycflights13` dataset, which includes all flights that departed New York City in 2013. 
+
+The dataset comprises 5 different tables, which of which can be linked to the others using joins.  We'll focus on combining `flights` with `airports` and `weather`. 
+
+```{r, echo = FALSE, fig.cap = 'Linking fields in the tables of the `nycflights13` dataset.`}
+knitr::include_graphics(file.path('images', '03-eda', 'relational-nycflights.png'))
+```
+
 
 ```{r}
 library(tidyverse)
 library(nycflights13)
 
-airlines
-airports
-planes
-weather
 flights
+airports
+weather
 ```
 
 Some quick data quality observations:
+
 ```{r}
 ## `flights` has 8.3k missing values for departure and arrival times
 tail(flights)
@@ -110,6 +118,9 @@ flights %>%
 flights %>% 
     filter(is.na(origin)) %>% 
     nrow()
+
+## And has 3 different values, for the 3 airports in New York City
+count(flights, origin)
 ```
 
 ### A good join ###
@@ -151,7 +162,7 @@ problems %>%
 Manage this using `anti_join()` to determine which airports aren't in `origin`. 
 
 ```{r}
-anti_join(airports, flights_smol, by = c('faa' = 'origin'))
+anti_join(airports, flights, by = c('faa' = 'origin'))
 ```
 
 
@@ -182,6 +193,6 @@ One way to figure out what happened is to check the names of the columns.  The `
 ```{r}
 mult_problems %>% 
     select(matches('.x'))
-```
 
-*[using `distinct()`]*
+count(mult_problems, origin.x, origin.y)
+```

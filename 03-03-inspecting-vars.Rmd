@@ -305,7 +305,7 @@ As a preliminary question, what fraction of stops had a search?  Are there dispa
 ## 31%
 dataf %>% 
     count(search_conducted) %>% 
-    mutate(share = n)
+    mutate(share = n / sum(n))
 ```
 
 Across all subjects, 31% of stops involved a search. 
@@ -372,7 +372,7 @@ dataf %>%
 
 Time permitting, we'll discuss these during class.  But more likely we'll talk about them via Slack. 
 
-1. Suppose you've conducted this EDA because you're working with an activist organization that promotes defunding the police and prison abolition.  Should you report the preliminary findings above to your organization contacts?  
+1. Suppose you've conducted this EDA because you're working with an activist organization that promotes defunding the police and prison abolition.  Should you share the preliminary findings above with your organization contacts?  
 
 2. What influence should the following factors make to your answer?  
     - Funding: Whether you're being paid as a consultant vs. volunteering your expertise
@@ -380,9 +380,10 @@ Time permitting, we'll discuss these during class.  But more likely we'll talk a
     - Relationships: Whether you are friends with members of the activist organization and/or police
     - Communications: The degree to which you can control whether and how the organization will publish your preliminary findings
     - Timeliness:  Whether these findings are relevant to a pending law or policy change
-    - Other factors to take into account?  Or not? 
+    
+3. What other factors should be taken into account as you decide whether to share your findings?  Or not taken into account? 
 
-3. How has this "raw data" been shaped by upstream decisions?  (Think of Leonelli's relational account of data.)
+4. How has this "raw data" been shaped by upstream decisions?  (Think of Leonelli's relational account of data.)
 
 
 ## Lab ##
