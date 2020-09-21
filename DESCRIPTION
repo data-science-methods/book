@@ -12,5 +12,6 @@ Imports:
 	tictoc,
 	desc,
 	sessioninfo,
-	datasauRus
+	datasauRus,
+	nycflights13
 
