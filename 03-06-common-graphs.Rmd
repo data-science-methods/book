@@ -233,6 +233,39 @@ ggplot(tuition_df, aes(system, in_state_tuition,
     stat_summary(geom = 'errorbar', width = .2)
 ```
 
+*[join stuff]*
+
+```{r}
+## Schools in tuition_df that will be missing after we join w/ div_df
+anti_join(tuition_df, div_df, by = 'name') %>% 
+    pull(name)
+
+## Because div_df isn't filtered down to 2-year schools, it's okay if a lot of its schools are left out
+anti_join(div_df, tuition_df, by = 'name') %>% 
+    nrow()
+
+## Checking duplications
+comb_df_draft = inner_join(tuition_df, div_df, by = 'name')
+nrow(comb_df_draft)
+nrow(distinct(comb_df_draft))
+
+## 135 schools in tuition_df, minus 20 rows not matched
+comb_df_draft %>% 
+    select(name) %>% 
+    distinct() %>% 
+    nrow()
+
+## We should have one row in comb_df_draft for each school-category combination
+comb_df_draft %>% 
+    select(name, category) %>% 
+    distinct() %>% 
+    nrow()
+
+## Check column names
+names(comb_df_draft)
+```
+
+
 *[after joins]*
 
 ```{r}

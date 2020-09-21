@@ -1,16 +1,30 @@
 # Joins #
 
-- The diversity data doesn't contain the `system` variable, or anything else to distinguish public vs. private vs. for-profit schools.  
-- However, we can combine it with the tuition data, matching by school name.
-- This is done using operations called *joins*.  
+*Joins* are an extremely powerful tool for data science, allowing us to combine two datasets by matching columns.  
+
+Some common scenarios: 
+
+- Data from two different sources for the same units
+    - Pre- and post-treatment
+    - Multi-round experiments / survey panels
+    - Advertising and vote share
+
+- Data on different levels
+    - Students in classrooms in schools
+    - Census block groups in counties in states
+
+
+## Types of joins ##
 
 ```{r, echo = FALSE, fig.show = 'hold', out.width = '45%', fig.cap = 'Join operations combine two dataframes based on one or more matching columns.  Different join operations keep different rows from the combination.  Sources: <https://data-lessons.github.io/gapminder-R/>; <https://notchained.hatenablog.com/entry/2015/01/03/160700>'}
 knitr::include_graphics(file.path('images', '03-eda', 'join-rows.png'))
 knitr::include_graphics(file.path('images', '03-eda', 'join-venn.png'))
 ```
 
-- Suppose we're joining two dataframes, `left` and `right`
+- Suppose we have two dataframes, `left` and `right`
 ```{r}
+library(tidyverse)
+
 left = tribble(
     ~animal, ~zoo,
     'aardvark', 'Sacramento', 
@@ -53,51 +67,121 @@ inner_join(left, right, by = 'animal')
 anti_join(left, right, by = 'animal')
 ```
 
-- Joins are powerful but can create hazards
-    - *Missing values* from left, right, and full joins
-        - In a left join, rows from `left` that don't match will have missing values in the columns from `right`
-    - *Row counts* can be difficult to predict in advance
-        - Rows will be copied if they match multiple times
-    - *Column names* can be changed if they're repeated across dataframes but not used for matching
 
-```{r}
-inner_join(tuition_df, div_df, by = 'name') %>% 
-    names()
-```
+## Hazards ##
+
+Joins can create a number of hazards. 
+
+- *Missing values* from left, right, and full joins
+    - In a left join, rows from `left` that don't match will have missing values in the columns from `right`
+- *Row counts* can be difficult to predict in advance
+    - Rows will be copied if they match multiple times
+- *Column names* can be changed if they're repeated across dataframes but not used for matching
 
 - To manage these hazards
     - Use `anti_join()` to figure out where missing values will be
     - Use `select()` with `distinct()` to check for unexpected duplications
     - Use `names()` to check column names
     
+### Data ###
+
+*[background; diagram of keys from <https://r4ds.had.co.nz/relational-data.html>]
+
 ```{r}
-## Schools in tuition_df that will be missing after we join w/ div_df
-anti_join(tuition_df, div_df, by = 'name') %>% 
-    pull(name)
+library(tidyverse)
+library(nycflights13)
 
-## Because div_df isn't filtered down to 2-year schools, it's okay if a lot of its schools are left out
-anti_join(div_df, tuition_df, by = 'name') %>% 
-    nrow()
-
-## Checking duplications
-comb_df_draft = inner_join(tuition_df, div_df, by = 'name')
-nrow(comb_df_draft)
-nrow(distinct(comb_df_draft))
-
-## 135 schools in tuition_df, minus 20 rows not matched
-comb_df_draft %>% 
-    select(name) %>% 
-    distinct() %>% 
-    nrow()
-
-## We should have one row in comb_df_draft for each school-category combination
-comb_df_draft %>% 
-    select(name, category) %>% 
-    distinct() %>% 
-    nrow()
-
-## Check column names
-names(comb_df_draft)
+airlines
+airports
+planes
+weather
+flights
 ```
 
-After all that, we can create some plots for demographic categories against school system and in-state tuition. 
+Some quick data quality observations:
+```{r}
+## `flights` has 8.3k missing values for departure and arrival times
+tail(flights)
+flights %>% 
+    filter(is.na(dep_time)) %>% 
+    nrow()
+
+## But origin is complete
+flights %>% 
+    filter(is.na(origin)) %>% 
+    nrow()
+```
+
+### A good join ###
+
+*Expectation*:  For every flight, we can match the origin code to `airports`. 
+
+```{r}
+goodjoin = left_join(flights, airports, by = c('origin' = 'faa'))
+
+nrow(flights)
+nrow(goodjoin)
+
+## If we couldn't match an origin code, `tzone` would be NA
+goodjoin %>% 
+    filter(is.na(tzone))
+```
+
+### Bad join #1 ###
+
+*Expectation*: Every airport has at least 1 originating flight. 
+
+```{r}
+problems = right_join(flights, airports, by = c('origin' = 'faa'))
+
+## Row counts
+nrow(flights)
+nrow(problems)
+
+## Missing values
+tail(problems)
+problems %>% 
+    filter(is.na(carrier)) %>% 
+    nrow()
+problems %>% 
+    filter(is.na(carrier)) %>% 
+    select(year, month, day, carrier, origin, name, tzone)
+```
+
+Manage this using `anti_join()` to determine which airports aren't in `origin`. 
+
+```{r}
+anti_join(airports, flights_smol, by = c('faa' = 'origin'))
+```
+
+
+### Bad join #2 ###
+
+Calculate the average daily temperature at each airport. 
+
+```{r}
+avg_temp = weather %>% 
+    group_by(origin, year, month, day) %>% 
+    summarize(temp = mean(temp)) %>% 
+    ungroup()
+```
+
+*Expectation*: Each flight has 1 average daily temperature at its origin. 
+
+```{r}
+mult_problems = inner_join(flights, avg_temp, 
+                           by = c('year', 'month', 'day'))
+nrow(flights)
+nrow(mult_problems)
+## `mult_problems` has almost 3x more rows than `flights`
+nrow(mult_problems) / nrow(flights)
+```
+
+One way to figure out what happened is to check the names of the columns.  The `dplyr` join functions add `.x` and `.y` when they encounter repeated column names.  
+
+```{r}
+mult_problems %>% 
+    select(matches('.x'))
+```
+
+*[using `distinct()`]*
