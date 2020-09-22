@@ -13,5 +13,7 @@ Imports:
 	desc,
 	sessioninfo,
 	datasauRus,
-	nycflights13
+	nycflights13,
+	ggbeeswarm,
+	ggforce
 

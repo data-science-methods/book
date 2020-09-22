@@ -8,10 +8,10 @@ library(tidyverse)
 
 library(skimr)
 
-library(gghighlight)
 library(ggbeeswarm)
 library(ggforce)
-library(ggupset)
+# library(gghighlight)
+# library(ggupset)
 ```
 
 While `ggplot2` is supposed to have "pretty defaults," for a long time its default color scales have been *terrible*, with bad color combinations for color-blind folks, poor rendering in black and white, and low contrast against the default gray background.  
