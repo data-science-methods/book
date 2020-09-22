@@ -331,7 +331,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Use `spec()` to retrieve the guessed column specification
 ## Pass a specification to the `col_types` argument to quiet this message</code></pre>
 <div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="inspecting-variables.html#cb28-1" aria-hidden="true"></a><span class="kw">toc</span>()</span></code></pre></div>
-<pre><code>## 0.424 sec elapsed</code></pre>
+<pre><code>## 0.418 sec elapsed</code></pre>
 <div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="inspecting-variables.html#cb30-1" aria-hidden="true"></a><span class="co"># class(dataf$beat)</span></span>
 <span id="cb30-2"><a href="inspecting-variables.html#cb30-2" aria-hidden="true"></a><span class="co"># class(dataf$subject_age)</span></span></code></pre></div>
 </div>
@@ -750,15 +750,16 @@ Figure 9.1: Screenshot of the two summary tables from the Oakland report. Source
 <p>For the other question, we need to calculate something like <code>share</code> <em>within</em> racial groups. That is, among all stops <em>of Black folks</em>, what fraction involved a search? The <code>group_by()</code> function divides the dataset into groups that other tidyverse functions respect. Specifically, <code>count()</code> and <code>mutate()</code> will both analyze each group defined by <code>subject_race</code> separately.</p>
 <p>After using <code>group_by()</code>, it’s good practice to always call <code>ungroup()</code>. We don’t want to accidentally work with the grouped version in another part of our analysis.</p>
 <div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="inspecting-variables.html#cb54-1" aria-hidden="true"></a><span class="co">## What fraction of stops had a search, by race? </span></span>
-<span id="cb54-2"><a href="inspecting-variables.html#cb54-2" aria-hidden="true"></a><span class="co">## Note that, for each racial group, `share` adds up to 100%</span></span>
-<span id="cb54-3"><a href="inspecting-variables.html#cb54-3" aria-hidden="true"></a><span class="co">## For all groups, most stops didn&#39;t involve a search</span></span>
-<span id="cb54-4"><a href="inspecting-variables.html#cb54-4" aria-hidden="true"></a><span class="co">## For Black subjects, 38% of stops involved a search</span></span>
-<span id="cb54-5"><a href="inspecting-variables.html#cb54-5" aria-hidden="true"></a><span class="co">## For White subjects, 15% of stops involved a search</span></span>
-<span id="cb54-6"><a href="inspecting-variables.html#cb54-6" aria-hidden="true"></a>dataf <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb54-7"><a href="inspecting-variables.html#cb54-7" aria-hidden="true"></a><span class="st">    </span><span class="kw">group_by</span>(subject_race) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb54-8"><a href="inspecting-variables.html#cb54-8" aria-hidden="true"></a><span class="st">    </span><span class="kw">count</span>(search_conducted) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb54-9"><a href="inspecting-variables.html#cb54-9" aria-hidden="true"></a><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">share =</span> n <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(n)) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb54-10"><a href="inspecting-variables.html#cb54-10" aria-hidden="true"></a><span class="st">    </span><span class="kw">ungroup</span>()</span></code></pre></div>
+<span id="cb54-2"><a href="inspecting-variables.html#cb54-2" aria-hidden="true"></a><span class="co">## Note that, for each racial group, `share` adds up to 100%. </span></span>
+<span id="cb54-3"><a href="inspecting-variables.html#cb54-3" aria-hidden="true"></a><span class="co">## </span></span>
+<span id="cb54-4"><a href="inspecting-variables.html#cb54-4" aria-hidden="true"></a><span class="co">## For all groups, most stops didn&#39;t involve a search; </span></span>
+<span id="cb54-5"><a href="inspecting-variables.html#cb54-5" aria-hidden="true"></a><span class="co">## For Black subjects, 38% of stops involved a search; </span></span>
+<span id="cb54-6"><a href="inspecting-variables.html#cb54-6" aria-hidden="true"></a><span class="co">## For White subjects, 15% of stops involved a search. </span></span>
+<span id="cb54-7"><a href="inspecting-variables.html#cb54-7" aria-hidden="true"></a>dataf <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb54-8"><a href="inspecting-variables.html#cb54-8" aria-hidden="true"></a><span class="st">    </span><span class="kw">group_by</span>(subject_race) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb54-9"><a href="inspecting-variables.html#cb54-9" aria-hidden="true"></a><span class="st">    </span><span class="kw">count</span>(search_conducted) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb54-10"><a href="inspecting-variables.html#cb54-10" aria-hidden="true"></a><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">share =</span> n <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(n)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb54-11"><a href="inspecting-variables.html#cb54-11" aria-hidden="true"></a><span class="st">    </span><span class="kw">ungroup</span>()</span></code></pre></div>
 <pre><code>## # A tibble: 10 x 4
 ##    subject_race           search_conducted     n share
 ##    &lt;chr&gt;                  &lt;lgl&gt;            &lt;int&gt; &lt;dbl&gt;

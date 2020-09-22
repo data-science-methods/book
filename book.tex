@@ -119,7 +119,7 @@
 
 \title{Data Science Methods for Cognitive Science}
 \author{Dan Hicks, \href{mailto:hicks.daniel.j@gmail.com}{\nolinkurl{hicks.daniel.j@gmail.com}}}
-\date{Tue Sep 22 01:37:50 2020}
+\date{Tue Sep 22 17:40:31 2020}
 
 \begin{document}
 \maketitle
@@ -2180,7 +2180,7 @@ The dataset is a zipped \texttt{csv} or comma-separated value file. CSVs are str
 \end{Shaded}
 
 \begin{verbatim}
-## 0.334 sec elapsed
+## 0.353 sec elapsed
 \end{verbatim}
 
 \begin{Shaded}
@@ -2892,10 +2892,11 @@ After using \texttt{group\_by()}, it's good practice to always call \texttt{ungr
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\#\# What fraction of stops had a search, by race? }
-\CommentTok{\#\# Note that, for each racial group, \textasciigrave{}share\textasciigrave{} adds up to 100\%}
-\CommentTok{\#\# For all groups, most stops didn\textquotesingle{}t involve a search}
-\CommentTok{\#\# For Black subjects, 38\% of stops involved a search}
-\CommentTok{\#\# For White subjects, 15\% of stops involved a search}
+\CommentTok{\#\# Note that, for each racial group, \textasciigrave{}share\textasciigrave{} adds up to 100\%. }
+\CommentTok{\#\# }
+\CommentTok{\#\# For all groups, most stops didn\textquotesingle{}t involve a search; }
+\CommentTok{\#\# For Black subjects, 38\% of stops involved a search; }
+\CommentTok{\#\# For White subjects, 15\% of stops involved a search. }
 \NormalTok{dataf }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
 \StringTok{    }\KeywordTok{group\_by}\NormalTok{(subject\_race) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
 \StringTok{    }\KeywordTok{count}\NormalTok{(search\_conducted) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
