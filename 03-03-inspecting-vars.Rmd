@@ -132,13 +132,16 @@ If the answer to this **critical question** is **no** (for a lot of rows), then 
 - `filter(dataf, condition1, condition2, ...)` 
     - Returns a subset of `dataf` where all of the `condition`s are true
     - We'll use this to construct a subset where `search_conducted == TRUE`
+
 - `mutate(dataf, newvar = f(oldvar))` 
     - Adds the column `newvar`; it doesn't change `oldvar`
     - We'll use this to add a variable, `contraband_known`, indicating whether `contraband_found` is missing. 
+
 - `count(dataf, group1, group2, ...)` 
     - Organizes `dataf` into groups based on the unique values of the `group` variables, then
     - Counts the number of rows in each group
     - We'll use this to count the number of rows in our subset where the value of `contraband_found` is known or missing
+
 - The pipe `%>%` 
     - Lets us string together a series of function calls
     - The output of one function gets passed as the first argument to the next function
@@ -316,10 +319,11 @@ After using `group_by()`, it's good practice to always call `ungroup()`.  We don
 
 ```{r}
 ## What fraction of stops had a search, by race? 
-## Note that, for each racial group, `share` adds up to 100%
-## For all groups, most stops didn't involve a search
-## For Black subjects, 38% of stops involved a search
-## For White subjects, 15% of stops involved a search
+## Note that, for each racial group, `share` adds up to 100%. 
+## 
+## For all groups, most stops didn't involve a search; 
+## For Black subjects, 38% of stops involved a search; 
+## For White subjects, 15% of stops involved a search. 
 dataf %>% 
     group_by(subject_race) %>% 
     count(search_conducted) %>% 
