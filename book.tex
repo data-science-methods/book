@@ -119,7 +119,7 @@
 
 \title{Data Science Methods for Cognitive Science}
 \author{Dan Hicks, \href{mailto:hicks.daniel.j@gmail.com}{\nolinkurl{hicks.daniel.j@gmail.com}}}
-\date{Fri Sep 18 15:27:36 2020}
+\date{Tue Sep 22 01:37:50 2020}
 
 \begin{document}
 \maketitle
@@ -152,6 +152,9 @@ package & version & source\tabularnewline
 bookdown & 0.20.6 & Github (rstudio/bookdown@57f1217)\tabularnewline
 datasauRus & 0.1.4 & CRAN (R 4.0.2)\tabularnewline
 desc & 1.2.0 & CRAN (R 4.0.2)\tabularnewline
+ggbeeswarm & 0.6.0 & CRAN (R 4.0.2)\tabularnewline
+ggforce & 0.3.2 & CRAN (R 4.0.2)\tabularnewline
+nycflights13 & 1.0.1 & CRAN (R 4.0.2)\tabularnewline
 sessioninfo & 1.1.1 & CRAN (R 4.0.2)\tabularnewline
 skimr & 2.1.2 & CRAN (R 4.0.2)\tabularnewline
 tictoc & 1.0 & CRAN (R 4.0.2)\tabularnewline
@@ -397,12 +400,6 @@ By the end of the course, students will be able to
   \begin{itemize}
   \tightlist
   \item
-    functional vs.~object-oriented programming paradigms (Chambers \protect\hyperlink{ref-ChambersObjectOrientedProgrammingFunctional2014}{2014})
-  \item
-    waterfall vs.~spiral model of development
-  \item
-    data/phenomena/theory distinction (Bogen and Woodward \protect\hyperlink{ref-BogenSavingPhenomena1988}{1988})
-  \item
     reproducibility vs.~robustness vs.~replicability
   \item
     value and hazards of open data
@@ -411,18 +408,6 @@ By the end of the course, students will be able to
   \end{itemize}
 \item
   use exploratory data analysis techniques and tools to identify potential data errors and potential phenomena for further analysis
-
-  \begin{itemize}
-  \tightlist
-  \item
-    checklist (Huebner, Vach, and le Cessie \protect\hyperlink{ref-HuebnerSystematicApproachInitial2016}{2016})
-  \item
-    \texttt{skimr}, \texttt{visdat}
-  \item
-    1D summaries: histograms, density, ecdf plots
-  \item
-    2D summaries: scatterplots, boxplot, violin plot, beeswarm, upset plots; pairs plot (\url{https://www.data-imaginist.com/2019/a-flurry-of-facets/}); correlation matrix
-  \end{itemize}
 \item
   clean raw data and produce a reproducible codebook for both downstream analysis and public release of data according to FAIR standards (Wilkinson et al. \protect\hyperlink{ref-WilkinsonFAIRGuidingPrinciples2016}{2016})
 
@@ -2195,7 +2180,7 @@ The dataset is a zipped \texttt{csv} or comma-separated value file. CSVs are str
 \end{Shaded}
 
 \begin{verbatim}
-## 0.355 sec elapsed
+## 0.334 sec elapsed
 \end{verbatim}
 
 \begin{Shaded}
@@ -2886,16 +2871,16 @@ As a preliminary question, what fraction of stops had a search? Are there dispar
 \CommentTok{\#\# 31\%}
 \NormalTok{dataf }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
 \StringTok{    }\KeywordTok{count}\NormalTok{(search\_conducted) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
-\StringTok{    }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{share =}\NormalTok{ n)}
+\StringTok{    }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{share =}\NormalTok{ n }\OperatorTok{/}\StringTok{ }\KeywordTok{sum}\NormalTok{(n))}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
 ## # A tibble: 2 x 3
 ##   search_conducted     n share
-##   <lgl>            <int> <int>
-## 1 FALSE            92250 92250
-## 2 TRUE             41157 41157
+##   <lgl>            <int> <dbl>
+## 1 FALSE            92250 0.691
+## 2 TRUE             41157 0.309
 \end{verbatim}
 
 Across all subjects, 31\% of stops involved a search.
@@ -3033,7 +3018,7 @@ Time permitting, we'll discuss these during class. But more likely we'll talk ab
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \item
-  Suppose you've conducted this EDA because you're working with an activist organization that promotes defunding the police and prison abolition. Should you report the preliminary findings above to your organization contacts?
+  Suppose you've conducted this EDA because you're working with an activist organization that promotes defunding the police and prison abolition. Should you share the preliminary findings above with your organization contacts?
 \item
   What influence should the following factors make to your answer?
 
@@ -3049,9 +3034,9 @@ Time permitting, we'll discuss these during class. But more likely we'll talk ab
     Communications: The degree to which you can control whether and how the organization will publish your preliminary findings
   \item
     Timeliness: Whether these findings are relevant to a pending law or policy change
-  \item
-    Other factors to take into account? Or not?
   \end{itemize}
+\item
+  What other factors should be taken into account as you decide whether to share your findings? Or not taken into account?
 \item
   How has this ``raw data'' been shaped by upstream decisions? (Think of Leonelli's relational account of data.)
 \end{enumerate}
@@ -3061,6 +3046,637 @@ Time permitting, we'll discuss these during class. But more likely we'll talk ab
 
 The lab related to this material is available at \url{https://github.com/data-science-methods/lab-w04-eda}.
 
+\hypertarget{joins}{%
+\section{Joins}\label{joins}}
+
+\emph{Joins} are an extremely powerful tool for data science, allowing us to combine two datasets by matching columns.
+
+Some common scenarios:
+
+\begin{itemize}
+\tightlist
+\item
+  Data from two different sources for the same units
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Pre- and post-treatment
+  \item
+    Multi-round experiments / survey panels
+  \item
+    Advertising and vote share
+  \end{itemize}
+\item
+  Data on different levels
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Students in classrooms in schools
+  \item
+    Census block groups in counties in states
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{types-of-joins}{%
+\subsection{Types of joins}\label{types-of-joins}}
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.45\linewidth]{images/03-eda/join-rows} \includegraphics[width=0.45\linewidth]{images/03-eda/join-venn} 
+
+}
+
+\caption{Join operations combine two dataframes based on one or more matching columns.  Different join operations keep different rows from the combination.  Sources: <https://data-lessons.github.io/gapminder-R/>; <https://notchained.hatenablog.com/entry/2015/01/03/160700>}\label{fig:unnamed-chunk-52}
+\end{figure}
+
+\begin{itemize}
+\tightlist
+\item
+  Suppose we have two dataframes, \texttt{left} and \texttt{right}
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(tidyverse)}
+
+\NormalTok{left =}\StringTok{ }\KeywordTok{tribble}\NormalTok{(}
+    \OperatorTok{\textasciitilde{}}\NormalTok{animal, }\OperatorTok{\textasciitilde{}}\NormalTok{zoo,}
+    \StringTok{\textquotesingle{}aardvark\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Sacramento\textquotesingle{}}\NormalTok{, }
+    \StringTok{\textquotesingle{}aardvark\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}San Diego\textquotesingle{}}\NormalTok{,}
+    \StringTok{\textquotesingle{}chimpanzee\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}San Diego\textquotesingle{}}\NormalTok{,}
+    \StringTok{\textquotesingle{}zebra\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}San Diego\textquotesingle{}}
+\NormalTok{)}
+\NormalTok{right =}\StringTok{ }\KeywordTok{tribble}\NormalTok{(}
+    \OperatorTok{\textasciitilde{}}\NormalTok{animal, }\OperatorTok{\textasciitilde{}}\NormalTok{food, }
+    \StringTok{\textquotesingle{}aardvark\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}insects\textquotesingle{}}\NormalTok{, }
+    \StringTok{\textquotesingle{}chimpanzee\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}insects\textquotesingle{}}\NormalTok{, }
+    \StringTok{\textquotesingle{}chimpanzee\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}fruit\textquotesingle{}}\NormalTok{, }
+    \StringTok{\textquotesingle{}velociraptor\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}animals\textquotesingle{}}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  \emph{Left join}: keep all of the rows and columns from \texttt{left}; add columns from \texttt{right}
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{left\_join}\NormalTok{(left, right, }\DataTypeTok{by =} \StringTok{\textquotesingle{}animal\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 5 x 3
+##   animal     zoo        food   
+##   <chr>      <chr>      <chr>  
+## 1 aardvark   Sacramento insects
+## 2 aardvark   San Diego  insects
+## 3 chimpanzee San Diego  insects
+## 4 chimpanzee San Diego  fruit  
+## 5 zebra      San Diego  <NA>
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  \emph{Right join}: keep all of the rows and columns from \texttt{right}; add columns from \texttt{left}
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{right\_join}\NormalTok{(left, right, }\DataTypeTok{by =} \StringTok{\textquotesingle{}animal\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 5 x 3
+##   animal       zoo        food   
+##   <chr>        <chr>      <chr>  
+## 1 aardvark     Sacramento insects
+## 2 aardvark     San Diego  insects
+## 3 chimpanzee   San Diego  insects
+## 4 chimpanzee   San Diego  fruit  
+## 5 velociraptor <NA>       animals
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  \emph{Full join}: keep all rows and columns from both \texttt{left} and \texttt{right}
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{full\_join}\NormalTok{(left, right, }\DataTypeTok{by =} \StringTok{\textquotesingle{}animal\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 3
+##   animal       zoo        food   
+##   <chr>        <chr>      <chr>  
+## 1 aardvark     Sacramento insects
+## 2 aardvark     San Diego  insects
+## 3 chimpanzee   San Diego  insects
+## 4 chimpanzee   San Diego  fruit  
+## 5 zebra        San Diego  <NA>   
+## 6 velociraptor <NA>       animals
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  \emph{Inner join}: keep all columns, but only rows that match
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{inner\_join}\NormalTok{(left, right, }\DataTypeTok{by =} \StringTok{\textquotesingle{}animal\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 4 x 3
+##   animal     zoo        food   
+##   <chr>      <chr>      <chr>  
+## 1 aardvark   Sacramento insects
+## 2 aardvark   San Diego  insects
+## 3 chimpanzee San Diego  insects
+## 4 chimpanzee San Diego  fruit
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  \emph{Anti-join}: keep all columns from \texttt{left}, but only the rows that \emph{don't} match
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{anti\_join}\NormalTok{(left, right, }\DataTypeTok{by =} \StringTok{\textquotesingle{}animal\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 1 x 2
+##   animal zoo      
+##   <chr>  <chr>    
+## 1 zebra  San Diego
+\end{verbatim}
+
+\hypertarget{hazards}{%
+\subsection{Hazards}\label{hazards}}
+
+Joins can create a number of hazards.
+
+\begin{itemize}
+\tightlist
+\item
+  \emph{Missing values} from left, right, and full joins
+
+  \begin{itemize}
+  \tightlist
+  \item
+    In a left join, rows from \texttt{left} that don't match will have missing values in the columns from \texttt{right}
+  \end{itemize}
+\item
+  \emph{Row counts} can be difficult to predict in advance
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Rows will be copied if they match multiple times
+  \end{itemize}
+\item
+  \emph{Column names} can be changed if they're repeated across dataframes but not used for matching
+\end{itemize}
+
+To manage these hazards
+
+\begin{itemize}
+\tightlist
+\item
+  Use \texttt{anti\_join()} to figure out where missing values will be
+\item
+  Use \texttt{select()} with \texttt{distinct()} to check for unexpected duplications
+\item
+  Use \texttt{names()} to check column names
+\end{itemize}
+
+\hypertarget{data}{%
+\subsubsection{Data}\label{data}}
+
+To examine these hazards, we'll use the \texttt{nycflights13} dataset, which includes all flights that departed New York City in 2013.
+
+The dataset comprises 5 different tables, which of which can be linked to the others using joins. We'll focus on combining \texttt{flights} with \texttt{airports} and \texttt{weather}.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.6\linewidth]{images/03-eda/relational-nycflights} 
+
+}
+
+\caption{Linking fields in the tables of the `nycflights13` dataset.}\label{fig:unnamed-chunk-59}
+\end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(tidyverse)}
+\KeywordTok{library}\NormalTok{(nycflights13)}
+
+\NormalTok{flights}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 336,776 x 19
+##     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time arr_delay carrier
+##    <int> <int> <int>    <int>          <int>     <dbl>    <int>          <int>     <dbl> <chr>  
+##  1  2013     1     1      517            515         2      830            819        11 UA     
+##  2  2013     1     1      533            529         4      850            830        20 UA     
+##  3  2013     1     1      542            540         2      923            850        33 AA     
+##  4  2013     1     1      544            545        -1     1004           1022       -18 B6     
+##  5  2013     1     1      554            600        -6      812            837       -25 DL     
+##  6  2013     1     1      554            558        -4      740            728        12 UA     
+##  7  2013     1     1      555            600        -5      913            854        19 B6     
+##  8  2013     1     1      557            600        -3      709            723       -14 EV     
+##  9  2013     1     1      557            600        -3      838            846        -8 B6     
+## 10  2013     1     1      558            600        -2      753            745         8 AA     
+## # ... with 336,766 more rows, and 9 more variables: flight <int>, tailnum <chr>, origin <chr>,
+## #   dest <chr>, air_time <dbl>, distance <dbl>, hour <dbl>, minute <dbl>, time_hour <dttm>
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{airports}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 1,458 x 8
+##    faa   name                             lat    lon   alt    tz dst   tzone              
+##    <chr> <chr>                          <dbl>  <dbl> <dbl> <dbl> <chr> <chr>              
+##  1 04G   Lansdowne Airport               41.1  -80.6  1044    -5 A     America/New_York   
+##  2 06A   Moton Field Municipal Airport   32.5  -85.7   264    -6 A     America/Chicago    
+##  3 06C   Schaumburg Regional             42.0  -88.1   801    -6 A     America/Chicago    
+##  4 06N   Randall Airport                 41.4  -74.4   523    -5 A     America/New_York   
+##  5 09J   Jekyll Island Airport           31.1  -81.4    11    -5 A     America/New_York   
+##  6 0A9   Elizabethton Municipal Airport  36.4  -82.2  1593    -5 A     America/New_York   
+##  7 0G6   Williams County Airport         41.5  -84.5   730    -5 A     America/New_York   
+##  8 0G7   Finger Lakes Regional Airport   42.9  -76.8   492    -5 A     America/New_York   
+##  9 0P2   Shoestring Aviation Airfield    39.8  -76.6  1000    -5 U     America/New_York   
+## 10 0S9   Jefferson County Intl           48.1 -123.    108    -8 A     America/Los_Angeles
+## # ... with 1,448 more rows
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{weather}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 26,115 x 15
+##    origin  year month   day  hour  temp  dewp humid wind_dir wind_speed wind_gust precip pressure
+##    <chr>  <int> <int> <int> <int> <dbl> <dbl> <dbl>    <dbl>      <dbl>     <dbl>  <dbl>    <dbl>
+##  1 EWR     2013     1     1     1  39.0  26.1  59.4      270      10.4         NA      0    1012 
+##  2 EWR     2013     1     1     2  39.0  27.0  61.6      250       8.06        NA      0    1012.
+##  3 EWR     2013     1     1     3  39.0  28.0  64.4      240      11.5         NA      0    1012.
+##  4 EWR     2013     1     1     4  39.9  28.0  62.2      250      12.7         NA      0    1012.
+##  5 EWR     2013     1     1     5  39.0  28.0  64.4      260      12.7         NA      0    1012.
+##  6 EWR     2013     1     1     6  37.9  28.0  67.2      240      11.5         NA      0    1012.
+##  7 EWR     2013     1     1     7  39.0  28.0  64.4      240      15.0         NA      0    1012.
+##  8 EWR     2013     1     1     8  39.9  28.0  62.2      250      10.4         NA      0    1012.
+##  9 EWR     2013     1     1     9  39.9  28.0  62.2      260      15.0         NA      0    1013.
+## 10 EWR     2013     1     1    10  41    28.0  59.6      260      13.8         NA      0    1012.
+## # ... with 26,105 more rows, and 2 more variables: visib <dbl>, time_hour <dttm>
+\end{verbatim}
+
+Some quick data quality observations:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#\# \textasciigrave{}flights\textasciigrave{} has 8.3k missing values for departure and arrival times}
+\KeywordTok{tail}\NormalTok{(flights)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 19
+##    year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time arr_delay carrier
+##   <int> <int> <int>    <int>          <int>     <dbl>    <int>          <int>     <dbl> <chr>  
+## 1  2013     9    30       NA           1842        NA       NA           2019        NA EV     
+## 2  2013     9    30       NA           1455        NA       NA           1634        NA 9E     
+## 3  2013     9    30       NA           2200        NA       NA           2312        NA 9E     
+## 4  2013     9    30       NA           1210        NA       NA           1330        NA MQ     
+## 5  2013     9    30       NA           1159        NA       NA           1344        NA MQ     
+## 6  2013     9    30       NA            840        NA       NA           1020        NA MQ     
+## # ... with 9 more variables: flight <int>, tailnum <chr>, origin <chr>, dest <chr>, air_time <dbl>,
+## #   distance <dbl>, hour <dbl>, minute <dbl>, time_hour <dttm>
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{flights }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{    }\KeywordTok{filter}\NormalTok{(}\KeywordTok{is.na}\NormalTok{(dep\_time)) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{    }\KeywordTok{nrow}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 8255
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#\# But origin is complete}
+\NormalTok{flights }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{    }\KeywordTok{filter}\NormalTok{(}\KeywordTok{is.na}\NormalTok{(origin)) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{    }\KeywordTok{nrow}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#\# And has 3 different values, for the 3 airports in New York City}
+\KeywordTok{count}\NormalTok{(flights, origin)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 3 x 2
+##   origin      n
+##   <chr>   <int>
+## 1 EWR    120835
+## 2 JFK    111279
+## 3 LGA    104662
+\end{verbatim}
+
+\hypertarget{a-good-join}{%
+\subsubsection{A good join}\label{a-good-join}}
+
+\emph{Expectation}: For every flight, we can match the origin code to \texttt{airports}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{goodjoin =}\StringTok{ }\KeywordTok{left\_join}\NormalTok{(flights, airports, }\DataTypeTok{by =} \KeywordTok{c}\NormalTok{(}\StringTok{\textquotesingle{}origin\textquotesingle{}}\NormalTok{ =}\StringTok{ \textquotesingle{}faa\textquotesingle{}}\NormalTok{))}
+
+\KeywordTok{nrow}\NormalTok{(flights)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 336776
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{nrow}\NormalTok{(goodjoin)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 336776
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#\# If we couldn\textquotesingle{}t match an origin code, \textasciigrave{}tzone\textasciigrave{} would be NA}
+\NormalTok{goodjoin }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{    }\KeywordTok{filter}\NormalTok{(}\KeywordTok{is.na}\NormalTok{(tzone))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 0 x 26
+## # ... with 26 variables: year <int>, month <int>, day <int>, dep_time <int>, sched_dep_time <int>,
+## #   dep_delay <dbl>, arr_time <int>, sched_arr_time <int>, arr_delay <dbl>, carrier <chr>,
+## #   flight <int>, tailnum <chr>, origin <chr>, dest <chr>, air_time <dbl>, distance <dbl>,
+## #   hour <dbl>, minute <dbl>, time_hour <dttm>, name <chr>, lat <dbl>, lon <dbl>, alt <dbl>,
+## #   tz <dbl>, dst <chr>, tzone <chr>
+\end{verbatim}
+
+\hypertarget{bad-join-1}{%
+\subsubsection{Bad join \#1}\label{bad-join-1}}
+
+\emph{Expectation}: Every airport has at least 1 originating flight.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{problems =}\StringTok{ }\KeywordTok{right\_join}\NormalTok{(flights, airports, }\DataTypeTok{by =} \KeywordTok{c}\NormalTok{(}\StringTok{\textquotesingle{}origin\textquotesingle{}}\NormalTok{ =}\StringTok{ \textquotesingle{}faa\textquotesingle{}}\NormalTok{))}
+
+\CommentTok{\#\# Row counts}
+\KeywordTok{nrow}\NormalTok{(flights)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 336776
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{nrow}\NormalTok{(problems)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 338231
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#\# Missing values}
+\KeywordTok{tail}\NormalTok{(problems)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 26
+##    year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time arr_delay carrier
+##   <int> <int> <int>    <int>          <int>     <dbl>    <int>          <int>     <dbl> <chr>  
+## 1    NA    NA    NA       NA             NA        NA       NA             NA        NA <NA>   
+## 2    NA    NA    NA       NA             NA        NA       NA             NA        NA <NA>   
+## 3    NA    NA    NA       NA             NA        NA       NA             NA        NA <NA>   
+## 4    NA    NA    NA       NA             NA        NA       NA             NA        NA <NA>   
+## 5    NA    NA    NA       NA             NA        NA       NA             NA        NA <NA>   
+## 6    NA    NA    NA       NA             NA        NA       NA             NA        NA <NA>   
+## # ... with 16 more variables: flight <int>, tailnum <chr>, origin <chr>, dest <chr>,
+## #   air_time <dbl>, distance <dbl>, hour <dbl>, minute <dbl>, time_hour <dttm>, name <chr>,
+## #   lat <dbl>, lon <dbl>, alt <dbl>, tz <dbl>, dst <chr>, tzone <chr>
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{problems }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{    }\KeywordTok{filter}\NormalTok{(}\KeywordTok{is.na}\NormalTok{(carrier)) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{    }\KeywordTok{nrow}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1455
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{problems }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{    }\KeywordTok{filter}\NormalTok{(}\KeywordTok{is.na}\NormalTok{(carrier)) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{    }\KeywordTok{select}\NormalTok{(year, month, day, carrier, origin, name, tzone)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 1,455 x 7
+##     year month   day carrier origin name                           tzone              
+##    <int> <int> <int> <chr>   <chr>  <chr>                          <chr>              
+##  1    NA    NA    NA <NA>    04G    Lansdowne Airport              America/New_York   
+##  2    NA    NA    NA <NA>    06A    Moton Field Municipal Airport  America/Chicago    
+##  3    NA    NA    NA <NA>    06C    Schaumburg Regional            America/Chicago    
+##  4    NA    NA    NA <NA>    06N    Randall Airport                America/New_York   
+##  5    NA    NA    NA <NA>    09J    Jekyll Island Airport          America/New_York   
+##  6    NA    NA    NA <NA>    0A9    Elizabethton Municipal Airport America/New_York   
+##  7    NA    NA    NA <NA>    0G6    Williams County Airport        America/New_York   
+##  8    NA    NA    NA <NA>    0G7    Finger Lakes Regional Airport  America/New_York   
+##  9    NA    NA    NA <NA>    0P2    Shoestring Aviation Airfield   America/New_York   
+## 10    NA    NA    NA <NA>    0S9    Jefferson County Intl          America/Los_Angeles
+## # ... with 1,445 more rows
+\end{verbatim}
+
+Manage this using \texttt{anti\_join()} to determine which airports aren't in \texttt{origin}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{anti\_join}\NormalTok{(airports, flights, }\DataTypeTok{by =} \KeywordTok{c}\NormalTok{(}\StringTok{\textquotesingle{}faa\textquotesingle{}}\NormalTok{ =}\StringTok{ \textquotesingle{}origin\textquotesingle{}}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 1,455 x 8
+##    faa   name                             lat    lon   alt    tz dst   tzone              
+##    <chr> <chr>                          <dbl>  <dbl> <dbl> <dbl> <chr> <chr>              
+##  1 04G   Lansdowne Airport               41.1  -80.6  1044    -5 A     America/New_York   
+##  2 06A   Moton Field Municipal Airport   32.5  -85.7   264    -6 A     America/Chicago    
+##  3 06C   Schaumburg Regional             42.0  -88.1   801    -6 A     America/Chicago    
+##  4 06N   Randall Airport                 41.4  -74.4   523    -5 A     America/New_York   
+##  5 09J   Jekyll Island Airport           31.1  -81.4    11    -5 A     America/New_York   
+##  6 0A9   Elizabethton Municipal Airport  36.4  -82.2  1593    -5 A     America/New_York   
+##  7 0G6   Williams County Airport         41.5  -84.5   730    -5 A     America/New_York   
+##  8 0G7   Finger Lakes Regional Airport   42.9  -76.8   492    -5 A     America/New_York   
+##  9 0P2   Shoestring Aviation Airfield    39.8  -76.6  1000    -5 U     America/New_York   
+## 10 0S9   Jefferson County Intl           48.1 -123.    108    -8 A     America/Los_Angeles
+## # ... with 1,445 more rows
+\end{verbatim}
+
+\hypertarget{bad-join-2}{%
+\subsubsection{Bad join \#2}\label{bad-join-2}}
+
+Calculate the average daily temperature at each airport.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{avg\_temp =}\StringTok{ }\NormalTok{weather }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{    }\KeywordTok{group\_by}\NormalTok{(origin, year, month, day) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{    }\KeywordTok{summarize}\NormalTok{(}\DataTypeTok{temp =} \KeywordTok{mean}\NormalTok{(temp)) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{    }\KeywordTok{ungroup}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `summarise()` regrouping output by 'origin', 'year', 'month' (override with `.groups` argument)
+\end{verbatim}
+
+\emph{Expectation}: Each flight has 1 average daily temperature at its origin.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mult\_problems =}\StringTok{ }\KeywordTok{inner\_join}\NormalTok{(flights, avg\_temp, }
+                           \DataTypeTok{by =} \KeywordTok{c}\NormalTok{(}\StringTok{\textquotesingle{}year\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}month\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}day\textquotesingle{}}\NormalTok{))}
+\KeywordTok{nrow}\NormalTok{(flights)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 336776
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{nrow}\NormalTok{(mult\_problems)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1008000
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#\# \textasciigrave{}mult\_problems\textasciigrave{} has almost 3x more rows than \textasciigrave{}flights\textasciigrave{}}
+\KeywordTok{nrow}\NormalTok{(mult\_problems) }\OperatorTok{/}\StringTok{ }\KeywordTok{nrow}\NormalTok{(flights)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2.993087
+\end{verbatim}
+
+One way to figure out what happened is to check the names of the columns. The \texttt{dplyr} join functions add \texttt{.x} and \texttt{.y} when they encounter repeated column names.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mult\_problems }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{    }\KeywordTok{select}\NormalTok{(}\KeywordTok{matches}\NormalTok{(}\StringTok{\textquotesingle{}.x\textquotesingle{}}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 1,008,000 x 1
+##    origin.x
+##    <chr>   
+##  1 EWR     
+##  2 EWR     
+##  3 EWR     
+##  4 LGA     
+##  5 LGA     
+##  6 LGA     
+##  7 JFK     
+##  8 JFK     
+##  9 JFK     
+## 10 JFK     
+## # ... with 1,007,990 more rows
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{count}\NormalTok{(mult\_problems, origin.x, origin.y)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 9 x 3
+##   origin.x origin.y      n
+##   <chr>    <chr>     <int>
+## 1 EWR      EWR      120565
+## 2 EWR      JFK      120565
+## 3 EWR      LGA      120565
+## 4 JFK      EWR      110996
+## 5 JFK      JFK      110996
+## 6 JFK      LGA      110996
+## 7 LGA      EWR      104439
+## 8 LGA      JFK      104439
+## 9 LGA      LGA      104439
+\end{verbatim}
+
 \hypertarget{visual-eda}{%
 \section{Visual EDA}\label{visual-eda}}
 
@@ -3069,7 +3685,7 @@ The lab related to this material is available at \url{https://github.com/data-sc
 \item
   Recommended reading: Weissgerber et al. (\protect\hyperlink{ref-WeissgerberBarLineGraphs2015}{2015}); Wickham (\protect\hyperlink{ref-WickhamLayeredGrammarGraphics2010}{2010})
 \item
-  Further reading: Healy (\protect\hyperlink{ref-HealyDataVisualizationPractical2018}{2018}), ch.~1; ({\textbf{???}})
+  Further reading: Healy (\protect\hyperlink{ref-HealyDataVisualizationPractical2018}{2018}), ch.~1; Matejka and Fitzmaurice (\protect\hyperlink{ref-MatejkaSameStatsDifferent}{n.d.})
 \end{itemize}
 
 \hypertarget{the-role-of-visuals-in-eda}{%
@@ -3258,7 +3874,7 @@ The lab related to this material is available at \url{https://github.com/data-sc
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.6\linewidth]{book_files/figure-latex/unnamed-chunk-55-1} \end{center}
+\begin{center}\includegraphics[width=0.6\linewidth]{book_files/figure-latex/unnamed-chunk-71-1} \end{center}
 
 \hypertarget{the-grammar-of-graphics}{%
 \subsection{The Grammar of Graphics}\label{the-grammar-of-graphics}}
@@ -3266,7 +3882,7 @@ The lab related to this material is available at \url{https://github.com/data-sc
 \begin{itemize}
 \tightlist
 \item
-  ({\textbf{???}}); Wickham (\protect\hyperlink{ref-WickhamLayeredGrammarGraphics2010}{2010})
+  Wilkinson (\protect\hyperlink{ref-WilkinsonGrammarGraphics1999}{1999}); Wickham (\protect\hyperlink{ref-WickhamLayeredGrammarGraphics2010}{2010})
 \end{itemize}
 
 \begin{figure}
@@ -3275,7 +3891,7 @@ The lab related to this material is available at \url{https://github.com/data-sc
 
 }
 
-\caption{The Grammar of Graphics regards graphs as mappings from variables in the data to features of geometric objects. This means that every graph is a model.}\label{fig:unnamed-chunk-56}
+\caption{The Grammar of Graphics regards graphs as mappings from variables in the data to features of geometric objects. This means that every graph is a model.}\label{fig:unnamed-chunk-72}
 \end{figure}
 
 \begin{itemize}
@@ -3310,42 +3926,707 @@ The lab related to this material is available at \url{https://github.com/data-sc
   \end{itemize}
 \end{itemize}
 
+\hypertarget{common-and-less-common-graphs-for-eda}{%
+\section{Common (and less common) Graphs for EDA}\label{common-and-less-common-graphs-for-eda}}
+
+One of the major advantages of the grammar of graphics --- especially as implemented in the tidyverse package \texttt{ggplot2} --- is that it enables us to rapidly create \emph{and re-create} graphs. This speed and flexibility is extremely useful for EDA.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# install.packages(c(\textquotesingle{}tidyverse\textquotesingle{}, \textquotesingle{}skimr\textquotesingle{}, \textquotesingle{}gghighlight\textquotesingle{}, \textquotesingle{}ggbeeswarm\textquotesingle{}, \textquotesingle{}ggforce\textquotesingle{}, \textquotesingle{}ggupset\textquotesingle{}))}
+\KeywordTok{library}\NormalTok{(tidyverse)}
+
+\KeywordTok{library}\NormalTok{(skimr)}
+
+\KeywordTok{library}\NormalTok{(ggbeeswarm)}
+\KeywordTok{library}\NormalTok{(ggforce)}
+\CommentTok{\# library(gghighlight)}
+\CommentTok{\# library(ggupset)}
+\end{Highlighting}
+\end{Shaded}
+
+While \texttt{ggplot2} is supposed to have ``pretty defaults,'' for a long time its default color scales have been \emph{terrible}, with bad color combinations for color-blind folks, poor rendering in black and white, and low contrast against the default gray background.
+
+The options below should set a more color-blind-friendly default palette and a plain white background.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{options}\NormalTok{(}\DataTypeTok{ggplot2.discrete.fill =} \KeywordTok{partial}\NormalTok{(colorspace}\OperatorTok{::}\NormalTok{scale\_fill\_discrete\_qualitative, }\DataTypeTok{palette =} \StringTok{\textquotesingle{}Dark 2\textquotesingle{}}\NormalTok{), }
+        \DataTypeTok{ggplot2.discrete.colour =} \KeywordTok{partial}\NormalTok{(colorspace}\OperatorTok{::}\NormalTok{scale\_color\_discrete\_qualitative, }\DataTypeTok{palette =} \StringTok{\textquotesingle{}Dark 2\textquotesingle{}}\NormalTok{))}
+
+\KeywordTok{theme\_set}\NormalTok{(}\KeywordTok{theme\_bw}\NormalTok{())}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{data-1}{%
+\subsection{Data}\label{data-1}}
+
+We'll be looking at a collection of US college tuition and diversity data. I acquired the data from \href{https://github.com/rfordatascience/tidytuesday/tree/master/data/2020/2020-03-10}{TidyTuesday (2020-03-10)}, which in turn sourced it from some combination of \href{https://www.tuitiontracker.org/}{Tuition Tracker} and the \emph{Chronicle of Higher Education}.
+
+The documentation in this TidyTuesday repo is quite poor, and doesn't actually say exactly where each dataset came from. Some of the data is parsed from downloaded HTML files; other data is produced by non-reproducible scripts that clean CSV files. My best guess is that the tuition data comes \href{https://www.chronicle.com/article/tuition-and-fees-1998-99-through-2018-19/}{a \emph{Chronicle of Higher Education} table} with AY 2018-19 ``sticker prices'' for tuition. And I think the diversity data comes from \href{https://www.chronicle.com/article/student-diversity-at-4-725-institutions/}{another \emph{CHE} table} which reports counts of all students (not just undergrads) enrolled in Fall 2014.
+
+To facilitate some later steps, I filtered the datasets we'll be using to \emph{4-year colleges and universities} in \emph{California}. I also standardized the names of the Cal State (California State University, or CSU) and University of California campuses, and identified which ``system'' each school is in (CSU, UC, private, or for-profit). The prepared data files (along with the cleaning script and draft versions of the plots below) is available \href{https://github.com/data-science-methods/ca-tuition-diversity}{here}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data\_dir =}\StringTok{ \textquotesingle{}data\textquotesingle{}}
+\NormalTok{data\_files =}\StringTok{ }\KeywordTok{file.path}\NormalTok{(data\_dir, }\KeywordTok{c}\NormalTok{(}\StringTok{\textquotesingle{}diversity.Rds\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}tuition.Rds\textquotesingle{}}\NormalTok{))}
+
+\NormalTok{data\_urls =}\StringTok{ }\KeywordTok{str\_c}\NormalTok{(}\StringTok{\textquotesingle{}https://github.com/data{-}science{-}methods/ca{-}tuition{-}diversity/raw/master/\textquotesingle{}}\NormalTok{, data\_files)}
+
+\CommentTok{\#\# \textasciigrave{}if\textasciigrave{} isn\textquotesingle{}t vectorized, so we have to loop over the files/URLs manually}
+\NormalTok{download\_file =}\StringTok{ }\ControlFlowTok{function}\NormalTok{(path, url) \{}
+    \ControlFlowTok{if}\NormalTok{ (}\OperatorTok{!}\KeywordTok{file.exists}\NormalTok{(path)) \{}
+        \KeywordTok{download.file}\NormalTok{(url, path)}
+\NormalTok{    \}}
+\NormalTok{\}}
+\NormalTok{purrr}\OperatorTok{::}\KeywordTok{walk2}\NormalTok{(data\_files, data\_urls, download\_file)}
+
+\NormalTok{div\_df =}\StringTok{ }\KeywordTok{read\_rds}\NormalTok{(data\_files[}\DecValTok{1}\NormalTok{])}
+\NormalTok{tuition\_df =}\StringTok{ }\KeywordTok{read\_rds}\NormalTok{(data\_files[}\DecValTok{2}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+\texttt{tuition\_df} contains data on tuition (the ``sticker price,'' not what students actually pay). There are 135 rows, 1 row for each of the public, private, and for-profit 4-year schools in California. There are a few different calculations of tuition or cost; we'll only be looking at \texttt{in\_state\_tuition}.
+In this dataset, \texttt{type} is either public, private, or for-profit. All of the public 4-year colleges or universities in California belong to either the Cal State or UC system. \texttt{system} distinguishes these two public systems, and also carries over the values from \texttt{type} for private and for-profit schools.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{skim}\NormalTok{(tuition\_df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## -- Data Summary ------------------------
+##                            Values    
+## Name                       tuition_df
+## Number of rows             135       
+## Number of columns          11        
+## _______________________              
+## Column type frequency:               
+##   character                6         
+##   numeric                  5         
+## ________________________             
+## Group variables            None      
+## 
+## -- Variable type: character ------------------------------------------------------------------------
+##   skim_variable n_missing complete_rate   min   max empty n_unique whitespace
+## 1 name                  0             1    13    59     0      135          0
+## 2 state                 0             1    10    10     0        1          0
+## 3 state_code            0             1     2     2     0        1          0
+## 4 type                  0             1     6    10     0        3          0
+## 5 degree_length         0             1     6     6     0        1          0
+## 6 system                0             1     2    10     0        4          0
+## 
+## -- Variable type: numeric --------------------------------------------------------------------------
+##   skim_variable        n_missing complete_rate   mean     sd    p0    p25    p50    p75  p100 hist 
+## 1 room_and_board              35         0.741 12865.  3288.  2800 10932. 13428. 15332. 18127 ▁▂▃▇▆
+## 2 in_state_tuition             0         1     25602. 16268.  2691 10882. 20670  40172. 56876 ▇▆▅▃▅
+## 3 in_state_total               0         1     35132. 19484.  2691 19377  30416  51009  75003 ▅▇▃▃▃
+## 4 out_of_state_tuition         0         1     29425. 14629.  2691 17531  27810  43113  56876 ▃▇▅▅▅
+## 5 out_of_state_total           0         1     38955. 19215.  2691 23102  36103  57560  75003 ▆▅▇▆▅
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{count}\NormalTok{(tuition\_df, type, system)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 4 x 3
+##   type       system         n
+##   <chr>      <chr>      <int>
+## 1 For Profit for profit    10
+## 2 Private    private       93
+## 3 Public     CSU           23
+## 4 Public     UC             9
+\end{verbatim}
+
+\texttt{div\_df} has 5027 rows, corresponding to unique combinations of school (\texttt{name}) and demographic group (\texttt{category}). \texttt{share} gives the fraction of students enrolled at the school in the given group. Because the TidyTuesday dataset didn't have the \texttt{degree\_length} variable, I wasn't able to filter down to only 4-year schools. That won't be a problem later.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{skim}\NormalTok{(div\_df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## -- Data Summary ------------------------
+##                            Values
+## Name                       div_df
+## Number of rows             5027  
+## Number of columns          6     
+## _______________________          
+## Column type frequency:           
+##   character                3     
+##   numeric                  3     
+## ________________________         
+## Group variables            None  
+## 
+## -- Variable type: character ------------------------------------------------------------------------
+##   skim_variable n_missing complete_rate   min   max empty n_unique whitespace
+## 1 name                  0             1    11    74     0      457          0
+## 2 state                 0             1    10    10     0        1          0
+## 3 category              0             1     5    34     0       11          0
+## 
+## -- Variable type: numeric --------------------------------------------------------------------------
+##   skim_variable    n_missing complete_rate     mean       sd    p0      p25       p50      p75  p100
+## 1 total_enrollment         0             1 5912.    8886.        8 427      1232      8695     51237
+## 2 enrollment               0             1 1160.    2988.        0  14        98       580     36116
+## 3 share                    0             1    0.193    0.241     0   0.0111    0.0634    0.332     1
+##   hist 
+## 1 ▇▁▁▁▁
+## 2 ▇▁▁▁▁
+## 3 ▇▂▂▁▁
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{count}\NormalTok{(div\_df, name)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 457 x 2
+##    name                                               n
+##    <chr>                                          <int>
+##  1 Academy for Jewish Religion                       11
+##  2 Academy of Art University                         11
+##  3 Academy of Chinese Culture and Health Sciences    11
+##  4 Academy of Couture Art                            11
+##  5 Acupuncture and Integrative Medicine College      11
+##  6 Advanced College                                  11
+##  7 Advanced Computing Institute                      11
+##  8 Advanced Training Associates                      11
+##  9 Allan Hancock College                             11
+## 10 Alliant International University: San Diego       11
+## # ... with 447 more rows
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{count}\NormalTok{(div\_df, category)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 11 x 2
+##    category                               n
+##    <chr>                              <int>
+##  1 American Indian / Alaska Native      457
+##  2 Asian                                457
+##  3 Black                                457
+##  4 Hispanic                             457
+##  5 Native Hawaiian / Pacific Islander   457
+##  6 Non-Resident Foreign                 457
+##  7 Total Minority                       457
+##  8 Two Or More Races                    457
+##  9 Unknown                              457
+## 10 White                                457
+## 11 Women                                457
+\end{verbatim}
+
 \hypertarget{d-distributions}{%
 \subsection{1D distributions}\label{d-distributions}}
 
+\hypertarget{categorical-barplot}{%
+\subsubsection{Categorical: Barplot}\label{categorical-barplot}}
+
+Counts of observations for a single categorical variable. It's a bar geom with a count statistic. If we keep the statistic but change the geom, we get a point version of a barplot.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(tuition\_df, }\KeywordTok{aes}\NormalTok{(system, }\DataTypeTok{fill =}\NormalTok{ system)) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{geom\_bar}\NormalTok{()}
+\KeywordTok{ggplot}\NormalTok{(tuition\_df, }\KeywordTok{aes}\NormalTok{(system, }\DataTypeTok{fill =}\NormalTok{ system)) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{stat\_count}\NormalTok{(}\DataTypeTok{geom =} \StringTok{\textquotesingle{}bar\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.5\linewidth]{book_files/figure-latex/unnamed-chunk-78-1} \includegraphics[width=0.5\linewidth]{book_files/figure-latex/unnamed-chunk-78-2} \end{center}
+
+If we keep the statistic but change the geom, we can make a point version of a barplot. Or a version with text labels.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(tuition\_df, }\KeywordTok{aes}\NormalTok{(system, }\DataTypeTok{color =}\NormalTok{ system)) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{stat\_count}\NormalTok{(}\DataTypeTok{geom =} \StringTok{\textquotesingle{}point\textquotesingle{}}\NormalTok{, }\DataTypeTok{size =} \DecValTok{3}\NormalTok{)}
+\KeywordTok{ggplot}\NormalTok{(tuition\_df, }\KeywordTok{aes}\NormalTok{(system, }\DataTypeTok{color =}\NormalTok{ system)) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{stat\_count}\NormalTok{(}\DataTypeTok{geom =} \StringTok{\textquotesingle{}label\textquotesingle{}}\NormalTok{, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{label =} \KeywordTok{after\_stat}\NormalTok{(count)))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.5\linewidth]{book_files/figure-latex/unnamed-chunk-79-1} \includegraphics[width=0.5\linewidth]{book_files/figure-latex/unnamed-chunk-79-2} \end{center}
+
+Because of ggplot's layering system, we're not restricted to just a barplot or one of these variations. We can combine geoms into a single plot.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(tuition\_df, }\KeywordTok{aes}\NormalTok{(system)) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{stat\_count}\NormalTok{(}\DataTypeTok{geom =} \StringTok{\textquotesingle{}bar\textquotesingle{}}\NormalTok{, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{fill =}\NormalTok{ system)) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{stat\_count}\NormalTok{(}\DataTypeTok{geom =} \StringTok{\textquotesingle{}label\textquotesingle{}}\NormalTok{, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{label =} \KeywordTok{after\_stat}\NormalTok{(count)), }
+               \DataTypeTok{position =} \KeywordTok{position\_nudge}\NormalTok{(}\DataTypeTok{y =} \DecValTok{5}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.6\linewidth]{book_files/figure-latex/unnamed-chunk-80-1} \end{center}
+
+\hypertarget{numeric-histograms-and-density-plots}{%
+\subsubsection{Numeric: Histograms and density plots}\label{numeric-histograms-and-density-plots}}
+
+A histogram is a count of observations for a single categorical variable. It uses the same geom as the barplot, but a statistic of counts of \emph{binned} values for a continuous variable.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(tuition\_df, }\KeywordTok{aes}\NormalTok{(in\_state\_tuition)) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{geom\_histogram}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(tuition\_df, }\KeywordTok{aes}\NormalTok{(in\_state\_tuition)) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{stat\_bin}\NormalTok{(}\DataTypeTok{geom =} \StringTok{\textquotesingle{}bar\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+\end{verbatim}
+
+\begin{center}\includegraphics[width=0.4\linewidth]{book_files/figure-latex/unnamed-chunk-81-1} \includegraphics[width=0.4\linewidth]{book_files/figure-latex/unnamed-chunk-81-2} \end{center}
+
 \begin{itemize}
 \tightlist
 \item
-  categorical: barplot
+  \texttt{binwidth} can have a dramatic effect on the appearance of the plot
 \item
-  numeric: histogram -\textgreater{} density plot -\textgreater{} ecdf
+  \texttt{binwidth} is a free parameter in constructing the histogram as a model of the data
 \end{itemize}
 
-\hypertarget{d-distributions-1}{%
-\subsection{2D distributions}\label{d-distributions-1}}
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(tuition\_df, }\KeywordTok{aes}\NormalTok{(in\_state\_tuition)) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{geom\_histogram}\NormalTok{(}\DataTypeTok{binwidth =} \DecValTok{100}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.6\linewidth]{book_files/figure-latex/unnamed-chunk-82-1} \end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(tuition\_df, }\KeywordTok{aes}\NormalTok{(in\_state\_tuition)) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{geom\_histogram}\NormalTok{(}\DataTypeTok{binwidth =} \DecValTok{1000}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.6\linewidth]{book_files/figure-latex/unnamed-chunk-82-2} \end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(tuition\_df, }\KeywordTok{aes}\NormalTok{(in\_state\_tuition)) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{geom\_histogram}\NormalTok{(}\DataTypeTok{binwidth =} \DecValTok{10000}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.6\linewidth]{book_files/figure-latex/unnamed-chunk-82-3} \end{center}
+
+A frequency polygon uses the same count statistic, but displays the result with a line rather than columns.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(tuition\_df, }\KeywordTok{aes}\NormalTok{(in\_state\_tuition)) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{stat\_bin}\NormalTok{(}\DataTypeTok{geom =} \StringTok{\textquotesingle{}bar\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+\end{verbatim}
+
+\begin{center}\includegraphics[width=0.6\linewidth]{book_files/figure-latex/unnamed-chunk-83-1} \end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(tuition\_df, }\KeywordTok{aes}\NormalTok{(in\_state\_tuition)) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{stat\_bin}\NormalTok{(}\DataTypeTok{geom =} \StringTok{\textquotesingle{}line\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+\end{verbatim}
+
+\begin{center}\includegraphics[width=0.6\linewidth]{book_files/figure-latex/unnamed-chunk-83-2} \end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(tuition\_df, }\KeywordTok{aes}\NormalTok{(in\_state\_tuition)) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{geom\_freqpoly}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+\end{verbatim}
+
+\begin{center}\includegraphics[width=0.6\linewidth]{book_files/figure-latex/unnamed-chunk-83-3} \end{center}
+
+Density plots are a smoothed version of histograms.
 
 \begin{itemize}
 \tightlist
 \item
-  categorical x categorical: barplot
+  Often drawn with a rug, which indicates the locations of observed values on the x-axis
 \item
-  numeric x numeric: scatterplot -\textgreater{} contours
+  Like histogram, is a model of the data
 \item
-  categorical x numeric: boxplot -\textgreater{} violin plot -\textgreater{} beeswarm
+  Unlike histogram, people often overlook the free parameters (see \texttt{?density})
 \end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(tuition\_df, }\KeywordTok{aes}\NormalTok{(in\_state\_tuition)) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{geom\_density}\NormalTok{() }\OperatorTok{+}
+\StringTok{    }\KeywordTok{geom\_rug}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.6\linewidth]{book_files/figure-latex/unnamed-chunk-84-1} \end{center}
+
+A strip plot simply plots the values on a single axis.
+
+\begin{itemize}
+\tightlist
+\item
+  Unlike all of the other examples here, it doesn't involve any free parameters or other modeling decisions.\\
+\item
+  But it's also not very useful
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(tuition\_df, }\KeywordTok{aes}\NormalTok{(in\_state\_tuition)) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{geom\_point}\NormalTok{(}\DataTypeTok{y =} \DecValTok{0}\NormalTok{) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{ylim}\NormalTok{(}\OperatorTok{{-}}\NormalTok{.}\DecValTok{1}\NormalTok{, }\FloatTok{.1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.6\linewidth]{book_files/figure-latex/unnamed-chunk-85-1} \end{center}
+
+\hypertarget{d-distributions-categorical-x-numeric}{%
+\subsection{2D distributions: Categorical x Numeric}\label{d-distributions-categorical-x-numeric}}
+
+When there are only a few values of a categorical variable, it can be useful to simply plot points for individual values.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(tuition\_df, }\KeywordTok{aes}\NormalTok{(}\KeywordTok{fct\_reorder}\NormalTok{(name, in\_state\_tuition),}
+\NormalTok{                       in\_state\_tuition, }
+                       \DataTypeTok{color =}\NormalTok{ system)) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{geom\_point}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{color =}\NormalTok{ system)) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{coord\_flip}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.6\linewidth]{book_files/figure-latex/unnamed-chunk-86-1} \end{center}
+
+But we probably don't care about the names of individual schools. One option is a stacked histogram, using color (fill) to indicate school system.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(tuition\_df, }\KeywordTok{aes}\NormalTok{(in\_state\_tuition, }\DataTypeTok{fill =}\NormalTok{ system)) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{geom\_histogram}\NormalTok{(}\DataTypeTok{binwidth =} \DecValTok{1000}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.6\linewidth]{book_files/figure-latex/unnamed-chunk-87-1} \end{center}
+
+These can be difficult to read when it's not clear whether the bars are stacked on top of each other or layered, one behind the other. Here the bars are layered. The differences are very subtle but potentially important.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(tuition\_df, }\KeywordTok{aes}\NormalTok{(in\_state\_tuition, }\DataTypeTok{fill =}\NormalTok{ system)) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{geom\_histogram}\NormalTok{(}\DataTypeTok{binwidth =} \DecValTok{1000}\NormalTok{, }\DataTypeTok{position =} \StringTok{\textquotesingle{}identity\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.6\linewidth]{book_files/figure-latex/unnamed-chunk-88-1} \end{center}
+
+So it's more common to put the categorical variable on the x-axis. Here's a traditional boxplot. While color is strictly unnecessary, using color for the same categorical variable across plots helps us track relationships. Notice that we can change the way color is used by simply changing which aesthetic gets \texttt{system}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(tuition\_df, }\KeywordTok{aes}\NormalTok{(system, in\_state\_tuition, }\DataTypeTok{color =}\NormalTok{ system)) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{geom\_boxplot}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(tuition\_df, }\KeywordTok{aes}\NormalTok{(system, in\_state\_tuition, }\DataTypeTok{fill =}\NormalTok{ system)) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{geom\_boxplot}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+However, bowplots have many of the problems that Weissgerber et al. (\protect\hyperlink{ref-WeissgerberBarLineGraphs2015}{2015}) identify with bar-and-whisker plots. Neither is actually very good at showing non-gaussian distributions of the underlying data.
+
+A violin plot is better for this. The violin plot calculates densities across the numerical variable (tuition) within groups defined by the categorical variable (system), and shows them symmetrically. We can use the \texttt{draw\_quantiles} argument to show the medians, and \texttt{scale\ =\ \textquotesingle{}width\textquotesingle{}} to get them to have the same width (rather than the same area, the default).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(tuition\_df, }\KeywordTok{aes}\NormalTok{(system, in\_state\_tuition, }\DataTypeTok{color =}\NormalTok{ system)) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{geom\_violin}\NormalTok{(}\DataTypeTok{draw\_quantiles =} \FloatTok{.5}\NormalTok{, }\DataTypeTok{scale =} \StringTok{\textquotesingle{}width\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.6\linewidth]{book_files/figure-latex/unnamed-chunk-90-1} \end{center}
+
+We can add points to this, using \texttt{position\ =\ \textquotesingle{}jitter\textquotesingle{}} to reduce overplotting and \texttt{alpha\ =\ .5} to make them 50\% transparent.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(tuition\_df, }\KeywordTok{aes}\NormalTok{(system, in\_state\_tuition, }\DataTypeTok{color =}\NormalTok{ system)) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{geom\_violin}\NormalTok{(}\DataTypeTok{draw\_quantiles =} \FloatTok{.5}\NormalTok{, }\DataTypeTok{scale =} \StringTok{\textquotesingle{}width\textquotesingle{}}\NormalTok{) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{geom\_point}\NormalTok{(}\DataTypeTok{position =} \StringTok{\textquotesingle{}jitter\textquotesingle{}}\NormalTok{, }\DataTypeTok{alpha =} \FloatTok{.5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.6\linewidth]{book_files/figure-latex/unnamed-chunk-91-1} \end{center}
+
+\texttt{ggforce::geom\_sina()} tries to match the amount of jitter to the width of the violin plot, using the same \texttt{scale} argument. It's a little better, because now the points aren't outside of the violin. But it's still hard to see a visual pattern.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(tuition\_df, }\KeywordTok{aes}\NormalTok{(system, in\_state\_tuition, }\DataTypeTok{color =}\NormalTok{ system)) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{geom\_violin}\NormalTok{(}\DataTypeTok{draw\_quantiles =} \FloatTok{.5}\NormalTok{, }\DataTypeTok{scale =} \StringTok{\textquotesingle{}width\textquotesingle{}}\NormalTok{) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{geom\_sina}\NormalTok{(}\DataTypeTok{scale =} \StringTok{\textquotesingle{}width\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.6\linewidth]{book_files/figure-latex/unnamed-chunk-92-1} \end{center}
+
+A beeswarm plot positions the points so that they cluster close together in the x-direction without too much overplotting. This allows us to show both the individual points and the density distribution, with roughly the same shape (after tweaking some parameters).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(tuition\_df, }\KeywordTok{aes}\NormalTok{(system, in\_state\_tuition, }\DataTypeTok{color =}\NormalTok{ system)) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{geom\_violin}\NormalTok{(}\DataTypeTok{draw\_quantiles =} \FloatTok{.5}\NormalTok{, }\DataTypeTok{scale =} \StringTok{\textquotesingle{}width\textquotesingle{}}\NormalTok{) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{geom\_beeswarm}\NormalTok{(}\DataTypeTok{cex =} \DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.6\linewidth]{book_files/figure-latex/unnamed-chunk-93-1} \end{center}
+
+Using ggplot it is possible to create the bar-and-whiskers plot that Weissgerber et al. (\protect\hyperlink{ref-WeissgerberBarLineGraphs2015}{2015}) criticize. But now we have much better options.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(tuition\_df, }\KeywordTok{aes}\NormalTok{(system, in\_state\_tuition, }
+                       \DataTypeTok{fill =}\NormalTok{ system, }\DataTypeTok{color =}\NormalTok{ system)) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{stat\_summary}\NormalTok{(}\DataTypeTok{geom =} \StringTok{\textquotesingle{}bar\textquotesingle{}}\NormalTok{) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{stat\_summary}\NormalTok{(}\DataTypeTok{geom =} \StringTok{\textquotesingle{}errorbar\textquotesingle{}}\NormalTok{, }\DataTypeTok{width =} \FloatTok{.2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## No summary function supplied, defaulting to `mean_se()`
+## No summary function supplied, defaulting to `mean_se()`
+\end{verbatim}
+
+\begin{center}\includegraphics[width=0.6\linewidth]{book_files/figure-latex/unnamed-chunk-94-1} \end{center}
+
+\emph{{[}join stuff{]}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#\# Schools in tuition\_df that will be missing after we join w/ div\_df}
+\KeywordTok{anti\_join}\NormalTok{(tuition\_df, div\_df, }\DataTypeTok{by =} \StringTok{\textquotesingle{}name\textquotesingle{}}\NormalTok{) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{    }\KeywordTok{pull}\NormalTok{(name)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] "Alliant International University"                           
+##  [2] "Antioch University Los Angeles"                             
+##  [3] "Antioch University Santa Barbara"                           
+##  [4] "Beverly Hills Design Institute"                             
+##  [5] "California Coast University"                                
+##  [6] "California Northstate University College of Health Sciences"
+##  [7] "Charles R Drew University of Medicine and Science"          
+##  [8] "Concordia University Irvine"                                
+##  [9] "Hult International Business School"                         
+## [10] "Laguna College of Art and Design"                           
+## [11] "Lincoln University"                                         
+## [12] "Mount Saint Mary's University"                              
+## [13] "New Charter University"                                     
+## [14] "Northcentral University"                                    
+## [15] "Northwestern Polytechnic University"                        
+## [16] "Pacific Union College"                                      
+## [17] "Silicon Valley University"                                  
+## [18] "Simpson University"                                         
+## [19] "SUM Bible College & Theological Seminary"                   
+## [20] "The Master's University and Seminary"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#\# Because div\_df isn\textquotesingle{}t filtered down to 2{-}year schools, it\textquotesingle{}s okay if a lot of its schools are left out}
+\KeywordTok{anti\_join}\NormalTok{(div\_df, tuition\_df, }\DataTypeTok{by =} \StringTok{\textquotesingle{}name\textquotesingle{}}\NormalTok{) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{    }\KeywordTok{nrow}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 3762
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#\# Checking duplications}
+\NormalTok{comb\_df\_draft =}\StringTok{ }\KeywordTok{inner\_join}\NormalTok{(tuition\_df, div\_df, }\DataTypeTok{by =} \StringTok{\textquotesingle{}name\textquotesingle{}}\NormalTok{)}
+\KeywordTok{nrow}\NormalTok{(comb\_df\_draft)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1265
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{nrow}\NormalTok{(}\KeywordTok{distinct}\NormalTok{(comb\_df\_draft))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1265
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#\# 135 schools in tuition\_df, minus 20 rows not matched}
+\NormalTok{comb\_df\_draft }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{    }\KeywordTok{select}\NormalTok{(name) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{    }\KeywordTok{distinct}\NormalTok{() }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{    }\KeywordTok{nrow}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 115
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#\# We should have one row in comb\_df\_draft for each school{-}category combination}
+\NormalTok{comb\_df\_draft }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{    }\KeywordTok{select}\NormalTok{(name, category) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{    }\KeywordTok{distinct}\NormalTok{() }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{    }\KeywordTok{nrow}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1265
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#\# Check column names}
+\KeywordTok{names}\NormalTok{(comb\_df\_draft)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] "name"                 "state.x"              "state_code"           "type"                
+##  [5] "degree_length"        "room_and_board"       "in_state_tuition"     "in_state_total"      
+##  [9] "out_of_state_tuition" "out_of_state_total"   "system"               "total_enrollment"    
+## [13] "state.y"              "category"             "enrollment"           "share"
+\end{verbatim}
+
+\emph{{[}after joins{]}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{comb\_df =}\StringTok{ }\KeywordTok{inner\_join}\NormalTok{(div\_df, tuition\_df, }\DataTypeTok{by =} \KeywordTok{c}\NormalTok{(}\StringTok{\textquotesingle{}name\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}state\textquotesingle{}}\NormalTok{))}
+
+\KeywordTok{ggplot}\NormalTok{(comb\_df, }\KeywordTok{aes}\NormalTok{(system, share, }\DataTypeTok{color =}\NormalTok{ system)) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{geom\_violin}\NormalTok{(}\DataTypeTok{scale =} \StringTok{\textquotesingle{}width\textquotesingle{}}\NormalTok{,}
+                \DataTypeTok{draw\_quantiles =} \FloatTok{.5}\NormalTok{) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{geom\_beeswarm}\NormalTok{(}\DataTypeTok{alpha =} \FloatTok{.25}\NormalTok{, }\DataTypeTok{cex =} \DecValTok{2}\NormalTok{) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{facet\_wrap}\NormalTok{(}\KeywordTok{vars}\NormalTok{(category), }\DataTypeTok{scales =} \StringTok{\textquotesingle{}free\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in regularize.values(x, y, ties, missing(ties), na.rm = na.rm): collapsing to unique 'x'
+## values
+
+## Warning in regularize.values(x, y, ties, missing(ties), na.rm = na.rm): collapsing to unique 'x'
+## values
+
+## Warning in regularize.values(x, y, ties, missing(ties), na.rm = na.rm): collapsing to unique 'x'
+## values
+\end{verbatim}
+
+\begin{center}\includegraphics[width=0.6\linewidth]{book_files/figure-latex/unnamed-chunk-96-1} \end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(comb\_df, }\KeywordTok{aes}\NormalTok{(in\_state\_tuition, share)) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{geom\_point}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{color =}\NormalTok{ system)) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{geom\_smooth}\NormalTok{(}\DataTypeTok{color =} \StringTok{\textquotesingle{}black\textquotesingle{}}\NormalTok{) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{facet\_wrap}\NormalTok{(}\KeywordTok{vars}\NormalTok{(category), }\DataTypeTok{scales =} \StringTok{\textquotesingle{}free\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
+\end{verbatim}
+
+\begin{center}\includegraphics[width=0.6\linewidth]{book_files/figure-latex/unnamed-chunk-96-2} \end{center}
+
+\emph{{[}todo{]}}
 
 \hypertarget{multivariate-distributions}{%
 \subsection{Multivariate distributions}\label{multivariate-distributions}}
 
 \begin{itemize}
+\tightlist
 \item
   \texttt{ggforce::facet\_matrix()}
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(tuition\_df, }\KeywordTok{aes}\NormalTok{(.panel\_x, .panel\_y, }\DataTypeTok{color =}\NormalTok{ system)) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{geom\_autopoint}\NormalTok{(}\DataTypeTok{color =} \StringTok{\textquotesingle{}blue\textquotesingle{}}\NormalTok{) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{geom\_autodensity}\NormalTok{(}\DataTypeTok{fill =} \OtherTok{NA}\NormalTok{, }\DataTypeTok{position =} \StringTok{\textquotesingle{}identity\textquotesingle{}}\NormalTok{) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{geom\_autopoint}\NormalTok{() }\OperatorTok{+}
+\StringTok{    }\KeywordTok{geom\_mark\_ellipse}\NormalTok{(}\DataTypeTok{expand =} \FloatTok{.05}\NormalTok{) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{stat\_function}\NormalTok{(}\DataTypeTok{fun =}\NormalTok{ identity, }\DataTypeTok{inherit.aes =} \OtherTok{FALSE}\NormalTok{) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{facet\_matrix}\NormalTok{(}\KeywordTok{vars}\NormalTok{(in\_state\_tuition, in\_state\_total, }
+\NormalTok{                      out\_of\_state\_tuition, out\_of\_state\_total), }
+                 \DataTypeTok{layer.upper =} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{5}\NormalTok{),}
+                 \DataTypeTok{layer.diag =} \DecValTok{2}\NormalTok{, }
+                 \DataTypeTok{layer.lower =} \KeywordTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.6\linewidth]{book_files/figure-latex/unnamed-chunk-97-1} \end{center}
+
+\begin{itemize}
+\tightlist
 \item
   lab: correlation heat map + scatterplots
 \item
-  geom\_text
-\item
-  upset plots
+  upset plots (ggupset)
 \end{itemize}
 
 \hypertarget{intermediate-visualization-in-r}{%
@@ -3406,6 +4687,14 @@ Some of the plots include alternative layers, mostly geoms, to illustrate how di
     \end{itemize}
   \item
     Define a canvas first, then use these tools to paint elements on the canvas
+  \item
+    The \href{https://pbpython.com/visualization-tools-1.html}{common Python plotting packages} (\texttt{matplotlib}, \texttt{seaborn}, etc.) are object-oriented variations on this
+
+    \begin{itemize}
+    \tightlist
+    \item
+      \texttt{matplotlib} was originally designed to work like plotting in MATLAB, in order to ease the transition for scientists coming from MATLAB
+    \end{itemize}
   \end{itemize}
 \item
   Advantages of base graphics
@@ -3462,7 +4751,7 @@ Some of the plots include alternative layers, mostly geoms, to illustrate how di
     \item
       point shape is \texttt{pch} (uhhh point-character?)
     \item
-      point size is \texttt{cex} (???)
+      point and text size is \texttt{cex} (???)
     \end{itemize}
   \item
     ``Ugly defaults''
@@ -3487,7 +4776,7 @@ Some of the plots include alternative layers, mostly geoms, to illustrate how di
   \item
     Plots are \href{https://en.wikipedia.org/wiki/First-class_citizen}{first-class objects}
   \item
-    ``Pretty defaults''
+    ``Pretty defaults'' (though I disagree)
   \end{itemize}
 \item
   Disadvantages of \texttt{ggplot2}
@@ -3562,7 +4851,7 @@ Some of the plots include alternative layers, mostly geoms, to illustrate how di
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.6\linewidth]{book_files/figure-latex/unnamed-chunk-57-1} \end{center}
+\begin{center}\includegraphics[width=0.6\linewidth]{book_files/figure-latex/unnamed-chunk-98-1} \end{center}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3656,7 +4945,7 @@ Some of the plots include alternative layers, mostly geoms, to illustrate how di
 ## Warning: Removed 104 rows containing non-finite values (stat_density2d).
 \end{verbatim}
 
-\begin{center}\includegraphics[width=0.6\linewidth]{book_files/figure-latex/unnamed-chunk-58-1} \end{center}
+\begin{center}\includegraphics[width=0.6\linewidth]{book_files/figure-latex/unnamed-chunk-99-1} \end{center}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3731,7 +5020,7 @@ Some of the plots include alternative layers, mostly geoms, to illustrate how di
 ## Warning: Removed 1 row(s) containing missing values (geom_path).
 \end{verbatim}
 
-\begin{center}\includegraphics[width=0.6\linewidth]{book_files/figure-latex/unnamed-chunk-59-1} \end{center}
+\begin{center}\includegraphics[width=0.6\linewidth]{book_files/figure-latex/unnamed-chunk-100-1} \end{center}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3936,6 +5225,9 @@ Leonelli, Sabina. 2020. ``Scientific Research and Big Data.'' In \emph{The Stanf
 \leavevmode\hypertarget{ref-LyonWhyAreNormal2014}{}%
 Lyon, A. 2014. ``Why Are Normal Distributions Normal?'' \emph{The British Journal for the Philosophy of Science} 65 (3): 621--49. \url{https://doi.org/10.1093/bjps/axs046}.
 
+\leavevmode\hypertarget{ref-MatejkaSameStatsDifferent}{}%
+Matejka, Justin, and George Fitzmaurice. n.d. ``Same Stats, Different Graphs: Generating Datasets with Varied Appearance and Identical Statistics Through Simulated Annealing (the Datasaurus Dozen) \textbar{} Autodesk Research.'' Accessed May 21, 2017. \url{https://www.autodeskresearch.com/publications/samestats}.
+
 \leavevmode\hypertarget{ref-PaleologoWhatDifferenceMachine2018}{}%
 Paleologo, Giuseppe. 2018. ``What's the Difference Between Machine Learning in Python and R?'' February 28, 2018. \url{https://www.quora.com/Whats-the-difference-between-machine-learning-in-Python-and-R/answer/Giuseppe-Paleologo}.
 
@@ -3977,6 +5269,9 @@ Wickham, Hadley. 2010. ``A Layered Grammar of Graphics.'' \emph{Journal of Compu
 
 \leavevmode\hypertarget{ref-WickhamAdvanced2014}{}%
 ---------. 2014. \emph{Advanced R}. CRC Press. \url{https://adv-r.hadley.nz}.
+
+\leavevmode\hypertarget{ref-WilkinsonGrammarGraphics1999}{}%
+Wilkinson, Leland. 1999. \emph{The Grammar of Graphics}. Statistics and Computing. New York, NY: Springer New York. \url{https://doi.org/10.1007/978-1-4757-3100-2}.
 
 \leavevmode\hypertarget{ref-WilkinsonFAIRGuidingPrinciples2016}{}%
 Wilkinson, Mark D., Michel Dumontier, IJsbrand Jan Aalbersberg, Gabrielle Appleton, Myles Axton, Arie Baak, Niklas Blomberg, et al. 2016. ``The FAIR Guiding Principles for Scientific Data Management and Stewardship.'' \emph{Scientific Data} 3 (1, 1): 1--9. \url{https://doi.org/10.1038/sdata.2016.18}.

@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 12 Common (and less common) Graphs for EDA | Data Science Methods for Cognitive Science</title>
+  <meta name="description" content="This document is a set of notes (and perhaps later a textbook) for a course on data science methods for graduate students in social and behavioral sciences." />
+  <meta name="generator" content="bookdown 0.20.6 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 12 Common (and less common) Graphs for EDA | Data Science Methods for Cognitive Science" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This document is a set of notes (and perhaps later a textbook) for a course on data science methods for graduate students in social and behavioral sciences." />
+  <meta name="github-repo" content="data-science-methods/book" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 12 Common (and less common) Graphs for EDA | Data Science Methods for Cognitive Science" />
+  
+  <meta name="twitter:description" content="This document is a set of notes (and perhaps later a textbook) for a course on data science methods for graduate students in social and behavioral sciences." />
+  
+
+<meta name="author" content="Dan Hicks, hicks.daniel.j@gmail.com" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="visual-eda.html"/>
+<link rel="next" href="intermediate-visualization-in-r.html"/>
+<script src="libs/header-attrs-2.3.8/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="" data-path="setting-up.html"><a href="setting-up.html"><i class="fa fa-check"></i>Setting up</a>
+<ul>
+<li class="chapter" data-level="0.1" data-path="setting-up.html"><a href="setting-up.html#a-note-on-accessibility"><i class="fa fa-check"></i><b>0.1</b> A Note on Accessibility</a></li>
+<li class="chapter" data-level="0.2" data-path="setting-up.html"><a href="setting-up.html#hardware-recommendations"><i class="fa fa-check"></i><b>0.2</b> Hardware Recommendations</a></li>
+<li class="chapter" data-level="0.3" data-path="setting-up.html"><a href="setting-up.html#r-and-rstudio"><i class="fa fa-check"></i><b>0.3</b> R and RStudio</a></li>
+<li class="chapter" data-level="0.4" data-path="setting-up.html"><a href="setting-up.html#slack"><i class="fa fa-check"></i><b>0.4</b> Slack</a></li>
+<li class="chapter" data-level="0.5" data-path="setting-up.html"><a href="setting-up.html#github"><i class="fa fa-check"></i><b>0.5</b> GitHub</a></li>
+<li class="chapter" data-level="0.6" data-path="setting-up.html"><a href="setting-up.html#screen-layouts"><i class="fa fa-check"></i><b>0.6</b> Screen Layouts</a></li>
+<li class="chapter" data-level="0.7" data-path="setting-up.html"><a href="setting-up.html#pre-class-survey"><i class="fa fa-check"></i><b>0.7</b> Pre-Class Survey</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#land-acknowledgement"><i class="fa fa-check"></i><b>1.1</b> Land Acknowledgement</a></li>
+<li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#about-me"><i class="fa fa-check"></i><b>1.2</b> About me</a></li>
+<li class="chapter" data-level="1.3" data-path="introduction.html"><a href="introduction.html#what-this-course-isnt-and-is"><i class="fa fa-check"></i><b>1.3</b> What this course isn’t, and is</a></li>
+<li class="chapter" data-level="1.4" data-path="introduction.html"><a href="introduction.html#learning-outcomes"><i class="fa fa-check"></i><b>1.4</b> Learning outcomes</a></li>
+<li class="chapter" data-level="1.5" data-path="introduction.html"><a href="introduction.html#workflow"><i class="fa fa-check"></i><b>1.5</b> Workflow</a></li>
+<li class="chapter" data-level="1.6" data-path="introduction.html"><a href="introduction.html#notes-on-some-course-design-decisions"><i class="fa fa-check"></i><b>1.6</b> Notes on some course design decisions</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="what-is-this-thing-called-data-science.html"><a href="what-is-this-thing-called-data-science.html"><i class="fa fa-check"></i><b>2</b> What is this thing called data science?</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="what-is-this-thing-called-data-science.html"><a href="what-is-this-thing-called-data-science.html#standard-definition"><i class="fa fa-check"></i><b>2.1</b> Standard definition</a></li>
+<li class="chapter" data-level="2.2" data-path="what-is-this-thing-called-data-science.html"><a href="what-is-this-thing-called-data-science.html#a-prior-question-what-is-this-thing-called-data"><i class="fa fa-check"></i><b>2.2</b> A prior question: What is this thing called “data”?</a></li>
+<li class="chapter" data-level="2.3" data-path="what-is-this-thing-called-data-science.html"><a href="what-is-this-thing-called-data-science.html#back-to-data-science"><i class="fa fa-check"></i><b>2.3</b> Back to “data science”</a></li>
+</ul></li>
+<li class="part"><span><b>I Some fundamental tools</b></span></li>
+<li class="chapter" data-level="3" data-path="git-and-version-control.html"><a href="git-and-version-control.html"><i class="fa fa-check"></i><b>3</b> Git and Version Control</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="git-and-version-control.html"><a href="git-and-version-control.html#some-motivating-examples"><i class="fa fa-check"></i><b>3.1</b> Some motivating examples</a></li>
+<li class="chapter" data-level="3.2" data-path="git-and-version-control.html"><a href="git-and-version-control.html#version-control"><i class="fa fa-check"></i><b>3.2</b> Version control</a></li>
+<li class="chapter" data-level="3.3" data-path="git-and-version-control.html"><a href="git-and-version-control.html#how-to-do-things-with-git"><i class="fa fa-check"></i><b>3.3</b> How to do things with git</a></li>
+<li class="chapter" data-level="3.4" data-path="git-and-version-control.html"><a href="git-and-version-control.html#working-with-github-remotes"><i class="fa fa-check"></i><b>3.4</b> Working with GitHub remotes</a></li>
+<li class="chapter" data-level="3.5" data-path="git-and-version-control.html"><a href="git-and-version-control.html#lab"><i class="fa fa-check"></i><b>3.5</b> Lab</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="r-basics.html"><a href="r-basics.html"><i class="fa fa-check"></i><b>4</b> R Basics</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="r-basics.html"><a href="r-basics.html#lets-get-started-with-rstudio"><i class="fa fa-check"></i><b>4.1</b> Let’s get started with RStudio</a></li>
+<li class="chapter" data-level="4.2" data-path="r-basics.html"><a href="r-basics.html#selecting-elements-and-some-math"><i class="fa fa-check"></i><b>4.2</b> Selecting elements, and some math</a></li>
+<li class="chapter" data-level="4.3" data-path="r-basics.html"><a href="r-basics.html#base-r-data-types"><i class="fa fa-check"></i><b>4.3</b> Base R data types</a></li>
+<li class="chapter" data-level="4.4" data-path="r-basics.html"><a href="r-basics.html#examining-variables"><i class="fa fa-check"></i><b>4.4</b> Examining variables</a></li>
+<li class="chapter" data-level="4.5" data-path="r-basics.html"><a href="r-basics.html#logical-operators"><i class="fa fa-check"></i><b>4.5</b> Logical operators</a></li>
+<li class="chapter" data-level="4.6" data-path="r-basics.html"><a href="r-basics.html#missing-data"><i class="fa fa-check"></i><b>4.6</b> Missing data</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="functional-programming-and-data-science.html"><a href="functional-programming-and-data-science.html"><i class="fa fa-check"></i><b>5</b> Functional Programming and Data Science</a></li>
+<li class="chapter" data-level="6" data-path="warnings-errors-and-getting-help.html"><a href="warnings-errors-and-getting-help.html"><i class="fa fa-check"></i><b>6</b> Warnings, Errors, and Getting Help</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="warnings-errors-and-getting-help.html"><a href="warnings-errors-and-getting-help.html#recommended-reading-and-watching"><i class="fa fa-check"></i><b>6.1</b> Recommended reading and watching</a></li>
+<li class="chapter" data-level="6.2" data-path="warnings-errors-and-getting-help.html"><a href="warnings-errors-and-getting-help.html#messages-warnings-and-errors"><i class="fa fa-check"></i><b>6.2</b> Messages, warnings, and errors</a></li>
+<li class="chapter" data-level="6.3" data-path="warnings-errors-and-getting-help.html"><a href="warnings-errors-and-getting-help.html#where-to-go-for-help"><i class="fa fa-check"></i><b>6.3</b> Where to go for help</a></li>
+<li class="chapter" data-level="6.4" data-path="warnings-errors-and-getting-help.html"><a href="warnings-errors-and-getting-help.html#writing-a-reproducible-example-reprex"><i class="fa fa-check"></i><b>6.4</b> Writing a reproducible example: <code>reprex</code></a></li>
+<li class="chapter" data-level="6.5" data-path="warnings-errors-and-getting-help.html"><a href="warnings-errors-and-getting-help.html#do-not-do-these-things-in-your-reprex"><i class="fa fa-check"></i><b>6.5</b> Do not do these things in your reprex</a></li>
+</ul></li>
+<li class="part"><span><b>II Exploratory Data Analysis (EDA)</b></span></li>
+<li class="chapter" data-level="7" data-path="eda-models.html"><a href="eda-models.html"><i class="fa fa-check"></i><b>7</b> Exploratory Data Analysis</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="eda-models.html"><a href="eda-models.html#exploratory-and-confirmatory-research"><i class="fa fa-check"></i><b>7.1</b> Exploratory and Confirmatory Research</a></li>
+<li class="chapter" data-level="7.2" data-path="eda-models.html"><a href="eda-models.html#better-models-for-eda-i-risk-management-in-spiral-development"><i class="fa fa-check"></i><b>7.2</b> Better Models for EDA I: Risk Management in Spiral Development</a></li>
+<li class="chapter" data-level="7.3" data-path="eda-models.html"><a href="eda-models.html#better-models-for-eda-ii-epicycle-of-analysis"><i class="fa fa-check"></i><b>7.3</b> Better Models for EDA II: Epicycle of Analysis</a></li>
+<li class="chapter" data-level="7.4" data-path="eda-models.html"><a href="eda-models.html#better-models-for-eda-iii-developing-phenomena"><i class="fa fa-check"></i><b>7.4</b> Better Models for EDA III: Developing Phenomena</a></li>
+<li class="chapter" data-level="7.5" data-path="eda-models.html"><a href="eda-models.html#discussion-questions"><i class="fa fa-check"></i><b>7.5</b> Discussion questions</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="two-eda-checklists.html"><a href="two-eda-checklists.html"><i class="fa fa-check"></i><b>8</b> Two EDA “Checklists”</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="two-eda-checklists.html"><a href="two-eda-checklists.html#pengartdatascience2016"><i class="fa fa-check"></i><b>8.1</b> <span class="citation">Peng and Matsui (<span>2016</span>)</span></a></li>
+<li class="chapter" data-level="8.2" data-path="two-eda-checklists.html"><a href="two-eda-checklists.html#huebnersystematicapproachinitial2016"><i class="fa fa-check"></i><b>8.2</b> <span class="citation">Huebner, Vach, and le Cessie (<span>2016</span>)</span></a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="inspecting-variables.html"><a href="inspecting-variables.html"><i class="fa fa-check"></i><b>9</b> Inspecting Variables</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="inspecting-variables.html"><a href="inspecting-variables.html#packages"><i class="fa fa-check"></i><b>9.1</b> Packages</a></li>
+<li class="chapter" data-level="9.2" data-path="inspecting-variables.html"><a href="inspecting-variables.html#get-the-data"><i class="fa fa-check"></i><b>9.2</b> Get the Data</a></li>
+<li class="chapter" data-level="9.3" data-path="inspecting-variables.html"><a href="inspecting-variables.html#formulate-your-question"><i class="fa fa-check"></i><b>9.3</b> 1. Formulate your question</a></li>
+<li class="chapter" data-level="9.4" data-path="inspecting-variables.html"><a href="inspecting-variables.html#read-in-your-data"><i class="fa fa-check"></i><b>9.4</b> 2. Read in your data</a></li>
+<li class="chapter" data-level="9.5" data-path="inspecting-variables.html"><a href="inspecting-variables.html#check-the-packaging"><i class="fa fa-check"></i><b>9.5</b> 3. Check the packaging</a></li>
+<li class="chapter" data-level="9.6" data-path="inspecting-variables.html"><a href="inspecting-variables.html#filter-mutate-count-and-pipes"><i class="fa fa-check"></i><b>9.6</b> Filter, mutate, count, and pipes</a></li>
+<li class="chapter" data-level="9.7" data-path="inspecting-variables.html"><a href="inspecting-variables.html#look-at-the-top-and-the-bottom-of-your-data"><i class="fa fa-check"></i><b>9.7</b> 4. Look at the top and the bottom of your data</a></li>
+<li class="chapter" data-level="9.8" data-path="inspecting-variables.html"><a href="inspecting-variables.html#check-your-ns-and-6.-validate-with-at-least-one-external-data-source"><i class="fa fa-check"></i><b>9.8</b> 5. Check your “n”s (and) 6. Validate with at least one external data source</a></li>
+<li class="chapter" data-level="9.9" data-path="inspecting-variables.html"><a href="inspecting-variables.html#from-dates-to-years"><i class="fa fa-check"></i><b>9.9</b> From dates to years</a></li>
+<li class="chapter" data-level="9.10" data-path="inspecting-variables.html"><a href="inspecting-variables.html#make-a-plot"><i class="fa fa-check"></i><b>9.10</b> 7. Make a plot</a></li>
+<li class="chapter" data-level="9.11" data-path="inspecting-variables.html"><a href="inspecting-variables.html#try-the-easy-solution-first"><i class="fa fa-check"></i><b>9.11</b> 8. Try the easy solution first</a></li>
+<li class="chapter" data-level="9.12" data-path="inspecting-variables.html"><a href="inspecting-variables.html#follow-up"><i class="fa fa-check"></i><b>9.12</b> 9. Follow up</a></li>
+<li class="chapter" data-level="9.13" data-path="inspecting-variables.html"><a href="inspecting-variables.html#discussion-questions-1"><i class="fa fa-check"></i><b>9.13</b> Discussion questions</a></li>
+<li class="chapter" data-level="9.14" data-path="inspecting-variables.html"><a href="inspecting-variables.html#lab-1"><i class="fa fa-check"></i><b>9.14</b> Lab</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="joins.html"><a href="joins.html"><i class="fa fa-check"></i><b>10</b> Joins</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="joins.html"><a href="joins.html#types-of-joins"><i class="fa fa-check"></i><b>10.1</b> Types of joins</a></li>
+<li class="chapter" data-level="10.2" data-path="joins.html"><a href="joins.html#hazards"><i class="fa fa-check"></i><b>10.2</b> Hazards</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="visual-eda.html"><a href="visual-eda.html"><i class="fa fa-check"></i><b>11</b> Visual EDA</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="visual-eda.html"><a href="visual-eda.html#the-role-of-visuals-in-eda"><i class="fa fa-check"></i><b>11.1</b> The Role of Visuals in EDA</a></li>
+<li class="chapter" data-level="11.2" data-path="visual-eda.html"><a href="visual-eda.html#plot-your-data"><i class="fa fa-check"></i><b>11.2</b> Plot Your Data</a></li>
+<li class="chapter" data-level="11.3" data-path="visual-eda.html"><a href="visual-eda.html#the-grammar-of-graphics"><i class="fa fa-check"></i><b>11.3</b> The Grammar of Graphics</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="common-and-less-common-graphs-for-eda.html"><a href="common-and-less-common-graphs-for-eda.html"><i class="fa fa-check"></i><b>12</b> Common (and less common) Graphs for EDA</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="common-and-less-common-graphs-for-eda.html"><a href="common-and-less-common-graphs-for-eda.html#data-1"><i class="fa fa-check"></i><b>12.1</b> Data</a></li>
+<li class="chapter" data-level="12.2" data-path="common-and-less-common-graphs-for-eda.html"><a href="common-and-less-common-graphs-for-eda.html#d-distributions"><i class="fa fa-check"></i><b>12.2</b> 1D distributions</a></li>
+<li class="chapter" data-level="12.3" data-path="common-and-less-common-graphs-for-eda.html"><a href="common-and-less-common-graphs-for-eda.html#d-distributions-categorical-x-numeric"><i class="fa fa-check"></i><b>12.3</b> 2D distributions: Categorical x Numeric</a></li>
+<li class="chapter" data-level="12.4" data-path="common-and-less-common-graphs-for-eda.html"><a href="common-and-less-common-graphs-for-eda.html#multivariate-distributions"><i class="fa fa-check"></i><b>12.4</b> Multivariate distributions</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="intermediate-visualization-in-r.html"><a href="intermediate-visualization-in-r.html"><i class="fa fa-check"></i><b>13</b> Intermediate Visualization in R</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="intermediate-visualization-in-r.html"><a href="intermediate-visualization-in-r.html#base-graphics-vs.-ggplot2"><i class="fa fa-check"></i><b>13.1</b> Base graphics vs. <code>ggplot2</code></a></li>
+<li class="chapter" data-level="13.2" data-path="intermediate-visualization-in-r.html"><a href="intermediate-visualization-in-r.html#plot-1-dumbbell-plot"><i class="fa fa-check"></i><b>13.2</b> Plot 1: Dumbbell plot</a></li>
+<li class="chapter" data-level="13.3" data-path="intermediate-visualization-in-r.html"><a href="intermediate-visualization-in-r.html#plot-2-high-density-scatterplots"><i class="fa fa-check"></i><b>13.3</b> Plot 2: High-density scatterplots</a></li>
+<li class="chapter" data-level="13.4" data-path="intermediate-visualization-in-r.html"><a href="intermediate-visualization-in-r.html#plot-3-time-series-model-predictions"><i class="fa fa-check"></i><b>13.4</b> Plot 3: Time series + model predictions</a></li>
+<li class="chapter" data-level="13.5" data-path="intermediate-visualization-in-r.html"><a href="intermediate-visualization-in-r.html#plot-4-visualizing-spatial-data-in-r"><i class="fa fa-check"></i><b>13.5</b> Plot 4: Visualizing spatial data in R</a></li>
+</ul></li>
+<li class="part"><span><b>III Cleaning Data</b></span></li>
+<li class="part"><span><b>IV Reproducibility</b></span></li>
+<li class="part"><span><b>V Case Study: The COMPAS Dataset</b></span></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data Science Methods for Cognitive Science</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="common-and-less-common-graphs-for-eda" class="section level1" number="12">
+<h1><span class="header-section-number">Chapter 12</span> Common (and less common) Graphs for EDA</h1>
+<p>One of the major advantages of the grammar of graphics — especially as implemented in the tidyverse package <code>ggplot2</code> — is that it enables us to rapidly create <em>and re-create</em> graphs. This speed and flexibility is extremely useful for EDA.</p>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="common-and-less-common-graphs-for-eda.html#cb121-1" aria-hidden="true"></a><span class="co"># install.packages(c(&#39;tidyverse&#39;, &#39;skimr&#39;, &#39;gghighlight&#39;, &#39;ggbeeswarm&#39;, &#39;ggforce&#39;, &#39;ggupset&#39;))</span></span>
+<span id="cb121-2"><a href="common-and-less-common-graphs-for-eda.html#cb121-2" aria-hidden="true"></a><span class="kw">library</span>(tidyverse)</span>
+<span id="cb121-3"><a href="common-and-less-common-graphs-for-eda.html#cb121-3" aria-hidden="true"></a></span>
+<span id="cb121-4"><a href="common-and-less-common-graphs-for-eda.html#cb121-4" aria-hidden="true"></a><span class="kw">library</span>(skimr)</span>
+<span id="cb121-5"><a href="common-and-less-common-graphs-for-eda.html#cb121-5" aria-hidden="true"></a></span>
+<span id="cb121-6"><a href="common-and-less-common-graphs-for-eda.html#cb121-6" aria-hidden="true"></a><span class="kw">library</span>(ggbeeswarm)</span>
+<span id="cb121-7"><a href="common-and-less-common-graphs-for-eda.html#cb121-7" aria-hidden="true"></a><span class="kw">library</span>(ggforce)</span>
+<span id="cb121-8"><a href="common-and-less-common-graphs-for-eda.html#cb121-8" aria-hidden="true"></a><span class="co"># library(gghighlight)</span></span>
+<span id="cb121-9"><a href="common-and-less-common-graphs-for-eda.html#cb121-9" aria-hidden="true"></a><span class="co"># library(ggupset)</span></span></code></pre></div>
+<p>While <code>ggplot2</code> is supposed to have “pretty defaults,” for a long time its default color scales have been <em>terrible</em>, with bad color combinations for color-blind folks, poor rendering in black and white, and low contrast against the default gray background.</p>
+<p>The options below should set a more color-blind-friendly default palette and a plain white background.</p>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="common-and-less-common-graphs-for-eda.html#cb122-1" aria-hidden="true"></a><span class="kw">options</span>(<span class="dt">ggplot2.discrete.fill =</span> <span class="kw">partial</span>(colorspace<span class="op">::</span>scale_fill_discrete_qualitative, <span class="dt">palette =</span> <span class="st">&#39;Dark 2&#39;</span>), </span>
+<span id="cb122-2"><a href="common-and-less-common-graphs-for-eda.html#cb122-2" aria-hidden="true"></a>        <span class="dt">ggplot2.discrete.colour =</span> <span class="kw">partial</span>(colorspace<span class="op">::</span>scale_color_discrete_qualitative, <span class="dt">palette =</span> <span class="st">&#39;Dark 2&#39;</span>))</span>
+<span id="cb122-3"><a href="common-and-less-common-graphs-for-eda.html#cb122-3" aria-hidden="true"></a></span>
+<span id="cb122-4"><a href="common-and-less-common-graphs-for-eda.html#cb122-4" aria-hidden="true"></a><span class="kw">theme_set</span>(<span class="kw">theme_bw</span>())</span></code></pre></div>
+<div id="data-1" class="section level2" number="12.1">
+<h2><span class="header-section-number">12.1</span> Data</h2>
+<p>We’ll be looking at a collection of US college tuition and diversity data. I acquired the data from <a href="https://github.com/rfordatascience/tidytuesday/tree/master/data/2020/2020-03-10">TidyTuesday (2020-03-10)</a>, which in turn sourced it from some combination of <a href="https://www.tuitiontracker.org/">Tuition Tracker</a> and the <em>Chronicle of Higher Education</em>.</p>
+<p>The documentation in this TidyTuesday repo is quite poor, and doesn’t actually say exactly where each dataset came from. Some of the data is parsed from downloaded HTML files; other data is produced by non-reproducible scripts that clean CSV files. My best guess is that the tuition data comes <a href="https://www.chronicle.com/article/tuition-and-fees-1998-99-through-2018-19/">a <em>Chronicle of Higher Education</em> table</a> with AY 2018-19 “sticker prices” for tuition. And I think the diversity data comes from <a href="https://www.chronicle.com/article/student-diversity-at-4-725-institutions/">another <em>CHE</em> table</a> which reports counts of all students (not just undergrads) enrolled in Fall 2014.</p>
+<p>To facilitate some later steps, I filtered the datasets we’ll be using to <em>4-year colleges and universities</em> in <em>California</em>. I also standardized the names of the Cal State (California State University, or CSU) and University of California campuses, and identified which “system” each school is in (CSU, UC, private, or for-profit). The prepared data files (along with the cleaning script and draft versions of the plots below) is available <a href="https://github.com/data-science-methods/ca-tuition-diversity">here</a>.</p>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="common-and-less-common-graphs-for-eda.html#cb123-1" aria-hidden="true"></a>data_dir =<span class="st"> &#39;data&#39;</span></span>
+<span id="cb123-2"><a href="common-and-less-common-graphs-for-eda.html#cb123-2" aria-hidden="true"></a>data_files =<span class="st"> </span><span class="kw">file.path</span>(data_dir, <span class="kw">c</span>(<span class="st">&#39;diversity.Rds&#39;</span>, <span class="st">&#39;tuition.Rds&#39;</span>))</span>
+<span id="cb123-3"><a href="common-and-less-common-graphs-for-eda.html#cb123-3" aria-hidden="true"></a></span>
+<span id="cb123-4"><a href="common-and-less-common-graphs-for-eda.html#cb123-4" aria-hidden="true"></a>data_urls =<span class="st"> </span><span class="kw">str_c</span>(<span class="st">&#39;https://github.com/data-science-methods/ca-tuition-diversity/raw/master/&#39;</span>, data_files)</span>
+<span id="cb123-5"><a href="common-and-less-common-graphs-for-eda.html#cb123-5" aria-hidden="true"></a></span>
+<span id="cb123-6"><a href="common-and-less-common-graphs-for-eda.html#cb123-6" aria-hidden="true"></a><span class="co">## `if` isn&#39;t vectorized, so we have to loop over the files/URLs manually</span></span>
+<span id="cb123-7"><a href="common-and-less-common-graphs-for-eda.html#cb123-7" aria-hidden="true"></a>download_file =<span class="st"> </span><span class="cf">function</span>(path, url) {</span>
+<span id="cb123-8"><a href="common-and-less-common-graphs-for-eda.html#cb123-8" aria-hidden="true"></a>    <span class="cf">if</span> (<span class="op">!</span><span class="kw">file.exists</span>(path)) {</span>
+<span id="cb123-9"><a href="common-and-less-common-graphs-for-eda.html#cb123-9" aria-hidden="true"></a>        <span class="kw">download.file</span>(url, path)</span>
+<span id="cb123-10"><a href="common-and-less-common-graphs-for-eda.html#cb123-10" aria-hidden="true"></a>    }</span>
+<span id="cb123-11"><a href="common-and-less-common-graphs-for-eda.html#cb123-11" aria-hidden="true"></a>}</span>
+<span id="cb123-12"><a href="common-and-less-common-graphs-for-eda.html#cb123-12" aria-hidden="true"></a>purrr<span class="op">::</span><span class="kw">walk2</span>(data_files, data_urls, download_file)</span>
+<span id="cb123-13"><a href="common-and-less-common-graphs-for-eda.html#cb123-13" aria-hidden="true"></a></span>
+<span id="cb123-14"><a href="common-and-less-common-graphs-for-eda.html#cb123-14" aria-hidden="true"></a>div_df =<span class="st"> </span><span class="kw">read_rds</span>(data_files[<span class="dv">1</span>])</span>
+<span id="cb123-15"><a href="common-and-less-common-graphs-for-eda.html#cb123-15" aria-hidden="true"></a>tuition_df =<span class="st"> </span><span class="kw">read_rds</span>(data_files[<span class="dv">2</span>])</span></code></pre></div>
+<p><code>tuition_df</code> contains data on tuition (the “sticker price,” not what students actually pay). There are 135 rows, 1 row for each of the public, private, and for-profit 4-year schools in California. There are a few different calculations of tuition or cost; we’ll only be looking at <code>in_state_tuition</code>.
+In this dataset, <code>type</code> is either public, private, or for-profit. All of the public 4-year colleges or universities in California belong to either the Cal State or UC system. <code>system</code> distinguishes these two public systems, and also carries over the values from <code>type</code> for private and for-profit schools.</p>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="common-and-less-common-graphs-for-eda.html#cb124-1" aria-hidden="true"></a><span class="kw">skim</span>(tuition_df)</span></code></pre></div>
+<pre><code>## ── Data Summary ────────────────────────
+##                            Values    
+## Name                       tuition_df
+## Number of rows             135       
+## Number of columns          11        
+## _______________________              
+## Column type frequency:               
+##   character                6         
+##   numeric                  5         
+## ________________________             
+## Group variables            None      
+## 
+## ── Variable type: character ────────────────────────────────────────────────────────────────────────
+##   skim_variable n_missing complete_rate   min   max empty n_unique whitespace
+## 1 name                  0             1    13    59     0      135          0
+## 2 state                 0             1    10    10     0        1          0
+## 3 state_code            0             1     2     2     0        1          0
+## 4 type                  0             1     6    10     0        3          0
+## 5 degree_length         0             1     6     6     0        1          0
+## 6 system                0             1     2    10     0        4          0
+## 
+## ── Variable type: numeric ──────────────────────────────────────────────────────────────────────────
+##   skim_variable        n_missing complete_rate   mean     sd    p0    p25    p50    p75  p100 hist 
+## 1 room_and_board              35         0.741 12865.  3288.  2800 10932. 13428. 15332. 18127 ▁▂▃▇▆
+## 2 in_state_tuition             0         1     25602. 16268.  2691 10882. 20670  40172. 56876 ▇▆▅▃▅
+## 3 in_state_total               0         1     35132. 19484.  2691 19377  30416  51009  75003 ▅▇▃▃▃
+## 4 out_of_state_tuition         0         1     29425. 14629.  2691 17531  27810  43113  56876 ▃▇▅▅▅
+## 5 out_of_state_total           0         1     38955. 19215.  2691 23102  36103  57560  75003 ▆▅▇▆▅</code></pre>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="common-and-less-common-graphs-for-eda.html#cb126-1" aria-hidden="true"></a><span class="kw">count</span>(tuition_df, type, system)</span></code></pre></div>
+<pre><code>## # A tibble: 4 x 3
+##   type       system         n
+##   &lt;chr&gt;      &lt;chr&gt;      &lt;int&gt;
+## 1 For Profit for profit    10
+## 2 Private    private       93
+## 3 Public     CSU           23
+## 4 Public     UC             9</code></pre>
+<p><code>div_df</code> has 5027 rows, corresponding to unique combinations of school (<code>name</code>) and demographic group (<code>category</code>). <code>share</code> gives the fraction of students enrolled at the school in the given group. Because the TidyTuesday dataset didn’t have the <code>degree_length</code> variable, I wasn’t able to filter down to only 4-year schools. That won’t be a problem later.</p>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="common-and-less-common-graphs-for-eda.html#cb128-1" aria-hidden="true"></a><span class="kw">skim</span>(div_df)</span></code></pre></div>
+<pre><code>## ── Data Summary ────────────────────────
+##                            Values
+## Name                       div_df
+## Number of rows             5027  
+## Number of columns          6     
+## _______________________          
+## Column type frequency:           
+##   character                3     
+##   numeric                  3     
+## ________________________         
+## Group variables            None  
+## 
+## ── Variable type: character ────────────────────────────────────────────────────────────────────────
+##   skim_variable n_missing complete_rate   min   max empty n_unique whitespace
+## 1 name                  0             1    11    74     0      457          0
+## 2 state                 0             1    10    10     0        1          0
+## 3 category              0             1     5    34     0       11          0
+## 
+## ── Variable type: numeric ──────────────────────────────────────────────────────────────────────────
+##   skim_variable    n_missing complete_rate     mean       sd    p0      p25       p50      p75  p100
+## 1 total_enrollment         0             1 5912.    8886.        8 427      1232      8695     51237
+## 2 enrollment               0             1 1160.    2988.        0  14        98       580     36116
+## 3 share                    0             1    0.193    0.241     0   0.0111    0.0634    0.332     1
+##   hist 
+## 1 ▇▁▁▁▁
+## 2 ▇▁▁▁▁
+## 3 ▇▂▂▁▁</code></pre>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="common-and-less-common-graphs-for-eda.html#cb130-1" aria-hidden="true"></a><span class="kw">count</span>(div_df, name)</span></code></pre></div>
+<pre><code>## # A tibble: 457 x 2
+##    name                                               n
+##    &lt;chr&gt;                                          &lt;int&gt;
+##  1 Academy for Jewish Religion                       11
+##  2 Academy of Art University                         11
+##  3 Academy of Chinese Culture and Health Sciences    11
+##  4 Academy of Couture Art                            11
+##  5 Acupuncture and Integrative Medicine College      11
+##  6 Advanced College                                  11
+##  7 Advanced Computing Institute                      11
+##  8 Advanced Training Associates                      11
+##  9 Allan Hancock College                             11
+## 10 Alliant International University: San Diego       11
+## # … with 447 more rows</code></pre>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="common-and-less-common-graphs-for-eda.html#cb132-1" aria-hidden="true"></a><span class="kw">count</span>(div_df, category)</span></code></pre></div>
+<pre><code>## # A tibble: 11 x 2
+##    category                               n
+##    &lt;chr&gt;                              &lt;int&gt;
+##  1 American Indian / Alaska Native      457
+##  2 Asian                                457
+##  3 Black                                457
+##  4 Hispanic                             457
+##  5 Native Hawaiian / Pacific Islander   457
+##  6 Non-Resident Foreign                 457
+##  7 Total Minority                       457
+##  8 Two Or More Races                    457
+##  9 Unknown                              457
+## 10 White                                457
+## 11 Women                                457</code></pre>
+</div>
+<div id="d-distributions" class="section level2" number="12.2">
+<h2><span class="header-section-number">12.2</span> 1D distributions</h2>
+<div id="categorical-barplot" class="section level3" number="12.2.1">
+<h3><span class="header-section-number">12.2.1</span> Categorical: Barplot</h3>
+<p>Counts of observations for a single categorical variable. It’s a bar geom with a count statistic. If we keep the statistic but change the geom, we get a point version of a barplot.</p>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="common-and-less-common-graphs-for-eda.html#cb134-1" aria-hidden="true"></a><span class="kw">ggplot</span>(tuition_df, <span class="kw">aes</span>(system, <span class="dt">fill =</span> system)) <span class="op">+</span></span>
+<span id="cb134-2"><a href="common-and-less-common-graphs-for-eda.html#cb134-2" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_bar</span>()</span>
+<span id="cb134-3"><a href="common-and-less-common-graphs-for-eda.html#cb134-3" aria-hidden="true"></a><span class="kw">ggplot</span>(tuition_df, <span class="kw">aes</span>(system, <span class="dt">fill =</span> system)) <span class="op">+</span></span>
+<span id="cb134-4"><a href="common-and-less-common-graphs-for-eda.html#cb134-4" aria-hidden="true"></a><span class="st">    </span><span class="kw">stat_count</span>(<span class="dt">geom =</span> <span class="st">&#39;bar&#39;</span>)</span></code></pre></div>
+<p><img src="book_files/figure-html/unnamed-chunk-78-1.png" width="50%" style="display: block; margin: auto;" /><img src="book_files/figure-html/unnamed-chunk-78-2.png" width="50%" style="display: block; margin: auto;" /></p>
+<p>If we keep the statistic but change the geom, we can make a point version of a barplot. Or a version with text labels.</p>
+<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="common-and-less-common-graphs-for-eda.html#cb135-1" aria-hidden="true"></a><span class="kw">ggplot</span>(tuition_df, <span class="kw">aes</span>(system, <span class="dt">color =</span> system)) <span class="op">+</span></span>
+<span id="cb135-2"><a href="common-and-less-common-graphs-for-eda.html#cb135-2" aria-hidden="true"></a><span class="st">    </span><span class="kw">stat_count</span>(<span class="dt">geom =</span> <span class="st">&#39;point&#39;</span>, <span class="dt">size =</span> <span class="dv">3</span>)</span>
+<span id="cb135-3"><a href="common-and-less-common-graphs-for-eda.html#cb135-3" aria-hidden="true"></a><span class="kw">ggplot</span>(tuition_df, <span class="kw">aes</span>(system, <span class="dt">color =</span> system)) <span class="op">+</span></span>
+<span id="cb135-4"><a href="common-and-less-common-graphs-for-eda.html#cb135-4" aria-hidden="true"></a><span class="st">    </span><span class="kw">stat_count</span>(<span class="dt">geom =</span> <span class="st">&#39;label&#39;</span>, <span class="kw">aes</span>(<span class="dt">label =</span> <span class="kw">after_stat</span>(count)))</span></code></pre></div>
+<p><img src="book_files/figure-html/unnamed-chunk-79-1.png" width="50%" style="display: block; margin: auto;" /><img src="book_files/figure-html/unnamed-chunk-79-2.png" width="50%" style="display: block; margin: auto;" /></p>
+<p>Because of ggplot’s layering system, we’re not restricted to just a barplot or one of these variations. We can combine geoms into a single plot.</p>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="common-and-less-common-graphs-for-eda.html#cb136-1" aria-hidden="true"></a><span class="kw">ggplot</span>(tuition_df, <span class="kw">aes</span>(system)) <span class="op">+</span></span>
+<span id="cb136-2"><a href="common-and-less-common-graphs-for-eda.html#cb136-2" aria-hidden="true"></a><span class="st">    </span><span class="kw">stat_count</span>(<span class="dt">geom =</span> <span class="st">&#39;bar&#39;</span>, <span class="kw">aes</span>(<span class="dt">fill =</span> system)) <span class="op">+</span></span>
+<span id="cb136-3"><a href="common-and-less-common-graphs-for-eda.html#cb136-3" aria-hidden="true"></a><span class="st">    </span><span class="kw">stat_count</span>(<span class="dt">geom =</span> <span class="st">&#39;label&#39;</span>, <span class="kw">aes</span>(<span class="dt">label =</span> <span class="kw">after_stat</span>(count)), </span>
+<span id="cb136-4"><a href="common-and-less-common-graphs-for-eda.html#cb136-4" aria-hidden="true"></a>               <span class="dt">position =</span> <span class="kw">position_nudge</span>(<span class="dt">y =</span> <span class="dv">5</span>))</span></code></pre></div>
+<p><img src="book_files/figure-html/unnamed-chunk-80-1.png" width="60%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="numeric-histograms-and-density-plots" class="section level3" number="12.2.2">
+<h3><span class="header-section-number">12.2.2</span> Numeric: Histograms and density plots</h3>
+<p>A histogram is a count of observations for a single categorical variable. It uses the same geom as the barplot, but a statistic of counts of <em>binned</em> values for a continuous variable.</p>
+<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="common-and-less-common-graphs-for-eda.html#cb137-1" aria-hidden="true"></a><span class="kw">ggplot</span>(tuition_df, <span class="kw">aes</span>(in_state_tuition)) <span class="op">+</span></span>
+<span id="cb137-2"><a href="common-and-less-common-graphs-for-eda.html#cb137-2" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_histogram</span>()</span></code></pre></div>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="common-and-less-common-graphs-for-eda.html#cb139-1" aria-hidden="true"></a><span class="kw">ggplot</span>(tuition_df, <span class="kw">aes</span>(in_state_tuition)) <span class="op">+</span></span>
+<span id="cb139-2"><a href="common-and-less-common-graphs-for-eda.html#cb139-2" aria-hidden="true"></a><span class="st">    </span><span class="kw">stat_bin</span>(<span class="dt">geom =</span> <span class="st">&#39;bar&#39;</span>)</span></code></pre></div>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="book_files/figure-html/unnamed-chunk-81-1.png" width="40%" style="display: block; margin: auto;" /><img src="book_files/figure-html/unnamed-chunk-81-2.png" width="40%" style="display: block; margin: auto;" /></p>
+<ul>
+<li><code>binwidth</code> can have a dramatic effect on the appearance of the plot</li>
+<li><code>binwidth</code> is a free parameter in constructing the histogram as a model of the data</li>
+</ul>
+<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="common-and-less-common-graphs-for-eda.html#cb141-1" aria-hidden="true"></a><span class="kw">ggplot</span>(tuition_df, <span class="kw">aes</span>(in_state_tuition)) <span class="op">+</span></span>
+<span id="cb141-2"><a href="common-and-less-common-graphs-for-eda.html#cb141-2" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="dv">100</span>)</span></code></pre></div>
+<p><img src="book_files/figure-html/unnamed-chunk-82-1.png" width="60%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="common-and-less-common-graphs-for-eda.html#cb142-1" aria-hidden="true"></a><span class="kw">ggplot</span>(tuition_df, <span class="kw">aes</span>(in_state_tuition)) <span class="op">+</span></span>
+<span id="cb142-2"><a href="common-and-less-common-graphs-for-eda.html#cb142-2" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="dv">1000</span>)</span></code></pre></div>
+<p><img src="book_files/figure-html/unnamed-chunk-82-2.png" width="60%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="common-and-less-common-graphs-for-eda.html#cb143-1" aria-hidden="true"></a><span class="kw">ggplot</span>(tuition_df, <span class="kw">aes</span>(in_state_tuition)) <span class="op">+</span></span>
+<span id="cb143-2"><a href="common-and-less-common-graphs-for-eda.html#cb143-2" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="dv">10000</span>)</span></code></pre></div>
+<p><img src="book_files/figure-html/unnamed-chunk-82-3.png" width="60%" style="display: block; margin: auto;" /></p>
+<p>A frequency polygon uses the same count statistic, but displays the result with a line rather than columns.</p>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="common-and-less-common-graphs-for-eda.html#cb144-1" aria-hidden="true"></a><span class="kw">ggplot</span>(tuition_df, <span class="kw">aes</span>(in_state_tuition)) <span class="op">+</span></span>
+<span id="cb144-2"><a href="common-and-less-common-graphs-for-eda.html#cb144-2" aria-hidden="true"></a><span class="st">    </span><span class="kw">stat_bin</span>(<span class="dt">geom =</span> <span class="st">&#39;bar&#39;</span>)</span></code></pre></div>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="book_files/figure-html/unnamed-chunk-83-1.png" width="60%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="common-and-less-common-graphs-for-eda.html#cb146-1" aria-hidden="true"></a><span class="kw">ggplot</span>(tuition_df, <span class="kw">aes</span>(in_state_tuition)) <span class="op">+</span></span>
+<span id="cb146-2"><a href="common-and-less-common-graphs-for-eda.html#cb146-2" aria-hidden="true"></a><span class="st">    </span><span class="kw">stat_bin</span>(<span class="dt">geom =</span> <span class="st">&#39;line&#39;</span>)</span></code></pre></div>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="book_files/figure-html/unnamed-chunk-83-2.png" width="60%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="common-and-less-common-graphs-for-eda.html#cb148-1" aria-hidden="true"></a><span class="kw">ggplot</span>(tuition_df, <span class="kw">aes</span>(in_state_tuition)) <span class="op">+</span></span>
+<span id="cb148-2"><a href="common-and-less-common-graphs-for-eda.html#cb148-2" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_freqpoly</span>()</span></code></pre></div>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="book_files/figure-html/unnamed-chunk-83-3.png" width="60%" style="display: block; margin: auto;" /></p>
+<p>Density plots are a smoothed version of histograms.</p>
+<ul>
+<li>Often drawn with a rug, which indicates the locations of observed values on the x-axis</li>
+<li>Like histogram, is a model of the data</li>
+<li>Unlike histogram, people often overlook the free parameters (see <code>?density</code>)</li>
+</ul>
+<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="common-and-less-common-graphs-for-eda.html#cb150-1" aria-hidden="true"></a><span class="kw">ggplot</span>(tuition_df, <span class="kw">aes</span>(in_state_tuition)) <span class="op">+</span></span>
+<span id="cb150-2"><a href="common-and-less-common-graphs-for-eda.html#cb150-2" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_density</span>() <span class="op">+</span></span>
+<span id="cb150-3"><a href="common-and-less-common-graphs-for-eda.html#cb150-3" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_rug</span>()</span></code></pre></div>
+<p><img src="book_files/figure-html/unnamed-chunk-84-1.png" width="60%" style="display: block; margin: auto;" /></p>
+<p>A strip plot simply plots the values on a single axis.</p>
+<ul>
+<li>Unlike all of the other examples here, it doesn’t involve any free parameters or other modeling decisions.<br />
+</li>
+<li>But it’s also not very useful</li>
+</ul>
+<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="common-and-less-common-graphs-for-eda.html#cb151-1" aria-hidden="true"></a><span class="kw">ggplot</span>(tuition_df, <span class="kw">aes</span>(in_state_tuition)) <span class="op">+</span></span>
+<span id="cb151-2"><a href="common-and-less-common-graphs-for-eda.html#cb151-2" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_point</span>(<span class="dt">y =</span> <span class="dv">0</span>) <span class="op">+</span></span>
+<span id="cb151-3"><a href="common-and-less-common-graphs-for-eda.html#cb151-3" aria-hidden="true"></a><span class="st">    </span><span class="kw">ylim</span>(<span class="op">-</span>.<span class="dv">1</span>, <span class="fl">.1</span>)</span></code></pre></div>
+<p><img src="book_files/figure-html/unnamed-chunk-85-1.png" width="60%" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="d-distributions-categorical-x-numeric" class="section level2" number="12.3">
+<h2><span class="header-section-number">12.3</span> 2D distributions: Categorical x Numeric</h2>
+<p>When there are only a few values of a categorical variable, it can be useful to simply plot points for individual values.</p>
+<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="common-and-less-common-graphs-for-eda.html#cb152-1" aria-hidden="true"></a><span class="kw">ggplot</span>(tuition_df, <span class="kw">aes</span>(<span class="kw">fct_reorder</span>(name, in_state_tuition),</span>
+<span id="cb152-2"><a href="common-and-less-common-graphs-for-eda.html#cb152-2" aria-hidden="true"></a>                       in_state_tuition, </span>
+<span id="cb152-3"><a href="common-and-less-common-graphs-for-eda.html#cb152-3" aria-hidden="true"></a>                       <span class="dt">color =</span> system)) <span class="op">+</span></span>
+<span id="cb152-4"><a href="common-and-less-common-graphs-for-eda.html#cb152-4" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color =</span> system)) <span class="op">+</span></span>
+<span id="cb152-5"><a href="common-and-less-common-graphs-for-eda.html#cb152-5" aria-hidden="true"></a><span class="st">    </span><span class="kw">coord_flip</span>()</span></code></pre></div>
+<p><img src="book_files/figure-html/unnamed-chunk-86-1.png" width="60%" style="display: block; margin: auto;" /></p>
+<p>But we probably don’t care about the names of individual schools. One option is a stacked histogram, using color (fill) to indicate school system.</p>
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="common-and-less-common-graphs-for-eda.html#cb153-1" aria-hidden="true"></a><span class="kw">ggplot</span>(tuition_df, <span class="kw">aes</span>(in_state_tuition, <span class="dt">fill =</span> system)) <span class="op">+</span></span>
+<span id="cb153-2"><a href="common-and-less-common-graphs-for-eda.html#cb153-2" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="dv">1000</span>)</span></code></pre></div>
+<p><img src="book_files/figure-html/unnamed-chunk-87-1.png" width="60%" style="display: block; margin: auto;" /></p>
+<p>These can be difficult to read when it’s not clear whether the bars are stacked on top of each other or layered, one behind the other. Here the bars are layered. The differences are very subtle but potentially important.</p>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="common-and-less-common-graphs-for-eda.html#cb154-1" aria-hidden="true"></a><span class="kw">ggplot</span>(tuition_df, <span class="kw">aes</span>(in_state_tuition, <span class="dt">fill =</span> system)) <span class="op">+</span></span>
+<span id="cb154-2"><a href="common-and-less-common-graphs-for-eda.html#cb154-2" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="dv">1000</span>, <span class="dt">position =</span> <span class="st">&#39;identity&#39;</span>)</span></code></pre></div>
+<p><img src="book_files/figure-html/unnamed-chunk-88-1.png" width="60%" style="display: block; margin: auto;" /></p>
+<p>So it’s more common to put the categorical variable on the x-axis. Here’s a traditional boxplot. While color is strictly unnecessary, using color for the same categorical variable across plots helps us track relationships. Notice that we can change the way color is used by simply changing which aesthetic gets <code>system</code>.</p>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="common-and-less-common-graphs-for-eda.html#cb155-1" aria-hidden="true"></a><span class="kw">ggplot</span>(tuition_df, <span class="kw">aes</span>(system, in_state_tuition, <span class="dt">color =</span> system)) <span class="op">+</span></span>
+<span id="cb155-2"><a href="common-and-less-common-graphs-for-eda.html#cb155-2" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_boxplot</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="common-and-less-common-graphs-for-eda.html#cb156-1" aria-hidden="true"></a><span class="kw">ggplot</span>(tuition_df, <span class="kw">aes</span>(system, in_state_tuition, <span class="dt">fill =</span> system)) <span class="op">+</span></span>
+<span id="cb156-2"><a href="common-and-less-common-graphs-for-eda.html#cb156-2" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_boxplot</span>()</span></code></pre></div>
+<p>However, bowplots have many of the problems that <span class="citation">Weissgerber et al. (<a href="#ref-WeissgerberBarLineGraphs2015" role="doc-biblioref">2015</a>)</span> identify with bar-and-whisker plots. Neither is actually very good at showing non-gaussian distributions of the underlying data.</p>
+<p>A violin plot is better for this. The violin plot calculates densities across the numerical variable (tuition) within groups defined by the categorical variable (system), and shows them symmetrically. We can use the <code>draw_quantiles</code> argument to show the medians, and <code>scale = 'width'</code> to get them to have the same width (rather than the same area, the default).</p>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="common-and-less-common-graphs-for-eda.html#cb157-1" aria-hidden="true"></a><span class="kw">ggplot</span>(tuition_df, <span class="kw">aes</span>(system, in_state_tuition, <span class="dt">color =</span> system)) <span class="op">+</span></span>
+<span id="cb157-2"><a href="common-and-less-common-graphs-for-eda.html#cb157-2" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_violin</span>(<span class="dt">draw_quantiles =</span> <span class="fl">.5</span>, <span class="dt">scale =</span> <span class="st">&#39;width&#39;</span>)</span></code></pre></div>
+<p><img src="book_files/figure-html/unnamed-chunk-90-1.png" width="60%" style="display: block; margin: auto;" /></p>
+<p>We can add points to this, using <code>position = 'jitter'</code> to reduce overplotting and <code>alpha = .5</code> to make them 50% transparent.</p>
+<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="common-and-less-common-graphs-for-eda.html#cb158-1" aria-hidden="true"></a><span class="kw">ggplot</span>(tuition_df, <span class="kw">aes</span>(system, in_state_tuition, <span class="dt">color =</span> system)) <span class="op">+</span></span>
+<span id="cb158-2"><a href="common-and-less-common-graphs-for-eda.html#cb158-2" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_violin</span>(<span class="dt">draw_quantiles =</span> <span class="fl">.5</span>, <span class="dt">scale =</span> <span class="st">&#39;width&#39;</span>) <span class="op">+</span></span>
+<span id="cb158-3"><a href="common-and-less-common-graphs-for-eda.html#cb158-3" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_point</span>(<span class="dt">position =</span> <span class="st">&#39;jitter&#39;</span>, <span class="dt">alpha =</span> <span class="fl">.5</span>)</span></code></pre></div>
+<p><img src="book_files/figure-html/unnamed-chunk-91-1.png" width="60%" style="display: block; margin: auto;" /></p>
+<p><code>ggforce::geom_sina()</code> tries to match the amount of jitter to the width of the violin plot, using the same <code>scale</code> argument. It’s a little better, because now the points aren’t outside of the violin. But it’s still hard to see a visual pattern.</p>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="common-and-less-common-graphs-for-eda.html#cb159-1" aria-hidden="true"></a><span class="kw">ggplot</span>(tuition_df, <span class="kw">aes</span>(system, in_state_tuition, <span class="dt">color =</span> system)) <span class="op">+</span></span>
+<span id="cb159-2"><a href="common-and-less-common-graphs-for-eda.html#cb159-2" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_violin</span>(<span class="dt">draw_quantiles =</span> <span class="fl">.5</span>, <span class="dt">scale =</span> <span class="st">&#39;width&#39;</span>) <span class="op">+</span></span>
+<span id="cb159-3"><a href="common-and-less-common-graphs-for-eda.html#cb159-3" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_sina</span>(<span class="dt">scale =</span> <span class="st">&#39;width&#39;</span>)</span></code></pre></div>
+<p><img src="book_files/figure-html/unnamed-chunk-92-1.png" width="60%" style="display: block; margin: auto;" /></p>
+<p>A beeswarm plot positions the points so that they cluster close together in the x-direction without too much overplotting. This allows us to show both the individual points and the density distribution, with roughly the same shape (after tweaking some parameters).</p>
+<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="common-and-less-common-graphs-for-eda.html#cb160-1" aria-hidden="true"></a><span class="kw">ggplot</span>(tuition_df, <span class="kw">aes</span>(system, in_state_tuition, <span class="dt">color =</span> system)) <span class="op">+</span></span>
+<span id="cb160-2"><a href="common-and-less-common-graphs-for-eda.html#cb160-2" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_violin</span>(<span class="dt">draw_quantiles =</span> <span class="fl">.5</span>, <span class="dt">scale =</span> <span class="st">&#39;width&#39;</span>) <span class="op">+</span></span>
+<span id="cb160-3"><a href="common-and-less-common-graphs-for-eda.html#cb160-3" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_beeswarm</span>(<span class="dt">cex =</span> <span class="dv">2</span>)</span></code></pre></div>
+<p><img src="book_files/figure-html/unnamed-chunk-93-1.png" width="60%" style="display: block; margin: auto;" /></p>
+<p>Using ggplot it is possible to create the bar-and-whiskers plot that <span class="citation">Weissgerber et al. (<a href="#ref-WeissgerberBarLineGraphs2015" role="doc-biblioref">2015</a>)</span> criticize. But now we have much better options.</p>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="common-and-less-common-graphs-for-eda.html#cb161-1" aria-hidden="true"></a><span class="kw">ggplot</span>(tuition_df, <span class="kw">aes</span>(system, in_state_tuition, </span>
+<span id="cb161-2"><a href="common-and-less-common-graphs-for-eda.html#cb161-2" aria-hidden="true"></a>                       <span class="dt">fill =</span> system, <span class="dt">color =</span> system)) <span class="op">+</span></span>
+<span id="cb161-3"><a href="common-and-less-common-graphs-for-eda.html#cb161-3" aria-hidden="true"></a><span class="st">    </span><span class="kw">stat_summary</span>(<span class="dt">geom =</span> <span class="st">&#39;bar&#39;</span>) <span class="op">+</span></span>
+<span id="cb161-4"><a href="common-and-less-common-graphs-for-eda.html#cb161-4" aria-hidden="true"></a><span class="st">    </span><span class="kw">stat_summary</span>(<span class="dt">geom =</span> <span class="st">&#39;errorbar&#39;</span>, <span class="dt">width =</span> <span class="fl">.2</span>)</span></code></pre></div>
+<pre><code>## No summary function supplied, defaulting to `mean_se()`
+## No summary function supplied, defaulting to `mean_se()`</code></pre>
+<p><img src="book_files/figure-html/unnamed-chunk-94-1.png" width="60%" style="display: block; margin: auto;" /></p>
+<p><em>[join stuff]</em></p>
+<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="common-and-less-common-graphs-for-eda.html#cb163-1" aria-hidden="true"></a><span class="co">## Schools in tuition_df that will be missing after we join w/ div_df</span></span>
+<span id="cb163-2"><a href="common-and-less-common-graphs-for-eda.html#cb163-2" aria-hidden="true"></a><span class="kw">anti_join</span>(tuition_df, div_df, <span class="dt">by =</span> <span class="st">&#39;name&#39;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb163-3"><a href="common-and-less-common-graphs-for-eda.html#cb163-3" aria-hidden="true"></a><span class="st">    </span><span class="kw">pull</span>(name)</span></code></pre></div>
+<pre><code>##  [1] &quot;Alliant International University&quot;                           
+##  [2] &quot;Antioch University Los Angeles&quot;                             
+##  [3] &quot;Antioch University Santa Barbara&quot;                           
+##  [4] &quot;Beverly Hills Design Institute&quot;                             
+##  [5] &quot;California Coast University&quot;                                
+##  [6] &quot;California Northstate University College of Health Sciences&quot;
+##  [7] &quot;Charles R Drew University of Medicine and Science&quot;          
+##  [8] &quot;Concordia University Irvine&quot;                                
+##  [9] &quot;Hult International Business School&quot;                         
+## [10] &quot;Laguna College of Art and Design&quot;                           
+## [11] &quot;Lincoln University&quot;                                         
+## [12] &quot;Mount Saint Mary&#39;s University&quot;                              
+## [13] &quot;New Charter University&quot;                                     
+## [14] &quot;Northcentral University&quot;                                    
+## [15] &quot;Northwestern Polytechnic University&quot;                        
+## [16] &quot;Pacific Union College&quot;                                      
+## [17] &quot;Silicon Valley University&quot;                                  
+## [18] &quot;Simpson University&quot;                                         
+## [19] &quot;SUM Bible College &amp; Theological Seminary&quot;                   
+## [20] &quot;The Master&#39;s University and Seminary&quot;</code></pre>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="common-and-less-common-graphs-for-eda.html#cb165-1" aria-hidden="true"></a><span class="co">## Because div_df isn&#39;t filtered down to 2-year schools, it&#39;s okay if a lot of its schools are left out</span></span>
+<span id="cb165-2"><a href="common-and-less-common-graphs-for-eda.html#cb165-2" aria-hidden="true"></a><span class="kw">anti_join</span>(div_df, tuition_df, <span class="dt">by =</span> <span class="st">&#39;name&#39;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb165-3"><a href="common-and-less-common-graphs-for-eda.html#cb165-3" aria-hidden="true"></a><span class="st">    </span><span class="kw">nrow</span>()</span></code></pre></div>
+<pre><code>## [1] 3762</code></pre>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="common-and-less-common-graphs-for-eda.html#cb167-1" aria-hidden="true"></a><span class="co">## Checking duplications</span></span>
+<span id="cb167-2"><a href="common-and-less-common-graphs-for-eda.html#cb167-2" aria-hidden="true"></a>comb_df_draft =<span class="st"> </span><span class="kw">inner_join</span>(tuition_df, div_df, <span class="dt">by =</span> <span class="st">&#39;name&#39;</span>)</span>
+<span id="cb167-3"><a href="common-and-less-common-graphs-for-eda.html#cb167-3" aria-hidden="true"></a><span class="kw">nrow</span>(comb_df_draft)</span></code></pre></div>
+<pre><code>## [1] 1265</code></pre>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="common-and-less-common-graphs-for-eda.html#cb169-1" aria-hidden="true"></a><span class="kw">nrow</span>(<span class="kw">distinct</span>(comb_df_draft))</span></code></pre></div>
+<pre><code>## [1] 1265</code></pre>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="common-and-less-common-graphs-for-eda.html#cb171-1" aria-hidden="true"></a><span class="co">## 135 schools in tuition_df, minus 20 rows not matched</span></span>
+<span id="cb171-2"><a href="common-and-less-common-graphs-for-eda.html#cb171-2" aria-hidden="true"></a>comb_df_draft <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb171-3"><a href="common-and-less-common-graphs-for-eda.html#cb171-3" aria-hidden="true"></a><span class="st">    </span><span class="kw">select</span>(name) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb171-4"><a href="common-and-less-common-graphs-for-eda.html#cb171-4" aria-hidden="true"></a><span class="st">    </span><span class="kw">distinct</span>() <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb171-5"><a href="common-and-less-common-graphs-for-eda.html#cb171-5" aria-hidden="true"></a><span class="st">    </span><span class="kw">nrow</span>()</span></code></pre></div>
+<pre><code>## [1] 115</code></pre>
+<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="common-and-less-common-graphs-for-eda.html#cb173-1" aria-hidden="true"></a><span class="co">## We should have one row in comb_df_draft for each school-category combination</span></span>
+<span id="cb173-2"><a href="common-and-less-common-graphs-for-eda.html#cb173-2" aria-hidden="true"></a>comb_df_draft <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb173-3"><a href="common-and-less-common-graphs-for-eda.html#cb173-3" aria-hidden="true"></a><span class="st">    </span><span class="kw">select</span>(name, category) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb173-4"><a href="common-and-less-common-graphs-for-eda.html#cb173-4" aria-hidden="true"></a><span class="st">    </span><span class="kw">distinct</span>() <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb173-5"><a href="common-and-less-common-graphs-for-eda.html#cb173-5" aria-hidden="true"></a><span class="st">    </span><span class="kw">nrow</span>()</span></code></pre></div>
+<pre><code>## [1] 1265</code></pre>
+<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="common-and-less-common-graphs-for-eda.html#cb175-1" aria-hidden="true"></a><span class="co">## Check column names</span></span>
+<span id="cb175-2"><a href="common-and-less-common-graphs-for-eda.html#cb175-2" aria-hidden="true"></a><span class="kw">names</span>(comb_df_draft)</span></code></pre></div>
+<pre><code>##  [1] &quot;name&quot;                 &quot;state.x&quot;              &quot;state_code&quot;           &quot;type&quot;                
+##  [5] &quot;degree_length&quot;        &quot;room_and_board&quot;       &quot;in_state_tuition&quot;     &quot;in_state_total&quot;      
+##  [9] &quot;out_of_state_tuition&quot; &quot;out_of_state_total&quot;   &quot;system&quot;               &quot;total_enrollment&quot;    
+## [13] &quot;state.y&quot;              &quot;category&quot;             &quot;enrollment&quot;           &quot;share&quot;</code></pre>
+<p><em>[after joins]</em></p>
+<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="common-and-less-common-graphs-for-eda.html#cb177-1" aria-hidden="true"></a>comb_df =<span class="st"> </span><span class="kw">inner_join</span>(div_df, tuition_df, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&#39;name&#39;</span>, <span class="st">&#39;state&#39;</span>))</span>
+<span id="cb177-2"><a href="common-and-less-common-graphs-for-eda.html#cb177-2" aria-hidden="true"></a></span>
+<span id="cb177-3"><a href="common-and-less-common-graphs-for-eda.html#cb177-3" aria-hidden="true"></a><span class="kw">ggplot</span>(comb_df, <span class="kw">aes</span>(system, share, <span class="dt">color =</span> system)) <span class="op">+</span></span>
+<span id="cb177-4"><a href="common-and-less-common-graphs-for-eda.html#cb177-4" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_violin</span>(<span class="dt">scale =</span> <span class="st">&#39;width&#39;</span>,</span>
+<span id="cb177-5"><a href="common-and-less-common-graphs-for-eda.html#cb177-5" aria-hidden="true"></a>                <span class="dt">draw_quantiles =</span> <span class="fl">.5</span>) <span class="op">+</span></span>
+<span id="cb177-6"><a href="common-and-less-common-graphs-for-eda.html#cb177-6" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_beeswarm</span>(<span class="dt">alpha =</span> <span class="fl">.25</span>, <span class="dt">cex =</span> <span class="dv">2</span>) <span class="op">+</span></span>
+<span id="cb177-7"><a href="common-and-less-common-graphs-for-eda.html#cb177-7" aria-hidden="true"></a><span class="st">    </span><span class="kw">facet_wrap</span>(<span class="kw">vars</span>(category), <span class="dt">scales =</span> <span class="st">&#39;free&#39;</span>)</span></code></pre></div>
+<pre><code>## Warning in regularize.values(x, y, ties, missing(ties), na.rm = na.rm): collapsing to unique &#39;x&#39;
+## values
+
+## Warning in regularize.values(x, y, ties, missing(ties), na.rm = na.rm): collapsing to unique &#39;x&#39;
+## values
+
+## Warning in regularize.values(x, y, ties, missing(ties), na.rm = na.rm): collapsing to unique &#39;x&#39;
+## values</code></pre>
+<p><img src="book_files/figure-html/unnamed-chunk-96-1.png" width="60%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="common-and-less-common-graphs-for-eda.html#cb179-1" aria-hidden="true"></a><span class="kw">ggplot</span>(comb_df, <span class="kw">aes</span>(in_state_tuition, share)) <span class="op">+</span></span>
+<span id="cb179-2"><a href="common-and-less-common-graphs-for-eda.html#cb179-2" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color =</span> system)) <span class="op">+</span></span>
+<span id="cb179-3"><a href="common-and-less-common-graphs-for-eda.html#cb179-3" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_smooth</span>(<span class="dt">color =</span> <span class="st">&#39;black&#39;</span>) <span class="op">+</span></span>
+<span id="cb179-4"><a href="common-and-less-common-graphs-for-eda.html#cb179-4" aria-hidden="true"></a><span class="st">    </span><span class="kw">facet_wrap</span>(<span class="kw">vars</span>(category), <span class="dt">scales =</span> <span class="st">&#39;free&#39;</span>)</span></code></pre></div>
+<pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;</code></pre>
+<p><img src="book_files/figure-html/unnamed-chunk-96-2.png" width="60%" style="display: block; margin: auto;" /></p>
+<p><em>[todo]</em></p>
+</div>
+<div id="multivariate-distributions" class="section level2" number="12.4">
+<h2><span class="header-section-number">12.4</span> Multivariate distributions</h2>
+<ul>
+<li><code>ggforce::facet_matrix()</code></li>
+</ul>
+<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="common-and-less-common-graphs-for-eda.html#cb181-1" aria-hidden="true"></a><span class="kw">ggplot</span>(tuition_df, <span class="kw">aes</span>(.panel_x, .panel_y, <span class="dt">color =</span> system)) <span class="op">+</span></span>
+<span id="cb181-2"><a href="common-and-less-common-graphs-for-eda.html#cb181-2" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_autopoint</span>(<span class="dt">color =</span> <span class="st">&#39;blue&#39;</span>) <span class="op">+</span></span>
+<span id="cb181-3"><a href="common-and-less-common-graphs-for-eda.html#cb181-3" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_autodensity</span>(<span class="dt">fill =</span> <span class="ot">NA</span>, <span class="dt">position =</span> <span class="st">&#39;identity&#39;</span>) <span class="op">+</span></span>
+<span id="cb181-4"><a href="common-and-less-common-graphs-for-eda.html#cb181-4" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_autopoint</span>() <span class="op">+</span></span>
+<span id="cb181-5"><a href="common-and-less-common-graphs-for-eda.html#cb181-5" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_mark_ellipse</span>(<span class="dt">expand =</span> <span class="fl">.05</span>) <span class="op">+</span></span>
+<span id="cb181-6"><a href="common-and-less-common-graphs-for-eda.html#cb181-6" aria-hidden="true"></a><span class="st">    </span><span class="kw">stat_function</span>(<span class="dt">fun =</span> identity, <span class="dt">inherit.aes =</span> <span class="ot">FALSE</span>) <span class="op">+</span></span>
+<span id="cb181-7"><a href="common-and-less-common-graphs-for-eda.html#cb181-7" aria-hidden="true"></a><span class="st">    </span><span class="kw">facet_matrix</span>(<span class="kw">vars</span>(in_state_tuition, in_state_total, </span>
+<span id="cb181-8"><a href="common-and-less-common-graphs-for-eda.html#cb181-8" aria-hidden="true"></a>                      out_of_state_tuition, out_of_state_total), </span>
+<span id="cb181-9"><a href="common-and-less-common-graphs-for-eda.html#cb181-9" aria-hidden="true"></a>                 <span class="dt">layer.upper =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">5</span>),</span>
+<span id="cb181-10"><a href="common-and-less-common-graphs-for-eda.html#cb181-10" aria-hidden="true"></a>                 <span class="dt">layer.diag =</span> <span class="dv">2</span>, </span>
+<span id="cb181-11"><a href="common-and-less-common-graphs-for-eda.html#cb181-11" aria-hidden="true"></a>                 <span class="dt">layer.lower =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>))</span></code></pre></div>
+<p><img src="book_files/figure-html/unnamed-chunk-97-1.png" width="60%" style="display: block; margin: auto;" /></p>
+<ul>
+<li>lab: correlation heat map + scatterplots</li>
+<li>upset plots (ggupset)</li>
+</ul>
+
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-WeissgerberBarLineGraphs2015">
+<p>Weissgerber, Tracey L., Natasa M. Milic, Stacey J. Winham, and Vesna D. Garovic. 2015. “Beyond Bar and Line Graphs: Time for a New Data Presentation Paradigm.” <em>PLoS Biol</em> 13 (4): e1002128. <a href="https://doi.org/10.1371/journal.pbio.1002128">https://doi.org/10.1371/journal.pbio.1002128</a>.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="visual-eda.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="intermediate-visualization-in-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/data-science-methods/book/blob/master/03-06-common-graphs.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["book.pdf"],
+"toc": {
+"collapse": "section",
+"scroll_highlight": true
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
