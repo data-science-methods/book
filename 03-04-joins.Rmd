@@ -99,6 +99,7 @@ knitr::include_graphics(file.path('images', '03-eda', 'relational-nycflights.png
 ```{r}
 library(tidyverse)
 library(nycflights13)
+library(visdat)
 
 flights
 airports
@@ -113,6 +114,12 @@ tail(flights)
 flights %>% 
     filter(is.na(dep_time)) %>% 
     nrow()
+
+## Draw a sample of 1k rows and pipe them into vis_miss()
+set.seed(2020-09-20)
+flights %>% 
+    sample_n(1000) %>% 
+    vis_miss(cluster = TRUE)
 
 ## But origin is complete
 flights %>% 

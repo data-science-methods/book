@@ -12,7 +12,7 @@
 - Including not just graphs but also structured tables, such as [stem-and-leaf displays](https://en.wikipedia.org/wiki/Stem-and-leaf_display)
 
 - In terms of our 3 models of EDA (ch. \@ref(eda-models))
-    - Risk management:  With the right plot, our visual system can very efficiently detect aspects of the data that don't show up easily with summary statistics but will break models
+    - Risk management:  With the right plot, our visual system can very efficiently detect potential problems in the data that don't show up easily with summary statistics
         - Outliers 
         - Degeneracies (eg, perfect correlation)
         - Skew or bimodal distributions
@@ -23,7 +23,8 @@
         - Develop expectations about relationships between variables
 
     - Phenomena development: 
-        - *[something]*
+        - Quickly identify potential patterns
+        - Contrast potential patterns with noise/uncertainty/imprecision
 
 
 ## Plot Your Data ##
@@ -32,7 +33,7 @@
     - This is all you would need if the world were made of normal distributions
     - The world is not made of normal distributions [@LyonWhyAreNormal2014]
 
-- We'll illustrate this using The Datasaurus Dozen, a collection of 13 datasets
+- We'll illustrate this using The Datasaurus Dozen, a collection of 13 datasets [@MatejkaSameStatsDifferent]
     - Each dataset has two variables, `x` and `y`
 
 ```{r}
@@ -52,9 +53,9 @@ dataf %>%
     group_by(dataset) %>% 
     ## This is a more complex summarize() call than we've seen before
     ## 1. Number of rows
-    ## 2. "Summarize across the columns x and y, using the functions mean and sd"
+    ## 2. "Summarize across the columns x and y, using the functions mean and sd"; automatically generates names
     ## 3. Correlation between x and y
-    ## 4. p-value for t-test of the null that the correlation = 0
+    ## 4. p-value from a t-test of the null that the correlation = 0
     summarize(n = n(), 
               across(.cols = c(x, y), 
                      .fns = lst(mean, sd)), 
@@ -74,7 +75,7 @@ ggplot(dataf, aes(x, y)) +
 
 - @WilkinsonGrammarGraphics1999; @WickhamLayeredGrammarGraphics2010
 
-```{r, echo = FALSE, fig.cap = 'The Grammar of Graphics regards graphs as mappings from variables in the data to features of geometric objects. This means that every graph is a model.'}
+```{r, echo = FALSE, fig.cap = 'The Grammar of Graphics regards graphs as mappings from variables in the data to features of geometric objects. This means that every graph is a model.', out.width='100%'}
 knitr::include_graphics(file.path('images', '03-eda', 'grammar_of_graphics.png'))
 ```
 

@@ -24,7 +24,7 @@ PDF versions of each chapter can be found here:  [Handouts](handouts/index.html)
 
 (The URLs to the handouts are buggy.  To get to them, look for `handout/handout/` in the URL; delete the second `handout/`.)
 
-
+-----
 
 These notes were written in [RStudio](http://www.rstudio.com/ide/) using [bookdown](http://bookdown.org/). The complete source is available on [GitHub](https://github.com/data-science-methods/book/) and is automatically rebuilt using [Travis CI](https://github.com/data-science-methods/book/). 
 

@@ -233,7 +233,17 @@ ggplot(tuition_df, aes(system, in_state_tuition,
     stat_summary(geom = 'errorbar', width = .2)
 ```
 
-*[join stuff]*
+
+## Joining tuition and diversity data ##
+
+The other numeric variables in the tuition data are variations on in-state tuition:  they add room and board (`in_state_total`) or tuition for out-of-state tuitions (`out_of_state_tuition`), or both.  For something more interesting, we'll join the tuition data to the diversity data.  
+
+Recall that `div_df` has one row for each *combination* of school and demographic group (`category`).  
+```{r}
+div_df
+```
+
+First we'll do some checks for the hazards discussed in the "Joins" chapter. 
 
 ```{r}
 ## Schools in tuition_df that will be missing after we join w/ div_df
@@ -265,30 +275,68 @@ comb_df_draft %>%
 names(comb_df_draft)
 ```
 
-
-*[after joins]*
+Now we'll actually do the join. 
 
 ```{r}
 comb_df = inner_join(div_df, tuition_df, by = c('name', 'state'))
+```
 
+
+## School Diversity Violin Plots ##
+
+Because of the way `div_df` is structured, it makes sense to separate all of the plots for it into separate panels using the `category` variable.  We've used `facet_wrap()` in this way before.  
+
+```{r, out.width = '100%'}
 ggplot(comb_df, aes(system, share, color = system)) +
     geom_violin(scale = 'width',
                 draw_quantiles = .5) +
     geom_beeswarm(alpha = .25, cex = 2) +
     facet_wrap(vars(category), scales = 'free')
+```
 
+- No school in the data has more than 5% American Indian/Alaska Native students.  
+- The numbers are even lower for Native Hawaiian/Pacific Islanders. 
+- Just a few schools have more than 10% Black students.  
+- The median UC and CSU schools have greater "Total Minority" students than the private schools. 
+    - But there's a lot of variation within the CSU system and across private schools. 
+- UC and CSU schools have different groups of minority students
+    - UCs have a higher share of Asian students than Cal States
+    - Cal States have a higher share of Hispanic students than UCs
+
+
+## 2D Distributions: Numeric x Numeric ##
+
+A point geom gives us a basic scatterplot.  `geom_smooth()` adds a predictive model.  By default, this predictive model is either a LOESS (also called local regression; for smaller datasets) or a generalized additive model (GAM; for larger datasets). 
+
+```{r}
 ggplot(comb_df, aes(in_state_tuition, share)) +
     geom_point(aes(color = system)) +
     geom_smooth(color = 'black') +
     facet_wrap(vars(category), scales = 'free')
 ```
 
-*[todo]*
+### Discussion question ###
 
+Incorporating a regression model into an exploratory analysis like this will almost always be a fraught decision.  On the one hand, it aids pattern discovery, and isn't necessarily a radical step beyond plotting the data if we already think of the plot itself as a model.  On the other hand, any regression model involves substantive assumptions, and it can be difficult to interrogate those assumptions when the model is used in this way.  
+
+What other considerations should we take into account when deciding whether to add a model to an exploratory plot?  
+
+## Text geoms ##
+
+The final plot highlights how easy it is to extend a traditional scatterplot using ggplot.  First, the `text` geom prints strings of text (see also the `label` geom).  This is especially useful when we want to identify individual observations but have too many values for colors or shapes.  To accommodate the long labels, we expand the range of the x-values in the coordinate system and turn off clipping at the plot margins.  We also scale the size of the points to campus size, which suggests a correlation between size (which in this case is tightly correlated with age and prestige) and Hispanic share.  Aesthetics can be handled for the entire plot or separately for each layer, as needed to create effective cognitive affordances.  
+
+```{r}
+comb_df %>% 
+    filter(system == 'UC', category == 'Hispanic') %>% 
+    ggplot(aes(in_state_tuition, share)) +
+    geom_point(aes(size = total_enrollment), alpha = .5) +
+    geom_text(aes(label = name)) +
+    coord_cartesian(clip = 'off', xlim = c(13000, 16500))
+```
 
 ## Multivariate distributions ##
 
-- `ggforce::facet_matrix()`
+- (This should probably get moved to the next chapter, but I'll leave it here just in case we make it this far in class.)
 
 ```{r}
 ggplot(tuition_df, aes(.panel_x, .panel_y, color = system)) +
@@ -304,6 +352,7 @@ ggplot(tuition_df, aes(.panel_x, .panel_y, color = system)) +
                  layer.lower = c(3, 4, 5))
 ```
 
-- lab: correlation heat map + scatterplots
-- upset plots (ggupset)
 
+## Lab ##
+
+Once you're familiar with joins and the basics of ggplot, you're ready to tackle the next lab, which is available here: <https://github.com/data-science-methods/lab_w06_covid>
