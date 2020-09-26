@@ -70,23 +70,3 @@ ggplot(dataf, aes(x, y)) +
     facet_wrap(vars(dataset))
 ```
 
-
-## The Grammar of Graphics ##
-
-- @WilkinsonGrammarGraphics1999; @WickhamLayeredGrammarGraphics2010
-
-```{r, echo = FALSE, fig.cap = 'The Grammar of Graphics regards graphs as mappings from variables in the data to features of geometric objects. This means that every graph is a model.', out.width='100%'}
-knitr::include_graphics(file.path('images', '03-eda', 'grammar_of_graphics.png'))
-```
-
-- *Graphs are maps*
-    - A graph maps variables in the data to features of geometric objects
-    - An individual map is called an *aesthetic*
-    - So a graph is a collection of aesthetics applied to a dataset
-
-- **Graphs are models**
-    - Simplifications of the data
-    - Designed to fit with our cognitive capabilities
-    - In ways that support pattern detection, inference
-    - Recall Leonelli's relational view of data
-    - (Cog sci folks: would you use the term "cognitive affordance" here?)

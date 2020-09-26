@@ -1,5 +1,8 @@
 # Common (and less common) Graphs for EDA #
 
+```{r child = 'knitr_config.Rmd'}
+```
+
 One of the major advantages of the grammar of graphics — especially as implemented in the tidyverse package `ggplot2` — is that it enables us to rapidly create *and re-create* graphs.  This speed and flexibility is extremely useful for EDA.  
 
 ```{r}

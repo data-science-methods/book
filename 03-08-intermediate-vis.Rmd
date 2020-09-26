@@ -1,5 +1,8 @@
 # Intermediate Visualization in R #
 
+```{r child = 'knitr_config.Rmd'}
+```
+
 This chapter is based on a [workshop](https://github.com/dsidavis/RGraphicsWorkshop) that I ran at [UC Davis](https://www.youtube.com/watch?v=grEmJSL4Lwc) in February 2019.  We won't be covering it in class.  But it gives some more background on visualization in R and presents some more advanced uses of ggplot.  
 
 To work through the plots, I recommend commenting out everything and adding one layer at a time.  This is the best way to understand how each layer modifies the plot.  
