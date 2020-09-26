@@ -32,7 +32,7 @@
   
 <link rel="prev" href="inspecting-variables.html"/>
 <link rel="next" href="visual-eda.html"/>
-<script src="libs/header-attrs-2.3.8/header-attrs.js"></script>
+<script src="libs/header-attrs-2.3.9/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -229,7 +229,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.1" data-path="common-and-less-common-graphs-for-eda.html"><a href="common-and-less-common-graphs-for-eda.html#data-1"><i class="fa fa-check"></i><b>12.1</b> Data</a></li>
 <li class="chapter" data-level="12.2" data-path="common-and-less-common-graphs-for-eda.html"><a href="common-and-less-common-graphs-for-eda.html#d-distributions"><i class="fa fa-check"></i><b>12.2</b> 1D distributions</a></li>
 <li class="chapter" data-level="12.3" data-path="common-and-less-common-graphs-for-eda.html"><a href="common-and-less-common-graphs-for-eda.html#d-distributions-categorical-x-numeric"><i class="fa fa-check"></i><b>12.3</b> 2D distributions: Categorical x Numeric</a></li>
-<li class="chapter" data-level="12.4" data-path="common-and-less-common-graphs-for-eda.html"><a href="common-and-less-common-graphs-for-eda.html#multivariate-distributions"><i class="fa fa-check"></i><b>12.4</b> Multivariate distributions</a></li>
+<li class="chapter" data-level="12.4" data-path="common-and-less-common-graphs-for-eda.html"><a href="common-and-less-common-graphs-for-eda.html#joining-tuition-and-diversity-data"><i class="fa fa-check"></i><b>12.4</b> Joining tuition and diversity data</a></li>
+<li class="chapter" data-level="12.5" data-path="common-and-less-common-graphs-for-eda.html"><a href="common-and-less-common-graphs-for-eda.html#school-diversity-violin-plots"><i class="fa fa-check"></i><b>12.5</b> School Diversity Violin Plots</a></li>
+<li class="chapter" data-level="12.6" data-path="common-and-less-common-graphs-for-eda.html"><a href="common-and-less-common-graphs-for-eda.html#d-distributions-numeric-x-numeric"><i class="fa fa-check"></i><b>12.6</b> 2D Distributions: Numeric x Numeric</a></li>
+<li class="chapter" data-level="12.7" data-path="common-and-less-common-graphs-for-eda.html"><a href="common-and-less-common-graphs-for-eda.html#text-geoms"><i class="fa fa-check"></i><b>12.7</b> Text geoms</a></li>
+<li class="chapter" data-level="12.8" data-path="common-and-less-common-graphs-for-eda.html"><a href="common-and-less-common-graphs-for-eda.html#multivariate-distributions"><i class="fa fa-check"></i><b>12.8</b> Multivariate distributions</a></li>
+<li class="chapter" data-level="12.9" data-path="common-and-less-common-graphs-for-eda.html"><a href="common-and-less-common-graphs-for-eda.html#lab-2"><i class="fa fa-check"></i><b>12.9</b> Lab</a></li>
 </ul></li>
 <li class="chapter" data-level="13" data-path="intermediate-visualization-in-r.html"><a href="intermediate-visualization-in-r.html"><i class="fa fa-check"></i><b>13</b> Intermediate Visualization in R</a>
 <ul>
@@ -396,8 +401,9 @@ Figure 10.2: Linking fields in the tables of the <code>nycflights13</code> datas
 </div>
 <div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="joins.html#cb69-1" aria-hidden="true"></a><span class="kw">library</span>(tidyverse)</span>
 <span id="cb69-2"><a href="joins.html#cb69-2" aria-hidden="true"></a><span class="kw">library</span>(nycflights13)</span>
-<span id="cb69-3"><a href="joins.html#cb69-3" aria-hidden="true"></a></span>
-<span id="cb69-4"><a href="joins.html#cb69-4" aria-hidden="true"></a>flights</span></code></pre></div>
+<span id="cb69-3"><a href="joins.html#cb69-3" aria-hidden="true"></a><span class="kw">library</span>(visdat)</span>
+<span id="cb69-4"><a href="joins.html#cb69-4" aria-hidden="true"></a></span>
+<span id="cb69-5"><a href="joins.html#cb69-5" aria-hidden="true"></a>flights</span></code></pre></div>
 <pre><code>## # A tibble: 336,776 x 19
 ##     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time arr_delay carrier
 ##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt; &lt;chr&gt;  
@@ -461,13 +467,19 @@ Figure 10.2: Linking fields in the tables of the <code>nycflights13</code> datas
 <span id="cb77-2"><a href="joins.html#cb77-2" aria-hidden="true"></a><span class="st">    </span><span class="kw">filter</span>(<span class="kw">is.na</span>(dep_time)) <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb77-3"><a href="joins.html#cb77-3" aria-hidden="true"></a><span class="st">    </span><span class="kw">nrow</span>()</span></code></pre></div>
 <pre><code>## [1] 8255</code></pre>
-<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="joins.html#cb79-1" aria-hidden="true"></a><span class="co">## But origin is complete</span></span>
-<span id="cb79-2"><a href="joins.html#cb79-2" aria-hidden="true"></a>flights <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb79-3"><a href="joins.html#cb79-3" aria-hidden="true"></a><span class="st">    </span><span class="kw">filter</span>(<span class="kw">is.na</span>(origin)) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb79-4"><a href="joins.html#cb79-4" aria-hidden="true"></a><span class="st">    </span><span class="kw">nrow</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="joins.html#cb79-1" aria-hidden="true"></a><span class="co">## Draw a sample of 1k rows and pipe them into vis_miss()</span></span>
+<span id="cb79-2"><a href="joins.html#cb79-2" aria-hidden="true"></a><span class="kw">set.seed</span>(<span class="dv">2020-09-20</span>)</span>
+<span id="cb79-3"><a href="joins.html#cb79-3" aria-hidden="true"></a>flights <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb79-4"><a href="joins.html#cb79-4" aria-hidden="true"></a><span class="st">    </span><span class="kw">sample_n</span>(<span class="dv">1000</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb79-5"><a href="joins.html#cb79-5" aria-hidden="true"></a><span class="st">    </span><span class="kw">vis_miss</span>(<span class="dt">cluster =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<p><img src="book_files/figure-html/unnamed-chunk-61-1.png" width="60%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="joins.html#cb80-1" aria-hidden="true"></a><span class="co">## But origin is complete</span></span>
+<span id="cb80-2"><a href="joins.html#cb80-2" aria-hidden="true"></a>flights <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb80-3"><a href="joins.html#cb80-3" aria-hidden="true"></a><span class="st">    </span><span class="kw">filter</span>(<span class="kw">is.na</span>(origin)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb80-4"><a href="joins.html#cb80-4" aria-hidden="true"></a><span class="st">    </span><span class="kw">nrow</span>()</span></code></pre></div>
 <pre><code>## [1] 0</code></pre>
-<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="joins.html#cb81-1" aria-hidden="true"></a><span class="co">## And has 3 different values, for the 3 airports in New York City</span></span>
-<span id="cb81-2"><a href="joins.html#cb81-2" aria-hidden="true"></a><span class="kw">count</span>(flights, origin)</span></code></pre></div>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="joins.html#cb82-1" aria-hidden="true"></a><span class="co">## And has 3 different values, for the 3 airports in New York City</span></span>
+<span id="cb82-2"><a href="joins.html#cb82-2" aria-hidden="true"></a><span class="kw">count</span>(flights, origin)</span></code></pre></div>
 <pre><code>## # A tibble: 3 x 2
 ##   origin      n
 ##   &lt;chr&gt;   &lt;int&gt;
@@ -478,15 +490,15 @@ Figure 10.2: Linking fields in the tables of the <code>nycflights13</code> datas
 <div id="a-good-join" class="section level3" number="10.2.2">
 <h3><span class="header-section-number">10.2.2</span> A good join</h3>
 <p><em>Expectation</em>: For every flight, we can match the origin code to <code>airports</code>.</p>
-<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="joins.html#cb83-1" aria-hidden="true"></a>goodjoin =<span class="st"> </span><span class="kw">left_join</span>(flights, airports, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&#39;origin&#39;</span> =<span class="st"> &#39;faa&#39;</span>))</span>
-<span id="cb83-2"><a href="joins.html#cb83-2" aria-hidden="true"></a></span>
-<span id="cb83-3"><a href="joins.html#cb83-3" aria-hidden="true"></a><span class="kw">nrow</span>(flights)</span></code></pre></div>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="joins.html#cb84-1" aria-hidden="true"></a>goodjoin =<span class="st"> </span><span class="kw">left_join</span>(flights, airports, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&#39;origin&#39;</span> =<span class="st"> &#39;faa&#39;</span>))</span>
+<span id="cb84-2"><a href="joins.html#cb84-2" aria-hidden="true"></a></span>
+<span id="cb84-3"><a href="joins.html#cb84-3" aria-hidden="true"></a><span class="kw">nrow</span>(flights)</span></code></pre></div>
 <pre><code>## [1] 336776</code></pre>
-<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="joins.html#cb85-1" aria-hidden="true"></a><span class="kw">nrow</span>(goodjoin)</span></code></pre></div>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="joins.html#cb86-1" aria-hidden="true"></a><span class="kw">nrow</span>(goodjoin)</span></code></pre></div>
 <pre><code>## [1] 336776</code></pre>
-<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="joins.html#cb87-1" aria-hidden="true"></a><span class="co">## If we couldn&#39;t match an origin code, `tzone` would be NA</span></span>
-<span id="cb87-2"><a href="joins.html#cb87-2" aria-hidden="true"></a>goodjoin <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb87-3"><a href="joins.html#cb87-3" aria-hidden="true"></a><span class="st">    </span><span class="kw">filter</span>(<span class="kw">is.na</span>(tzone))</span></code></pre></div>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="joins.html#cb88-1" aria-hidden="true"></a><span class="co">## If we couldn&#39;t match an origin code, `tzone` would be NA</span></span>
+<span id="cb88-2"><a href="joins.html#cb88-2" aria-hidden="true"></a>goodjoin <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb88-3"><a href="joins.html#cb88-3" aria-hidden="true"></a><span class="st">    </span><span class="kw">filter</span>(<span class="kw">is.na</span>(tzone))</span></code></pre></div>
 <pre><code>## # A tibble: 0 x 26
 ## # … with 26 variables: year &lt;int&gt;, month &lt;int&gt;, day &lt;int&gt;, dep_time &lt;int&gt;, sched_dep_time &lt;int&gt;,
 ## #   dep_delay &lt;dbl&gt;, arr_time &lt;int&gt;, sched_arr_time &lt;int&gt;, arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;,
@@ -497,15 +509,15 @@ Figure 10.2: Linking fields in the tables of the <code>nycflights13</code> datas
 <div id="bad-join-1" class="section level3" number="10.2.3">
 <h3><span class="header-section-number">10.2.3</span> Bad join #1</h3>
 <p><em>Expectation</em>: Every airport has at least 1 originating flight.</p>
-<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="joins.html#cb89-1" aria-hidden="true"></a>problems =<span class="st"> </span><span class="kw">right_join</span>(flights, airports, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&#39;origin&#39;</span> =<span class="st"> &#39;faa&#39;</span>))</span>
-<span id="cb89-2"><a href="joins.html#cb89-2" aria-hidden="true"></a></span>
-<span id="cb89-3"><a href="joins.html#cb89-3" aria-hidden="true"></a><span class="co">## Row counts</span></span>
-<span id="cb89-4"><a href="joins.html#cb89-4" aria-hidden="true"></a><span class="kw">nrow</span>(flights)</span></code></pre></div>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="joins.html#cb90-1" aria-hidden="true"></a>problems =<span class="st"> </span><span class="kw">right_join</span>(flights, airports, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&#39;origin&#39;</span> =<span class="st"> &#39;faa&#39;</span>))</span>
+<span id="cb90-2"><a href="joins.html#cb90-2" aria-hidden="true"></a></span>
+<span id="cb90-3"><a href="joins.html#cb90-3" aria-hidden="true"></a><span class="co">## Row counts</span></span>
+<span id="cb90-4"><a href="joins.html#cb90-4" aria-hidden="true"></a><span class="kw">nrow</span>(flights)</span></code></pre></div>
 <pre><code>## [1] 336776</code></pre>
-<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="joins.html#cb91-1" aria-hidden="true"></a><span class="kw">nrow</span>(problems)</span></code></pre></div>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="joins.html#cb92-1" aria-hidden="true"></a><span class="kw">nrow</span>(problems)</span></code></pre></div>
 <pre><code>## [1] 338231</code></pre>
-<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="joins.html#cb93-1" aria-hidden="true"></a><span class="co">## Missing values</span></span>
-<span id="cb93-2"><a href="joins.html#cb93-2" aria-hidden="true"></a><span class="kw">tail</span>(problems)</span></code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="joins.html#cb94-1" aria-hidden="true"></a><span class="co">## Missing values</span></span>
+<span id="cb94-2"><a href="joins.html#cb94-2" aria-hidden="true"></a><span class="kw">tail</span>(problems)</span></code></pre></div>
 <pre><code>## # A tibble: 6 x 26
 ##    year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time arr_delay carrier
 ##   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt; &lt;chr&gt;  
@@ -518,13 +530,13 @@ Figure 10.2: Linking fields in the tables of the <code>nycflights13</code> datas
 ## # … with 16 more variables: flight &lt;int&gt;, tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;,
 ## #   distance &lt;dbl&gt;, hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;, name &lt;chr&gt;, lat &lt;dbl&gt;, lon &lt;dbl&gt;,
 ## #   alt &lt;dbl&gt;, tz &lt;dbl&gt;, dst &lt;chr&gt;, tzone &lt;chr&gt;</code></pre>
-<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="joins.html#cb95-1" aria-hidden="true"></a>problems <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb95-2"><a href="joins.html#cb95-2" aria-hidden="true"></a><span class="st">    </span><span class="kw">filter</span>(<span class="kw">is.na</span>(carrier)) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb95-3"><a href="joins.html#cb95-3" aria-hidden="true"></a><span class="st">    </span><span class="kw">nrow</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="joins.html#cb96-1" aria-hidden="true"></a>problems <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb96-2"><a href="joins.html#cb96-2" aria-hidden="true"></a><span class="st">    </span><span class="kw">filter</span>(<span class="kw">is.na</span>(carrier)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb96-3"><a href="joins.html#cb96-3" aria-hidden="true"></a><span class="st">    </span><span class="kw">nrow</span>()</span></code></pre></div>
 <pre><code>## [1] 1455</code></pre>
-<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="joins.html#cb97-1" aria-hidden="true"></a>problems <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb97-2"><a href="joins.html#cb97-2" aria-hidden="true"></a><span class="st">    </span><span class="kw">filter</span>(<span class="kw">is.na</span>(carrier)) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb97-3"><a href="joins.html#cb97-3" aria-hidden="true"></a><span class="st">    </span><span class="kw">select</span>(year, month, day, carrier, origin, name, tzone)</span></code></pre></div>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="joins.html#cb98-1" aria-hidden="true"></a>problems <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb98-2"><a href="joins.html#cb98-2" aria-hidden="true"></a><span class="st">    </span><span class="kw">filter</span>(<span class="kw">is.na</span>(carrier)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb98-3"><a href="joins.html#cb98-3" aria-hidden="true"></a><span class="st">    </span><span class="kw">select</span>(year, month, day, carrier, origin, name, tzone)</span></code></pre></div>
 <pre><code>## # A tibble: 1,455 x 7
 ##     year month   day carrier origin name                           tzone              
 ##    &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;                          &lt;chr&gt;              
@@ -540,7 +552,7 @@ Figure 10.2: Linking fields in the tables of the <code>nycflights13</code> datas
 ## 10    NA    NA    NA &lt;NA&gt;    0S9    Jefferson County Intl          America/Los_Angeles
 ## # … with 1,445 more rows</code></pre>
 <p>Manage this using <code>anti_join()</code> to determine which airports aren’t in <code>origin</code>.</p>
-<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="joins.html#cb99-1" aria-hidden="true"></a><span class="kw">anti_join</span>(airports, flights, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&#39;faa&#39;</span> =<span class="st"> &#39;origin&#39;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="joins.html#cb100-1" aria-hidden="true"></a><span class="kw">anti_join</span>(airports, flights, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&#39;faa&#39;</span> =<span class="st"> &#39;origin&#39;</span>))</span></code></pre></div>
 <pre><code>## # A tibble: 1,455 x 8
 ##    faa   name                             lat    lon   alt    tz dst   tzone              
 ##    &lt;chr&gt; &lt;chr&gt;                          &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;              
@@ -559,24 +571,24 @@ Figure 10.2: Linking fields in the tables of the <code>nycflights13</code> datas
 <div id="bad-join-2" class="section level3" number="10.2.4">
 <h3><span class="header-section-number">10.2.4</span> Bad join #2</h3>
 <p>Calculate the average daily temperature at each airport.</p>
-<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="joins.html#cb101-1" aria-hidden="true"></a>avg_temp =<span class="st"> </span>weather <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb101-2"><a href="joins.html#cb101-2" aria-hidden="true"></a><span class="st">    </span><span class="kw">group_by</span>(origin, year, month, day) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb101-3"><a href="joins.html#cb101-3" aria-hidden="true"></a><span class="st">    </span><span class="kw">summarize</span>(<span class="dt">temp =</span> <span class="kw">mean</span>(temp)) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb101-4"><a href="joins.html#cb101-4" aria-hidden="true"></a><span class="st">    </span><span class="kw">ungroup</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="joins.html#cb102-1" aria-hidden="true"></a>avg_temp =<span class="st"> </span>weather <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb102-2"><a href="joins.html#cb102-2" aria-hidden="true"></a><span class="st">    </span><span class="kw">group_by</span>(origin, year, month, day) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb102-3"><a href="joins.html#cb102-3" aria-hidden="true"></a><span class="st">    </span><span class="kw">summarize</span>(<span class="dt">temp =</span> <span class="kw">mean</span>(temp)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb102-4"><a href="joins.html#cb102-4" aria-hidden="true"></a><span class="st">    </span><span class="kw">ungroup</span>()</span></code></pre></div>
 <pre><code>## `summarise()` regrouping output by &#39;origin&#39;, &#39;year&#39;, &#39;month&#39; (override with `.groups` argument)</code></pre>
 <p><em>Expectation</em>: Each flight has 1 average daily temperature at its origin.</p>
-<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="joins.html#cb103-1" aria-hidden="true"></a>mult_problems =<span class="st"> </span><span class="kw">inner_join</span>(flights, avg_temp, </span>
-<span id="cb103-2"><a href="joins.html#cb103-2" aria-hidden="true"></a>                           <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&#39;year&#39;</span>, <span class="st">&#39;month&#39;</span>, <span class="st">&#39;day&#39;</span>))</span>
-<span id="cb103-3"><a href="joins.html#cb103-3" aria-hidden="true"></a><span class="kw">nrow</span>(flights)</span></code></pre></div>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="joins.html#cb104-1" aria-hidden="true"></a>mult_problems =<span class="st"> </span><span class="kw">inner_join</span>(flights, avg_temp, </span>
+<span id="cb104-2"><a href="joins.html#cb104-2" aria-hidden="true"></a>                           <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&#39;year&#39;</span>, <span class="st">&#39;month&#39;</span>, <span class="st">&#39;day&#39;</span>))</span>
+<span id="cb104-3"><a href="joins.html#cb104-3" aria-hidden="true"></a><span class="kw">nrow</span>(flights)</span></code></pre></div>
 <pre><code>## [1] 336776</code></pre>
-<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="joins.html#cb105-1" aria-hidden="true"></a><span class="kw">nrow</span>(mult_problems)</span></code></pre></div>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="joins.html#cb106-1" aria-hidden="true"></a><span class="kw">nrow</span>(mult_problems)</span></code></pre></div>
 <pre><code>## [1] 1008000</code></pre>
-<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="joins.html#cb107-1" aria-hidden="true"></a><span class="co">## `mult_problems` has almost 3x more rows than `flights`</span></span>
-<span id="cb107-2"><a href="joins.html#cb107-2" aria-hidden="true"></a><span class="kw">nrow</span>(mult_problems) <span class="op">/</span><span class="st"> </span><span class="kw">nrow</span>(flights)</span></code></pre></div>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="joins.html#cb108-1" aria-hidden="true"></a><span class="co">## `mult_problems` has almost 3x more rows than `flights`</span></span>
+<span id="cb108-2"><a href="joins.html#cb108-2" aria-hidden="true"></a><span class="kw">nrow</span>(mult_problems) <span class="op">/</span><span class="st"> </span><span class="kw">nrow</span>(flights)</span></code></pre></div>
 <pre><code>## [1] 2.993087</code></pre>
 <p>One way to figure out what happened is to check the names of the columns. The <code>dplyr</code> join functions add <code>.x</code> and <code>.y</code> when they encounter repeated column names.</p>
-<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="joins.html#cb109-1" aria-hidden="true"></a>mult_problems <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb109-2"><a href="joins.html#cb109-2" aria-hidden="true"></a><span class="st">    </span><span class="kw">select</span>(<span class="kw">matches</span>(<span class="st">&#39;.x&#39;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="joins.html#cb110-1" aria-hidden="true"></a>mult_problems <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb110-2"><a href="joins.html#cb110-2" aria-hidden="true"></a><span class="st">    </span><span class="kw">select</span>(<span class="kw">matches</span>(<span class="st">&#39;.x&#39;</span>))</span></code></pre></div>
 <pre><code>## # A tibble: 1,008,000 x 1
 ##    origin.x
 ##    &lt;chr&gt;   
@@ -591,7 +603,7 @@ Figure 10.2: Linking fields in the tables of the <code>nycflights13</code> datas
 ##  9 JFK     
 ## 10 JFK     
 ## # … with 1,007,990 more rows</code></pre>
-<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="joins.html#cb111-1" aria-hidden="true"></a><span class="kw">count</span>(mult_problems, origin.x, origin.y)</span></code></pre></div>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="joins.html#cb112-1" aria-hidden="true"></a><span class="kw">count</span>(mult_problems, origin.x, origin.y)</span></code></pre></div>
 <pre><code>## # A tibble: 9 x 3
 ##   origin.x origin.y      n
 ##   &lt;chr&gt;    &lt;chr&gt;     &lt;int&gt;

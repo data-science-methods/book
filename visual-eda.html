@@ -32,7 +32,7 @@
   
 <link rel="prev" href="joins.html"/>
 <link rel="next" href="common-and-less-common-graphs-for-eda.html"/>
-<script src="libs/header-attrs-2.3.8/header-attrs.js"></script>
+<script src="libs/header-attrs-2.3.9/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -229,7 +229,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.1" data-path="common-and-less-common-graphs-for-eda.html"><a href="common-and-less-common-graphs-for-eda.html#data-1"><i class="fa fa-check"></i><b>12.1</b> Data</a></li>
 <li class="chapter" data-level="12.2" data-path="common-and-less-common-graphs-for-eda.html"><a href="common-and-less-common-graphs-for-eda.html#d-distributions"><i class="fa fa-check"></i><b>12.2</b> 1D distributions</a></li>
 <li class="chapter" data-level="12.3" data-path="common-and-less-common-graphs-for-eda.html"><a href="common-and-less-common-graphs-for-eda.html#d-distributions-categorical-x-numeric"><i class="fa fa-check"></i><b>12.3</b> 2D distributions: Categorical x Numeric</a></li>
-<li class="chapter" data-level="12.4" data-path="common-and-less-common-graphs-for-eda.html"><a href="common-and-less-common-graphs-for-eda.html#multivariate-distributions"><i class="fa fa-check"></i><b>12.4</b> Multivariate distributions</a></li>
+<li class="chapter" data-level="12.4" data-path="common-and-less-common-graphs-for-eda.html"><a href="common-and-less-common-graphs-for-eda.html#joining-tuition-and-diversity-data"><i class="fa fa-check"></i><b>12.4</b> Joining tuition and diversity data</a></li>
+<li class="chapter" data-level="12.5" data-path="common-and-less-common-graphs-for-eda.html"><a href="common-and-less-common-graphs-for-eda.html#school-diversity-violin-plots"><i class="fa fa-check"></i><b>12.5</b> School Diversity Violin Plots</a></li>
+<li class="chapter" data-level="12.6" data-path="common-and-less-common-graphs-for-eda.html"><a href="common-and-less-common-graphs-for-eda.html#d-distributions-numeric-x-numeric"><i class="fa fa-check"></i><b>12.6</b> 2D Distributions: Numeric x Numeric</a></li>
+<li class="chapter" data-level="12.7" data-path="common-and-less-common-graphs-for-eda.html"><a href="common-and-less-common-graphs-for-eda.html#text-geoms"><i class="fa fa-check"></i><b>12.7</b> Text geoms</a></li>
+<li class="chapter" data-level="12.8" data-path="common-and-less-common-graphs-for-eda.html"><a href="common-and-less-common-graphs-for-eda.html#multivariate-distributions"><i class="fa fa-check"></i><b>12.8</b> Multivariate distributions</a></li>
+<li class="chapter" data-level="12.9" data-path="common-and-less-common-graphs-for-eda.html"><a href="common-and-less-common-graphs-for-eda.html#lab-2"><i class="fa fa-check"></i><b>12.9</b> Lab</a></li>
 </ul></li>
 <li class="chapter" data-level="13" data-path="intermediate-visualization-in-r.html"><a href="intermediate-visualization-in-r.html"><i class="fa fa-check"></i><b>13</b> Intermediate Visualization in R</a>
 <ul>
@@ -276,7 +281,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>Including not just graphs but also structured tables, such as <a href="https://en.wikipedia.org/wiki/Stem-and-leaf_display">stem-and-leaf displays</a></p></li>
 <li><p>In terms of our 3 models of EDA (ch. <a href="eda-models.html#eda-models">7</a>)</p>
 <ul>
-<li>Risk management: With the right plot, our visual system can very efficiently detect aspects of the data that don’t show up easily with summary statistics but will break models
+<li>Risk management: With the right plot, our visual system can very efficiently detect potential problems in the data that don’t show up easily with summary statistics
 <ul>
 <li>Outliers</li>
 <li>Degeneracies (eg, perfect correlation)</li>
@@ -290,7 +295,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li>Phenomena development:
 <ul>
-<li><em>[something]</em></li>
+<li>Quickly identify potential patterns</li>
+<li>Contrast potential patterns with noise/uncertainty/imprecision</li>
 </ul></li>
 </ul></li>
 </ul>
@@ -303,16 +309,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>This is all you would need if the world were made of normal distributions</li>
 <li>The world is not made of normal distributions <span class="citation">(Lyon <a href="#ref-LyonWhyAreNormal2014" role="doc-biblioref">2014</a>)</span></li>
 </ul></li>
-<li>We’ll illustrate this using The Datasaurus Dozen, a collection of 13 datasets
+<li>We’ll illustrate this using The Datasaurus Dozen, a collection of 13 datasets <span class="citation">(Matejka and Fitzmaurice <a href="#ref-MatejkaSameStatsDifferent" role="doc-biblioref">n.d.</a>)</span>
 <ul>
 <li>Each dataset has two variables, <code>x</code> and <code>y</code></li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="visual-eda.html#cb113-1" aria-hidden="true"></a><span class="kw">library</span>(tidyverse)</span>
-<span id="cb113-2"><a href="visual-eda.html#cb113-2" aria-hidden="true"></a><span class="kw">library</span>(datasauRus)</span>
-<span id="cb113-3"><a href="visual-eda.html#cb113-3" aria-hidden="true"></a>dataf =<span class="st"> </span>datasaurus_dozen</span>
-<span id="cb113-4"><a href="visual-eda.html#cb113-4" aria-hidden="true"></a></span>
-<span id="cb113-5"><a href="visual-eda.html#cb113-5" aria-hidden="true"></a>dataf</span></code></pre></div>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="visual-eda.html#cb114-1" aria-hidden="true"></a><span class="kw">library</span>(tidyverse)</span>
+<span id="cb114-2"><a href="visual-eda.html#cb114-2" aria-hidden="true"></a><span class="kw">library</span>(datasauRus)</span>
+<span id="cb114-3"><a href="visual-eda.html#cb114-3" aria-hidden="true"></a>dataf =<span class="st"> </span>datasaurus_dozen</span>
+<span id="cb114-4"><a href="visual-eda.html#cb114-4" aria-hidden="true"></a></span>
+<span id="cb114-5"><a href="visual-eda.html#cb114-5" aria-hidden="true"></a>dataf</span></code></pre></div>
 <pre><code>## # A tibble: 1,846 x 3
 ##    dataset     x     y
 ##    &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt;
@@ -327,7 +333,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  9 dino     29.0  74.5
 ## 10 dino     26.2  71.4
 ## # … with 1,836 more rows</code></pre>
-<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="visual-eda.html#cb115-1" aria-hidden="true"></a><span class="kw">count</span>(dataf, dataset)</span></code></pre></div>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="visual-eda.html#cb116-1" aria-hidden="true"></a><span class="kw">count</span>(dataf, dataset)</span></code></pre></div>
 <pre><code>## # A tibble: 13 x 2
 ##    dataset        n
 ##    &lt;chr&gt;      &lt;int&gt;
@@ -350,19 +356,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>p-value of the correlation coefficient is not statistically significant</li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="visual-eda.html#cb117-1" aria-hidden="true"></a>dataf <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb117-2"><a href="visual-eda.html#cb117-2" aria-hidden="true"></a><span class="st">    </span><span class="kw">group_by</span>(dataset) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb117-3"><a href="visual-eda.html#cb117-3" aria-hidden="true"></a><span class="st">    </span><span class="co">## This is a more complex summarize() call than we&#39;ve seen before</span></span>
-<span id="cb117-4"><a href="visual-eda.html#cb117-4" aria-hidden="true"></a><span class="st">    </span><span class="co">## 1. Number of rows</span></span>
-<span id="cb117-5"><a href="visual-eda.html#cb117-5" aria-hidden="true"></a><span class="st">    </span><span class="co">## 2. &quot;Summarize across the columns x and y, using the functions mean and sd&quot;</span></span>
-<span id="cb117-6"><a href="visual-eda.html#cb117-6" aria-hidden="true"></a><span class="st">    </span><span class="co">## 3. Correlation between x and y</span></span>
-<span id="cb117-7"><a href="visual-eda.html#cb117-7" aria-hidden="true"></a><span class="st">    </span><span class="co">## 4. p-value for t-test of the null that the correlation = 0</span></span>
-<span id="cb117-8"><a href="visual-eda.html#cb117-8" aria-hidden="true"></a><span class="st">    </span><span class="kw">summarize</span>(<span class="dt">n =</span> <span class="kw">n</span>(), </span>
-<span id="cb117-9"><a href="visual-eda.html#cb117-9" aria-hidden="true"></a>              <span class="kw">across</span>(<span class="dt">.cols =</span> <span class="kw">c</span>(x, y), </span>
-<span id="cb117-10"><a href="visual-eda.html#cb117-10" aria-hidden="true"></a>                     <span class="dt">.fns =</span> <span class="kw">lst</span>(mean, sd)), </span>
-<span id="cb117-11"><a href="visual-eda.html#cb117-11" aria-hidden="true"></a>              <span class="dt">cor_xy =</span> <span class="kw">cor</span>(x, y), </span>
-<span id="cb117-12"><a href="visual-eda.html#cb117-12" aria-hidden="true"></a>              <span class="dt">p_value =</span> <span class="kw">cor.test</span>(x, y)<span class="op">$</span>p.value) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb117-13"><a href="visual-eda.html#cb117-13" aria-hidden="true"></a><span class="st">    </span><span class="kw">ungroup</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="visual-eda.html#cb118-1" aria-hidden="true"></a>dataf <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb118-2"><a href="visual-eda.html#cb118-2" aria-hidden="true"></a><span class="st">    </span><span class="kw">group_by</span>(dataset) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb118-3"><a href="visual-eda.html#cb118-3" aria-hidden="true"></a><span class="st">    </span><span class="co">## This is a more complex summarize() call than we&#39;ve seen before</span></span>
+<span id="cb118-4"><a href="visual-eda.html#cb118-4" aria-hidden="true"></a><span class="st">    </span><span class="co">## 1. Number of rows</span></span>
+<span id="cb118-5"><a href="visual-eda.html#cb118-5" aria-hidden="true"></a><span class="st">    </span><span class="co">## 2. &quot;Summarize across the columns x and y, using the functions mean and sd&quot;; automatically generates names</span></span>
+<span id="cb118-6"><a href="visual-eda.html#cb118-6" aria-hidden="true"></a><span class="st">    </span><span class="co">## 3. Correlation between x and y</span></span>
+<span id="cb118-7"><a href="visual-eda.html#cb118-7" aria-hidden="true"></a><span class="st">    </span><span class="co">## 4. p-value from a t-test of the null that the correlation = 0</span></span>
+<span id="cb118-8"><a href="visual-eda.html#cb118-8" aria-hidden="true"></a><span class="st">    </span><span class="kw">summarize</span>(<span class="dt">n =</span> <span class="kw">n</span>(), </span>
+<span id="cb118-9"><a href="visual-eda.html#cb118-9" aria-hidden="true"></a>              <span class="kw">across</span>(<span class="dt">.cols =</span> <span class="kw">c</span>(x, y), </span>
+<span id="cb118-10"><a href="visual-eda.html#cb118-10" aria-hidden="true"></a>                     <span class="dt">.fns =</span> <span class="kw">lst</span>(mean, sd)), </span>
+<span id="cb118-11"><a href="visual-eda.html#cb118-11" aria-hidden="true"></a>              <span class="dt">cor_xy =</span> <span class="kw">cor</span>(x, y), </span>
+<span id="cb118-12"><a href="visual-eda.html#cb118-12" aria-hidden="true"></a>              <span class="dt">p_value =</span> <span class="kw">cor.test</span>(x, y)<span class="op">$</span>p.value) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb118-13"><a href="visual-eda.html#cb118-13" aria-hidden="true"></a><span class="st">    </span><span class="kw">ungroup</span>()</span></code></pre></div>
 <pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
 <pre><code>## # A tibble: 13 x 8
 ##    dataset        n x_mean  x_sd y_mean  y_sd  cor_xy p_value
@@ -380,9 +386,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 11 v_lines      142   54.3  16.8   47.8  26.9 -0.0694   0.412
 ## 12 wide_lines   142   54.3  16.8   47.8  26.9 -0.0666   0.431
 ## 13 x_shape      142   54.3  16.8   47.8  26.9 -0.0656   0.438</code></pre>
-<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="visual-eda.html#cb120-1" aria-hidden="true"></a><span class="kw">ggplot</span>(dataf, <span class="kw">aes</span>(x, y)) <span class="op">+</span></span>
-<span id="cb120-2"><a href="visual-eda.html#cb120-2" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
-<span id="cb120-3"><a href="visual-eda.html#cb120-3" aria-hidden="true"></a><span class="st">    </span><span class="kw">facet_wrap</span>(<span class="kw">vars</span>(dataset))</span></code></pre></div>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="visual-eda.html#cb121-1" aria-hidden="true"></a><span class="kw">ggplot</span>(dataf, <span class="kw">aes</span>(x, y)) <span class="op">+</span></span>
+<span id="cb121-2"><a href="visual-eda.html#cb121-2" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
+<span id="cb121-3"><a href="visual-eda.html#cb121-3" aria-hidden="true"></a><span class="st">    </span><span class="kw">facet_wrap</span>(<span class="kw">vars</span>(dataset))</span></code></pre></div>
 <p><img src="book_files/figure-html/unnamed-chunk-71-1.png" width="60%" style="display: block; margin: auto;" /></p>
 </div>
 <div id="the-grammar-of-graphics" class="section level2" number="11.3">
@@ -391,7 +397,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><span class="citation">Wilkinson (<a href="#ref-WilkinsonGrammarGraphics1999" role="doc-biblioref">1999</a>)</span>; <span class="citation">Wickham (<a href="#ref-WickhamLayeredGrammarGraphics2010" role="doc-biblioref">2010</a>)</span></li>
 </ul>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-72"></span>
-<img src="images/03-eda/grammar_of_graphics.png" alt="The Grammar of Graphics regards graphs as mappings from variables in the data to features of geometric objects. This means that every graph is a model." width="60%" />
+<img src="images/03-eda/grammar_of_graphics.png" alt="The Grammar of Graphics regards graphs as mappings from variables in the data to features of geometric objects. This means that every graph is a model." width="100%" />
 <p class="caption">
 Figure 11.1: The Grammar of Graphics regards graphs as mappings from variables in the data to features of geometric objects. This means that every graph is a model.
 </p>

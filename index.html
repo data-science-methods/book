@@ -32,7 +32,7 @@
   
 
 <link rel="next" href="setting-up.html"/>
-<script src="libs/header-attrs-2.3.8/header-attrs.js"></script>
+<script src="libs/header-attrs-2.3.9/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -229,7 +229,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.1" data-path="common-and-less-common-graphs-for-eda.html"><a href="common-and-less-common-graphs-for-eda.html#data-1"><i class="fa fa-check"></i><b>12.1</b> Data</a></li>
 <li class="chapter" data-level="12.2" data-path="common-and-less-common-graphs-for-eda.html"><a href="common-and-less-common-graphs-for-eda.html#d-distributions"><i class="fa fa-check"></i><b>12.2</b> 1D distributions</a></li>
 <li class="chapter" data-level="12.3" data-path="common-and-less-common-graphs-for-eda.html"><a href="common-and-less-common-graphs-for-eda.html#d-distributions-categorical-x-numeric"><i class="fa fa-check"></i><b>12.3</b> 2D distributions: Categorical x Numeric</a></li>
-<li class="chapter" data-level="12.4" data-path="common-and-less-common-graphs-for-eda.html"><a href="common-and-less-common-graphs-for-eda.html#multivariate-distributions"><i class="fa fa-check"></i><b>12.4</b> Multivariate distributions</a></li>
+<li class="chapter" data-level="12.4" data-path="common-and-less-common-graphs-for-eda.html"><a href="common-and-less-common-graphs-for-eda.html#joining-tuition-and-diversity-data"><i class="fa fa-check"></i><b>12.4</b> Joining tuition and diversity data</a></li>
+<li class="chapter" data-level="12.5" data-path="common-and-less-common-graphs-for-eda.html"><a href="common-and-less-common-graphs-for-eda.html#school-diversity-violin-plots"><i class="fa fa-check"></i><b>12.5</b> School Diversity Violin Plots</a></li>
+<li class="chapter" data-level="12.6" data-path="common-and-less-common-graphs-for-eda.html"><a href="common-and-less-common-graphs-for-eda.html#d-distributions-numeric-x-numeric"><i class="fa fa-check"></i><b>12.6</b> 2D Distributions: Numeric x Numeric</a></li>
+<li class="chapter" data-level="12.7" data-path="common-and-less-common-graphs-for-eda.html"><a href="common-and-less-common-graphs-for-eda.html#text-geoms"><i class="fa fa-check"></i><b>12.7</b> Text geoms</a></li>
+<li class="chapter" data-level="12.8" data-path="common-and-less-common-graphs-for-eda.html"><a href="common-and-less-common-graphs-for-eda.html#multivariate-distributions"><i class="fa fa-check"></i><b>12.8</b> Multivariate distributions</a></li>
+<li class="chapter" data-level="12.9" data-path="common-and-less-common-graphs-for-eda.html"><a href="common-and-less-common-graphs-for-eda.html#lab-2"><i class="fa fa-check"></i><b>12.9</b> Lab</a></li>
 </ul></li>
 <li class="chapter" data-level="13" data-path="intermediate-visualization-in-r.html"><a href="intermediate-visualization-in-r.html"><i class="fa fa-check"></i><b>13</b> Intermediate Visualization in R</a>
 <ul>
@@ -266,7 +271,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title">Data Science Methods for Cognitive Science</h1>
 <p class="author"><em>Dan Hicks, <a href="mailto:hicks.daniel.j@gmail.com" class="email">hicks.daniel.j@gmail.com</a></em></p>
-<p class="date"><em>Tue Sep 22 17:39:47 2020</em></p>
+<p class="date"><em>Sat Sep 26 17:03:38 2020</em></p>
 </div>
 <div id="preface" class="section level1 unnumbered">
 <h1>Preface</h1>
@@ -274,6 +279,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The course overview (including reading and lab assignments) is available here: <a href="https://docs.google.com/spreadsheets/d/1iS_I-LgT7bBRBUOYEOyJNHBe7Q8X_c3B1E9jap4b6jw/edit?usp=sharing" class="uri">https://docs.google.com/spreadsheets/d/1iS_I-LgT7bBRBUOYEOyJNHBe7Q8X_c3B1E9jap4b6jw/edit?usp=sharing</a></p>
 <p>PDF versions of each chapter can be found here: <a href="handouts/index.html">Handouts</a></p>
 <p>(The URLs to the handouts are buggy. To get to them, look for <code>handout/handout/</code> in the URL; delete the second <code>handout/</code>.)</p>
+<hr />
 <p>These notes were written in <a href="http://www.rstudio.com/ide/">RStudio</a> using <a href="http://bookdown.org/">bookdown</a>. The complete source is available on <a href="https://github.com/data-science-methods/book/">GitHub</a> and is automatically rebuilt using <a href="https://github.com/data-science-methods/book/">Travis CI</a>.</p>
 <p>This version of the book was built with R version 4.0.2 (2020-06-22), <a href="https://pandoc.org/">pandoc</a> version 2.10, and the following packages:</p>
 <table>
