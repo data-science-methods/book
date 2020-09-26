@@ -119,7 +119,7 @@
 
 \title{Data Science Methods for Cognitive Science}
 \author{Dan Hicks, \href{mailto:hicks.daniel.j@gmail.com}{\nolinkurl{hicks.daniel.j@gmail.com}}}
-\date{Sat Sep 26 17:04:22 2020}
+\date{Sat Sep 26 17:35:22 2020}
 
 \begin{document}
 \maketitle
@@ -2182,7 +2182,7 @@ The dataset is a zipped \texttt{csv} or comma-separated value file. CSVs are str
 \end{Shaded}
 
 \begin{verbatim}
-## 0.348 sec elapsed
+## 0.345 sec elapsed
 \end{verbatim}
 
 \begin{Shaded}
@@ -3895,21 +3895,42 @@ One way to figure out what happened is to check the names of the columns. The \t
 \begin{center}\includegraphics[width=0.6\linewidth]{book_files/figure-latex/unnamed-chunk-71-1} \end{center}
 
 \hypertarget{the-grammar-of-graphics}{%
-\subsection{The Grammar of Graphics}\label{the-grammar-of-graphics}}
+\section{The Grammar of Graphics}\label{the-grammar-of-graphics}}
 
 \begin{itemize}
-\tightlist
 \item
-  Wilkinson (\protect\hyperlink{ref-WilkinsonGrammarGraphics1999}{1999}); Wickham (\protect\hyperlink{ref-WickhamLayeredGrammarGraphics2010}{2010})
+  Reading: Wilkinson (\protect\hyperlink{ref-WilkinsonGrammarGraphics1999}{1999}); Wickham (\protect\hyperlink{ref-WickhamLayeredGrammarGraphics2010}{2010})
+\item
+  A lot of programming sublanguages for creating graphics are based on the \emph{artist's palette} model
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Define some low-level tools for drawing on a canvas: \texttt{points()}, \texttt{lines()}, \texttt{curve()}
+  \item
+    One-liners that bundle these tools into standard plots: \texttt{hist()}, \texttt{barplot()}
+  \item
+    This is used by base graphics in R, Python packages including \texttt{matplotlib} and \texttt{seaborn}, MATLAB, etc.
+  \end{itemize}
+\item
+  \emph{Grammar of graphics} is a fundamentally different approach
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Implemented by \texttt{ggplot2} in the tidyverse
+  \item
+    (Strictly speaking, \texttt{ggplot} is another package that Hadley Wickham created before \texttt{ggplot2}. But almost no one uses the older package. If people talk about ``ggplot,'' they almost always mean \texttt{ggplot2}.)
+  \end{itemize}
 \end{itemize}
 
 \begin{figure}
 
-{\centering \includegraphics[width=1\linewidth]{images/03-eda/grammar_of_graphics} 
+{\centering \includegraphics[width=1.2\linewidth]{images/03-eda/grammar_of_graphics} 
 
 }
 
-\caption{The Grammar of Graphics regards graphs as mappings from variables in the data to features of geometric objects. This means that every graph is a model.}\label{fig:unnamed-chunk-72}
+\caption{The Grammar of Graphics regards graphs as mappings from variables in the data to features of geometric objects. This means that every graph is a model.}\label{fig:unnamed-chunk-73}
 \end{figure}
 
 \begin{itemize}
@@ -4162,7 +4183,7 @@ Counts of observations for a single categorical variable. It's a bar geom with a
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.5\linewidth]{book_files/figure-latex/unnamed-chunk-78-1} \includegraphics[width=0.5\linewidth]{book_files/figure-latex/unnamed-chunk-78-2} \end{center}
+\begin{center}\includegraphics[width=0.5\linewidth]{book_files/figure-latex/unnamed-chunk-80-1} \includegraphics[width=0.5\linewidth]{book_files/figure-latex/unnamed-chunk-80-2} \end{center}
 
 If we keep the statistic but change the geom, we can make a point version of a barplot. Or a version with text labels.
 
@@ -4175,7 +4196,7 @@ If we keep the statistic but change the geom, we can make a point version of a b
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.5\linewidth]{book_files/figure-latex/unnamed-chunk-79-1} \includegraphics[width=0.5\linewidth]{book_files/figure-latex/unnamed-chunk-79-2} \end{center}
+\begin{center}\includegraphics[width=0.5\linewidth]{book_files/figure-latex/unnamed-chunk-81-1} \includegraphics[width=0.5\linewidth]{book_files/figure-latex/unnamed-chunk-81-2} \end{center}
 
 Because of ggplot's layering system, we're not restricted to just a barplot or one of these variations. We can combine geoms into a single plot.
 
@@ -4188,7 +4209,7 @@ Because of ggplot's layering system, we're not restricted to just a barplot or o
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.6\linewidth]{book_files/figure-latex/unnamed-chunk-80-1} \end{center}
+\begin{center}\includegraphics[width=0.6\linewidth]{book_files/figure-latex/unnamed-chunk-82-1} \end{center}
 
 \hypertarget{numeric-histograms-and-density-plots}{%
 \subsubsection{Numeric: Histograms and density plots}\label{numeric-histograms-and-density-plots}}
@@ -4217,7 +4238,7 @@ A histogram is a count of observations for a single categorical variable. It use
 ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
 \end{verbatim}
 
-\begin{center}\includegraphics[width=0.4\linewidth]{book_files/figure-latex/unnamed-chunk-81-1} \includegraphics[width=0.4\linewidth]{book_files/figure-latex/unnamed-chunk-81-2} \end{center}
+\begin{center}\includegraphics[width=0.4\linewidth]{book_files/figure-latex/unnamed-chunk-83-1} \includegraphics[width=0.4\linewidth]{book_files/figure-latex/unnamed-chunk-83-2} \end{center}
 
 \begin{itemize}
 \tightlist
@@ -4234,7 +4255,7 @@ A histogram is a count of observations for a single categorical variable. It use
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.6\linewidth]{book_files/figure-latex/unnamed-chunk-82-1} \end{center}
+\begin{center}\includegraphics[width=0.6\linewidth]{book_files/figure-latex/unnamed-chunk-84-1} \end{center}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4243,7 +4264,7 @@ A histogram is a count of observations for a single categorical variable. It use
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.6\linewidth]{book_files/figure-latex/unnamed-chunk-82-2} \end{center}
+\begin{center}\includegraphics[width=0.6\linewidth]{book_files/figure-latex/unnamed-chunk-84-2} \end{center}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4252,7 +4273,7 @@ A histogram is a count of observations for a single categorical variable. It use
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.6\linewidth]{book_files/figure-latex/unnamed-chunk-82-3} \end{center}
+\begin{center}\includegraphics[width=0.6\linewidth]{book_files/figure-latex/unnamed-chunk-84-3} \end{center}
 
 A frequency polygon uses the same count statistic, but displays the result with a line rather than columns.
 
@@ -4267,7 +4288,7 @@ A frequency polygon uses the same count statistic, but displays the result with 
 ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
 \end{verbatim}
 
-\begin{center}\includegraphics[width=0.6\linewidth]{book_files/figure-latex/unnamed-chunk-83-1} \end{center}
+\begin{center}\includegraphics[width=0.6\linewidth]{book_files/figure-latex/unnamed-chunk-85-1} \end{center}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4280,7 +4301,7 @@ A frequency polygon uses the same count statistic, but displays the result with 
 ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
 \end{verbatim}
 
-\begin{center}\includegraphics[width=0.6\linewidth]{book_files/figure-latex/unnamed-chunk-83-2} \end{center}
+\begin{center}\includegraphics[width=0.6\linewidth]{book_files/figure-latex/unnamed-chunk-85-2} \end{center}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4293,7 +4314,7 @@ A frequency polygon uses the same count statistic, but displays the result with 
 ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
 \end{verbatim}
 
-\begin{center}\includegraphics[width=0.6\linewidth]{book_files/figure-latex/unnamed-chunk-83-3} \end{center}
+\begin{center}\includegraphics[width=0.6\linewidth]{book_files/figure-latex/unnamed-chunk-85-3} \end{center}
 
 Density plots are a smoothed version of histograms.
 
@@ -4315,7 +4336,7 @@ Density plots are a smoothed version of histograms.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.6\linewidth]{book_files/figure-latex/unnamed-chunk-84-1} \end{center}
+\begin{center}\includegraphics[width=0.6\linewidth]{book_files/figure-latex/unnamed-chunk-86-1} \end{center}
 
 A strip plot simply plots the values on a single axis.
 
@@ -4335,7 +4356,7 @@ A strip plot simply plots the values on a single axis.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.6\linewidth]{book_files/figure-latex/unnamed-chunk-85-1} \end{center}
+\begin{center}\includegraphics[width=0.6\linewidth]{book_files/figure-latex/unnamed-chunk-87-1} \end{center}
 
 \hypertarget{d-distributions-categorical-x-numeric}{%
 \subsection{2D distributions: Categorical x Numeric}\label{d-distributions-categorical-x-numeric}}
@@ -4352,7 +4373,7 @@ When there are only a few values of a categorical variable, it can be useful to 
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.6\linewidth]{book_files/figure-latex/unnamed-chunk-86-1} \end{center}
+\begin{center}\includegraphics[width=0.6\linewidth]{book_files/figure-latex/unnamed-chunk-88-1} \end{center}
 
 But we probably don't care about the names of individual schools. One option is a stacked histogram, using color (fill) to indicate school system.
 
@@ -4363,7 +4384,7 @@ But we probably don't care about the names of individual schools. One option is 
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.6\linewidth]{book_files/figure-latex/unnamed-chunk-87-1} \end{center}
+\begin{center}\includegraphics[width=0.6\linewidth]{book_files/figure-latex/unnamed-chunk-89-1} \end{center}
 
 These can be difficult to read when it's not clear whether the bars are stacked on top of each other or layered, one behind the other. Here the bars are layered. The differences are very subtle but potentially important.
 
@@ -4374,7 +4395,7 @@ These can be difficult to read when it's not clear whether the bars are stacked 
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.6\linewidth]{book_files/figure-latex/unnamed-chunk-88-1} \end{center}
+\begin{center}\includegraphics[width=0.6\linewidth]{book_files/figure-latex/unnamed-chunk-90-1} \end{center}
 
 So it's more common to put the categorical variable on the x-axis. Here's a traditional boxplot. While color is strictly unnecessary, using color for the same categorical variable across plots helps us track relationships. Notice that we can change the way color is used by simply changing which aesthetic gets \texttt{system}.
 
@@ -4403,7 +4424,7 @@ A violin plot is better for this. The violin plot calculates densities across th
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.6\linewidth]{book_files/figure-latex/unnamed-chunk-90-1} \end{center}
+\begin{center}\includegraphics[width=0.6\linewidth]{book_files/figure-latex/unnamed-chunk-92-1} \end{center}
 
 We can add points to this, using \texttt{position\ =\ \textquotesingle{}jitter\textquotesingle{}} to reduce overplotting and \texttt{alpha\ =\ .5} to make them 50\% transparent.
 
@@ -4415,7 +4436,7 @@ We can add points to this, using \texttt{position\ =\ \textquotesingle{}jitter\t
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.6\linewidth]{book_files/figure-latex/unnamed-chunk-91-1} \end{center}
+\begin{center}\includegraphics[width=0.6\linewidth]{book_files/figure-latex/unnamed-chunk-93-1} \end{center}
 
 \texttt{ggforce::geom\_sina()} tries to match the amount of jitter to the width of the violin plot, using the same \texttt{scale} argument. It's a little better, because now the points aren't outside of the violin. But it's still hard to see a visual pattern.
 
@@ -4427,7 +4448,7 @@ We can add points to this, using \texttt{position\ =\ \textquotesingle{}jitter\t
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.6\linewidth]{book_files/figure-latex/unnamed-chunk-92-1} \end{center}
+\begin{center}\includegraphics[width=0.6\linewidth]{book_files/figure-latex/unnamed-chunk-94-1} \end{center}
 
 A beeswarm plot positions the points so that they cluster close together in the x-direction without too much overplotting. This allows us to show both the individual points and the density distribution, with roughly the same shape (after tweaking some parameters).
 
@@ -4439,7 +4460,7 @@ A beeswarm plot positions the points so that they cluster close together in the 
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.6\linewidth]{book_files/figure-latex/unnamed-chunk-93-1} \end{center}
+\begin{center}\includegraphics[width=0.6\linewidth]{book_files/figure-latex/unnamed-chunk-95-1} \end{center}
 
 Using ggplot it is possible to create the bar-and-whiskers plot that Weissgerber et al. (\protect\hyperlink{ref-WeissgerberBarLineGraphs2015}{2015}) criticize. But now we have much better options.
 
@@ -4457,7 +4478,7 @@ Using ggplot it is possible to create the bar-and-whiskers plot that Weissgerber
 ## No summary function supplied, defaulting to `mean_se()`
 \end{verbatim}
 
-\begin{center}\includegraphics[width=0.6\linewidth]{book_files/figure-latex/unnamed-chunk-94-1} \end{center}
+\begin{center}\includegraphics[width=0.6\linewidth]{book_files/figure-latex/unnamed-chunk-96-1} \end{center}
 
 \hypertarget{joining-tuition-and-diversity-data}{%
 \subsection{Joining tuition and diversity data}\label{joining-tuition-and-diversity-data}}
@@ -4632,7 +4653,7 @@ Because of the way \texttt{div\_df} is structured, it makes sense to separate al
 ## values
 \end{verbatim}
 
-\begin{center}\includegraphics[width=1\linewidth]{book_files/figure-latex/unnamed-chunk-98-1} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{book_files/figure-latex/unnamed-chunk-100-1} \end{center}
 
 \begin{itemize}
 \tightlist
@@ -4680,7 +4701,7 @@ A point geom gives us a basic scatterplot. \texttt{geom\_smooth()} adds a predic
 ## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
 \end{verbatim}
 
-\begin{center}\includegraphics[width=0.6\linewidth]{book_files/figure-latex/unnamed-chunk-99-1} \end{center}
+\begin{center}\includegraphics[width=0.6\linewidth]{book_files/figure-latex/unnamed-chunk-101-1} \end{center}
 
 \hypertarget{discussion-question}{%
 \subsubsection{Discussion question}\label{discussion-question}}
@@ -4705,7 +4726,7 @@ The final plot highlights how easy it is to extend a traditional scatterplot usi
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.6\linewidth]{book_files/figure-latex/unnamed-chunk-100-1} \end{center}
+\begin{center}\includegraphics[width=0.6\linewidth]{book_files/figure-latex/unnamed-chunk-102-1} \end{center}
 
 \hypertarget{multivariate-distributions}{%
 \subsection{Multivariate distributions}\label{multivariate-distributions}}
@@ -4732,7 +4753,7 @@ The final plot highlights how easy it is to extend a traditional scatterplot usi
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.6\linewidth]{book_files/figure-latex/unnamed-chunk-101-1} \end{center}
+\begin{center}\includegraphics[width=0.6\linewidth]{book_files/figure-latex/unnamed-chunk-103-1} \end{center}
 
 \hypertarget{lab-2}{%
 \subsection{Lab}\label{lab-2}}
@@ -4961,7 +4982,7 @@ Some of the plots include alternative layers, mostly geoms, to illustrate how di
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.6\linewidth]{book_files/figure-latex/unnamed-chunk-102-1} \end{center}
+\begin{center}\includegraphics[width=0.6\linewidth]{book_files/figure-latex/unnamed-chunk-105-1} \end{center}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5055,7 +5076,7 @@ Some of the plots include alternative layers, mostly geoms, to illustrate how di
 ## Warning: Removed 104 rows containing non-finite values (stat_density2d).
 \end{verbatim}
 
-\begin{center}\includegraphics[width=0.6\linewidth]{book_files/figure-latex/unnamed-chunk-103-1} \end{center}
+\begin{center}\includegraphics[width=0.6\linewidth]{book_files/figure-latex/unnamed-chunk-106-1} \end{center}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5130,7 +5151,7 @@ Some of the plots include alternative layers, mostly geoms, to illustrate how di
 ## Warning: Removed 1 row(s) containing missing values (geom_path).
 \end{verbatim}
 
-\begin{center}\includegraphics[width=0.6\linewidth]{book_files/figure-latex/unnamed-chunk-104-1} \end{center}
+\begin{center}\includegraphics[width=0.6\linewidth]{book_files/figure-latex/unnamed-chunk-107-1} \end{center}
 
 \begin{Shaded}
 \begin{Highlighting}[]
