@@ -1,3 +1,53 @@
 # Reproducibility, Replicability, and Robustness #
 
-- Reading: @YongWakeHighProfile2012, 
+- Reading: @YongWakeHighProfile2012, @AschwandenThereNoSuch2017, @HicksCommentSubmittedDaniel2020
+- Highly recommended:  @FeestWhyReplicationOverrated2019, @LeonelliRethinkingReproducibilityCriterion2018
+
+
+## The Replication Crisis ##
+
+- An epistemic-methodological crisis unfolding across multiple scientific fields, especially biomedicine and social psychology
+- Usually defined in a phrase:  "studies replicate much less often than you would expect"
+
+- While replication has received the most attention in the wake of a high-profile effort to replicate a collection of high-profile psychology studies [@OpenScienceCollaborationEstimatingReproducibilityPsychological2015], it's been simmering for a long time
+    - @IoannidisWhyMostPublished2005
+    - But at least as far back as @MeehlTheoryTestingPsychologyPhysics1967
+
+- *[numerous explanations]*
+    
+- Beyond academia, 
+    - In my experience most members of the general public don't pay attention to it
+    - Even scientists in non-experimental fields (e.g., cultural anthropologists) have forgotten
+    - But it has been used in policy settings to cast doubt on environmental epidemiology [@AschwandenThereNoSuch2017; @HicksCommentSubmittedDaniel2020]
+
+
+## Terminology ##
+
+- A 2019 National Academy of Sciences (NAS) report noted that people often use the terms "reproduce" and "replicate" interchangeably, and consequently conflate two very different expectations for quantitative experimental research [@NationalAcademiesofSciencesEngineeringandMedicineReproducibilityReplicabilityScience2019]
+
+- @HicksCommentSubmittedDaniel2020 reviews the NAS definitions and also compares them to "robustness"
+    - **Replicability**: Run the experimental again, getting new data on a more-or-less similar sample.  Do the same analysis.  Do we get qualitatively similar results?  
+    - **Reproducibility**: Run the same analysis script on the same data on a different computer.  Do we get numerically identical results? 
+    - **Robustness**: Use a *different* analytical approach to attempt to answer the same research question on the *same* data.  Do we get qualitatively similar results?  [@SteegenIncreasingTransparencyMultiverse2016; @SilberzahnManyAnalystsOne2018]
+
+
+|                     | same data? | same analysis? | expect to get 
+|:--------------------|:----------:|:--------------:|:--------------
+| replicability       |            | Y              | similar results
+| reproducibility     | Y          | Y              | numerically identical results
+| robustness          | Y          |                | similar results
+
+Table: The distinction between replicability, reproducibility, and robustness can be made by considering whether we use the same data, the same analysis, and whether we expect to get numerically identical or merely similar results. 
+
+
+- "Qualitatively similar" is necessarily vague and requires interpretation
+    - Researchers can and do disagree about whether any particular set of results is sufficiently "similar" or "different" [@FeestExperimentersRegressReconsidered2016]
+    - Sometimes a quantitative standard is used:  "replication attempt is also statistically significant and effect is in the same direction"
+    - But the unavoidable chance of type I and II errors means there's still uncertainty
+    - And remember that the threshold of statistical significance is basically arbitrary
+
+- "Numerically identical" is not vague
+    - At least, up to a tolerance threshold, and with the proviso that the computers are working correctly
+
+- *[but how valuable is it?]*
+
