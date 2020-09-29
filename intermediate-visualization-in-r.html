@@ -244,12 +244,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="14.4" data-path="intermediate-visualization-in-r.html"><a href="intermediate-visualization-in-r.html#plot-3-time-series-model-predictions"><i class="fa fa-check"></i><b>14.4</b> Plot 3: Time series + model predictions</a></li>
 <li class="chapter" data-level="14.5" data-path="intermediate-visualization-in-r.html"><a href="intermediate-visualization-in-r.html#plot-4-visualizing-spatial-data-in-r"><i class="fa fa-check"></i><b>14.5</b> Plot 4: Visualizing spatial data in R</a></li>
 </ul></li>
+<li class="part"><span><b>III Reproducibility</b></span></li>
 <li class="chapter" data-level="15" data-path="reproducibility-replicability-and-robustness.html"><a href="reproducibility-replicability-and-robustness.html"><i class="fa fa-check"></i><b>15</b> Reproducibility, Replicability, and Robustness</a>
 <ul>
 <li class="chapter" data-level="15.1" data-path="reproducibility-replicability-and-robustness.html"><a href="reproducibility-replicability-and-robustness.html#the-replication-crisis"><i class="fa fa-check"></i><b>15.1</b> The Replication Crisis</a></li>
 <li class="chapter" data-level="15.2" data-path="reproducibility-replicability-and-robustness.html"><a href="reproducibility-replicability-and-robustness.html#terminology"><i class="fa fa-check"></i><b>15.2</b> Terminology</a></li>
 </ul></li>
-<li class="part"><span><b>III Reproducibility</b></span></li>
 <li class="part"><span><b>IV Cleaning Data</b></span></li>
 <li class="part"><span><b>V Case Study: The COMPAS Dataset</b></span></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
@@ -278,26 +278,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>This chapter is based on a <a href="https://github.com/dsidavis/RGraphicsWorkshop">workshop</a> that I ran at <a href="https://www.youtube.com/watch?v=grEmJSL4Lwc">UC Davis</a> in February 2019. We won’t be covering it in class. But it gives some more background on visualization in R and presents some more advanced uses of ggplot.</p>
 <p>To work through the plots, I recommend commenting out everything and adding one layer at a time. This is the best way to understand how each layer modifies the plot.</p>
 <p>Some of the plots include alternative layers, mostly geoms, to illustrate how different ways of representing the data provide different visual affordances.</p>
-<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="intermediate-visualization-in-r.html#cb187-1" aria-hidden="true"></a><span class="kw">library</span>(ggplot2)</span>
-<span id="cb187-2"><a href="intermediate-visualization-in-r.html#cb187-2" aria-hidden="true"></a></span>
-<span id="cb187-3"><a href="intermediate-visualization-in-r.html#cb187-3" aria-hidden="true"></a>data_dir =<span class="st"> &#39;data&#39;</span></span>
-<span id="cb187-4"><a href="intermediate-visualization-in-r.html#cb187-4" aria-hidden="true"></a>data_files =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;papers&#39;</span> =<span class="st"> &#39;paper_counts.Rds&#39;</span>, </span>
-<span id="cb187-5"><a href="intermediate-visualization-in-r.html#cb187-5" aria-hidden="true"></a>               <span class="st">&#39;stations&#39;</span> =<span class="st"> &#39;stations.Rds&#39;</span>, </span>
-<span id="cb187-6"><a href="intermediate-visualization-in-r.html#cb187-6" aria-hidden="true"></a>               <span class="st">&#39;stations.utm&#39;</span> =<span class="st"> &#39;stations.utm.Rds&#39;</span>, </span>
-<span id="cb187-7"><a href="intermediate-visualization-in-r.html#cb187-7" aria-hidden="true"></a>               <span class="st">&#39;temperature&#39;</span> =<span class="st"> &#39;temp.Rds&#39;</span>)</span>
-<span id="cb187-8"><a href="intermediate-visualization-in-r.html#cb187-8" aria-hidden="true"></a>data_paths =<span class="st"> </span><span class="kw">file.path</span>(data_dir, data_files)</span>
-<span id="cb187-9"><a href="intermediate-visualization-in-r.html#cb187-9" aria-hidden="true"></a><span class="kw">names</span>(data_paths) =<span class="st"> </span><span class="kw">names</span>(data_files)</span>
-<span id="cb187-10"><a href="intermediate-visualization-in-r.html#cb187-10" aria-hidden="true"></a>data_urls =<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&#39;https://github.com/dsidavis/RGraphicsWorkshop/raw/master/data/&#39;</span>, data_files)</span>
-<span id="cb187-11"><a href="intermediate-visualization-in-r.html#cb187-11" aria-hidden="true"></a></span>
-<span id="cb187-12"><a href="intermediate-visualization-in-r.html#cb187-12" aria-hidden="true"></a><span class="co">## The repo includes a script `climate_data.R` that creates the final 3 datasets</span></span>
-<span id="cb187-13"><a href="intermediate-visualization-in-r.html#cb187-13" aria-hidden="true"></a></span>
-<span id="cb187-14"><a href="intermediate-visualization-in-r.html#cb187-14" aria-hidden="true"></a><span class="co">## `if` isn&#39;t vectorized, so we have to loop over this manually</span></span>
-<span id="cb187-15"><a href="intermediate-visualization-in-r.html#cb187-15" aria-hidden="true"></a>download_file =<span class="st"> </span><span class="cf">function</span>(path, url) {</span>
-<span id="cb187-16"><a href="intermediate-visualization-in-r.html#cb187-16" aria-hidden="true"></a>    <span class="cf">if</span> (<span class="op">!</span><span class="kw">file.exists</span>(path)) {</span>
-<span id="cb187-17"><a href="intermediate-visualization-in-r.html#cb187-17" aria-hidden="true"></a>        <span class="kw">download.file</span>(url, path)</span>
-<span id="cb187-18"><a href="intermediate-visualization-in-r.html#cb187-18" aria-hidden="true"></a>    }</span>
-<span id="cb187-19"><a href="intermediate-visualization-in-r.html#cb187-19" aria-hidden="true"></a>}</span>
-<span id="cb187-20"><a href="intermediate-visualization-in-r.html#cb187-20" aria-hidden="true"></a>purrr<span class="op">::</span><span class="kw">walk2</span>(data_paths, data_urls, download_file)</span></code></pre></div>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="intermediate-visualization-in-r.html#cb190-1" aria-hidden="true"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb190-2"><a href="intermediate-visualization-in-r.html#cb190-2" aria-hidden="true"></a></span>
+<span id="cb190-3"><a href="intermediate-visualization-in-r.html#cb190-3" aria-hidden="true"></a>data_dir =<span class="st"> &#39;data&#39;</span></span>
+<span id="cb190-4"><a href="intermediate-visualization-in-r.html#cb190-4" aria-hidden="true"></a>data_files =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;papers&#39;</span> =<span class="st"> &#39;paper_counts.Rds&#39;</span>, </span>
+<span id="cb190-5"><a href="intermediate-visualization-in-r.html#cb190-5" aria-hidden="true"></a>               <span class="st">&#39;stations&#39;</span> =<span class="st"> &#39;stations.Rds&#39;</span>, </span>
+<span id="cb190-6"><a href="intermediate-visualization-in-r.html#cb190-6" aria-hidden="true"></a>               <span class="st">&#39;stations.utm&#39;</span> =<span class="st"> &#39;stations.utm.Rds&#39;</span>, </span>
+<span id="cb190-7"><a href="intermediate-visualization-in-r.html#cb190-7" aria-hidden="true"></a>               <span class="st">&#39;temperature&#39;</span> =<span class="st"> &#39;temp.Rds&#39;</span>)</span>
+<span id="cb190-8"><a href="intermediate-visualization-in-r.html#cb190-8" aria-hidden="true"></a>data_paths =<span class="st"> </span><span class="kw">file.path</span>(data_dir, data_files)</span>
+<span id="cb190-9"><a href="intermediate-visualization-in-r.html#cb190-9" aria-hidden="true"></a><span class="kw">names</span>(data_paths) =<span class="st"> </span><span class="kw">names</span>(data_files)</span>
+<span id="cb190-10"><a href="intermediate-visualization-in-r.html#cb190-10" aria-hidden="true"></a>data_urls =<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&#39;https://github.com/dsidavis/RGraphicsWorkshop/raw/master/data/&#39;</span>, data_files)</span>
+<span id="cb190-11"><a href="intermediate-visualization-in-r.html#cb190-11" aria-hidden="true"></a></span>
+<span id="cb190-12"><a href="intermediate-visualization-in-r.html#cb190-12" aria-hidden="true"></a><span class="co">## The repo includes a script `climate_data.R` that creates the final 3 datasets</span></span>
+<span id="cb190-13"><a href="intermediate-visualization-in-r.html#cb190-13" aria-hidden="true"></a></span>
+<span id="cb190-14"><a href="intermediate-visualization-in-r.html#cb190-14" aria-hidden="true"></a><span class="co">## `if` isn&#39;t vectorized, so we have to loop over this manually</span></span>
+<span id="cb190-15"><a href="intermediate-visualization-in-r.html#cb190-15" aria-hidden="true"></a>download_file =<span class="st"> </span><span class="cf">function</span>(path, url) {</span>
+<span id="cb190-16"><a href="intermediate-visualization-in-r.html#cb190-16" aria-hidden="true"></a>    <span class="cf">if</span> (<span class="op">!</span><span class="kw">file.exists</span>(path)) {</span>
+<span id="cb190-17"><a href="intermediate-visualization-in-r.html#cb190-17" aria-hidden="true"></a>        <span class="kw">download.file</span>(url, path)</span>
+<span id="cb190-18"><a href="intermediate-visualization-in-r.html#cb190-18" aria-hidden="true"></a>    }</span>
+<span id="cb190-19"><a href="intermediate-visualization-in-r.html#cb190-19" aria-hidden="true"></a>}</span>
+<span id="cb190-20"><a href="intermediate-visualization-in-r.html#cb190-20" aria-hidden="true"></a>purrr<span class="op">::</span><span class="kw">walk2</span>(data_paths, data_urls, download_file)</span></code></pre></div>
 <div id="base-graphics-vs.-ggplot2" class="section level2" number="14.1">
 <h2><span class="header-section-number">14.1</span> Base graphics vs. <code>ggplot2</code></h2>
 <ul>
@@ -369,9 +369,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li><span class="citation">Hicks, Stahmer, and Smith (<a href="#ref-HicksImpactingCapabilitiesConceptual2018" role="doc-biblioref">2018</a>)</span> figure 2</li>
 </ul>
-<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="intermediate-visualization-in-r.html#cb188-1" aria-hidden="true"></a>counts_df =<span class="st"> </span><span class="kw">readRDS</span>(data_paths[<span class="st">&#39;papers&#39;</span>])</span>
-<span id="cb188-2"><a href="intermediate-visualization-in-r.html#cb188-2" aria-hidden="true"></a></span>
-<span id="cb188-3"><a href="intermediate-visualization-in-r.html#cb188-3" aria-hidden="true"></a>counts_df</span></code></pre></div>
+<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="intermediate-visualization-in-r.html#cb191-1" aria-hidden="true"></a>counts_df =<span class="st"> </span><span class="kw">readRDS</span>(data_paths[<span class="st">&#39;papers&#39;</span>])</span>
+<span id="cb191-2"><a href="intermediate-visualization-in-r.html#cb191-2" aria-hidden="true"></a></span>
+<span id="cb191-3"><a href="intermediate-visualization-in-r.html#cb191-3" aria-hidden="true"></a>counts_df</span></code></pre></div>
 <pre><code>## # A tibble: 27 x 3
 ##    subject_area   full sample
 ##    &lt;fct&gt;         &lt;dbl&gt;  &lt;dbl&gt;
@@ -386,30 +386,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  9 SOCI         0.0344 0.0446
 ## 10 COMP         0.0324 0.0380
 ## # … with 17 more rows</code></pre>
-<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="intermediate-visualization-in-r.html#cb190-1" aria-hidden="true"></a><span class="kw">ggplot</span>(counts_df, <span class="kw">aes</span>(subject_area)) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb190-2"><a href="intermediate-visualization-in-r.html#cb190-2" aria-hidden="true"></a><span class="st">    </span><span class="co">## geoms</span></span>
-<span id="cb190-3"><a href="intermediate-visualization-in-r.html#cb190-3" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">y =</span> full, <span class="dt">color =</span> <span class="st">&#39;Full&#39;</span>), <span class="dt">size =</span> <span class="dv">3</span>) <span class="op">+</span></span>
-<span id="cb190-4"><a href="intermediate-visualization-in-r.html#cb190-4" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">y =</span> sample, <span class="dt">color =</span> <span class="st">&#39;Sample&#39;</span>), <span class="dt">size =</span> <span class="dv">3</span>) <span class="op">+</span></span>
-<span id="cb190-5"><a href="intermediate-visualization-in-r.html#cb190-5" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_segment</span>(<span class="kw">aes</span>(<span class="dt">x =</span> subject_area, <span class="dt">xend =</span> subject_area, </span>
-<span id="cb190-6"><a href="intermediate-visualization-in-r.html#cb190-6" aria-hidden="true"></a>                     <span class="dt">y =</span> full, <span class="dt">yend =</span> sample), </span>
-<span id="cb190-7"><a href="intermediate-visualization-in-r.html#cb190-7" aria-hidden="true"></a>                 <span class="dt">arrow =</span> <span class="kw">arrow</span>(<span class="dt">angle =</span> <span class="dv">15</span>, <span class="dt">type =</span> <span class="st">&#39;closed&#39;</span>, </span>
-<span id="cb190-8"><a href="intermediate-visualization-in-r.html#cb190-8" aria-hidden="true"></a>                               <span class="dt">length =</span> <span class="kw">unit</span>(.<span class="dv">025</span>, <span class="st">&#39;snpc&#39;</span>))) <span class="op">+</span></span>
-<span id="cb190-9"><a href="intermediate-visualization-in-r.html#cb190-9" aria-hidden="true"></a><span class="st">    </span><span class="co">## scales</span></span>
-<span id="cb190-10"><a href="intermediate-visualization-in-r.html#cb190-10" aria-hidden="true"></a><span class="st">    </span><span class="kw">xlab</span>(<span class="st">&#39;ASJC subject area&#39;</span>) <span class="op">+</span></span>
-<span id="cb190-11"><a href="intermediate-visualization-in-r.html#cb190-11" aria-hidden="true"></a><span class="st">    </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels =</span> scales<span class="op">::</span><span class="kw">percent_format</span>(), </span>
-<span id="cb190-12"><a href="intermediate-visualization-in-r.html#cb190-12" aria-hidden="true"></a>                       <span class="dt">name =</span> <span class="st">&#39;Papers in dataset&#39;</span>) <span class="op">+</span></span>
-<span id="cb190-13"><a href="intermediate-visualization-in-r.html#cb190-13" aria-hidden="true"></a><span class="st">    </span><span class="kw">scale_color_brewer</span>(<span class="dt">palette =</span> <span class="st">&#39;Set1&#39;</span>, </span>
-<span id="cb190-14"><a href="intermediate-visualization-in-r.html#cb190-14" aria-hidden="true"></a>                       <span class="dt">name =</span> <span class="st">&#39;Dataset&#39;</span>) <span class="op">+</span></span>
-<span id="cb190-15"><a href="intermediate-visualization-in-r.html#cb190-15" aria-hidden="true"></a><span class="st">    </span><span class="kw">coord_flip</span>() <span class="op">+</span><span class="st"> </span></span>
-<span id="cb190-16"><a href="intermediate-visualization-in-r.html#cb190-16" aria-hidden="true"></a><span class="st">    </span><span class="co">## annotations and theme</span></span>
-<span id="cb190-17"><a href="intermediate-visualization-in-r.html#cb190-17" aria-hidden="true"></a><span class="st">    </span><span class="kw">ggtitle</span>(<span class="st">&#39;Sampling improves balance across subject areas&#39;</span>, </span>
-<span id="cb190-18"><a href="intermediate-visualization-in-r.html#cb190-18" aria-hidden="true"></a>            <span class="dt">subtitle =</span> <span class="kw">Sys.time</span>()) <span class="op">+</span></span>
-<span id="cb190-19"><a href="intermediate-visualization-in-r.html#cb190-19" aria-hidden="true"></a><span class="st">    </span><span class="co"># annotate(geom = &#39;label&#39;, x = &#39;HEAL&#39;, y = .12, label = Sys.time()) +</span></span>
-<span id="cb190-20"><a href="intermediate-visualization-in-r.html#cb190-20" aria-hidden="true"></a><span class="st">    </span><span class="kw">theme_minimal</span>() <span class="op">+</span></span>
-<span id="cb190-21"><a href="intermediate-visualization-in-r.html#cb190-21" aria-hidden="true"></a><span class="st">    </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="kw">c</span>(.<span class="dv">8</span>, <span class="fl">.2</span>), </span>
-<span id="cb190-22"><a href="intermediate-visualization-in-r.html#cb190-22" aria-hidden="true"></a>          <span class="dt">legend.background =</span> <span class="kw">element_rect</span>(<span class="dt">fill =</span> <span class="st">&#39;white&#39;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="intermediate-visualization-in-r.html#cb193-1" aria-hidden="true"></a><span class="kw">ggplot</span>(counts_df, <span class="kw">aes</span>(subject_area)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb193-2"><a href="intermediate-visualization-in-r.html#cb193-2" aria-hidden="true"></a><span class="st">    </span><span class="co">## geoms</span></span>
+<span id="cb193-3"><a href="intermediate-visualization-in-r.html#cb193-3" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">y =</span> full, <span class="dt">color =</span> <span class="st">&#39;Full&#39;</span>), <span class="dt">size =</span> <span class="dv">3</span>) <span class="op">+</span></span>
+<span id="cb193-4"><a href="intermediate-visualization-in-r.html#cb193-4" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">y =</span> sample, <span class="dt">color =</span> <span class="st">&#39;Sample&#39;</span>), <span class="dt">size =</span> <span class="dv">3</span>) <span class="op">+</span></span>
+<span id="cb193-5"><a href="intermediate-visualization-in-r.html#cb193-5" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_segment</span>(<span class="kw">aes</span>(<span class="dt">x =</span> subject_area, <span class="dt">xend =</span> subject_area, </span>
+<span id="cb193-6"><a href="intermediate-visualization-in-r.html#cb193-6" aria-hidden="true"></a>                     <span class="dt">y =</span> full, <span class="dt">yend =</span> sample), </span>
+<span id="cb193-7"><a href="intermediate-visualization-in-r.html#cb193-7" aria-hidden="true"></a>                 <span class="dt">arrow =</span> <span class="kw">arrow</span>(<span class="dt">angle =</span> <span class="dv">15</span>, <span class="dt">type =</span> <span class="st">&#39;closed&#39;</span>, </span>
+<span id="cb193-8"><a href="intermediate-visualization-in-r.html#cb193-8" aria-hidden="true"></a>                               <span class="dt">length =</span> <span class="kw">unit</span>(.<span class="dv">025</span>, <span class="st">&#39;snpc&#39;</span>))) <span class="op">+</span></span>
+<span id="cb193-9"><a href="intermediate-visualization-in-r.html#cb193-9" aria-hidden="true"></a><span class="st">    </span><span class="co">## scales</span></span>
+<span id="cb193-10"><a href="intermediate-visualization-in-r.html#cb193-10" aria-hidden="true"></a><span class="st">    </span><span class="kw">xlab</span>(<span class="st">&#39;ASJC subject area&#39;</span>) <span class="op">+</span></span>
+<span id="cb193-11"><a href="intermediate-visualization-in-r.html#cb193-11" aria-hidden="true"></a><span class="st">    </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels =</span> scales<span class="op">::</span><span class="kw">percent_format</span>(), </span>
+<span id="cb193-12"><a href="intermediate-visualization-in-r.html#cb193-12" aria-hidden="true"></a>                       <span class="dt">name =</span> <span class="st">&#39;Papers in dataset&#39;</span>) <span class="op">+</span></span>
+<span id="cb193-13"><a href="intermediate-visualization-in-r.html#cb193-13" aria-hidden="true"></a><span class="st">    </span><span class="kw">scale_color_brewer</span>(<span class="dt">palette =</span> <span class="st">&#39;Set1&#39;</span>, </span>
+<span id="cb193-14"><a href="intermediate-visualization-in-r.html#cb193-14" aria-hidden="true"></a>                       <span class="dt">name =</span> <span class="st">&#39;Dataset&#39;</span>) <span class="op">+</span></span>
+<span id="cb193-15"><a href="intermediate-visualization-in-r.html#cb193-15" aria-hidden="true"></a><span class="st">    </span><span class="kw">coord_flip</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb193-16"><a href="intermediate-visualization-in-r.html#cb193-16" aria-hidden="true"></a><span class="st">    </span><span class="co">## annotations and theme</span></span>
+<span id="cb193-17"><a href="intermediate-visualization-in-r.html#cb193-17" aria-hidden="true"></a><span class="st">    </span><span class="kw">ggtitle</span>(<span class="st">&#39;Sampling improves balance across subject areas&#39;</span>, </span>
+<span id="cb193-18"><a href="intermediate-visualization-in-r.html#cb193-18" aria-hidden="true"></a>            <span class="dt">subtitle =</span> <span class="kw">Sys.time</span>()) <span class="op">+</span></span>
+<span id="cb193-19"><a href="intermediate-visualization-in-r.html#cb193-19" aria-hidden="true"></a><span class="st">    </span><span class="co"># annotate(geom = &#39;label&#39;, x = &#39;HEAL&#39;, y = .12, label = Sys.time()) +</span></span>
+<span id="cb193-20"><a href="intermediate-visualization-in-r.html#cb193-20" aria-hidden="true"></a><span class="st">    </span><span class="kw">theme_minimal</span>() <span class="op">+</span></span>
+<span id="cb193-21"><a href="intermediate-visualization-in-r.html#cb193-21" aria-hidden="true"></a><span class="st">    </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="kw">c</span>(.<span class="dv">8</span>, <span class="fl">.2</span>), </span>
+<span id="cb193-22"><a href="intermediate-visualization-in-r.html#cb193-22" aria-hidden="true"></a>          <span class="dt">legend.background =</span> <span class="kw">element_rect</span>(<span class="dt">fill =</span> <span class="st">&#39;white&#39;</span>))</span></code></pre></div>
 <p><img src="book_files/figure-html/unnamed-chunk-105-1.png" width="60%" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="intermediate-visualization-in-r.html#cb191-1" aria-hidden="true"></a><span class="co"># ggsave(paste0(plots_dir, &#39;plot_1.png&#39;), height = 7, width = 7)</span></span></code></pre></div>
+<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="intermediate-visualization-in-r.html#cb194-1" aria-hidden="true"></a><span class="co"># ggsave(paste0(plots_dir, &#39;plot_1.png&#39;), height = 7, width = 7)</span></span></code></pre></div>
 <div id="discussion" class="section level3" number="14.2.1">
 <h3><span class="header-section-number">14.2.1</span> Discussion</h3>
 <ol style="list-style-type: decimal">
@@ -427,11 +427,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="plot-2-high-density-scatterplots" class="section level2" number="14.3">
 <h2><span class="header-section-number">14.3</span> Plot 2: High-density scatterplots</h2>
-<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="intermediate-visualization-in-r.html#cb192-1" aria-hidden="true"></a><span class="co">## Code to construct this dataset is in `climate_data.R`</span></span>
-<span id="cb192-2"><a href="intermediate-visualization-in-r.html#cb192-2" aria-hidden="true"></a>temp_df =<span class="st"> </span><span class="kw">readRDS</span>(data_paths[<span class="st">&#39;temperature&#39;</span>])</span>
-<span id="cb192-3"><a href="intermediate-visualization-in-r.html#cb192-3" aria-hidden="true"></a></span>
-<span id="cb192-4"><a href="intermediate-visualization-in-r.html#cb192-4" aria-hidden="true"></a><span class="co">## 15k observations lead to lots of overplotting and long render times</span></span>
-<span id="cb192-5"><a href="intermediate-visualization-in-r.html#cb192-5" aria-hidden="true"></a><span class="kw">str</span>(temp_df)</span></code></pre></div>
+<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="intermediate-visualization-in-r.html#cb195-1" aria-hidden="true"></a><span class="co">## Code to construct this dataset is in `climate_data.R`</span></span>
+<span id="cb195-2"><a href="intermediate-visualization-in-r.html#cb195-2" aria-hidden="true"></a>temp_df =<span class="st"> </span><span class="kw">readRDS</span>(data_paths[<span class="st">&#39;temperature&#39;</span>])</span>
+<span id="cb195-3"><a href="intermediate-visualization-in-r.html#cb195-3" aria-hidden="true"></a></span>
+<span id="cb195-4"><a href="intermediate-visualization-in-r.html#cb195-4" aria-hidden="true"></a><span class="co">## 15k observations lead to lots of overplotting and long render times</span></span>
+<span id="cb195-5"><a href="intermediate-visualization-in-r.html#cb195-5" aria-hidden="true"></a><span class="kw">str</span>(temp_df)</span></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    14577 obs. of  12 variables:
 ##  $ id           : chr  &quot;USC00042294&quot; &quot;USC00042294&quot; &quot;USC00042294&quot; &quot;USC00042294&quot; ...
 ##  $ name         : chr  &quot;Davis&quot; &quot;Davis&quot; &quot;Davis&quot; &quot;Davis&quot; ...
@@ -445,35 +445,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  $ precipitation: num  0 0 0 0 5 8 0 0 0 0 ...
 ##  $ lat          : num  38.5 38.5 38.5 38.5 38.5 ...
 ##  $ lon          : num  -122 -122 -122 -122 -122 ...</code></pre>
-<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="intermediate-visualization-in-r.html#cb194-1" aria-hidden="true"></a><span class="kw">ggplot</span>(temp_df, <span class="kw">aes</span>(temp_max, temp_delta)) <span class="op">+</span></span>
-<span id="cb194-2"><a href="intermediate-visualization-in-r.html#cb194-2" aria-hidden="true"></a><span class="st">    </span><span class="co">## geoms</span></span>
-<span id="cb194-3"><a href="intermediate-visualization-in-r.html#cb194-3" aria-hidden="true"></a><span class="st">    </span><span class="co"># geom_point() +</span></span>
-<span id="cb194-4"><a href="intermediate-visualization-in-r.html#cb194-4" aria-hidden="true"></a><span class="st">    </span><span class="co"># geom_count() +</span></span>
-<span id="cb194-5"><a href="intermediate-visualization-in-r.html#cb194-5" aria-hidden="true"></a><span class="st">    </span><span class="co"># geom_bin2d() +</span></span>
-<span id="cb194-6"><a href="intermediate-visualization-in-r.html#cb194-6" aria-hidden="true"></a><span class="st">    </span><span class="co"># geom_hex(aes(color = after_stat(count))) +</span></span>
-<span id="cb194-7"><a href="intermediate-visualization-in-r.html#cb194-7" aria-hidden="true"></a><span class="st">    </span><span class="co"># geom_density2d(size = 1) +</span></span>
-<span id="cb194-8"><a href="intermediate-visualization-in-r.html#cb194-8" aria-hidden="true"></a><span class="st">    </span><span class="co"># stat_density2d(contour = FALSE, geom = &#39;raster&#39;,</span></span>
-<span id="cb194-9"><a href="intermediate-visualization-in-r.html#cb194-9" aria-hidden="true"></a><span class="st">    </span><span class="co">#                aes(fill = after_stat(density)), </span></span>
-<span id="cb194-10"><a href="intermediate-visualization-in-r.html#cb194-10" aria-hidden="true"></a><span class="st">    </span><span class="co">#                show.legend = FALSE) +</span></span>
-<span id="cb194-11"><a href="intermediate-visualization-in-r.html#cb194-11" aria-hidden="true"></a><span class="st">    </span><span class="kw">stat_density2d</span>(<span class="dt">geom =</span> <span class="st">&#39;polygon&#39;</span>,</span>
-<span id="cb194-12"><a href="intermediate-visualization-in-r.html#cb194-12" aria-hidden="true"></a>                   <span class="kw">aes</span>(<span class="dt">fill =</span> <span class="kw">after_stat</span>(level)),</span>
-<span id="cb194-13"><a href="intermediate-visualization-in-r.html#cb194-13" aria-hidden="true"></a>                   <span class="dt">show.legend =</span> <span class="ot">FALSE</span>) <span class="op">+</span></span>
-<span id="cb194-14"><a href="intermediate-visualization-in-r.html#cb194-14" aria-hidden="true"></a><span class="st">    </span><span class="co">## facets</span></span>
-<span id="cb194-15"><a href="intermediate-visualization-in-r.html#cb194-15" aria-hidden="true"></a><span class="st">    </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>name) <span class="op">+</span></span>
-<span id="cb194-16"><a href="intermediate-visualization-in-r.html#cb194-16" aria-hidden="true"></a><span class="st">    </span><span class="co">## Annotations are repeated within each facet</span></span>
-<span id="cb194-17"><a href="intermediate-visualization-in-r.html#cb194-17" aria-hidden="true"></a><span class="st">    </span><span class="co"># annotate(geom = &#39;label&#39;, x = 200, y = 5, label = Sys.time()) +</span></span>
-<span id="cb194-18"><a href="intermediate-visualization-in-r.html#cb194-18" aria-hidden="true"></a><span class="st">    </span><span class="co">## scales</span></span>
-<span id="cb194-19"><a href="intermediate-visualization-in-r.html#cb194-19" aria-hidden="true"></a><span class="st">    </span><span class="kw">xlab</span>(<span class="st">&#39;Daily maximum temperature (ºC)&#39;</span>) <span class="op">+</span></span>
-<span id="cb194-20"><a href="intermediate-visualization-in-r.html#cb194-20" aria-hidden="true"></a><span class="st">    </span><span class="kw">ylab</span>(<span class="st">&#39;Daily temperature difference (ºC)&#39;</span>) <span class="op">+</span></span>
-<span id="cb194-21"><a href="intermediate-visualization-in-r.html#cb194-21" aria-hidden="true"></a><span class="st">    </span><span class="kw">scale_color_viridis_c</span>(<span class="dt">option =</span> <span class="st">&#39;A&#39;</span>) <span class="op">+</span></span>
-<span id="cb194-22"><a href="intermediate-visualization-in-r.html#cb194-22" aria-hidden="true"></a><span class="st">    </span><span class="kw">scale_fill_viridis_c</span>(<span class="dt">option =</span> <span class="st">&#39;A&#39;</span>) <span class="op">+</span></span>
-<span id="cb194-23"><a href="intermediate-visualization-in-r.html#cb194-23" aria-hidden="true"></a><span class="st">    </span><span class="co">## themes</span></span>
-<span id="cb194-24"><a href="intermediate-visualization-in-r.html#cb194-24" aria-hidden="true"></a><span class="st">    </span><span class="kw">theme_bw</span>() <span class="op">+</span></span>
-<span id="cb194-25"><a href="intermediate-visualization-in-r.html#cb194-25" aria-hidden="true"></a><span class="st">    </span><span class="kw">ggtitle</span>(<span class="st">&#39;Temperature difference is associated with maximum daily temperature&#39;</span>, </span>
-<span id="cb194-26"><a href="intermediate-visualization-in-r.html#cb194-26" aria-hidden="true"></a>            <span class="dt">subtitle =</span> <span class="kw">Sys.time</span>())</span></code></pre></div>
+<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="intermediate-visualization-in-r.html#cb197-1" aria-hidden="true"></a><span class="kw">ggplot</span>(temp_df, <span class="kw">aes</span>(temp_max, temp_delta)) <span class="op">+</span></span>
+<span id="cb197-2"><a href="intermediate-visualization-in-r.html#cb197-2" aria-hidden="true"></a><span class="st">    </span><span class="co">## geoms</span></span>
+<span id="cb197-3"><a href="intermediate-visualization-in-r.html#cb197-3" aria-hidden="true"></a><span class="st">    </span><span class="co"># geom_point() +</span></span>
+<span id="cb197-4"><a href="intermediate-visualization-in-r.html#cb197-4" aria-hidden="true"></a><span class="st">    </span><span class="co"># geom_count() +</span></span>
+<span id="cb197-5"><a href="intermediate-visualization-in-r.html#cb197-5" aria-hidden="true"></a><span class="st">    </span><span class="co"># geom_bin2d() +</span></span>
+<span id="cb197-6"><a href="intermediate-visualization-in-r.html#cb197-6" aria-hidden="true"></a><span class="st">    </span><span class="co"># geom_hex(aes(color = after_stat(count))) +</span></span>
+<span id="cb197-7"><a href="intermediate-visualization-in-r.html#cb197-7" aria-hidden="true"></a><span class="st">    </span><span class="co"># geom_density2d(size = 1) +</span></span>
+<span id="cb197-8"><a href="intermediate-visualization-in-r.html#cb197-8" aria-hidden="true"></a><span class="st">    </span><span class="co"># stat_density2d(contour = FALSE, geom = &#39;raster&#39;,</span></span>
+<span id="cb197-9"><a href="intermediate-visualization-in-r.html#cb197-9" aria-hidden="true"></a><span class="st">    </span><span class="co">#                aes(fill = after_stat(density)), </span></span>
+<span id="cb197-10"><a href="intermediate-visualization-in-r.html#cb197-10" aria-hidden="true"></a><span class="st">    </span><span class="co">#                show.legend = FALSE) +</span></span>
+<span id="cb197-11"><a href="intermediate-visualization-in-r.html#cb197-11" aria-hidden="true"></a><span class="st">    </span><span class="kw">stat_density2d</span>(<span class="dt">geom =</span> <span class="st">&#39;polygon&#39;</span>,</span>
+<span id="cb197-12"><a href="intermediate-visualization-in-r.html#cb197-12" aria-hidden="true"></a>                   <span class="kw">aes</span>(<span class="dt">fill =</span> <span class="kw">after_stat</span>(level)),</span>
+<span id="cb197-13"><a href="intermediate-visualization-in-r.html#cb197-13" aria-hidden="true"></a>                   <span class="dt">show.legend =</span> <span class="ot">FALSE</span>) <span class="op">+</span></span>
+<span id="cb197-14"><a href="intermediate-visualization-in-r.html#cb197-14" aria-hidden="true"></a><span class="st">    </span><span class="co">## facets</span></span>
+<span id="cb197-15"><a href="intermediate-visualization-in-r.html#cb197-15" aria-hidden="true"></a><span class="st">    </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>name) <span class="op">+</span></span>
+<span id="cb197-16"><a href="intermediate-visualization-in-r.html#cb197-16" aria-hidden="true"></a><span class="st">    </span><span class="co">## Annotations are repeated within each facet</span></span>
+<span id="cb197-17"><a href="intermediate-visualization-in-r.html#cb197-17" aria-hidden="true"></a><span class="st">    </span><span class="co"># annotate(geom = &#39;label&#39;, x = 200, y = 5, label = Sys.time()) +</span></span>
+<span id="cb197-18"><a href="intermediate-visualization-in-r.html#cb197-18" aria-hidden="true"></a><span class="st">    </span><span class="co">## scales</span></span>
+<span id="cb197-19"><a href="intermediate-visualization-in-r.html#cb197-19" aria-hidden="true"></a><span class="st">    </span><span class="kw">xlab</span>(<span class="st">&#39;Daily maximum temperature (ºC)&#39;</span>) <span class="op">+</span></span>
+<span id="cb197-20"><a href="intermediate-visualization-in-r.html#cb197-20" aria-hidden="true"></a><span class="st">    </span><span class="kw">ylab</span>(<span class="st">&#39;Daily temperature difference (ºC)&#39;</span>) <span class="op">+</span></span>
+<span id="cb197-21"><a href="intermediate-visualization-in-r.html#cb197-21" aria-hidden="true"></a><span class="st">    </span><span class="kw">scale_color_viridis_c</span>(<span class="dt">option =</span> <span class="st">&#39;A&#39;</span>) <span class="op">+</span></span>
+<span id="cb197-22"><a href="intermediate-visualization-in-r.html#cb197-22" aria-hidden="true"></a><span class="st">    </span><span class="kw">scale_fill_viridis_c</span>(<span class="dt">option =</span> <span class="st">&#39;A&#39;</span>) <span class="op">+</span></span>
+<span id="cb197-23"><a href="intermediate-visualization-in-r.html#cb197-23" aria-hidden="true"></a><span class="st">    </span><span class="co">## themes</span></span>
+<span id="cb197-24"><a href="intermediate-visualization-in-r.html#cb197-24" aria-hidden="true"></a><span class="st">    </span><span class="kw">theme_bw</span>() <span class="op">+</span></span>
+<span id="cb197-25"><a href="intermediate-visualization-in-r.html#cb197-25" aria-hidden="true"></a><span class="st">    </span><span class="kw">ggtitle</span>(<span class="st">&#39;Temperature difference is associated with maximum daily temperature&#39;</span>, </span>
+<span id="cb197-26"><a href="intermediate-visualization-in-r.html#cb197-26" aria-hidden="true"></a>            <span class="dt">subtitle =</span> <span class="kw">Sys.time</span>())</span></code></pre></div>
 <pre><code>## Warning: Removed 104 rows containing non-finite values (stat_density2d).</code></pre>
 <p><img src="book_files/figure-html/unnamed-chunk-106-1.png" width="60%" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="intermediate-visualization-in-r.html#cb196-1" aria-hidden="true"></a><span class="co"># ggsave(paste0(plots_dir, &#39;plot_2.png&#39;), height = 7, width = 7)</span></span></code></pre></div>
+<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="intermediate-visualization-in-r.html#cb199-1" aria-hidden="true"></a><span class="co"># ggsave(paste0(plots_dir, &#39;plot_2.png&#39;), height = 7, width = 7)</span></span></code></pre></div>
 <div id="discussion-1" class="section level3" number="14.3.1">
 <h3><span class="header-section-number">14.3.1</span> Discussion</h3>
 <ol style="list-style-type: decimal">
@@ -483,53 +483,53 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="plot-3-time-series-model-predictions" class="section level2" number="14.4">
 <h2><span class="header-section-number">14.4</span> Plot 3: Time series + model predictions</h2>
-<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="intermediate-visualization-in-r.html#cb197-1" aria-hidden="true"></a><span class="co">## Hack to get month labels on day-as-year</span></span>
-<span id="cb197-2"><a href="intermediate-visualization-in-r.html#cb197-2" aria-hidden="true"></a><span class="co">## &lt;https://stackoverflow.com/a/39861306/3187973&gt;</span></span>
-<span id="cb197-3"><a href="intermediate-visualization-in-r.html#cb197-3" aria-hidden="true"></a>temp_df<span class="op">$</span>day.date =<span class="st"> </span><span class="kw">as.Date</span>(temp_df<span class="op">$</span>day, <span class="st">&#39;2009-01-01&#39;</span>)</span>
-<span id="cb197-4"><a href="intermediate-visualization-in-r.html#cb197-4" aria-hidden="true"></a></span>
-<span id="cb197-5"><a href="intermediate-visualization-in-r.html#cb197-5" aria-hidden="true"></a><span class="co">## Model **for Sacramento alone**</span></span>
-<span id="cb197-6"><a href="intermediate-visualization-in-r.html#cb197-6" aria-hidden="true"></a>model =<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data =</span> temp_df, temp_delta <span class="op">~</span><span class="st"> </span>day <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(day<span class="op">^</span><span class="dv">2</span>), </span>
-<span id="cb197-7"><a href="intermediate-visualization-in-r.html#cb197-7" aria-hidden="true"></a>           <span class="dt">subset =</span> name <span class="op">==</span><span class="st"> &#39;Sacramento&#39;</span>)</span>
-<span id="cb197-8"><a href="intermediate-visualization-in-r.html#cb197-8" aria-hidden="true"></a></span>
-<span id="cb197-9"><a href="intermediate-visualization-in-r.html#cb197-9" aria-hidden="true"></a><span class="co">## The director of the center where I gave this talk (who was also my postdoc supervisor) is part of the R Core Team. He doesn&#39;t like tidyverse, so I did everything except ggplot using base R. </span></span>
-<span id="cb197-10"><a href="intermediate-visualization-in-r.html#cb197-10" aria-hidden="true"></a><span class="co">## This is a good illustration of how tidyverse makes R more functional</span></span>
-<span id="cb197-11"><a href="intermediate-visualization-in-r.html#cb197-11" aria-hidden="true"></a>predictions =<span class="st"> </span><span class="kw">predict</span>(model, <span class="dt">interval =</span> <span class="st">&#39;confidence&#39;</span>, <span class="dt">level =</span> <span class="fl">.95</span>)</span>
-<span id="cb197-12"><a href="intermediate-visualization-in-r.html#cb197-12" aria-hidden="true"></a>predictions =<span class="st"> </span><span class="kw">as.data.frame</span>(predictions)</span>
-<span id="cb197-13"><a href="intermediate-visualization-in-r.html#cb197-13" aria-hidden="true"></a>predictions<span class="op">$</span>day =<span class="st"> </span>model<span class="op">$</span>model<span class="op">$</span>day</span>
-<span id="cb197-14"><a href="intermediate-visualization-in-r.html#cb197-14" aria-hidden="true"></a>predictions<span class="op">$</span>day.date =<span class="st"> </span><span class="kw">as.Date</span>(predictions<span class="op">$</span>day, <span class="st">&#39;2009-01-01&#39;</span>)</span>
-<span id="cb197-15"><a href="intermediate-visualization-in-r.html#cb197-15" aria-hidden="true"></a></span>
-<span id="cb197-16"><a href="intermediate-visualization-in-r.html#cb197-16" aria-hidden="true"></a><span class="kw">ggplot</span>(temp_df, <span class="kw">aes</span>(day.date, temp_delta)) <span class="op">+</span></span>
-<span id="cb197-17"><a href="intermediate-visualization-in-r.html#cb197-17" aria-hidden="true"></a><span class="st">    </span><span class="co">## geoms</span></span>
-<span id="cb197-18"><a href="intermediate-visualization-in-r.html#cb197-18" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_path</span>(<span class="kw">aes</span>(<span class="dt">color =</span> month, <span class="dt">group =</span> year), <span class="dt">alpha =</span> <span class="fl">.3</span>, <span class="dt">show.legend =</span> <span class="ot">FALSE</span>) <span class="op">+</span></span>
-<span id="cb197-19"><a href="intermediate-visualization-in-r.html#cb197-19" aria-hidden="true"></a><span class="st">    </span><span class="co">## Separate models for each panel</span></span>
-<span id="cb197-20"><a href="intermediate-visualization-in-r.html#cb197-20" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> lm, <span class="dt">formula =</span> y <span class="op">~</span><span class="st"> </span>x <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(x<span class="op">^</span><span class="dv">2</span>),</span>
-<span id="cb197-21"><a href="intermediate-visualization-in-r.html#cb197-21" aria-hidden="true"></a>                <span class="dt">color =</span> <span class="st">&#39;red&#39;</span>, <span class="dt">size =</span> <span class="dv">1</span>) <span class="op">+</span></span>
-<span id="cb197-22"><a href="intermediate-visualization-in-r.html#cb197-22" aria-hidden="true"></a><span class="st">    </span><span class="co">## Sacramento-only model</span></span>
-<span id="cb197-23"><a href="intermediate-visualization-in-r.html#cb197-23" aria-hidden="true"></a><span class="st">    </span><span class="co">## Use the smooth geom to get curve + ribbon</span></span>
-<span id="cb197-24"><a href="intermediate-visualization-in-r.html#cb197-24" aria-hidden="true"></a><span class="st">    </span><span class="co">## But set `stat = &#39;identity&#39;` because we don&#39;t want to fit a (new) model</span></span>
-<span id="cb197-25"><a href="intermediate-visualization-in-r.html#cb197-25" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_smooth</span>(<span class="dt">data =</span> predictions, <span class="dt">stat =</span> <span class="st">&#39;identity&#39;</span>,</span>
-<span id="cb197-26"><a href="intermediate-visualization-in-r.html#cb197-26" aria-hidden="true"></a>                <span class="kw">aes</span>(<span class="dt">y =</span> fit, <span class="dt">ymax =</span> upr, <span class="dt">ymin =</span> lwr),</span>
-<span id="cb197-27"><a href="intermediate-visualization-in-r.html#cb197-27" aria-hidden="true"></a>                <span class="dt">color =</span> <span class="st">&#39;blue&#39;</span>, <span class="dt">fill =</span> <span class="st">&#39;blue&#39;</span>, <span class="dt">size =</span> <span class="dv">1</span>) <span class="op">+</span></span>
-<span id="cb197-28"><a href="intermediate-visualization-in-r.html#cb197-28" aria-hidden="true"></a><span class="st">    </span><span class="co">## facets</span></span>
-<span id="cb197-29"><a href="intermediate-visualization-in-r.html#cb197-29" aria-hidden="true"></a><span class="st">    </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>name) <span class="op">+</span></span>
-<span id="cb197-30"><a href="intermediate-visualization-in-r.html#cb197-30" aria-hidden="true"></a><span class="st">    </span><span class="co">## scales</span></span>
-<span id="cb197-31"><a href="intermediate-visualization-in-r.html#cb197-31" aria-hidden="true"></a><span class="st">    </span><span class="kw">scale_x_date</span>(<span class="dt">name =</span> <span class="st">&#39;Month&#39;</span>, <span class="dt">date_breaks =</span> <span class="st">&#39;3 month&#39;</span>, <span class="dt">date_labels =</span> <span class="st">&#39;%b&#39;</span>) <span class="op">+</span><span class="st">  </span></span>
-<span id="cb197-32"><a href="intermediate-visualization-in-r.html#cb197-32" aria-hidden="true"></a><span class="st">    </span><span class="kw">scale_y_continuous</span>(<span class="dt">name =</span> <span class="st">&#39;Daily temperature difference (max - min)&#39;</span>, </span>
-<span id="cb197-33"><a href="intermediate-visualization-in-r.html#cb197-33" aria-hidden="true"></a>                       <span class="dt">labels =</span> scales<span class="op">::</span><span class="kw">math_format</span>(<span class="dt">expr =</span> .x<span class="op">*</span>degree<span class="op">*</span>C)) <span class="op">+</span></span>
-<span id="cb197-34"><a href="intermediate-visualization-in-r.html#cb197-34" aria-hidden="true"></a><span class="st">    </span><span class="kw">scale_color_viridis_d</span>(<span class="dt">limits =</span> month.name,</span>
-<span id="cb197-35"><a href="intermediate-visualization-in-r.html#cb197-35" aria-hidden="true"></a>                          <span class="dt">option =</span> <span class="st">&#39;E&#39;</span>,</span>
-<span id="cb197-36"><a href="intermediate-visualization-in-r.html#cb197-36" aria-hidden="true"></a>                          <span class="dt">direction =</span> <span class="dv">-1</span>) <span class="op">+</span></span>
-<span id="cb197-37"><a href="intermediate-visualization-in-r.html#cb197-37" aria-hidden="true"></a><span class="st">    </span><span class="co"># coord_polar() +</span></span>
-<span id="cb197-38"><a href="intermediate-visualization-in-r.html#cb197-38" aria-hidden="true"></a><span class="st">    </span><span class="co">## themes</span></span>
-<span id="cb197-39"><a href="intermediate-visualization-in-r.html#cb197-39" aria-hidden="true"></a><span class="st">    </span><span class="kw">theme_bw</span>() <span class="op">+</span></span>
-<span id="cb197-40"><a href="intermediate-visualization-in-r.html#cb197-40" aria-hidden="true"></a><span class="st">    </span><span class="kw">ggtitle</span>(<span class="st">&#39;Sacramento has smaller temperature differences than other sites&#39;</span>, </span>
-<span id="cb197-41"><a href="intermediate-visualization-in-r.html#cb197-41" aria-hidden="true"></a>            <span class="dt">subtitle =</span> <span class="kw">Sys.time</span>())</span></code></pre></div>
+<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="intermediate-visualization-in-r.html#cb200-1" aria-hidden="true"></a><span class="co">## Hack to get month labels on day-as-year</span></span>
+<span id="cb200-2"><a href="intermediate-visualization-in-r.html#cb200-2" aria-hidden="true"></a><span class="co">## &lt;https://stackoverflow.com/a/39861306/3187973&gt;</span></span>
+<span id="cb200-3"><a href="intermediate-visualization-in-r.html#cb200-3" aria-hidden="true"></a>temp_df<span class="op">$</span>day.date =<span class="st"> </span><span class="kw">as.Date</span>(temp_df<span class="op">$</span>day, <span class="st">&#39;2009-01-01&#39;</span>)</span>
+<span id="cb200-4"><a href="intermediate-visualization-in-r.html#cb200-4" aria-hidden="true"></a></span>
+<span id="cb200-5"><a href="intermediate-visualization-in-r.html#cb200-5" aria-hidden="true"></a><span class="co">## Model **for Sacramento alone**</span></span>
+<span id="cb200-6"><a href="intermediate-visualization-in-r.html#cb200-6" aria-hidden="true"></a>model =<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data =</span> temp_df, temp_delta <span class="op">~</span><span class="st"> </span>day <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(day<span class="op">^</span><span class="dv">2</span>), </span>
+<span id="cb200-7"><a href="intermediate-visualization-in-r.html#cb200-7" aria-hidden="true"></a>           <span class="dt">subset =</span> name <span class="op">==</span><span class="st"> &#39;Sacramento&#39;</span>)</span>
+<span id="cb200-8"><a href="intermediate-visualization-in-r.html#cb200-8" aria-hidden="true"></a></span>
+<span id="cb200-9"><a href="intermediate-visualization-in-r.html#cb200-9" aria-hidden="true"></a><span class="co">## The director of the center where I gave this talk (who was also my postdoc supervisor) is part of the R Core Team. He doesn&#39;t like tidyverse, so I did everything except ggplot using base R. </span></span>
+<span id="cb200-10"><a href="intermediate-visualization-in-r.html#cb200-10" aria-hidden="true"></a><span class="co">## This is a good illustration of how tidyverse makes R more functional</span></span>
+<span id="cb200-11"><a href="intermediate-visualization-in-r.html#cb200-11" aria-hidden="true"></a>predictions =<span class="st"> </span><span class="kw">predict</span>(model, <span class="dt">interval =</span> <span class="st">&#39;confidence&#39;</span>, <span class="dt">level =</span> <span class="fl">.95</span>)</span>
+<span id="cb200-12"><a href="intermediate-visualization-in-r.html#cb200-12" aria-hidden="true"></a>predictions =<span class="st"> </span><span class="kw">as.data.frame</span>(predictions)</span>
+<span id="cb200-13"><a href="intermediate-visualization-in-r.html#cb200-13" aria-hidden="true"></a>predictions<span class="op">$</span>day =<span class="st"> </span>model<span class="op">$</span>model<span class="op">$</span>day</span>
+<span id="cb200-14"><a href="intermediate-visualization-in-r.html#cb200-14" aria-hidden="true"></a>predictions<span class="op">$</span>day.date =<span class="st"> </span><span class="kw">as.Date</span>(predictions<span class="op">$</span>day, <span class="st">&#39;2009-01-01&#39;</span>)</span>
+<span id="cb200-15"><a href="intermediate-visualization-in-r.html#cb200-15" aria-hidden="true"></a></span>
+<span id="cb200-16"><a href="intermediate-visualization-in-r.html#cb200-16" aria-hidden="true"></a><span class="kw">ggplot</span>(temp_df, <span class="kw">aes</span>(day.date, temp_delta)) <span class="op">+</span></span>
+<span id="cb200-17"><a href="intermediate-visualization-in-r.html#cb200-17" aria-hidden="true"></a><span class="st">    </span><span class="co">## geoms</span></span>
+<span id="cb200-18"><a href="intermediate-visualization-in-r.html#cb200-18" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_path</span>(<span class="kw">aes</span>(<span class="dt">color =</span> month, <span class="dt">group =</span> year), <span class="dt">alpha =</span> <span class="fl">.3</span>, <span class="dt">show.legend =</span> <span class="ot">FALSE</span>) <span class="op">+</span></span>
+<span id="cb200-19"><a href="intermediate-visualization-in-r.html#cb200-19" aria-hidden="true"></a><span class="st">    </span><span class="co">## Separate models for each panel</span></span>
+<span id="cb200-20"><a href="intermediate-visualization-in-r.html#cb200-20" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> lm, <span class="dt">formula =</span> y <span class="op">~</span><span class="st"> </span>x <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(x<span class="op">^</span><span class="dv">2</span>),</span>
+<span id="cb200-21"><a href="intermediate-visualization-in-r.html#cb200-21" aria-hidden="true"></a>                <span class="dt">color =</span> <span class="st">&#39;red&#39;</span>, <span class="dt">size =</span> <span class="dv">1</span>) <span class="op">+</span></span>
+<span id="cb200-22"><a href="intermediate-visualization-in-r.html#cb200-22" aria-hidden="true"></a><span class="st">    </span><span class="co">## Sacramento-only model</span></span>
+<span id="cb200-23"><a href="intermediate-visualization-in-r.html#cb200-23" aria-hidden="true"></a><span class="st">    </span><span class="co">## Use the smooth geom to get curve + ribbon</span></span>
+<span id="cb200-24"><a href="intermediate-visualization-in-r.html#cb200-24" aria-hidden="true"></a><span class="st">    </span><span class="co">## But set `stat = &#39;identity&#39;` because we don&#39;t want to fit a (new) model</span></span>
+<span id="cb200-25"><a href="intermediate-visualization-in-r.html#cb200-25" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_smooth</span>(<span class="dt">data =</span> predictions, <span class="dt">stat =</span> <span class="st">&#39;identity&#39;</span>,</span>
+<span id="cb200-26"><a href="intermediate-visualization-in-r.html#cb200-26" aria-hidden="true"></a>                <span class="kw">aes</span>(<span class="dt">y =</span> fit, <span class="dt">ymax =</span> upr, <span class="dt">ymin =</span> lwr),</span>
+<span id="cb200-27"><a href="intermediate-visualization-in-r.html#cb200-27" aria-hidden="true"></a>                <span class="dt">color =</span> <span class="st">&#39;blue&#39;</span>, <span class="dt">fill =</span> <span class="st">&#39;blue&#39;</span>, <span class="dt">size =</span> <span class="dv">1</span>) <span class="op">+</span></span>
+<span id="cb200-28"><a href="intermediate-visualization-in-r.html#cb200-28" aria-hidden="true"></a><span class="st">    </span><span class="co">## facets</span></span>
+<span id="cb200-29"><a href="intermediate-visualization-in-r.html#cb200-29" aria-hidden="true"></a><span class="st">    </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>name) <span class="op">+</span></span>
+<span id="cb200-30"><a href="intermediate-visualization-in-r.html#cb200-30" aria-hidden="true"></a><span class="st">    </span><span class="co">## scales</span></span>
+<span id="cb200-31"><a href="intermediate-visualization-in-r.html#cb200-31" aria-hidden="true"></a><span class="st">    </span><span class="kw">scale_x_date</span>(<span class="dt">name =</span> <span class="st">&#39;Month&#39;</span>, <span class="dt">date_breaks =</span> <span class="st">&#39;3 month&#39;</span>, <span class="dt">date_labels =</span> <span class="st">&#39;%b&#39;</span>) <span class="op">+</span><span class="st">  </span></span>
+<span id="cb200-32"><a href="intermediate-visualization-in-r.html#cb200-32" aria-hidden="true"></a><span class="st">    </span><span class="kw">scale_y_continuous</span>(<span class="dt">name =</span> <span class="st">&#39;Daily temperature difference (max - min)&#39;</span>, </span>
+<span id="cb200-33"><a href="intermediate-visualization-in-r.html#cb200-33" aria-hidden="true"></a>                       <span class="dt">labels =</span> scales<span class="op">::</span><span class="kw">math_format</span>(<span class="dt">expr =</span> .x<span class="op">*</span>degree<span class="op">*</span>C)) <span class="op">+</span></span>
+<span id="cb200-34"><a href="intermediate-visualization-in-r.html#cb200-34" aria-hidden="true"></a><span class="st">    </span><span class="kw">scale_color_viridis_d</span>(<span class="dt">limits =</span> month.name,</span>
+<span id="cb200-35"><a href="intermediate-visualization-in-r.html#cb200-35" aria-hidden="true"></a>                          <span class="dt">option =</span> <span class="st">&#39;E&#39;</span>,</span>
+<span id="cb200-36"><a href="intermediate-visualization-in-r.html#cb200-36" aria-hidden="true"></a>                          <span class="dt">direction =</span> <span class="dv">-1</span>) <span class="op">+</span></span>
+<span id="cb200-37"><a href="intermediate-visualization-in-r.html#cb200-37" aria-hidden="true"></a><span class="st">    </span><span class="co"># coord_polar() +</span></span>
+<span id="cb200-38"><a href="intermediate-visualization-in-r.html#cb200-38" aria-hidden="true"></a><span class="st">    </span><span class="co">## themes</span></span>
+<span id="cb200-39"><a href="intermediate-visualization-in-r.html#cb200-39" aria-hidden="true"></a><span class="st">    </span><span class="kw">theme_bw</span>() <span class="op">+</span></span>
+<span id="cb200-40"><a href="intermediate-visualization-in-r.html#cb200-40" aria-hidden="true"></a><span class="st">    </span><span class="kw">ggtitle</span>(<span class="st">&#39;Sacramento has smaller temperature differences than other sites&#39;</span>, </span>
+<span id="cb200-41"><a href="intermediate-visualization-in-r.html#cb200-41" aria-hidden="true"></a>            <span class="dt">subtitle =</span> <span class="kw">Sys.time</span>())</span></code></pre></div>
 <pre><code>## Warning: Removed 104 rows containing non-finite values (stat_smooth).</code></pre>
 <pre><code>## Warning: Removed 1 row(s) containing missing values (geom_path).</code></pre>
 <p><img src="book_files/figure-html/unnamed-chunk-107-1.png" width="60%" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="intermediate-visualization-in-r.html#cb200-1" aria-hidden="true"></a><span class="co">## Note effect of aspect ratios on perception</span></span>
-<span id="cb200-2"><a href="intermediate-visualization-in-r.html#cb200-2" aria-hidden="true"></a><span class="co"># ggsave(paste0(plots_dir, &#39;plot_3.png&#39;), height = 7, width = 7)</span></span>
-<span id="cb200-3"><a href="intermediate-visualization-in-r.html#cb200-3" aria-hidden="true"></a><span class="co"># ggsave(paste0(plots_dir, &#39;plot_3a.png&#39;), height = 7, width = 12)</span></span></code></pre></div>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="intermediate-visualization-in-r.html#cb203-1" aria-hidden="true"></a><span class="co">## Note effect of aspect ratios on perception</span></span>
+<span id="cb203-2"><a href="intermediate-visualization-in-r.html#cb203-2" aria-hidden="true"></a><span class="co"># ggsave(paste0(plots_dir, &#39;plot_3.png&#39;), height = 7, width = 7)</span></span>
+<span id="cb203-3"><a href="intermediate-visualization-in-r.html#cb203-3" aria-hidden="true"></a><span class="co"># ggsave(paste0(plots_dir, &#39;plot_3a.png&#39;), height = 7, width = 12)</span></span></code></pre></div>
 <div id="discussion-2" class="section level3" number="14.4.1">
 <h3><span class="header-section-number">14.4.1</span> Discussion</h3>
 <ol style="list-style-type: decimal">
@@ -553,18 +553,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>As of version 3, <code>ggplot2</code> can plot vector spatial data from <code>sf</code> objects using <code>geom_sf()</code></li>
 <li>This section looks at two different ways of adding basemaps under <code>geom_sf()</code> plots</li>
 </ul>
-<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="intermediate-visualization-in-r.html#cb201-1" aria-hidden="true"></a><span class="cf">if</span> (<span class="kw">packageVersion</span>(<span class="st">&#39;ggplot2&#39;</span>) <span class="op">&lt;</span><span class="st"> </span><span class="kw">package_version</span>(<span class="st">&#39;3.0.0&#39;</span>)) {</span>
-<span id="cb201-2"><a href="intermediate-visualization-in-r.html#cb201-2" aria-hidden="true"></a>    <span class="kw">stop</span>(<span class="st">&#39;ggplot2 version 3 or later is required for this section&#39;</span>)</span>
-<span id="cb201-3"><a href="intermediate-visualization-in-r.html#cb201-3" aria-hidden="true"></a>} <span class="cf">else</span> {</span>
-<span id="cb201-4"><a href="intermediate-visualization-in-r.html#cb201-4" aria-hidden="true"></a>    <span class="kw">library</span>(sf)</span>
-<span id="cb201-5"><a href="intermediate-visualization-in-r.html#cb201-5" aria-hidden="true"></a>    <span class="kw">library</span>(ggmap)</span>
-<span id="cb201-6"><a href="intermediate-visualization-in-r.html#cb201-6" aria-hidden="true"></a>    <span class="kw">library</span>(ggspatial)</span>
-<span id="cb201-7"><a href="intermediate-visualization-in-r.html#cb201-7" aria-hidden="true"></a>}</span>
-<span id="cb201-8"><a href="intermediate-visualization-in-r.html#cb201-8" aria-hidden="true"></a></span>
-<span id="cb201-9"><a href="intermediate-visualization-in-r.html#cb201-9" aria-hidden="true"></a>stations =<span class="st"> </span><span class="kw">readRDS</span>(data_files[<span class="st">&#39;stations&#39;</span>])</span>
-<span id="cb201-10"><a href="intermediate-visualization-in-r.html#cb201-10" aria-hidden="true"></a>stations.utm =<span class="st"> </span><span class="kw">readRDS</span>(data_files[<span class="st">&#39;stations.utm&#39;</span>])</span>
-<span id="cb201-11"><a href="intermediate-visualization-in-r.html#cb201-11" aria-hidden="true"></a></span>
-<span id="cb201-12"><a href="intermediate-visualization-in-r.html#cb201-12" aria-hidden="true"></a>stations</span></code></pre></div>
+<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="intermediate-visualization-in-r.html#cb204-1" aria-hidden="true"></a><span class="cf">if</span> (<span class="kw">packageVersion</span>(<span class="st">&#39;ggplot2&#39;</span>) <span class="op">&lt;</span><span class="st"> </span><span class="kw">package_version</span>(<span class="st">&#39;3.0.0&#39;</span>)) {</span>
+<span id="cb204-2"><a href="intermediate-visualization-in-r.html#cb204-2" aria-hidden="true"></a>    <span class="kw">stop</span>(<span class="st">&#39;ggplot2 version 3 or later is required for this section&#39;</span>)</span>
+<span id="cb204-3"><a href="intermediate-visualization-in-r.html#cb204-3" aria-hidden="true"></a>} <span class="cf">else</span> {</span>
+<span id="cb204-4"><a href="intermediate-visualization-in-r.html#cb204-4" aria-hidden="true"></a>    <span class="kw">library</span>(sf)</span>
+<span id="cb204-5"><a href="intermediate-visualization-in-r.html#cb204-5" aria-hidden="true"></a>    <span class="kw">library</span>(ggmap)</span>
+<span id="cb204-6"><a href="intermediate-visualization-in-r.html#cb204-6" aria-hidden="true"></a>    <span class="kw">library</span>(ggspatial)</span>
+<span id="cb204-7"><a href="intermediate-visualization-in-r.html#cb204-7" aria-hidden="true"></a>}</span>
+<span id="cb204-8"><a href="intermediate-visualization-in-r.html#cb204-8" aria-hidden="true"></a></span>
+<span id="cb204-9"><a href="intermediate-visualization-in-r.html#cb204-9" aria-hidden="true"></a>stations =<span class="st"> </span><span class="kw">readRDS</span>(data_files[<span class="st">&#39;stations&#39;</span>])</span>
+<span id="cb204-10"><a href="intermediate-visualization-in-r.html#cb204-10" aria-hidden="true"></a>stations.utm =<span class="st"> </span><span class="kw">readRDS</span>(data_files[<span class="st">&#39;stations.utm&#39;</span>])</span>
+<span id="cb204-11"><a href="intermediate-visualization-in-r.html#cb204-11" aria-hidden="true"></a></span>
+<span id="cb204-12"><a href="intermediate-visualization-in-r.html#cb204-12" aria-hidden="true"></a>stations</span></code></pre></div>
 <div id="ggmap-approach" class="section level3" number="14.5.1">
 <h3><span class="header-section-number">14.5.1</span> <code>ggmap</code> approach</h3>
 <ul>
@@ -574,24 +574,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>See <code>?register_google</code> for links and instructions</li>
 <li><strong><em>DO NOT SHARE YOUR API KEY</em></strong></li>
 </ul>
-<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="intermediate-visualization-in-r.html#cb202-1" aria-hidden="true"></a><span class="co"># register_google(key = &#39;notarealkey&#39;, write = TRUE)</span></span>
-<span id="cb202-2"><a href="intermediate-visualization-in-r.html#cb202-2" aria-hidden="true"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">has_google_key</span>()) {</span>
-<span id="cb202-3"><a href="intermediate-visualization-in-r.html#cb202-3" aria-hidden="true"></a>    <span class="kw">stop</span>(<span class="st">&#39;You need a Google Maps API key.  See ?register_google&#39;</span>)</span>
-<span id="cb202-4"><a href="intermediate-visualization-in-r.html#cb202-4" aria-hidden="true"></a>}</span>
-<span id="cb202-5"><a href="intermediate-visualization-in-r.html#cb202-5" aria-hidden="true"></a></span>
-<span id="cb202-6"><a href="intermediate-visualization-in-r.html#cb202-6" aria-hidden="true"></a>basemap =<span class="st"> </span><span class="kw">get_map</span>(<span class="dt">location =</span> <span class="kw">c</span>(<span class="op">-</span><span class="fl">121.4183</span>, <span class="fl">38.5552</span>), </span>
-<span id="cb202-7"><a href="intermediate-visualization-in-r.html#cb202-7" aria-hidden="true"></a>                  <span class="dt">maptype =</span> <span class="st">&#39;terrain&#39;</span>,</span>
-<span id="cb202-8"><a href="intermediate-visualization-in-r.html#cb202-8" aria-hidden="true"></a>                  <span class="dt">zoom =</span> <span class="dv">8</span>)</span>
-<span id="cb202-9"><a href="intermediate-visualization-in-r.html#cb202-9" aria-hidden="true"></a></span>
-<span id="cb202-10"><a href="intermediate-visualization-in-r.html#cb202-10" aria-hidden="true"></a><span class="kw">ggmap</span>(basemap) <span class="op">+</span></span>
-<span id="cb202-11"><a href="intermediate-visualization-in-r.html#cb202-11" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_sf</span>(<span class="dt">data =</span> stations, <span class="dt">inherit.aes =</span> <span class="ot">FALSE</span>) <span class="op">+</span></span>
-<span id="cb202-12"><a href="intermediate-visualization-in-r.html#cb202-12" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_sf_label</span>(<span class="dt">data =</span> stations, </span>
-<span id="cb202-13"><a href="intermediate-visualization-in-r.html#cb202-13" aria-hidden="true"></a>                  <span class="kw">aes</span>(<span class="dt">label =</span> name), <span class="dt">nudge_y =</span> <span class="fl">-.1</span>, <span class="dt">size =</span> <span class="dv">3</span>)</span>
-<span id="cb202-14"><a href="intermediate-visualization-in-r.html#cb202-14" aria-hidden="true"></a><span class="co"># ggsave(paste0(plots_dir, &#39;plot_4_ggmap.png&#39;), height = 7, width = 7)</span></span>
-<span id="cb202-15"><a href="intermediate-visualization-in-r.html#cb202-15" aria-hidden="true"></a></span>
-<span id="cb202-16"><a href="intermediate-visualization-in-r.html#cb202-16" aria-hidden="true"></a><span class="co">## Example with UTM coordinates</span></span>
-<span id="cb202-17"><a href="intermediate-visualization-in-r.html#cb202-17" aria-hidden="true"></a><span class="co"># ggmap(basemap) +</span></span>
-<span id="cb202-18"><a href="intermediate-visualization-in-r.html#cb202-18" aria-hidden="true"></a><span class="co">#     geom_sf(data = stations.utm, inherit.aes = FALSE)</span></span></code></pre></div>
+<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="intermediate-visualization-in-r.html#cb205-1" aria-hidden="true"></a><span class="co"># register_google(key = &#39;notarealkey&#39;, write = TRUE)</span></span>
+<span id="cb205-2"><a href="intermediate-visualization-in-r.html#cb205-2" aria-hidden="true"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">has_google_key</span>()) {</span>
+<span id="cb205-3"><a href="intermediate-visualization-in-r.html#cb205-3" aria-hidden="true"></a>    <span class="kw">stop</span>(<span class="st">&#39;You need a Google Maps API key.  See ?register_google&#39;</span>)</span>
+<span id="cb205-4"><a href="intermediate-visualization-in-r.html#cb205-4" aria-hidden="true"></a>}</span>
+<span id="cb205-5"><a href="intermediate-visualization-in-r.html#cb205-5" aria-hidden="true"></a></span>
+<span id="cb205-6"><a href="intermediate-visualization-in-r.html#cb205-6" aria-hidden="true"></a>basemap =<span class="st"> </span><span class="kw">get_map</span>(<span class="dt">location =</span> <span class="kw">c</span>(<span class="op">-</span><span class="fl">121.4183</span>, <span class="fl">38.5552</span>), </span>
+<span id="cb205-7"><a href="intermediate-visualization-in-r.html#cb205-7" aria-hidden="true"></a>                  <span class="dt">maptype =</span> <span class="st">&#39;terrain&#39;</span>,</span>
+<span id="cb205-8"><a href="intermediate-visualization-in-r.html#cb205-8" aria-hidden="true"></a>                  <span class="dt">zoom =</span> <span class="dv">8</span>)</span>
+<span id="cb205-9"><a href="intermediate-visualization-in-r.html#cb205-9" aria-hidden="true"></a></span>
+<span id="cb205-10"><a href="intermediate-visualization-in-r.html#cb205-10" aria-hidden="true"></a><span class="kw">ggmap</span>(basemap) <span class="op">+</span></span>
+<span id="cb205-11"><a href="intermediate-visualization-in-r.html#cb205-11" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_sf</span>(<span class="dt">data =</span> stations, <span class="dt">inherit.aes =</span> <span class="ot">FALSE</span>) <span class="op">+</span></span>
+<span id="cb205-12"><a href="intermediate-visualization-in-r.html#cb205-12" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_sf_label</span>(<span class="dt">data =</span> stations, </span>
+<span id="cb205-13"><a href="intermediate-visualization-in-r.html#cb205-13" aria-hidden="true"></a>                  <span class="kw">aes</span>(<span class="dt">label =</span> name), <span class="dt">nudge_y =</span> <span class="fl">-.1</span>, <span class="dt">size =</span> <span class="dv">3</span>)</span>
+<span id="cb205-14"><a href="intermediate-visualization-in-r.html#cb205-14" aria-hidden="true"></a><span class="co"># ggsave(paste0(plots_dir, &#39;plot_4_ggmap.png&#39;), height = 7, width = 7)</span></span>
+<span id="cb205-15"><a href="intermediate-visualization-in-r.html#cb205-15" aria-hidden="true"></a></span>
+<span id="cb205-16"><a href="intermediate-visualization-in-r.html#cb205-16" aria-hidden="true"></a><span class="co">## Example with UTM coordinates</span></span>
+<span id="cb205-17"><a href="intermediate-visualization-in-r.html#cb205-17" aria-hidden="true"></a><span class="co"># ggmap(basemap) +</span></span>
+<span id="cb205-18"><a href="intermediate-visualization-in-r.html#cb205-18" aria-hidden="true"></a><span class="co">#     geom_sf(data = stations.utm, inherit.aes = FALSE)</span></span></code></pre></div>
 </div>
 <div id="ggspatial-approach" class="section level3" number="14.5.2">
 <h3><span class="header-section-number">14.5.2</span> <code>ggspatial</code> approach</h3>
@@ -599,26 +599,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>annotation_map_tile()</code> is slow, even with cached images</li>
 <li>See <code>rosm::osm.types()</code> for a list of basemap types</li>
 </ul>
-<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="intermediate-visualization-in-r.html#cb203-1" aria-hidden="true"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> stations) <span class="op">+</span></span>
-<span id="cb203-2"><a href="intermediate-visualization-in-r.html#cb203-2" aria-hidden="true"></a><span class="st">    </span><span class="kw">annotation_map_tile</span>(<span class="dt">type =</span> <span class="st">&#39;osm&#39;</span>, <span class="dt">zoom =</span> <span class="dv">10</span>) <span class="op">+</span></span>
-<span id="cb203-3"><a href="intermediate-visualization-in-r.html#cb203-3" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_sf_label</span>(<span class="dt">data =</span> stations, </span>
-<span id="cb203-4"><a href="intermediate-visualization-in-r.html#cb203-4" aria-hidden="true"></a>                  <span class="kw">aes</span>(<span class="dt">label =</span> name), <span class="dt">nudge_y =</span> <span class="fl">.03</span>, <span class="dt">size =</span> <span class="dv">3</span>) <span class="op">+</span></span>
-<span id="cb203-5"><a href="intermediate-visualization-in-r.html#cb203-5" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_sf</span>() <span class="op">+</span></span>
-<span id="cb203-6"><a href="intermediate-visualization-in-r.html#cb203-6" aria-hidden="true"></a><span class="st">    </span><span class="kw">annotation_scale</span>(<span class="dt">location =</span> <span class="st">&#39;tl&#39;</span>) <span class="op">+</span></span>
-<span id="cb203-7"><a href="intermediate-visualization-in-r.html#cb203-7" aria-hidden="true"></a><span class="st">    </span><span class="kw">annotation_north_arrow</span>(<span class="dt">location =</span> <span class="st">&#39;br&#39;</span>, <span class="dt">which_north =</span> <span class="st">&#39;true&#39;</span>, </span>
-<span id="cb203-8"><a href="intermediate-visualization-in-r.html#cb203-8" aria-hidden="true"></a>                           <span class="dt">style =</span> north_arrow_minimal)</span>
-<span id="cb203-9"><a href="intermediate-visualization-in-r.html#cb203-9" aria-hidden="true"></a><span class="co"># ggsave(paste0(plots_dir, &#39;plot_4_ggspatial.png&#39;), height = 7, width = 7)</span></span>
-<span id="cb203-10"><a href="intermediate-visualization-in-r.html#cb203-10" aria-hidden="true"></a></span>
-<span id="cb203-11"><a href="intermediate-visualization-in-r.html#cb203-11" aria-hidden="true"></a><span class="co">## Example with UTM coordinates</span></span>
-<span id="cb203-12"><a href="intermediate-visualization-in-r.html#cb203-12" aria-hidden="true"></a><span class="co"># ggplot(data = stations.utm) +</span></span>
-<span id="cb203-13"><a href="intermediate-visualization-in-r.html#cb203-13" aria-hidden="true"></a><span class="co">#     annotation_map_tile(type = &#39;osm&#39;, zoom = 10,</span></span>
-<span id="cb203-14"><a href="intermediate-visualization-in-r.html#cb203-14" aria-hidden="true"></a><span class="co">#                         cachedir = system.file(&#39;rosm.cache&#39;, package = &#39;ggspatial&#39;)) +</span></span>
-<span id="cb203-15"><a href="intermediate-visualization-in-r.html#cb203-15" aria-hidden="true"></a><span class="co">#     geom_sf_label(data = stations,</span></span>
-<span id="cb203-16"><a href="intermediate-visualization-in-r.html#cb203-16" aria-hidden="true"></a><span class="co">#                   aes(label = name), nudge_y = 1000, size = 3) +</span></span>
-<span id="cb203-17"><a href="intermediate-visualization-in-r.html#cb203-17" aria-hidden="true"></a><span class="co">#     geom_sf()</span></span></code></pre></div>
+<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="intermediate-visualization-in-r.html#cb206-1" aria-hidden="true"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> stations) <span class="op">+</span></span>
+<span id="cb206-2"><a href="intermediate-visualization-in-r.html#cb206-2" aria-hidden="true"></a><span class="st">    </span><span class="kw">annotation_map_tile</span>(<span class="dt">type =</span> <span class="st">&#39;osm&#39;</span>, <span class="dt">zoom =</span> <span class="dv">10</span>) <span class="op">+</span></span>
+<span id="cb206-3"><a href="intermediate-visualization-in-r.html#cb206-3" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_sf_label</span>(<span class="dt">data =</span> stations, </span>
+<span id="cb206-4"><a href="intermediate-visualization-in-r.html#cb206-4" aria-hidden="true"></a>                  <span class="kw">aes</span>(<span class="dt">label =</span> name), <span class="dt">nudge_y =</span> <span class="fl">.03</span>, <span class="dt">size =</span> <span class="dv">3</span>) <span class="op">+</span></span>
+<span id="cb206-5"><a href="intermediate-visualization-in-r.html#cb206-5" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_sf</span>() <span class="op">+</span></span>
+<span id="cb206-6"><a href="intermediate-visualization-in-r.html#cb206-6" aria-hidden="true"></a><span class="st">    </span><span class="kw">annotation_scale</span>(<span class="dt">location =</span> <span class="st">&#39;tl&#39;</span>) <span class="op">+</span></span>
+<span id="cb206-7"><a href="intermediate-visualization-in-r.html#cb206-7" aria-hidden="true"></a><span class="st">    </span><span class="kw">annotation_north_arrow</span>(<span class="dt">location =</span> <span class="st">&#39;br&#39;</span>, <span class="dt">which_north =</span> <span class="st">&#39;true&#39;</span>, </span>
+<span id="cb206-8"><a href="intermediate-visualization-in-r.html#cb206-8" aria-hidden="true"></a>                           <span class="dt">style =</span> north_arrow_minimal)</span>
+<span id="cb206-9"><a href="intermediate-visualization-in-r.html#cb206-9" aria-hidden="true"></a><span class="co"># ggsave(paste0(plots_dir, &#39;plot_4_ggspatial.png&#39;), height = 7, width = 7)</span></span>
+<span id="cb206-10"><a href="intermediate-visualization-in-r.html#cb206-10" aria-hidden="true"></a></span>
+<span id="cb206-11"><a href="intermediate-visualization-in-r.html#cb206-11" aria-hidden="true"></a><span class="co">## Example with UTM coordinates</span></span>
+<span id="cb206-12"><a href="intermediate-visualization-in-r.html#cb206-12" aria-hidden="true"></a><span class="co"># ggplot(data = stations.utm) +</span></span>
+<span id="cb206-13"><a href="intermediate-visualization-in-r.html#cb206-13" aria-hidden="true"></a><span class="co">#     annotation_map_tile(type = &#39;osm&#39;, zoom = 10,</span></span>
+<span id="cb206-14"><a href="intermediate-visualization-in-r.html#cb206-14" aria-hidden="true"></a><span class="co">#                         cachedir = system.file(&#39;rosm.cache&#39;, package = &#39;ggspatial&#39;)) +</span></span>
+<span id="cb206-15"><a href="intermediate-visualization-in-r.html#cb206-15" aria-hidden="true"></a><span class="co">#     geom_sf_label(data = stations,</span></span>
+<span id="cb206-16"><a href="intermediate-visualization-in-r.html#cb206-16" aria-hidden="true"></a><span class="co">#                   aes(label = name), nudge_y = 1000, size = 3) +</span></span>
+<span id="cb206-17"><a href="intermediate-visualization-in-r.html#cb206-17" aria-hidden="true"></a><span class="co">#     geom_sf()</span></span></code></pre></div>
 
 </div>
 </div>
+</div>
+
+
+
 </div>
 <h3>References</h3>
 <div id="refs" class="references">

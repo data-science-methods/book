@@ -119,7 +119,7 @@
 
 \title{Data Science Methods for Cognitive Science}
 \author{Dan Hicks, \href{mailto:hicks.daniel.j@gmail.com}{\nolinkurl{hicks.daniel.j@gmail.com}}}
-\date{Tue Sep 29 18:24:45 2020}
+\date{Tue Sep 29 22:13:28 2020}
 
 \begin{document}
 \maketitle
@@ -151,7 +151,7 @@ This version of the book was built with R version 4.0.2 (2020-06-22), \href{http
 package & version & source\tabularnewline
 \midrule
 \endhead
-bookdown & 0.20.6 & Github (rstudio/bookdown@cd9a8a5)\tabularnewline
+bookdown & 0.20.6 & Github (rstudio/bookdown@74c8bef)\tabularnewline
 datasauRus & 0.1.4 & CRAN (R 4.0.2)\tabularnewline
 desc & 1.2.0 & CRAN (R 4.0.2)\tabularnewline
 ggbeeswarm & 0.6.0 & CRAN (R 4.0.2)\tabularnewline
@@ -2182,7 +2182,7 @@ The dataset is a zipped \texttt{csv} or comma-separated value file. CSVs are str
 \end{Shaded}
 
 \begin{verbatim}
-## 0.352 sec elapsed
+## 0.353 sec elapsed
 \end{verbatim}
 
 \begin{Shaded}
@@ -4009,7 +4009,7 @@ To facilitate some later steps, I filtered the datasets we'll be using to \emph{
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{data\_dir =}\StringTok{ \textquotesingle{}data\textquotesingle{}}
-\NormalTok{data\_files =}\StringTok{ }\KeywordTok{file.path}\NormalTok{(data\_dir, }\KeywordTok{c}\NormalTok{(}\StringTok{\textquotesingle{}diversity.Rds\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}tuition.Rds\textquotesingle{}}\NormalTok{))}
+\NormalTok{data\_files =}\StringTok{ }\KeywordTok{file.path}\NormalTok{(data\_dir, }\KeywordTok{c}\NormalTok{(}\StringTok{\textquotesingle{}diversity.csv\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}tuition.csv\textquotesingle{}}\NormalTok{))}
 
 \NormalTok{data\_urls =}\StringTok{ }\KeywordTok{str\_c}\NormalTok{(}\StringTok{\textquotesingle{}https://github.com/data{-}science{-}methods/ca{-}tuition{-}diversity/raw/master/\textquotesingle{}}\NormalTok{, data\_files)}
 
@@ -4021,10 +4021,44 @@ To facilitate some later steps, I filtered the datasets we'll be using to \emph{
 \NormalTok{\}}
 \NormalTok{purrr}\OperatorTok{::}\KeywordTok{walk2}\NormalTok{(data\_files, data\_urls, download\_file)}
 
-\NormalTok{div\_df =}\StringTok{ }\KeywordTok{read\_rds}\NormalTok{(data\_files[}\DecValTok{1}\NormalTok{])}
-\NormalTok{tuition\_df =}\StringTok{ }\KeywordTok{read\_rds}\NormalTok{(data\_files[}\DecValTok{2}\NormalTok{])}
+\NormalTok{div\_df =}\StringTok{ }\KeywordTok{read\_csv}\NormalTok{(data\_files[}\DecValTok{1}\NormalTok{])}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{verbatim}
+## Parsed with column specification:
+## cols(
+##   name = col_character(),
+##   total_enrollment = col_double(),
+##   state = col_character(),
+##   category = col_character(),
+##   enrollment = col_double(),
+##   share = col_double()
+## )
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tuition\_df =}\StringTok{ }\KeywordTok{read\_csv}\NormalTok{(data\_files[}\DecValTok{2}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Parsed with column specification:
+## cols(
+##   name = col_character(),
+##   state = col_character(),
+##   state_code = col_character(),
+##   type = col_character(),
+##   degree_length = col_character(),
+##   room_and_board = col_double(),
+##   in_state_tuition = col_double(),
+##   in_state_total = col_double(),
+##   out_of_state_tuition = col_double(),
+##   out_of_state_total = col_double(),
+##   system = col_character()
+## )
+\end{verbatim}
 
 \texttt{tuition\_df} contains data on tuition (the ``sticker price,'' not what students actually pay). There are 135 rows, 1 row for each of the public, private, and for-profit 4-year schools in California. There are a few different calculations of tuition or cost; we'll only be looking at \texttt{in\_state\_tuition}.
 In this dataset, \texttt{type} is either public, private, or for-profit. All of the public 4-year colleges or universities in California belong to either the Cal State or UC system. \texttt{system} distinguishes these two public systems, and also carries over the values from \texttt{type} for private and for-profit schools.
@@ -5288,6 +5322,9 @@ Some of the plots include alternative layers, mostly geoms, to illustrate how di
 \end{Highlighting}
 \end{Shaded}
 
+\hypertarget{part-reproducibility}{%
+\part{Reproducibility}\label{part-reproducibility}}
+
 \hypertarget{reproducibility-replicability-and-robustness}{%
 \section{Reproducibility, Replicability, and Robustness}\label{reproducibility-replicability-and-robustness}}
 
@@ -5396,9 +5433,6 @@ robustness & Y & & similar results\tabularnewline
 \item
   \emph{{[}but how valuable is it?{]}}
 \end{itemize}
-
-\hypertarget{part-reproducibility}{%
-\part{Reproducibility}\label{part-reproducibility}}
 
 \hypertarget{part-cleaning-data}{%
 \part{Cleaning Data}\label{part-cleaning-data}}
