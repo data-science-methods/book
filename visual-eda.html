@@ -32,7 +32,7 @@
   
 <link rel="prev" href="joins.html"/>
 <link rel="next" href="the-grammar-of-graphics.html"/>
-<script src="libs/header-attrs-2.3.9/header-attrs.js"></script>
+<script src="libs/header-attrs-2.3.11/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -244,8 +244,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="14.4" data-path="intermediate-visualization-in-r.html"><a href="intermediate-visualization-in-r.html#plot-3-time-series-model-predictions"><i class="fa fa-check"></i><b>14.4</b> Plot 3: Time series + model predictions</a></li>
 <li class="chapter" data-level="14.5" data-path="intermediate-visualization-in-r.html"><a href="intermediate-visualization-in-r.html#plot-4-visualizing-spatial-data-in-r"><i class="fa fa-check"></i><b>14.5</b> Plot 4: Visualizing spatial data in R</a></li>
 </ul></li>
-<li class="part"><span><b>III Cleaning Data</b></span></li>
-<li class="part"><span><b>IV Reproducibility</b></span></li>
+<li class="chapter" data-level="15" data-path="reproducibility-replicability-and-robustness.html"><a href="reproducibility-replicability-and-robustness.html"><i class="fa fa-check"></i><b>15</b> Reproducibility, Replicability, and Robustness</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="reproducibility-replicability-and-robustness.html"><a href="reproducibility-replicability-and-robustness.html#the-replication-crisis"><i class="fa fa-check"></i><b>15.1</b> The Replication Crisis</a></li>
+<li class="chapter" data-level="15.2" data-path="reproducibility-replicability-and-robustness.html"><a href="reproducibility-replicability-and-robustness.html#terminology"><i class="fa fa-check"></i><b>15.2</b> Terminology</a></li>
+</ul></li>
+<li class="part"><span><b>III Reproducibility</b></span></li>
+<li class="part"><span><b>IV Cleaning Data</b></span></li>
 <li class="part"><span><b>V Case Study: The COMPAS Dataset</b></span></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -356,13 +361,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>p-value of the correlation coefficient is not statistically significant</li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="visual-eda.html#cb118-1" aria-hidden="true"></a>dataf <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb118-2"><a href="visual-eda.html#cb118-2" aria-hidden="true"></a><span class="st">    </span><span class="kw">group_by</span>(dataset) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb118-3"><a href="visual-eda.html#cb118-3" aria-hidden="true"></a><span class="st">    </span><span class="co">## This is a more complex summarize() call than we&#39;ve seen before</span></span>
-<span id="cb118-4"><a href="visual-eda.html#cb118-4" aria-hidden="true"></a><span class="st">    </span><span class="co">## 1. Number of rows</span></span>
-<span id="cb118-5"><a href="visual-eda.html#cb118-5" aria-hidden="true"></a><span class="st">    </span><span class="co">## 2. &quot;Summarize across the columns x and y, using the functions mean and sd&quot;; automatically generates names</span></span>
-<span id="cb118-6"><a href="visual-eda.html#cb118-6" aria-hidden="true"></a><span class="st">    </span><span class="co">## 3. Correlation between x and y</span></span>
-<span id="cb118-7"><a href="visual-eda.html#cb118-7" aria-hidden="true"></a><span class="st">    </span><span class="co">## 4. p-value from a t-test of the null that the correlation = 0</span></span>
+<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="visual-eda.html#cb118-1" aria-hidden="true"></a><span class="co">## This is a more complex summarize() call than we&#39;ve seen before</span></span>
+<span id="cb118-2"><a href="visual-eda.html#cb118-2" aria-hidden="true"></a><span class="co">## 1. Number of rows</span></span>
+<span id="cb118-3"><a href="visual-eda.html#cb118-3" aria-hidden="true"></a><span class="co">## 2. &quot;Summarize across the columns x and y, using the functions mean and sd&quot;; automatically generates names</span></span>
+<span id="cb118-4"><a href="visual-eda.html#cb118-4" aria-hidden="true"></a><span class="co">## 3. Correlation between x and y</span></span>
+<span id="cb118-5"><a href="visual-eda.html#cb118-5" aria-hidden="true"></a><span class="co">## 4. p-value from a t-test of the null that the correlation = 0</span></span>
+<span id="cb118-6"><a href="visual-eda.html#cb118-6" aria-hidden="true"></a>dataf <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb118-7"><a href="visual-eda.html#cb118-7" aria-hidden="true"></a><span class="st">    </span><span class="kw">group_by</span>(dataset) <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb118-8"><a href="visual-eda.html#cb118-8" aria-hidden="true"></a><span class="st">    </span><span class="kw">summarize</span>(<span class="dt">n =</span> <span class="kw">n</span>(), </span>
 <span id="cb118-9"><a href="visual-eda.html#cb118-9" aria-hidden="true"></a>              <span class="kw">across</span>(<span class="dt">.cols =</span> <span class="kw">c</span>(x, y), </span>
 <span id="cb118-10"><a href="visual-eda.html#cb118-10" aria-hidden="true"></a>                     <span class="dt">.fns =</span> <span class="kw">lst</span>(mean, sd)), </span>

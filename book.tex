@@ -119,7 +119,7 @@
 
 \title{Data Science Methods for Cognitive Science}
 \author{Dan Hicks, \href{mailto:hicks.daniel.j@gmail.com}{\nolinkurl{hicks.daniel.j@gmail.com}}}
-\date{Sat Sep 26 17:35:22 2020}
+\date{Tue Sep 29 18:24:45 2020}
 
 \begin{document}
 \maketitle
@@ -151,7 +151,7 @@ This version of the book was built with R version 4.0.2 (2020-06-22), \href{http
 package & version & source\tabularnewline
 \midrule
 \endhead
-bookdown & 0.20.6 & Github (rstudio/bookdown@57f1217)\tabularnewline
+bookdown & 0.20.6 & Github (rstudio/bookdown@cd9a8a5)\tabularnewline
 datasauRus & 0.1.4 & CRAN (R 4.0.2)\tabularnewline
 desc & 1.2.0 & CRAN (R 4.0.2)\tabularnewline
 ggbeeswarm & 0.6.0 & CRAN (R 4.0.2)\tabularnewline
@@ -712,7 +712,7 @@ However,
     \begin{itemize}
     \tightlist
     \item
-      ex: pesticide use + Census data in Hicks (\protect\hyperlink{ref-HicksCensusDemographicsChlorpyrifos2020}{2020})
+      ex: pesticide use + Census data in Hicks (\protect\hyperlink{ref-HicksCensusDemographicsChlorpyrifos2020}{2020}\protect\hyperlink{ref-HicksCensusDemographicsChlorpyrifos2020}{a})
     \end{itemize}
   \item
     Data first, questions later
@@ -2182,7 +2182,7 @@ The dataset is a zipped \texttt{csv} or comma-separated value file. CSVs are str
 \end{Shaded}
 
 \begin{verbatim}
-## 0.345 sec elapsed
+## 0.352 sec elapsed
 \end{verbatim}
 
 \begin{Shaded}
@@ -3845,13 +3845,13 @@ One way to figure out what happened is to check the names of the columns. The \t
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\CommentTok{\#\# This is a more complex summarize() call than we\textquotesingle{}ve seen before}
+\CommentTok{\#\# 1. Number of rows}
+\CommentTok{\#\# 2. "Summarize across the columns x and y, using the functions mean and sd"; automatically generates names}
+\CommentTok{\#\# 3. Correlation between x and y}
+\CommentTok{\#\# 4. p{-}value from a t{-}test of the null that the correlation = 0}
 \NormalTok{dataf }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
 \StringTok{    }\KeywordTok{group\_by}\NormalTok{(dataset) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
-\StringTok{    }\CommentTok{\#\# This is a more complex summarize() call than we\textquotesingle{}ve seen before}
-\StringTok{    }\CommentTok{\#\# 1. Number of rows}
-\StringTok{    }\CommentTok{\#\# 2. "Summarize across the columns x and y, using the functions mean and sd"; automatically generates names}
-\StringTok{    }\CommentTok{\#\# 3. Correlation between x and y}
-\StringTok{    }\CommentTok{\#\# 4. p{-}value from a t{-}test of the null that the correlation = 0}
 \StringTok{    }\KeywordTok{summarize}\NormalTok{(}\DataTypeTok{n =} \KeywordTok{n}\NormalTok{(), }
               \KeywordTok{across}\NormalTok{(}\DataTypeTok{.cols =} \KeywordTok{c}\NormalTok{(x, y), }
                      \DataTypeTok{.fns =} \KeywordTok{lst}\NormalTok{(mean, sd)), }
@@ -5288,11 +5288,120 @@ Some of the plots include alternative layers, mostly geoms, to illustrate how di
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{part-cleaning-data}{%
-\part{Cleaning Data}\label{part-cleaning-data}}
+\hypertarget{reproducibility-replicability-and-robustness}{%
+\section{Reproducibility, Replicability, and Robustness}\label{reproducibility-replicability-and-robustness}}
+
+\begin{itemize}
+\tightlist
+\item
+  Reading: ({\textbf{???}}), Aschwanden (\protect\hyperlink{ref-AschwandenThereNoSuch2017}{2017}), Hicks (\protect\hyperlink{ref-HicksCommentSubmittedDaniel2020}{2020}\protect\hyperlink{ref-HicksCommentSubmittedDaniel2020}{b})
+\item
+  Highly recommended: Feest (\protect\hyperlink{ref-FeestWhyReplicationOverrated2019}{2019}), Leonelli (\protect\hyperlink{ref-LeonelliRethinkingReproducibilityCriterion2018}{2018})
+\end{itemize}
+
+\hypertarget{the-replication-crisis}{%
+\subsection{The Replication Crisis}\label{the-replication-crisis}}
+
+\begin{itemize}
+\item
+  An epistemic-methodological crisis unfolding across multiple scientific fields, especially biomedicine and social psychology
+\item
+  Usually defined in a phrase: ``studies replicate much less often than you would expect''
+\item
+  While replication has received the most attention in the wake of a high-profile effort to replicate a collection of high-profile psychology studies ({\textbf{???}}), it's been simmering for a long time
+
+  \begin{itemize}
+  \tightlist
+  \item
+    ({\textbf{???}})
+  \item
+    But at least as far back as ({\textbf{???}})
+  \end{itemize}
+\item
+  \emph{{[}numerous explanations{]}}
+\item
+  Beyond academia,
+
+  \begin{itemize}
+  \tightlist
+  \item
+    In my experience most members of the general public don't pay attention to it
+  \item
+    Even scientists in non-experimental fields (e.g., cultural anthropologists) have forgotten
+  \item
+    But it has been used in policy settings to cast doubt on environmental epidemiology (Aschwanden \protect\hyperlink{ref-AschwandenThereNoSuch2017}{2017}; Hicks \protect\hyperlink{ref-HicksCommentSubmittedDaniel2020}{2020}\protect\hyperlink{ref-HicksCommentSubmittedDaniel2020}{b})
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{terminology}{%
+\subsection{Terminology}\label{terminology}}
+
+\begin{itemize}
+\item
+  A 2019 National Academy of Sciences (NAS) report noted that people often use the terms ``reproduce'' and ``replicate'' interchangeably, and consequently conflate two very different expectations for quantitative experimental research (National Academies of Sciences, Engineering, and Medicine \protect\hyperlink{ref-NationalAcademiesofSciencesEngineeringandMedicineReproducibilityReplicabilityScience2019}{2019})
+\item
+  Hicks (\protect\hyperlink{ref-HicksCommentSubmittedDaniel2020}{2020}\protect\hyperlink{ref-HicksCommentSubmittedDaniel2020}{b}) reviews the NAS definitions and also compares them to ``robustness''
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Replicability}: Run the experimental again, getting new data on a more-or-less similar sample. Do the same analysis. Do we get qualitatively similar results?\\
+  \item
+    \textbf{Reproducibility}: Run the same analysis script on the same data on a different computer. Do we get numerically identical results?
+  \item
+    \textbf{Robustness}: Use a \emph{different} analytical approach to attempt to answer the same research question on the \emph{same} data. Do we get qualitatively similar results? (Steegen et al. \protect\hyperlink{ref-SteegenIncreasingTransparencyMultiverse2016}{2016}; Silberzahn et al. \protect\hyperlink{ref-SilberzahnManyAnalystsOne2018}{2018})
+  \end{itemize}
+\end{itemize}
+
+\begin{longtable}[]{@{}lccl@{}}
+\caption{The distinction between replicability, reproducibility, and robustness can be made by considering whether we use the same data, the same analysis, and whether we expect to get numerically identical or merely similar results.}\tabularnewline
+\toprule
+& same data? & same analysis? & expect to get\tabularnewline
+\midrule
+\endfirsthead
+\toprule
+& same data? & same analysis? & expect to get\tabularnewline
+\midrule
+\endhead
+replicability & & Y & similar results\tabularnewline
+reproducibility & Y & Y & numerically identical results\tabularnewline
+robustness & Y & & similar results\tabularnewline
+\bottomrule
+\end{longtable}
+
+\begin{itemize}
+\tightlist
+\item
+  ``Qualitatively similar'' is necessarily vague and requires interpretation
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Researchers can and do disagree about whether any particular set of results is sufficiently ``similar'' or ``different'' ({\textbf{???}})
+  \item
+    Sometimes a quantitative standard is used: ``replication attempt is also statistically significant and effect is in the same direction''
+  \item
+    But the unavoidable chance of type I and II errors means there's still uncertainty
+  \item
+    And remember that the threshold of statistical significance is basically arbitrary
+  \end{itemize}
+\item
+  ``Numerically identical'' is not vague
+
+  \begin{itemize}
+  \tightlist
+  \item
+    At least, up to a tolerance threshold, and with the proviso that the computers are working correctly
+  \end{itemize}
+\item
+  \emph{{[}but how valuable is it?{]}}
+\end{itemize}
 
 \hypertarget{part-reproducibility}{%
 \part{Reproducibility}\label{part-reproducibility}}
+
+\hypertarget{part-cleaning-data}{%
+\part{Cleaning Data}\label{part-cleaning-data}}
 
 \hypertarget{part-case-study-the-compas-dataset}{%
 \part{Case Study: The COMPAS Dataset}\label{part-case-study-the-compas-dataset}}
@@ -5305,6 +5414,9 @@ Ahemad, Faizan. 2018. ``Version Control with Jupyter Notebooks.'' Medium. Octobe
 \leavevmode\hypertarget{ref-AngwinMachineBiasThere2016}{}%
 Angwin, Julia, Jeff Larson, Surya Mattu, and Lauren Kirchner. 2016. ``Machine Bias: There's Software Used Across the Country to Predict Future Criminals. And It's Biased Against Blacks.'' ProPublica. May 23, 2016. \url{https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing}.
 
+\leavevmode\hypertarget{ref-AschwandenThereNoSuch2017}{}%
+Aschwanden, Christie. 2017. ``There's No Such Thing as `Sound Science'.'' FiveThirtyEight. December 6, 2017. \url{https://fivethirtyeight.com/features/the-easiest-way-to-dismiss-good-science-demand-sound-science/}.
+
 \leavevmode\hypertarget{ref-BoehmSpiralModelSoftware1988}{}%
 Boehm, B. W. 1988. ``A Spiral Model of Software Development and Enhancement.'' \emph{Computer} 21 (5): 61--72. \url{https://doi.org/10.1109/2.59}.
 
@@ -5316,6 +5428,9 @@ Chambers, John M. 2014. ``Object-Oriented Programming, Functional Programming an
 
 \leavevmode\hypertarget{ref-Corbett-DaviesComputerProgramUsed2016}{}%
 Corbett-Davies, Sam, Emma Pierson, Avi Feller, and Sharad Goel. 2016. ``A Computer Program Used for Bail and Sentencing Decisions Was Labeled Biased Against Blacks. It's Actually Not That Clear.'' Washington Post. October 17, 2016. \url{https://www.washingtonpost.com/news/monkey-cage/wp/2016/10/17/can-an-algorithm-be-racist-our-analysis-is-more-cautious-than-propublicas/}.
+
+\leavevmode\hypertarget{ref-FeestWhyReplicationOverrated2019}{}%
+Feest, Uljana. 2019. ``Why Replication Is Overrated.'' \emph{Philosophy of Science} 86 (5): 895--905. \url{https://doi.org/10.1086/705451}.
 
 \leavevmode\hypertarget{ref-GentlemanStatisticalAnalysesReproducible2004}{}%
 Gentleman, Robert, and Duncan Temple Lang. 2004. ``Statistical Analyses and Reproducible Research.'' \emph{Bioconductor Project Working Papers}, May. \url{https://biostats.bepress.com/bioconductor/paper2}.
@@ -5330,7 +5445,10 @@ Hanna, Alex, Emily Denton, Andrew Smart, and Jamila Smith-Loud. 2019. ``Towards 
 Healy, Kieran. 2018. \emph{Data Visualization: A Practical Introduction}. Princeton University Press. \url{http://books.google.com?id=3XOYDwAAQBAJ}.
 
 \leavevmode\hypertarget{ref-HicksCensusDemographicsChlorpyrifos2020}{}%
-Hicks, Daniel J. 2020. ``Census Demographics and Chlorpyrifos Use in California's Central Valley, 2011--15: A Distributional Environmental Justice Analysis.'' \emph{International Journal of Environmental Research and Public Health} 17 (7, 7): 2593. \url{https://doi.org/10.3390/ijerph17072593}.
+Hicks, Daniel J. 2020a. ``Census Demographics and Chlorpyrifos Use in California's Central Valley, 2011--15: A Distributional Environmental Justice Analysis.'' \emph{International Journal of Environmental Research and Public Health} 17 (7, 7): 2593. \url{https://doi.org/10.3390/ijerph17072593}.
+
+\leavevmode\hypertarget{ref-HicksCommentSubmittedDaniel2020}{}%
+---------. 2020b. ``Comment Submitted by Daniel J. Hicks, Department of Cognitive and Information Sciences, University of California, Merced.'' Regulations.gov. May 20, 2020. \url{https://www.regulations.gov/document?D=EPA-HQ-OA-2018-0259-11405}.
 
 \leavevmode\hypertarget{ref-HicksImpactingCapabilitiesConceptual2018}{}%
 Hicks, Daniel J., Carl Stahmer, and MacKenzie Smith. 2018. ``Impacting Capabilities: A Conceptual Framework for the Social Value of Research.'' \emph{Frontiers in Research Metrics and Analytics}. \url{https://doi.org/10.3389/frma.2018.00024}.
@@ -5353,11 +5471,17 @@ Kleinberg, Jon, Sendhil Mullainathan, and Manish Raghavan. 2016. ``Inherent Trad
 \leavevmode\hypertarget{ref-LeonelliScientificResearchBig2020}{}%
 Leonelli, Sabina. 2020. ``Scientific Research and Big Data.'' In \emph{The Stanford Encyclopedia of Philosophy}, edited by Edward N. Zalta, Summer 2020. Metaphysics Research Lab, Stanford University. \url{https://plato.stanford.edu/archives/sum2020/entries/science-big-data/}.
 
+\leavevmode\hypertarget{ref-LeonelliRethinkingReproducibilityCriterion2018}{}%
+---------. 2018. ``Rethinking Reproducibility as a Criterion for Research Quality.'' In \emph{Research in the History of Economic Thought and Methodology}, edited by Luca Fiorito, Scott Scheall, and Carlos Eduardo Suprinyak, 36:129--46. Emerald Publishing Limited. \url{https://doi.org/10.1108/S0743-41542018000036B009}.
+
 \leavevmode\hypertarget{ref-LyonWhyAreNormal2014}{}%
 Lyon, A. 2014. ``Why Are Normal Distributions Normal?'' \emph{The British Journal for the Philosophy of Science} 65 (3): 621--49. \url{https://doi.org/10.1093/bjps/axs046}.
 
 \leavevmode\hypertarget{ref-MatejkaSameStatsDifferent}{}%
 Matejka, Justin, and George Fitzmaurice. n.d. ``Same Stats, Different Graphs: Generating Datasets with Varied Appearance and Identical Statistics Through Simulated Annealing (the Datasaurus Dozen) \textbar{} Autodesk Research.'' Accessed May 21, 2017. \url{https://www.autodeskresearch.com/publications/samestats}.
+
+\leavevmode\hypertarget{ref-NationalAcademiesofSciencesEngineeringandMedicineReproducibilityReplicabilityScience2019}{}%
+National Academies of Sciences, Engineering, and Medicine. 2019. \emph{Reproducibility and Replicability in Science}. Washington, D.C.: National Academies Press. \url{https://doi.org/10.17226/25303}.
 
 \leavevmode\hypertarget{ref-PaleologoWhatDifferenceMachine2018}{}%
 Paleologo, Giuseppe. 2018. ``What's the Difference Between Machine Learning in Python and R?'' February 28, 2018. \url{https://www.quora.com/Whats-the-difference-between-machine-learning-in-Python-and-R/answer/Giuseppe-Paleologo}.
@@ -5376,6 +5500,12 @@ Selbst, Andrew D., Danah Boyd, Sorelle Friedler, Suresh Venkatasubramanian, and 
 
 \leavevmode\hypertarget{ref-ShotwellWhyUse2019}{}%
 Shotwell, Gordon. 2019. ``Why I Use R.'' Title. December 30, 2019. \url{https://blog.shotwell.ca/posts/why_i_use_r/}.
+
+\leavevmode\hypertarget{ref-SilberzahnManyAnalystsOne2018}{}%
+Silberzahn, R., E. L. Uhlmann, D. P. Martin, P. Anselmi, F. Aust, E. Awtrey, Š. Bahník, et al. 2018. ``Many Analysts, One Data Set: Making Transparent How Variations in Analytic Choices Affect Results.'' \emph{Advances in Methods and Practices in Psychological Science}, August, 2515245917747646. \url{https://doi.org/10.1177/2515245917747646}.
+
+\leavevmode\hypertarget{ref-SteegenIncreasingTransparencyMultiverse2016}{}%
+Steegen, Sara, Francis Tuerlinckx, Andrew Gelman, and Wolf Vanpaemel. 2016. ``Increasing Transparency Through a Multiverse Analysis.'' \emph{Perspectives on Psychological Science} 11 (5): 702--12. \url{https://doi.org/10.1177/1745691616658637}.
 
 \leavevmode\hypertarget{ref-TukeyWeNeedBoth1980}{}%
 Tukey, John W. 1980. ``We Need Both Exploratory and Confirmatory.'' \emph{The American Statistician} 34 (1): 23--25. \url{https://doi.org/10.1080/00031305.1980.10482706}.
