@@ -49,13 +49,13 @@ count(dataf, dataset)
     - p-value of the correlation coefficient is not statistically significant
 
 ```{r}
+## This is a more complex summarize() call than we've seen before
+## 1. Number of rows
+## 2. "Summarize across the columns x and y, using the functions mean and sd"; automatically generates names
+## 3. Correlation between x and y
+## 4. p-value from a t-test of the null that the correlation = 0
 dataf %>% 
     group_by(dataset) %>% 
-    ## This is a more complex summarize() call than we've seen before
-    ## 1. Number of rows
-    ## 2. "Summarize across the columns x and y, using the functions mean and sd"; automatically generates names
-    ## 3. Correlation between x and y
-    ## 4. p-value from a t-test of the null that the correlation = 0
     summarize(n = n(), 
               across(.cols = c(x, y), 
                      .fns = lst(mean, sd)), 
