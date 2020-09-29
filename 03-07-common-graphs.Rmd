@@ -38,7 +38,7 @@ To facilitate some later steps, I filtered the datasets we'll be using to *4-yea
 
 ```{r}
 data_dir = 'data'
-data_files = file.path(data_dir, c('diversity.Rds', 'tuition.Rds'))
+data_files = file.path(data_dir, c('diversity.csv', 'tuition.csv'))
 
 data_urls = str_c('https://github.com/data-science-methods/ca-tuition-diversity/raw/master/', data_files)
 
@@ -50,8 +50,8 @@ download_file = function(path, url) {
 }
 purrr::walk2(data_files, data_urls, download_file)
 
-div_df = read_rds(data_files[1])
-tuition_df = read_rds(data_files[2])
+div_df = read_csv(data_files[1])
+tuition_df = read_csv(data_files[2])
 ```
 
 `tuition_df` contains data on tuition (the "sticker price," not what students actually pay).  There are 135 rows, 1 row for each of the public, private, and for-profit 4-year schools in California.  There are a few different calculations of tuition or cost; we'll only be looking at `in_state_tuition`. 
