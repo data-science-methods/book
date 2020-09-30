@@ -119,7 +119,7 @@
 
 \title{Data Science Methods for Cognitive Science}
 \author{Dan Hicks, \href{mailto:hicks.daniel.j@gmail.com}{\nolinkurl{hicks.daniel.j@gmail.com}}}
-\date{Tue Sep 29 22:13:28 2020}
+\date{Wed Sep 30 19:55:56 2020}
 
 \begin{document}
 \maketitle
@@ -2182,7 +2182,7 @@ The dataset is a zipped \texttt{csv} or comma-separated value file. CSVs are str
 \end{Shaded}
 
 \begin{verbatim}
-## 0.353 sec elapsed
+## 0.399 sec elapsed
 \end{verbatim}
 
 \begin{Shaded}
@@ -5329,11 +5329,22 @@ Some of the plots include alternative layers, mostly geoms, to illustrate how di
 \section{Reproducibility, Replicability, and Robustness}\label{reproducibility-replicability-and-robustness}}
 
 \begin{itemize}
-\tightlist
 \item
-  Reading: ({\textbf{???}}), Aschwanden (\protect\hyperlink{ref-AschwandenThereNoSuch2017}{2017}), Hicks (\protect\hyperlink{ref-HicksCommentSubmittedDaniel2020}{2020}\protect\hyperlink{ref-HicksCommentSubmittedDaniel2020}{b})
+  Reading: Yong (\protect\hyperlink{ref-YongReplicationStudiesBad2012}{2012}), Aschwanden (\protect\hyperlink{ref-AschwandenThereNoSuch2017}{2017}), Hicks (\protect\hyperlink{ref-HicksCommentSubmittedDaniel2020}{2020}\protect\hyperlink{ref-HicksCommentSubmittedDaniel2020}{b})
 \item
   Highly recommended: Feest (\protect\hyperlink{ref-FeestWhyReplicationOverrated2019}{2019}), Leonelli (\protect\hyperlink{ref-LeonelliRethinkingReproducibilityCriterion2018}{2018})
+\item
+  Some data management disasters
+
+  \begin{itemize}
+  \tightlist
+  \item
+    (\emph{The Economist} \protect\hyperlink{ref-ArrayErrors2011}{2011}); (``Video: Keith Baggerly, "When Is Reproducibility an Ethical Issue? Genomics, Personalized Medicine, and Human Error"'' \protect\hyperlink{ref-VideoKeithBaggerly}{n.d.})
+  \item
+    Herndon, Ash, and Pollin (\protect\hyperlink{ref-HerndonDoesHighPublic2014}{2014}); but you can just read Bailey and Borwein (Jon) (\protect\hyperlink{ref-BaileyReinhartRogoffErrorHow}{n.d.}), Cassidy (\protect\hyperlink{ref-CassidyReinhartRogoffControversy}{n.d.}), watch (\emph{Reinhart \& Rogoff - Growth in a Time of Debt - EXERCISE!} \protect\hyperlink{ref-ReinhartRogoffGrowth2019}{2019})
+  \item
+    Laskowski (\protect\hyperlink{ref-LaskowskiWhatWhenYou}{n.d.}), Viglione (\protect\hyperlink{ref-ViglioneAvalancheSpiderpaperRetractions2020}{2020}), Pennisi (\protect\hyperlink{ref-PennisiProminentSpiderBiologist2020}{2020})
+  \end{itemize}
 \end{itemize}
 
 \hypertarget{the-replication-crisis}{%
@@ -5345,17 +5356,13 @@ Some of the plots include alternative layers, mostly geoms, to illustrate how di
 \item
   Usually defined in a phrase: ``studies replicate much less often than you would expect''
 \item
-  While replication has received the most attention in the wake of a high-profile effort to replicate a collection of high-profile psychology studies ({\textbf{???}}), it's been simmering for a long time
+  Received the most attention in the wake of a high-profile effort to replicate a collection of high-profile psychology studies (Open Science Collaboration \protect\hyperlink{ref-OpenScienceCollaborationEstimatingReproducibilityPsychological2015}{2015})
 
   \begin{itemize}
   \tightlist
   \item
-    ({\textbf{???}})
-  \item
-    But at least as far back as ({\textbf{???}})
+    But it's been simmering for a long time (Ioannidis \protect\hyperlink{ref-IoannidisWhyMostPublished2005}{2005}; Meehl \protect\hyperlink{ref-MeehlTheoryTestingPsychologyPhysics1967}{1967})
   \end{itemize}
-\item
-  \emph{{[}numerous explanations{]}}
 \item
   Beyond academia,
 
@@ -5414,7 +5421,7 @@ robustness & Y & & similar results\tabularnewline
   \begin{itemize}
   \tightlist
   \item
-    Researchers can and do disagree about whether any particular set of results is sufficiently ``similar'' or ``different'' ({\textbf{???}})
+    Researchers can and do disagree about whether any particular set of results is sufficiently ``similar'' or ``different'' (Feest \protect\hyperlink{ref-FeestExperimentersRegressReconsidered2016}{2016})
   \item
     Sometimes a quantitative standard is used: ``replication attempt is also statistically significant and effect is in the same direction''
   \item
@@ -5428,10 +5435,124 @@ robustness & Y & & similar results\tabularnewline
   \begin{itemize}
   \tightlist
   \item
-    At least, up to a tolerance threshold, and with the proviso that the computers are working correctly
+    (At least, up to a tolerance threshold, and with the proviso that the computers are working correctly)
   \end{itemize}
+\end{itemize}
+
+\hypertarget{epistemic-value-of-reproducibility}{%
+\subsection{Epistemic Value of Reproducibility}\label{epistemic-value-of-reproducibility}}
+
+Reproducibility is a \emph{necessary} condition for computational research, but has low \emph{evidentiary value}.
+
+\begin{itemize}
 \item
-  \emph{{[}but how valuable is it?{]}}
+  Necessary condition: If we can't run your code on your data and get the same output, something has gone seriously wrong.
+\item
+  Low evidentiary value: Reproducibility tells us \emph{only} that your code reliably produces the output you reported.
+\end{itemize}
+
+\begin{longtable}[]{@{}l@{}}
+\caption{Things reproducibility doesn't tell us}\tabularnewline
+\toprule
+\endhead
+Whether your research question is reasonable\tabularnewline
+Whether your data can possibly answer your research question\tabularnewline
+Whether your data was fabricated\tabularnewline
+Whether your data was mismanaged\tabularnewline
+Whether your analyses are appropriate\tabularnewline
+Whether your code runs the analysis that you think it does\tabularnewline
+Whether you p-hacked your analysis (Simmons, Nelson, and Simonsohn \protect\hyperlink{ref-SimmonsFalsePositivePsychology2011}{2011})\tabularnewline
+Whether your interpretation of the analysis output is reasonable\tabularnewline
+\tabularnewline
+\bottomrule
+\end{longtable}
+
+\hypertarget{open-science-reproducible}{%
+\section{Open Science ≠ Reproducible}\label{open-science-reproducible}}
+
+\begin{itemize}
+\tightlist
+\item
+  Open science movement: Nosek et al. (\protect\hyperlink{ref-NosekPromotingOpenResearch2015}{2015}); Munafò et al. (\protect\hyperlink{ref-MunafoManifestoReproducibleScience2017}{2017})
+\end{itemize}
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.6\linewidth]{images/reproducibility/badges} 
+
+}
+
+\caption{As part of the open science movement, some journals have added badges to journal articles indicating open data, open code, etc.}\label{fig:unnamed-chunk-111}
+\end{figure}
+
+\begin{itemize}
+\tightlist
+\item
+  Obels et al. (\protect\hyperlink{ref-ObelsAnalysisOpenData2020}{2020})
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Reproducibility check of 62 pre-registered studies in a Center for Open Science database
+  \item
+    ``Of the 62 articles that met our inclusion criteria, 41 had data available, and 37 had analysis scripts available''
+  \item
+    ``We could run the scripts for 31 analyses, and we reproduced the main results for 21 articles.''
+  \end{itemize}
+\end{itemize}
+
+\textbackslash begin\{figure\}
+
+\{\centering \includegraphics[width=0.6\linewidth]{book_files/figure-latex/unnamed-chunk-112-1}
+
+\}
+
+\textbackslash caption\{Infographic for Obels et al. (\protect\hyperlink{ref-ObelsAnalysisOpenData2020}{2020}). While 58\% of preregistered studies provided both the data and analysis script, only 50\% had runnable scripts and only 34\% could actually be reproduced.\}\label{fig:unnamed-chunk-112}
+\textbackslash end\{figure\}
+
+\begin{itemize}
+\item
+  An example: \url{https://osf.io/k5qmw/}; Colombo et al. (\protect\hyperlink{ref-ColomboIntellectuallyHumblePrejudiced2020}{2020})
+\item
+  Better: \url{https://osf.io/he5za/}; Colling et al. (\protect\hyperlink{ref-CollingRegisteredReplicationReport2020}{2020})
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Although:
+  \item
+    Binder stalled out my first attempt
+  \item
+    The manuscript file can't be knit
+  \item
+    Running the analysis requires finding and running a series of scripts
+  \item
+    Some of the scripts have warnings and errors, and it's not clear if those are problems
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{what-can-we-learn-from-software-engineering}{%
+\subsection{What can we learn from software engineering?}\label{what-can-we-learn-from-software-engineering}}
+
+\begin{verbatim}
+- version control
+- good coding style
+    - <https://style.tidyverse.org/>
+    - prefactoring
+    - <https://www.youtube.com/watch?v=7oyiPBjLAWY>
+- code review [@PostolovskiYourCodeReview]
+- documenting code (and data)
+    - self-documenting code: <https://dev.to/woubuc/self-documenting-is-a-myth-and-how-to-make-your-code-self-documenting-3h2n>
+- the life-changing magic of tidying up (your files)
+    - @WilsonBestPracticesScientific2014; @WilsonGoodEnoughPractices2017; @NobleQuickGuideOrganizing2009
+    - my project template
+- later: automation, CI
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  lab/exercise: spend 90 minutes on EDA of the Silberzahn et al.~red card data, then code review
 \end{itemize}
 
 \hypertarget{part-cleaning-data}{%
@@ -5451,20 +5572,35 @@ Angwin, Julia, Jeff Larson, Surya Mattu, and Lauren Kirchner. 2016. ``Machine Bi
 \leavevmode\hypertarget{ref-AschwandenThereNoSuch2017}{}%
 Aschwanden, Christie. 2017. ``There's No Such Thing as `Sound Science'.'' FiveThirtyEight. December 6, 2017. \url{https://fivethirtyeight.com/features/the-easiest-way-to-dismiss-good-science-demand-sound-science/}.
 
+\leavevmode\hypertarget{ref-BaileyReinhartRogoffErrorHow}{}%
+Bailey, David H., and Jonathan Borwein (Jon). n.d. ``The Reinhart-Rogoff Error -- or How Not to Excel at Economics.'' The Conversation. Accessed May 16, 2020. \url{http://theconversation.com/the-reinhart-rogoff-error-or-how-not-to-excel-at-economics-13646}.
+
 \leavevmode\hypertarget{ref-BoehmSpiralModelSoftware1988}{}%
 Boehm, B. W. 1988. ``A Spiral Model of Software Development and Enhancement.'' \emph{Computer} 21 (5): 61--72. \url{https://doi.org/10.1109/2.59}.
 
 \leavevmode\hypertarget{ref-BogenSavingPhenomena1988}{}%
 Bogen, James, and James Woodward. 1988. ``Saving the Phenomena.'' \emph{The Philosophical Review} 97 (3): 303--52. \url{http://www.jstor.org/stable/2185445}.
 
+\leavevmode\hypertarget{ref-CassidyReinhartRogoffControversy}{}%
+Cassidy, John. n.d. ``The Reinhart and Rogoff Controversy: A Summing Up.'' The New Yorker. Accessed September 27, 2020. \url{https://www.newyorker.com/news/john-cassidy/the-reinhart-and-rogoff-controversy-a-summing-up}.
+
 \leavevmode\hypertarget{ref-ChambersObjectOrientedProgrammingFunctional2014}{}%
 Chambers, John M. 2014. ``Object-Oriented Programming, Functional Programming and R.'' \emph{Statistical Science} 29 (2): 167--80. \url{https://doi.org/10.1214/13-STS452}.
+
+\leavevmode\hypertarget{ref-CollingRegisteredReplicationReport2020}{}%
+Colling, Lincoln J., Dénes Szűcs, Damiano De Marco, Krzysztof Cipora, Rolf Ulrich, Hans-Christoph Nuerk, Mojtaba Soltanlou, et al. 2020. ``Registered Replication Report on Fischer, Castel, Dodd, and Pratt (2003).'' \emph{Advances in Methods and Practices in Psychological Science} 3 (2): 143--62. \url{https://doi.org/10.1177/2515245920903079}.
+
+\leavevmode\hypertarget{ref-ColomboIntellectuallyHumblePrejudiced2020}{}%
+Colombo, Matteo, Kevin Strangmann, Lieke Houkes, Zhasmina Kostadinova, and Mark J. Brandt. 2020. ``Intellectually Humble, but Prejudiced People. A Paradox of Intellectual Virtue.'' \emph{Review of Philosophy and Psychology}, July. \url{https://doi.org/10.1007/s13164-020-00496-4}.
 
 \leavevmode\hypertarget{ref-Corbett-DaviesComputerProgramUsed2016}{}%
 Corbett-Davies, Sam, Emma Pierson, Avi Feller, and Sharad Goel. 2016. ``A Computer Program Used for Bail and Sentencing Decisions Was Labeled Biased Against Blacks. It's Actually Not That Clear.'' Washington Post. October 17, 2016. \url{https://www.washingtonpost.com/news/monkey-cage/wp/2016/10/17/can-an-algorithm-be-racist-our-analysis-is-more-cautious-than-propublicas/}.
 
+\leavevmode\hypertarget{ref-FeestExperimentersRegressReconsidered2016}{}%
+Feest, Uljana. 2016. ``The Experimenters' Regress Reconsidered: Replication, Tacit Knowledge, and the Dynamics of Knowledge Generation.'' \emph{Studies in History and Philosophy of Science Part A} 58 (August): 34--45. \url{https://doi.org/10.1016/j.shpsa.2016.04.003}.
+
 \leavevmode\hypertarget{ref-FeestWhyReplicationOverrated2019}{}%
-Feest, Uljana. 2019. ``Why Replication Is Overrated.'' \emph{Philosophy of Science} 86 (5): 895--905. \url{https://doi.org/10.1086/705451}.
+---------. 2019. ``Why Replication Is Overrated.'' \emph{Philosophy of Science} 86 (5): 895--905. \url{https://doi.org/10.1086/705451}.
 
 \leavevmode\hypertarget{ref-GentlemanStatisticalAnalysesReproducible2004}{}%
 Gentleman, Robert, and Duncan Temple Lang. 2004. ``Statistical Analyses and Reproducible Research.'' \emph{Bioconductor Project Working Papers}, May. \url{https://biostats.bepress.com/bioconductor/paper2}.
@@ -5477,6 +5613,9 @@ Hanna, Alex, Emily Denton, Andrew Smart, and Jamila Smith-Loud. 2019. ``Towards 
 
 \leavevmode\hypertarget{ref-HealyDataVisualizationPractical2018}{}%
 Healy, Kieran. 2018. \emph{Data Visualization: A Practical Introduction}. Princeton University Press. \url{http://books.google.com?id=3XOYDwAAQBAJ}.
+
+\leavevmode\hypertarget{ref-HerndonDoesHighPublic2014}{}%
+Herndon, Thomas, Michael Ash, and Robert Pollin. 2014. ``Does High Public Debt Consistently Stifle Economic Growth? A Critique of Reinhart and Rogoff.'' \emph{Cambridge Journal of Economics} 38 (2): 257--79. \url{https://doi.org/10.1093/cje/bet075}.
 
 \leavevmode\hypertarget{ref-HicksCensusDemographicsChlorpyrifos2020}{}%
 Hicks, Daniel J. 2020a. ``Census Demographics and Chlorpyrifos Use in California's Central Valley, 2011--15: A Distributional Environmental Justice Analysis.'' \emph{International Journal of Environmental Research and Public Health} 17 (7, 7): 2593. \url{https://doi.org/10.3390/ijerph17072593}.
@@ -5496,11 +5635,17 @@ Hoffmann, Anna Lauren. 2019. ``Where Fairness Fails: Data, Algorithms, and the L
 \leavevmode\hypertarget{ref-HuebnerSystematicApproachInitial2016}{}%
 Huebner, Marianne, Werner Vach, and Saskia le Cessie. 2016. ``A Systematic Approach to Initial Data Analysis Is Good Research Practice.'' \emph{The Journal of Thoracic and Cardiovascular Surgery} 151 (1): 25--27. \url{https://doi.org/10.1016/j.jtcvs.2015.09.085}.
 
+\leavevmode\hypertarget{ref-IoannidisWhyMostPublished2005}{}%
+Ioannidis, John P. A. 2005. ``Why Most Published Research Findings Are False.'' \emph{PLoS Med} 2 (8): e124. \url{https://doi.org/10.1371/journal.pmed.0020124}.
+
 \leavevmode\hypertarget{ref-KeyesRbitraryStandards2016}{}%
 Keyes, Os. 2016. ``Rbitrary Standards.'' March 12, 2016. \url{https://ironholds.org/projects/rbitrary/}.
 
 \leavevmode\hypertarget{ref-KleinbergInherentTradeOffsFair2016}{}%
 Kleinberg, Jon, Sendhil Mullainathan, and Manish Raghavan. 2016. ``Inherent Trade-Offs in the Fair Determination of Risk Scores,'' November. \url{http://arxiv.org/abs/1609.05807}.
+
+\leavevmode\hypertarget{ref-LaskowskiWhatWhenYou}{}%
+Laskowski, Kate. n.d. ``What to Do When You Don't Trust Your Data Anymore -- Laskowski Lab at UC Davis.'' Accessed January 29, 2020. \url{https://laskowskilab.faculty.ucdavis.edu/2020/01/29/retractions/}.
 
 \leavevmode\hypertarget{ref-LeonelliScientificResearchBig2020}{}%
 Leonelli, Sabina. 2020. ``Scientific Research and Big Data.'' In \emph{The Stanford Encyclopedia of Philosophy}, edited by Edward N. Zalta, Summer 2020. Metaphysics Research Lab, Stanford University. \url{https://plato.stanford.edu/archives/sum2020/entries/science-big-data/}.
@@ -5514,8 +5659,23 @@ Lyon, A. 2014. ``Why Are Normal Distributions Normal?'' \emph{The British Journa
 \leavevmode\hypertarget{ref-MatejkaSameStatsDifferent}{}%
 Matejka, Justin, and George Fitzmaurice. n.d. ``Same Stats, Different Graphs: Generating Datasets with Varied Appearance and Identical Statistics Through Simulated Annealing (the Datasaurus Dozen) \textbar{} Autodesk Research.'' Accessed May 21, 2017. \url{https://www.autodeskresearch.com/publications/samestats}.
 
+\leavevmode\hypertarget{ref-MeehlTheoryTestingPsychologyPhysics1967}{}%
+Meehl, Paul E. 1967. ``Theory-Testing in Psychology and Physics: A Methodological Paradox.'' \emph{Philosophy of Science} 34 (2): 103--15. \url{http://www.jstor.org.proxy1.lib.uwo.ca/stable/186099}.
+
+\leavevmode\hypertarget{ref-MunafoManifestoReproducibleScience2017}{}%
+Munafò, Marcus R., Brian A. Nosek, Dorothy V. M. Bishop, Katherine S. Button, Christopher D. Chambers, Nathalie Percie du Sert, Uri Simonsohn, Eric-Jan Wagenmakers, Jennifer J. Ware, and John P. A. Ioannidis. 2017. ``A Manifesto for Reproducible Science.'' \emph{Nature Human Behaviour} 1 (1, 1): 1--9. \url{https://doi.org/10.1038/s41562-016-0021}.
+
 \leavevmode\hypertarget{ref-NationalAcademiesofSciencesEngineeringandMedicineReproducibilityReplicabilityScience2019}{}%
 National Academies of Sciences, Engineering, and Medicine. 2019. \emph{Reproducibility and Replicability in Science}. Washington, D.C.: National Academies Press. \url{https://doi.org/10.17226/25303}.
+
+\leavevmode\hypertarget{ref-NosekPromotingOpenResearch2015}{}%
+Nosek, B. A., G. Alter, G. C. Banks, D. Borsboom, S. D. Bowman, S. J. Breckler, S. Buck, et al. 2015. ``Promoting an Open Research Culture.'' \emph{Science} 348 (6242): 1422--5. \url{https://doi.org/10.1126/science.aab2374}.
+
+\leavevmode\hypertarget{ref-ObelsAnalysisOpenData2020}{}%
+Obels, Pepijn, Daniël Lakens, Nicholas A. Coles, Jaroslav Gottfried, and Seth A. Green. 2020. ``Analysis of Open Data and Computational Reproducibility in Registered Reports in Psychology.'' \emph{Advances in Methods and Practices in Psychological Science} 3 (2): 229--37. \url{https://doi.org/10.1177/2515245920918872}.
+
+\leavevmode\hypertarget{ref-OpenScienceCollaborationEstimatingReproducibilityPsychological2015}{}%
+Open Science Collaboration. 2015. ``Estimating the Reproducibility of Psychological Science.'' \emph{Science} 349 (6251): aac4716--aac4716. \url{https://doi.org/10.1126/science.aac4716}.
 
 \leavevmode\hypertarget{ref-PaleologoWhatDifferenceMachine2018}{}%
 Paleologo, Giuseppe. 2018. ``What's the Difference Between Machine Learning in Python and R?'' February 28, 2018. \url{https://www.quora.com/Whats-the-difference-between-machine-learning-in-Python-and-R/answer/Giuseppe-Paleologo}.
@@ -5523,11 +5683,17 @@ Paleologo, Giuseppe. 2018. ``What's the Difference Between Machine Learning in P
 \leavevmode\hypertarget{ref-PengArtDataScience2016}{}%
 Peng, Roger D., and Elizabeth Matsui. 2016. \emph{The Art of Data Science: A Guide for Anyone Who Works with Data}. Leanpub. \url{http://leanpub.com/artofdatascience}.
 
+\leavevmode\hypertarget{ref-PennisiProminentSpiderBiologist2020}{}%
+Pennisi, Elizabeth. 2020. ``Prominent Spider Biologist Spun a Web of Questionable Data.'' \emph{Science} 367 (6478): 613--14. \url{https://doi.org/10.1126/science.367.6478.613}.
+
 \leavevmode\hypertarget{ref-PerkelWhyJupyterData2018}{}%
 Perkel, Jeffrey M. 2018. ``Why Jupyter Is Data Scientists' Computational Notebook of Choice.'' \emph{Nature} 563 (October): 145. \url{https://doi.org/10.1038/d41586-018-07196-1}.
 
 \leavevmode\hypertarget{ref-PiersonLargescaleAnalysisRacial2020}{}%
 Pierson, Emma, Camelia Simoiu, Jan Overgoor, Sam Corbett-Davies, Daniel Jenson, Amy Shoemaker, Vignesh Ramachandran, et al. 2020. ``A Large-Scale Analysis of Racial Disparities in Police Stops Across the United States.'' \emph{Nature Human Behaviour}, May, 1--10. \url{https://doi.org/10.1038/s41562-020-0858-1}.
+
+\leavevmode\hypertarget{ref-ReinhartRogoffGrowth2019}{}%
+\emph{Reinhart \& Rogoff - Growth in a Time of Debt - EXERCISE!} 2019. \url{https://www.youtube.com/watch?v=ItGMz0ERvcw}.
 
 \leavevmode\hypertarget{ref-SelbstFairnessAbstractionSociotechnical2018}{}%
 Selbst, Andrew D., Danah Boyd, Sorelle Friedler, Suresh Venkatasubramanian, and Janet Vertesi. 2018. ``Fairness and Abstraction in Sociotechnical Systems.'' SSRN Scholarly Paper ID 3265913. Rochester, NY: Social Science Research Network. \url{https://papers.ssrn.com/abstract=3265913}.
@@ -5538,14 +5704,26 @@ Shotwell, Gordon. 2019. ``Why I Use R.'' Title. December 30, 2019. \url{https://
 \leavevmode\hypertarget{ref-SilberzahnManyAnalystsOne2018}{}%
 Silberzahn, R., E. L. Uhlmann, D. P. Martin, P. Anselmi, F. Aust, E. Awtrey, Š. Bahník, et al. 2018. ``Many Analysts, One Data Set: Making Transparent How Variations in Analytic Choices Affect Results.'' \emph{Advances in Methods and Practices in Psychological Science}, August, 2515245917747646. \url{https://doi.org/10.1177/2515245917747646}.
 
+\leavevmode\hypertarget{ref-SimmonsFalsePositivePsychology2011}{}%
+Simmons, Joseph P, Leif D Nelson, and Uri Simonsohn. 2011. ``False-Positive Psychology.'' \emph{Psychological Science} 22 (11): 1359--66. \url{http://pss.sagepub.com/content/22/11/1359.abstract}.
+
 \leavevmode\hypertarget{ref-SteegenIncreasingTransparencyMultiverse2016}{}%
 Steegen, Sara, Francis Tuerlinckx, Andrew Gelman, and Wolf Vanpaemel. 2016. ``Increasing Transparency Through a Multiverse Analysis.'' \emph{Perspectives on Psychological Science} 11 (5): 702--12. \url{https://doi.org/10.1177/1745691616658637}.
+
+\leavevmode\hypertarget{ref-ArrayErrors2011}{}%
+\emph{The Economist}. 2011. ``An Array of Errors,'' September 10, 2011. \url{https://www.economist.com/science-and-technology/2011/09/10/an-array-of-errors}.
 
 \leavevmode\hypertarget{ref-TukeyWeNeedBoth1980}{}%
 Tukey, John W. 1980. ``We Need Both Exploratory and Confirmatory.'' \emph{The American Statistician} 34 (1): 23--25. \url{https://doi.org/10.1080/00031305.1980.10482706}.
 
 \leavevmode\hypertarget{ref-TukeyExploratoryDataAnalysis1977}{}%
 Tukey, John Wilder. 1977. \emph{Exploratory Data Analysis}. Addison-Wesley Series in Behavioral Science. Reading, Mass: Addison-Wesley Pub. Co. \url{https://archive.org/details/exploratorydataa00tuke_0}.
+
+\leavevmode\hypertarget{ref-VideoKeithBaggerly}{}%
+``Video: Keith Baggerly, "When Is Reproducibility an Ethical Issue? Genomics, Personalized Medicine, and Human Error".'' n.d. Accessed September 23, 2020. \url{http://www.birs.ca/events/2013/5-day-workshops/13w5083/videos/watch/201308141121-Baggerly.html}.
+
+\leavevmode\hypertarget{ref-ViglioneAvalancheSpiderpaperRetractions2020}{}%
+Viglione, Giuliana. 2020. ``\,`Avalanche' of Spider-Paper Retractions Shakes Behavioural-Ecology Community.'' \emph{Nature}, February. \url{https://doi.org/10.1038/d41586-020-00287-y}.
 
 \leavevmode\hypertarget{ref-WagenmakersAgendaPurelyConfirmatory2012}{}%
 Wagenmakers, Eric-Jan, Ruud Wetzels, Denny Borsboom, Han L. J. van der Maas, and Rogier A. Kievit. 2012. ``An Agenda for Purely Confirmatory Research.'' \emph{Perspectives on Psychological Science} 7 (6): 632--38. \url{https://doi.org/10.1177/1745691612463078}.
@@ -5576,6 +5754,9 @@ Wilson, Greg, Jennifer Bryan, Karen Cranston, Justin Kitzes, Lex Nederbragt, and
 
 \leavevmode\hypertarget{ref-WuPythonVsChoosing2019}{}%
 Wu, Jun. 2019. ``Python Vs. R --- Choosing the Best Programming Language for Data Science.'' Medium. June 25, 2019. \url{https://towardsdatascience.com/python-vs-r-choosing-the-best-programming-languages-for-data-science-b1327f01f6bf}.
+
+\leavevmode\hypertarget{ref-YongReplicationStudiesBad2012}{}%
+Yong, E. 2012. ``Replication Studies: Bad Copy.'' \emph{Nature} 485 (7398): 298--300. \url{https://doi.org/10.1038/485298a}.
 \end{cslreferences}
 
 \end{document}
