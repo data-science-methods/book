@@ -3,18 +3,20 @@
 - Reading: @YongWakeHighProfile2012, @AschwandenThereNoSuch2017, @HicksCommentSubmittedDaniel2020
 - Highly recommended:  @FeestWhyReplicationOverrated2019, @LeonelliRethinkingReproducibilityCriterion2018
 
+- Some data management disasters
+    - @ArrayErrors2011; @VideoKeithBaggerly
+    - @HerndonDoesHighPublic2014; but you can just read @BaileyReinhartRogoffErrorHow, @CassidyReinhartRogoffControversy, watch @ReinhartRogoffGrowth2019
+    - @LaskowskiWhatWhenYou, @ViglioneAvalancheSpiderpaperRetractions2020, @PennisiProminentSpiderBiologist2020
+
 
 ## The Replication Crisis ##
 
 - An epistemic-methodological crisis unfolding across multiple scientific fields, especially biomedicine and social psychology
 - Usually defined in a phrase:  "studies replicate much less often than you would expect"
 
-- While replication has received the most attention in the wake of a high-profile effort to replicate a collection of high-profile psychology studies [@OpenScienceCollaborationEstimatingReproducibilityPsychological2015], it's been simmering for a long time
-    - @IoannidisWhyMostPublished2005
-    - But at least as far back as @MeehlTheoryTestingPsychologyPhysics1967
+- Received the most attention in the wake of a high-profile effort to replicate a collection of high-profile psychology studies [@OpenScienceCollaborationEstimatingReproducibilityPsychological2015]
+    - But it's been simmering for a long time [@IoannidisWhyMostPublished2005; @MeehlTheoryTestingPsychologyPhysics1967]
 
-- *[numerous explanations]*
-    
 - Beyond academia, 
     - In my experience most members of the general public don't pay attention to it
     - Even scientists in non-experimental fields (e.g., cultural anthropologists) have forgotten
@@ -47,7 +49,32 @@ Table: The distinction between replicability, reproducibility, and robustness ca
     - And remember that the threshold of statistical significance is basically arbitrary
 
 - "Numerically identical" is not vague
-    - At least, up to a tolerance threshold, and with the proviso that the computers are working correctly
+    - (At least, up to a tolerance threshold, and with the proviso that the computers are working correctly)
 
-- *[but how valuable is it?]*
+
+## Epistemic Value of Reproducibility ##
+
+Reproducibility is a *necessary* condition for computational research, but has low *evidentiary value*. 
+
+- Necessary condition:  If we can't run your code on your data and get the same output, something has gone seriously wrong. 
+
+- Low evidentiary value:  Reproducibility tells us *only* that your code reliably produces the output you reported.  See table \@ref(tab:repro-value)
+
+| |
+|:-----| 
+| Whether your research question is reasonable |
+| Whether your data can possibly answer your research question |
+| Whether your data was fabricated |
+| Whether your data was mismanaged |
+| Whether your analyses are appropriate |
+| Whether your code runs the analysis that you think it does |
+| Whether you p-hacked your analysis [@SimmonsFalsePositivePsychology2011] |
+| Whether your interpretation of the analysis output is reasonable |
+| |
+
+Table: \#tab:repro-value Things reproducibility doesn't tell us
+
+
+
+
 
