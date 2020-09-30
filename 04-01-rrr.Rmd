@@ -1,6 +1,6 @@
 # Reproducibility, Replicability, and Robustness #
 
-- Reading: @YongWakeHighProfile2012, @AschwandenThereNoSuch2017, @HicksCommentSubmittedDaniel2020
+- Reading: @YongReplicationStudiesBad2012, @AschwandenThereNoSuch2017, @HicksCommentSubmittedDaniel2020
 - Highly recommended:  @FeestWhyReplicationOverrated2019, @LeonelliRethinkingReproducibilityCriterion2018
 
 - Some data management disasters
@@ -58,7 +58,7 @@ Reproducibility is a *necessary* condition for computational research, but has l
 
 - Necessary condition:  If we can't run your code on your data and get the same output, something has gone seriously wrong. 
 
-- Low evidentiary value:  Reproducibility tells us *only* that your code reliably produces the output you reported.  See table \@ref(tab:repro-value)
+- Low evidentiary value:  Reproducibility tells us *only* that your code reliably produces the output you reported.  
 
 | |
 |:-----| 
@@ -72,7 +72,7 @@ Reproducibility is a *necessary* condition for computational research, but has l
 | Whether your interpretation of the analysis output is reasonable |
 | |
 
-Table: \#tab:repro-value Things reproducibility doesn't tell us
+Table: Things reproducibility doesn't tell us
 
 
 

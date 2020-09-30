@@ -1,15 +1,18 @@
-# Reproducibility and Software Engineering #
-
-## Open Science ≠ Reproducible ##
+# Open Science ≠ Reproducible #
 
 - Open science movement: @NosekPromotingOpenResearch2015; @MunafoManifestoReproducibleScience2017
+
+```{r, echo = FALSE, out.width = '60%', fig.cap = "As part of the open science movement, some journals have added badges to journal articles indicating open data, open code, etc."}
+knitr::include_graphics(file.path('images', 'reproducibility', 'badges.png'))
+```
+
 
 - @ObelsAnalysisOpenData2020
     - Reproducibility check of 62 pre-registered studies in a Center for Open Science database
     - "Of the 62 articles that met our inclusion criteria, 41 had data available, and 37 had analysis scripts available"
     - "We could run the scripts for 31 analyses, and we reproduced the main results for 21 articles."
 
-```{r, echo = FALSE, message = FALSE, fig.cap = "Infographic for @ObelsAnalysisOpenData2020. While 58% of preregistered studies provided both the data and analysis script, only 50% had runnable scripts and only 34% could actually be reproduced."}
+```{r, echo = FALSE, message = FALSE, out.width = '60%', fig.cap = "Infographic for @ObelsAnalysisOpenData2020. While 58% of preregistered studies provided both the data and analysis script, only 50% had runnable scripts and only 34% could actually be reproduced."}
 library(tidyverse)
 
 obels_df = tribble(
@@ -36,10 +39,12 @@ ggplot(obels_df, aes(check)) +
                   width = 1L, height = n, 
                   fill = as.factor(n))) +
     geom_label(aes(label = check,
-               x = check, y = 0L), alpha = .75) +
+               x = check, y = 0L), 
+               position = position_nudge(x = .15),
+               alpha = .75) +
     geom_label(aes(label = scales::percent(frac, accuracy = 2),
                    x = check, y = 0L), 
-               position = position_nudge(x = -.3), 
+               position = position_nudge(x = -.15), 
                alpha = .75) +
     scale_fill_viridis_d(direction = -1,
                          guide = FALSE) +
