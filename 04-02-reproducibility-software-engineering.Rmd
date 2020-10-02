@@ -1,0 +1,4 @@
+# Reproducibility and Software Engineering #
+
+- Recommended viewing:  @McElreathScienceAmateurSoftware2020
+
