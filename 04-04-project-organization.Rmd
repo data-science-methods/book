@@ -1,0 +1,41 @@
+# Organizing your projects #
+
+- Reading: @WilsonGoodEnoughPractices2017; @NobleQuickGuideOrganizing2009
+
+- Good project organization will
+    - Keep your project self-contained, making it easy to find files as needed
+    - Play nicely with version control
+    - Self-document key relationships between project files
+
+## Two templates ##
+
+### @NobleQuickGuideOrganizing2009 ###
+
+```{r, echo = FALSE, fig.cap = "Noble's [-@NobleQuickGuideOrganizing2009] sample folder structure is designed for experimental biologists."}
+knitr::include_graphics(file.path('images', 'reproducibility', 'noble.png'))
+```
+
+- Includes code for 
+    - running experiments
+    - cleaning and analyzing data
+    - typesetting a LateX file into a PDF
+
+- Other features 
+    - notebook file, updated regularly
+    - chronological folders for experimental runs
+    - folders for compiled code and their corresponding source files
+
+### DJH's Project Template ###
+
+- <https://github.com/dhicks/project_template>
+
+- Configured as a GitHub "template," making it easy to create new repositories for new projects
+
+- Designated folders for data, plots/outputs, and utility functions
+
+- File naming convention
+    - Automatically orders analysis scripts
+    - Coordinates plots, outputs, and intermediate data with the script that creates them
+    
+- R package infrastructure
+    - Enables one-liner to load the utility functions in `R`: `devtools::load_all('..')`

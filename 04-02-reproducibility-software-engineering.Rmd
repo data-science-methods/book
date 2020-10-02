@@ -2,3 +2,91 @@
 
 - Recommended viewing:  @McElreathScienceAmateurSoftware2020
 
+- The reproducibility side of the replication crisis suggests that academic science has a reproducibility problem
+- But software engineering doesn't
+
+
+## What can we learn from software engineering? ##
+
+- develop in a clean workspace
+    - restart and rerun often
+
+- version control
+
+- the life-changing magic of tidying up (your files)
+    - @WilsonBestPracticesScientific2014; @WilsonGoodEnoughPractices2017; @NobleQuickGuideOrganizing2009
+    - my project template: <https://github.com/dhicks/project_template>
+
+- documenting code (and data)
+    - self-documenting code: <https://dev.to/woubuc/self-documenting-is-a-myth-and-how-to-make-your-code-self-documenting-3h2n>
+
+- **code review**
+
+- later: automation, CI
+
+- maybe also: unit testing
+
+
+## A code review checklist ##
+
+@PostolovskiYourCodeReview
+
+1. Readability / understandability
+    - Follows a [style guide](https://style.tidyverse.org/)
+    - Or at least uses consistent style
+    - Whitespace, whitespace, whitespace
+    - Meaningful names / [self-documenting code](https://dev.to/woubuc/self-documenting-is-a-myth-and-how-to-make-your-code-self-documenting-3h2n)
+    - [File naming](https://github.com/dhicks/project_template)
+    - Prefactoring for straightforward logic <https://www.youtube.com/watch?v=7oyiPBjLAWY>
+
+2. Maintainability
+    - [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself)
+    - Hard-coded configuration
+    - Strong assumptions about structure and content of inputs
+    - Uses deprecated or removed features
+
+3. Security
+    - How are passwords for websites, APIs, and sensitive data handled? 
+    - Data validation
+    - Code validation (tests and assertions)
+
+4. Speed and Performance
+    - Performance for users
+        - `tictoc` for simple wall time checks
+        - Profiling for more thorough optimization
+    - Resource use
+        - Does this really need to be run on the MERCED cluster? 
+        - How much will this cost the lab/team if it's accidentally run 1,000 times?
+        - Cache raw returns from web scraping and API queries
+
+5. Documentation
+    - Scripts: Section markers, signposting of what's happening and why
+    - Functions: Assumptions about inputs, explanation of output
+    - Data: Provenance, date and time retrieved, codebook
+    - Project: README, NEWS
+
+6. Reinventing the Wheel
+    - Is there a (well-maintained, checked) package for this? 
+    - [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself)
+
+7. Reliability
+    - What happens if packages aren't installed (don't use `require()`!), data can't be found, data has been altered or mangled, a function returns missing or zero-length values, one script in the middle of the pipeline is altered
+    
+8. Scalability
+
+9. Reusability
+    - Can this bit of code be dropped into the lab's/team's next project? 
+
+10. In-house/lab/team style
+
+11. Test coverage and quality
+    - Unpopular opinion: For "bench data science," assertions often make more sense than unit tests
+    - `assertthat` for assertions; `testthat` for unit tests
+    
+12. Fit for purpose
+
+13. Notice what's missing
+    - Edge cases, unexpected inputs, error handling
+    
+14. Zoom out
+

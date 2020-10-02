@@ -1,84 +1,119 @@
-# Open Science ≠ Reproducible #
+# An Example Code Review #
 
-- Open science movement: @NosekPromotingOpenResearch2015; @MunafoManifestoReproducibleScience2017
+- We'll review the code for @ColomboIntellectuallyHumblePrejudiced2020
+    - Data and code available at <https://osf.io/k5qmw/>
 
-```{r, echo = FALSE, out.width = '60%', fig.cap = "As part of the open science movement, some journals have added badges to journal articles indicating open data, open code, etc."}
-knitr::include_graphics(file.path('images', 'reproducibility', 'badges.png'))
-```
+- I find a lot of problems
+    - But don't read this as criticizing the authors
+    - These types of problems are widespread in computational science
+    - Because researchers aren't trained to look for, prevent, and correct these problems
+    
+
+## A short checklist ##
+
+0. What happens if you just run the script? 
+1. Readability
+2. Maintainability
+3. Documentation
+4. Reliability
+
+## Project organization ##
+
+- No documentation
+    - README, attribution
+    - Data provenance, codebook
+- Folder and file names
+    - Folder names suggest an order
+    - Which files are inputs and which are outputs? 
+    - Date stamps in file names - was version control used? 
+    - Inconsistent styles in file names
+- Are the inputs for the `meta` analysis the outputs from the studies? 
+    - What happens if something changes in the study analyses? 
+
+## `study1` ##
+
+0. Just run the script
+    - Error on line 16
+    - Trying to take a subset of columns from the data being read in
+    - Using column indices
+    - But the indices don't match the number of columns in the data
+    - We can't recover from this without documentation for the data
+        - What columns should be in the raw data, and what columns will be used for the analysis? 
+
+1. Readability
+    - Long lines, inconsistent whitespace
+    - Repetitive chunks of analysis aren't documented
+        - Could be put into function(s) with meaningful names
+
+2. Maintainability
+    - Lots of repetition: lines 25-41; analysis on 90-95; numerous places throughout
+    - Doesn't seem like this analysis is being written out anywhere? 
+        - In particular, how is the output here supposed to feed into the meta-analysis? 
+    - Line 132: why are we deleting things? 
+    - `cor.mtest` is defined multiple times
+    - Line 265: surprise `library()` call
+
+3. Documentation
+    - Line 46: Looks like we're starting one section of the analysis
+        - But it's easy to miss this section break, similar breaks eg line 134
+        - Contrast very visible break on 199
+    - What are these tests, plots, and why are we doing them? 
+    - Contrast with the factor analysis starting on line 79
+
+4. Reliability
+    - No checks to validate data
 
 
-- @ObelsAnalysisOpenData2020
-    - Reproducibility check of 62 pre-registered studies in a Center for Open Science database
-    - "Of the 62 articles that met our inclusion criteria, 41 had data available, and 37 had analysis scripts available"
-    - "We could run the scripts for 31 analyses, and we reproduced the main results for 21 articles."
+## `study2` ##
 
-```{r, echo = FALSE, message = FALSE, out.width = '60%', fig.cap = "Infographic for @ObelsAnalysisOpenData2020. While 58% of preregistered studies provided both the data and analysis script, only 50% had runnable scripts and only 34% could actually be reproduced."}
-library(tidyverse)
+0. Just run the script
+    - Syntax error on line 282
+        - Uncommenting 281 gives a very cryptic error
+        - Commenting out these lines -> everything seems to run
+    - But should we be worried about all of these convergence warnings? 
 
-obels_df = tribble(
-    ~check, ~n, 
-    'included', 62, 
-    'data available', 41, 
-    'code available', 37, 
-    'data & code available', 36,
-    'script runnable', 31, 
-    'reproduced', 21
-) %>% 
-    mutate(check = fct_inorder(check), 
-           total = 62, 
-           frac = n / total)
+- Pretty much all the same concerns as with `study1`
+    - Seems to use exactly the same analysis functions
+        - These should be defined once, in a single R file called by the analysis scripts
+        - Could even be a local package loaded using `usethis::load_all()` (<https://devtools.r-lib.org/reference/load_all.html>)
+    
+## `study3` ##
 
-time2_trans = scales::trans_new(
-    name = 'times2', 
-    inverse = function(x) {2*x}, 
-    transform = function(x) {x/2}
-)
+0. Just run the script
+    - Line 47: Missing dependency
 
-ggplot(obels_df, aes(check)) +
-    geom_tile(aes(x = fct_rev(check), y = 0L, 
-                  width = 1L, height = n, 
-                  fill = as.factor(n))) +
-    geom_label(aes(label = check,
-               x = check, y = 0L), 
-               position = position_nudge(x = .15),
-               alpha = .75) +
-    geom_label(aes(label = scales::percent(frac, accuracy = 2),
-                   x = check, y = 0L), 
-               position = position_nudge(x = -.15), 
-               alpha = .75) +
-    scale_fill_viridis_d(direction = -1,
-                         guide = FALSE) +
-    scale_x_discrete(name = '', breaks = c()) +
-    scale_y_continuous(name = '', trans = time2_trans, 
-                       breaks = seq(0, 60, by = 20), 
-                       minor_breaks = seq(-60, 60, by = 10)) +
-    coord_flip() +
-    theme_minimal()
-```
+1. Readability
+    - Long lines, bad pipe style
 
-- An example: <https://osf.io/k5qmw/>; @ColomboIntellectuallyHumblePrejudiced2020
+2. Maintainability
+    - Again, issues with repetition, not writing things out
 
+3. Documentation
+    - Basically none
+
+4. Reliability
+    - `TRUE` and `FALSE` are reserved words, meaning they can't be used as variable names
+        - `T` and `F` are variables defined by default to match these
+        - Their value can be changed
+        - So using `TRUE` and `FALSE` is preferred
+    - Several repetitions of `export(tidy(m6k, conf.int  = T), "export.xlsx")`
+        - Writing over `m6k` each time with a new regression model
+        - Is `export()` appending the results to `export.xlsx`, or overwriting the file? 
+
+## `study4` and `meta` ##
+
+- Same issues as the other script files
+- Confirm that the input for the meta-analysis isn't directly generated from the study scripts
+    
+
+<!--
 - Better: <https://osf.io/he5za/>; @CollingRegisteredReplicationReport2020
     - Although: 
     - Binder stalled out my first attempt
     - The manuscript file can't be knit
     - Running the analysis requires finding and running a series of scripts
     - Some of the scripts have warnings and errors, and it's not clear if those are problems
+-->
 
-
-## What can we learn from software engineering? ##
-
-    - version control
-    - good coding style
-        - <https://style.tidyverse.org/>
-        - prefactoring
-        - <https://www.youtube.com/watch?v=7oyiPBjLAWY>
-    - code review [@PostolovskiYourCodeReview]
-    - documenting code (and data)
-        - self-documenting code: <https://dev.to/woubuc/self-documenting-is-a-myth-and-how-to-make-your-code-self-documenting-3h2n>
-    - the life-changing magic of tidying up (your files)
-        - @WilsonBestPracticesScientific2014; @WilsonGoodEnoughPractices2017; @NobleQuickGuideOrganizing2009
-        - my project template
-    - later: automation, CI
     
-- lab/exercise: spend 90 minutes on EDA of the Silberzahn et al. red card data, then code review
+- *[todo]* lab/exercise: spend 90 minutes on EDA of the Silberzahn et al. red card data, then code review

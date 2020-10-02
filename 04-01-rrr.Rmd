@@ -75,6 +75,63 @@ Reproducibility is a *necessary* condition for computational research, but has l
 Table: Things reproducibility doesn't tell us
 
 
+# Open Science ≠ Reproducible #
+
+- Open science movement: @NosekPromotingOpenResearch2015; @MunafoManifestoReproducibleScience2017
+
+```{r, echo = FALSE, out.width = '60%', fig.cap = "As part of the open science movement, some journals have added badges to journal articles indicating open data, open code, etc."}
+knitr::include_graphics(file.path('images', 'reproducibility', 'badges.png'))
+```
+
+
+- @ObelsAnalysisOpenData2020
+    - Reproducibility check of 62 pre-registered studies in a Center for Open Science database
+    - "Of the 62 articles that met our inclusion criteria, 41 had data available, and 37 had analysis scripts available"
+    - "We could run the scripts for 31 analyses, and we reproduced the main results for 21 articles."
+
+```{r, echo = FALSE, message = FALSE, out.width = '60%', fig.cap = "Infographic for @ObelsAnalysisOpenData2020. While 58% of preregistered studies provided both the data and analysis script, only 50% had runnable scripts and only 34% could actually be reproduced."}
+library(tidyverse)
+
+obels_df = tribble(
+    ~check, ~n, 
+    'included', 62, 
+    'data available', 41, 
+    'code available', 37, 
+    'data & code available', 36,
+    'script runnable', 31, 
+    'reproduced', 21
+) %>% 
+    mutate(check = fct_inorder(check), 
+           total = 62, 
+           frac = n / total)
+
+time2_trans = scales::trans_new(
+    name = 'times2', 
+    inverse = function(x) {2*x}, 
+    transform = function(x) {x/2}
+)
+
+ggplot(obels_df, aes(check)) +
+    geom_tile(aes(x = fct_rev(check), y = 0L, 
+                  width = 1L, height = n, 
+                  fill = as.factor(n))) +
+    geom_label(aes(label = check,
+               x = check, y = 0L), 
+               position = position_nudge(x = .15),
+               alpha = .75) +
+    geom_label(aes(label = scales::percent(frac, accuracy = 2),
+                   x = check, y = 0L), 
+               position = position_nudge(x = -.15), 
+               alpha = .75) +
+    scale_fill_viridis_d(direction = -1,
+                         guide = FALSE) +
+    scale_x_discrete(name = '', breaks = c()) +
+    scale_y_continuous(name = '', trans = time2_trans, 
+                       breaks = seq(0, 60, by = 20), 
+                       minor_breaks = seq(-60, 60, by = 10)) +
+    coord_flip() +
+    theme_minimal()
+```
 
 
 
