@@ -119,7 +119,7 @@
 
 \title{Data Science Methods for Cognitive Science}
 \author{Dan Hicks, \href{mailto:hicks.daniel.j@gmail.com}{\nolinkurl{hicks.daniel.j@gmail.com}}}
-\date{Wed Sep 30 19:55:56 2020}
+\date{Fri Oct 2 19:18:29 2020}
 
 \begin{document}
 \maketitle
@@ -162,7 +162,7 @@ skimr & 2.1.2 & CRAN (R 4.0.2)\tabularnewline
 tictoc & 1.0 & CRAN (R 4.0.2)\tabularnewline
 tidyverse & 1.3.0 & CRAN (R 4.0.2)\tabularnewline
 visdat & 0.5.3 & CRAN (R 4.0.2)\tabularnewline
-vroom & 1.3.1 & CRAN (R 4.0.2)\tabularnewline
+vroom & 1.3.2 & CRAN (R 4.0.2)\tabularnewline
 \bottomrule
 \end{longtable}
 
@@ -2182,7 +2182,7 @@ The dataset is a zipped \texttt{csv} or comma-separated value file. CSVs are str
 \end{Shaded}
 
 \begin{verbatim}
-## 0.399 sec elapsed
+## 0.335 sec elapsed
 \end{verbatim}
 
 \begin{Shaded}
@@ -5510,49 +5510,611 @@ Whether your interpretation of the analysis output is reasonable\tabularnewline
 \textbackslash caption\{Infographic for Obels et al. (\protect\hyperlink{ref-ObelsAnalysisOpenData2020}{2020}). While 58\% of preregistered studies provided both the data and analysis script, only 50\% had runnable scripts and only 34\% could actually be reproduced.\}\label{fig:unnamed-chunk-112}
 \textbackslash end\{figure\}
 
+\hypertarget{reproducibility-and-software-engineering}{%
+\section{Reproducibility and Software Engineering}\label{reproducibility-and-software-engineering}}
+
 \begin{itemize}
 \item
-  An example: \url{https://osf.io/k5qmw/}; Colombo et al. (\protect\hyperlink{ref-ColomboIntellectuallyHumblePrejudiced2020}{2020})
+  Recommended viewing: McElreath (\protect\hyperlink{ref-McElreathScienceAmateurSoftware2020}{2020})
 \item
-  Better: \url{https://osf.io/he5za/}; Colling et al. (\protect\hyperlink{ref-CollingRegisteredReplicationReport2020}{2020})
-
-  \begin{itemize}
-  \tightlist
-  \item
-    Although:
-  \item
-    Binder stalled out my first attempt
-  \item
-    The manuscript file can't be knit
-  \item
-    Running the analysis requires finding and running a series of scripts
-  \item
-    Some of the scripts have warnings and errors, and it's not clear if those are problems
-  \end{itemize}
+  The reproducibility side of the replication crisis suggests that academic science has a reproducibility problem
+\item
+  But software engineering doesn't
 \end{itemize}
 
 \hypertarget{what-can-we-learn-from-software-engineering}{%
 \subsection{What can we learn from software engineering?}\label{what-can-we-learn-from-software-engineering}}
 
-\begin{verbatim}
-- version control
-- good coding style
-    - <https://style.tidyverse.org/>
-    - prefactoring
-    - <https://www.youtube.com/watch?v=7oyiPBjLAWY>
-- code review [@PostolovskiYourCodeReview]
-- documenting code (and data)
-    - self-documenting code: <https://dev.to/woubuc/self-documenting-is-a-myth-and-how-to-make-your-code-self-documenting-3h2n>
-- the life-changing magic of tidying up (your files)
-    - @WilsonBestPracticesScientific2014; @WilsonGoodEnoughPractices2017; @NobleQuickGuideOrganizing2009
-    - my project template
-- later: automation, CI
-\end{verbatim}
+\begin{itemize}
+\item
+  develop in a clean workspace
+
+  \begin{itemize}
+  \tightlist
+  \item
+    restart and rerun often
+  \end{itemize}
+\item
+  version control
+\item
+  the life-changing magic of tidying up (your files)
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Wilson et al. (\protect\hyperlink{ref-WilsonBestPracticesScientific2014}{2014}); Wilson et al. (\protect\hyperlink{ref-WilsonGoodEnoughPractices2017}{2017}); Noble (\protect\hyperlink{ref-NobleQuickGuideOrganizing2009}{2009})
+  \item
+    my project template: \url{https://github.com/dhicks/project_template}
+  \end{itemize}
+\item
+  documenting code (and data)
+
+  \begin{itemize}
+  \tightlist
+  \item
+    self-documenting code: \url{https://dev.to/woubuc/self-documenting-is-a-myth-and-how-to-make-your-code-self-documenting-3h2n}
+  \end{itemize}
+\item
+  \textbf{code review}
+\item
+  later: automation, CI
+\item
+  maybe also: unit testing
+\end{itemize}
+
+\hypertarget{a-code-review-checklist}{%
+\subsection{A code review checklist}\label{a-code-review-checklist}}
+
+Postolovski (\protect\hyperlink{ref-PostolovskiYourCodeReview}{n.d.})
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Readability / understandability
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Follows a \href{https://style.tidyverse.org/}{style guide}
+  \item
+    Or at least uses consistent style
+  \item
+    Whitespace, whitespace, whitespace
+  \item
+    Meaningful names / \href{https://dev.to/woubuc/self-documenting-is-a-myth-and-how-to-make-your-code-self-documenting-3h2n}{self-documenting code}
+  \item
+    \href{https://github.com/dhicks/project_template}{File naming}
+  \item
+    Prefactoring for straightforward logic \url{https://www.youtube.com/watch?v=7oyiPBjLAWY}
+  \end{itemize}
+\item
+  Maintainability
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \href{https://en.wikipedia.org/wiki/Don\%27t_repeat_yourself}{DRY}
+  \item
+    Hard-coded configuration
+  \item
+    Strong assumptions about structure and content of inputs
+  \item
+    Uses deprecated or removed features
+  \end{itemize}
+\item
+  Security
+
+  \begin{itemize}
+  \tightlist
+  \item
+    How are passwords for websites, APIs, and sensitive data handled?
+  \item
+    Data validation
+  \item
+    Code validation (tests and assertions)
+  \end{itemize}
+\item
+  Speed and Performance
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Performance for users
+
+    \begin{itemize}
+    \tightlist
+    \item
+      \texttt{tictoc} for simple wall time checks
+    \item
+      Profiling for more thorough optimization
+    \end{itemize}
+  \item
+    Resource use
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Does this really need to be run on the MERCED cluster?
+    \item
+      How much will this cost the lab/team if it's accidentally run 1,000 times?
+    \item
+      Cache raw returns from web scraping and API queries
+    \end{itemize}
+  \end{itemize}
+\item
+  Documentation
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Scripts: Section markers, signposting of what's happening and why
+  \item
+    Functions: Assumptions about inputs, explanation of output
+  \item
+    Data: Provenance, date and time retrieved, codebook
+  \item
+    Project: README, NEWS
+  \end{itemize}
+\item
+  Reinventing the Wheel
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Is there a (well-maintained, checked) package for this?
+  \item
+    \href{https://en.wikipedia.org/wiki/Don\%27t_repeat_yourself}{DRY}
+  \end{itemize}
+\item
+  Reliability
+
+  \begin{itemize}
+  \tightlist
+  \item
+    What happens if packages aren't installed (don't use \texttt{require()}!), data can't be found, data has been altered or mangled, a function returns missing or zero-length values, one script in the middle of the pipeline is altered
+  \end{itemize}
+\item
+  Scalability
+\item
+  Reusability
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Can this bit of code be dropped into the lab's/team's next project?
+  \end{itemize}
+\item
+  In-house/lab/team style
+\item
+  Test coverage and quality
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Unpopular opinion: For ``bench data science,'' assertions often make more sense than unit tests
+  \item
+    \texttt{assertthat} for assertions; \texttt{testthat} for unit tests
+  \end{itemize}
+\item
+  Fit for purpose
+\item
+  Notice what's missing
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Edge cases, unexpected inputs, error handling
+  \end{itemize}
+\item
+  Zoom out
+\end{enumerate}
+
+\hypertarget{an-example-code-review}{%
+\section{An Example Code Review}\label{an-example-code-review}}
 
 \begin{itemize}
 \tightlist
 \item
-  lab/exercise: spend 90 minutes on EDA of the Silberzahn et al.~red card data, then code review
+  We'll review the code for Colombo et al. (\protect\hyperlink{ref-ColomboIntellectuallyHumblePrejudiced2020}{2020})
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Data and code available at \url{https://osf.io/k5qmw/}
+  \end{itemize}
+\item
+  I find a lot of problems
+
+  \begin{itemize}
+  \tightlist
+  \item
+    But don't read this as criticizing the authors
+  \item
+    These types of problems are widespread in computational science
+  \item
+    Because researchers aren't trained to look for, prevent, and correct these problems
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{a-short-checklist}{%
+\subsection{A short checklist}\label{a-short-checklist}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{-1}
+\tightlist
+\item
+  What happens if you just run the script?
+\item
+  Readability
+\item
+  Maintainability
+\item
+  Documentation
+\item
+  Reliability
+\end{enumerate}
+
+\hypertarget{project-organization}{%
+\subsection{Project organization}\label{project-organization}}
+
+\begin{itemize}
+\tightlist
+\item
+  No documentation
+
+  \begin{itemize}
+  \tightlist
+  \item
+    README, attribution
+  \item
+    Data provenance, codebook
+  \end{itemize}
+\item
+  Folder and file names
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Folder names suggest an order
+  \item
+    Which files are inputs and which are outputs?
+  \item
+    Date stamps in file names - was version control used?
+  \item
+    Inconsistent styles in file names
+  \end{itemize}
+\item
+  Are the inputs for the \texttt{meta} analysis the outputs from the studies?
+
+  \begin{itemize}
+  \tightlist
+  \item
+    What happens if something changes in the study analyses?
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{study1}{%
+\subsection{\texorpdfstring{\texttt{study1}}{study1}}\label{study1}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{-1}
+\tightlist
+\item
+  Just run the script
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Error on line 16
+  \item
+    Trying to take a subset of columns from the data being read in
+  \item
+    Using column indices
+  \item
+    But the indices don't match the number of columns in the data
+  \item
+    We can't recover from this without documentation for the data
+
+    \begin{itemize}
+    \tightlist
+    \item
+      What columns should be in the raw data, and what columns will be used for the analysis?
+    \end{itemize}
+  \end{itemize}
+\item
+  Readability
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Long lines, inconsistent whitespace
+  \item
+    Repetitive chunks of analysis aren't documented
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Could be put into function(s) with meaningful names
+    \end{itemize}
+  \end{itemize}
+\item
+  Maintainability
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Lots of repetition: lines 25-41; analysis on 90-95; numerous places throughout
+  \item
+    Doesn't seem like this analysis is being written out anywhere?
+
+    \begin{itemize}
+    \tightlist
+    \item
+      In particular, how is the output here supposed to feed into the meta-analysis?
+    \end{itemize}
+  \item
+    Line 132: why are we deleting things?
+  \item
+    \texttt{cor.mtest} is defined multiple times
+  \item
+    Line 265: surprise \texttt{library()} call
+  \end{itemize}
+\item
+  Documentation
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Line 46: Looks like we're starting one section of the analysis
+
+    \begin{itemize}
+    \tightlist
+    \item
+      But it's easy to miss this section break, similar breaks eg line 134
+    \item
+      Contrast very visible break on 199
+    \end{itemize}
+  \item
+    What are these tests, plots, and why are we doing them?
+  \item
+    Contrast with the factor analysis starting on line 79
+  \end{itemize}
+\item
+  Reliability
+
+  \begin{itemize}
+  \tightlist
+  \item
+    No checks to validate data
+  \end{itemize}
+\end{enumerate}
+
+\hypertarget{study2}{%
+\subsection{\texorpdfstring{\texttt{study2}}{study2}}\label{study2}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{-1}
+\tightlist
+\item
+  Just run the script
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Syntax error on line 282
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Uncommenting 281 gives a very cryptic error
+    \item
+      Commenting out these lines -\textgreater{} everything seems to run
+    \end{itemize}
+  \item
+    But should we be worried about all of these convergence warnings?
+  \end{itemize}
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  Pretty much all the same concerns as with \texttt{study1}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Seems to use exactly the same analysis functions
+
+    \begin{itemize}
+    \tightlist
+    \item
+      These should be defined once, in a single R file called by the analysis scripts
+    \item
+      Could even be a local package loaded using \texttt{usethis::load\_all()} (\url{https://devtools.r-lib.org/reference/load_all.html})
+    \end{itemize}
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{study3}{%
+\subsection{\texorpdfstring{\texttt{study3}}{study3}}\label{study3}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{-1}
+\tightlist
+\item
+  Just run the script
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Line 47: Missing dependency
+  \end{itemize}
+\item
+  Readability
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Long lines, bad pipe style
+  \end{itemize}
+\item
+  Maintainability
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Again, issues with repetition, not writing things out
+  \end{itemize}
+\item
+  Documentation
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Basically none
+  \end{itemize}
+\item
+  Reliability
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{TRUE} and \texttt{FALSE} are reserved words, meaning they can't be used as variable names
+
+    \begin{itemize}
+    \tightlist
+    \item
+      \texttt{T} and \texttt{F} are variables defined by default to match these
+    \item
+      Their value can be changed
+    \item
+      So using \texttt{TRUE} and \texttt{FALSE} is preferred
+    \end{itemize}
+  \item
+    Several repetitions of \texttt{export(tidy(m6k,\ conf.int\ \ =\ T),\ "export.xlsx")}
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Writing over \texttt{m6k} each time with a new regression model
+    \item
+      Is \texttt{export()} appending the results to \texttt{export.xlsx}, or overwriting the file?
+    \end{itemize}
+  \end{itemize}
+\end{enumerate}
+
+\hypertarget{study4-and-meta}{%
+\subsection{\texorpdfstring{\texttt{study4} and \texttt{meta}}{study4 and meta}}\label{study4-and-meta}}
+
+\begin{itemize}
+\tightlist
+\item
+  Same issues as the other script files
+\item
+  Confirm that the input for the meta-analysis isn't directly generated from the study scripts
+\end{itemize}
+
+\begin{itemize}
+\tightlist
+\item
+  \emph{{[}todo{]}} lab/exercise: spend 90 minutes on EDA of the Silberzahn et al.~red card data, then code review
+\end{itemize}
+
+\hypertarget{organizing-your-projects}{%
+\section{Organizing your projects}\label{organizing-your-projects}}
+
+\begin{itemize}
+\item
+  Reading: Wilson et al. (\protect\hyperlink{ref-WilsonGoodEnoughPractices2017}{2017}); Noble (\protect\hyperlink{ref-NobleQuickGuideOrganizing2009}{2009})
+\item
+  Good project organization will
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Keep your project self-contained, making it easy to find files as needed
+  \item
+    Play nicely with version control
+  \item
+    Self-document key relationships between project files
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{two-templates}{%
+\subsection{Two templates}\label{two-templates}}
+
+\hypertarget{noblequickguideorganizing2009}{%
+\subsubsection{\texorpdfstring{Noble (\protect\hyperlink{ref-NobleQuickGuideOrganizing2009}{2009})}{Noble (2009)}}\label{noblequickguideorganizing2009}}
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.6\linewidth]{images/reproducibility/noble} 
+
+}
+
+\caption{Noble's [-@NobleQuickGuideOrganizing2009] sample folder structure is designed for experimental biologists.}\label{fig:unnamed-chunk-113}
+\end{figure}
+
+\begin{itemize}
+\tightlist
+\item
+  Includes code for
+
+  \begin{itemize}
+  \tightlist
+  \item
+    running experiments
+  \item
+    cleaning and analyzing data
+  \item
+    typesetting a LateX file into a PDF
+  \end{itemize}
+\item
+  Other features
+
+  \begin{itemize}
+  \tightlist
+  \item
+    notebook file, updated regularly
+  \item
+    chronological folders for experimental runs
+  \item
+    folders for compiled code and their corresponding source files
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{djhs-project-template}{%
+\subsubsection{DJH's Project Template}\label{djhs-project-template}}
+
+\begin{itemize}
+\item
+  \url{https://github.com/dhicks/project_template}
+\item
+  Configured as a GitHub ``template,'' making it easy to create new repositories for new projects
+\item
+  Designated folders for data, plots/outputs, and utility functions
+\item
+  File naming convention
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Automatically orders analysis scripts
+  \item
+    Coordinates plots, outputs, and intermediate data with the script that creates them
+  \end{itemize}
+\item
+  R package infrastructure
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Enables one-liner to load the utility functions in \texttt{R}: \texttt{devtools::load\_all(\textquotesingle{}..\textquotesingle{})}
+  \end{itemize}
 \end{itemize}
 
 \hypertarget{part-cleaning-data}{%
@@ -5586,9 +6148,6 @@ Cassidy, John. n.d. ``The Reinhart and Rogoff Controversy: A Summing Up.'' The N
 
 \leavevmode\hypertarget{ref-ChambersObjectOrientedProgrammingFunctional2014}{}%
 Chambers, John M. 2014. ``Object-Oriented Programming, Functional Programming and R.'' \emph{Statistical Science} 29 (2): 167--80. \url{https://doi.org/10.1214/13-STS452}.
-
-\leavevmode\hypertarget{ref-CollingRegisteredReplicationReport2020}{}%
-Colling, Lincoln J., Dénes Szűcs, Damiano De Marco, Krzysztof Cipora, Rolf Ulrich, Hans-Christoph Nuerk, Mojtaba Soltanlou, et al. 2020. ``Registered Replication Report on Fischer, Castel, Dodd, and Pratt (2003).'' \emph{Advances in Methods and Practices in Psychological Science} 3 (2): 143--62. \url{https://doi.org/10.1177/2515245920903079}.
 
 \leavevmode\hypertarget{ref-ColomboIntellectuallyHumblePrejudiced2020}{}%
 Colombo, Matteo, Kevin Strangmann, Lieke Houkes, Zhasmina Kostadinova, and Mark J. Brandt. 2020. ``Intellectually Humble, but Prejudiced People. A Paradox of Intellectual Virtue.'' \emph{Review of Philosophy and Psychology}, July. \url{https://doi.org/10.1007/s13164-020-00496-4}.
@@ -5659,6 +6218,9 @@ Lyon, A. 2014. ``Why Are Normal Distributions Normal?'' \emph{The British Journa
 \leavevmode\hypertarget{ref-MatejkaSameStatsDifferent}{}%
 Matejka, Justin, and George Fitzmaurice. n.d. ``Same Stats, Different Graphs: Generating Datasets with Varied Appearance and Identical Statistics Through Simulated Annealing (the Datasaurus Dozen) \textbar{} Autodesk Research.'' Accessed May 21, 2017. \url{https://www.autodeskresearch.com/publications/samestats}.
 
+\leavevmode\hypertarget{ref-McElreathScienceAmateurSoftware2020}{}%
+McElreath, Richard, dir. 2020. \emph{Science as Amateur Software Development}. \url{https://www.youtube.com/watch?v=zwRdO9_GGhY}.
+
 \leavevmode\hypertarget{ref-MeehlTheoryTestingPsychologyPhysics1967}{}%
 Meehl, Paul E. 1967. ``Theory-Testing in Psychology and Physics: A Methodological Paradox.'' \emph{Philosophy of Science} 34 (2): 103--15. \url{http://www.jstor.org.proxy1.lib.uwo.ca/stable/186099}.
 
@@ -5667,6 +6229,9 @@ Munafò, Marcus R., Brian A. Nosek, Dorothy V. M. Bishop, Katherine S. Button, C
 
 \leavevmode\hypertarget{ref-NationalAcademiesofSciencesEngineeringandMedicineReproducibilityReplicabilityScience2019}{}%
 National Academies of Sciences, Engineering, and Medicine. 2019. \emph{Reproducibility and Replicability in Science}. Washington, D.C.: National Academies Press. \url{https://doi.org/10.17226/25303}.
+
+\leavevmode\hypertarget{ref-NobleQuickGuideOrganizing2009}{}%
+Noble, William Stafford. 2009. ``A Quick Guide to Organizing Computational Biology Projects.'' \emph{PLOS Computational Biology} 5 (7): e1000424. \url{https://doi.org/10.1371/journal.pcbi.1000424}.
 
 \leavevmode\hypertarget{ref-NosekPromotingOpenResearch2015}{}%
 Nosek, B. A., G. Alter, G. C. Banks, D. Borsboom, S. D. Bowman, S. J. Breckler, S. Buck, et al. 2015. ``Promoting an Open Research Culture.'' \emph{Science} 348 (6242): 1422--5. \url{https://doi.org/10.1126/science.aab2374}.
@@ -5691,6 +6256,9 @@ Perkel, Jeffrey M. 2018. ``Why Jupyter Is Data Scientists' Computational Noteboo
 
 \leavevmode\hypertarget{ref-PiersonLargescaleAnalysisRacial2020}{}%
 Pierson, Emma, Camelia Simoiu, Jan Overgoor, Sam Corbett-Davies, Daniel Jenson, Amy Shoemaker, Vignesh Ramachandran, et al. 2020. ``A Large-Scale Analysis of Racial Disparities in Police Stops Across the United States.'' \emph{Nature Human Behaviour}, May, 1--10. \url{https://doi.org/10.1038/s41562-020-0858-1}.
+
+\leavevmode\hypertarget{ref-PostolovskiYourCodeReview}{}%
+Postolovski, Tash. n.d. ``Your Code Review Checklist: 14 Things to Include.'' Accessed September 27, 2020. \url{https://www.codementor.io/blog/code-review-checklist-76q7ovkaqj}.
 
 \leavevmode\hypertarget{ref-ReinhartRogoffGrowth2019}{}%
 \emph{Reinhart \& Rogoff - Growth in a Time of Debt - EXERCISE!} 2019. \url{https://www.youtube.com/watch?v=ItGMz0ERvcw}.
@@ -5748,6 +6316,9 @@ Wilkinson, Leland. 1999. \emph{The Grammar of Graphics}. Statistics and Computin
 
 \leavevmode\hypertarget{ref-WilkinsonFAIRGuidingPrinciples2016}{}%
 Wilkinson, Mark D., Michel Dumontier, IJsbrand Jan Aalbersberg, Gabrielle Appleton, Myles Axton, Arie Baak, Niklas Blomberg, et al. 2016. ``The FAIR Guiding Principles for Scientific Data Management and Stewardship.'' \emph{Scientific Data} 3 (1, 1): 1--9. \url{https://doi.org/10.1038/sdata.2016.18}.
+
+\leavevmode\hypertarget{ref-WilsonBestPracticesScientific2014}{}%
+Wilson, Greg, D. A. Aruliah, C. Titus Brown, Neil P. Chue Hong, Matt Davis, Richard T. Guy, Steven H. D. Haddock, et al. 2014. ``Best Practices for Scientific Computing.'' \emph{PLoS Biol} 12 (1): e1001745. \url{https://doi.org/10.1371/journal.pbio.1001745}.
 
 \leavevmode\hypertarget{ref-WilsonGoodEnoughPractices2017}{}%
 Wilson, Greg, Jennifer Bryan, Karen Cranston, Justin Kitzes, Lex Nederbragt, and Tracy K. Teal. 2017. ``Good Enough Practices in Scientific Computing.'' \emph{PLOS Computational Biology} 13 (6): e1005510. \url{https://doi.org/10.1371/journal.pcbi.1005510}.

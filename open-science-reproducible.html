@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="reproducibility-replicability-and-robustness.html"/>
-<link rel="next" href="references.html"/>
+<link rel="next" href="reproducibility-and-software-engineering.html"/>
 <script src="libs/header-attrs-2.4.1/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -251,9 +251,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="15.2" data-path="reproducibility-replicability-and-robustness.html"><a href="reproducibility-replicability-and-robustness.html#terminology"><i class="fa fa-check"></i><b>15.2</b> Terminology</a></li>
 <li class="chapter" data-level="15.3" data-path="reproducibility-replicability-and-robustness.html"><a href="reproducibility-replicability-and-robustness.html#epistemic-value-of-reproducibility"><i class="fa fa-check"></i><b>15.3</b> Epistemic Value of Reproducibility</a></li>
 </ul></li>
-<li class="chapter" data-level="16" data-path="open-science-reproducible.html"><a href="open-science-reproducible.html"><i class="fa fa-check"></i><b>16</b> Open Science ≠ Reproducible</a>
+<li class="chapter" data-level="16" data-path="open-science-reproducible.html"><a href="open-science-reproducible.html"><i class="fa fa-check"></i><b>16</b> Open Science ≠ Reproducible</a></li>
+<li class="chapter" data-level="17" data-path="reproducibility-and-software-engineering.html"><a href="reproducibility-and-software-engineering.html"><i class="fa fa-check"></i><b>17</b> Reproducibility and Software Engineering</a>
 <ul>
-<li class="chapter" data-level="16.1" data-path="open-science-reproducible.html"><a href="open-science-reproducible.html#what-can-we-learn-from-software-engineering"><i class="fa fa-check"></i><b>16.1</b> What can we learn from software engineering?</a></li>
+<li class="chapter" data-level="17.1" data-path="reproducibility-and-software-engineering.html"><a href="reproducibility-and-software-engineering.html#what-can-we-learn-from-software-engineering"><i class="fa fa-check"></i><b>17.1</b> What can we learn from software engineering?</a></li>
+<li class="chapter" data-level="17.2" data-path="reproducibility-and-software-engineering.html"><a href="reproducibility-and-software-engineering.html#a-code-review-checklist"><i class="fa fa-check"></i><b>17.2</b> A code review checklist</a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="an-example-code-review.html"><a href="an-example-code-review.html"><i class="fa fa-check"></i><b>18</b> An Example Code Review</a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="an-example-code-review.html"><a href="an-example-code-review.html#a-short-checklist"><i class="fa fa-check"></i><b>18.1</b> A short checklist</a></li>
+<li class="chapter" data-level="18.2" data-path="an-example-code-review.html"><a href="an-example-code-review.html#project-organization"><i class="fa fa-check"></i><b>18.2</b> Project organization</a></li>
+<li class="chapter" data-level="18.3" data-path="an-example-code-review.html"><a href="an-example-code-review.html#study1"><i class="fa fa-check"></i><b>18.3</b> <code>study1</code></a></li>
+<li class="chapter" data-level="18.4" data-path="an-example-code-review.html"><a href="an-example-code-review.html#study2"><i class="fa fa-check"></i><b>18.4</b> <code>study2</code></a></li>
+<li class="chapter" data-level="18.5" data-path="an-example-code-review.html"><a href="an-example-code-review.html#study3"><i class="fa fa-check"></i><b>18.5</b> <code>study3</code></a></li>
+<li class="chapter" data-level="18.6" data-path="an-example-code-review.html"><a href="an-example-code-review.html#study4-and-meta"><i class="fa fa-check"></i><b>18.6</b> <code>study4</code> and <code>meta</code></a></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="organizing-your-projects.html"><a href="organizing-your-projects.html"><i class="fa fa-check"></i><b>19</b> Organizing your projects</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="organizing-your-projects.html"><a href="organizing-your-projects.html#two-templates"><i class="fa fa-check"></i><b>19.1</b> Two templates</a></li>
 </ul></li>
 <li class="part"><span><b>IV Cleaning Data</b></span></li>
 <li class="part"><span><b>V Case Study: The COMPAS Dataset</b></span></li>
@@ -303,53 +318,10 @@ Figure 16.1: As part of the open science movement, some journals have added badg
 Figure 16.2: Infographic for <span class="citation">Obels et al. (<a href="#ref-ObelsAnalysisOpenData2020" role="doc-biblioref">2020</a>)</span>. While 58% of preregistered studies provided both the data and analysis script, only 50% had runnable scripts and only 34% could actually be reproduced.
 </p>
 </div>
-<ul>
-<li><p>An example: <a href="https://osf.io/k5qmw/" class="uri">https://osf.io/k5qmw/</a>; <span class="citation">Colombo et al. (<a href="#ref-ColomboIntellectuallyHumblePrejudiced2020" role="doc-biblioref">2020</a>)</span></p></li>
-<li><p>Better: <a href="https://osf.io/he5za/" class="uri">https://osf.io/he5za/</a>; <span class="citation">Colling et al. (<a href="#ref-CollingRegisteredReplicationReport2020" role="doc-biblioref">2020</a>)</span></p>
-<ul>
-<li>Although:</li>
-<li>Binder stalled out my first attempt</li>
-<li>The manuscript file can’t be knit</li>
-<li>Running the analysis requires finding and running a series of scripts</li>
-<li>Some of the scripts have warnings and errors, and it’s not clear if those are problems</li>
-</ul></li>
-</ul>
-<div id="what-can-we-learn-from-software-engineering" class="section level2" number="16.1">
-<h2><span class="header-section-number">16.1</span> What can we learn from software engineering?</h2>
-<pre><code>- version control
-- good coding style
-    - &lt;https://style.tidyverse.org/&gt;
-    - prefactoring
-    - &lt;https://www.youtube.com/watch?v=7oyiPBjLAWY&gt;
-- code review [@PostolovskiYourCodeReview]
-- documenting code (and data)
-    - self-documenting code: &lt;https://dev.to/woubuc/self-documenting-is-a-myth-and-how-to-make-your-code-self-documenting-3h2n&gt;
-- the life-changing magic of tidying up (your files)
-    - @WilsonBestPracticesScientific2014; @WilsonGoodEnoughPractices2017; @NobleQuickGuideOrganizing2009
-    - my project template
-- later: automation, CI</code></pre>
-<ul>
-<li>lab/exercise: spend 90 minutes on EDA of the Silberzahn et al. red card data, then code review</li>
-</ul>
-
-</div>
-</div>
-
-
-
-</div>
-
-
 
 </div>
 <h3>References</h3>
 <div id="refs" class="references">
-<div id="ref-CollingRegisteredReplicationReport2020">
-<p>Colling, Lincoln J., Dénes Szűcs, Damiano De Marco, Krzysztof Cipora, Rolf Ulrich, Hans-Christoph Nuerk, Mojtaba Soltanlou, et al. 2020. “Registered Replication Report on Fischer, Castel, Dodd, and Pratt (2003).” <em>Advances in Methods and Practices in Psychological Science</em> 3 (2): 143–62. <a href="https://doi.org/10.1177/2515245920903079">https://doi.org/10.1177/2515245920903079</a>.</p>
-</div>
-<div id="ref-ColomboIntellectuallyHumblePrejudiced2020">
-<p>Colombo, Matteo, Kevin Strangmann, Lieke Houkes, Zhasmina Kostadinova, and Mark J. Brandt. 2020. “Intellectually Humble, but Prejudiced People. A Paradox of Intellectual Virtue.” <em>Review of Philosophy and Psychology</em>, July. <a href="https://doi.org/10.1007/s13164-020-00496-4">https://doi.org/10.1007/s13164-020-00496-4</a>.</p>
-</div>
 <div id="ref-MunafoManifestoReproducibleScience2017">
 <p>Munafò, Marcus R., Brian A. Nosek, Dorothy V. M. Bishop, Katherine S. Button, Christopher D. Chambers, Nathalie Percie du Sert, Uri Simonsohn, Eric-Jan Wagenmakers, Jennifer J. Ware, and John P. A. Ioannidis. 2017. “A Manifesto for Reproducible Science.” <em>Nature Human Behaviour</em> 1 (1, 1): 1–9. <a href="https://doi.org/10.1038/s41562-016-0021">https://doi.org/10.1038/s41562-016-0021</a>.</p>
 </div>
@@ -366,7 +338,7 @@ Figure 16.2: Infographic for <span class="citation">Obels et al. (<a href="#ref-
         </div>
       </div>
 <a href="reproducibility-replicability-and-robustness.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="reproducibility-and-software-engineering.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -397,7 +369,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/data-science-methods/book/blob/master/04-02-open-science.Rmd",
+"link": "https://github.com/data-science-methods/book/blob/master/04-01-rrr.Rmd",
 "text": "Edit"
 },
 "history": {
