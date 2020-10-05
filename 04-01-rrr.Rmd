@@ -7,6 +7,7 @@
     - @ArrayErrors2011; @VideoKeithBaggerly
     - @HerndonDoesHighPublic2014; but you can just read @BaileyReinhartRogoffErrorHow, @CassidyReinhartRogoffControversy, watch @ReinhartRogoffGrowth2019
     - @LaskowskiWhatWhenYou, @ViglioneAvalancheSpiderpaperRetractions2020, @PennisiProminentSpiderBiologist2020
+    - @HowExcelMay2020
 
 
 ## The Replication Crisis ##
@@ -76,10 +77,12 @@ Reproducibility is a *necessary* condition for computational research, but has *
 | |
 |:-----| 
 | Whether your research question is reasonable |
+| Whether your data was collected the way you think it was |
 | Whether your data can possibly answer your research question |
 | Whether your data was fabricated |
 | Whether your data was mismanaged |
 | Whether your analyses are appropriate |
+| Whether your analysis includes relevant covariates |
 | Whether your code runs the analysis that you think it does |
 | Whether you p-hacked your analysis [@SimmonsFalsePositivePsychology2011] |
 | How to interpret your analysis output |
