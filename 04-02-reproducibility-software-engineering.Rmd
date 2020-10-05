@@ -1,7 +1,7 @@
 # Reproducibility and Software Engineering #
 
 - Reading: @PostolovskiYourCodeReview2020; @WilsonGoodEnoughPractices2017; @BuckensSelfdocumentingMythHow2019
-- Recommended video:  @McElreathScienceAmateurSoftware2020;
+- Recommended video:  @McElreathScienceAmateurSoftware2020
 
 - The reproducibility side of the replication crisis suggests that academic science has a reproducibility problem
 - But software engineering doesn't
