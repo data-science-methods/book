@@ -1,0 +1,12 @@
+# Some Data-Cleaning Tools #
+
+@WickhamTidyData2014
+
+- concept of tidy data
+    - work through examples from Wickham's "Tidy Data"
+
+Excel dates
+separate()
+pivot_*()
+forcats stuff?
+stringr stuff

@@ -1,6 +1,6 @@
 # Organizing your projects #
 
-- Reading: @WilsonGoodEnoughPractices2017; @NobleQuickGuideOrganizing2009
+- Reading: @NobleQuickGuideOrganizing2009
 
 - Good project organization will
     - Keep your project self-contained, making it easy to find files as needed
@@ -39,3 +39,8 @@ knitr::include_graphics(file.path('images', 'reproducibility', 'noble.png'))
     
 - R package infrastructure
     - Enables one-liner to load the utility functions in `R`: `devtools::load_all('..')`
+
+
+## RStudio Projects ##
+
+*[todo]*

@@ -1,0 +1,24 @@
+# Managing and Publishing Data #
+
+- reading: @WilkinsonFAIRGuidingPrinciples2016
+    - *[unethical open data - endangered species]*
+    - Tulloch et al.
+    - <https://datajustice.github.io/report/>
+    - <NicolConsentInsufficientData2019>
+    - Emil O.W. Kierkegaard
+        - OkCupid data scrape: <https://retractionwatch.com/2016/05/16/publicly-available-data-on-thousands-of-okcupid-users-pulled-over-copyright-claim/>
+        - Kierkegaard is a negative role model in other respects:  <https://rationalwiki.org/wiki/Emil_Kirkegaard>
+
+
+
+- FAIR principles (Wilkinson et al)
+
+- codebooks
+    - Stanford Open Policing codebook as example: <https://github.com/stanford-policylab/opp/blob/master/data_readme.md>
+    - Some general guidelines: <https://afit-r.github.io/codebook>
+
+- data management plans
+    - UCM Library: <https://library.ucmerced.edu/research/researchers/research-data-management/data-management-plans>
+    - UCM IT support: <https://it.ucmerced.edu/content/research-data-management-consultation-service>
+    - NSF examples: <https://libraries.ucsd.edu/research-and-collections/data-curation/dmp-samples.html>
+

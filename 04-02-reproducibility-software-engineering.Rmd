@@ -1,6 +1,6 @@
 # Reproducibility and Software Engineering #
 
-- Recommended viewing:  @McElreathScienceAmateurSoftware2020
+- Recommended:  @McElreathScienceAmateurSoftware2020; @PostolovskiYourCodeReview; @WilsonGoodEnoughPractices2017
 
 - The reproducibility side of the replication crisis suggests that academic science has a reproducibility problem
 - But software engineering doesn't
@@ -8,23 +8,19 @@
 
 ## What can we learn from software engineering? ##
 
-- develop in a clean workspace
-    - restart and rerun often
+- Things we've already talked about
+    - develop in a clean workspace
+        - restart and rerun often
+    - version control
 
-- version control
+- Things we'll talk about in this section of the course
+    - code review
+    - the life-changing magic of tidying up (your files)
+    - documenting code and data
 
-- the life-changing magic of tidying up (your files)
-    - @WilsonBestPracticesScientific2014; @WilsonGoodEnoughPractices2017; @NobleQuickGuideOrganizing2009
-    - my project template: <https://github.com/dhicks/project_template>
-
-- documenting code (and data)
-    - self-documenting code: <https://dev.to/woubuc/self-documenting-is-a-myth-and-how-to-make-your-code-self-documenting-3h2n>
-
-- **code review**
-
-- later: automation, CI
-
-- maybe also: unit testing
+- Things we'll talk about later, time permitting
+    - `make` and continuous integration for automating reproducibility
+    - unit testing for validating code
 
 
 ## A code review checklist ##

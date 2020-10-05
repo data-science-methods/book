@@ -17,10 +17,18 @@
 - Received the most attention in the wake of a high-profile effort to replicate a collection of high-profile psychology studies [@OpenScienceCollaborationEstimatingReproducibilityPsychological2015]
     - But it's been simmering for a long time [@IoannidisWhyMostPublished2005; @MeehlTheoryTestingPsychologyPhysics1967]
 
-- Beyond academia, 
-    - In my experience most members of the general public don't pay attention to it
+- In psychology
+    - Has stimulated a move towards preregistered studies, open science, and lots of papers reflecting on psychological methods
+    - Open science movement: @NosekPromotingOpenResearch2015; @MunafoManifestoReproducibleScience2017
+
+```{r, echo = FALSE, out.width = '60%', fig.cap = "As part of the open science movement, some journals have added badges to journal articles indicating open data, open code, etc."}
+knitr::include_graphics(file.path('images', 'reproducibility', 'badges.png'))
+```
+
+- Beyond academia
+    - In my experience most members of the general public aren't aware of it
     - Even scientists in non-experimental fields (e.g., cultural anthropologists) have forgotten
-    - But it has been used in policy settings to cast doubt on environmental epidemiology [@AschwandenThereNoSuch2017; @HicksCommentSubmittedDaniel2020]
+    - But it has been used in policy settings to manufacture doubt about environmental epidemiology [@AschwandenThereNoSuch2017; @HicksCommentSubmittedDaniel2020]
 
 
 ## Terminology ##
@@ -50,11 +58,16 @@ Table: The distinction between replicability, reproducibility, and robustness ca
 
 - "Numerically identical" is not vague
     - (At least, up to a tolerance threshold, and with the proviso that the computers are working correctly)
+    
+- Problem-solution mismatch
+    - The replication crisis was spurred by high-profile *replication* failures
+    - But open science is about promoting *reproducibility* [@HicksCommentSubmittedDaniel2020]
+    - Connection between reproducibility and replication is generally quite thin
 
 
 ## Epistemic Value of Reproducibility ##
 
-Reproducibility is a *necessary* condition for computational research, but has low *evidentiary value*. 
+Reproducibility is a *necessary* condition for computational research, but has *low evidentiary value*. 
 
 - Necessary condition:  If we can't run your code on your data and get the same output, something has gone seriously wrong. 
 
@@ -69,20 +82,14 @@ Reproducibility is a *necessary* condition for computational research, but has l
 | Whether your analyses are appropriate |
 | Whether your code runs the analysis that you think it does |
 | Whether you p-hacked your analysis [@SimmonsFalsePositivePsychology2011] |
-| Whether your interpretation of the analysis output is reasonable |
+| How to interpret your analysis output |
+| How to characterize your intervention and endpoint [@FeestWhyReplicationOverrated2019]
 | |
 
 Table: Things reproducibility doesn't tell us
 
 
-# Open Science ≠ Reproducible #
-
-- Open science movement: @NosekPromotingOpenResearch2015; @MunafoManifestoReproducibleScience2017
-
-```{r, echo = FALSE, out.width = '60%', fig.cap = "As part of the open science movement, some journals have added badges to journal articles indicating open data, open code, etc."}
-knitr::include_graphics(file.path('images', 'reproducibility', 'badges.png'))
-```
-
+## Open Science ≠ Reproducible ##
 
 - @ObelsAnalysisOpenData2020
     - Reproducibility check of 62 pre-registered studies in a Center for Open Science database
