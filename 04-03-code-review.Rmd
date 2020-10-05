@@ -2,6 +2,8 @@
 
 - We'll review the code for @ColomboIntellectuallyHumblePrejudiced2020
     - Data and code available at <https://osf.io/k5qmw/>
+    
+*[missing values; error handling]*
 
 - I find a lot of problems
     - But don't read this as criticizing the authors
