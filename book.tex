@@ -119,7 +119,7 @@
 
 \title{Data Science Methods for Cognitive Science}
 \author{Dan Hicks, \href{mailto:hicks.daniel.j@gmail.com}{\nolinkurl{hicks.daniel.j@gmail.com}}}
-\date{Fri Oct 2 19:18:29 2020}
+\date{Mon Oct 5 18:01:17 2020}
 
 \begin{document}
 \maketitle
@@ -1072,7 +1072,7 @@ The lab for this section can be found at \url{https://github.com/data-science-me
     Cheatsheet: \url{https://raw.githubusercontent.com/rstudio/cheatsheets/master/rstudio-ide.pdf}
   \end{itemize}
 \item
-  \textbf{If you're already familiar with the basics of R}, I recommend spending some time with Wickham (\protect\hyperlink{ref-WickhamAdvanced2014}{2014}).
+  \textbf{If you're already familiar with the basics of R}, I recommend spending some time with Wickham (\protect\hyperlink{ref-WickhamAdvanced2014}{2014}\protect\hyperlink{ref-WickhamAdvanced2014}{b}).
 \end{itemize}
 
 \hypertarget{lets-plot-a-thing}{%
@@ -1370,7 +1370,7 @@ Like 99\% of the time you create a data frame by loading data or manipulating an
 
 \begin{itemize}
 \item
-  Recommended reading: Chambers (\protect\hyperlink{ref-ChambersObjectOrientedProgrammingFunctional2014}{2014}); parts II and III of Wickham (\protect\hyperlink{ref-WickhamAdvanced2014}{2014})
+  Recommended reading: Chambers (\protect\hyperlink{ref-ChambersObjectOrientedProgrammingFunctional2014}{2014}); parts II and III of Wickham (\protect\hyperlink{ref-WickhamAdvanced2014}{2014}\protect\hyperlink{ref-WickhamAdvanced2014}{b})
 \item
   Programming paradigms
 
@@ -4026,7 +4026,8 @@ To facilitate some later steps, I filtered the datasets we'll be using to \emph{
 \end{Shaded}
 
 \begin{verbatim}
-## Parsed with column specification:
+## 
+## -- Column specification ----------------------------------------------------------------------------
 ## cols(
 ##   name = col_character(),
 ##   total_enrollment = col_double(),
@@ -4044,7 +4045,8 @@ To facilitate some later steps, I filtered the datasets we'll be using to \emph{
 \end{Shaded}
 
 \begin{verbatim}
-## Parsed with column specification:
+## 
+## -- Column specification ----------------------------------------------------------------------------
 ## cols(
 ##   name = col_character(),
 ##   state = col_character(),
@@ -5364,16 +5366,39 @@ Some of the plots include alternative layers, mostly geoms, to illustrate how di
     But it's been simmering for a long time (Ioannidis \protect\hyperlink{ref-IoannidisWhyMostPublished2005}{2005}; Meehl \protect\hyperlink{ref-MeehlTheoryTestingPsychologyPhysics1967}{1967})
   \end{itemize}
 \item
-  Beyond academia,
+  In psychology
 
   \begin{itemize}
   \tightlist
   \item
-    In my experience most members of the general public don't pay attention to it
+    Has stimulated a move towards preregistered studies, open science, and lots of papers reflecting on psychological methods
+  \item
+    Open science movement: Nosek et al. (\protect\hyperlink{ref-NosekPromotingOpenResearch2015}{2015}); Munafò et al. (\protect\hyperlink{ref-MunafoManifestoReproducibleScience2017}{2017})
+  \end{itemize}
+\end{itemize}
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.6\linewidth]{images/reproducibility/badges} 
+
+}
+
+\caption{As part of the open science movement, some journals have added badges to journal articles indicating open data, open code, etc.}\label{fig:unnamed-chunk-111}
+\end{figure}
+
+\begin{itemize}
+\tightlist
+\item
+  Beyond academia
+
+  \begin{itemize}
+  \tightlist
+  \item
+    In my experience most members of the general public aren't aware of it
   \item
     Even scientists in non-experimental fields (e.g., cultural anthropologists) have forgotten
   \item
-    But it has been used in policy settings to cast doubt on environmental epidemiology (Aschwanden \protect\hyperlink{ref-AschwandenThereNoSuch2017}{2017}; Hicks \protect\hyperlink{ref-HicksCommentSubmittedDaniel2020}{2020}\protect\hyperlink{ref-HicksCommentSubmittedDaniel2020}{b})
+    But it has been used in policy settings to manufacture doubt about environmental epidemiology (Aschwanden \protect\hyperlink{ref-AschwandenThereNoSuch2017}{2017}; Hicks \protect\hyperlink{ref-HicksCommentSubmittedDaniel2020}{2020}\protect\hyperlink{ref-HicksCommentSubmittedDaniel2020}{b})
   \end{itemize}
 \end{itemize}
 
@@ -5437,12 +5462,24 @@ robustness & Y & & similar results\tabularnewline
   \item
     (At least, up to a tolerance threshold, and with the proviso that the computers are working correctly)
   \end{itemize}
+\item
+  Problem-solution mismatch
+
+  \begin{itemize}
+  \tightlist
+  \item
+    The replication crisis was spurred by high-profile \emph{replication} failures
+  \item
+    But open science is about promoting \emph{reproducibility} (Hicks \protect\hyperlink{ref-HicksCommentSubmittedDaniel2020}{2020}\protect\hyperlink{ref-HicksCommentSubmittedDaniel2020}{b})
+  \item
+    Connection between reproducibility and replication is generally quite thin
+  \end{itemize}
 \end{itemize}
 
 \hypertarget{epistemic-value-of-reproducibility}{%
 \subsection{Epistemic Value of Reproducibility}\label{epistemic-value-of-reproducibility}}
 
-Reproducibility is a \emph{necessary} condition for computational research, but has low \emph{evidentiary value}.
+Reproducibility is a \emph{necessary} condition for computational research, but has \emph{low evidentiary value}.
 
 \begin{itemize}
 \item
@@ -5455,35 +5492,41 @@ Reproducibility is a \emph{necessary} condition for computational research, but 
 \caption{Things reproducibility doesn't tell us}\tabularnewline
 \toprule
 \endhead
-Whether your research question is reasonable\tabularnewline
-Whether your data can possibly answer your research question\tabularnewline
-Whether your data was fabricated\tabularnewline
-Whether your data was mismanaged\tabularnewline
-Whether your analyses are appropriate\tabularnewline
-Whether your code runs the analysis that you think it does\tabularnewline
-Whether you p-hacked your analysis (Simmons, Nelson, and Simonsohn \protect\hyperlink{ref-SimmonsFalsePositivePsychology2011}{2011})\tabularnewline
-Whether your interpretation of the analysis output is reasonable\tabularnewline
-\tabularnewline
+\begin{minipage}[t]{0.97\columnwidth}\raggedright
+Whether your research question is reasonable\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.97\columnwidth}\raggedright
+Whether your data can possibly answer your research question\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.97\columnwidth}\raggedright
+Whether your data was fabricated\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.97\columnwidth}\raggedright
+Whether your data was mismanaged\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.97\columnwidth}\raggedright
+Whether your analyses are appropriate\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.97\columnwidth}\raggedright
+Whether your code runs the analysis that you think it does\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.97\columnwidth}\raggedright
+Whether you p-hacked your analysis (Simmons, Nelson, and Simonsohn \protect\hyperlink{ref-SimmonsFalsePositivePsychology2011}{2011})\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.97\columnwidth}\raggedright
+How to interpret your analysis output\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.97\columnwidth}\raggedright
+How to characterize your intervention and endpoint (Feest \protect\hyperlink{ref-FeestWhyReplicationOverrated2019}{2019})\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.97\columnwidth}\raggedright
+\strut
+\end{minipage}\tabularnewline
 \bottomrule
 \end{longtable}
 
 \hypertarget{open-science-reproducible}{%
-\section{Open Science ≠ Reproducible}\label{open-science-reproducible}}
-
-\begin{itemize}
-\tightlist
-\item
-  Open science movement: Nosek et al. (\protect\hyperlink{ref-NosekPromotingOpenResearch2015}{2015}); Munafò et al. (\protect\hyperlink{ref-MunafoManifestoReproducibleScience2017}{2017})
-\end{itemize}
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.6\linewidth]{images/reproducibility/badges} 
-
-}
-
-\caption{As part of the open science movement, some journals have added badges to journal articles indicating open data, open code, etc.}\label{fig:unnamed-chunk-111}
-\end{figure}
+\subsection{Open Science ≠ Reproducible}\label{open-science-reproducible}}
 
 \begin{itemize}
 \tightlist
@@ -5515,7 +5558,9 @@ Whether your interpretation of the analysis output is reasonable\tabularnewline
 
 \begin{itemize}
 \item
-  Recommended viewing: McElreath (\protect\hyperlink{ref-McElreathScienceAmateurSoftware2020}{2020})
+  Reading: Postolovski (\protect\hyperlink{ref-PostolovskiYourCodeReview2020}{2020}); Wilson et al. (\protect\hyperlink{ref-WilsonGoodEnoughPractices2017}{2017}); Buckens (\protect\hyperlink{ref-BuckensSelfdocumentingMythHow2019}{2019})
+\item
+  Recommended video: McElreath (\protect\hyperlink{ref-McElreathScienceAmateurSoftware2020}{2020})
 \item
   The reproducibility side of the replication crisis suggests that academic science has a reproducibility problem
 \item
@@ -5526,80 +5571,115 @@ Whether your interpretation of the analysis output is reasonable\tabularnewline
 \subsection{What can we learn from software engineering?}\label{what-can-we-learn-from-software-engineering}}
 
 \begin{itemize}
+\tightlist
 \item
-  develop in a clean workspace
+  Things we've already talked about
 
   \begin{itemize}
   \tightlist
   \item
-    restart and rerun often
+    develop in a clean workspace
+
+    \begin{itemize}
+    \tightlist
+    \item
+      restart and rerun often
+    \end{itemize}
+  \item
+    version control
   \end{itemize}
 \item
-  version control
-\item
-  the life-changing magic of tidying up (your files)
+  Things we'll talk about in this section of the course
 
   \begin{itemize}
   \tightlist
   \item
-    Wilson et al. (\protect\hyperlink{ref-WilsonBestPracticesScientific2014}{2014}); Wilson et al. (\protect\hyperlink{ref-WilsonGoodEnoughPractices2017}{2017}); Noble (\protect\hyperlink{ref-NobleQuickGuideOrganizing2009}{2009})
+    using a style guide and linter
   \item
-    my project template: \url{https://github.com/dhicks/project_template}
+    code review
+  \item
+    the life-changing magic of tidying up (your files)
+  \item
+    documenting code and data
   \end{itemize}
 \item
-  documenting code (and data)
+  Things we'll talk about later, time permitting
 
   \begin{itemize}
   \tightlist
   \item
-    self-documenting code: \url{https://dev.to/woubuc/self-documenting-is-a-myth-and-how-to-make-your-code-self-documenting-3h2n}
+    \texttt{make} and continuous integration for automating reproducibility
+  \item
+    unit testing for validating code
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{code-style}{%
+\subsection{Code style}\label{code-style}}
+
+\begin{itemize}
+\item
+  In written language, conventions for punctuation, capitalization aid comprehension by indicating structure
+\item
+  Style guides do the same thing for code
+
+  \begin{itemize}
+  \tightlist
+  \item
+    In-line spacing makes it easier to pick out distinguish functions, operators, and variables in a line
+  \item
+    Returns distinguish arguments in a function call
+  \item
+    Indentation corresponds to structure of complex expressions
+  \item
+    Common conventions for naming, assignment reduce cognitive load
   \end{itemize}
 \item
-  \textbf{code review}
+  Tidyverse style guide: \url{https://style.tidyverse.org/}
 \item
-  later: automation, CI
-\item
-  maybe also: unit testing
+  \texttt{linr}: \url{https://cran.r-project.org/web/packages/lintr/index.html}
 \end{itemize}
 
 \hypertarget{a-code-review-checklist}{%
 \subsection{A code review checklist}\label{a-code-review-checklist}}
 
-Postolovski (\protect\hyperlink{ref-PostolovskiYourCodeReview}{n.d.})
+Postolovski (\protect\hyperlink{ref-PostolovskiYourCodeReview2020}{2020})
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \item
-  Readability / understandability
+  \textbf{Readability / understandability}
 
   \begin{itemize}
   \tightlist
   \item
-    Follows a \href{https://style.tidyverse.org/}{style guide}
+    \href{https://style.tidyverse.org/files.html}{File naming}
   \item
-    Or at least uses consistent style
+    Follows a \href{https://style.tidyverse.org/}{style guide}
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Or at least uses consistent style
+    \end{itemize}
   \item
     Whitespace, whitespace, whitespace
   \item
     Meaningful names / \href{https://dev.to/woubuc/self-documenting-is-a-myth-and-how-to-make-your-code-self-documenting-3h2n}{self-documenting code}
-  \item
-    \href{https://github.com/dhicks/project_template}{File naming}
-  \item
-    Prefactoring for straightforward logic \url{https://www.youtube.com/watch?v=7oyiPBjLAWY}
   \end{itemize}
 \item
-  Maintainability
+  \textbf{Maintainability}
 
   \begin{itemize}
   \tightlist
   \item
     \href{https://en.wikipedia.org/wiki/Don\%27t_repeat_yourself}{DRY}
   \item
-    Hard-coded configuration
+    Avoid hard-coded configuration
   \item
-    Strong assumptions about structure and content of inputs
+    Check strong assumptions about structure and content of inputs
   \item
-    Uses deprecated or removed features
+    Avoid deprecated or removed features
   \end{itemize}
 \item
   Security
@@ -5642,7 +5722,7 @@ Postolovski (\protect\hyperlink{ref-PostolovskiYourCodeReview}{n.d.})
     \end{itemize}
   \end{itemize}
 \item
-  Documentation
+  \textbf{Documentation}
 
   \begin{itemize}
   \tightlist
@@ -5650,6 +5730,14 @@ Postolovski (\protect\hyperlink{ref-PostolovskiYourCodeReview}{n.d.})
     Scripts: Section markers, signposting of what's happening and why
   \item
     Functions: Assumptions about inputs, explanation of output
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Consider using \texttt{roxygen2} + R's package infrastructure
+    \item
+      \url{https://r-pkgs.org/man.html\#man-functions}
+    \end{itemize}
   \item
     Data: Provenance, date and time retrieved, codebook
   \item
@@ -5666,12 +5754,22 @@ Postolovski (\protect\hyperlink{ref-PostolovskiYourCodeReview}{n.d.})
     \href{https://en.wikipedia.org/wiki/Don\%27t_repeat_yourself}{DRY}
   \end{itemize}
 \item
-  Reliability
+  \textbf{Reliability}
 
   \begin{itemize}
   \tightlist
   \item
-    What happens if packages aren't installed (don't use \texttt{require()}!), data can't be found, data has been altered or mangled, a function returns missing or zero-length values, one script in the middle of the pipeline is altered
+    What happens if packages aren't installed (don't use \texttt{require()}!)?
+  \item
+    data can't be found?
+  \item
+    data has missing values or errors?
+  \item
+    data has been altered or corrupted?
+  \item
+    a function returns missing or zero-length values?
+  \item
+    one script in the middle of the pipeline is altered?
   \end{itemize}
 \item
   Scalability
@@ -5696,7 +5794,7 @@ Postolovski (\protect\hyperlink{ref-PostolovskiYourCodeReview}{n.d.})
     \texttt{assertthat} for assertions; \texttt{testthat} for unit tests
   \end{itemize}
 \item
-  Fit for purpose
+  \textbf{Fit for purpose}
 \item
   Notice what's missing
 
@@ -5722,6 +5820,12 @@ Postolovski (\protect\hyperlink{ref-PostolovskiYourCodeReview}{n.d.})
   \item
     Data and code available at \url{https://osf.io/k5qmw/}
   \end{itemize}
+\end{itemize}
+
+\emph{{[}missing values; error handling{]}}
+
+\begin{itemize}
+\tightlist
 \item
   I find a lot of problems
 
@@ -6029,7 +6133,7 @@ Postolovski (\protect\hyperlink{ref-PostolovskiYourCodeReview}{n.d.})
 
 \begin{itemize}
 \item
-  Reading: Wilson et al. (\protect\hyperlink{ref-WilsonGoodEnoughPractices2017}{2017}); Noble (\protect\hyperlink{ref-NobleQuickGuideOrganizing2009}{2009})
+  Reading: Noble (\protect\hyperlink{ref-NobleQuickGuideOrganizing2009}{2009})
 \item
   Good project organization will
 
@@ -6117,6 +6221,87 @@ Postolovski (\protect\hyperlink{ref-PostolovskiYourCodeReview}{n.d.})
   \end{itemize}
 \end{itemize}
 
+\hypertarget{rstudio-projects}{%
+\subsection{RStudio Projects}\label{rstudio-projects}}
+
+\emph{{[}todo{]}}
+
+\hypertarget{managing-and-publishing-data}{%
+\section{Managing and Publishing Data}\label{managing-and-publishing-data}}
+
+\begin{itemize}
+\item
+  reading: Wilkinson et al. (\protect\hyperlink{ref-WilkinsonFAIRGuidingPrinciples2016}{2016})
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \emph{{[}unethical open data - endangered species{]}}
+  \item
+    Tulloch et al.
+  \item
+    \url{https://datajustice.github.io/report/}
+  \item
+  \item
+    Emil O.W. Kierkegaard
+
+    \begin{itemize}
+    \tightlist
+    \item
+      OkCupid data scrape: \url{https://retractionwatch.com/2016/05/16/publicly-available-data-on-thousands-of-okcupid-users-pulled-over-copyright-claim/}
+    \item
+      Kierkegaard is a negative role model in other respects: \url{https://rationalwiki.org/wiki/Emil_Kirkegaard}
+    \end{itemize}
+  \end{itemize}
+\item
+  FAIR principles (Wilkinson et al)
+\item
+  codebooks
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Stanford Open Policing codebook as example: \url{https://github.com/stanford-policylab/opp/blob/master/data_readme.md}
+  \item
+    Some general guidelines: \url{https://afit-r.github.io/codebook}
+  \end{itemize}
+\item
+  data management plans
+
+  \begin{itemize}
+  \tightlist
+  \item
+    UCM Library: \url{https://library.ucmerced.edu/research/researchers/research-data-management/data-management-plans}
+  \item
+    UCM IT support: \url{https://it.ucmerced.edu/content/research-data-management-consultation-service}
+  \item
+    NSF examples: \url{https://libraries.ucsd.edu/research-and-collections/data-curation/dmp-samples.html}
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{some-data-cleaning-tools}{%
+\section{Some Data-Cleaning Tools}\label{some-data-cleaning-tools}}
+
+Wickham (\protect\hyperlink{ref-WickhamTidyData2014}{2014}\protect\hyperlink{ref-WickhamTidyData2014}{a})
+
+\begin{itemize}
+\tightlist
+\item
+  concept of tidy data
+
+  \begin{itemize}
+  \tightlist
+  \item
+    work through examples from Wickham's ``Tidy Data''
+  \end{itemize}
+\end{itemize}
+
+Excel dates
+separate()
+pivot\_*()
+forcats stuff?
+stringr stuff
+
 \hypertarget{part-cleaning-data}{%
 \part{Cleaning Data}\label{part-cleaning-data}}
 
@@ -6142,6 +6327,9 @@ Boehm, B. W. 1988. ``A Spiral Model of Software Development and Enhancement.'' \
 
 \leavevmode\hypertarget{ref-BogenSavingPhenomena1988}{}%
 Bogen, James, and James Woodward. 1988. ``Saving the Phenomena.'' \emph{The Philosophical Review} 97 (3): 303--52. \url{http://www.jstor.org/stable/2185445}.
+
+\leavevmode\hypertarget{ref-BuckensSelfdocumentingMythHow2019}{}%
+Buckens, Wouter. 2019. ``Self-Documenting Is a Myth, and How to Make Your Code Self-Documenting.'' Woubuc. August 3, 2019. \url{https://blog.woubuc.be/post/self-documenting-code-is-a-myth/}.
 
 \leavevmode\hypertarget{ref-CassidyReinhartRogoffControversy}{}%
 Cassidy, John. n.d. ``The Reinhart and Rogoff Controversy: A Summing Up.'' The New Yorker. Accessed September 27, 2020. \url{https://www.newyorker.com/news/john-cassidy/the-reinhart-and-rogoff-controversy-a-summing-up}.
@@ -6257,8 +6445,8 @@ Perkel, Jeffrey M. 2018. ``Why Jupyter Is Data Scientists' Computational Noteboo
 \leavevmode\hypertarget{ref-PiersonLargescaleAnalysisRacial2020}{}%
 Pierson, Emma, Camelia Simoiu, Jan Overgoor, Sam Corbett-Davies, Daniel Jenson, Amy Shoemaker, Vignesh Ramachandran, et al. 2020. ``A Large-Scale Analysis of Racial Disparities in Police Stops Across the United States.'' \emph{Nature Human Behaviour}, May, 1--10. \url{https://doi.org/10.1038/s41562-020-0858-1}.
 
-\leavevmode\hypertarget{ref-PostolovskiYourCodeReview}{}%
-Postolovski, Tash. n.d. ``Your Code Review Checklist: 14 Things to Include.'' Accessed September 27, 2020. \url{https://www.codementor.io/blog/code-review-checklist-76q7ovkaqj}.
+\leavevmode\hypertarget{ref-PostolovskiYourCodeReview2020}{}%
+Postolovski, Tash. 2020. ``Your Code Review Checklist: 14 Things to Include.'' July 6, 2020. \url{https://www.codementor.io/blog/code-review-checklist-76q7ovkaqj}.
 
 \leavevmode\hypertarget{ref-ReinhartRogoffGrowth2019}{}%
 \emph{Reinhart \& Rogoff - Growth in a Time of Debt - EXERCISE!} 2019. \url{https://www.youtube.com/watch?v=ItGMz0ERvcw}.
@@ -6308,17 +6496,17 @@ Whitmore, Jonathan. 2015. ``Jupyter Notebook Best Practices for Data Science.'' 
 \leavevmode\hypertarget{ref-WickhamLayeredGrammarGraphics2010}{}%
 Wickham, Hadley. 2010. ``A Layered Grammar of Graphics.'' \emph{Journal of Computational and Graphical Statistics} 19 (1): 3--28. \url{https://doi.org/10.1198/jcgs.2009.07098}.
 
+\leavevmode\hypertarget{ref-WickhamTidyData2014}{}%
+---------. 2014a. ``Tidy Data.'' \emph{Journal of Statistical Software} 59 (10). \url{https://doi.org/10.18637/jss.v059.i10}.
+
 \leavevmode\hypertarget{ref-WickhamAdvanced2014}{}%
----------. 2014. \emph{Advanced R}. CRC Press. \url{https://adv-r.hadley.nz}.
+---------. 2014b. \emph{Advanced R}. CRC Press. \url{https://adv-r.hadley.nz}.
 
 \leavevmode\hypertarget{ref-WilkinsonGrammarGraphics1999}{}%
 Wilkinson, Leland. 1999. \emph{The Grammar of Graphics}. Statistics and Computing. New York, NY: Springer New York. \url{https://doi.org/10.1007/978-1-4757-3100-2}.
 
 \leavevmode\hypertarget{ref-WilkinsonFAIRGuidingPrinciples2016}{}%
 Wilkinson, Mark D., Michel Dumontier, IJsbrand Jan Aalbersberg, Gabrielle Appleton, Myles Axton, Arie Baak, Niklas Blomberg, et al. 2016. ``The FAIR Guiding Principles for Scientific Data Management and Stewardship.'' \emph{Scientific Data} 3 (1, 1): 1--9. \url{https://doi.org/10.1038/sdata.2016.18}.
-
-\leavevmode\hypertarget{ref-WilsonBestPracticesScientific2014}{}%
-Wilson, Greg, D. A. Aruliah, C. Titus Brown, Neil P. Chue Hong, Matt Davis, Richard T. Guy, Steven H. D. Haddock, et al. 2014. ``Best Practices for Scientific Computing.'' \emph{PLoS Biol} 12 (1): e1001745. \url{https://doi.org/10.1371/journal.pbio.1001745}.
 
 \leavevmode\hypertarget{ref-WilsonGoodEnoughPractices2017}{}%
 Wilson, Greg, Jennifer Bryan, Karen Cranston, Justin Kitzes, Lex Nederbragt, and Tracy K. Teal. 2017. ``Good Enough Practices in Scientific Computing.'' \emph{PLOS Computational Biology} 13 (6): e1005510. \url{https://doi.org/10.1371/journal.pcbi.1005510}.
