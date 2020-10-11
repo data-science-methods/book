@@ -37,7 +37,7 @@
 
 - Tidyverse style guide:  <https://style.tidyverse.org/>
 
-- `linr`: <https://cran.r-project.org/web/packages/lintr/index.html>
+- `lintr`: <https://cran.r-project.org/web/packages/lintr/index.html>
 
 
 ## A code review checklist ##
@@ -84,12 +84,13 @@
     - [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself)
 
 7. **Reliability**
-    - What happens if packages aren't installed (don't use `require()`!)?
-    - data can't be found?
-    - data has missing values or errors? 
-    - data has been altered or corrupted? 
-    - a function returns missing or zero-length values? 
-    - one script in the middle of the pipeline is altered? 
+    - What happens if packages aren't installed?
+        - Reminder: `require()` doesn't stop if the package is missing
+    - Data can't be found?
+    - Data has missing values or errors? 
+    - Data has been altered or corrupted? 
+    - A function returns a missing or zero-length value? 
+    - One script in the middle of the pipeline is altered? 
     
 8. Scalability
 

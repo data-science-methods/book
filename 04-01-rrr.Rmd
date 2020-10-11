@@ -4,8 +4,8 @@
 - Highly recommended:  @FeestWhyReplicationOverrated2019, @LeonelliRethinkingReproducibilityCriterion2018
 
 - Some data management disasters
-    - @ArrayErrors2011; @VideoKeithBaggerly
-    - @HerndonDoesHighPublic2014; but you can just read @BaileyReinhartRogoffErrorHow, @CassidyReinhartRogoffControversy, watch @ReinhartRogoffGrowth2019
+    - @ArrayErrors2011, @VideoKeithBaggerly
+    - @HerndonDoesHighPublic2014, but you can just read @BaileyReinhartRogoffErrorHow, @CassidyReinhartRogoffControversy, and/or watch @ReinhartRogoffGrowth2019
     - @LaskowskiWhatWhenYou, @ViglioneAvalancheSpiderpaperRetractions2020, @PennisiProminentSpiderBiologist2020
     - @HowExcelMay2020
 
@@ -87,7 +87,6 @@ Reproducibility is a *necessary* condition for computational research, but has *
 | Whether you p-hacked your analysis [@SimmonsFalsePositivePsychology2011] |
 | How to interpret your analysis output |
 | How to characterize your intervention and endpoint [@FeestWhyReplicationOverrated2019]
-| |
 
 Table: Things reproducibility doesn't tell us
 

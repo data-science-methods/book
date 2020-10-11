@@ -3,15 +3,14 @@
 - We'll review the code for @ColomboIntellectuallyHumblePrejudiced2020
     - Data and code available at <https://osf.io/k5qmw/>
     
-*[missing values; error handling]*
-
 - I find a lot of problems
     - But don't read this as criticizing the authors
     - These types of problems are widespread in computational science
     - Because researchers aren't trained to look for, prevent, and correct these problems
+    - **Take home message: Do code review as part of your research and it won't be this painful**
     
 
-## A short checklist ##
+## A shortened checklist ##
 
 0. What happens if you just run the script? 
 1. Readability
@@ -61,10 +60,14 @@
         - Contrast very visible break on 199
     - What are these tests, plots, and why are we doing them? 
     - Contrast with the factor analysis starting on line 79
+    - Lines 116-17: Did they solve the "this is bad"? 
 
 4. Reliability
+    - A quick check with `skimr` and/or `visdat` for study 1 indicates lots of missing values for a few variables
+        - maybe because respondents rated different numbers of groups (why?)
+        - also some sporadic missingness
+        - doesn't seem like this was handled explicitly
     - No checks to validate data
-
 
 ## `study2` ##
 
@@ -107,15 +110,3 @@
 - Same issues as the other script files
 - Confirm that the input for the meta-analysis isn't directly generated from the study scripts
     
-
-<!--
-- Better: <https://osf.io/he5za/>; @CollingRegisteredReplicationReport2020
-    - Although: 
-    - Binder stalled out my first attempt
-    - The manuscript file can't be knit
-    - Running the analysis requires finding and running a series of scripts
-    - Some of the scripts have warnings and errors, and it's not clear if those are problems
--->
-
-    
-- *[todo]* lab/exercise: spend 90 minutes on EDA of the Silberzahn et al. red card data, then code review

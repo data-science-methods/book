@@ -1,6 +1,7 @@
 # Organizing your projects #
 
 - Reading: @NobleQuickGuideOrganizing2009
+- See also: <https://support.rstudio.com/hc/en-us/articles/200526207-Using-Projects>
 
 - Good project organization will
     - Keep your project self-contained, making it easy to find files as needed
@@ -41,6 +42,8 @@ knitr::include_graphics(file.path('images', 'reproducibility', 'noble.png'))
     - Enables one-liner to load the utility functions in `R`: `devtools::load_all('..')`
 
 
-## RStudio Projects ##
+## A Note on Paths ##
 
-*[todo]*
+- Windows and Unix-based systems write paths differently
+- Use `file.path()` or the `here` package to construct paths
+
