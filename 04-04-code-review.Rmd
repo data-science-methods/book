@@ -1,4 +1,78 @@
-# An Example Code Review #
+# Code review #
+
+## A code review checklist ##
+
+@PostolovskiYourCodeReview2020
+
+1. **Readability / understandability**
+    - [File naming](https://style.tidyverse.org/files.html)
+    - Follows a [style guide](https://style.tidyverse.org/)
+        - Or at least uses consistent style
+    - Whitespace, whitespace, whitespace
+    - Meaningful names / [self-documenting code](https://dev.to/woubuc/self-documenting-is-a-myth-and-how-to-make-your-code-self-documenting-3h2n)
+    
+2. **Maintainability**
+    - [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself)
+    - Avoid hard-coded configuration
+    - Check strong assumptions about structure and content of inputs
+    - Avoid deprecated or removed features
+
+3. Security
+    - How are passwords for websites, APIs, and sensitive data handled? 
+    - Data validation
+    - Code validation (tests and assertions)
+
+4. Speed and Performance
+    - Performance for users
+        - `tictoc` for simple wall time checks
+        - Profiling for more thorough optimization
+    - Resource use
+        - Does this really need to be run on the MERCED cluster? 
+        - How much will this cost the lab/team if it's accidentally run 1,000 times?
+        - Cache raw returns from web scraping and API queries
+
+5. **Documentation**
+    - Scripts: Section markers, signposting of what's happening and why
+    - Functions: Assumptions about inputs, explanation of output
+        - Consider using `roxygen2` + R's package infrastructure
+        - <https://r-pkgs.org/man.html#man-functions>
+    - Data: Provenance, date and time retrieved, codebook
+    - Project: README, NEWS
+
+6. Reinventing the Wheel
+    - Is there a (well-maintained, checked) package for this? 
+    - [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself)
+
+7. **Reliability**
+    - What happens if packages aren't installed?
+        - Reminder: `require()` doesn't stop if the package is missing
+    - Data can't be found?
+    - Data has missing values or errors? 
+    - Data has been altered or corrupted? 
+    - A function returns a missing or zero-length value? 
+    - One script in the middle of the pipeline is altered? 
+    
+8. Scalability
+
+9. Reusability
+    - Can this bit of code be dropped into the lab's/team's next project? 
+
+10. In-house/lab/team style
+
+11. Test coverage and quality
+    - Unpopular opinion: For "bench data science," assertions often make more sense than unit tests
+    - `assertthat` for assertions; `testthat` for unit tests
+    
+12. **Fit for purpose**
+
+13. Notice what's missing
+    - Edge cases, unexpected inputs, error handling
+    
+14. Zoom out
+
+
+
+## An Example Code Review ##
 
 - We'll review the code for @ColomboIntellectuallyHumblePrejudiced2020
     - Data and code available at <https://osf.io/k5qmw/>
@@ -10,7 +84,7 @@
     - **Take home message: Do code review as part of your research and it won't be this painful**
     
 
-## A shortened checklist ##
+### A shortened checklist ###
 
 0. What happens if you just run the script? 
 1. Readability
@@ -18,7 +92,7 @@
 3. Documentation
 4. Reliability
 
-## Project organization ##
+### Project organization ###
 
 - No documentation
     - README, attribution
@@ -31,7 +105,7 @@
 - Are the inputs for the `meta` analysis the outputs from the studies? 
     - What happens if something changes in the study analyses? 
 
-## `study1` ##
+### `study1` ###
 
 0. Just run the script
     - Error on line 16
@@ -69,7 +143,7 @@
         - doesn't seem like this was handled explicitly
     - No checks to validate data
 
-## `study2` ##
+### `study2` ###
 
 0. Just run the script
     - Syntax error on line 282
@@ -82,7 +156,7 @@
         - These should be defined once, in a single R file called by the analysis scripts
         - Could even be a local package loaded using `usethis::load_all()` (<https://devtools.r-lib.org/reference/load_all.html>)
     
-## `study3` ##
+### `study3` ###
 
 0. Just run the script
     - Line 47: Missing dependency
@@ -105,7 +179,7 @@
         - Writing over `m6k` each time with a new regression model
         - Is `export()` appending the results to `export.xlsx`, or overwriting the file? 
 
-## `study4` and `meta` ##
+### `study4` and `meta` ###
 
 - Same issues as the other script files
 - Confirm that the input for the meta-analysis isn't directly generated from the study scripts
