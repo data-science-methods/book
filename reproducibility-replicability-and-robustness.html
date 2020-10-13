@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 15 Reproducibility, Replicability, and Robustness | Data Science Methods for Cognitive Science</title>
   <meta name="description" content="This document is a set of notes (and perhaps later a textbook) for a course on data science methods for graduate students in social and behavioral sciences." />
-  <meta name="generator" content="bookdown 0.20.6 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21.1 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 15 Reproducibility, Replicability, and Robustness | Data Science Methods for Cognitive Science" />
   <meta property="og:type" content="book" />
@@ -32,7 +32,7 @@
   
 <link rel="prev" href="intermediate-visualization-in-r.html"/>
 <link rel="next" href="reproducibility-and-software-engineering.html"/>
-<script src="libs/header-attrs-2.4.1/header-attrs.js"></script>
+<script src="libs/header-attrs-2.4.4/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -258,21 +258,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="16.1" data-path="reproducibility-and-software-engineering.html"><a href="reproducibility-and-software-engineering.html#what-can-we-learn-from-software-engineering"><i class="fa fa-check"></i><b>16.1</b> What can we learn from software engineering?</a></li>
 <li class="chapter" data-level="16.2" data-path="reproducibility-and-software-engineering.html"><a href="reproducibility-and-software-engineering.html#code-style"><i class="fa fa-check"></i><b>16.2</b> Code style</a></li>
-<li class="chapter" data-level="16.3" data-path="reproducibility-and-software-engineering.html"><a href="reproducibility-and-software-engineering.html#a-code-review-checklist"><i class="fa fa-check"></i><b>16.3</b> A code review checklist</a></li>
 </ul></li>
-<li class="chapter" data-level="17" data-path="an-example-code-review.html"><a href="an-example-code-review.html"><i class="fa fa-check"></i><b>17</b> An Example Code Review</a>
+<li class="chapter" data-level="17" data-path="organizing-your-projects.html"><a href="organizing-your-projects.html"><i class="fa fa-check"></i><b>17</b> Organizing your projects</a>
 <ul>
-<li class="chapter" data-level="17.1" data-path="an-example-code-review.html"><a href="an-example-code-review.html#a-short-checklist"><i class="fa fa-check"></i><b>17.1</b> A short checklist</a></li>
-<li class="chapter" data-level="17.2" data-path="an-example-code-review.html"><a href="an-example-code-review.html#project-organization"><i class="fa fa-check"></i><b>17.2</b> Project organization</a></li>
-<li class="chapter" data-level="17.3" data-path="an-example-code-review.html"><a href="an-example-code-review.html#study1"><i class="fa fa-check"></i><b>17.3</b> <code>study1</code></a></li>
-<li class="chapter" data-level="17.4" data-path="an-example-code-review.html"><a href="an-example-code-review.html#study2"><i class="fa fa-check"></i><b>17.4</b> <code>study2</code></a></li>
-<li class="chapter" data-level="17.5" data-path="an-example-code-review.html"><a href="an-example-code-review.html#study3"><i class="fa fa-check"></i><b>17.5</b> <code>study3</code></a></li>
-<li class="chapter" data-level="17.6" data-path="an-example-code-review.html"><a href="an-example-code-review.html#study4-and-meta"><i class="fa fa-check"></i><b>17.6</b> <code>study4</code> and <code>meta</code></a></li>
+<li class="chapter" data-level="17.1" data-path="organizing-your-projects.html"><a href="organizing-your-projects.html#two-templates"><i class="fa fa-check"></i><b>17.1</b> Two templates</a></li>
+<li class="chapter" data-level="17.2" data-path="organizing-your-projects.html"><a href="organizing-your-projects.html#a-note-on-paths"><i class="fa fa-check"></i><b>17.2</b> A Note on Paths</a></li>
 </ul></li>
-<li class="chapter" data-level="18" data-path="organizing-your-projects.html"><a href="organizing-your-projects.html"><i class="fa fa-check"></i><b>18</b> Organizing your projects</a>
+<li class="chapter" data-level="18" data-path="code-review.html"><a href="code-review.html"><i class="fa fa-check"></i><b>18</b> Code review</a>
 <ul>
-<li class="chapter" data-level="18.1" data-path="organizing-your-projects.html"><a href="organizing-your-projects.html#two-templates"><i class="fa fa-check"></i><b>18.1</b> Two templates</a></li>
-<li class="chapter" data-level="18.2" data-path="organizing-your-projects.html"><a href="organizing-your-projects.html#rstudio-projects"><i class="fa fa-check"></i><b>18.2</b> RStudio Projects</a></li>
+<li class="chapter" data-level="18.1" data-path="code-review.html"><a href="code-review.html#a-code-review-checklist"><i class="fa fa-check"></i><b>18.1</b> A code review checklist</a></li>
+<li class="chapter" data-level="18.2" data-path="code-review.html"><a href="code-review.html#an-example-code-review"><i class="fa fa-check"></i><b>18.2</b> An Example Code Review</a></li>
 </ul></li>
 <li class="chapter" data-level="19" data-path="managing-and-publishing-data.html"><a href="managing-and-publishing-data.html"><i class="fa fa-check"></i><b>19</b> Managing and Publishing Data</a></li>
 <li class="chapter" data-level="20" data-path="some-data-cleaning-tools.html"><a href="some-data-cleaning-tools.html"><i class="fa fa-check"></i><b>20</b> Some Data-Cleaning Tools</a></li>
@@ -306,8 +301,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>Highly recommended: <span class="citation">Feest (<a href="#ref-FeestWhyReplicationOverrated2019" role="doc-biblioref">2019</a>)</span>, <span class="citation">Leonelli (<a href="#ref-LeonelliRethinkingReproducibilityCriterion2018" role="doc-biblioref">2018</a>)</span></p></li>
 <li><p>Some data management disasters</p>
 <ul>
-<li><span class="citation">(<em>The Economist</em> <a href="#ref-ArrayErrors2011" role="doc-biblioref">2011</a>)</span>; <span class="citation">(“Video: Keith Baggerly, "When Is Reproducibility an Ethical Issue? Genomics, Personalized Medicine, and Human Error"” <a href="#ref-VideoKeithBaggerly" role="doc-biblioref">n.d.</a>)</span></li>
-<li><span class="citation">Herndon, Ash, and Pollin (<a href="#ref-HerndonDoesHighPublic2014" role="doc-biblioref">2014</a>)</span>; but you can just read <span class="citation">Bailey and Borwein (Jon) (<a href="#ref-BaileyReinhartRogoffErrorHow" role="doc-biblioref">n.d.</a>)</span>, <span class="citation">Cassidy (<a href="#ref-CassidyReinhartRogoffControversy" role="doc-biblioref">n.d.</a>)</span>, watch <span class="citation">(<em>Reinhart &amp; Rogoff - Growth in a Time of Debt - EXERCISE!</em> <a href="#ref-ReinhartRogoffGrowth2019" role="doc-biblioref">2019</a>)</span></li>
+<li><span class="citation">(<em>The Economist</em> <a href="#ref-ArrayErrors2011" role="doc-biblioref">2011</a>)</span>, <span class="citation">(“Video: Keith Baggerly, "When Is Reproducibility an Ethical Issue? Genomics, Personalized Medicine, and Human Error"” <a href="#ref-VideoKeithBaggerly" role="doc-biblioref">n.d.</a>)</span></li>
+<li><span class="citation">Herndon, Ash, and Pollin (<a href="#ref-HerndonDoesHighPublic2014" role="doc-biblioref">2014</a>)</span>, but you can just read <span class="citation">Bailey and Borwein (Jon) (<a href="#ref-BaileyReinhartRogoffErrorHow" role="doc-biblioref">n.d.</a>)</span>, <span class="citation">Cassidy (<a href="#ref-CassidyReinhartRogoffControversy" role="doc-biblioref">n.d.</a>)</span>, and/or watch <span class="citation">(<em>Reinhart &amp; Rogoff - Growth in a Time of Debt - EXERCISE!</em> <a href="#ref-ReinhartRogoffGrowth2019" role="doc-biblioref">2019</a>)</span></li>
 <li><span class="citation">Laskowski (<a href="#ref-LaskowskiWhatWhenYou" role="doc-biblioref">n.d.</a>)</span>, <span class="citation">Viglione (<a href="#ref-ViglioneAvalancheSpiderpaperRetractions2020" role="doc-biblioref">2020</a>)</span>, <span class="citation">Pennisi (<a href="#ref-PennisiProminentSpiderBiologist2020" role="doc-biblioref">2020</a>)</span></li>
 <li><span class="citation">(“How Excel May Have Caused Loss of 16,000 Covid Tests in England” <a href="#ref-HowExcelMay2020" role="doc-biblioref">n.d.</a>)</span></li>
 </ul></li>
@@ -450,9 +445,6 @@ Figure 15.1: As part of the open science movement, some journals have added badg
 </tr>
 <tr class="odd">
 <td align="left">How to characterize your intervention and endpoint <span class="citation">(Feest <a href="#ref-FeestWhyReplicationOverrated2019" role="doc-biblioref">2019</a>)</span></td>
-</tr>
-<tr class="even">
-<td align="left"></td>
 </tr>
 </tbody>
 </table>

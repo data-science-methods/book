@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 16 Reproducibility and Software Engineering | Data Science Methods for Cognitive Science</title>
   <meta name="description" content="This document is a set of notes (and perhaps later a textbook) for a course on data science methods for graduate students in social and behavioral sciences." />
-  <meta name="generator" content="bookdown 0.20.6 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21.1 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 16 Reproducibility and Software Engineering | Data Science Methods for Cognitive Science" />
   <meta property="og:type" content="book" />
@@ -31,8 +31,8 @@
   
   
 <link rel="prev" href="reproducibility-replicability-and-robustness.html"/>
-<link rel="next" href="an-example-code-review.html"/>
-<script src="libs/header-attrs-2.4.1/header-attrs.js"></script>
+<link rel="next" href="organizing-your-projects.html"/>
+<script src="libs/header-attrs-2.4.4/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -258,21 +258,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="16.1" data-path="reproducibility-and-software-engineering.html"><a href="reproducibility-and-software-engineering.html#what-can-we-learn-from-software-engineering"><i class="fa fa-check"></i><b>16.1</b> What can we learn from software engineering?</a></li>
 <li class="chapter" data-level="16.2" data-path="reproducibility-and-software-engineering.html"><a href="reproducibility-and-software-engineering.html#code-style"><i class="fa fa-check"></i><b>16.2</b> Code style</a></li>
-<li class="chapter" data-level="16.3" data-path="reproducibility-and-software-engineering.html"><a href="reproducibility-and-software-engineering.html#a-code-review-checklist"><i class="fa fa-check"></i><b>16.3</b> A code review checklist</a></li>
 </ul></li>
-<li class="chapter" data-level="17" data-path="an-example-code-review.html"><a href="an-example-code-review.html"><i class="fa fa-check"></i><b>17</b> An Example Code Review</a>
+<li class="chapter" data-level="17" data-path="organizing-your-projects.html"><a href="organizing-your-projects.html"><i class="fa fa-check"></i><b>17</b> Organizing your projects</a>
 <ul>
-<li class="chapter" data-level="17.1" data-path="an-example-code-review.html"><a href="an-example-code-review.html#a-short-checklist"><i class="fa fa-check"></i><b>17.1</b> A short checklist</a></li>
-<li class="chapter" data-level="17.2" data-path="an-example-code-review.html"><a href="an-example-code-review.html#project-organization"><i class="fa fa-check"></i><b>17.2</b> Project organization</a></li>
-<li class="chapter" data-level="17.3" data-path="an-example-code-review.html"><a href="an-example-code-review.html#study1"><i class="fa fa-check"></i><b>17.3</b> <code>study1</code></a></li>
-<li class="chapter" data-level="17.4" data-path="an-example-code-review.html"><a href="an-example-code-review.html#study2"><i class="fa fa-check"></i><b>17.4</b> <code>study2</code></a></li>
-<li class="chapter" data-level="17.5" data-path="an-example-code-review.html"><a href="an-example-code-review.html#study3"><i class="fa fa-check"></i><b>17.5</b> <code>study3</code></a></li>
-<li class="chapter" data-level="17.6" data-path="an-example-code-review.html"><a href="an-example-code-review.html#study4-and-meta"><i class="fa fa-check"></i><b>17.6</b> <code>study4</code> and <code>meta</code></a></li>
+<li class="chapter" data-level="17.1" data-path="organizing-your-projects.html"><a href="organizing-your-projects.html#two-templates"><i class="fa fa-check"></i><b>17.1</b> Two templates</a></li>
+<li class="chapter" data-level="17.2" data-path="organizing-your-projects.html"><a href="organizing-your-projects.html#a-note-on-paths"><i class="fa fa-check"></i><b>17.2</b> A Note on Paths</a></li>
 </ul></li>
-<li class="chapter" data-level="18" data-path="organizing-your-projects.html"><a href="organizing-your-projects.html"><i class="fa fa-check"></i><b>18</b> Organizing your projects</a>
+<li class="chapter" data-level="18" data-path="code-review.html"><a href="code-review.html"><i class="fa fa-check"></i><b>18</b> Code review</a>
 <ul>
-<li class="chapter" data-level="18.1" data-path="organizing-your-projects.html"><a href="organizing-your-projects.html#two-templates"><i class="fa fa-check"></i><b>18.1</b> Two templates</a></li>
-<li class="chapter" data-level="18.2" data-path="organizing-your-projects.html"><a href="organizing-your-projects.html#rstudio-projects"><i class="fa fa-check"></i><b>18.2</b> RStudio Projects</a></li>
+<li class="chapter" data-level="18.1" data-path="code-review.html"><a href="code-review.html#a-code-review-checklist"><i class="fa fa-check"></i><b>18.1</b> A code review checklist</a></li>
+<li class="chapter" data-level="18.2" data-path="code-review.html"><a href="code-review.html#an-example-code-review"><i class="fa fa-check"></i><b>18.2</b> An Example Code Review</a></li>
 </ul></li>
 <li class="chapter" data-level="19" data-path="managing-and-publishing-data.html"><a href="managing-and-publishing-data.html"><i class="fa fa-check"></i><b>19</b> Managing and Publishing Data</a></li>
 <li class="chapter" data-level="20" data-path="some-data-cleaning-tools.html"><a href="some-data-cleaning-tools.html"><i class="fa fa-check"></i><b>20</b> Some Data-Cleaning Tools</a></li>
@@ -321,8 +316,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Things we’ll talk about in this section of the course
 <ul>
 <li>using a style guide and linter</li>
-<li>code review</li>
 <li>the life-changing magic of tidying up (your files)</li>
+<li>code review</li>
 <li>documenting code and data</li>
 </ul></li>
 <li>Things we’ll talk about later, time permitting
@@ -335,8 +330,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="code-style" class="section level2" number="16.2">
 <h2><span class="header-section-number">16.2</span> Code style</h2>
 <ul>
-<li><p>In written language, conventions for punctuation, capitalization aid comprehension by indicating structure</p></li>
-<li><p>Style guides do the same thing for code</p>
+<li><p>iNéwritteNélanguagEáconventionSéfoRîpunctuatioNøcapitalizatioNîaiDécomprehensioNébYéindicatinGéstructurE</p>
+<ul>
+<li>this is what it’s like to read poorly-styled code</li>
+<li>conventions only work if they’re <em>shared</em> conventions</li>
+</ul></li>
+<li><p>Style guides provide shared conventions for readable code</p>
 <ul>
 <li>In-line spacing makes it easier to pick out distinguish functions, operators, and variables in a line</li>
 <li>Returns distinguish arguments in a function call</li>
@@ -344,93 +343,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Common conventions for naming, assignment reduce cognitive load</li>
 </ul></li>
 <li><p>Tidyverse style guide: <a href="https://style.tidyverse.org/" class="uri">https://style.tidyverse.org/</a></p></li>
-<li><p><code>linr</code>: <a href="https://cran.r-project.org/web/packages/lintr/index.html" class="uri">https://cran.r-project.org/web/packages/lintr/index.html</a></p></li>
+<li><p><code>lintr</code>: <a href="https://cran.r-project.org/web/packages/lintr/index.html" class="uri">https://cran.r-project.org/web/packages/lintr/index.html</a></p></li>
 </ul>
-</div>
-<div id="a-code-review-checklist" class="section level2" number="16.3">
-<h2><span class="header-section-number">16.3</span> A code review checklist</h2>
-<p><span class="citation">Postolovski (<a href="#ref-PostolovskiYourCodeReview2020" role="doc-biblioref">2020</a>)</span></p>
-<ol style="list-style-type: decimal">
-<li><p><strong>Readability / understandability</strong></p>
-<ul>
-<li><a href="https://style.tidyverse.org/files.html">File naming</a></li>
-<li>Follows a <a href="https://style.tidyverse.org/">style guide</a>
-<ul>
-<li>Or at least uses consistent style</li>
-</ul></li>
-<li>Whitespace, whitespace, whitespace</li>
-<li>Meaningful names / <a href="https://dev.to/woubuc/self-documenting-is-a-myth-and-how-to-make-your-code-self-documenting-3h2n">self-documenting code</a></li>
-</ul></li>
-<li><p><strong>Maintainability</strong></p>
-<ul>
-<li><a href="https://en.wikipedia.org/wiki/Don%27t_repeat_yourself">DRY</a></li>
-<li>Avoid hard-coded configuration</li>
-<li>Check strong assumptions about structure and content of inputs</li>
-<li>Avoid deprecated or removed features</li>
-</ul></li>
-<li><p>Security</p>
-<ul>
-<li>How are passwords for websites, APIs, and sensitive data handled?</li>
-<li>Data validation</li>
-<li>Code validation (tests and assertions)</li>
-</ul></li>
-<li><p>Speed and Performance</p>
-<ul>
-<li>Performance for users
-<ul>
-<li><code>tictoc</code> for simple wall time checks</li>
-<li>Profiling for more thorough optimization</li>
-</ul></li>
-<li>Resource use
-<ul>
-<li>Does this really need to be run on the MERCED cluster?</li>
-<li>How much will this cost the lab/team if it’s accidentally run 1,000 times?</li>
-<li>Cache raw returns from web scraping and API queries</li>
-</ul></li>
-</ul></li>
-<li><p><strong>Documentation</strong></p>
-<ul>
-<li>Scripts: Section markers, signposting of what’s happening and why</li>
-<li>Functions: Assumptions about inputs, explanation of output
-<ul>
-<li>Consider using <code>roxygen2</code> + R’s package infrastructure</li>
-<li><a href="https://r-pkgs.org/man.html#man-functions" class="uri">https://r-pkgs.org/man.html#man-functions</a></li>
-</ul></li>
-<li>Data: Provenance, date and time retrieved, codebook</li>
-<li>Project: README, NEWS</li>
-</ul></li>
-<li><p>Reinventing the Wheel</p>
-<ul>
-<li>Is there a (well-maintained, checked) package for this?</li>
-<li><a href="https://en.wikipedia.org/wiki/Don%27t_repeat_yourself">DRY</a></li>
-</ul></li>
-<li><p><strong>Reliability</strong></p>
-<ul>
-<li>What happens if packages aren’t installed (don’t use <code>require()</code>!)?</li>
-<li>data can’t be found?</li>
-<li>data has missing values or errors?</li>
-<li>data has been altered or corrupted?</li>
-<li>a function returns missing or zero-length values?</li>
-<li>one script in the middle of the pipeline is altered?</li>
-</ul></li>
-<li><p>Scalability</p></li>
-<li><p>Reusability</p>
-<ul>
-<li>Can this bit of code be dropped into the lab’s/team’s next project?</li>
-</ul></li>
-<li><p>In-house/lab/team style</p></li>
-<li><p>Test coverage and quality</p>
-<ul>
-<li>Unpopular opinion: For “bench data science,” assertions often make more sense than unit tests</li>
-<li><code>assertthat</code> for assertions; <code>testthat</code> for unit tests</li>
-</ul></li>
-<li><p><strong>Fit for purpose</strong></p></li>
-<li><p>Notice what’s missing</p>
-<ul>
-<li>Edge cases, unexpected inputs, error handling</li>
-</ul></li>
-<li><p>Zoom out</p></li>
-</ol>
 
 </div>
 </div>
@@ -455,7 +369,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         </div>
       </div>
 <a href="reproducibility-replicability-and-robustness.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="an-example-code-review.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="organizing-your-projects.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

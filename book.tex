@@ -119,7 +119,7 @@
 
 \title{Data Science Methods for Cognitive Science}
 \author{Dan Hicks, \href{mailto:hicks.daniel.j@gmail.com}{\nolinkurl{hicks.daniel.j@gmail.com}}}
-\date{Mon Oct 5 21:57:44 2020}
+\date{Tue Oct 13 18:08:52 2020}
 
 \begin{document}
 \maketitle
@@ -151,7 +151,7 @@ This version of the book was built with R version 4.0.2 (2020-06-22), \href{http
 package & version & source\tabularnewline
 \midrule
 \endhead
-bookdown & 0.20.6 & Github (rstudio/bookdown@74c8bef)\tabularnewline
+bookdown & 0.21.1 & Github (rstudio/bookdown@dd70e34)\tabularnewline
 datasauRus & 0.1.4 & CRAN (R 4.0.2)\tabularnewline
 desc & 1.2.0 & CRAN (R 4.0.2)\tabularnewline
 ggbeeswarm & 0.6.0 & CRAN (R 4.0.2)\tabularnewline
@@ -2182,7 +2182,7 @@ The dataset is a zipped \texttt{csv} or comma-separated value file. CSVs are str
 \end{Shaded}
 
 \begin{verbatim}
-## 0.325 sec elapsed
+## 0.331 sec elapsed
 \end{verbatim}
 
 \begin{Shaded}
@@ -5341,9 +5341,9 @@ Some of the plots include alternative layers, mostly geoms, to illustrate how di
   \begin{itemize}
   \tightlist
   \item
-    (\emph{The Economist} \protect\hyperlink{ref-ArrayErrors2011}{2011}); (``Video: Keith Baggerly, "When Is Reproducibility an Ethical Issue? Genomics, Personalized Medicine, and Human Error"'' \protect\hyperlink{ref-VideoKeithBaggerly}{n.d.})
+    (\emph{The Economist} \protect\hyperlink{ref-ArrayErrors2011}{2011}), (``Video: Keith Baggerly, "When Is Reproducibility an Ethical Issue? Genomics, Personalized Medicine, and Human Error"'' \protect\hyperlink{ref-VideoKeithBaggerly}{n.d.})
   \item
-    Herndon, Ash, and Pollin (\protect\hyperlink{ref-HerndonDoesHighPublic2014}{2014}); but you can just read Bailey and Borwein (Jon) (\protect\hyperlink{ref-BaileyReinhartRogoffErrorHow}{n.d.}), Cassidy (\protect\hyperlink{ref-CassidyReinhartRogoffControversy}{n.d.}), watch (\emph{Reinhart \& Rogoff - Growth in a Time of Debt - EXERCISE!} \protect\hyperlink{ref-ReinhartRogoffGrowth2019}{2019})
+    Herndon, Ash, and Pollin (\protect\hyperlink{ref-HerndonDoesHighPublic2014}{2014}), but you can just read Bailey and Borwein (Jon) (\protect\hyperlink{ref-BaileyReinhartRogoffErrorHow}{n.d.}), Cassidy (\protect\hyperlink{ref-CassidyReinhartRogoffControversy}{n.d.}), and/or watch (\emph{Reinhart \& Rogoff - Growth in a Time of Debt - EXERCISE!} \protect\hyperlink{ref-ReinhartRogoffGrowth2019}{2019})
   \item
     Laskowski (\protect\hyperlink{ref-LaskowskiWhatWhenYou}{n.d.}), Viglione (\protect\hyperlink{ref-ViglioneAvalancheSpiderpaperRetractions2020}{2020}), Pennisi (\protect\hyperlink{ref-PennisiProminentSpiderBiologist2020}{2020})
   \item
@@ -5527,9 +5527,6 @@ How to interpret your analysis output\strut
 \begin{minipage}[t]{0.97\columnwidth}\raggedright
 How to characterize your intervention and endpoint (Feest \protect\hyperlink{ref-FeestWhyReplicationOverrated2019}{2019})\strut
 \end{minipage}\tabularnewline
-\begin{minipage}[t]{0.97\columnwidth}\raggedright
-\strut
-\end{minipage}\tabularnewline
 \bottomrule
 \end{longtable}
 
@@ -5604,9 +5601,9 @@ How to characterize your intervention and endpoint (Feest \protect\hyperlink{ref
   \item
     using a style guide and linter
   \item
-    code review
-  \item
     the life-changing magic of tidying up (your files)
+  \item
+    code review
   \item
     documenting code and data
   \end{itemize}
@@ -5627,9 +5624,17 @@ How to characterize your intervention and endpoint (Feest \protect\hyperlink{ref
 
 \begin{itemize}
 \item
-  In written language, conventions for punctuation, capitalization aid comprehension by indicating structure
+  iNéwritteNélanguagEáconventionSéfoRîpunctuatioNøcapitalizatioNîaiDécomprehensioNébYéindicatinGéstructurE
+
+  \begin{itemize}
+  \tightlist
+  \item
+    this is what it's like to read poorly-styled code
+  \item
+    conventions only work if they're \emph{shared} conventions
+  \end{itemize}
 \item
-  Style guides do the same thing for code
+  Style guides provide shared conventions for readable code
 
   \begin{itemize}
   \tightlist
@@ -5645,8 +5650,136 @@ How to characterize your intervention and endpoint (Feest \protect\hyperlink{ref
 \item
   Tidyverse style guide: \url{https://style.tidyverse.org/}
 \item
-  \texttt{linr}: \url{https://cran.r-project.org/web/packages/lintr/index.html}
+  \texttt{lintr}: \url{https://cran.r-project.org/web/packages/lintr/index.html}
 \end{itemize}
+
+\hypertarget{organizing-your-projects}{%
+\section{Organizing your projects}\label{organizing-your-projects}}
+
+\begin{itemize}
+\item
+  Reading: Noble (\protect\hyperlink{ref-NobleQuickGuideOrganizing2009}{2009})
+\item
+  See also: \url{https://support.rstudio.com/hc/en-us/articles/200526207-Using-Projects}
+\item
+  Good project organization will
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Keep your project self-contained, making it easy to find files as needed
+  \item
+    Play nicely with version control
+  \item
+    Self-document key relationships between project files
+  \end{itemize}
+\end{itemize}
+
+While we're at it, put your work in folders, not scattered across your desktop.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.6\linewidth]{images/reproducibility/folder_structure} 
+
+}
+
+\caption{Folder organization is your friend. Most of my work lives in Google Drive for automatic backups. I have top-level folders for teaching, coding, and writing projects. Then each project or collection of projects lives in its own folder. I take advantage of OS features such as shortcuts, highlighting, and special characters in file names to make it easy to find frequently-used things. An 'Archives' folder is good for tucking old projects out of the way.}\label{fig:unnamed-chunk-113}
+\end{figure}
+
+\hypertarget{two-templates}{%
+\subsection{Two templates}\label{two-templates}}
+
+\hypertarget{noblequickguideorganizing2009}{%
+\subsubsection{\texorpdfstring{Noble (\protect\hyperlink{ref-NobleQuickGuideOrganizing2009}{2009})}{Noble (2009)}}\label{noblequickguideorganizing2009}}
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.6\linewidth]{images/reproducibility/noble} 
+
+}
+
+\caption{Noble's [-@NobleQuickGuideOrganizing2009] sample folder structure is designed for experimental biologists.}\label{fig:unnamed-chunk-114}
+\end{figure}
+
+\begin{itemize}
+\tightlist
+\item
+  Includes code for
+
+  \begin{itemize}
+  \tightlist
+  \item
+    running experiments
+  \item
+    cleaning and analyzing data
+  \item
+    typesetting a LateX file into a PDF
+  \end{itemize}
+\item
+  Other features
+
+  \begin{itemize}
+  \tightlist
+  \item
+    notebook file, updated regularly
+  \item
+    chronological folders for experimental runs
+  \item
+    folders for compiled code and their corresponding source files
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{djhs-project-template}{%
+\subsubsection{DJH's Project Template}\label{djhs-project-template}}
+
+\begin{itemize}
+\item
+  \url{https://github.com/dhicks/project_template}
+\item
+  Configured as a GitHub ``template,'' making it easy to create new repositories for new projects
+\item
+  Designated folders for data, plots/outputs, and utility functions
+\item
+  File naming convention
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Automatically orders analysis scripts
+  \item
+    Coordinates plots, outputs, and intermediate data with the script that creates them
+  \end{itemize}
+\item
+  R package infrastructure
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Enables one-liner to load the utility functions in \texttt{R}: \texttt{devtools::load\_all(\textquotesingle{}..\textquotesingle{})}
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{a-note-on-paths}{%
+\subsection{A Note on Paths}\label{a-note-on-paths}}
+
+\begin{itemize}
+\tightlist
+\item
+  Windows and Unix-based systems write paths differently
+\item
+  Use \texttt{file.path()} or the \texttt{here} package to construct paths
+\item
+  \texttt{..} in a path means ``go up to the parent folder''
+
+  \begin{itemize}
+  \tightlist
+  \item
+    so \texttt{../data/00\_raw\_data.csv} goes up one level (eg, from the \texttt{scripts} folder), then down to the \texttt{data} folder, then the file \texttt{00\_raw\_data.csv}
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{code-review}{%
+\section{Code review}\label{code-review}}
 
 \hypertarget{a-code-review-checklist}{%
 \subsection{A code review checklist}\label{a-code-review-checklist}}
@@ -5767,17 +5900,23 @@ Postolovski (\protect\hyperlink{ref-PostolovskiYourCodeReview2020}{2020})
   \begin{itemize}
   \tightlist
   \item
-    What happens if packages aren't installed (don't use \texttt{require()}!)?
+    What happens if packages aren't installed?
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Reminder: \texttt{require()} doesn't stop if the package is missing
+    \end{itemize}
   \item
-    data can't be found?
+    Data can't be found?
   \item
-    data has missing values or errors?
+    Data has missing values or errors?
   \item
-    data has been altered or corrupted?
+    Data has been altered or corrupted?
   \item
-    a function returns missing or zero-length values?
+    A function returns a missing or zero-length value?
   \item
-    one script in the middle of the pipeline is altered?
+    One script in the middle of the pipeline is altered?
   \end{itemize}
 \item
   Scalability
@@ -5816,7 +5955,7 @@ Postolovski (\protect\hyperlink{ref-PostolovskiYourCodeReview2020}{2020})
 \end{enumerate}
 
 \hypertarget{an-example-code-review}{%
-\section{An Example Code Review}\label{an-example-code-review}}
+\subsection{An Example Code Review}\label{an-example-code-review}}
 
 \begin{itemize}
 \tightlist
@@ -5828,12 +5967,6 @@ Postolovski (\protect\hyperlink{ref-PostolovskiYourCodeReview2020}{2020})
   \item
     Data and code available at \url{https://osf.io/k5qmw/}
   \end{itemize}
-\end{itemize}
-
-\emph{{[}missing values; error handling{]}}
-
-\begin{itemize}
-\tightlist
 \item
   I find a lot of problems
 
@@ -5845,11 +5978,13 @@ Postolovski (\protect\hyperlink{ref-PostolovskiYourCodeReview2020}{2020})
     These types of problems are widespread in computational science
   \item
     Because researchers aren't trained to look for, prevent, and correct these problems
+  \item
+    \textbf{Take home message: Do code review as part of your research and it won't be this painful}
   \end{itemize}
 \end{itemize}
 
-\hypertarget{a-short-checklist}{%
-\subsection{A short checklist}\label{a-short-checklist}}
+\hypertarget{a-shortened-checklist}{%
+\subsubsection{A shortened checklist}\label{a-shortened-checklist}}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -5868,7 +6003,7 @@ Postolovski (\protect\hyperlink{ref-PostolovskiYourCodeReview2020}{2020})
 \end{enumerate}
 
 \hypertarget{project-organization}{%
-\subsection{Project organization}\label{project-organization}}
+\subsubsection{Project organization}\label{project-organization}}
 
 \begin{itemize}
 \tightlist
@@ -5907,7 +6042,7 @@ Postolovski (\protect\hyperlink{ref-PostolovskiYourCodeReview2020}{2020})
 \end{itemize}
 
 \hypertarget{study1}{%
-\subsection{\texorpdfstring{\texttt{study1}}{study1}}\label{study1}}
+\subsubsection{\texorpdfstring{\texttt{study1}}{study1}}\label{study1}}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -5992,6 +6127,8 @@ Postolovski (\protect\hyperlink{ref-PostolovskiYourCodeReview2020}{2020})
     What are these tests, plots, and why are we doing them?
   \item
     Contrast with the factor analysis starting on line 79
+  \item
+    Lines 116-17: Did they solve the ``this is bad''?
   \end{itemize}
 \item
   Reliability
@@ -5999,12 +6136,24 @@ Postolovski (\protect\hyperlink{ref-PostolovskiYourCodeReview2020}{2020})
   \begin{itemize}
   \tightlist
   \item
+    A quick check with \texttt{skimr} and/or \texttt{visdat} for study 1 indicates lots of missing values for a few variables
+
+    \begin{itemize}
+    \tightlist
+    \item
+      maybe because respondents rated different numbers of groups (why?)
+    \item
+      also some sporadic missingness
+    \item
+      doesn't seem like this was handled explicitly
+    \end{itemize}
+  \item
     No checks to validate data
   \end{itemize}
 \end{enumerate}
 
 \hypertarget{study2}{%
-\subsection{\texorpdfstring{\texttt{study2}}{study2}}\label{study2}}
+\subsubsection{\texorpdfstring{\texttt{study2}}{study2}}\label{study2}}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -6051,7 +6200,7 @@ Postolovski (\protect\hyperlink{ref-PostolovskiYourCodeReview2020}{2020})
 \end{itemize}
 
 \hypertarget{study3}{%
-\subsection{\texorpdfstring{\texttt{study3}}{study3}}\label{study3}}
+\subsubsection{\texorpdfstring{\texttt{study3}}{study3}}\label{study3}}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -6120,7 +6269,7 @@ Postolovski (\protect\hyperlink{ref-PostolovskiYourCodeReview2020}{2020})
 \end{enumerate}
 
 \hypertarget{study4-and-meta}{%
-\subsection{\texorpdfstring{\texttt{study4} and \texttt{meta}}{study4 and meta}}\label{study4-and-meta}}
+\subsubsection{\texorpdfstring{\texttt{study4} and \texttt{meta}}{study4 and meta}}\label{study4-and-meta}}
 
 \begin{itemize}
 \tightlist
@@ -6129,110 +6278,6 @@ Postolovski (\protect\hyperlink{ref-PostolovskiYourCodeReview2020}{2020})
 \item
   Confirm that the input for the meta-analysis isn't directly generated from the study scripts
 \end{itemize}
-
-\begin{itemize}
-\tightlist
-\item
-  \emph{{[}todo{]}} lab/exercise: spend 90 minutes on EDA of the Silberzahn et al.~red card data, then code review
-\end{itemize}
-
-\hypertarget{organizing-your-projects}{%
-\section{Organizing your projects}\label{organizing-your-projects}}
-
-\begin{itemize}
-\item
-  Reading: Noble (\protect\hyperlink{ref-NobleQuickGuideOrganizing2009}{2009})
-\item
-  Good project organization will
-
-  \begin{itemize}
-  \tightlist
-  \item
-    Keep your project self-contained, making it easy to find files as needed
-  \item
-    Play nicely with version control
-  \item
-    Self-document key relationships between project files
-  \end{itemize}
-\end{itemize}
-
-\hypertarget{two-templates}{%
-\subsection{Two templates}\label{two-templates}}
-
-\hypertarget{noblequickguideorganizing2009}{%
-\subsubsection{\texorpdfstring{Noble (\protect\hyperlink{ref-NobleQuickGuideOrganizing2009}{2009})}{Noble (2009)}}\label{noblequickguideorganizing2009}}
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.6\linewidth]{images/reproducibility/noble} 
-
-}
-
-\caption{Noble's [-@NobleQuickGuideOrganizing2009] sample folder structure is designed for experimental biologists.}\label{fig:unnamed-chunk-113}
-\end{figure}
-
-\begin{itemize}
-\tightlist
-\item
-  Includes code for
-
-  \begin{itemize}
-  \tightlist
-  \item
-    running experiments
-  \item
-    cleaning and analyzing data
-  \item
-    typesetting a LateX file into a PDF
-  \end{itemize}
-\item
-  Other features
-
-  \begin{itemize}
-  \tightlist
-  \item
-    notebook file, updated regularly
-  \item
-    chronological folders for experimental runs
-  \item
-    folders for compiled code and their corresponding source files
-  \end{itemize}
-\end{itemize}
-
-\hypertarget{djhs-project-template}{%
-\subsubsection{DJH's Project Template}\label{djhs-project-template}}
-
-\begin{itemize}
-\item
-  \url{https://github.com/dhicks/project_template}
-\item
-  Configured as a GitHub ``template,'' making it easy to create new repositories for new projects
-\item
-  Designated folders for data, plots/outputs, and utility functions
-\item
-  File naming convention
-
-  \begin{itemize}
-  \tightlist
-  \item
-    Automatically orders analysis scripts
-  \item
-    Coordinates plots, outputs, and intermediate data with the script that creates them
-  \end{itemize}
-\item
-  R package infrastructure
-
-  \begin{itemize}
-  \tightlist
-  \item
-    Enables one-liner to load the utility functions in \texttt{R}: \texttt{devtools::load\_all(\textquotesingle{}..\textquotesingle{})}
-  \end{itemize}
-\end{itemize}
-
-\hypertarget{rstudio-projects}{%
-\subsection{RStudio Projects}\label{rstudio-projects}}
-
-\emph{{[}todo{]}}
 
 \hypertarget{managing-and-publishing-data}{%
 \section{Managing and Publishing Data}\label{managing-and-publishing-data}}
@@ -6364,7 +6409,7 @@ Gentleman, Robert, and Duncan Temple Lang. 2004. ``Statistical Analyses and Repr
 Grus, Joel. n.d. ``I Don't Like Notebooks - Joel Grus - \#JupyterCon 2018.'' Google Docs. Accessed May 6, 2020. \url{https://docs.google.com/presentation/d/1n2RlMdmv1p25Xy5thJUhkKGvjtV-dkAIsUXP-AL4ffI/edit?usp=embed_facebook}.
 
 \leavevmode\hypertarget{ref-HannaCriticalRaceMethodology2019}{}%
-Hanna, Alex, Emily Denton, Andrew Smart, and Jamila Smith-Loud. 2019. ``Towards a Critical Race Methodology in Algorithmic Fairness,'' December. \url{https://doi.org/10.1145/3351095.3372826}.
+Hanna, Alex, Emily Denton, Andrew Smart, and Jamila Smith-Loud. 2019. ``Towards a Critical Race Methodology in Algorithmic Fairness.'' December 7, 2019. \url{https://doi.org/10.1145/3351095.3372826}.
 
 \leavevmode\hypertarget{ref-HealyDataVisualizationPractical2018}{}%
 Healy, Kieran. 2018. \emph{Data Visualization: A Practical Introduction}. Princeton University Press. \url{http://books.google.com?id=3XOYDwAAQBAJ}.
@@ -6400,7 +6445,7 @@ Ioannidis, John P. A. 2005. ``Why Most Published Research Findings Are False.'' 
 Keyes, Os. 2016. ``Rbitrary Standards.'' March 12, 2016. \url{https://ironholds.org/projects/rbitrary/}.
 
 \leavevmode\hypertarget{ref-KleinbergInherentTradeOffsFair2016}{}%
-Kleinberg, Jon, Sendhil Mullainathan, and Manish Raghavan. 2016. ``Inherent Trade-Offs in the Fair Determination of Risk Scores,'' November. \url{http://arxiv.org/abs/1609.05807}.
+Kleinberg, Jon, Sendhil Mullainathan, and Manish Raghavan. 2016. ``Inherent Trade-Offs in the Fair Determination of Risk Scores.'' November 17, 2016. \url{http://arxiv.org/abs/1609.05807}.
 
 \leavevmode\hypertarget{ref-LaskowskiWhatWhenYou}{}%
 Laskowski, Kate. n.d. ``What to Do When You Don't Trust Your Data Anymore -- Laskowski Lab at UC Davis.'' Accessed January 29, 2020. \url{https://laskowskilab.faculty.ucdavis.edu/2020/01/29/retractions/}.
