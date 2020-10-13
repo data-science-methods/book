@@ -8,6 +8,12 @@
     - Play nicely with version control
     - Self-document key relationships between project files
 
+While we're at it, put your work in folders, not scattered across your desktop.  
+
+```{r, echo = FALSE, fig.cap = "Folder organization is your friend. Most of my work lives in Google Drive for automatic backups. I have top-level folders for teaching, coding, and writing projects. Then each project or collection of projects lives in its own folder. I take advantage of OS features such as shortcuts, highlighting, and special characters in file names to make it easy to find frequently-used things. An 'Archives' folder is good for tucking old projects out of the way."}
+knitr::include_graphics(file.path('images', 'reproducibility', 'folder_structure.png'))
+```
+
 ## Two templates ##
 
 ### @NobleQuickGuideOrganizing2009 ###
@@ -46,4 +52,6 @@ knitr::include_graphics(file.path('images', 'reproducibility', 'noble.png'))
 
 - Windows and Unix-based systems write paths differently
 - Use `file.path()` or the `here` package to construct paths
+- `..` in a path means "go up to the parent folder"
+    - so `../data/00_raw_data.csv` goes up one level (eg, from the `scripts` folder), then down to the `data` folder, then the file `00_raw_data.csv`
 

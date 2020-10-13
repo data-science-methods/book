@@ -27,9 +27,11 @@
 
 ## Code style ##
 
-- In written language, conventions for punctuation, capitalization aid comprehension by indicating structure
+- iNéwritteNélanguagEáconventionSéfoRîpunctuatioNøcapitalizatioNîaiDécomprehensioNébYéindicatinGéstructurE
+    - this is what it's like to read poorly-styled code
+    - conventions only work if they're *shared* conventions
 
-- Style guides do the same thing for code
+- Style guides provide shared conventions for readable code
     - In-line spacing makes it easier to pick out distinguish functions, operators, and variables in a line
     - Returns distinguish arguments in a function call
     - Indentation corresponds to structure of complex expressions
