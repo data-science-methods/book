@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 19 Managing and Publishing Data | Data Science Methods for Cognitive Science</title>
+  <title>Chapter 20 Managing and Publishing Data | Data Science Methods for Cognitive Science</title>
   <meta name="description" content="This document is a set of notes (and perhaps later a textbook) for a course on data science methods for graduate students in social and behavioral sciences." />
-  <meta name="generator" content="bookdown 0.21.1 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21.2 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 19 Managing and Publishing Data | Data Science Methods for Cognitive Science" />
+  <meta property="og:title" content="Chapter 20 Managing and Publishing Data | Data Science Methods for Cognitive Science" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="data-science-methods/book" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 19 Managing and Publishing Data | Data Science Methods for Cognitive Science" />
+  <meta name="twitter:title" content="Chapter 20 Managing and Publishing Data | Data Science Methods for Cognitive Science" />
   
   <meta name="twitter:description" content="This document is a set of notes (and perhaps later a textbook) for a course on data science methods for graduate students in social and behavioral sciences." />
   
@@ -30,9 +30,9 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="code-review.html"/>
+<link rel="prev" href="code-review-activity.html"/>
 <link rel="next" href="some-data-cleaning-tools.html"/>
-<script src="libs/header-attrs-2.4.4/header-attrs.js"></script>
+<script src="libs/header-attrs-2.4.6/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -269,10 +269,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="18.1" data-path="code-review.html"><a href="code-review.html#a-code-review-checklist"><i class="fa fa-check"></i><b>18.1</b> A code review checklist</a></li>
 <li class="chapter" data-level="18.2" data-path="code-review.html"><a href="code-review.html#an-example-code-review"><i class="fa fa-check"></i><b>18.2</b> An Example Code Review</a></li>
 </ul></li>
-<li class="chapter" data-level="19" data-path="managing-and-publishing-data.html"><a href="managing-and-publishing-data.html"><i class="fa fa-check"></i><b>19</b> Managing and Publishing Data</a></li>
-<li class="chapter" data-level="20" data-path="some-data-cleaning-tools.html"><a href="some-data-cleaning-tools.html"><i class="fa fa-check"></i><b>20</b> Some Data-Cleaning Tools</a></li>
-<li class="part"><span><b>IV Cleaning Data</b></span></li>
-<li class="part"><span><b>V Case Study: The COMPAS Dataset</b></span></li>
+<li class="chapter" data-level="19" data-path="code-review-activity.html"><a href="code-review-activity.html"><i class="fa fa-check"></i><b>19</b> Code Review Activity</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="code-review-activity.html"><a href="code-review-activity.html#a-shorter-checklist"><i class="fa fa-check"></i><b>19.1</b> A shorter checklist</a></li>
+<li class="chapter" data-level="19.2" data-path="code-review-activity.html"><a href="code-review-activity.html#part-1"><i class="fa fa-check"></i><b>19.2</b> Part 1</a></li>
+<li class="chapter" data-level="19.3" data-path="code-review-activity.html"><a href="code-review-activity.html#part-2"><i class="fa fa-check"></i><b>19.3</b> Part 2</a></li>
+<li class="chapter" data-level="19.4" data-path="code-review-activity.html"><a href="code-review-activity.html#part-3"><i class="fa fa-check"></i><b>19.4</b> Part 3</a></li>
+</ul></li>
+<li class="chapter" data-level="20" data-path="managing-and-publishing-data.html"><a href="managing-and-publishing-data.html"><i class="fa fa-check"></i><b>20</b> Managing and Publishing Data</a></li>
+<li class="chapter" data-level="21" data-path="some-data-cleaning-tools.html"><a href="some-data-cleaning-tools.html"><i class="fa fa-check"></i><b>21</b> Some Data-Cleaning Tools</a></li>
+<li class="part"><span><b>IV Case Study: The COMPAS Dataset</b></span></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -294,8 +300,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="managing-and-publishing-data" class="section level1" number="19">
-<h1><span class="header-section-number">Chapter 19</span> Managing and Publishing Data</h1>
+<div id="managing-and-publishing-data" class="section level1" number="20">
+<h1><span class="header-section-number">Chapter 20</span> Managing and Publishing Data</h1>
 <ul>
 <li><p>reading: <span class="citation">Wilkinson et al. (<a href="#ref-WilkinsonFAIRGuidingPrinciples2016" role="doc-biblioref">2016</a>)</span></p>
 <ul>
@@ -325,7 +331,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </div>
 <h3>References</h3>
-<div id="refs" class="references">
+<div id="refs" class="references hanging-indent">
 <div id="ref-WilkinsonFAIRGuidingPrinciples2016">
 <p>Wilkinson, Mark D., Michel Dumontier, IJsbrand Jan Aalbersberg, Gabrielle Appleton, Myles Axton, Arie Baak, Niklas Blomberg, et al. 2016. “The FAIR Guiding Principles for Scientific Data Management and Stewardship.” <em>Scientific Data</em> 3 (1, 1): 1–9. <a href="https://doi.org/10.1038/sdata.2016.18">https://doi.org/10.1038/sdata.2016.18</a>.</p>
 </div>
@@ -335,7 +341,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="code-review.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="code-review-activity.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="some-data-cleaning-tools.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
@@ -367,7 +373,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/data-science-methods/book/blob/master/04-05-data-management.Rmd",
+"link": "https://github.com/data-science-methods/book/blob/master/04-06-data-management.Rmd",
 "text": "Edit"
 },
 "history": {

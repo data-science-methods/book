@@ -119,7 +119,7 @@
 
 \title{Data Science Methods for Cognitive Science}
 \author{Dan Hicks, \href{mailto:hicks.daniel.j@gmail.com}{\nolinkurl{hicks.daniel.j@gmail.com}}}
-\date{Tue Oct 13 18:08:52 2020}
+\date{Mon Oct 19 18:43:59 2020}
 
 \begin{document}
 \maketitle
@@ -151,7 +151,7 @@ This version of the book was built with R version 4.0.2 (2020-06-22), \href{http
 package & version & source\tabularnewline
 \midrule
 \endhead
-bookdown & 0.21.1 & Github (rstudio/bookdown@dd70e34)\tabularnewline
+bookdown & 0.21.2 & Github (rstudio/bookdown@9ed0651)\tabularnewline
 datasauRus & 0.1.4 & CRAN (R 4.0.2)\tabularnewline
 desc & 1.2.0 & CRAN (R 4.0.2)\tabularnewline
 ggbeeswarm & 0.6.0 & CRAN (R 4.0.2)\tabularnewline
@@ -2182,7 +2182,7 @@ The dataset is a zipped \texttt{csv} or comma-separated value file. CSVs are str
 \end{Shaded}
 
 \begin{verbatim}
-## 0.331 sec elapsed
+## 0.339 sec elapsed
 \end{verbatim}
 
 \begin{Shaded}
@@ -6279,6 +6279,151 @@ Postolovski (\protect\hyperlink{ref-PostolovskiYourCodeReview2020}{2020})
   Confirm that the input for the meta-analysis isn't directly generated from the study scripts
 \end{itemize}
 
+\hypertarget{code-review-activity}{%
+\section{Code Review Activity}\label{code-review-activity}}
+
+For this activity, you'll be working in pairs on a two-part assignment. In the first part, you'll do a brief exploratory data analysis of the dataset used in
+Silberzahn and Uhlmann (\protect\hyperlink{ref-SilberzahnCrowdsourcedResearchMany2015}{2015}) and Silberzahn et al. (\protect\hyperlink{ref-SilberzahnManyAnalystsOne2018}{2018}). In the second part, you and your partner will do a code review for another pair's EDA.
+
+\hypertarget{a-shorter-checklist}{%
+\subsection{A shorter checklist}\label{a-shorter-checklist}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{-1}
+\tightlist
+\item
+  What happens if you just run the script?
+\item
+  Readability
+\item
+  Maintainability
+\item
+  Documentation
+\item
+  Reliability
+\end{enumerate}
+
+\hypertarget{part-1}{%
+\subsection{Part 1}\label{part-1}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Set up the project
+
+  \begin{itemize}
+  \tightlist
+  \item
+    One member of your group should fork the (nearly empty) repository for this activity: \url{https://github.com/data-science-methods/code-review}
+  \item
+    Create appropriate folders, a README with your names and contact information and a short explanation, etc.
+  \item
+    Download the data files and situate them in your repository.
+
+    \begin{itemize}
+    \tightlist
+    \item
+      The data file itself: \url{https://osf.io/fv8c3/}
+    \item
+      The documentation, which should be named \texttt{README.rtf}: \url{https://osf.io/9yh4x/}
+    \end{itemize}
+  \item
+    In the repository on GitHub, go to the Settings tab and look for Manage Access on the left-hand side. Use the ``Invite a collaborator'' button to give everyone in your group permission to push up to the repo.
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Otherwise you'll have to deal with a lot of pull requests.
+    \item
+      See the screenshot for the elements you're looking for.
+    \end{itemize}
+  \end{itemize}
+\end{enumerate}
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.6\linewidth]{images/reproducibility/collaborators} 
+
+}
+
+\caption{To give someone permission to push to a repository, go to Settings, then Manage Access, then Invite a collaborator.}\label{fig:unnamed-chunk-115}
+\end{figure}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Start working on an EDA of the data
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Use the checklists and tools from our EDA unit (ch.~9).
+  \item
+    You can use the primary question from Silberzahn et al.: \emph{Are dark-skinned football (soccer) players more likely to be red-carded?}
+  \item
+    \textbf{Pair programming}: Either work in person if you can, or using screenshare over Zoom. Switch off which person is typing every 15 minutes or so. Using GitHub to sync your work between your computers.
+  \item
+    You'll have \emph{about 90 minutes} to work on this.
+  \item
+    There are three goals here, in order:
+
+    \begin{enumerate}
+    \def\labelenumii{\arabic{enumii}.}
+    \tightlist
+    \item
+      Practice writing good, readable code
+    \item
+      Generate example code for Part 2
+    \item
+      Practice using the checklists and tools for EDA
+    \end{enumerate}
+  \item
+    Don't worry if things are ``incomplete.''
+  \end{itemize}
+\item
+  File a PR against the original repository.
+\end{enumerate}
+
+\hypertarget{part-2}{%
+\subsection{Part 2}\label{part-2}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  I'll send you a link to another group's repository.
+\item
+  Working with your partner, review the code in the PR.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Clone the other group's repository to your machine to run it.
+  \item
+    Go to the ``Files changed'' tab and browse through the code, adding comments in a code review.
+  \item
+    \emph{Use the short checklist at the top of this page}: Relate each comment to one element of the checklist.
+  \item
+    \textbf{Remember that these are your classmates and all of this is public.}
+  \item
+    Frame your points as praise, suggestions, and constructive criticism.
+  \end{itemize}
+\item
+  When you're ready to submit your review, include a summary comment noting the most important changes that you would recommend.
+\end{enumerate}
+
+\hypertarget{part-3}{%
+\subsection{Part 3}\label{part-3}}
+
+\begin{itemize}
+\tightlist
+\item
+  After the other group submits their summary, review their comments and suggestions, and make changes as appropriate.
+\end{itemize}
+
 \hypertarget{managing-and-publishing-data}{%
 \section{Managing and Publishing Data}\label{managing-and-publishing-data}}
 
@@ -6354,9 +6499,6 @@ separate()
 pivot\_*()
 forcats stuff?
 stringr stuff
-
-\hypertarget{part-cleaning-data}{%
-\part{Cleaning Data}\label{part-cleaning-data}}
 
 \hypertarget{part-case-study-the-compas-dataset}{%
 \part{Case Study: The COMPAS Dataset}\label{part-case-study-the-compas-dataset}}
@@ -6512,6 +6654,9 @@ Selbst, Andrew D., Danah Boyd, Sorelle Friedler, Suresh Venkatasubramanian, and 
 
 \leavevmode\hypertarget{ref-ShotwellWhyUse2019}{}%
 Shotwell, Gordon. 2019. ``Why I Use R.'' Title. December 30, 2019. \url{https://blog.shotwell.ca/posts/why_i_use_r/}.
+
+\leavevmode\hypertarget{ref-SilberzahnCrowdsourcedResearchMany2015}{}%
+Silberzahn, Raphael, and Eric L. Uhlmann. 2015. ``Crowdsourced Research: Many Hands Make Tight Work.'' \emph{Nature} 526 (7572): 189--91. \url{https://doi.org/10.1038/526189a}.
 
 \leavevmode\hypertarget{ref-SilberzahnManyAnalystsOne2018}{}%
 Silberzahn, R., E. L. Uhlmann, D. P. Martin, P. Anselmi, F. Aust, E. Awtrey, Š. Bahník, et al. 2018. ``Many Analysts, One Data Set: Making Transparent How Variations in Analytic Choices Affect Results.'' \emph{Advances in Methods and Practices in Psychological Science}, August, 2515245917747646. \url{https://doi.org/10.1177/2515245917747646}.
