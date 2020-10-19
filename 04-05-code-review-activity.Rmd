@@ -11,3 +11,52 @@ For this activity, you'll be working in pairs on a two-part assignment.  In the 
 3. Documentation
 4. Reliability
 
+
+## Part 1 ##
+
+1. Set up the project
+    - One member of your group should fork the (nearly empty) repository for this activity: <https://github.com/data-science-methods/code-review>
+    - Create appropriate folders, a README with your names and contact information and a short explanation, etc. 
+    - Download the data files and situate them in your repository. 
+        - The data file itself: <https://osf.io/fv8c3/>
+        - The documentation, which should be named `README.rtf`: <https://osf.io/9yh4x/>
+    - In the repository on GitHub, go to the Settings tab and look for Manage Access on the left-hand side.  Use the "Invite a collaborator" button to give everyone in your group permission to push up to the repo.  
+        - Otherwise you'll have to deal with a lot of pull requests. 
+        - See the screenshot for the elements you're looking for. 
+
+```{r, echo = FALSE, fig.cap = "To give someone permission to push to a repository, go to Settings, then Manage Access, then Invite a collaborator."}
+knitr::include_graphics(file.path('images', 'reproducibility', 'collaborators.png'))
+```
+        
+2. Start working on an EDA of the data
+    - Use the checklists and tools from our EDA unit (ch. 9). 
+    - You can use the primary question from Silberzahn et al.: *Are dark-skinned football (soccer) players more likely to be red-carded?* 
+    - **Pair programming**: Either work in person if you can, or using screenshare over Zoom.  Switch off which person is typing every 15 minutes or so.  Using GitHub to sync your work between your computers. 
+    - You'll have *about 90 minutes* to work on this. 
+    - There are three goals here, in order:  
+        1. Practice writing good, readable code
+        2. Generate example code for Part 2
+        3. Practice using the checklists and tools for EDA
+    - Don't worry if things are "incomplete."
+
+3. File a PR against the original repository. 
+
+
+## Part 2 ##
+
+1. I'll send you a link to another group's repository. 
+
+2. Working with your partner, review the code in the PR. 
+    - Clone the other group's repository to your machine to run it. 
+    - Go to the "Files changed" tab and browse through the code, adding comments in a code review. 
+    - *Use the short checklist at the top of this page*: Relate each comment to one element of the checklist. 
+    - **Remember that these are your classmates and all of this is public.** 
+    - Frame your points as praise, suggestions, and constructive criticism.  
+
+3. When you're ready to submit your review, include a summary comment noting the most important changes that you would recommend. 
+
+
+## Part 3 ##
+
+- After the other group submits their summary, review their comments and suggestions, and make changes as appropriate.  
+
