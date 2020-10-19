@@ -1,0 +1,13 @@
+# Code Review Activity #
+
+For this activity, you'll be working in pairs on a two-part assignment.  In the first part, you'll do a brief exploratory data analysis of the dataset used in
+@SilberzahnCrowdsourcedResearchMany2015 and @SilberzahnManyAnalystsOne2018.  In the second part, you and your partner will do a code review for another pair's EDA.  
+
+## A shorter checklist ##
+
+0. What happens if you just run the script?
+1. Readability
+2. Maintainability
+3. Documentation
+4. Reliability
+
