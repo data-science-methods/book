@@ -1,5 +1,9 @@
 # Some Data-Cleaning Tools #
 
+```{r}
+library(printr)
+```
+
 - reading: @WickhamTidyData2014
 
 ## Tidy Data ##
@@ -9,28 +13,30 @@
     2. Each observation forms a row.
     3. Each type of observational unit forms a table.
 
-- Example: student final grades, registration demographics, and major for every philosophy course at UC Davis, 2005-2015
+- Example: student demographics and major, for students who took a philosophy course at UC Davis, 2005-2015
 
-*[visuals]*
+```{r, echo = FALSE, fig.show = 'hold', fig.cap = "Two tables in a tidy dataset. The first table records students' majors during each term they were enrolled; the second records demographics.  The tables have different units of observation, but can be linked using the ID (internal to this dataset) for an analysis at the level of individual students. Other tables in this dataset include final grades for philosophy courses taken by the students, and demographics of the instructors of those courses."}
+knitr::include_graphics(c(file.path('images', 'data', 'tidy-1.png'), 
+                          file.path('images', 'data', 'tidy-2.png')))
+```
 
 - slightly rephrased
-    - 1 row = 1 unique unit of observation
-        - 1 row = 1 student who was registered in 1 course
-    
     - 1 table = 1 unit of observation
-        - student-course final grades
-        - student-quarter major
-        - CRN-instructor name
-        - instructor-demographics
-        - (in practice, this one is often relaxed)
-    
-    - Every column is either an identifier, a measured variable, or links to another table
-        - identifier: within-dataset student ID, course registration number (CRN)
-        - measured variable: final course grade
-        - links: 
-            - student ID $\to$ demographics
-            - CRN -> instructor name $\to$ instructor demographics
-            - student ID + CRN $\to$ major that semester
+        - student-term (major)
+        - student (demographics)
+    - 1 row = 1 unique observed unit
+        - 1 row = 1 student-term combination
+        - 1 row = 1 student
+    - Every column is either an *identifier* or a *measured variable*
+        - rule of thumb: 1 row = 1 unique combination of identifiers
+        - major table
+            - identifiers: student ID, `term`
+            - measured variables: admit term, relative term, major
+            - NB the `term` identifier is constructed from two measured variables
+        - demographics table
+            - identifier: student ID
+            - measured variables: gender, race and ethnicity variables, first gen status, low income status, admission type, whether they ever majored in philosophy, major the semester they took their first philosophy course
+            - NB here "measured variable" includes both variables in the raw data as well as variables I constructed for analysis purposes (`poc`, `demographic`)
 
 ## Tools for tidying data ##
 
@@ -43,9 +49,13 @@ data_folder = file.path('data')
 
 ### 3.1: The Pew Dataset ###
 
+- `pivot_longer()`
+- `if_else()`
+- `fct_inorder()`
+
 ```{r load_pew}
 pew_df = read_csv(file.path(data_folder, 'pew.csv'))
-pew_df
+head(pew_df)
 ```
 
 ```{r tidy_pew}
@@ -63,7 +73,7 @@ pew_clean = pew_df %>%
                             NA_character_, 
                             income), 
            income = fct_inorder(income))
-pew_clean
+head(pew_clean)
 ```
 
 ```{r plot_pew}
@@ -76,9 +86,14 @@ ggplot(pew_clean, aes(religion, freq, fill = fct_rev(income))) +
 
 ### 3.1: The Billboard Dataset ###
 
+- A little helper function for parsing
+- `str_remove()`
+- Coercion
+- Date arithmetic
+
 ```{r, load_billboard}
 billboard_df = read_csv(file.path(data_folder, 'billboard.csv'))
-billboard_df
+head(billboard_df)
 ```
 
 ```{r tidy_billboard}
@@ -107,7 +122,7 @@ billboard_clean = billboard_df %>%
            date = date.entered + (week-1)*7) %>% 
     ## Clean columns
     select(year, artist, time, track, date, week, rank)
-billboard_clean
+head(billboard_clean)
 ```
 
 NB. Base R includes methods for doing date arithmetic, eg, 
@@ -118,13 +133,19 @@ If you need month arithmetic, check out the `lubridate` package, and specificall
 
 ```{r}
 count(billboard_clean, artist, track) %>% 
-    arrange(desc(n))
+    arrange(desc(n)) %>% 
+    head()
 ```
 
 ### 3.2: The TB Dataset ###
 
+- `haven` package
+- `separate()`
+- `case_when()`
+
 ```{r load_tb}
 tb_df = haven::read_sav(file.path(data_folder, 'tb.sav'))
+head(tb_df)
 ```
 
 ```{r tidy_tb}
@@ -145,20 +166,24 @@ tb_clean = tb_df %>%
     separate(age, into = c('age_lower', 'age_upper'), 
              sep = -2) %>% 
     mutate(age = str_c(age_lower, '-', age_upper), 
-           age = case_when(age == '-u' ~ NA_character_, 
+           age = case_when(age == '-u'  ~ NA_character_, 
                            age == '-65' ~ '65+', 
-                           TRUE ~ age), 
+                           TRUE         ~ age), 
            age = fct_inorder(age)) %>% 
     select(-age_lower, -age_upper) %>% 
     ## Put in order, with ID columns first and then the variable
     select(country, year, gender, age, cases)
-tb_clean
+head(tb_clean)
 ```
 
 ### 3.3: The Weather Dataset ###
 
+- `pivot_wider()`
+- `str_remove()`
+
 ```{r load_weather}
 weather_df = read_csv(file.path(data_folder, 'weather.csv'))
+head(weather_df)
 ```
 
 ```{r tidy_weather}
@@ -175,12 +200,7 @@ weather_clean = weather_df %>%
     mutate(day = str_remove(day, 'd'), 
            day = as.integer(day)) %>% 
     ## Check against the paper by filtering to non-missing rows
-    filter(!is.na(tmax)|!is.na(tmin))
-weather_clean
+    filter(!is.na(tmax) | !is.na(tmin))
+head(weather_clean)
 ```
-
-
-- lab: NSF data
-    - 3 files that need to be cleaned in the same way, then combined
-    - Excel date mangling
     
