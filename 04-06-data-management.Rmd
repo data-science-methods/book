@@ -1,24 +1,92 @@
 # Managing and Publishing Data #
 
-- reading: @WilkinsonFAIRGuidingPrinciples2016
-    - *[unethical open data - endangered species]*
-    - Tulloch et al.
-    - <https://datajustice.github.io/report/>
-    - <NicolConsentInsufficientData2019>
-    - Emil O.W. Kierkegaard
-        - OkCupid data scrape: <https://retractionwatch.com/2016/05/16/publicly-available-data-on-thousands-of-okcupid-users-pulled-over-copyright-claim/>
-        - Kierkegaard is a negative role model in other respects:  <https://rationalwiki.org/wiki/Emil_Kirkegaard>
+- reading:
+    - @WilkinsonFAIRGuidingPrinciples2016
+    - @OpenDataOffer2018
+    - @NicolConsentInsufficientData2019
+    - @McCookPubliclyAvailableData2016
 
 
+## FAIR principles for published data ##
 
-- FAIR principles (Wilkinson et al)
+- *Findable*
+    - F1. (meta)data are assigned a globally unique and persistent identifier
+    - F2. data are described with rich metadata (defined by R1 below)
+    - F3. metadata clearly and explicitly include the identifier of the data it describes 
+    - F4. (meta)data are registered or indexed in a searchable resource
+- *Accessible*
+    - A1. (meta)data are retrievable by their identifier using a standardized communications protocol 
+        - A1.1 the protocol is open, free, and universally implementable
+        - A1.2 the protocol allows for an authentication and authorization procedure, where necessary 
+    - A2. metadata are accessible, even when the data are no longer available
+- *Interoperable*
+    - I1. (meta)data use a formal, accessible, shared, and broadly applicable language for knowledge representation. 
+    - I2. (meta)data use vocabularies that follow FAIR principles
+    - I3. (meta)data include qualified references to other (meta)data
+- *Reusable*
+    - R1. meta(data) are richly described with a plurality of accurate and relevant attributes 
+        - R1.1. (meta)data are released with a clear and accessible data usage license
+        - R1.2. (meta)data are associated with detailed provenance
+        - R1.3. (meta)data meet domain-relevant community standards
 
-- codebooks
-    - Stanford Open Policing codebook as example: <https://github.com/stanford-policylab/opp/blob/master/data_readme.md>
-    - Some general guidelines: <https://afit-r.github.io/codebook>
+- DOIs for data
+    - [Instructions for OSF](https://help.osf.io/hc/en-us/articles/360019931013-Create-DOIs)
+    - [Notes for Zenodo](https://help.zenodo.org/#versioning)
+        - [Zenodo also plays nicely with GitHub for minting DOIs for code](https://guides.github.com/activities/citable-code/)
+    - [Citation models at Harvard Dataverse](https://dataverse.org/best-practices/data-citation)
 
-- data management plans
-    - UCM Library: <https://library.ucmerced.edu/research/researchers/research-data-management/data-management-plans>
-    - UCM IT support: <https://it.ucmerced.edu/content/research-data-management-consultation-service>
-    - NSF examples: <https://libraries.ucsd.edu/research-and-collections/data-curation/dmp-samples.html>
 
+## Documentation ##
+
+- Many social science fields have a tradition of writing codebooks for their data
+    - [Stanford Open Policing codebook](https://github.com/stanford-policylab/opp/blob/master/data_readme.md)
+    - ["Codebook-like summary" of the `covdata` package, automatically generated using `skimr`](https://kjhealy.github.io/covdata/articles/codebook.html)
+
+- Major codebook elements (<https://afit-r.github.io/codebook>)
+    1. Original source of the data
+    2. Sampling information
+        - Where and how the data were generated
+    3. Variable-level metadata and summaries
+    4. Structure of the data
+
+
+## Data management plans ##
+
+- Much like a research plan, data management plans provide an overview of the steps you'll take to gather, publish, and maintain your data
+    - Since 2011, NSF has required a 2-page data management plan for most types of proposals
+
+- Examples and resources
+    - [UCM Library](https://library.ucmerced.edu/research/researchers/research-data-management/data-management-plans)
+    - [UCM IT support](https://it.ucmerced.edu/content/research-data-management-consultation-service)
+    - [NSF examples](https://libraries.ucsd.edu/research-and-collections/data-curation/dmp-samples.html)
+    - [NSF policy summary](https://www.nsf.gov/bfa/dias/policy/dmp.jsp)
+
+
+## Hazards of open data ##
+
+- Legal
+    - Privacy
+        - Personally identifiable information (PII): "information which can be used to **distinguish or trace an individual's identity**, such as their name, social security number, biometric records, etc. *alone, or when combined with other ... information*" [Source](https://www.osec.doc.gov/opog/privacy/PII_BII.html)
+        - Sensitive information: "if the loss, compromission [sic], or disclosure without authorization of this data could **result in harm, embarrassment, inconvenience, or unfairness** to an individual" [Source](https://techgdpr.com/blog/difference-between-pii-and-personal-data/)
+        - IRB will require you to
+            - indicate what PII and sensitive information you're collecting
+            - explain why you need to collect it
+            - outline a plan to keep it secure
+            - notify or mitigate issues with participants if security is compromised
+
+    - Copyright
+        - Data that you've bought from a broker
+        - Journal article text, *but also* article metadata if you used a private service to retrieve it
+    
+- Community-level hazards
+    - Location of endangered species [@OpenDataOffer2018]
+    - Indigenous community sacred sites
+    - Antiquities
+    - Identifying the Golden State Killer through GEDmatch [@ZhangHowTinyWebsite2018]
+ 
+- Public-but-inaccessible data
+    - OKCupid data scrape [@McCookPubliclyAvailableData2016]
+        - [Don't be like Emil O. Kierkegaard](https://rationalwiki.org/wiki/Emil_Kirkegaard)
+    
+
+    

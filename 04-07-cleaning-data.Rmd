@@ -1,12 +1,186 @@
 # Some Data-Cleaning Tools #
 
-@WickhamTidyData2014
+- reading: @WickhamTidyData2014
 
-- concept of tidy data
-    - work through examples from Wickham's "Tidy Data"
+## Tidy Data ##
 
-Excel dates
-separate()
-pivot_*()
-forcats stuff?
-stringr stuff
+- conventions for organizing data for analysis
+    1. Each variable forms a column.
+    2. Each observation forms a row.
+    3. Each type of observational unit forms a table.
+
+- Example: student final grades, registration demographics, and major for every philosophy course at UC Davis, 2005-2015
+
+*[visuals]*
+
+- slightly rephrased
+    - 1 row = 1 unique unit of observation
+        - 1 row = 1 student who was registered in 1 course
+    
+    - 1 table = 1 unit of observation
+        - student-course final grades
+        - student-quarter major
+        - CRN-instructor name
+        - instructor-demographics
+        - (in practice, this one is often relaxed)
+    
+    - Every column is either an identifier, a measured variable, or links to another table
+        - identifier: within-dataset student ID, course registration number (CRN)
+        - measured variable: final course grade
+        - links: 
+            - student ID $\to$ demographics
+            - CRN -> instructor name $\to$ instructor demographics
+            - student ID + CRN $\to$ major that semester
+
+## Tools for tidying data ##
+
+```{r setup}
+library(tidyverse)
+theme_set(theme_minimal())
+
+data_folder = file.path('data')
+```
+
+### 3.1: The Pew Dataset ###
+
+```{r load_pew}
+pew_df = read_csv(file.path(data_folder, 'pew.csv'))
+pew_df
+```
+
+```{r tidy_pew}
+pew_clean = pew_df %>% 
+    ## Drop the row number column
+    select(-X1) %>% 
+    ## Lengthen: 1 row per religion x income level
+    pivot_longer(cols = `<$10k`:`Don't know/refused`, 
+                 names_to = 'income', 
+                 values_to = 'freq') %>% 
+    ## Cleaning `income`: 
+    ## - Make "Don't know/refused" into NA
+    ## - Coerce to ordered factor
+    mutate(income = if_else(str_detect(income, "Don't know"), 
+                            NA_character_, 
+                            income), 
+           income = fct_inorder(income))
+pew_clean
+```
+
+```{r plot_pew}
+ggplot(pew_clean, aes(religion, freq, fill = fct_rev(income))) +
+    geom_col() +
+    scale_fill_viridis_d(na.value = 'grey50') +
+    coord_flip()
+```
+
+
+### 3.1: The Billboard Dataset ###
+
+```{r, load_billboard}
+billboard_df = read_csv(file.path(data_folder, 'billboard.csv'))
+billboard_df
+```
+
+```{r tidy_billboard}
+#' Helper function to parse weeks to integers in the Billboard dataset
+#' @param wk_chr Vector of week characters, with the pattern `c('wk1', 'wk2')`
+#' @return Vector of integers, eg, `c(1L, 2L)`
+parse_week = function(wk_chr) {
+    wk_int = wk_chr %>% 
+        str_remove('wk') %>% 
+        as.integer()
+    return(wk_int)
+}
+
+billboard_clean = billboard_df %>% 
+    ## Drop the row number column
+    select(-X1) %>% 
+    ## Pivot week down and remove NA rows
+    pivot_longer(cols = starts_with('wk'), 
+                 names_to = 'week', 
+                 values_to = 'rank') %>% 
+    filter(!is.na(rank)) %>% 
+    ## Parse week and calculate date
+    ## NB Base R can handle date arithmetic
+    ## For month arithmetic see ?lubridate::`%m+%`
+    mutate(week = parse_week(week), 
+           date = date.entered + (week-1)*7) %>% 
+    ## Clean columns
+    select(year, artist, time, track, date, week, rank)
+billboard_clean
+```
+
+NB. Base R includes methods for doing date arithmetic, eg, 
+```{r}
+as.Date('2020-04-30') + 1
+```
+If you need month arithmetic, check out the `lubridate` package, and specifically `%m+%` and related operators. 
+
+```{r}
+count(billboard_clean, artist, track) %>% 
+    arrange(desc(n))
+```
+
+### 3.2: The TB Dataset ###
+
+```{r load_tb}
+tb_df = haven::read_sav(file.path(data_folder, 'tb.sav'))
+```
+
+```{r tidy_tb}
+tb_clean = tb_df %>% 
+    ## One row per observation = country x gender x age group
+    pivot_longer(m014:fu, 
+                 names_to = 'column', 
+                 values_to = 'cases') %>% 
+    ## Separate gender and age
+    separate(column, into = c('gender', 'age'), 
+             sep = 1) %>% 
+    ## Wrangle age: 
+    ## - Split into upper and lower bounds
+    ## - Recombine with -
+    ## - Fix missing age and 65+
+    ## - Set order
+    ## - Clean up the intermediate columns for upper and lower bounds
+    separate(age, into = c('age_lower', 'age_upper'), 
+             sep = -2) %>% 
+    mutate(age = str_c(age_lower, '-', age_upper), 
+           age = case_when(age == '-u' ~ NA_character_, 
+                           age == '-65' ~ '65+', 
+                           TRUE ~ age), 
+           age = fct_inorder(age)) %>% 
+    select(-age_lower, -age_upper) %>% 
+    ## Put in order, with ID columns first and then the variable
+    select(country, year, gender, age, cases)
+tb_clean
+```
+
+### 3.3: The Weather Dataset ###
+
+```{r load_weather}
+weather_df = read_csv(file.path(data_folder, 'weather.csv'))
+```
+
+```{r tidy_weather}
+weather_clean = weather_df %>% 
+    select(-X1) %>% 
+    ## Lengthen days
+    pivot_longer(d1:d31, 
+                 names_to = 'day', 
+                 values_to = 'obs') %>% 
+    ## Widen `element`
+    pivot_wider(names_from = element, 
+                values_from = obs) %>% 
+    ## Fix the class of `day`
+    mutate(day = str_remove(day, 'd'), 
+           day = as.integer(day)) %>% 
+    ## Check against the paper by filtering to non-missing rows
+    filter(!is.na(tmax)|!is.na(tmin))
+weather_clean
+```
+
+
+- lab: NSF data
+    - 3 files that need to be cleaned in the same way, then combined
+    - Excel date mangling
+    
