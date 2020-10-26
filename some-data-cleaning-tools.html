@@ -312,6 +312,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="some-data-cleaning-tools" class="section level1" number="21">
 <h1><span class="header-section-number">Chapter 21</span> Some Data-Cleaning Tools</h1>
+<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="some-data-cleaning-tools.html#cb207-1" aria-hidden="true"></a><span class="kw">library</span>(printr)</span></code></pre></div>
+<pre><code>## Registered S3 method overwritten by &#39;printr&#39;:
+##   method                from     
+##   knit_print.data.frame rmarkdown</code></pre>
 <ul>
 <li>reading: <span class="citation">Wickham (<a href="#ref-WickhamTidyData2014" role="doc-biblioref">2014</a><a href="#ref-WickhamTidyData2014" role="doc-biblioref">a</a>)</span></li>
 </ul>
@@ -324,33 +328,41 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Each observation forms a row.</li>
 <li>Each type of observational unit forms a table.</li>
 </ol></li>
-<li>Example: student final grades, registration demographics, and major for every philosophy course at UC Davis, 2005-2015</li>
+<li>Example: student demographics and major, for students who took a philosophy course at UC Davis, 2005-2015</li>
 </ul>
-<p><em>[visuals]</em></p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-117"></span>
+<img src="images/data/tidy-1.png" alt="Two tables in a tidy dataset. The first table records students' majors during each term they were enrolled; the second records demographics.  The tables have different units of observation, but can be linked using the ID (internal to this dataset) for an analysis at the level of individual students. Other tables in this dataset include final grades for philosophy courses taken by the students, and demographics of the instructors of those courses." width="60%" /><img src="images/data/tidy-2.png" alt="Two tables in a tidy dataset. The first table records students' majors during each term they were enrolled; the second records demographics.  The tables have different units of observation, but can be linked using the ID (internal to this dataset) for an analysis at the level of individual students. Other tables in this dataset include final grades for philosophy courses taken by the students, and demographics of the instructors of those courses." width="60%" />
+<p class="caption">
+Figure 21.1: Two tables in a tidy dataset. The first table records students’ majors during each term they were enrolled; the second records demographics. The tables have different units of observation, but can be linked using the ID (internal to this dataset) for an analysis at the level of individual students. Other tables in this dataset include final grades for philosophy courses taken by the students, and demographics of the instructors of those courses.
+</p>
+</div>
 <ul>
 <li>slightly rephrased
 <ul>
-<li>1 row = 1 unique unit of observation
-<ul>
-<li>1 row = 1 student who was registered in 1 course</li>
-</ul></li>
 <li>1 table = 1 unit of observation
 <ul>
-<li>student-course final grades</li>
-<li>student-quarter major</li>
-<li>CRN-instructor name</li>
-<li>instructor-demographics</li>
-<li>(in practice, this one is often relaxed)</li>
+<li>student-term (major)</li>
+<li>student (demographics)</li>
 </ul></li>
-<li>Every column is either an identifier, a measured variable, or links to another table
+<li>1 row = 1 unique observed unit
 <ul>
-<li>identifier: within-dataset student ID, course registration number (CRN)</li>
-<li>measured variable: final course grade</li>
-<li>links:
+<li>1 row = 1 student-term combination</li>
+<li>1 row = 1 student</li>
+</ul></li>
+<li>Every column is either an <em>identifier</em> or a <em>measured variable</em>
 <ul>
-<li>student ID <span class="math inline">\(\to\)</span> demographics</li>
-<li>CRN -&gt; instructor name <span class="math inline">\(\to\)</span> instructor demographics</li>
-<li>student ID + CRN <span class="math inline">\(\to\)</span> major that semester</li>
+<li>rule of thumb: 1 row = 1 unique combination of identifiers</li>
+<li>major table
+<ul>
+<li>identifiers: student ID, <code>term</code></li>
+<li>measured variables: admit term, relative term, major</li>
+<li>NB the <code>term</code> identifier is constructed from two measured variables</li>
+</ul></li>
+<li>demographics table
+<ul>
+<li>identifier: student ID</li>
+<li>measured variables: gender, race and ethnicity variables, first gen status, low income status, admission type, whether they ever majored in philosophy, major the semester they took their first philosophy course</li>
+<li>NB here “measured variable” includes both variables in the raw data as well as variables I constructed for analysis purposes (<code>poc</code>, <code>demographic</code>)</li>
 </ul></li>
 </ul></li>
 </ul></li>
@@ -358,13 +370,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="tools-for-tidying-data" class="section level2" number="21.2">
 <h2><span class="header-section-number">21.2</span> Tools for tidying data</h2>
-<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="some-data-cleaning-tools.html#cb207-1" aria-hidden="true"></a><span class="kw">library</span>(tidyverse)</span>
-<span id="cb207-2"><a href="some-data-cleaning-tools.html#cb207-2" aria-hidden="true"></a><span class="kw">theme_set</span>(<span class="kw">theme_minimal</span>())</span>
-<span id="cb207-3"><a href="some-data-cleaning-tools.html#cb207-3" aria-hidden="true"></a></span>
-<span id="cb207-4"><a href="some-data-cleaning-tools.html#cb207-4" aria-hidden="true"></a>data_folder =<span class="st"> </span><span class="kw">file.path</span>(<span class="st">&#39;data&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="some-data-cleaning-tools.html#cb209-1" aria-hidden="true"></a><span class="kw">library</span>(tidyverse)</span>
+<span id="cb209-2"><a href="some-data-cleaning-tools.html#cb209-2" aria-hidden="true"></a><span class="kw">theme_set</span>(<span class="kw">theme_minimal</span>())</span>
+<span id="cb209-3"><a href="some-data-cleaning-tools.html#cb209-3" aria-hidden="true"></a></span>
+<span id="cb209-4"><a href="some-data-cleaning-tools.html#cb209-4" aria-hidden="true"></a>data_folder =<span class="st"> </span><span class="kw">file.path</span>(<span class="st">&#39;data&#39;</span>)</span></code></pre></div>
 <div id="the-pew-dataset" class="section level3" number="21.2.1">
 <h3><span class="header-section-number">21.2.1</span> 3.1: The Pew Dataset</h3>
-<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="some-data-cleaning-tools.html#cb208-1" aria-hidden="true"></a>pew_df =<span class="st"> </span><span class="kw">read_csv</span>(<span class="kw">file.path</span>(data_folder, <span class="st">&#39;pew.csv&#39;</span>))</span></code></pre></div>
+<ul>
+<li><code>pivot_longer()</code></li>
+<li><code>if_else()</code></li>
+<li><code>fct_inorder()</code></li>
+</ul>
+<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="some-data-cleaning-tools.html#cb210-1" aria-hidden="true"></a>pew_df =<span class="st"> </span><span class="kw">read_csv</span>(<span class="kw">file.path</span>(data_folder, <span class="st">&#39;pew.csv&#39;</span>))</span></code></pre></div>
 <pre><code>## Warning: Missing column names filled in: &#39;X1&#39; [1]</code></pre>
 <pre><code>## 
 ## ── Column specification ────────────────────────────────────────────────────────────────────────────
@@ -382,58 +399,181 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##   `&gt;150k` = col_double(),
 ##   `Don&#39;t know/refused` = col_double()
 ## )</code></pre>
-<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="some-data-cleaning-tools.html#cb211-1" aria-hidden="true"></a>pew_df</span></code></pre></div>
-<pre><code>## # A tibble: 18 x 12
-##       X1 religion `&lt;$10k` `$10-20k` `$20-30k` `$30-40k` `$40-50k` `$50-75k` `$75-100k` `$100-150k`
-##    &lt;dbl&gt; &lt;chr&gt;      &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;       &lt;dbl&gt;
-##  1     1 Agnostic      27        34        60        81        76       137        122         109
-##  2     2 Atheist       12        27        37        52        35        70         73          59
-##  3     3 Buddhist      27        21        30        34        33        58         62          39
-##  4     4 Catholic     418       617       732       670       638      1116        949         792
-##  5     5 Don’t k…      15        14        15        11        10        35         21          17
-##  6     6 Evangel…     575       869      1064       982       881      1486        949         723
-##  7     7 Hindu          1         9         7         9        11        34         47          48
-##  8     8 Histori…     228       244       236       238       197       223        131          81
-##  9     9 Jehovah…      20        27        24        24        21        30         15          11
-## 10    10 Jewish        19        19        25        25        30        95         69          87
-## 11    11 Mainlin…     289       495       619       655       651      1107        939         753
-## 12    12 Mormon        29        40        48        51        56       112         85          49
-## 13    13 Muslim         6         7         9        10         9        23         16           8
-## 14    14 Orthodox      13        17        23        32        32        47         38          42
-## 15    15 Other C…       9         7        11        13        13        14         18          14
-## 16    16 Other F…      20        33        40        46        49        63         46          40
-## 17    17 Other W…       5         2         3         4         2         7          3           4
-## 18    18 Unaffil…     217       299       374       365       341       528        407         321
-## # … with 2 more variables: `&gt;150k` &lt;dbl&gt;, `Don&#39;t know/refused` &lt;dbl&gt;</code></pre>
-<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="some-data-cleaning-tools.html#cb213-1" aria-hidden="true"></a>pew_clean =<span class="st"> </span>pew_df <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb213-2"><a href="some-data-cleaning-tools.html#cb213-2" aria-hidden="true"></a><span class="st">    </span><span class="co">## Drop the row number column</span></span>
-<span id="cb213-3"><a href="some-data-cleaning-tools.html#cb213-3" aria-hidden="true"></a><span class="st">    </span><span class="kw">select</span>(<span class="op">-</span>X1) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb213-4"><a href="some-data-cleaning-tools.html#cb213-4" aria-hidden="true"></a><span class="st">    </span><span class="co">## Lengthen: 1 row per religion x income level</span></span>
-<span id="cb213-5"><a href="some-data-cleaning-tools.html#cb213-5" aria-hidden="true"></a><span class="st">    </span><span class="kw">pivot_longer</span>(<span class="dt">cols =</span> <span class="st">`</span><span class="dt">&lt;$10k</span><span class="st">`</span><span class="op">:</span><span class="st">`</span><span class="dt">Don&#39;t know/refused</span><span class="st">`</span>, </span>
-<span id="cb213-6"><a href="some-data-cleaning-tools.html#cb213-6" aria-hidden="true"></a>                 <span class="dt">names_to =</span> <span class="st">&#39;income&#39;</span>, </span>
-<span id="cb213-7"><a href="some-data-cleaning-tools.html#cb213-7" aria-hidden="true"></a>                 <span class="dt">values_to =</span> <span class="st">&#39;freq&#39;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb213-8"><a href="some-data-cleaning-tools.html#cb213-8" aria-hidden="true"></a><span class="st">    </span><span class="co">## Cleaning `income`: </span></span>
-<span id="cb213-9"><a href="some-data-cleaning-tools.html#cb213-9" aria-hidden="true"></a><span class="st">    </span><span class="co">## - Make &quot;Don&#39;t know/refused&quot; into NA</span></span>
-<span id="cb213-10"><a href="some-data-cleaning-tools.html#cb213-10" aria-hidden="true"></a><span class="st">    </span><span class="co">## - Coerce to ordered factor</span></span>
-<span id="cb213-11"><a href="some-data-cleaning-tools.html#cb213-11" aria-hidden="true"></a><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">income =</span> <span class="kw">if_else</span>(<span class="kw">str_detect</span>(income, <span class="st">&quot;Don&#39;t know&quot;</span>), </span>
-<span id="cb213-12"><a href="some-data-cleaning-tools.html#cb213-12" aria-hidden="true"></a>                            <span class="ot">NA_character_</span>, </span>
-<span id="cb213-13"><a href="some-data-cleaning-tools.html#cb213-13" aria-hidden="true"></a>                            income), </span>
-<span id="cb213-14"><a href="some-data-cleaning-tools.html#cb213-14" aria-hidden="true"></a>           <span class="dt">income =</span> <span class="kw">fct_inorder</span>(income))</span>
-<span id="cb213-15"><a href="some-data-cleaning-tools.html#cb213-15" aria-hidden="true"></a>pew_clean</span></code></pre></div>
-<pre><code>## # A tibble: 180 x 3
-##    religion income     freq
-##    &lt;chr&gt;    &lt;fct&gt;     &lt;dbl&gt;
-##  1 Agnostic &lt;$10k        27
-##  2 Agnostic $10-20k      34
-##  3 Agnostic $20-30k      60
-##  4 Agnostic $30-40k      81
-##  5 Agnostic $40-50k      76
-##  6 Agnostic $50-75k     137
-##  7 Agnostic $75-100k    122
-##  8 Agnostic $100-150k   109
-##  9 Agnostic &gt;150k        84
-## 10 Agnostic &lt;NA&gt;         96
-## # … with 170 more rows</code></pre>
+<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="some-data-cleaning-tools.html#cb213-1" aria-hidden="true"></a><span class="kw">head</span>(pew_df)</span></code></pre></div>
+<table>
+<colgroup>
+<col width="2%" />
+<col width="16%" />
+<col width="5%" />
+<col width="7%" />
+<col width="7%" />
+<col width="7%" />
+<col width="7%" />
+<col width="7%" />
+<col width="8%" />
+<col width="8%" />
+<col width="5%" />
+<col width="16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="right">X1</th>
+<th align="left">religion</th>
+<th align="right">&lt;$10k</th>
+<th align="right">$10-20k</th>
+<th align="right">$20-30k</th>
+<th align="right">$30-40k</th>
+<th align="right">$40-50k</th>
+<th align="right">$50-75k</th>
+<th align="right">$75-100k</th>
+<th align="right">$100-150k</th>
+<th align="right">&gt;150k</th>
+<th align="right">Don’t know/refused</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">Agnostic</td>
+<td align="right">27</td>
+<td align="right">34</td>
+<td align="right">60</td>
+<td align="right">81</td>
+<td align="right">76</td>
+<td align="right">137</td>
+<td align="right">122</td>
+<td align="right">109</td>
+<td align="right">84</td>
+<td align="right">96</td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="left">Atheist</td>
+<td align="right">12</td>
+<td align="right">27</td>
+<td align="right">37</td>
+<td align="right">52</td>
+<td align="right">35</td>
+<td align="right">70</td>
+<td align="right">73</td>
+<td align="right">59</td>
+<td align="right">74</td>
+<td align="right">76</td>
+</tr>
+<tr class="odd">
+<td align="right">3</td>
+<td align="left">Buddhist</td>
+<td align="right">27</td>
+<td align="right">21</td>
+<td align="right">30</td>
+<td align="right">34</td>
+<td align="right">33</td>
+<td align="right">58</td>
+<td align="right">62</td>
+<td align="right">39</td>
+<td align="right">53</td>
+<td align="right">54</td>
+</tr>
+<tr class="even">
+<td align="right">4</td>
+<td align="left">Catholic</td>
+<td align="right">418</td>
+<td align="right">617</td>
+<td align="right">732</td>
+<td align="right">670</td>
+<td align="right">638</td>
+<td align="right">1116</td>
+<td align="right">949</td>
+<td align="right">792</td>
+<td align="right">633</td>
+<td align="right">1489</td>
+</tr>
+<tr class="odd">
+<td align="right">5</td>
+<td align="left">Don’t know/refused</td>
+<td align="right">15</td>
+<td align="right">14</td>
+<td align="right">15</td>
+<td align="right">11</td>
+<td align="right">10</td>
+<td align="right">35</td>
+<td align="right">21</td>
+<td align="right">17</td>
+<td align="right">18</td>
+<td align="right">116</td>
+</tr>
+<tr class="even">
+<td align="right">6</td>
+<td align="left">Evangelical Prot</td>
+<td align="right">575</td>
+<td align="right">869</td>
+<td align="right">1064</td>
+<td align="right">982</td>
+<td align="right">881</td>
+<td align="right">1486</td>
+<td align="right">949</td>
+<td align="right">723</td>
+<td align="right">414</td>
+<td align="right">1529</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb214-1"><a href="some-data-cleaning-tools.html#cb214-1" aria-hidden="true"></a>pew_clean =<span class="st"> </span>pew_df <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb214-2"><a href="some-data-cleaning-tools.html#cb214-2" aria-hidden="true"></a><span class="st">    </span><span class="co">## Drop the row number column</span></span>
+<span id="cb214-3"><a href="some-data-cleaning-tools.html#cb214-3" aria-hidden="true"></a><span class="st">    </span><span class="kw">select</span>(<span class="op">-</span>X1) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb214-4"><a href="some-data-cleaning-tools.html#cb214-4" aria-hidden="true"></a><span class="st">    </span><span class="co">## Lengthen: 1 row per religion x income level</span></span>
+<span id="cb214-5"><a href="some-data-cleaning-tools.html#cb214-5" aria-hidden="true"></a><span class="st">    </span><span class="kw">pivot_longer</span>(<span class="dt">cols =</span> <span class="st">`</span><span class="dt">&lt;$10k</span><span class="st">`</span><span class="op">:</span><span class="st">`</span><span class="dt">Don&#39;t know/refused</span><span class="st">`</span>, </span>
+<span id="cb214-6"><a href="some-data-cleaning-tools.html#cb214-6" aria-hidden="true"></a>                 <span class="dt">names_to =</span> <span class="st">&#39;income&#39;</span>, </span>
+<span id="cb214-7"><a href="some-data-cleaning-tools.html#cb214-7" aria-hidden="true"></a>                 <span class="dt">values_to =</span> <span class="st">&#39;freq&#39;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb214-8"><a href="some-data-cleaning-tools.html#cb214-8" aria-hidden="true"></a><span class="st">    </span><span class="co">## Cleaning `income`: </span></span>
+<span id="cb214-9"><a href="some-data-cleaning-tools.html#cb214-9" aria-hidden="true"></a><span class="st">    </span><span class="co">## - Make &quot;Don&#39;t know/refused&quot; into NA</span></span>
+<span id="cb214-10"><a href="some-data-cleaning-tools.html#cb214-10" aria-hidden="true"></a><span class="st">    </span><span class="co">## - Coerce to ordered factor</span></span>
+<span id="cb214-11"><a href="some-data-cleaning-tools.html#cb214-11" aria-hidden="true"></a><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">income =</span> <span class="kw">if_else</span>(<span class="kw">str_detect</span>(income, <span class="st">&quot;Don&#39;t know&quot;</span>), </span>
+<span id="cb214-12"><a href="some-data-cleaning-tools.html#cb214-12" aria-hidden="true"></a>                            <span class="ot">NA_character_</span>, </span>
+<span id="cb214-13"><a href="some-data-cleaning-tools.html#cb214-13" aria-hidden="true"></a>                            income), </span>
+<span id="cb214-14"><a href="some-data-cleaning-tools.html#cb214-14" aria-hidden="true"></a>           <span class="dt">income =</span> <span class="kw">fct_inorder</span>(income))</span>
+<span id="cb214-15"><a href="some-data-cleaning-tools.html#cb214-15" aria-hidden="true"></a><span class="kw">head</span>(pew_clean)</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">religion</th>
+<th align="left">income</th>
+<th align="right">freq</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Agnostic</td>
+<td align="left">&lt;$10k</td>
+<td align="right">27</td>
+</tr>
+<tr class="even">
+<td align="left">Agnostic</td>
+<td align="left">$10-20k</td>
+<td align="right">34</td>
+</tr>
+<tr class="odd">
+<td align="left">Agnostic</td>
+<td align="left">$20-30k</td>
+<td align="right">60</td>
+</tr>
+<tr class="even">
+<td align="left">Agnostic</td>
+<td align="left">$30-40k</td>
+<td align="right">81</td>
+</tr>
+<tr class="odd">
+<td align="left">Agnostic</td>
+<td align="left">$40-50k</td>
+<td align="right">76</td>
+</tr>
+<tr class="even">
+<td align="left">Agnostic</td>
+<td align="left">$50-75k</td>
+<td align="right">137</td>
+</tr>
+</tbody>
+</table>
 <div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="some-data-cleaning-tools.html#cb215-1" aria-hidden="true"></a><span class="kw">ggplot</span>(pew_clean, <span class="kw">aes</span>(religion, freq, <span class="dt">fill =</span> <span class="kw">fct_rev</span>(income))) <span class="op">+</span></span>
 <span id="cb215-2"><a href="some-data-cleaning-tools.html#cb215-2" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_col</span>() <span class="op">+</span></span>
 <span id="cb215-3"><a href="some-data-cleaning-tools.html#cb215-3" aria-hidden="true"></a><span class="st">    </span><span class="kw">scale_fill_viridis_d</span>(<span class="dt">na.value =</span> <span class="st">&#39;grey50&#39;</span>) <span class="op">+</span></span>
@@ -442,6 +582,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="the-billboard-dataset" class="section level3" number="21.2.2">
 <h3><span class="header-section-number">21.2.2</span> 3.1: The Billboard Dataset</h3>
+<ul>
+<li>A little helper function for parsing</li>
+<li><code>str_remove()</code></li>
+<li>Coercion</li>
+<li>Date arithmetic</li>
+</ul>
 <div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb216-1"><a href="some-data-cleaning-tools.html#cb216-1" aria-hidden="true"></a>billboard_df =<span class="st"> </span><span class="kw">read_csv</span>(<span class="kw">file.path</span>(data_folder, <span class="st">&#39;billboard.csv&#39;</span>))</span></code></pre></div>
 <pre><code>## Warning: Missing column names filled in: &#39;X1&#39; [1]</code></pre>
 <pre><code>## 
@@ -465,136 +611,1092 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##   wk76 = col_logical()
 ## )
 ## ℹ Use `spec()` for the full column specifications.</code></pre>
-<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="some-data-cleaning-tools.html#cb219-1" aria-hidden="true"></a>billboard_df</span></code></pre></div>
-<pre><code>## # A tibble: 317 x 82
-##       X1  year artist track time  date.entered   wk1   wk2   wk3   wk4   wk5   wk6   wk7   wk8   wk9
-##    &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt; &lt;tim&gt; &lt;date&gt;       &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-##  1     1  2000 2 Pac  Baby… 04:22 2000-02-26      87    82    72    77    87    94    99    NA    NA
-##  2     2  2000 2Ge+h… The … 03:15 2000-09-02      91    87    92    NA    NA    NA    NA    NA    NA
-##  3     3  2000 3 Doo… Kryp… 03:53 2000-04-08      81    70    68    67    66    57    54    53    51
-##  4     4  2000 3 Doo… Loser 04:24 2000-10-21      76    76    72    69    67    65    55    59    62
-##  5     5  2000 504 B… Wobb… 03:35 2000-04-15      57    34    25    17    17    31    36    49    53
-##  6     6  2000 98^0   Give… 03:24 2000-08-19      51    39    34    26    26    19     2     2     3
-##  7     7  2000 A*Tee… Danc… 03:44 2000-07-08      97    97    96    95   100    NA    NA    NA    NA
-##  8     8  2000 Aaliy… I Do… 04:15 2000-01-29      84    62    51    41    38    35    35    38    38
-##  9     9  2000 Aaliy… Try … 04:03 2000-03-18      59    53    38    28    21    18    16    14    12
-## 10    10  2000 Adams… Open… 05:30 2000-08-26      76    76    74    69    68    67    61    58    57
-## # … with 307 more rows, and 67 more variables: wk10 &lt;dbl&gt;, wk11 &lt;dbl&gt;, wk12 &lt;dbl&gt;, wk13 &lt;dbl&gt;,
-## #   wk14 &lt;dbl&gt;, wk15 &lt;dbl&gt;, wk16 &lt;dbl&gt;, wk17 &lt;dbl&gt;, wk18 &lt;dbl&gt;, wk19 &lt;dbl&gt;, wk20 &lt;dbl&gt;, wk21 &lt;dbl&gt;,
-## #   wk22 &lt;dbl&gt;, wk23 &lt;dbl&gt;, wk24 &lt;dbl&gt;, wk25 &lt;dbl&gt;, wk26 &lt;dbl&gt;, wk27 &lt;dbl&gt;, wk28 &lt;dbl&gt;, wk29 &lt;dbl&gt;,
-## #   wk30 &lt;dbl&gt;, wk31 &lt;dbl&gt;, wk32 &lt;dbl&gt;, wk33 &lt;dbl&gt;, wk34 &lt;dbl&gt;, wk35 &lt;dbl&gt;, wk36 &lt;dbl&gt;, wk37 &lt;dbl&gt;,
-## #   wk38 &lt;dbl&gt;, wk39 &lt;dbl&gt;, wk40 &lt;dbl&gt;, wk41 &lt;dbl&gt;, wk42 &lt;dbl&gt;, wk43 &lt;dbl&gt;, wk44 &lt;dbl&gt;, wk45 &lt;dbl&gt;,
-## #   wk46 &lt;dbl&gt;, wk47 &lt;dbl&gt;, wk48 &lt;dbl&gt;, wk49 &lt;dbl&gt;, wk50 &lt;dbl&gt;, wk51 &lt;dbl&gt;, wk52 &lt;dbl&gt;, wk53 &lt;dbl&gt;,
-## #   wk54 &lt;dbl&gt;, wk55 &lt;dbl&gt;, wk56 &lt;dbl&gt;, wk57 &lt;dbl&gt;, wk58 &lt;dbl&gt;, wk59 &lt;dbl&gt;, wk60 &lt;dbl&gt;, wk61 &lt;dbl&gt;,
-## #   wk62 &lt;dbl&gt;, wk63 &lt;dbl&gt;, wk64 &lt;dbl&gt;, wk65 &lt;dbl&gt;, wk66 &lt;lgl&gt;, wk67 &lt;lgl&gt;, wk68 &lt;lgl&gt;, wk69 &lt;lgl&gt;,
-## #   wk70 &lt;lgl&gt;, wk71 &lt;lgl&gt;, wk72 &lt;lgl&gt;, wk73 &lt;lgl&gt;, wk74 &lt;lgl&gt;, wk75 &lt;lgl&gt;, wk76 &lt;lgl&gt;</code></pre>
-<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="some-data-cleaning-tools.html#cb221-1" aria-hidden="true"></a><span class="co">#&#39; Helper function to parse weeks to integers in the Billboard dataset</span></span>
-<span id="cb221-2"><a href="some-data-cleaning-tools.html#cb221-2" aria-hidden="true"></a><span class="co">#&#39; @param wk_chr Vector of week characters, with the pattern `c(&#39;wk1&#39;, &#39;wk2&#39;)`</span></span>
-<span id="cb221-3"><a href="some-data-cleaning-tools.html#cb221-3" aria-hidden="true"></a><span class="co">#&#39; @return Vector of integers, eg, `c(1L, 2L)`</span></span>
-<span id="cb221-4"><a href="some-data-cleaning-tools.html#cb221-4" aria-hidden="true"></a>parse_week =<span class="st"> </span><span class="cf">function</span>(wk_chr) {</span>
-<span id="cb221-5"><a href="some-data-cleaning-tools.html#cb221-5" aria-hidden="true"></a>    wk_int =<span class="st"> </span>wk_chr <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb221-6"><a href="some-data-cleaning-tools.html#cb221-6" aria-hidden="true"></a><span class="st">        </span><span class="kw">str_remove</span>(<span class="st">&#39;wk&#39;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb221-7"><a href="some-data-cleaning-tools.html#cb221-7" aria-hidden="true"></a><span class="st">        </span><span class="kw">as.integer</span>()</span>
-<span id="cb221-8"><a href="some-data-cleaning-tools.html#cb221-8" aria-hidden="true"></a>    <span class="kw">return</span>(wk_int)</span>
-<span id="cb221-9"><a href="some-data-cleaning-tools.html#cb221-9" aria-hidden="true"></a>}</span>
-<span id="cb221-10"><a href="some-data-cleaning-tools.html#cb221-10" aria-hidden="true"></a></span>
-<span id="cb221-11"><a href="some-data-cleaning-tools.html#cb221-11" aria-hidden="true"></a>billboard_clean =<span class="st"> </span>billboard_df <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb221-12"><a href="some-data-cleaning-tools.html#cb221-12" aria-hidden="true"></a><span class="st">    </span><span class="co">## Drop the row number column</span></span>
-<span id="cb221-13"><a href="some-data-cleaning-tools.html#cb221-13" aria-hidden="true"></a><span class="st">    </span><span class="kw">select</span>(<span class="op">-</span>X1) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb221-14"><a href="some-data-cleaning-tools.html#cb221-14" aria-hidden="true"></a><span class="st">    </span><span class="co">## Pivot week down and remove NA rows</span></span>
-<span id="cb221-15"><a href="some-data-cleaning-tools.html#cb221-15" aria-hidden="true"></a><span class="st">    </span><span class="kw">pivot_longer</span>(<span class="dt">cols =</span> <span class="kw">starts_with</span>(<span class="st">&#39;wk&#39;</span>), </span>
-<span id="cb221-16"><a href="some-data-cleaning-tools.html#cb221-16" aria-hidden="true"></a>                 <span class="dt">names_to =</span> <span class="st">&#39;week&#39;</span>, </span>
-<span id="cb221-17"><a href="some-data-cleaning-tools.html#cb221-17" aria-hidden="true"></a>                 <span class="dt">values_to =</span> <span class="st">&#39;rank&#39;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb221-18"><a href="some-data-cleaning-tools.html#cb221-18" aria-hidden="true"></a><span class="st">    </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(rank)) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb221-19"><a href="some-data-cleaning-tools.html#cb221-19" aria-hidden="true"></a><span class="st">    </span><span class="co">## Parse week and calculate date</span></span>
-<span id="cb221-20"><a href="some-data-cleaning-tools.html#cb221-20" aria-hidden="true"></a><span class="st">    </span><span class="co">## NB Base R can handle date arithmetic</span></span>
-<span id="cb221-21"><a href="some-data-cleaning-tools.html#cb221-21" aria-hidden="true"></a><span class="st">    </span><span class="co">## For month arithmetic see ?lubridate::`%m+%`</span></span>
-<span id="cb221-22"><a href="some-data-cleaning-tools.html#cb221-22" aria-hidden="true"></a><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">week =</span> <span class="kw">parse_week</span>(week), </span>
-<span id="cb221-23"><a href="some-data-cleaning-tools.html#cb221-23" aria-hidden="true"></a>           <span class="dt">date =</span> date.entered <span class="op">+</span><span class="st"> </span>(week<span class="dv">-1</span>)<span class="op">*</span><span class="dv">7</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb221-24"><a href="some-data-cleaning-tools.html#cb221-24" aria-hidden="true"></a><span class="st">    </span><span class="co">## Clean columns</span></span>
-<span id="cb221-25"><a href="some-data-cleaning-tools.html#cb221-25" aria-hidden="true"></a><span class="st">    </span><span class="kw">select</span>(year, artist, time, track, date, week, rank)</span>
-<span id="cb221-26"><a href="some-data-cleaning-tools.html#cb221-26" aria-hidden="true"></a>billboard_clean</span></code></pre></div>
-<pre><code>## # A tibble: 5,307 x 7
-##     year artist  time   track                   date        week  rank
-##    &lt;dbl&gt; &lt;chr&gt;   &lt;time&gt; &lt;chr&gt;                   &lt;date&gt;     &lt;int&gt; &lt;dbl&gt;
-##  1  2000 2 Pac   04:22  Baby Don&#39;t Cry          2000-02-26     1    87
-##  2  2000 2 Pac   04:22  Baby Don&#39;t Cry          2000-03-04     2    82
-##  3  2000 2 Pac   04:22  Baby Don&#39;t Cry          2000-03-11     3    72
-##  4  2000 2 Pac   04:22  Baby Don&#39;t Cry          2000-03-18     4    77
-##  5  2000 2 Pac   04:22  Baby Don&#39;t Cry          2000-03-25     5    87
-##  6  2000 2 Pac   04:22  Baby Don&#39;t Cry          2000-04-01     6    94
-##  7  2000 2 Pac   04:22  Baby Don&#39;t Cry          2000-04-08     7    99
-##  8  2000 2Ge+her 03:15  The Hardest Part Of ... 2000-09-02     1    91
-##  9  2000 2Ge+her 03:15  The Hardest Part Of ... 2000-09-09     2    87
-## 10  2000 2Ge+her 03:15  The Hardest Part Of ... 2000-09-16     3    92
-## # … with 5,297 more rows</code></pre>
+<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="some-data-cleaning-tools.html#cb219-1" aria-hidden="true"></a><span class="kw">head</span>(billboard_df)</span></code></pre></div>
+<table style="width:100%;">
+<colgroup>
+<col width="0%" />
+<col width="1%" />
+<col width="2%" />
+<col width="5%" />
+<col width="2%" />
+<col width="2%" />
+<col width="0%" />
+<col width="0%" />
+<col width="0%" />
+<col width="0%" />
+<col width="0%" />
+<col width="0%" />
+<col width="0%" />
+<col width="0%" />
+<col width="0%" />
+<col width="1%" />
+<col width="1%" />
+<col width="1%" />
+<col width="1%" />
+<col width="1%" />
+<col width="1%" />
+<col width="1%" />
+<col width="1%" />
+<col width="1%" />
+<col width="1%" />
+<col width="1%" />
+<col width="1%" />
+<col width="1%" />
+<col width="1%" />
+<col width="1%" />
+<col width="1%" />
+<col width="1%" />
+<col width="1%" />
+<col width="1%" />
+<col width="1%" />
+<col width="1%" />
+<col width="1%" />
+<col width="1%" />
+<col width="1%" />
+<col width="1%" />
+<col width="1%" />
+<col width="1%" />
+<col width="1%" />
+<col width="1%" />
+<col width="1%" />
+<col width="1%" />
+<col width="1%" />
+<col width="1%" />
+<col width="1%" />
+<col width="1%" />
+<col width="1%" />
+<col width="1%" />
+<col width="1%" />
+<col width="1%" />
+<col width="1%" />
+<col width="1%" />
+<col width="1%" />
+<col width="1%" />
+<col width="1%" />
+<col width="1%" />
+<col width="1%" />
+<col width="1%" />
+<col width="1%" />
+<col width="1%" />
+<col width="1%" />
+<col width="1%" />
+<col width="1%" />
+<col width="1%" />
+<col width="1%" />
+<col width="1%" />
+<col width="1%" />
+<col width="1%" />
+<col width="1%" />
+<col width="1%" />
+<col width="1%" />
+<col width="1%" />
+<col width="1%" />
+<col width="1%" />
+<col width="1%" />
+<col width="1%" />
+<col width="1%" />
+<col width="1%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="right">X1</th>
+<th align="right">year</th>
+<th align="left">artist</th>
+<th align="left">track</th>
+<th align="left">time</th>
+<th align="left">date.entered</th>
+<th align="right">wk1</th>
+<th align="right">wk2</th>
+<th align="right">wk3</th>
+<th align="right">wk4</th>
+<th align="right">wk5</th>
+<th align="right">wk6</th>
+<th align="right">wk7</th>
+<th align="right">wk8</th>
+<th align="right">wk9</th>
+<th align="right">wk10</th>
+<th align="right">wk11</th>
+<th align="right">wk12</th>
+<th align="right">wk13</th>
+<th align="right">wk14</th>
+<th align="right">wk15</th>
+<th align="right">wk16</th>
+<th align="right">wk17</th>
+<th align="right">wk18</th>
+<th align="right">wk19</th>
+<th align="right">wk20</th>
+<th align="right">wk21</th>
+<th align="right">wk22</th>
+<th align="right">wk23</th>
+<th align="right">wk24</th>
+<th align="right">wk25</th>
+<th align="right">wk26</th>
+<th align="right">wk27</th>
+<th align="right">wk28</th>
+<th align="right">wk29</th>
+<th align="right">wk30</th>
+<th align="right">wk31</th>
+<th align="right">wk32</th>
+<th align="right">wk33</th>
+<th align="right">wk34</th>
+<th align="right">wk35</th>
+<th align="right">wk36</th>
+<th align="right">wk37</th>
+<th align="right">wk38</th>
+<th align="right">wk39</th>
+<th align="right">wk40</th>
+<th align="right">wk41</th>
+<th align="right">wk42</th>
+<th align="right">wk43</th>
+<th align="right">wk44</th>
+<th align="right">wk45</th>
+<th align="right">wk46</th>
+<th align="right">wk47</th>
+<th align="right">wk48</th>
+<th align="right">wk49</th>
+<th align="right">wk50</th>
+<th align="right">wk51</th>
+<th align="right">wk52</th>
+<th align="right">wk53</th>
+<th align="right">wk54</th>
+<th align="right">wk55</th>
+<th align="right">wk56</th>
+<th align="right">wk57</th>
+<th align="right">wk58</th>
+<th align="right">wk59</th>
+<th align="right">wk60</th>
+<th align="right">wk61</th>
+<th align="right">wk62</th>
+<th align="right">wk63</th>
+<th align="right">wk64</th>
+<th align="right">wk65</th>
+<th align="left">wk66</th>
+<th align="left">wk67</th>
+<th align="left">wk68</th>
+<th align="left">wk69</th>
+<th align="left">wk70</th>
+<th align="left">wk71</th>
+<th align="left">wk72</th>
+<th align="left">wk73</th>
+<th align="left">wk74</th>
+<th align="left">wk75</th>
+<th align="left">wk76</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1</td>
+<td align="right">2000</td>
+<td align="left">2 Pac</td>
+<td align="left">Baby Don’t Cry</td>
+<td align="left">04:22:00</td>
+<td align="left">2000-02-26</td>
+<td align="right">87</td>
+<td align="right">82</td>
+<td align="right">72</td>
+<td align="right">77</td>
+<td align="right">87</td>
+<td align="right">94</td>
+<td align="right">99</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="right">2000</td>
+<td align="left">2Ge+her</td>
+<td align="left">The Hardest Part Of …</td>
+<td align="left">03:15:00</td>
+<td align="left">2000-09-02</td>
+<td align="right">91</td>
+<td align="right">87</td>
+<td align="right">92</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="right">3</td>
+<td align="right">2000</td>
+<td align="left">3 Doors Down</td>
+<td align="left">Kryptonite</td>
+<td align="left">03:53:00</td>
+<td align="left">2000-04-08</td>
+<td align="right">81</td>
+<td align="right">70</td>
+<td align="right">68</td>
+<td align="right">67</td>
+<td align="right">66</td>
+<td align="right">57</td>
+<td align="right">54</td>
+<td align="right">53</td>
+<td align="right">51</td>
+<td align="right">51</td>
+<td align="right">51</td>
+<td align="right">51</td>
+<td align="right">47</td>
+<td align="right">44</td>
+<td align="right">38</td>
+<td align="right">28</td>
+<td align="right">22</td>
+<td align="right">18</td>
+<td align="right">18</td>
+<td align="right">14</td>
+<td align="right">12</td>
+<td align="right">7</td>
+<td align="right">6</td>
+<td align="right">6</td>
+<td align="right">6</td>
+<td align="right">5</td>
+<td align="right">5</td>
+<td align="right">4</td>
+<td align="right">4</td>
+<td align="right">4</td>
+<td align="right">4</td>
+<td align="right">3</td>
+<td align="right">3</td>
+<td align="right">3</td>
+<td align="right">4</td>
+<td align="right">5</td>
+<td align="right">5</td>
+<td align="right">9</td>
+<td align="right">9</td>
+<td align="right">15</td>
+<td align="right">14</td>
+<td align="right">13</td>
+<td align="right">14</td>
+<td align="right">16</td>
+<td align="right">17</td>
+<td align="right">21</td>
+<td align="right">22</td>
+<td align="right">24</td>
+<td align="right">28</td>
+<td align="right">33</td>
+<td align="right">42</td>
+<td align="right">42</td>
+<td align="right">49</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="right">4</td>
+<td align="right">2000</td>
+<td align="left">3 Doors Down</td>
+<td align="left">Loser</td>
+<td align="left">04:24:00</td>
+<td align="left">2000-10-21</td>
+<td align="right">76</td>
+<td align="right">76</td>
+<td align="right">72</td>
+<td align="right">69</td>
+<td align="right">67</td>
+<td align="right">65</td>
+<td align="right">55</td>
+<td align="right">59</td>
+<td align="right">62</td>
+<td align="right">61</td>
+<td align="right">61</td>
+<td align="right">59</td>
+<td align="right">61</td>
+<td align="right">66</td>
+<td align="right">72</td>
+<td align="right">76</td>
+<td align="right">75</td>
+<td align="right">67</td>
+<td align="right">73</td>
+<td align="right">70</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="right">5</td>
+<td align="right">2000</td>
+<td align="left">504 Boyz</td>
+<td align="left">Wobble Wobble</td>
+<td align="left">03:35:00</td>
+<td align="left">2000-04-15</td>
+<td align="right">57</td>
+<td align="right">34</td>
+<td align="right">25</td>
+<td align="right">17</td>
+<td align="right">17</td>
+<td align="right">31</td>
+<td align="right">36</td>
+<td align="right">49</td>
+<td align="right">53</td>
+<td align="right">57</td>
+<td align="right">64</td>
+<td align="right">70</td>
+<td align="right">75</td>
+<td align="right">76</td>
+<td align="right">78</td>
+<td align="right">85</td>
+<td align="right">92</td>
+<td align="right">96</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="right">6</td>
+<td align="right">2000</td>
+<td align="left">98^0</td>
+<td align="left">Give Me Just One Nig…</td>
+<td align="left">03:24:00</td>
+<td align="left">2000-08-19</td>
+<td align="right">51</td>
+<td align="right">39</td>
+<td align="right">34</td>
+<td align="right">26</td>
+<td align="right">26</td>
+<td align="right">19</td>
+<td align="right">2</td>
+<td align="right">2</td>
+<td align="right">3</td>
+<td align="right">6</td>
+<td align="right">7</td>
+<td align="right">22</td>
+<td align="right">29</td>
+<td align="right">36</td>
+<td align="right">47</td>
+<td align="right">67</td>
+<td align="right">66</td>
+<td align="right">84</td>
+<td align="right">93</td>
+<td align="right">94</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="some-data-cleaning-tools.html#cb220-1" aria-hidden="true"></a><span class="co">#&#39; Helper function to parse weeks to integers in the Billboard dataset</span></span>
+<span id="cb220-2"><a href="some-data-cleaning-tools.html#cb220-2" aria-hidden="true"></a><span class="co">#&#39; @param wk_chr Vector of week characters, with the pattern `c(&#39;wk1&#39;, &#39;wk2&#39;)`</span></span>
+<span id="cb220-3"><a href="some-data-cleaning-tools.html#cb220-3" aria-hidden="true"></a><span class="co">#&#39; @return Vector of integers, eg, `c(1L, 2L)`</span></span>
+<span id="cb220-4"><a href="some-data-cleaning-tools.html#cb220-4" aria-hidden="true"></a>parse_week =<span class="st"> </span><span class="cf">function</span>(wk_chr) {</span>
+<span id="cb220-5"><a href="some-data-cleaning-tools.html#cb220-5" aria-hidden="true"></a>    wk_int =<span class="st"> </span>wk_chr <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb220-6"><a href="some-data-cleaning-tools.html#cb220-6" aria-hidden="true"></a><span class="st">        </span><span class="kw">str_remove</span>(<span class="st">&#39;wk&#39;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb220-7"><a href="some-data-cleaning-tools.html#cb220-7" aria-hidden="true"></a><span class="st">        </span><span class="kw">as.integer</span>()</span>
+<span id="cb220-8"><a href="some-data-cleaning-tools.html#cb220-8" aria-hidden="true"></a>    <span class="kw">return</span>(wk_int)</span>
+<span id="cb220-9"><a href="some-data-cleaning-tools.html#cb220-9" aria-hidden="true"></a>}</span>
+<span id="cb220-10"><a href="some-data-cleaning-tools.html#cb220-10" aria-hidden="true"></a></span>
+<span id="cb220-11"><a href="some-data-cleaning-tools.html#cb220-11" aria-hidden="true"></a>billboard_clean =<span class="st"> </span>billboard_df <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb220-12"><a href="some-data-cleaning-tools.html#cb220-12" aria-hidden="true"></a><span class="st">    </span><span class="co">## Drop the row number column</span></span>
+<span id="cb220-13"><a href="some-data-cleaning-tools.html#cb220-13" aria-hidden="true"></a><span class="st">    </span><span class="kw">select</span>(<span class="op">-</span>X1) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb220-14"><a href="some-data-cleaning-tools.html#cb220-14" aria-hidden="true"></a><span class="st">    </span><span class="co">## Pivot week down and remove NA rows</span></span>
+<span id="cb220-15"><a href="some-data-cleaning-tools.html#cb220-15" aria-hidden="true"></a><span class="st">    </span><span class="kw">pivot_longer</span>(<span class="dt">cols =</span> <span class="kw">starts_with</span>(<span class="st">&#39;wk&#39;</span>), </span>
+<span id="cb220-16"><a href="some-data-cleaning-tools.html#cb220-16" aria-hidden="true"></a>                 <span class="dt">names_to =</span> <span class="st">&#39;week&#39;</span>, </span>
+<span id="cb220-17"><a href="some-data-cleaning-tools.html#cb220-17" aria-hidden="true"></a>                 <span class="dt">values_to =</span> <span class="st">&#39;rank&#39;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb220-18"><a href="some-data-cleaning-tools.html#cb220-18" aria-hidden="true"></a><span class="st">    </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(rank)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb220-19"><a href="some-data-cleaning-tools.html#cb220-19" aria-hidden="true"></a><span class="st">    </span><span class="co">## Parse week and calculate date</span></span>
+<span id="cb220-20"><a href="some-data-cleaning-tools.html#cb220-20" aria-hidden="true"></a><span class="st">    </span><span class="co">## NB Base R can handle date arithmetic</span></span>
+<span id="cb220-21"><a href="some-data-cleaning-tools.html#cb220-21" aria-hidden="true"></a><span class="st">    </span><span class="co">## For month arithmetic see ?lubridate::`%m+%`</span></span>
+<span id="cb220-22"><a href="some-data-cleaning-tools.html#cb220-22" aria-hidden="true"></a><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">week =</span> <span class="kw">parse_week</span>(week), </span>
+<span id="cb220-23"><a href="some-data-cleaning-tools.html#cb220-23" aria-hidden="true"></a>           <span class="dt">date =</span> date.entered <span class="op">+</span><span class="st"> </span>(week<span class="dv">-1</span>)<span class="op">*</span><span class="dv">7</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb220-24"><a href="some-data-cleaning-tools.html#cb220-24" aria-hidden="true"></a><span class="st">    </span><span class="co">## Clean columns</span></span>
+<span id="cb220-25"><a href="some-data-cleaning-tools.html#cb220-25" aria-hidden="true"></a><span class="st">    </span><span class="kw">select</span>(year, artist, time, track, date, week, rank)</span>
+<span id="cb220-26"><a href="some-data-cleaning-tools.html#cb220-26" aria-hidden="true"></a><span class="kw">head</span>(billboard_clean)</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="right">year</th>
+<th align="left">artist</th>
+<th align="left">time</th>
+<th align="left">track</th>
+<th align="left">date</th>
+<th align="right">week</th>
+<th align="right">rank</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">2000</td>
+<td align="left">2 Pac</td>
+<td align="left">04:22:00</td>
+<td align="left">Baby Don’t Cry</td>
+<td align="left">2000-02-26</td>
+<td align="right">1</td>
+<td align="right">87</td>
+</tr>
+<tr class="even">
+<td align="right">2000</td>
+<td align="left">2 Pac</td>
+<td align="left">04:22:00</td>
+<td align="left">Baby Don’t Cry</td>
+<td align="left">2000-03-04</td>
+<td align="right">2</td>
+<td align="right">82</td>
+</tr>
+<tr class="odd">
+<td align="right">2000</td>
+<td align="left">2 Pac</td>
+<td align="left">04:22:00</td>
+<td align="left">Baby Don’t Cry</td>
+<td align="left">2000-03-11</td>
+<td align="right">3</td>
+<td align="right">72</td>
+</tr>
+<tr class="even">
+<td align="right">2000</td>
+<td align="left">2 Pac</td>
+<td align="left">04:22:00</td>
+<td align="left">Baby Don’t Cry</td>
+<td align="left">2000-03-18</td>
+<td align="right">4</td>
+<td align="right">77</td>
+</tr>
+<tr class="odd">
+<td align="right">2000</td>
+<td align="left">2 Pac</td>
+<td align="left">04:22:00</td>
+<td align="left">Baby Don’t Cry</td>
+<td align="left">2000-03-25</td>
+<td align="right">5</td>
+<td align="right">87</td>
+</tr>
+<tr class="even">
+<td align="right">2000</td>
+<td align="left">2 Pac</td>
+<td align="left">04:22:00</td>
+<td align="left">Baby Don’t Cry</td>
+<td align="left">2000-04-01</td>
+<td align="right">6</td>
+<td align="right">94</td>
+</tr>
+</tbody>
+</table>
 <p>NB. Base R includes methods for doing date arithmetic, eg,</p>
-<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="some-data-cleaning-tools.html#cb223-1" aria-hidden="true"></a><span class="kw">as.Date</span>(<span class="st">&#39;2020-04-30&#39;</span>) <span class="op">+</span><span class="st"> </span><span class="dv">1</span></span></code></pre></div>
+<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="some-data-cleaning-tools.html#cb221-1" aria-hidden="true"></a><span class="kw">as.Date</span>(<span class="st">&#39;2020-04-30&#39;</span>) <span class="op">+</span><span class="st"> </span><span class="dv">1</span></span></code></pre></div>
 <pre><code>## [1] &quot;2020-05-01&quot;</code></pre>
 <p>If you need month arithmetic, check out the <code>lubridate</code> package, and specifically <code>%m+%</code> and related operators.</p>
-<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="some-data-cleaning-tools.html#cb225-1" aria-hidden="true"></a><span class="kw">count</span>(billboard_clean, artist, track) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb225-2"><a href="some-data-cleaning-tools.html#cb225-2" aria-hidden="true"></a><span class="st">    </span><span class="kw">arrange</span>(<span class="kw">desc</span>(n))</span></code></pre></div>
-<pre><code>## # A tibble: 317 x 3
-##    artist           track                       n
-##    &lt;chr&gt;            &lt;chr&gt;                   &lt;int&gt;
-##  1 Creed            Higher                     57
-##  2 Lonestar         Amazed                     55
-##  3 3 Doors Down     Kryptonite                 53
-##  4 Hill, Faith      Breathe                    53
-##  5 Creed            With Arms Wide Open        47
-##  6 Joe              I Wanna Know               44
-##  7 Vertical Horizon Everything You Want        41
-##  8 matchbox twenty  Bent                       39
-##  9 Braxton, Toni    He Wasn&#39;t Man Enough       37
-## 10 Nelly            (Hot S**t) Country G...    34
-## # … with 307 more rows</code></pre>
+<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="some-data-cleaning-tools.html#cb223-1" aria-hidden="true"></a><span class="kw">count</span>(billboard_clean, artist, track) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb223-2"><a href="some-data-cleaning-tools.html#cb223-2" aria-hidden="true"></a><span class="st">    </span><span class="kw">arrange</span>(<span class="kw">desc</span>(n)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb223-3"><a href="some-data-cleaning-tools.html#cb223-3" aria-hidden="true"></a><span class="st">    </span><span class="kw">head</span>()</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">artist</th>
+<th align="left">track</th>
+<th align="right">n</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Creed</td>
+<td align="left">Higher</td>
+<td align="right">57</td>
+</tr>
+<tr class="even">
+<td align="left">Lonestar</td>
+<td align="left">Amazed</td>
+<td align="right">55</td>
+</tr>
+<tr class="odd">
+<td align="left">3 Doors Down</td>
+<td align="left">Kryptonite</td>
+<td align="right">53</td>
+</tr>
+<tr class="even">
+<td align="left">Hill, Faith</td>
+<td align="left">Breathe</td>
+<td align="right">53</td>
+</tr>
+<tr class="odd">
+<td align="left">Creed</td>
+<td align="left">With Arms Wide Open</td>
+<td align="right">47</td>
+</tr>
+<tr class="even">
+<td align="left">Joe</td>
+<td align="left">I Wanna Know</td>
+<td align="right">44</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div id="the-tb-dataset" class="section level3" number="21.2.3">
 <h3><span class="header-section-number">21.2.3</span> 3.2: The TB Dataset</h3>
-<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="some-data-cleaning-tools.html#cb227-1" aria-hidden="true"></a>tb_df =<span class="st"> </span>haven<span class="op">::</span><span class="kw">read_sav</span>(<span class="kw">file.path</span>(data_folder, <span class="st">&#39;tb.sav&#39;</span>))</span></code></pre></div>
-<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="some-data-cleaning-tools.html#cb228-1" aria-hidden="true"></a>tb_clean =<span class="st"> </span>tb_df <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb228-2"><a href="some-data-cleaning-tools.html#cb228-2" aria-hidden="true"></a><span class="st">    </span><span class="co">## One row per observation = country x gender x age group</span></span>
-<span id="cb228-3"><a href="some-data-cleaning-tools.html#cb228-3" aria-hidden="true"></a><span class="st">    </span><span class="kw">pivot_longer</span>(m014<span class="op">:</span>fu, </span>
-<span id="cb228-4"><a href="some-data-cleaning-tools.html#cb228-4" aria-hidden="true"></a>                 <span class="dt">names_to =</span> <span class="st">&#39;column&#39;</span>, </span>
-<span id="cb228-5"><a href="some-data-cleaning-tools.html#cb228-5" aria-hidden="true"></a>                 <span class="dt">values_to =</span> <span class="st">&#39;cases&#39;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb228-6"><a href="some-data-cleaning-tools.html#cb228-6" aria-hidden="true"></a><span class="st">    </span><span class="co">## Separate gender and age</span></span>
-<span id="cb228-7"><a href="some-data-cleaning-tools.html#cb228-7" aria-hidden="true"></a><span class="st">    </span><span class="kw">separate</span>(column, <span class="dt">into =</span> <span class="kw">c</span>(<span class="st">&#39;gender&#39;</span>, <span class="st">&#39;age&#39;</span>), </span>
-<span id="cb228-8"><a href="some-data-cleaning-tools.html#cb228-8" aria-hidden="true"></a>             <span class="dt">sep =</span> <span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb228-9"><a href="some-data-cleaning-tools.html#cb228-9" aria-hidden="true"></a><span class="st">    </span><span class="co">## Wrangle age: </span></span>
-<span id="cb228-10"><a href="some-data-cleaning-tools.html#cb228-10" aria-hidden="true"></a><span class="st">    </span><span class="co">## - Split into upper and lower bounds</span></span>
-<span id="cb228-11"><a href="some-data-cleaning-tools.html#cb228-11" aria-hidden="true"></a><span class="st">    </span><span class="co">## - Recombine with -</span></span>
-<span id="cb228-12"><a href="some-data-cleaning-tools.html#cb228-12" aria-hidden="true"></a><span class="st">    </span><span class="co">## - Fix missing age and 65+</span></span>
-<span id="cb228-13"><a href="some-data-cleaning-tools.html#cb228-13" aria-hidden="true"></a><span class="st">    </span><span class="co">## - Set order</span></span>
-<span id="cb228-14"><a href="some-data-cleaning-tools.html#cb228-14" aria-hidden="true"></a><span class="st">    </span><span class="co">## - Clean up the intermediate columns for upper and lower bounds</span></span>
-<span id="cb228-15"><a href="some-data-cleaning-tools.html#cb228-15" aria-hidden="true"></a><span class="st">    </span><span class="kw">separate</span>(age, <span class="dt">into =</span> <span class="kw">c</span>(<span class="st">&#39;age_lower&#39;</span>, <span class="st">&#39;age_upper&#39;</span>), </span>
-<span id="cb228-16"><a href="some-data-cleaning-tools.html#cb228-16" aria-hidden="true"></a>             <span class="dt">sep =</span> <span class="dv">-2</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb228-17"><a href="some-data-cleaning-tools.html#cb228-17" aria-hidden="true"></a><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">age =</span> <span class="kw">str_c</span>(age_lower, <span class="st">&#39;-&#39;</span>, age_upper), </span>
-<span id="cb228-18"><a href="some-data-cleaning-tools.html#cb228-18" aria-hidden="true"></a>           <span class="dt">age =</span> <span class="kw">case_when</span>(age <span class="op">==</span><span class="st"> &#39;-u&#39;</span> <span class="op">~</span><span class="st"> </span><span class="ot">NA_character_</span>, </span>
-<span id="cb228-19"><a href="some-data-cleaning-tools.html#cb228-19" aria-hidden="true"></a>                           age <span class="op">==</span><span class="st"> &#39;-65&#39;</span> <span class="op">~</span><span class="st"> &#39;65+&#39;</span>, </span>
-<span id="cb228-20"><a href="some-data-cleaning-tools.html#cb228-20" aria-hidden="true"></a>                           <span class="ot">TRUE</span> <span class="op">~</span><span class="st"> </span>age), </span>
-<span id="cb228-21"><a href="some-data-cleaning-tools.html#cb228-21" aria-hidden="true"></a>           <span class="dt">age =</span> <span class="kw">fct_inorder</span>(age)) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb228-22"><a href="some-data-cleaning-tools.html#cb228-22" aria-hidden="true"></a><span class="st">    </span><span class="kw">select</span>(<span class="op">-</span>age_lower, <span class="op">-</span>age_upper) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb228-23"><a href="some-data-cleaning-tools.html#cb228-23" aria-hidden="true"></a><span class="st">    </span><span class="co">## Put in order, with ID columns first and then the variable</span></span>
-<span id="cb228-24"><a href="some-data-cleaning-tools.html#cb228-24" aria-hidden="true"></a><span class="st">    </span><span class="kw">select</span>(country, year, gender, age, cases)</span>
-<span id="cb228-25"><a href="some-data-cleaning-tools.html#cb228-25" aria-hidden="true"></a>tb_clean</span></code></pre></div>
-<pre><code>## # A tibble: 3,216 x 5
-##    country  year gender age   cases
-##    &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;  &lt;fct&gt; &lt;dbl&gt;
-##  1 AD       2000 m      0-14      0
-##  2 AD       2000 m      15-24     0
-##  3 AD       2000 m      25-34     1
-##  4 AD       2000 m      35-44     0
-##  5 AD       2000 m      45-54     0
-##  6 AD       2000 m      55-64     0
-##  7 AD       2000 m      65+       0
-##  8 AD       2000 m      &lt;NA&gt;     NA
-##  9 AD       2000 f      0-14     NA
-## 10 AD       2000 f      15-24    NA
-## # … with 3,206 more rows</code></pre>
+<ul>
+<li><code>haven</code> package</li>
+<li><code>separate()</code></li>
+<li><code>case_when()</code></li>
+</ul>
+<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="some-data-cleaning-tools.html#cb224-1" aria-hidden="true"></a>tb_df =<span class="st"> </span>haven<span class="op">::</span><span class="kw">read_sav</span>(<span class="kw">file.path</span>(data_folder, <span class="st">&#39;tb.sav&#39;</span>))</span>
+<span id="cb224-2"><a href="some-data-cleaning-tools.html#cb224-2" aria-hidden="true"></a><span class="kw">head</span>(tb_df)</span></code></pre></div>
+<table>
+<colgroup>
+<col width="8%" />
+<col width="5%" />
+<col width="5%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="4%" />
+<col width="3%" />
+<col width="5%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="4%" />
+<col width="3%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">country</th>
+<th align="right">year</th>
+<th align="right">m014</th>
+<th align="right">m1524</th>
+<th align="right">m2534</th>
+<th align="right">m3544</th>
+<th align="right">m4554</th>
+<th align="right">m5564</th>
+<th align="right">m65</th>
+<th align="right">mu</th>
+<th align="right">f014</th>
+<th align="right">f1524</th>
+<th align="right">f2534</th>
+<th align="right">f3544</th>
+<th align="right">f4554</th>
+<th align="right">f5564</th>
+<th align="right">f65</th>
+<th align="right">fu</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">AD</td>
+<td align="right">2000</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+</tr>
+<tr class="even">
+<td align="left">AE</td>
+<td align="right">2000</td>
+<td align="right">2</td>
+<td align="right">4</td>
+<td align="right">4</td>
+<td align="right">6</td>
+<td align="right">5</td>
+<td align="right">12</td>
+<td align="right">10</td>
+<td align="right">NA</td>
+<td align="right">3</td>
+<td align="right">16</td>
+<td align="right">1</td>
+<td align="right">3</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">4</td>
+<td align="right">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">AF</td>
+<td align="right">2000</td>
+<td align="right">52</td>
+<td align="right">228</td>
+<td align="right">183</td>
+<td align="right">149</td>
+<td align="right">129</td>
+<td align="right">94</td>
+<td align="right">80</td>
+<td align="right">NA</td>
+<td align="right">93</td>
+<td align="right">414</td>
+<td align="right">565</td>
+<td align="right">339</td>
+<td align="right">205</td>
+<td align="right">99</td>
+<td align="right">36</td>
+<td align="right">NA</td>
+</tr>
+<tr class="even">
+<td align="left">AG</td>
+<td align="right">2000</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">NA</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">AL</td>
+<td align="right">2000</td>
+<td align="right">2</td>
+<td align="right">19</td>
+<td align="right">21</td>
+<td align="right">14</td>
+<td align="right">24</td>
+<td align="right">19</td>
+<td align="right">16</td>
+<td align="right">NA</td>
+<td align="right">3</td>
+<td align="right">11</td>
+<td align="right">10</td>
+<td align="right">8</td>
+<td align="right">8</td>
+<td align="right">5</td>
+<td align="right">11</td>
+<td align="right">NA</td>
+</tr>
+<tr class="even">
+<td align="left">AM</td>
+<td align="right">2000</td>
+<td align="right">2</td>
+<td align="right">152</td>
+<td align="right">130</td>
+<td align="right">131</td>
+<td align="right">63</td>
+<td align="right">26</td>
+<td align="right">21</td>
+<td align="right">NA</td>
+<td align="right">1</td>
+<td align="right">24</td>
+<td align="right">27</td>
+<td align="right">24</td>
+<td align="right">8</td>
+<td align="right">8</td>
+<td align="right">4</td>
+<td align="right">NA</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="some-data-cleaning-tools.html#cb225-1" aria-hidden="true"></a>tb_clean =<span class="st"> </span>tb_df <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb225-2"><a href="some-data-cleaning-tools.html#cb225-2" aria-hidden="true"></a><span class="st">    </span><span class="co">## One row per observation = country x gender x age group</span></span>
+<span id="cb225-3"><a href="some-data-cleaning-tools.html#cb225-3" aria-hidden="true"></a><span class="st">    </span><span class="kw">pivot_longer</span>(m014<span class="op">:</span>fu, </span>
+<span id="cb225-4"><a href="some-data-cleaning-tools.html#cb225-4" aria-hidden="true"></a>                 <span class="dt">names_to =</span> <span class="st">&#39;column&#39;</span>, </span>
+<span id="cb225-5"><a href="some-data-cleaning-tools.html#cb225-5" aria-hidden="true"></a>                 <span class="dt">values_to =</span> <span class="st">&#39;cases&#39;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb225-6"><a href="some-data-cleaning-tools.html#cb225-6" aria-hidden="true"></a><span class="st">    </span><span class="co">## Separate gender and age</span></span>
+<span id="cb225-7"><a href="some-data-cleaning-tools.html#cb225-7" aria-hidden="true"></a><span class="st">    </span><span class="kw">separate</span>(column, <span class="dt">into =</span> <span class="kw">c</span>(<span class="st">&#39;gender&#39;</span>, <span class="st">&#39;age&#39;</span>), </span>
+<span id="cb225-8"><a href="some-data-cleaning-tools.html#cb225-8" aria-hidden="true"></a>             <span class="dt">sep =</span> <span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb225-9"><a href="some-data-cleaning-tools.html#cb225-9" aria-hidden="true"></a><span class="st">    </span><span class="co">## Wrangle age: </span></span>
+<span id="cb225-10"><a href="some-data-cleaning-tools.html#cb225-10" aria-hidden="true"></a><span class="st">    </span><span class="co">## - Split into upper and lower bounds</span></span>
+<span id="cb225-11"><a href="some-data-cleaning-tools.html#cb225-11" aria-hidden="true"></a><span class="st">    </span><span class="co">## - Recombine with -</span></span>
+<span id="cb225-12"><a href="some-data-cleaning-tools.html#cb225-12" aria-hidden="true"></a><span class="st">    </span><span class="co">## - Fix missing age and 65+</span></span>
+<span id="cb225-13"><a href="some-data-cleaning-tools.html#cb225-13" aria-hidden="true"></a><span class="st">    </span><span class="co">## - Set order</span></span>
+<span id="cb225-14"><a href="some-data-cleaning-tools.html#cb225-14" aria-hidden="true"></a><span class="st">    </span><span class="co">## - Clean up the intermediate columns for upper and lower bounds</span></span>
+<span id="cb225-15"><a href="some-data-cleaning-tools.html#cb225-15" aria-hidden="true"></a><span class="st">    </span><span class="kw">separate</span>(age, <span class="dt">into =</span> <span class="kw">c</span>(<span class="st">&#39;age_lower&#39;</span>, <span class="st">&#39;age_upper&#39;</span>), </span>
+<span id="cb225-16"><a href="some-data-cleaning-tools.html#cb225-16" aria-hidden="true"></a>             <span class="dt">sep =</span> <span class="dv">-2</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb225-17"><a href="some-data-cleaning-tools.html#cb225-17" aria-hidden="true"></a><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">age =</span> <span class="kw">str_c</span>(age_lower, <span class="st">&#39;-&#39;</span>, age_upper), </span>
+<span id="cb225-18"><a href="some-data-cleaning-tools.html#cb225-18" aria-hidden="true"></a>           <span class="dt">age =</span> <span class="kw">case_when</span>(age <span class="op">==</span><span class="st"> &#39;-u&#39;</span>  <span class="op">~</span><span class="st"> </span><span class="ot">NA_character_</span>, </span>
+<span id="cb225-19"><a href="some-data-cleaning-tools.html#cb225-19" aria-hidden="true"></a>                           age <span class="op">==</span><span class="st"> &#39;-65&#39;</span> <span class="op">~</span><span class="st"> &#39;65+&#39;</span>, </span>
+<span id="cb225-20"><a href="some-data-cleaning-tools.html#cb225-20" aria-hidden="true"></a>                           <span class="ot">TRUE</span>         <span class="op">~</span><span class="st"> </span>age), </span>
+<span id="cb225-21"><a href="some-data-cleaning-tools.html#cb225-21" aria-hidden="true"></a>           <span class="dt">age =</span> <span class="kw">fct_inorder</span>(age)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb225-22"><a href="some-data-cleaning-tools.html#cb225-22" aria-hidden="true"></a><span class="st">    </span><span class="kw">select</span>(<span class="op">-</span>age_lower, <span class="op">-</span>age_upper) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb225-23"><a href="some-data-cleaning-tools.html#cb225-23" aria-hidden="true"></a><span class="st">    </span><span class="co">## Put in order, with ID columns first and then the variable</span></span>
+<span id="cb225-24"><a href="some-data-cleaning-tools.html#cb225-24" aria-hidden="true"></a><span class="st">    </span><span class="kw">select</span>(country, year, gender, age, cases)</span>
+<span id="cb225-25"><a href="some-data-cleaning-tools.html#cb225-25" aria-hidden="true"></a><span class="kw">head</span>(tb_clean)</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">country</th>
+<th align="right">year</th>
+<th align="left">gender</th>
+<th align="left">age</th>
+<th align="right">cases</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">AD</td>
+<td align="right">2000</td>
+<td align="left">m</td>
+<td align="left">0-14</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">AD</td>
+<td align="right">2000</td>
+<td align="left">m</td>
+<td align="left">15-24</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">AD</td>
+<td align="right">2000</td>
+<td align="left">m</td>
+<td align="left">25-34</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="left">AD</td>
+<td align="right">2000</td>
+<td align="left">m</td>
+<td align="left">35-44</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">AD</td>
+<td align="right">2000</td>
+<td align="left">m</td>
+<td align="left">45-54</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">AD</td>
+<td align="right">2000</td>
+<td align="left">m</td>
+<td align="left">55-64</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div id="the-weather-dataset" class="section level3" number="21.2.4">
 <h3><span class="header-section-number">21.2.4</span> 3.3: The Weather Dataset</h3>
-<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="some-data-cleaning-tools.html#cb230-1" aria-hidden="true"></a>weather_df =<span class="st"> </span><span class="kw">read_csv</span>(<span class="kw">file.path</span>(data_folder, <span class="st">&#39;weather.csv&#39;</span>))</span></code></pre></div>
+<ul>
+<li><code>pivot_wider()</code></li>
+<li><code>str_remove()</code></li>
+</ul>
+<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="some-data-cleaning-tools.html#cb226-1" aria-hidden="true"></a>weather_df =<span class="st"> </span><span class="kw">read_csv</span>(<span class="kw">file.path</span>(data_folder, <span class="st">&#39;weather.csv&#39;</span>))</span></code></pre></div>
 <pre><code>## Warning: Missing column names filled in: &#39;X1&#39; [1]</code></pre>
 <pre><code>## 
 ## ── Column specification ────────────────────────────────────────────────────────────────────────────
@@ -612,42 +1714,394 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##   d24 = col_logical()
 ## )
 ## ℹ Use `spec()` for the full column specifications.</code></pre>
-<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="some-data-cleaning-tools.html#cb233-1" aria-hidden="true"></a>weather_clean =<span class="st"> </span>weather_df <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb233-2"><a href="some-data-cleaning-tools.html#cb233-2" aria-hidden="true"></a><span class="st">    </span><span class="kw">select</span>(<span class="op">-</span>X1) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb233-3"><a href="some-data-cleaning-tools.html#cb233-3" aria-hidden="true"></a><span class="st">    </span><span class="co">## Lengthen days</span></span>
-<span id="cb233-4"><a href="some-data-cleaning-tools.html#cb233-4" aria-hidden="true"></a><span class="st">    </span><span class="kw">pivot_longer</span>(d1<span class="op">:</span>d31, </span>
-<span id="cb233-5"><a href="some-data-cleaning-tools.html#cb233-5" aria-hidden="true"></a>                 <span class="dt">names_to =</span> <span class="st">&#39;day&#39;</span>, </span>
-<span id="cb233-6"><a href="some-data-cleaning-tools.html#cb233-6" aria-hidden="true"></a>                 <span class="dt">values_to =</span> <span class="st">&#39;obs&#39;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb233-7"><a href="some-data-cleaning-tools.html#cb233-7" aria-hidden="true"></a><span class="st">    </span><span class="co">## Widen `element`</span></span>
-<span id="cb233-8"><a href="some-data-cleaning-tools.html#cb233-8" aria-hidden="true"></a><span class="st">    </span><span class="kw">pivot_wider</span>(<span class="dt">names_from =</span> element, </span>
-<span id="cb233-9"><a href="some-data-cleaning-tools.html#cb233-9" aria-hidden="true"></a>                <span class="dt">values_from =</span> obs) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb233-10"><a href="some-data-cleaning-tools.html#cb233-10" aria-hidden="true"></a><span class="st">    </span><span class="co">## Fix the class of `day`</span></span>
-<span id="cb233-11"><a href="some-data-cleaning-tools.html#cb233-11" aria-hidden="true"></a><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">day =</span> <span class="kw">str_remove</span>(day, <span class="st">&#39;d&#39;</span>), </span>
-<span id="cb233-12"><a href="some-data-cleaning-tools.html#cb233-12" aria-hidden="true"></a>           <span class="dt">day =</span> <span class="kw">as.integer</span>(day)) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb233-13"><a href="some-data-cleaning-tools.html#cb233-13" aria-hidden="true"></a><span class="st">    </span><span class="co">## Check against the paper by filtering to non-missing rows</span></span>
-<span id="cb233-14"><a href="some-data-cleaning-tools.html#cb233-14" aria-hidden="true"></a><span class="st">    </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(tmax)<span class="op">|!</span><span class="kw">is.na</span>(tmin))</span>
-<span id="cb233-15"><a href="some-data-cleaning-tools.html#cb233-15" aria-hidden="true"></a>weather_clean</span></code></pre></div>
-<pre><code>## # A tibble: 33 x 6
-##    id       year month   day  tmax  tmin
-##    &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
-##  1 MX17004  2010     1    30  27.8  14.5
-##  2 MX17004  2010     2     2  27.3  14.4
-##  3 MX17004  2010     2     3  24.1  14.4
-##  4 MX17004  2010     2    11  29.7  13.4
-##  5 MX17004  2010     2    23  29.9  10.7
-##  6 MX17004  2010     3     5  32.1  14.2
-##  7 MX17004  2010     3    10  34.5  16.8
-##  8 MX17004  2010     3    16  31.1  17.6
-##  9 MX17004  2010     4    27  36.3  16.7
-## 10 MX17004  2010     5    27  33.2  18.2
-## # … with 23 more rows</code></pre>
-<ul>
-<li>lab: NSF data
-<ul>
-<li>3 files that need to be cleaned in the same way, then combined</li>
-<li>Excel date mangling</li>
-</ul></li>
-</ul>
+<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="some-data-cleaning-tools.html#cb229-1" aria-hidden="true"></a><span class="kw">head</span>(weather_df)</span></code></pre></div>
+<table>
+<colgroup>
+<col width="1%" />
+<col width="5%" />
+<col width="3%" />
+<col width="3%" />
+<col width="5%" />
+<col width="1%" />
+<col width="3%" />
+<col width="3%" />
+<col width="1%" />
+<col width="3%" />
+<col width="1%" />
+<col width="1%" />
+<col width="1%" />
+<col width="1%" />
+<col width="3%" />
+<col width="3%" />
+<col width="2%" />
+<col width="2%" />
+<col width="2%" />
+<col width="2%" />
+<col width="3%" />
+<col width="2%" />
+<col width="2%" />
+<col width="2%" />
+<col width="2%" />
+<col width="2%" />
+<col width="2%" />
+<col width="3%" />
+<col width="2%" />
+<col width="2%" />
+<col width="2%" />
+<col width="2%" />
+<col width="2%" />
+<col width="2%" />
+<col width="3%" />
+<col width="2%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="right">X1</th>
+<th align="left">id</th>
+<th align="right">year</th>
+<th align="right">month</th>
+<th align="left">element</th>
+<th align="right">d1</th>
+<th align="right">d2</th>
+<th align="right">d3</th>
+<th align="right">d4</th>
+<th align="right">d5</th>
+<th align="right">d6</th>
+<th align="right">d7</th>
+<th align="right">d8</th>
+<th align="left">d9</th>
+<th align="right">d10</th>
+<th align="right">d11</th>
+<th align="left">d12</th>
+<th align="right">d13</th>
+<th align="right">d14</th>
+<th align="right">d15</th>
+<th align="right">d16</th>
+<th align="right">d17</th>
+<th align="left">d18</th>
+<th align="left">d19</th>
+<th align="left">d20</th>
+<th align="left">d21</th>
+<th align="left">d22</th>
+<th align="right">d23</th>
+<th align="left">d24</th>
+<th align="right">d25</th>
+<th align="right">d26</th>
+<th align="right">d27</th>
+<th align="right">d28</th>
+<th align="right">d29</th>
+<th align="right">d30</th>
+<th align="right">d31</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">MX17004</td>
+<td align="right">2010</td>
+<td align="right">1</td>
+<td align="left">tmax</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="left">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="left">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="right">NA</td>
+<td align="left">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">27.8</td>
+<td align="right">NA</td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="left">MX17004</td>
+<td align="right">2010</td>
+<td align="right">1</td>
+<td align="left">tmin</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="left">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="left">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="right">NA</td>
+<td align="left">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">14.5</td>
+<td align="right">NA</td>
+</tr>
+<tr class="odd">
+<td align="right">3</td>
+<td align="left">MX17004</td>
+<td align="right">2010</td>
+<td align="right">2</td>
+<td align="left">tmax</td>
+<td align="right">NA</td>
+<td align="right">27.3</td>
+<td align="right">24.1</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="left">NA</td>
+<td align="right">NA</td>
+<td align="right">29.7</td>
+<td align="left">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="right">29.9</td>
+<td align="left">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+</tr>
+<tr class="even">
+<td align="right">4</td>
+<td align="left">MX17004</td>
+<td align="right">2010</td>
+<td align="right">2</td>
+<td align="left">tmin</td>
+<td align="right">NA</td>
+<td align="right">14.4</td>
+<td align="right">14.4</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="left">NA</td>
+<td align="right">NA</td>
+<td align="right">13.4</td>
+<td align="left">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="right">10.7</td>
+<td align="left">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+</tr>
+<tr class="odd">
+<td align="right">5</td>
+<td align="left">MX17004</td>
+<td align="right">2010</td>
+<td align="right">3</td>
+<td align="left">tmax</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">32.1</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="left">NA</td>
+<td align="right">34.5</td>
+<td align="right">NA</td>
+<td align="left">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">31.1</td>
+<td align="right">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="right">NA</td>
+<td align="left">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+</tr>
+<tr class="even">
+<td align="right">6</td>
+<td align="left">MX17004</td>
+<td align="right">2010</td>
+<td align="right">3</td>
+<td align="left">tmin</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">14.2</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="left">NA</td>
+<td align="right">16.8</td>
+<td align="right">NA</td>
+<td align="left">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">17.6</td>
+<td align="right">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="right">NA</td>
+<td align="left">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="some-data-cleaning-tools.html#cb230-1" aria-hidden="true"></a>weather_clean =<span class="st"> </span>weather_df <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb230-2"><a href="some-data-cleaning-tools.html#cb230-2" aria-hidden="true"></a><span class="st">    </span><span class="kw">select</span>(<span class="op">-</span>X1) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb230-3"><a href="some-data-cleaning-tools.html#cb230-3" aria-hidden="true"></a><span class="st">    </span><span class="co">## Lengthen days</span></span>
+<span id="cb230-4"><a href="some-data-cleaning-tools.html#cb230-4" aria-hidden="true"></a><span class="st">    </span><span class="kw">pivot_longer</span>(d1<span class="op">:</span>d31, </span>
+<span id="cb230-5"><a href="some-data-cleaning-tools.html#cb230-5" aria-hidden="true"></a>                 <span class="dt">names_to =</span> <span class="st">&#39;day&#39;</span>, </span>
+<span id="cb230-6"><a href="some-data-cleaning-tools.html#cb230-6" aria-hidden="true"></a>                 <span class="dt">values_to =</span> <span class="st">&#39;obs&#39;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb230-7"><a href="some-data-cleaning-tools.html#cb230-7" aria-hidden="true"></a><span class="st">    </span><span class="co">## Widen `element`</span></span>
+<span id="cb230-8"><a href="some-data-cleaning-tools.html#cb230-8" aria-hidden="true"></a><span class="st">    </span><span class="kw">pivot_wider</span>(<span class="dt">names_from =</span> element, </span>
+<span id="cb230-9"><a href="some-data-cleaning-tools.html#cb230-9" aria-hidden="true"></a>                <span class="dt">values_from =</span> obs) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb230-10"><a href="some-data-cleaning-tools.html#cb230-10" aria-hidden="true"></a><span class="st">    </span><span class="co">## Fix the class of `day`</span></span>
+<span id="cb230-11"><a href="some-data-cleaning-tools.html#cb230-11" aria-hidden="true"></a><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">day =</span> <span class="kw">str_remove</span>(day, <span class="st">&#39;d&#39;</span>), </span>
+<span id="cb230-12"><a href="some-data-cleaning-tools.html#cb230-12" aria-hidden="true"></a>           <span class="dt">day =</span> <span class="kw">as.integer</span>(day)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb230-13"><a href="some-data-cleaning-tools.html#cb230-13" aria-hidden="true"></a><span class="st">    </span><span class="co">## Check against the paper by filtering to non-missing rows</span></span>
+<span id="cb230-14"><a href="some-data-cleaning-tools.html#cb230-14" aria-hidden="true"></a><span class="st">    </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(tmax) <span class="op">|</span><span class="st"> </span><span class="op">!</span><span class="kw">is.na</span>(tmin))</span>
+<span id="cb230-15"><a href="some-data-cleaning-tools.html#cb230-15" aria-hidden="true"></a><span class="kw">head</span>(weather_clean)</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">id</th>
+<th align="right">year</th>
+<th align="right">month</th>
+<th align="right">day</th>
+<th align="right">tmax</th>
+<th align="right">tmin</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">MX17004</td>
+<td align="right">2010</td>
+<td align="right">1</td>
+<td align="right">30</td>
+<td align="right">27.8</td>
+<td align="right">14.5</td>
+</tr>
+<tr class="even">
+<td align="left">MX17004</td>
+<td align="right">2010</td>
+<td align="right">2</td>
+<td align="right">2</td>
+<td align="right">27.3</td>
+<td align="right">14.4</td>
+</tr>
+<tr class="odd">
+<td align="left">MX17004</td>
+<td align="right">2010</td>
+<td align="right">2</td>
+<td align="right">3</td>
+<td align="right">24.1</td>
+<td align="right">14.4</td>
+</tr>
+<tr class="even">
+<td align="left">MX17004</td>
+<td align="right">2010</td>
+<td align="right">2</td>
+<td align="right">11</td>
+<td align="right">29.7</td>
+<td align="right">13.4</td>
+</tr>
+<tr class="odd">
+<td align="left">MX17004</td>
+<td align="right">2010</td>
+<td align="right">2</td>
+<td align="right">23</td>
+<td align="right">29.9</td>
+<td align="right">10.7</td>
+</tr>
+<tr class="even">
+<td align="left">MX17004</td>
+<td align="right">2010</td>
+<td align="right">3</td>
+<td align="right">5</td>
+<td align="right">32.1</td>
+<td align="right">14.2</td>
+</tr>
+</tbody>
+</table>
 
 </div>
 </div>

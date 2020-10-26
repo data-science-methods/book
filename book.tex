@@ -119,7 +119,7 @@
 
 \title{Data Science Methods for Cognitive Science}
 \author{Dan Hicks, \href{mailto:hicks.daniel.j@gmail.com}{\nolinkurl{hicks.daniel.j@gmail.com}}}
-\date{Mon Oct 26 19:42:12 2020}
+\date{Mon Oct 26 23:10:33 2020}
 
 \begin{document}
 \maketitle
@@ -157,6 +157,7 @@ desc & 1.2.0 & CRAN (R 4.0.2)\tabularnewline
 ggbeeswarm & 0.6.0 & CRAN (R 4.0.2)\tabularnewline
 ggforce & 0.3.2 & CRAN (R 4.0.2)\tabularnewline
 nycflights13 & 1.0.1 & CRAN (R 4.0.2)\tabularnewline
+printr & 0.1 & CRAN (R 4.0.2)\tabularnewline
 sessioninfo & 1.1.1 & CRAN (R 4.0.2)\tabularnewline
 skimr & 2.1.2 & CRAN (R 4.0.2)\tabularnewline
 tictoc & 1.0 & CRAN (R 4.0.2)\tabularnewline
@@ -2182,7 +2183,7 @@ The dataset is a zipped \texttt{csv} or comma-separated value file. CSVs are str
 \end{Shaded}
 
 \begin{verbatim}
-## 0.332 sec elapsed
+## 0.338 sec elapsed
 \end{verbatim}
 
 \begin{Shaded}
@@ -6677,6 +6678,18 @@ Silberzahn and Uhlmann (\protect\hyperlink{ref-SilberzahnCrowdsourcedResearchMan
 \hypertarget{some-data-cleaning-tools}{%
 \section{Some Data-Cleaning Tools}\label{some-data-cleaning-tools}}
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(printr)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Registered S3 method overwritten by 'printr':
+##   method                from     
+##   knit_print.data.frame rmarkdown
+\end{verbatim}
+
 \begin{itemize}
 \tightlist
 \item
@@ -6702,10 +6715,17 @@ Silberzahn and Uhlmann (\protect\hyperlink{ref-SilberzahnCrowdsourcedResearchMan
     Each type of observational unit forms a table.
   \end{enumerate}
 \item
-  Example: student final grades, registration demographics, and major for every philosophy course at UC Davis, 2005-2015
+  Example: student demographics and major, for students who took a philosophy course at UC Davis, 2005-2015
 \end{itemize}
 
-\emph{{[}visuals{]}}
+\begin{figure}
+
+{\centering \includegraphics[width=0.6\linewidth]{images/data/tidy-1} \includegraphics[width=0.6\linewidth]{images/data/tidy-2} 
+
+}
+
+\caption{Two tables in a tidy dataset. The first table records students' majors during each term they were enrolled; the second records demographics.  The tables have different units of observation, but can be linked using the ID (internal to this dataset) for an analysis at the level of individual students. Other tables in this dataset include final grades for philosophy courses taken by the students, and demographics of the instructors of those courses.}\label{fig:unnamed-chunk-117}
+\end{figure}
 
 \begin{itemize}
 \tightlist
@@ -6715,49 +6735,55 @@ Silberzahn and Uhlmann (\protect\hyperlink{ref-SilberzahnCrowdsourcedResearchMan
   \begin{itemize}
   \tightlist
   \item
-    1 row = 1 unique unit of observation
-
-    \begin{itemize}
-    \tightlist
-    \item
-      1 row = 1 student who was registered in 1 course
-    \end{itemize}
-  \item
     1 table = 1 unit of observation
 
     \begin{itemize}
     \tightlist
     \item
-      student-course final grades
+      student-term (major)
     \item
-      student-quarter major
-    \item
-      CRN-instructor name
-    \item
-      instructor-demographics
-    \item
-      (in practice, this one is often relaxed)
+      student (demographics)
     \end{itemize}
   \item
-    Every column is either an identifier, a measured variable, or links to another table
+    1 row = 1 unique observed unit
 
     \begin{itemize}
     \tightlist
     \item
-      identifier: within-dataset student ID, course registration number (CRN)
+      1 row = 1 student-term combination
     \item
-      measured variable: final course grade
+      1 row = 1 student
+    \end{itemize}
+  \item
+    Every column is either an \emph{identifier} or a \emph{measured variable}
+
+    \begin{itemize}
+    \tightlist
     \item
-      links:
+      rule of thumb: 1 row = 1 unique combination of identifiers
+    \item
+      major table
 
       \begin{itemize}
       \tightlist
       \item
-        student ID \(\to\) demographics
+        identifiers: student ID, \texttt{term}
       \item
-        CRN -\textgreater{} instructor name \(\to\) instructor demographics
+        measured variables: admit term, relative term, major
       \item
-        student ID + CRN \(\to\) major that semester
+        NB the \texttt{term} identifier is constructed from two measured variables
+      \end{itemize}
+    \item
+      demographics table
+
+      \begin{itemize}
+      \tightlist
+      \item
+        identifier: student ID
+      \item
+        measured variables: gender, race and ethnicity variables, first gen status, low income status, admission type, whether they ever majored in philosophy, major the semester they took their first philosophy course
+      \item
+        NB here ``measured variable'' includes both variables in the raw data as well as variables I constructed for analysis purposes (\texttt{poc}, \texttt{demographic})
       \end{itemize}
     \end{itemize}
   \end{itemize}
@@ -6777,6 +6803,16 @@ Silberzahn and Uhlmann (\protect\hyperlink{ref-SilberzahnCrowdsourcedResearchMan
 
 \hypertarget{the-pew-dataset}{%
 \subsubsection{3.1: The Pew Dataset}\label{the-pew-dataset}}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{pivot\_longer()}
+\item
+  \texttt{if\_else()}
+\item
+  \texttt{fct\_inorder()}
+\end{itemize}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -6809,34 +6845,27 @@ Silberzahn and Uhlmann (\protect\hyperlink{ref-SilberzahnCrowdsourcedResearchMan
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{pew\_df}
+\KeywordTok{head}\NormalTok{(pew\_df)}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{verbatim}
-## # A tibble: 18 x 12
-##       X1 religion `<$10k` `$10-20k` `$20-30k` `$30-40k` `$40-50k` `$50-75k` `$75-100k` `$100-150k`
-##    <dbl> <chr>      <dbl>     <dbl>     <dbl>     <dbl>     <dbl>     <dbl>      <dbl>       <dbl>
-##  1     1 Agnostic      27        34        60        81        76       137        122         109
-##  2     2 Atheist       12        27        37        52        35        70         73          59
-##  3     3 Buddhist      27        21        30        34        33        58         62          39
-##  4     4 Catholic     418       617       732       670       638      1116        949         792
-##  5     5 Don’t k~      15        14        15        11        10        35         21          17
-##  6     6 Evangel~     575       869      1064       982       881      1486        949         723
-##  7     7 Hindu          1         9         7         9        11        34         47          48
-##  8     8 Histori~     228       244       236       238       197       223        131          81
-##  9     9 Jehovah~      20        27        24        24        21        30         15          11
-## 10    10 Jewish        19        19        25        25        30        95         69          87
-## 11    11 Mainlin~     289       495       619       655       651      1107        939         753
-## 12    12 Mormon        29        40        48        51        56       112         85          49
-## 13    13 Muslim         6         7         9        10         9        23         16           8
-## 14    14 Orthodox      13        17        23        32        32        47         38          42
-## 15    15 Other C~       9         7        11        13        13        14         18          14
-## 16    16 Other F~      20        33        40        46        49        63         46          40
-## 17    17 Other W~       5         2         3         4         2         7          3           4
-## 18    18 Unaffil~     217       299       374       365       341       528        407         321
-## # ... with 2 more variables: `>150k` <dbl>, `Don't know/refused` <dbl>
-\end{verbatim}
+\begin{tabular}{r|l|r|r|r|r|r|r|r|r|r|r}
+\hline
+X1 & religion & <\$10k & \$10-20k & \$20-30k & \$30-40k & \$40-50k & \$50-75k & \$75-100k & \$100-150k & >150k & Don't know/refused\\
+\hline
+1 & Agnostic & 27 & 34 & 60 & 81 & 76 & 137 & 122 & 109 & 84 & 96\\
+\hline
+2 & Atheist & 12 & 27 & 37 & 52 & 35 & 70 & 73 & 59 & 74 & 76\\
+\hline
+3 & Buddhist & 27 & 21 & 30 & 34 & 33 & 58 & 62 & 39 & 53 & 54\\
+\hline
+4 & Catholic & 418 & 617 & 732 & 670 & 638 & 1116 & 949 & 792 & 633 & 1489\\
+\hline
+5 & Don’t know/refused & 15 & 14 & 15 & 11 & 10 & 35 & 21 & 17 & 18 & 116\\
+\hline
+6 & Evangelical Prot & 575 & 869 & 1064 & 982 & 881 & 1486 & 949 & 723 & 414 & 1529\\
+\hline
+\end{tabular}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -6854,26 +6883,27 @@ Silberzahn and Uhlmann (\protect\hyperlink{ref-SilberzahnCrowdsourcedResearchMan
                             \OtherTok{NA\_character\_}\NormalTok{, }
 \NormalTok{                            income), }
            \DataTypeTok{income =} \KeywordTok{fct\_inorder}\NormalTok{(income))}
-\NormalTok{pew\_clean}
+\KeywordTok{head}\NormalTok{(pew\_clean)}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{verbatim}
-## # A tibble: 180 x 3
-##    religion income     freq
-##    <chr>    <fct>     <dbl>
-##  1 Agnostic <$10k        27
-##  2 Agnostic $10-20k      34
-##  3 Agnostic $20-30k      60
-##  4 Agnostic $30-40k      81
-##  5 Agnostic $40-50k      76
-##  6 Agnostic $50-75k     137
-##  7 Agnostic $75-100k    122
-##  8 Agnostic $100-150k   109
-##  9 Agnostic >150k        84
-## 10 Agnostic <NA>         96
-## # ... with 170 more rows
-\end{verbatim}
+\begin{tabular}{l|l|r}
+\hline
+religion & income & freq\\
+\hline
+Agnostic & <\$10k & 27\\
+\hline
+Agnostic & \$10-20k & 34\\
+\hline
+Agnostic & \$20-30k & 60\\
+\hline
+Agnostic & \$30-40k & 81\\
+\hline
+Agnostic & \$40-50k & 76\\
+\hline
+Agnostic & \$50-75k & 137\\
+\hline
+\end{tabular}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -7129,6 +7159,18 @@ Silberzahn and Uhlmann (\protect\hyperlink{ref-SilberzahnCrowdsourcedResearchMan
 \hypertarget{the-billboard-dataset}{%
 \subsubsection{3.1: The Billboard Dataset}\label{the-billboard-dataset}}
 
+\begin{itemize}
+\tightlist
+\item
+  A little helper function for parsing
+\item
+  \texttt{str\_remove()}
+\item
+  Coercion
+\item
+  Date arithmetic
+\end{itemize}
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{billboard\_df =}\StringTok{ }\KeywordTok{read\_csv}\NormalTok{(}\KeywordTok{file.path}\NormalTok{(data\_folder, }\StringTok{\textquotesingle{}billboard.csv\textquotesingle{}}\NormalTok{))}
@@ -7165,34 +7207,27 @@ Silberzahn and Uhlmann (\protect\hyperlink{ref-SilberzahnCrowdsourcedResearchMan
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{billboard\_df}
+\KeywordTok{head}\NormalTok{(billboard\_df)}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{verbatim}
-## # A tibble: 317 x 82
-##       X1  year artist track time  date.entered   wk1   wk2   wk3   wk4   wk5   wk6   wk7   wk8   wk9
-##    <dbl> <dbl> <chr>  <chr> <tim> <date>       <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>
-##  1     1  2000 2 Pac  Baby~ 04:22 2000-02-26      87    82    72    77    87    94    99    NA    NA
-##  2     2  2000 2Ge+h~ The ~ 03:15 2000-09-02      91    87    92    NA    NA    NA    NA    NA    NA
-##  3     3  2000 3 Doo~ Kryp~ 03:53 2000-04-08      81    70    68    67    66    57    54    53    51
-##  4     4  2000 3 Doo~ Loser 04:24 2000-10-21      76    76    72    69    67    65    55    59    62
-##  5     5  2000 504 B~ Wobb~ 03:35 2000-04-15      57    34    25    17    17    31    36    49    53
-##  6     6  2000 98^0   Give~ 03:24 2000-08-19      51    39    34    26    26    19     2     2     3
-##  7     7  2000 A*Tee~ Danc~ 03:44 2000-07-08      97    97    96    95   100    NA    NA    NA    NA
-##  8     8  2000 Aaliy~ I Do~ 04:15 2000-01-29      84    62    51    41    38    35    35    38    38
-##  9     9  2000 Aaliy~ Try ~ 04:03 2000-03-18      59    53    38    28    21    18    16    14    12
-## 10    10  2000 Adams~ Open~ 05:30 2000-08-26      76    76    74    69    68    67    61    58    57
-## # ... with 307 more rows, and 67 more variables: wk10 <dbl>, wk11 <dbl>, wk12 <dbl>, wk13 <dbl>,
-## #   wk14 <dbl>, wk15 <dbl>, wk16 <dbl>, wk17 <dbl>, wk18 <dbl>, wk19 <dbl>, wk20 <dbl>, wk21 <dbl>,
-## #   wk22 <dbl>, wk23 <dbl>, wk24 <dbl>, wk25 <dbl>, wk26 <dbl>, wk27 <dbl>, wk28 <dbl>, wk29 <dbl>,
-## #   wk30 <dbl>, wk31 <dbl>, wk32 <dbl>, wk33 <dbl>, wk34 <dbl>, wk35 <dbl>, wk36 <dbl>, wk37 <dbl>,
-## #   wk38 <dbl>, wk39 <dbl>, wk40 <dbl>, wk41 <dbl>, wk42 <dbl>, wk43 <dbl>, wk44 <dbl>, wk45 <dbl>,
-## #   wk46 <dbl>, wk47 <dbl>, wk48 <dbl>, wk49 <dbl>, wk50 <dbl>, wk51 <dbl>, wk52 <dbl>, wk53 <dbl>,
-## #   wk54 <dbl>, wk55 <dbl>, wk56 <dbl>, wk57 <dbl>, wk58 <dbl>, wk59 <dbl>, wk60 <dbl>, wk61 <dbl>,
-## #   wk62 <dbl>, wk63 <dbl>, wk64 <dbl>, wk65 <dbl>, wk66 <lgl>, wk67 <lgl>, wk68 <lgl>, wk69 <lgl>,
-## #   wk70 <lgl>, wk71 <lgl>, wk72 <lgl>, wk73 <lgl>, wk74 <lgl>, wk75 <lgl>, wk76 <lgl>
-\end{verbatim}
+\begin{tabular}{r|r|l|l|l|l|r|r|r|r|r|r|r|r|r|r|r|r|r|r|r|r|r|r|r|r|r|r|r|r|r|r|r|r|r|r|r|r|r|r|r|r|r|r|r|r|r|r|r|r|r|r|r|r|r|r|r|r|r|r|r|r|r|r|r|r|r|r|r|r|r|l|l|l|l|l|l|l|l|l|l|l}
+\hline
+X1 & year & artist & track & time & date.entered & wk1 & wk2 & wk3 & wk4 & wk5 & wk6 & wk7 & wk8 & wk9 & wk10 & wk11 & wk12 & wk13 & wk14 & wk15 & wk16 & wk17 & wk18 & wk19 & wk20 & wk21 & wk22 & wk23 & wk24 & wk25 & wk26 & wk27 & wk28 & wk29 & wk30 & wk31 & wk32 & wk33 & wk34 & wk35 & wk36 & wk37 & wk38 & wk39 & wk40 & wk41 & wk42 & wk43 & wk44 & wk45 & wk46 & wk47 & wk48 & wk49 & wk50 & wk51 & wk52 & wk53 & wk54 & wk55 & wk56 & wk57 & wk58 & wk59 & wk60 & wk61 & wk62 & wk63 & wk64 & wk65 & wk66 & wk67 & wk68 & wk69 & wk70 & wk71 & wk72 & wk73 & wk74 & wk75 & wk76\\
+\hline
+1 & 2000 & 2 Pac & Baby Don't Cry & 04:22:00 & 2000-02-26 & 87 & 82 & 72 & 77 & 87 & 94 & 99 & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA\\
+\hline
+2 & 2000 & 2Ge+her & The Hardest Part Of ... & 03:15:00 & 2000-09-02 & 91 & 87 & 92 & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA\\
+\hline
+3 & 2000 & 3 Doors Down & Kryptonite & 03:53:00 & 2000-04-08 & 81 & 70 & 68 & 67 & 66 & 57 & 54 & 53 & 51 & 51 & 51 & 51 & 47 & 44 & 38 & 28 & 22 & 18 & 18 & 14 & 12 & 7 & 6 & 6 & 6 & 5 & 5 & 4 & 4 & 4 & 4 & 3 & 3 & 3 & 4 & 5 & 5 & 9 & 9 & 15 & 14 & 13 & 14 & 16 & 17 & 21 & 22 & 24 & 28 & 33 & 42 & 42 & 49 & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA\\
+\hline
+4 & 2000 & 3 Doors Down & Loser & 04:24:00 & 2000-10-21 & 76 & 76 & 72 & 69 & 67 & 65 & 55 & 59 & 62 & 61 & 61 & 59 & 61 & 66 & 72 & 76 & 75 & 67 & 73 & 70 & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA\\
+\hline
+5 & 2000 & 504 Boyz & Wobble Wobble & 03:35:00 & 2000-04-15 & 57 & 34 & 25 & 17 & 17 & 31 & 36 & 49 & 53 & 57 & 64 & 70 & 75 & 76 & 78 & 85 & 92 & 96 & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA\\
+\hline
+6 & 2000 & 98\textasciicircum{}0 & Give Me Just One Nig... & 03:24:00 & 2000-08-19 & 51 & 39 & 34 & 26 & 26 & 19 & 2 & 2 & 3 & 6 & 7 & 22 & 29 & 36 & 47 & 67 & 66 & 84 & 93 & 94 & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA\\
+\hline
+\end{tabular}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -7221,26 +7256,27 @@ Silberzahn and Uhlmann (\protect\hyperlink{ref-SilberzahnCrowdsourcedResearchMan
            \DataTypeTok{date =}\NormalTok{ date.entered }\OperatorTok{+}\StringTok{ }\NormalTok{(week}\DecValTok{{-}1}\NormalTok{)}\OperatorTok{*}\DecValTok{7}\NormalTok{) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
 \StringTok{    }\CommentTok{\#\# Clean columns}
 \StringTok{    }\KeywordTok{select}\NormalTok{(year, artist, time, track, date, week, rank)}
-\NormalTok{billboard\_clean}
+\KeywordTok{head}\NormalTok{(billboard\_clean)}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{verbatim}
-## # A tibble: 5,307 x 7
-##     year artist  time   track                   date        week  rank
-##    <dbl> <chr>   <time> <chr>                   <date>     <int> <dbl>
-##  1  2000 2 Pac   04:22  Baby Don't Cry          2000-02-26     1    87
-##  2  2000 2 Pac   04:22  Baby Don't Cry          2000-03-04     2    82
-##  3  2000 2 Pac   04:22  Baby Don't Cry          2000-03-11     3    72
-##  4  2000 2 Pac   04:22  Baby Don't Cry          2000-03-18     4    77
-##  5  2000 2 Pac   04:22  Baby Don't Cry          2000-03-25     5    87
-##  6  2000 2 Pac   04:22  Baby Don't Cry          2000-04-01     6    94
-##  7  2000 2 Pac   04:22  Baby Don't Cry          2000-04-08     7    99
-##  8  2000 2Ge+her 03:15  The Hardest Part Of ... 2000-09-02     1    91
-##  9  2000 2Ge+her 03:15  The Hardest Part Of ... 2000-09-09     2    87
-## 10  2000 2Ge+her 03:15  The Hardest Part Of ... 2000-09-16     3    92
-## # ... with 5,297 more rows
-\end{verbatim}
+\begin{tabular}{r|l|l|l|l|r|r}
+\hline
+year & artist & time & track & date & week & rank\\
+\hline
+2000 & 2 Pac & 04:22:00 & Baby Don't Cry & 2000-02-26 & 1 & 87\\
+\hline
+2000 & 2 Pac & 04:22:00 & Baby Don't Cry & 2000-03-04 & 2 & 82\\
+\hline
+2000 & 2 Pac & 04:22:00 & Baby Don't Cry & 2000-03-11 & 3 & 72\\
+\hline
+2000 & 2 Pac & 04:22:00 & Baby Don't Cry & 2000-03-18 & 4 & 77\\
+\hline
+2000 & 2 Pac & 04:22:00 & Baby Don't Cry & 2000-03-25 & 5 & 87\\
+\hline
+2000 & 2 Pac & 04:22:00 & Baby Don't Cry & 2000-04-01 & 6 & 94\\
+\hline
+\end{tabular}
 
 NB. Base R includes methods for doing date arithmetic, eg,
 
@@ -7259,35 +7295,66 @@ If you need month arithmetic, check out the \texttt{lubridate} package, and spec
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{count}\NormalTok{(billboard\_clean, artist, track) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
-\StringTok{    }\KeywordTok{arrange}\NormalTok{(}\KeywordTok{desc}\NormalTok{(n))}
+\StringTok{    }\KeywordTok{arrange}\NormalTok{(}\KeywordTok{desc}\NormalTok{(n)) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{    }\KeywordTok{head}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{verbatim}
-## # A tibble: 317 x 3
-##    artist           track                       n
-##    <chr>            <chr>                   <int>
-##  1 Creed            Higher                     57
-##  2 Lonestar         Amazed                     55
-##  3 3 Doors Down     Kryptonite                 53
-##  4 Hill, Faith      Breathe                    53
-##  5 Creed            With Arms Wide Open        47
-##  6 Joe              I Wanna Know               44
-##  7 Vertical Horizon Everything You Want        41
-##  8 matchbox twenty  Bent                       39
-##  9 Braxton, Toni    He Wasn't Man Enough       37
-## 10 Nelly            (Hot S**t) Country G...    34
-## # ... with 307 more rows
-\end{verbatim}
+\begin{tabular}{l|l|r}
+\hline
+artist & track & n\\
+\hline
+Creed & Higher & 57\\
+\hline
+Lonestar & Amazed & 55\\
+\hline
+3 Doors Down & Kryptonite & 53\\
+\hline
+Hill, Faith & Breathe & 53\\
+\hline
+Creed & With Arms Wide Open & 47\\
+\hline
+Joe & I Wanna Know & 44\\
+\hline
+\end{tabular}
 
 \hypertarget{the-tb-dataset}{%
 \subsubsection{3.2: The TB Dataset}\label{the-tb-dataset}}
 
+\begin{itemize}
+\tightlist
+\item
+  \texttt{haven} package
+\item
+  \texttt{separate()}
+\item
+  \texttt{case\_when()}
+\end{itemize}
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{tb\_df =}\StringTok{ }\NormalTok{haven}\OperatorTok{::}\KeywordTok{read\_sav}\NormalTok{(}\KeywordTok{file.path}\NormalTok{(data\_folder, }\StringTok{\textquotesingle{}tb.sav\textquotesingle{}}\NormalTok{))}
+\KeywordTok{head}\NormalTok{(tb\_df)}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{tabular}{l|r|r|r|r|r|r|r|r|r|r|r|r|r|r|r|r|r}
+\hline
+country & year & m014 & m1524 & m2534 & m3544 & m4554 & m5564 & m65 & mu & f014 & f1524 & f2534 & f3544 & f4554 & f5564 & f65 & fu\\
+\hline
+AD & 2000 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & NA & NA & NA & NA & NA & NA & NA & NA & NA\\
+\hline
+AE & 2000 & 2 & 4 & 4 & 6 & 5 & 12 & 10 & NA & 3 & 16 & 1 & 3 & 0 & 0 & 4 & NA\\
+\hline
+AF & 2000 & 52 & 228 & 183 & 149 & 129 & 94 & 80 & NA & 93 & 414 & 565 & 339 & 205 & 99 & 36 & NA\\
+\hline
+AG & 2000 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & NA & 1 & 1 & 1 & 0 & 0 & 0 & 0 & NA\\
+\hline
+AL & 2000 & 2 & 19 & 21 & 14 & 24 & 19 & 16 & NA & 3 & 11 & 10 & 8 & 8 & 5 & 11 & NA\\
+\hline
+AM & 2000 & 2 & 152 & 130 & 131 & 63 & 26 & 21 & NA & 1 & 24 & 27 & 24 & 8 & 8 & 4 & NA\\
+\hline
+\end{tabular}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -7308,36 +7375,45 @@ If you need month arithmetic, check out the \texttt{lubridate} package, and spec
 \StringTok{    }\KeywordTok{separate}\NormalTok{(age, }\DataTypeTok{into =} \KeywordTok{c}\NormalTok{(}\StringTok{\textquotesingle{}age\_lower\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}age\_upper\textquotesingle{}}\NormalTok{), }
              \DataTypeTok{sep =} \DecValTok{{-}2}\NormalTok{) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
 \StringTok{    }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{age =} \KeywordTok{str\_c}\NormalTok{(age\_lower, }\StringTok{\textquotesingle{}{-}\textquotesingle{}}\NormalTok{, age\_upper), }
-           \DataTypeTok{age =} \KeywordTok{case\_when}\NormalTok{(age }\OperatorTok{==}\StringTok{ \textquotesingle{}{-}u\textquotesingle{}} \OperatorTok{\textasciitilde{}}\StringTok{ }\OtherTok{NA\_character\_}\NormalTok{, }
+           \DataTypeTok{age =} \KeywordTok{case\_when}\NormalTok{(age }\OperatorTok{==}\StringTok{ \textquotesingle{}{-}u\textquotesingle{}}  \OperatorTok{\textasciitilde{}}\StringTok{ }\OtherTok{NA\_character\_}\NormalTok{, }
 \NormalTok{                           age }\OperatorTok{==}\StringTok{ \textquotesingle{}{-}65\textquotesingle{}} \OperatorTok{\textasciitilde{}}\StringTok{ \textquotesingle{}65+\textquotesingle{}}\NormalTok{, }
-                           \OtherTok{TRUE} \OperatorTok{\textasciitilde{}}\StringTok{ }\NormalTok{age), }
+                           \OtherTok{TRUE}         \OperatorTok{\textasciitilde{}}\StringTok{ }\NormalTok{age), }
            \DataTypeTok{age =} \KeywordTok{fct\_inorder}\NormalTok{(age)) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
 \StringTok{    }\KeywordTok{select}\NormalTok{(}\OperatorTok{{-}}\NormalTok{age\_lower, }\OperatorTok{{-}}\NormalTok{age\_upper) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
 \StringTok{    }\CommentTok{\#\# Put in order, with ID columns first and then the variable}
 \StringTok{    }\KeywordTok{select}\NormalTok{(country, year, gender, age, cases)}
-\NormalTok{tb\_clean}
+\KeywordTok{head}\NormalTok{(tb\_clean)}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{verbatim}
-## # A tibble: 3,216 x 5
-##    country  year gender age   cases
-##    <chr>   <dbl> <chr>  <fct> <dbl>
-##  1 AD       2000 m      0-14      0
-##  2 AD       2000 m      15-24     0
-##  3 AD       2000 m      25-34     1
-##  4 AD       2000 m      35-44     0
-##  5 AD       2000 m      45-54     0
-##  6 AD       2000 m      55-64     0
-##  7 AD       2000 m      65+       0
-##  8 AD       2000 m      <NA>     NA
-##  9 AD       2000 f      0-14     NA
-## 10 AD       2000 f      15-24    NA
-## # ... with 3,206 more rows
-\end{verbatim}
+\begin{tabular}{l|r|l|l|r}
+\hline
+country & year & gender & age & cases\\
+\hline
+AD & 2000 & m & 0-14 & 0\\
+\hline
+AD & 2000 & m & 15-24 & 0\\
+\hline
+AD & 2000 & m & 25-34 & 1\\
+\hline
+AD & 2000 & m & 35-44 & 0\\
+\hline
+AD & 2000 & m & 45-54 & 0\\
+\hline
+AD & 2000 & m & 55-64 & 0\\
+\hline
+\end{tabular}
 
 \hypertarget{the-weather-dataset}{%
 \subsubsection{3.3: The Weather Dataset}\label{the-weather-dataset}}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{pivot\_wider()}
+\item
+  \texttt{str\_remove()}
+\end{itemize}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -7370,6 +7446,30 @@ If you need month arithmetic, check out the \texttt{lubridate} package, and spec
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\KeywordTok{head}\NormalTok{(weather\_df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{tabular}{r|l|r|r|l|r|r|r|r|r|r|r|r|l|r|r|l|r|r|r|r|r|l|l|l|l|l|r|l|r|r|r|r|r|r|r}
+\hline
+X1 & id & year & month & element & d1 & d2 & d3 & d4 & d5 & d6 & d7 & d8 & d9 & d10 & d11 & d12 & d13 & d14 & d15 & d16 & d17 & d18 & d19 & d20 & d21 & d22 & d23 & d24 & d25 & d26 & d27 & d28 & d29 & d30 & d31\\
+\hline
+1 & MX17004 & 2010 & 1 & tmax & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & 27.8 & NA\\
+\hline
+2 & MX17004 & 2010 & 1 & tmin & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & 14.5 & NA\\
+\hline
+3 & MX17004 & 2010 & 2 & tmax & NA & 27.3 & 24.1 & NA & NA & NA & NA & NA & NA & NA & 29.7 & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & 29.9 & NA & NA & NA & NA & NA & NA & NA & NA\\
+\hline
+4 & MX17004 & 2010 & 2 & tmin & NA & 14.4 & 14.4 & NA & NA & NA & NA & NA & NA & NA & 13.4 & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & 10.7 & NA & NA & NA & NA & NA & NA & NA & NA\\
+\hline
+5 & MX17004 & 2010 & 3 & tmax & NA & NA & NA & NA & 32.1 & NA & NA & NA & NA & 34.5 & NA & NA & NA & NA & NA & 31.1 & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA\\
+\hline
+6 & MX17004 & 2010 & 3 & tmin & NA & NA & NA & NA & 14.2 & NA & NA & NA & NA & 16.8 & NA & NA & NA & NA & NA & 17.6 & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA & NA\\
+\hline
+\end{tabular}
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \NormalTok{weather\_clean =}\StringTok{ }\NormalTok{weather\_df }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
 \StringTok{    }\KeywordTok{select}\NormalTok{(}\OperatorTok{{-}}\NormalTok{X1) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
 \StringTok{    }\CommentTok{\#\# Lengthen days}
@@ -7383,41 +7483,28 @@ If you need month arithmetic, check out the \texttt{lubridate} package, and spec
 \StringTok{    }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{day =} \KeywordTok{str\_remove}\NormalTok{(day, }\StringTok{\textquotesingle{}d\textquotesingle{}}\NormalTok{), }
            \DataTypeTok{day =} \KeywordTok{as.integer}\NormalTok{(day)) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
 \StringTok{    }\CommentTok{\#\# Check against the paper by filtering to non{-}missing rows}
-\StringTok{    }\KeywordTok{filter}\NormalTok{(}\OperatorTok{!}\KeywordTok{is.na}\NormalTok{(tmax)}\OperatorTok{|!}\KeywordTok{is.na}\NormalTok{(tmin))}
-\NormalTok{weather\_clean}
+\StringTok{    }\KeywordTok{filter}\NormalTok{(}\OperatorTok{!}\KeywordTok{is.na}\NormalTok{(tmax) }\OperatorTok{|}\StringTok{ }\OperatorTok{!}\KeywordTok{is.na}\NormalTok{(tmin))}
+\KeywordTok{head}\NormalTok{(weather\_clean)}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{verbatim}
-## # A tibble: 33 x 6
-##    id       year month   day  tmax  tmin
-##    <chr>   <dbl> <dbl> <int> <dbl> <dbl>
-##  1 MX17004  2010     1    30  27.8  14.5
-##  2 MX17004  2010     2     2  27.3  14.4
-##  3 MX17004  2010     2     3  24.1  14.4
-##  4 MX17004  2010     2    11  29.7  13.4
-##  5 MX17004  2010     2    23  29.9  10.7
-##  6 MX17004  2010     3     5  32.1  14.2
-##  7 MX17004  2010     3    10  34.5  16.8
-##  8 MX17004  2010     3    16  31.1  17.6
-##  9 MX17004  2010     4    27  36.3  16.7
-## 10 MX17004  2010     5    27  33.2  18.2
-## # ... with 23 more rows
-\end{verbatim}
-
-\begin{itemize}
-\tightlist
-\item
-  lab: NSF data
-
-  \begin{itemize}
-  \tightlist
-  \item
-    3 files that need to be cleaned in the same way, then combined
-  \item
-    Excel date mangling
-  \end{itemize}
-\end{itemize}
+\begin{tabular}{l|r|r|r|r|r}
+\hline
+id & year & month & day & tmax & tmin\\
+\hline
+MX17004 & 2010 & 1 & 30 & 27.8 & 14.5\\
+\hline
+MX17004 & 2010 & 2 & 2 & 27.3 & 14.4\\
+\hline
+MX17004 & 2010 & 2 & 3 & 24.1 & 14.4\\
+\hline
+MX17004 & 2010 & 2 & 11 & 29.7 & 13.4\\
+\hline
+MX17004 & 2010 & 2 & 23 & 29.9 & 10.7\\
+\hline
+MX17004 & 2010 & 3 & 5 & 32.1 & 14.2\\
+\hline
+\end{tabular}
 
 \hypertarget{part-case-study-the-compas-dataset}{%
 \part{Case Study: The COMPAS Dataset}\label{part-case-study-the-compas-dataset}}
