@@ -119,7 +119,7 @@
 
 \title{Data Science Methods for Cognitive Science}
 \author{Dan Hicks, \href{mailto:hicks.daniel.j@gmail.com}{\nolinkurl{hicks.daniel.j@gmail.com}}}
-\date{Mon Oct 19 18:43:59 2020}
+\date{Mon Oct 26 19:42:12 2020}
 
 \begin{document}
 \maketitle
@@ -151,7 +151,7 @@ This version of the book was built with R version 4.0.2 (2020-06-22), \href{http
 package & version & source\tabularnewline
 \midrule
 \endhead
-bookdown & 0.21.2 & Github (rstudio/bookdown@9ed0651)\tabularnewline
+bookdown & 0.21.2 & Github (rstudio/bookdown@285c092)\tabularnewline
 datasauRus & 0.1.4 & CRAN (R 4.0.2)\tabularnewline
 desc & 1.2.0 & CRAN (R 4.0.2)\tabularnewline
 ggbeeswarm & 0.6.0 & CRAN (R 4.0.2)\tabularnewline
@@ -2182,7 +2182,7 @@ The dataset is a zipped \texttt{csv} or comma-separated value file. CSVs are str
 \end{Shaded}
 
 \begin{verbatim}
-## 0.339 sec elapsed
+## 0.332 sec elapsed
 \end{verbatim}
 
 \begin{Shaded}
@@ -6428,77 +6428,996 @@ Silberzahn and Uhlmann (\protect\hyperlink{ref-SilberzahnCrowdsourcedResearchMan
 \section{Managing and Publishing Data}\label{managing-and-publishing-data}}
 
 \begin{itemize}
+\tightlist
 \item
-  reading: Wilkinson et al. (\protect\hyperlink{ref-WilkinsonFAIRGuidingPrinciples2016}{2016})
+  reading:
 
   \begin{itemize}
   \tightlist
   \item
-    \emph{{[}unethical open data - endangered species{]}}
+    Wilkinson et al. (\protect\hyperlink{ref-WilkinsonFAIRGuidingPrinciples2016}{2016})
   \item
-    Tulloch et al.
+    (``Open Data Offer Risks and Rewards for Conservation'' \protect\hyperlink{ref-OpenDataOffer2018}{2018})
   \item
-    \url{https://datajustice.github.io/report/}
+    Nicol et al. (\protect\hyperlink{ref-NicolConsentInsufficientData2019}{2019})
   \item
+    McCook (\protect\hyperlink{ref-McCookPubliclyAvailableData2016}{2016})
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{fair-principles-for-published-data}{%
+\subsection{FAIR principles for published data}\label{fair-principles-for-published-data}}
+
+\begin{itemize}
+\tightlist
+\item
+  \emph{Findable}
+
+  \begin{itemize}
+  \tightlist
   \item
-    Emil O.W. Kierkegaard
+    F1. (meta)data are assigned a globally unique and persistent identifier
+  \item
+    F2. data are described with rich metadata (defined by R1 below)
+  \item
+    F3. metadata clearly and explicitly include the identifier of the data it describes
+  \item
+    F4. (meta)data are registered or indexed in a searchable resource
+  \end{itemize}
+\item
+  \emph{Accessible}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    A1. (meta)data are retrievable by their identifier using a standardized communications protocol
 
     \begin{itemize}
     \tightlist
     \item
-      OkCupid data scrape: \url{https://retractionwatch.com/2016/05/16/publicly-available-data-on-thousands-of-okcupid-users-pulled-over-copyright-claim/}
+      A1.1 the protocol is open, free, and universally implementable
     \item
-      Kierkegaard is a negative role model in other respects: \url{https://rationalwiki.org/wiki/Emil_Kirkegaard}
+      A1.2 the protocol allows for an authentication and authorization procedure, where necessary
+    \end{itemize}
+  \item
+    A2. metadata are accessible, even when the data are no longer available
+  \end{itemize}
+\item
+  \emph{Interoperable}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    I1. (meta)data use a formal, accessible, shared, and broadly applicable language for knowledge representation.
+  \item
+    I2. (meta)data use vocabularies that follow FAIR principles
+  \item
+    I3. (meta)data include qualified references to other (meta)data
+  \end{itemize}
+\item
+  \emph{Reusable}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    R1. meta(data) are richly described with a plurality of accurate and relevant attributes
+
+    \begin{itemize}
+    \tightlist
+    \item
+      R1.1. (meta)data are released with a clear and accessible data usage license
+    \item
+      R1.2. (meta)data are associated with detailed provenance
+    \item
+      R1.3. (meta)data meet domain-relevant community standards
     \end{itemize}
   \end{itemize}
 \item
-  FAIR principles (Wilkinson et al)
-\item
-  codebooks
+  DOIs for data
 
   \begin{itemize}
   \tightlist
   \item
-    Stanford Open Policing codebook as example: \url{https://github.com/stanford-policylab/opp/blob/master/data_readme.md}
+    \href{https://help.osf.io/hc/en-us/articles/360019931013-Create-DOIs}{Instructions for OSF}
   \item
-    Some general guidelines: \url{https://afit-r.github.io/codebook}
+    \href{https://help.zenodo.org/\#versioning}{Notes for Zenodo}
+
+    \begin{itemize}
+    \tightlist
+    \item
+      \href{https://guides.github.com/activities/citable-code/}{Zenodo also plays nicely with GitHub for minting DOIs for code}
+    \end{itemize}
+  \item
+    \href{https://dataverse.org/best-practices/data-citation}{Citation models at Harvard Dataverse}
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{documentation}{%
+\subsection{Documentation}\label{documentation}}
+
+\begin{itemize}
+\tightlist
+\item
+  Many social science fields have a tradition of writing codebooks for their data
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \href{https://github.com/stanford-policylab/opp/blob/master/data_readme.md}{Stanford Open Policing codebook}
+  \item
+    \href{https://kjhealy.github.io/covdata/articles/codebook.html}{``Codebook-like summary'' of the \texttt{covdata} package, automatically generated using \texttt{skimr}}
   \end{itemize}
 \item
-  data management plans
+  Major codebook elements (\url{https://afit-r.github.io/codebook})
+
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    Original source of the data
+  \item
+    Sampling information
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Where and how the data were generated
+    \end{itemize}
+  \item
+    Variable-level metadata and summaries
+  \item
+    Structure of the data
+  \end{enumerate}
+\end{itemize}
+
+\hypertarget{data-management-plans}{%
+\subsection{Data management plans}\label{data-management-plans}}
+
+\begin{itemize}
+\tightlist
+\item
+  Much like a research plan, data management plans provide an overview of the steps you'll take to gather, publish, and maintain your data
 
   \begin{itemize}
   \tightlist
   \item
-    UCM Library: \url{https://library.ucmerced.edu/research/researchers/research-data-management/data-management-plans}
+    Since 2011, NSF has required a 2-page data management plan for most types of proposals
+  \end{itemize}
+\item
+  Examples and resources
+
+  \begin{itemize}
+  \tightlist
   \item
-    UCM IT support: \url{https://it.ucmerced.edu/content/research-data-management-consultation-service}
+    \href{https://library.ucmerced.edu/research/researchers/research-data-management/data-management-plans}{UCM Library}
   \item
-    NSF examples: \url{https://libraries.ucsd.edu/research-and-collections/data-curation/dmp-samples.html}
+    \href{https://it.ucmerced.edu/content/research-data-management-consultation-service}{UCM IT support}
+  \item
+    \href{https://libraries.ucsd.edu/research-and-collections/data-curation/dmp-samples.html}{NSF examples}
+  \item
+    \href{https://www.nsf.gov/bfa/dias/policy/dmp.jsp}{NSF policy summary}
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{hazards-of-open-data}{%
+\subsection{Hazards of open data}\label{hazards-of-open-data}}
+
+\begin{itemize}
+\tightlist
+\item
+  Legal
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Privacy
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Personally identifiable information (PII): ``information which can be used to \textbf{distinguish or trace an individual's identity}, such as their name, social security number, biometric records, etc. \emph{alone, or when combined with other \ldots{} information}'' \href{https://www.osec.doc.gov/opog/privacy/PII_BII.html}{Source}
+    \item
+      Sensitive information: ``if the loss, compromission {[}sic{]}, or disclosure without authorization of this data could \textbf{result in harm, embarrassment, inconvenience, or unfairness} to an individual'' \href{https://techgdpr.com/blog/difference-between-pii-and-personal-data/}{Source}
+    \item
+      IRB will require you to
+
+      \begin{itemize}
+      \tightlist
+      \item
+        indicate what PII and sensitive information you're collecting
+      \item
+        explain why you need to collect it
+      \item
+        outline a plan to keep it secure
+      \item
+        notify or mitigate issues with participants if security is compromised
+      \end{itemize}
+    \end{itemize}
+  \item
+    Copyright
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Data that you've bought from a broker
+    \item
+      Journal article text, \emph{but also} article metadata if you used a private service to retrieve it
+    \end{itemize}
+  \end{itemize}
+\item
+  Community-level hazards
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Location of endangered species (``Open Data Offer Risks and Rewards for Conservation'' \protect\hyperlink{ref-OpenDataOffer2018}{2018})
+  \item
+    Indigenous community sacred sites
+  \item
+    Antiquities
+  \item
+    Identifying the Golden State Killer through GEDmatch (Zhang \protect\hyperlink{ref-ZhangHowTinyWebsite2018}{2018})
+  \end{itemize}
+\item
+  Public-but-inaccessible data
+
+  \begin{itemize}
+  \tightlist
+  \item
+    OKCupid data scrape (McCook \protect\hyperlink{ref-McCookPubliclyAvailableData2016}{2016})
+
+    \begin{itemize}
+    \tightlist
+    \item
+      \href{https://rationalwiki.org/wiki/Emil_Kirkegaard}{Don't be like Emil O. Kierkegaard}
+    \end{itemize}
   \end{itemize}
 \end{itemize}
 
 \hypertarget{some-data-cleaning-tools}{%
 \section{Some Data-Cleaning Tools}\label{some-data-cleaning-tools}}
 
-Wickham (\protect\hyperlink{ref-WickhamTidyData2014}{2014}\protect\hyperlink{ref-WickhamTidyData2014}{a})
+\begin{itemize}
+\tightlist
+\item
+  reading: Wickham (\protect\hyperlink{ref-WickhamTidyData2014}{2014}\protect\hyperlink{ref-WickhamTidyData2014}{a})
+\end{itemize}
+
+\hypertarget{tidy-data}{%
+\subsection{Tidy Data}\label{tidy-data}}
 
 \begin{itemize}
 \tightlist
 \item
-  concept of tidy data
+  conventions for organizing data for analysis
+
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    Each variable forms a column.
+  \item
+    Each observation forms a row.
+  \item
+    Each type of observational unit forms a table.
+  \end{enumerate}
+\item
+  Example: student final grades, registration demographics, and major for every philosophy course at UC Davis, 2005-2015
+\end{itemize}
+
+\emph{{[}visuals{]}}
+
+\begin{itemize}
+\tightlist
+\item
+  slightly rephrased
 
   \begin{itemize}
   \tightlist
   \item
-    work through examples from Wickham's ``Tidy Data''
+    1 row = 1 unique unit of observation
+
+    \begin{itemize}
+    \tightlist
+    \item
+      1 row = 1 student who was registered in 1 course
+    \end{itemize}
+  \item
+    1 table = 1 unit of observation
+
+    \begin{itemize}
+    \tightlist
+    \item
+      student-course final grades
+    \item
+      student-quarter major
+    \item
+      CRN-instructor name
+    \item
+      instructor-demographics
+    \item
+      (in practice, this one is often relaxed)
+    \end{itemize}
+  \item
+    Every column is either an identifier, a measured variable, or links to another table
+
+    \begin{itemize}
+    \tightlist
+    \item
+      identifier: within-dataset student ID, course registration number (CRN)
+    \item
+      measured variable: final course grade
+    \item
+      links:
+
+      \begin{itemize}
+      \tightlist
+      \item
+        student ID \(\to\) demographics
+      \item
+        CRN -\textgreater{} instructor name \(\to\) instructor demographics
+      \item
+        student ID + CRN \(\to\) major that semester
+      \end{itemize}
+    \end{itemize}
   \end{itemize}
 \end{itemize}
 
-Excel dates
-separate()
-pivot\_*()
-forcats stuff?
-stringr stuff
+\hypertarget{tools-for-tidying-data}{%
+\subsection{Tools for tidying data}\label{tools-for-tidying-data}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(tidyverse)}
+\KeywordTok{theme\_set}\NormalTok{(}\KeywordTok{theme\_minimal}\NormalTok{())}
+
+\NormalTok{data\_folder =}\StringTok{ }\KeywordTok{file.path}\NormalTok{(}\StringTok{\textquotesingle{}data\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{the-pew-dataset}{%
+\subsubsection{3.1: The Pew Dataset}\label{the-pew-dataset}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pew\_df =}\StringTok{ }\KeywordTok{read\_csv}\NormalTok{(}\KeywordTok{file.path}\NormalTok{(data\_folder, }\StringTok{\textquotesingle{}pew.csv\textquotesingle{}}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Missing column names filled in: 'X1' [1]
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## -- Column specification ----------------------------------------------------------------------------
+## cols(
+##   X1 = col_double(),
+##   religion = col_character(),
+##   `<$10k` = col_double(),
+##   `$10-20k` = col_double(),
+##   `$20-30k` = col_double(),
+##   `$30-40k` = col_double(),
+##   `$40-50k` = col_double(),
+##   `$50-75k` = col_double(),
+##   `$75-100k` = col_double(),
+##   `$100-150k` = col_double(),
+##   `>150k` = col_double(),
+##   `Don't know/refused` = col_double()
+## )
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pew\_df}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 18 x 12
+##       X1 religion `<$10k` `$10-20k` `$20-30k` `$30-40k` `$40-50k` `$50-75k` `$75-100k` `$100-150k`
+##    <dbl> <chr>      <dbl>     <dbl>     <dbl>     <dbl>     <dbl>     <dbl>      <dbl>       <dbl>
+##  1     1 Agnostic      27        34        60        81        76       137        122         109
+##  2     2 Atheist       12        27        37        52        35        70         73          59
+##  3     3 Buddhist      27        21        30        34        33        58         62          39
+##  4     4 Catholic     418       617       732       670       638      1116        949         792
+##  5     5 Don’t k~      15        14        15        11        10        35         21          17
+##  6     6 Evangel~     575       869      1064       982       881      1486        949         723
+##  7     7 Hindu          1         9         7         9        11        34         47          48
+##  8     8 Histori~     228       244       236       238       197       223        131          81
+##  9     9 Jehovah~      20        27        24        24        21        30         15          11
+## 10    10 Jewish        19        19        25        25        30        95         69          87
+## 11    11 Mainlin~     289       495       619       655       651      1107        939         753
+## 12    12 Mormon        29        40        48        51        56       112         85          49
+## 13    13 Muslim         6         7         9        10         9        23         16           8
+## 14    14 Orthodox      13        17        23        32        32        47         38          42
+## 15    15 Other C~       9         7        11        13        13        14         18          14
+## 16    16 Other F~      20        33        40        46        49        63         46          40
+## 17    17 Other W~       5         2         3         4         2         7          3           4
+## 18    18 Unaffil~     217       299       374       365       341       528        407         321
+## # ... with 2 more variables: `>150k` <dbl>, `Don't know/refused` <dbl>
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pew\_clean =}\StringTok{ }\NormalTok{pew\_df }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{    }\CommentTok{\#\# Drop the row number column}
+\StringTok{    }\KeywordTok{select}\NormalTok{(}\OperatorTok{{-}}\NormalTok{X1) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{    }\CommentTok{\#\# Lengthen: 1 row per religion x income level}
+\StringTok{    }\KeywordTok{pivot\_longer}\NormalTok{(}\DataTypeTok{cols =} \StringTok{\textasciigrave{}}\DataTypeTok{\textless{}$10k}\StringTok{\textasciigrave{}}\OperatorTok{:}\StringTok{\textasciigrave{}}\DataTypeTok{Don\textquotesingle{}t know/refused}\StringTok{\textasciigrave{}}\NormalTok{, }
+                 \DataTypeTok{names\_to =} \StringTok{\textquotesingle{}income\textquotesingle{}}\NormalTok{, }
+                 \DataTypeTok{values\_to =} \StringTok{\textquotesingle{}freq\textquotesingle{}}\NormalTok{) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{    }\CommentTok{\#\# Cleaning \textasciigrave{}income\textasciigrave{}: }
+\StringTok{    }\CommentTok{\#\# {-} Make "Don\textquotesingle{}t know/refused" into NA}
+\StringTok{    }\CommentTok{\#\# {-} Coerce to ordered factor}
+\StringTok{    }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{income =} \KeywordTok{if\_else}\NormalTok{(}\KeywordTok{str\_detect}\NormalTok{(income, }\StringTok{"Don\textquotesingle{}t know"}\NormalTok{), }
+                            \OtherTok{NA\_character\_}\NormalTok{, }
+\NormalTok{                            income), }
+           \DataTypeTok{income =} \KeywordTok{fct\_inorder}\NormalTok{(income))}
+\NormalTok{pew\_clean}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 180 x 3
+##    religion income     freq
+##    <chr>    <fct>     <dbl>
+##  1 Agnostic <$10k        27
+##  2 Agnostic $10-20k      34
+##  3 Agnostic $20-30k      60
+##  4 Agnostic $30-40k      81
+##  5 Agnostic $40-50k      76
+##  6 Agnostic $50-75k     137
+##  7 Agnostic $75-100k    122
+##  8 Agnostic $100-150k   109
+##  9 Agnostic >150k        84
+## 10 Agnostic <NA>         96
+## # ... with 170 more rows
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(pew\_clean, }\KeywordTok{aes}\NormalTok{(religion, freq, }\DataTypeTok{fill =} \KeywordTok{fct\_rev}\NormalTok{(income))) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{geom\_col}\NormalTok{() }\OperatorTok{+}
+\StringTok{    }\KeywordTok{scale\_fill\_viridis\_d}\NormalTok{(}\DataTypeTok{na.value =} \StringTok{\textquotesingle{}grey50\textquotesingle{}}\NormalTok{) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{coord\_flip}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : conversion failure on
+## 'Don’t know/refused' in 'mbcsToSbcs': dot substituted for <e2>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : conversion failure on
+## 'Don’t know/refused' in 'mbcsToSbcs': dot substituted for <80>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : conversion failure on
+## 'Don’t know/refused' in 'mbcsToSbcs': dot substituted for <99>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : conversion failure on
+## 'Don’t know/refused' in 'mbcsToSbcs': dot substituted for <e2>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : conversion failure on
+## 'Don’t know/refused' in 'mbcsToSbcs': dot substituted for <80>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : conversion failure on
+## 'Don’t know/refused' in 'mbcsToSbcs': dot substituted for <99>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : conversion failure on
+## 'Don’t know/refused' in 'mbcsToSbcs': dot substituted for <e2>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : conversion failure on
+## 'Don’t know/refused' in 'mbcsToSbcs': dot substituted for <80>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : conversion failure on
+## 'Don’t know/refused' in 'mbcsToSbcs': dot substituted for <99>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : conversion failure on
+## 'Don’t know/refused' in 'mbcsToSbcs': dot substituted for <e2>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : conversion failure on
+## 'Don’t know/refused' in 'mbcsToSbcs': dot substituted for <80>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : conversion failure on
+## 'Don’t know/refused' in 'mbcsToSbcs': dot substituted for <99>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : conversion failure on
+## 'Don’t know/refused' in 'mbcsToSbcs': dot substituted for <e2>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : conversion failure on
+## 'Don’t know/refused' in 'mbcsToSbcs': dot substituted for <80>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : conversion failure on
+## 'Don’t know/refused' in 'mbcsToSbcs': dot substituted for <99>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : conversion failure on
+## 'Don’t know/refused' in 'mbcsToSbcs': dot substituted for <e2>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : conversion failure on
+## 'Don’t know/refused' in 'mbcsToSbcs': dot substituted for <80>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : conversion failure on
+## 'Don’t know/refused' in 'mbcsToSbcs': dot substituted for <99>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : conversion failure on
+## 'Don’t know/refused' in 'mbcsToSbcs': dot substituted for <e2>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : conversion failure on
+## 'Don’t know/refused' in 'mbcsToSbcs': dot substituted for <80>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : conversion failure on
+## 'Don’t know/refused' in 'mbcsToSbcs': dot substituted for <99>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : conversion failure on
+## 'Don’t know/refused' in 'mbcsToSbcs': dot substituted for <e2>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : conversion failure on
+## 'Don’t know/refused' in 'mbcsToSbcs': dot substituted for <80>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : conversion failure on
+## 'Don’t know/refused' in 'mbcsToSbcs': dot substituted for <99>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : conversion failure on
+## 'Don’t know/refused' in 'mbcsToSbcs': dot substituted for <e2>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : conversion failure on
+## 'Don’t know/refused' in 'mbcsToSbcs': dot substituted for <80>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : conversion failure on
+## 'Don’t know/refused' in 'mbcsToSbcs': dot substituted for <99>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : conversion failure on
+## 'Don’t know/refused' in 'mbcsToSbcs': dot substituted for <e2>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : conversion failure on
+## 'Don’t know/refused' in 'mbcsToSbcs': dot substituted for <80>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : conversion failure on
+## 'Don’t know/refused' in 'mbcsToSbcs': dot substituted for <99>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : conversion failure on
+## 'Don’t know/refused' in 'mbcsToSbcs': dot substituted for <e2>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : conversion failure on
+## 'Don’t know/refused' in 'mbcsToSbcs': dot substituted for <80>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : conversion failure on
+## 'Don’t know/refused' in 'mbcsToSbcs': dot substituted for <99>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : conversion failure on
+## 'Don’t know/refused' in 'mbcsToSbcs': dot substituted for <e2>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : conversion failure on
+## 'Don’t know/refused' in 'mbcsToSbcs': dot substituted for <80>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : conversion failure on
+## 'Don’t know/refused' in 'mbcsToSbcs': dot substituted for <99>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : conversion failure on
+## 'Don’t know/refused' in 'mbcsToSbcs': dot substituted for <e2>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : conversion failure on
+## 'Don’t know/refused' in 'mbcsToSbcs': dot substituted for <80>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : conversion failure on
+## 'Don’t know/refused' in 'mbcsToSbcs': dot substituted for <99>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : conversion failure on
+## 'Don’t know/refused' in 'mbcsToSbcs': dot substituted for <e2>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : conversion failure on
+## 'Don’t know/refused' in 'mbcsToSbcs': dot substituted for <80>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : conversion failure on
+## 'Don’t know/refused' in 'mbcsToSbcs': dot substituted for <99>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : conversion failure on
+## 'Don’t know/refused' in 'mbcsToSbcs': dot substituted for <e2>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : conversion failure on
+## 'Don’t know/refused' in 'mbcsToSbcs': dot substituted for <80>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : conversion failure on
+## 'Don’t know/refused' in 'mbcsToSbcs': dot substituted for <99>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, : conversion failure on
+## 'Don’t know/refused' in 'mbcsToSbcs': dot substituted for <e2>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, : conversion failure on
+## 'Don’t know/refused' in 'mbcsToSbcs': dot substituted for <80>
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, : conversion failure on
+## 'Don’t know/refused' in 'mbcsToSbcs': dot substituted for <99>
+\end{verbatim}
+
+\begin{center}\includegraphics[width=0.6\linewidth]{book_files/figure-latex/plot_pew-1} \end{center}
+
+\hypertarget{the-billboard-dataset}{%
+\subsubsection{3.1: The Billboard Dataset}\label{the-billboard-dataset}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{billboard\_df =}\StringTok{ }\KeywordTok{read\_csv}\NormalTok{(}\KeywordTok{file.path}\NormalTok{(data\_folder, }\StringTok{\textquotesingle{}billboard.csv\textquotesingle{}}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Missing column names filled in: 'X1' [1]
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## -- Column specification ----------------------------------------------------------------------------
+## cols(
+##   .default = col_double(),
+##   artist = col_character(),
+##   track = col_character(),
+##   time = col_time(format = ""),
+##   date.entered = col_date(format = ""),
+##   wk66 = col_logical(),
+##   wk67 = col_logical(),
+##   wk68 = col_logical(),
+##   wk69 = col_logical(),
+##   wk70 = col_logical(),
+##   wk71 = col_logical(),
+##   wk72 = col_logical(),
+##   wk73 = col_logical(),
+##   wk74 = col_logical(),
+##   wk75 = col_logical(),
+##   wk76 = col_logical()
+## )
+## i Use `spec()` for the full column specifications.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{billboard\_df}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 317 x 82
+##       X1  year artist track time  date.entered   wk1   wk2   wk3   wk4   wk5   wk6   wk7   wk8   wk9
+##    <dbl> <dbl> <chr>  <chr> <tim> <date>       <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>
+##  1     1  2000 2 Pac  Baby~ 04:22 2000-02-26      87    82    72    77    87    94    99    NA    NA
+##  2     2  2000 2Ge+h~ The ~ 03:15 2000-09-02      91    87    92    NA    NA    NA    NA    NA    NA
+##  3     3  2000 3 Doo~ Kryp~ 03:53 2000-04-08      81    70    68    67    66    57    54    53    51
+##  4     4  2000 3 Doo~ Loser 04:24 2000-10-21      76    76    72    69    67    65    55    59    62
+##  5     5  2000 504 B~ Wobb~ 03:35 2000-04-15      57    34    25    17    17    31    36    49    53
+##  6     6  2000 98^0   Give~ 03:24 2000-08-19      51    39    34    26    26    19     2     2     3
+##  7     7  2000 A*Tee~ Danc~ 03:44 2000-07-08      97    97    96    95   100    NA    NA    NA    NA
+##  8     8  2000 Aaliy~ I Do~ 04:15 2000-01-29      84    62    51    41    38    35    35    38    38
+##  9     9  2000 Aaliy~ Try ~ 04:03 2000-03-18      59    53    38    28    21    18    16    14    12
+## 10    10  2000 Adams~ Open~ 05:30 2000-08-26      76    76    74    69    68    67    61    58    57
+## # ... with 307 more rows, and 67 more variables: wk10 <dbl>, wk11 <dbl>, wk12 <dbl>, wk13 <dbl>,
+## #   wk14 <dbl>, wk15 <dbl>, wk16 <dbl>, wk17 <dbl>, wk18 <dbl>, wk19 <dbl>, wk20 <dbl>, wk21 <dbl>,
+## #   wk22 <dbl>, wk23 <dbl>, wk24 <dbl>, wk25 <dbl>, wk26 <dbl>, wk27 <dbl>, wk28 <dbl>, wk29 <dbl>,
+## #   wk30 <dbl>, wk31 <dbl>, wk32 <dbl>, wk33 <dbl>, wk34 <dbl>, wk35 <dbl>, wk36 <dbl>, wk37 <dbl>,
+## #   wk38 <dbl>, wk39 <dbl>, wk40 <dbl>, wk41 <dbl>, wk42 <dbl>, wk43 <dbl>, wk44 <dbl>, wk45 <dbl>,
+## #   wk46 <dbl>, wk47 <dbl>, wk48 <dbl>, wk49 <dbl>, wk50 <dbl>, wk51 <dbl>, wk52 <dbl>, wk53 <dbl>,
+## #   wk54 <dbl>, wk55 <dbl>, wk56 <dbl>, wk57 <dbl>, wk58 <dbl>, wk59 <dbl>, wk60 <dbl>, wk61 <dbl>,
+## #   wk62 <dbl>, wk63 <dbl>, wk64 <dbl>, wk65 <dbl>, wk66 <lgl>, wk67 <lgl>, wk68 <lgl>, wk69 <lgl>,
+## #   wk70 <lgl>, wk71 <lgl>, wk72 <lgl>, wk73 <lgl>, wk74 <lgl>, wk75 <lgl>, wk76 <lgl>
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#\textquotesingle{} Helper function to parse weeks to integers in the Billboard dataset}
+\CommentTok{\#\textquotesingle{} @param wk\_chr Vector of week characters, with the pattern \textasciigrave{}c(\textquotesingle{}wk1\textquotesingle{}, \textquotesingle{}wk2\textquotesingle{})\textasciigrave{}}
+\CommentTok{\#\textquotesingle{} @return Vector of integers, eg, \textasciigrave{}c(1L, 2L)\textasciigrave{}}
+\NormalTok{parse\_week =}\StringTok{ }\ControlFlowTok{function}\NormalTok{(wk\_chr) \{}
+\NormalTok{    wk\_int =}\StringTok{ }\NormalTok{wk\_chr }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{        }\KeywordTok{str\_remove}\NormalTok{(}\StringTok{\textquotesingle{}wk\textquotesingle{}}\NormalTok{) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{        }\KeywordTok{as.integer}\NormalTok{()}
+    \KeywordTok{return}\NormalTok{(wk\_int)}
+\NormalTok{\}}
+
+\NormalTok{billboard\_clean =}\StringTok{ }\NormalTok{billboard\_df }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{    }\CommentTok{\#\# Drop the row number column}
+\StringTok{    }\KeywordTok{select}\NormalTok{(}\OperatorTok{{-}}\NormalTok{X1) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{    }\CommentTok{\#\# Pivot week down and remove NA rows}
+\StringTok{    }\KeywordTok{pivot\_longer}\NormalTok{(}\DataTypeTok{cols =} \KeywordTok{starts\_with}\NormalTok{(}\StringTok{\textquotesingle{}wk\textquotesingle{}}\NormalTok{), }
+                 \DataTypeTok{names\_to =} \StringTok{\textquotesingle{}week\textquotesingle{}}\NormalTok{, }
+                 \DataTypeTok{values\_to =} \StringTok{\textquotesingle{}rank\textquotesingle{}}\NormalTok{) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{    }\KeywordTok{filter}\NormalTok{(}\OperatorTok{!}\KeywordTok{is.na}\NormalTok{(rank)) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{    }\CommentTok{\#\# Parse week and calculate date}
+\StringTok{    }\CommentTok{\#\# NB Base R can handle date arithmetic}
+\StringTok{    }\CommentTok{\#\# For month arithmetic see ?lubridate::\textasciigrave{}\%m+\%\textasciigrave{}}
+\StringTok{    }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{week =} \KeywordTok{parse\_week}\NormalTok{(week), }
+           \DataTypeTok{date =}\NormalTok{ date.entered }\OperatorTok{+}\StringTok{ }\NormalTok{(week}\DecValTok{{-}1}\NormalTok{)}\OperatorTok{*}\DecValTok{7}\NormalTok{) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{    }\CommentTok{\#\# Clean columns}
+\StringTok{    }\KeywordTok{select}\NormalTok{(year, artist, time, track, date, week, rank)}
+\NormalTok{billboard\_clean}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 5,307 x 7
+##     year artist  time   track                   date        week  rank
+##    <dbl> <chr>   <time> <chr>                   <date>     <int> <dbl>
+##  1  2000 2 Pac   04:22  Baby Don't Cry          2000-02-26     1    87
+##  2  2000 2 Pac   04:22  Baby Don't Cry          2000-03-04     2    82
+##  3  2000 2 Pac   04:22  Baby Don't Cry          2000-03-11     3    72
+##  4  2000 2 Pac   04:22  Baby Don't Cry          2000-03-18     4    77
+##  5  2000 2 Pac   04:22  Baby Don't Cry          2000-03-25     5    87
+##  6  2000 2 Pac   04:22  Baby Don't Cry          2000-04-01     6    94
+##  7  2000 2 Pac   04:22  Baby Don't Cry          2000-04-08     7    99
+##  8  2000 2Ge+her 03:15  The Hardest Part Of ... 2000-09-02     1    91
+##  9  2000 2Ge+her 03:15  The Hardest Part Of ... 2000-09-09     2    87
+## 10  2000 2Ge+her 03:15  The Hardest Part Of ... 2000-09-16     3    92
+## # ... with 5,297 more rows
+\end{verbatim}
+
+NB. Base R includes methods for doing date arithmetic, eg,
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{as.Date}\NormalTok{(}\StringTok{\textquotesingle{}2020{-}04{-}30\textquotesingle{}}\NormalTok{) }\OperatorTok{+}\StringTok{ }\DecValTok{1}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "2020-05-01"
+\end{verbatim}
+
+If you need month arithmetic, check out the \texttt{lubridate} package, and specifically \texttt{\%m+\%} and related operators.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{count}\NormalTok{(billboard\_clean, artist, track) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{    }\KeywordTok{arrange}\NormalTok{(}\KeywordTok{desc}\NormalTok{(n))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 317 x 3
+##    artist           track                       n
+##    <chr>            <chr>                   <int>
+##  1 Creed            Higher                     57
+##  2 Lonestar         Amazed                     55
+##  3 3 Doors Down     Kryptonite                 53
+##  4 Hill, Faith      Breathe                    53
+##  5 Creed            With Arms Wide Open        47
+##  6 Joe              I Wanna Know               44
+##  7 Vertical Horizon Everything You Want        41
+##  8 matchbox twenty  Bent                       39
+##  9 Braxton, Toni    He Wasn't Man Enough       37
+## 10 Nelly            (Hot S**t) Country G...    34
+## # ... with 307 more rows
+\end{verbatim}
+
+\hypertarget{the-tb-dataset}{%
+\subsubsection{3.2: The TB Dataset}\label{the-tb-dataset}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tb\_df =}\StringTok{ }\NormalTok{haven}\OperatorTok{::}\KeywordTok{read\_sav}\NormalTok{(}\KeywordTok{file.path}\NormalTok{(data\_folder, }\StringTok{\textquotesingle{}tb.sav\textquotesingle{}}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tb\_clean =}\StringTok{ }\NormalTok{tb\_df }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{    }\CommentTok{\#\# One row per observation = country x gender x age group}
+\StringTok{    }\KeywordTok{pivot\_longer}\NormalTok{(m014}\OperatorTok{:}\NormalTok{fu, }
+                 \DataTypeTok{names\_to =} \StringTok{\textquotesingle{}column\textquotesingle{}}\NormalTok{, }
+                 \DataTypeTok{values\_to =} \StringTok{\textquotesingle{}cases\textquotesingle{}}\NormalTok{) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{    }\CommentTok{\#\# Separate gender and age}
+\StringTok{    }\KeywordTok{separate}\NormalTok{(column, }\DataTypeTok{into =} \KeywordTok{c}\NormalTok{(}\StringTok{\textquotesingle{}gender\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}age\textquotesingle{}}\NormalTok{), }
+             \DataTypeTok{sep =} \DecValTok{1}\NormalTok{) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{    }\CommentTok{\#\# Wrangle age: }
+\StringTok{    }\CommentTok{\#\# {-} Split into upper and lower bounds}
+\StringTok{    }\CommentTok{\#\# {-} Recombine with {-}}
+\StringTok{    }\CommentTok{\#\# {-} Fix missing age and 65+}
+\StringTok{    }\CommentTok{\#\# {-} Set order}
+\StringTok{    }\CommentTok{\#\# {-} Clean up the intermediate columns for upper and lower bounds}
+\StringTok{    }\KeywordTok{separate}\NormalTok{(age, }\DataTypeTok{into =} \KeywordTok{c}\NormalTok{(}\StringTok{\textquotesingle{}age\_lower\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}age\_upper\textquotesingle{}}\NormalTok{), }
+             \DataTypeTok{sep =} \DecValTok{{-}2}\NormalTok{) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{    }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{age =} \KeywordTok{str\_c}\NormalTok{(age\_lower, }\StringTok{\textquotesingle{}{-}\textquotesingle{}}\NormalTok{, age\_upper), }
+           \DataTypeTok{age =} \KeywordTok{case\_when}\NormalTok{(age }\OperatorTok{==}\StringTok{ \textquotesingle{}{-}u\textquotesingle{}} \OperatorTok{\textasciitilde{}}\StringTok{ }\OtherTok{NA\_character\_}\NormalTok{, }
+\NormalTok{                           age }\OperatorTok{==}\StringTok{ \textquotesingle{}{-}65\textquotesingle{}} \OperatorTok{\textasciitilde{}}\StringTok{ \textquotesingle{}65+\textquotesingle{}}\NormalTok{, }
+                           \OtherTok{TRUE} \OperatorTok{\textasciitilde{}}\StringTok{ }\NormalTok{age), }
+           \DataTypeTok{age =} \KeywordTok{fct\_inorder}\NormalTok{(age)) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{    }\KeywordTok{select}\NormalTok{(}\OperatorTok{{-}}\NormalTok{age\_lower, }\OperatorTok{{-}}\NormalTok{age\_upper) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{    }\CommentTok{\#\# Put in order, with ID columns first and then the variable}
+\StringTok{    }\KeywordTok{select}\NormalTok{(country, year, gender, age, cases)}
+\NormalTok{tb\_clean}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 3,216 x 5
+##    country  year gender age   cases
+##    <chr>   <dbl> <chr>  <fct> <dbl>
+##  1 AD       2000 m      0-14      0
+##  2 AD       2000 m      15-24     0
+##  3 AD       2000 m      25-34     1
+##  4 AD       2000 m      35-44     0
+##  5 AD       2000 m      45-54     0
+##  6 AD       2000 m      55-64     0
+##  7 AD       2000 m      65+       0
+##  8 AD       2000 m      <NA>     NA
+##  9 AD       2000 f      0-14     NA
+## 10 AD       2000 f      15-24    NA
+## # ... with 3,206 more rows
+\end{verbatim}
+
+\hypertarget{the-weather-dataset}{%
+\subsubsection{3.3: The Weather Dataset}\label{the-weather-dataset}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{weather\_df =}\StringTok{ }\KeywordTok{read\_csv}\NormalTok{(}\KeywordTok{file.path}\NormalTok{(data\_folder, }\StringTok{\textquotesingle{}weather.csv\textquotesingle{}}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Missing column names filled in: 'X1' [1]
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## -- Column specification ----------------------------------------------------------------------------
+## cols(
+##   .default = col_double(),
+##   id = col_character(),
+##   element = col_character(),
+##   d9 = col_logical(),
+##   d12 = col_logical(),
+##   d18 = col_logical(),
+##   d19 = col_logical(),
+##   d20 = col_logical(),
+##   d21 = col_logical(),
+##   d22 = col_logical(),
+##   d24 = col_logical()
+## )
+## i Use `spec()` for the full column specifications.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{weather\_clean =}\StringTok{ }\NormalTok{weather\_df }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{    }\KeywordTok{select}\NormalTok{(}\OperatorTok{{-}}\NormalTok{X1) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{    }\CommentTok{\#\# Lengthen days}
+\StringTok{    }\KeywordTok{pivot\_longer}\NormalTok{(d1}\OperatorTok{:}\NormalTok{d31, }
+                 \DataTypeTok{names\_to =} \StringTok{\textquotesingle{}day\textquotesingle{}}\NormalTok{, }
+                 \DataTypeTok{values\_to =} \StringTok{\textquotesingle{}obs\textquotesingle{}}\NormalTok{) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{    }\CommentTok{\#\# Widen \textasciigrave{}element\textasciigrave{}}
+\StringTok{    }\KeywordTok{pivot\_wider}\NormalTok{(}\DataTypeTok{names\_from =}\NormalTok{ element, }
+                \DataTypeTok{values\_from =}\NormalTok{ obs) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{    }\CommentTok{\#\# Fix the class of \textasciigrave{}day\textasciigrave{}}
+\StringTok{    }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{day =} \KeywordTok{str\_remove}\NormalTok{(day, }\StringTok{\textquotesingle{}d\textquotesingle{}}\NormalTok{), }
+           \DataTypeTok{day =} \KeywordTok{as.integer}\NormalTok{(day)) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{    }\CommentTok{\#\# Check against the paper by filtering to non{-}missing rows}
+\StringTok{    }\KeywordTok{filter}\NormalTok{(}\OperatorTok{!}\KeywordTok{is.na}\NormalTok{(tmax)}\OperatorTok{|!}\KeywordTok{is.na}\NormalTok{(tmin))}
+\NormalTok{weather\_clean}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 33 x 6
+##    id       year month   day  tmax  tmin
+##    <chr>   <dbl> <dbl> <int> <dbl> <dbl>
+##  1 MX17004  2010     1    30  27.8  14.5
+##  2 MX17004  2010     2     2  27.3  14.4
+##  3 MX17004  2010     2     3  24.1  14.4
+##  4 MX17004  2010     2    11  29.7  13.4
+##  5 MX17004  2010     2    23  29.9  10.7
+##  6 MX17004  2010     3     5  32.1  14.2
+##  7 MX17004  2010     3    10  34.5  16.8
+##  8 MX17004  2010     3    16  31.1  17.6
+##  9 MX17004  2010     4    27  36.3  16.7
+## 10 MX17004  2010     5    27  33.2  18.2
+## # ... with 23 more rows
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  lab: NSF data
+
+  \begin{itemize}
+  \tightlist
+  \item
+    3 files that need to be cleaned in the same way, then combined
+  \item
+    Excel date mangling
+  \end{itemize}
+\end{itemize}
 
 \hypertarget{part-case-study-the-compas-dataset}{%
 \part{Case Study: The COMPAS Dataset}\label{part-case-study-the-compas-dataset}}
@@ -6604,6 +7523,9 @@ Lyon, A. 2014. ``Why Are Normal Distributions Normal?'' \emph{The British Journa
 \leavevmode\hypertarget{ref-MatejkaSameStatsDifferent}{}%
 Matejka, Justin, and George Fitzmaurice. n.d. ``Same Stats, Different Graphs: Generating Datasets with Varied Appearance and Identical Statistics Through Simulated Annealing (the Datasaurus Dozen) \textbar{} Autodesk Research.'' Accessed May 21, 2017. \url{https://www.autodeskresearch.com/publications/samestats}.
 
+\leavevmode\hypertarget{ref-McCookPubliclyAvailableData2016}{}%
+McCook, Alison. 2016. ``Publicly Available Data on Thousands of OKCupid Users Pulled over Copyright Claim.'' Retraction Watch. May 16, 2016. \url{https://retractionwatch.com/2016/05/16/publicly-available-data-on-thousands-of-okcupid-users-pulled-over-copyright-claim/}.
+
 \leavevmode\hypertarget{ref-McElreathScienceAmateurSoftware2020}{}%
 McElreath, Richard, dir. 2020. \emph{Science as Amateur Software Development}. \url{https://www.youtube.com/watch?v=zwRdO9_GGhY}.
 
@@ -6616,6 +7538,9 @@ Munafò, Marcus R., Brian A. Nosek, Dorothy V. M. Bishop, Katherine S. Button, C
 \leavevmode\hypertarget{ref-NationalAcademiesofSciencesEngineeringandMedicineReproducibilityReplicabilityScience2019}{}%
 National Academies of Sciences, Engineering, and Medicine. 2019. \emph{Reproducibility and Replicability in Science}. Washington, D.C.: National Academies Press. \url{https://doi.org/10.17226/25303}.
 
+\leavevmode\hypertarget{ref-NicolConsentInsufficientData2019}{}%
+Nicol, Dianne, Lisa Eckstein, Heidi Beate Bentzen, Pascal Borry, Mike Burgess, Wylie Burke, Don Chalmers, et al. 2019. ``Consent Insufficient for Data Release.'' \emph{Science} 364 (6439): 445--46. \url{https://doi.org/10.1126/science.aax0892}.
+
 \leavevmode\hypertarget{ref-NobleQuickGuideOrganizing2009}{}%
 Noble, William Stafford. 2009. ``A Quick Guide to Organizing Computational Biology Projects.'' \emph{PLOS Computational Biology} 5 (7): e1000424. \url{https://doi.org/10.1371/journal.pcbi.1000424}.
 
@@ -6624,6 +7549,9 @@ Nosek, B. A., G. Alter, G. C. Banks, D. Borsboom, S. D. Bowman, S. J. Breckler, 
 
 \leavevmode\hypertarget{ref-ObelsAnalysisOpenData2020}{}%
 Obels, Pepijn, Daniël Lakens, Nicholas A. Coles, Jaroslav Gottfried, and Seth A. Green. 2020. ``Analysis of Open Data and Computational Reproducibility in Registered Reports in Psychology.'' \emph{Advances in Methods and Practices in Psychological Science} 3 (2): 229--37. \url{https://doi.org/10.1177/2515245920918872}.
+
+\leavevmode\hypertarget{ref-OpenDataOffer2018}{}%
+``Open Data Offer Risks and Rewards for Conservation.'' 2018. \emph{Nature} 559 (7715): 444--44. \url{https://doi.org/10.1038/d41586-018-05800-y}.
 
 \leavevmode\hypertarget{ref-OpenScienceCollaborationEstimatingReproducibilityPsychological2015}{}%
 Open Science Collaboration. 2015. ``Estimating the Reproducibility of Psychological Science.'' \emph{Science} 349 (6251): aac4716--aac4716. \url{https://doi.org/10.1126/science.aac4716}.
@@ -6717,6 +7645,9 @@ Wu, Jun. 2019. ``Python Vs. R --- Choosing the Best Programming Language for Dat
 
 \leavevmode\hypertarget{ref-YongReplicationStudiesBad2012}{}%
 Yong, E. 2012. ``Replication Studies: Bad Copy.'' \emph{Nature} 485 (7398): 298--300. \url{https://doi.org/10.1038/485298a}.
+
+\leavevmode\hypertarget{ref-ZhangHowTinyWebsite2018}{}%
+Zhang, Sarah. 2018. ``How a Tiny Website Became the Police's Go-to Genealogy Database.'' The Atlantic. June 1, 2018. \url{https://www.theatlantic.com/science/archive/2018/06/gedmatch-police-genealogy-database/561695/}.
 \end{cslreferences}
 
 \end{document}

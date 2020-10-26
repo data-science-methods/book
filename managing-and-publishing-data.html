@@ -32,7 +32,7 @@
   
 <link rel="prev" href="code-review-activity.html"/>
 <link rel="next" href="some-data-cleaning-tools.html"/>
-<script src="libs/header-attrs-2.4.6/header-attrs.js"></script>
+<script src="libs/header-attrs-2.5.2/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -276,8 +276,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="19.3" data-path="code-review-activity.html"><a href="code-review-activity.html#part-2"><i class="fa fa-check"></i><b>19.3</b> Part 2</a></li>
 <li class="chapter" data-level="19.4" data-path="code-review-activity.html"><a href="code-review-activity.html#part-3"><i class="fa fa-check"></i><b>19.4</b> Part 3</a></li>
 </ul></li>
-<li class="chapter" data-level="20" data-path="managing-and-publishing-data.html"><a href="managing-and-publishing-data.html"><i class="fa fa-check"></i><b>20</b> Managing and Publishing Data</a></li>
-<li class="chapter" data-level="21" data-path="some-data-cleaning-tools.html"><a href="some-data-cleaning-tools.html"><i class="fa fa-check"></i><b>21</b> Some Data-Cleaning Tools</a></li>
+<li class="chapter" data-level="20" data-path="managing-and-publishing-data.html"><a href="managing-and-publishing-data.html"><i class="fa fa-check"></i><b>20</b> Managing and Publishing Data</a>
+<ul>
+<li class="chapter" data-level="20.1" data-path="managing-and-publishing-data.html"><a href="managing-and-publishing-data.html#fair-principles-for-published-data"><i class="fa fa-check"></i><b>20.1</b> FAIR principles for published data</a></li>
+<li class="chapter" data-level="20.2" data-path="managing-and-publishing-data.html"><a href="managing-and-publishing-data.html#documentation"><i class="fa fa-check"></i><b>20.2</b> Documentation</a></li>
+<li class="chapter" data-level="20.3" data-path="managing-and-publishing-data.html"><a href="managing-and-publishing-data.html#data-management-plans"><i class="fa fa-check"></i><b>20.3</b> Data management plans</a></li>
+<li class="chapter" data-level="20.4" data-path="managing-and-publishing-data.html"><a href="managing-and-publishing-data.html#hazards-of-open-data"><i class="fa fa-check"></i><b>20.4</b> Hazards of open data</a></li>
+</ul></li>
+<li class="chapter" data-level="21" data-path="some-data-cleaning-tools.html"><a href="some-data-cleaning-tools.html"><i class="fa fa-check"></i><b>21</b> Some Data-Cleaning Tools</a>
+<ul>
+<li class="chapter" data-level="21.1" data-path="some-data-cleaning-tools.html"><a href="some-data-cleaning-tools.html#tidy-data"><i class="fa fa-check"></i><b>21.1</b> Tidy Data</a></li>
+<li class="chapter" data-level="21.2" data-path="some-data-cleaning-tools.html"><a href="some-data-cleaning-tools.html#tools-for-tidying-data"><i class="fa fa-check"></i><b>21.2</b> Tools for tidying data</a></li>
+</ul></li>
 <li class="part"><span><b>IV Case Study: The COMPAS Dataset</b></span></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -303,37 +313,152 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="managing-and-publishing-data" class="section level1" number="20">
 <h1><span class="header-section-number">Chapter 20</span> Managing and Publishing Data</h1>
 <ul>
-<li><p>reading: <span class="citation">Wilkinson et al. (<a href="#ref-WilkinsonFAIRGuidingPrinciples2016" role="doc-biblioref">2016</a>)</span></p>
+<li>reading:
 <ul>
-<li><em>[unethical open data - endangered species]</em></li>
-<li>Tulloch et al.</li>
-<li><a href="https://datajustice.github.io/report/" class="uri">https://datajustice.github.io/report/</a></li>
-<li><NicolConsentInsufficientData2019></li>
-<li>Emil O.W. Kierkegaard
+<li><span class="citation">Wilkinson et al. (<a href="#ref-WilkinsonFAIRGuidingPrinciples2016" role="doc-biblioref">2016</a>)</span></li>
+<li><span class="citation">(“Open Data Offer Risks and Rewards for Conservation” <a href="#ref-OpenDataOffer2018" role="doc-biblioref">2018</a>)</span></li>
+<li><span class="citation">Nicol et al. (<a href="#ref-NicolConsentInsufficientData2019" role="doc-biblioref">2019</a>)</span></li>
+<li><span class="citation">McCook (<a href="#ref-McCookPubliclyAvailableData2016" role="doc-biblioref">2016</a>)</span></li>
+</ul></li>
+</ul>
+<div id="fair-principles-for-published-data" class="section level2" number="20.1">
+<h2><span class="header-section-number">20.1</span> FAIR principles for published data</h2>
 <ul>
-<li>OkCupid data scrape: <a href="https://retractionwatch.com/2016/05/16/publicly-available-data-on-thousands-of-okcupid-users-pulled-over-copyright-claim/" class="uri">https://retractionwatch.com/2016/05/16/publicly-available-data-on-thousands-of-okcupid-users-pulled-over-copyright-claim/</a></li>
-<li>Kierkegaard is a negative role model in other respects: <a href="https://rationalwiki.org/wiki/Emil_Kirkegaard" class="uri">https://rationalwiki.org/wiki/Emil_Kirkegaard</a></li>
+<li><em>Findable</em>
+<ul>
+<li>F1. (meta)data are assigned a globally unique and persistent identifier</li>
+<li>F2. data are described with rich metadata (defined by R1 below)</li>
+<li>F3. metadata clearly and explicitly include the identifier of the data it describes</li>
+<li>F4. (meta)data are registered or indexed in a searchable resource</li>
+</ul></li>
+<li><em>Accessible</em>
+<ul>
+<li>A1. (meta)data are retrievable by their identifier using a standardized communications protocol
+<ul>
+<li>A1.1 the protocol is open, free, and universally implementable</li>
+<li>A1.2 the protocol allows for an authentication and authorization procedure, where necessary</li>
+</ul></li>
+<li>A2. metadata are accessible, even when the data are no longer available</li>
+</ul></li>
+<li><em>Interoperable</em>
+<ul>
+<li>I1. (meta)data use a formal, accessible, shared, and broadly applicable language for knowledge representation.</li>
+<li>I2. (meta)data use vocabularies that follow FAIR principles</li>
+<li>I3. (meta)data include qualified references to other (meta)data</li>
+</ul></li>
+<li><em>Reusable</em>
+<ul>
+<li>R1. meta(data) are richly described with a plurality of accurate and relevant attributes
+<ul>
+<li>R1.1. (meta)data are released with a clear and accessible data usage license</li>
+<li>R1.2. (meta)data are associated with detailed provenance</li>
+<li>R1.3. (meta)data meet domain-relevant community standards</li>
 </ul></li>
 </ul></li>
-<li><p>FAIR principles (Wilkinson et al)</p></li>
-<li><p>codebooks</p>
+<li>DOIs for data
 <ul>
-<li>Stanford Open Policing codebook as example: <a href="https://github.com/stanford-policylab/opp/blob/master/data_readme.md" class="uri">https://github.com/stanford-policylab/opp/blob/master/data_readme.md</a></li>
-<li>Some general guidelines: <a href="https://afit-r.github.io/codebook" class="uri">https://afit-r.github.io/codebook</a></li>
+<li><a href="https://help.osf.io/hc/en-us/articles/360019931013-Create-DOIs">Instructions for OSF</a></li>
+<li><a href="https://help.zenodo.org/#versioning">Notes for Zenodo</a>
+<ul>
+<li><a href="https://guides.github.com/activities/citable-code/">Zenodo also plays nicely with GitHub for minting DOIs for code</a></li>
 </ul></li>
-<li><p>data management plans</p>
+<li><a href="https://dataverse.org/best-practices/data-citation">Citation models at Harvard Dataverse</a></li>
+</ul></li>
+</ul>
+</div>
+<div id="documentation" class="section level2" number="20.2">
+<h2><span class="header-section-number">20.2</span> Documentation</h2>
 <ul>
-<li>UCM Library: <a href="https://library.ucmerced.edu/research/researchers/research-data-management/data-management-plans" class="uri">https://library.ucmerced.edu/research/researchers/research-data-management/data-management-plans</a></li>
-<li>UCM IT support: <a href="https://it.ucmerced.edu/content/research-data-management-consultation-service" class="uri">https://it.ucmerced.edu/content/research-data-management-consultation-service</a></li>
-<li>NSF examples: <a href="https://libraries.ucsd.edu/research-and-collections/data-curation/dmp-samples.html" class="uri">https://libraries.ucsd.edu/research-and-collections/data-curation/dmp-samples.html</a></li>
+<li>Many social science fields have a tradition of writing codebooks for their data
+<ul>
+<li><a href="https://github.com/stanford-policylab/opp/blob/master/data_readme.md">Stanford Open Policing codebook</a></li>
+<li><a href="https://kjhealy.github.io/covdata/articles/codebook.html">“Codebook-like summary” of the <code>covdata</code> package, automatically generated using <code>skimr</code></a></li>
+</ul></li>
+<li>Major codebook elements (<a href="https://afit-r.github.io/codebook" class="uri">https://afit-r.github.io/codebook</a>)
+<ol style="list-style-type: decimal">
+<li>Original source of the data</li>
+<li>Sampling information
+<ul>
+<li>Where and how the data were generated</li>
+</ul></li>
+<li>Variable-level metadata and summaries</li>
+<li>Structure of the data</li>
+</ol></li>
+</ul>
+</div>
+<div id="data-management-plans" class="section level2" number="20.3">
+<h2><span class="header-section-number">20.3</span> Data management plans</h2>
+<ul>
+<li>Much like a research plan, data management plans provide an overview of the steps you’ll take to gather, publish, and maintain your data
+<ul>
+<li>Since 2011, NSF has required a 2-page data management plan for most types of proposals</li>
+</ul></li>
+<li>Examples and resources
+<ul>
+<li><a href="https://library.ucmerced.edu/research/researchers/research-data-management/data-management-plans">UCM Library</a></li>
+<li><a href="https://it.ucmerced.edu/content/research-data-management-consultation-service">UCM IT support</a></li>
+<li><a href="https://libraries.ucsd.edu/research-and-collections/data-curation/dmp-samples.html">NSF examples</a></li>
+<li><a href="https://www.nsf.gov/bfa/dias/policy/dmp.jsp">NSF policy summary</a></li>
+</ul></li>
+</ul>
+</div>
+<div id="hazards-of-open-data" class="section level2" number="20.4">
+<h2><span class="header-section-number">20.4</span> Hazards of open data</h2>
+<ul>
+<li>Legal
+<ul>
+<li>Privacy
+<ul>
+<li>Personally identifiable information (PII): “information which can be used to <strong>distinguish or trace an individual’s identity</strong>, such as their name, social security number, biometric records, etc. <em>alone, or when combined with other … information</em>” <a href="https://www.osec.doc.gov/opog/privacy/PII_BII.html">Source</a></li>
+<li>Sensitive information: “if the loss, compromission [sic], or disclosure without authorization of this data could <strong>result in harm, embarrassment, inconvenience, or unfairness</strong> to an individual” <a href="https://techgdpr.com/blog/difference-between-pii-and-personal-data/">Source</a></li>
+<li>IRB will require you to
+<ul>
+<li>indicate what PII and sensitive information you’re collecting</li>
+<li>explain why you need to collect it</li>
+<li>outline a plan to keep it secure</li>
+<li>notify or mitigate issues with participants if security is compromised</li>
+</ul></li>
+</ul></li>
+<li>Copyright
+<ul>
+<li>Data that you’ve bought from a broker</li>
+<li>Journal article text, <em>but also</em> article metadata if you used a private service to retrieve it</li>
+</ul></li>
+</ul></li>
+<li>Community-level hazards
+<ul>
+<li>Location of endangered species <span class="citation">(“Open Data Offer Risks and Rewards for Conservation” <a href="#ref-OpenDataOffer2018" role="doc-biblioref">2018</a>)</span></li>
+<li>Indigenous community sacred sites</li>
+<li>Antiquities</li>
+<li>Identifying the Golden State Killer through GEDmatch <span class="citation">(Zhang <a href="#ref-ZhangHowTinyWebsite2018" role="doc-biblioref">2018</a>)</span></li>
+</ul></li>
+<li>Public-but-inaccessible data
+<ul>
+<li>OKCupid data scrape <span class="citation">(McCook <a href="#ref-McCookPubliclyAvailableData2016" role="doc-biblioref">2016</a>)</span>
+<ul>
+<li><a href="https://rationalwiki.org/wiki/Emil_Kirkegaard">Don’t be like Emil O. Kierkegaard</a></li>
+</ul></li>
 </ul></li>
 </ul>
 
 </div>
+</div>
 <h3>References</h3>
 <div id="refs" class="references hanging-indent">
+<div id="ref-McCookPubliclyAvailableData2016">
+<p>McCook, Alison. 2016. “Publicly Available Data on Thousands of OKCupid Users Pulled over Copyright Claim.” Retraction Watch. May 16, 2016. <a href="https://retractionwatch.com/2016/05/16/publicly-available-data-on-thousands-of-okcupid-users-pulled-over-copyright-claim/">https://retractionwatch.com/2016/05/16/publicly-available-data-on-thousands-of-okcupid-users-pulled-over-copyright-claim/</a>.</p>
+</div>
+<div id="ref-NicolConsentInsufficientData2019">
+<p>Nicol, Dianne, Lisa Eckstein, Heidi Beate Bentzen, Pascal Borry, Mike Burgess, Wylie Burke, Don Chalmers, et al. 2019. “Consent Insufficient for Data Release.” <em>Science</em> 364 (6439): 445–46. <a href="https://doi.org/10.1126/science.aax0892">https://doi.org/10.1126/science.aax0892</a>.</p>
+</div>
+<div id="ref-OpenDataOffer2018">
+<p>“Open Data Offer Risks and Rewards for Conservation.” 2018. <em>Nature</em> 559 (7715): 444–44. <a href="https://doi.org/10.1038/d41586-018-05800-y">https://doi.org/10.1038/d41586-018-05800-y</a>.</p>
+</div>
 <div id="ref-WilkinsonFAIRGuidingPrinciples2016">
 <p>Wilkinson, Mark D., Michel Dumontier, IJsbrand Jan Aalbersberg, Gabrielle Appleton, Myles Axton, Arie Baak, Niklas Blomberg, et al. 2016. “The FAIR Guiding Principles for Scientific Data Management and Stewardship.” <em>Scientific Data</em> 3 (1, 1): 1–9. <a href="https://doi.org/10.1038/sdata.2016.18">https://doi.org/10.1038/sdata.2016.18</a>.</p>
+</div>
+<div id="ref-ZhangHowTinyWebsite2018">
+<p>Zhang, Sarah. 2018. “How a Tiny Website Became the Police’s Go-to Genealogy Database.” The Atlantic. June 1, 2018. <a href="https://www.theatlantic.com/science/archive/2018/06/gedmatch-police-genealogy-database/561695/">https://www.theatlantic.com/science/archive/2018/06/gedmatch-police-genealogy-database/561695/</a>.</p>
 </div>
 </div>
             </section>
