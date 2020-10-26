@@ -34,7 +34,7 @@
 
 ## Tools for tidying data ##
 
-```{r setup}
+```{r tidy_setup}
 library(tidyverse)
 theme_set(theme_minimal())
 
