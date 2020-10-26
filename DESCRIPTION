@@ -15,5 +15,6 @@ Imports:
 	datasauRus,
 	nycflights13,
 	ggbeeswarm,
-	ggforce
+	ggforce,
+	printr
 
