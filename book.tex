@@ -119,7 +119,7 @@
 
 \title{Data Science Methods for Cognitive Science}
 \author{Dan Hicks, \href{mailto:hicks.daniel.j@gmail.com}{\nolinkurl{hicks.daniel.j@gmail.com}}}
-\date{Mon Oct 26 23:10:33 2020}
+\date{Tue Oct 27 19:20:38 2020}
 
 \begin{document}
 \maketitle
@@ -2183,7 +2183,7 @@ The dataset is a zipped \texttt{csv} or comma-separated value file. CSVs are str
 \end{Shaded}
 
 \begin{verbatim}
-## 0.338 sec elapsed
+## 0.335 sec elapsed
 \end{verbatim}
 
 \begin{Shaded}
@@ -6678,18 +6678,6 @@ Silberzahn and Uhlmann (\protect\hyperlink{ref-SilberzahnCrowdsourcedResearchMan
 \hypertarget{some-data-cleaning-tools}{%
 \section{Some Data-Cleaning Tools}\label{some-data-cleaning-tools}}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(printr)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## Registered S3 method overwritten by 'printr':
-##   method                from     
-##   knit_print.data.frame rmarkdown
-\end{verbatim}
-
 \begin{itemize}
 \tightlist
 \item
@@ -6798,8 +6786,35 @@ Silberzahn and Uhlmann (\protect\hyperlink{ref-SilberzahnCrowdsourcedResearchMan
 \KeywordTok{theme\_set}\NormalTok{(}\KeywordTok{theme\_minimal}\NormalTok{())}
 
 \NormalTok{data\_folder =}\StringTok{ }\KeywordTok{file.path}\NormalTok{(}\StringTok{\textquotesingle{}data\textquotesingle{}}\NormalTok{)}
+\NormalTok{data\_zip =}\StringTok{ }\KeywordTok{file.path}\NormalTok{(data\_folder, }\StringTok{\textquotesingle{}tidy.zip\textquotesingle{}}\NormalTok{)}
+\CommentTok{\#\# Get the data}
+\ControlFlowTok{if}\NormalTok{ (}\OperatorTok{!}\KeywordTok{file.exists}\NormalTok{(data\_zip)) \{}
+    \KeywordTok{download.file}\NormalTok{(}\StringTok{\textquotesingle{}https://github.com/data{-}science{-}methods/book/raw/master/data/tidy.zip\textquotesingle{}}\NormalTok{, }
+\NormalTok{                  data\_zip)}
+\NormalTok{\}}
+\KeywordTok{unzip}\NormalTok{(data\_zip, }\DataTypeTok{overwrite =} \OtherTok{FALSE}\NormalTok{, }\DataTypeTok{exdir =}\NormalTok{ data\_folder)}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{verbatim}
+## Warning in unzip(data_zip, overwrite = FALSE, exdir = data_folder): not overwriting file 'data/
+## billboard.csv
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in unzip(data_zip, overwrite = FALSE, exdir = data_folder): not overwriting file 'data/
+## weather.csv
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in unzip(data_zip, overwrite = FALSE, exdir = data_folder): not overwriting file 'data/
+## tb.sav
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in unzip(data_zip, overwrite = FALSE, exdir = data_folder): not overwriting file 'data/
+## pew.csv
+\end{verbatim}
 
 \hypertarget{the-pew-dataset}{%
 \subsubsection{3.1: The Pew Dataset}\label{the-pew-dataset}}
