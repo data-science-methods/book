@@ -1,6 +1,6 @@
 # Some Data-Cleaning Tools #
 
-```{r}
+```{r, echo = FALSE, message = FALSE}
 library(printr)
 ```
 
@@ -46,10 +46,12 @@ theme_set(theme_minimal())
 
 data_folder = file.path('data')
 data_zip = file.path(data_folder, 'tidy.zip')
+## Get the data
 if (!file.exists(data_zip)) {
-    message('fill this in')
+    download.file('https://github.com/data-science-methods/book/raw/master/data/tidy.zip', 
+                  data_zip)
 }
-unzip(data_zip, overwrite = FALSE)
+unzip(data_zip, overwrite = FALSE, exdir = data_folder)
 ```
 
 ### 3.1: The Pew Dataset ###
