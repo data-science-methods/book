@@ -45,6 +45,11 @@ library(tidyverse)
 theme_set(theme_minimal())
 
 data_folder = file.path('data')
+data_zip = file.path(data_folder, 'tidy.zip')
+if (!file.exists(data_zip)) {
+    message('fill this in')
+}
+unzip(data_zip, overwrite = FALSE)
 ```
 
 ### 3.1: The Pew Dataset ###
