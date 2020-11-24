@@ -1,0 +1,155 @@
+# A Tech Stack for Automatically Reproduced Research #
+
+```{r child = 'knitr_config.Rmd'}
+```
+
+```{r, echo = FALSE}
+library(knitr)
+
+img_path = file.path('images', 'reproducibility')
+```
+
+Background reading: 
+
+- @GentlemanStatisticalAnalysesReproducible2004
+- @HealyPlainPersonGuide
+
+Our goal in this chapter and the next is to assemble a tech stack for automatically reproducing research. Where @GentlemanStatisticalAnalysesReproducible2004 and @HealyPlainPersonGuide focus on preparing code and papers in such a way that outputs are more likely to be *reproducible*, we can use additional tools to *automatically reproduce* outputs. This allows us to do things like automatically post updated preprints or online supplements.  
+
+```{r stack, echo = FALSE, fig.cap = "A tech stack for automatically reproduced research.  Yellow tools are used to assemble documents from a markup language and R code.  Light green tools manage references and allow us to automatically format bibliographies.  Git and GitHub Pages, in red, combine version control and webhosting for automatically reproduced research reports.  make and Travis-CI automate the process of running a sequence of scripts.  yaml files, in purple, and R DESCRIPTION files, in aquamarine, are used to configure settings for several different tools in the stack.  A number of extensions to R Markdown, in orange, support specific kinds of complex exports, including books, websites, and package documentation.", out.width = "100%"}
+include_graphics(file.path(img_path, 'stack.png'))
+```
+
+This chapter will focus on the *document assembly* side of the stack.  
+
+## Document Assembly ##
+
+- Same basic idea as HTML or LaTeX
+    - Write the "source code" for the document in a plaintex format with markup
+    - Process or typeset the source code to generate the nice-looking document
+    - We'll be using Markdown instead of HTML or LaTeX, because it's simpler
+
+- *[Things to install]*
+    - LaTeX (recommended: [TinyTeX](https://yihui.name/tinytex/))
+    - [Pandoc](https://pandoc.org/) (recommended: version 2.11 or later, which handles citations more smoothly)
+    - `rmarkdown` R package (recommended: version 2.5 or later)
+    
+### Write in Markdown ###
+
+- [Markdown overview](https://daringfireball.net/projects/markdown/)
+- [Pandoc's Markdown](https://pandoc.org/MANUAL.html#pandocs-markdown)
+- [R Markdown reference guide](https://rstudio.com/wp-content/uploads/2015/03/R Markdown-reference.pdf)
+
+*[image and URL]*
+
+```{markdown}
+# Header 1 #
+## Header 2 ##
+
+Here's a paragraph. 
+
+And another, with *emphasis* and **bold**.  This sentence has a footnote.[^foo]
+
+[^foo]: bar
+
+- Itemized
+- lists
+- are
+- easy
+
+1. So
+2. are
+3. enumerated
+4. lists
+```
+
+- Conversion
+    - `pandoc ex.md -o ex.pdf`
+    - `pandoc ex.md -o ex.html`
+    - `pandoc ex.md -o ex.docx`
+    - [More pandoc conversion formats](https://pandoc.org/index.html)
+    - In RStudio, click "Knitr" or "Preview" (default shortcut Command-Shift-K)
+
+
+### Add metadata and configuration with a YAML header ###
+
+- YAML (["YAML Ain't Markup Language"](https://en.wikipedia.org/wiki/YAML))
+    - [Syntax cheat sheet](https://yaml.org/refcard.html)
+    - Used for configuration files (and headers)
+    
+```
+---
+author: "The Jag Cat"
+title: "Let's go outside and do bird murder"
+abstract: >
+  Right now there are birds in the backyard.  They are hopping around and chirping and being birds.  In this paper, I argue that we should go outside and do a murder to them.  
+  
+geometry: "margin=1.25in"
+mainfont: "Georgia"
+fontsize: 11pt
+
+toc: true
+numbersections: true
+colorlinks: true
+---
+```
+
+- Available options depend on the output format
+- Difference between top-level configuration options and `output:pdf_document` options
+- `header-includes` for any LaTeX packages you want to load
+
+
+### Add R code with R Markdown ###
+
+- [R Markdown reference guide](https://rstudio.com/wp-content/uploads/2015/03/RMarkdown-reference.pdf)
+
+- *Code chunks* are wrapped in *fences* (3 backticks or tildes)
+  - In braces: [language](https://rmarkdown.rstudio.com/lesson-5.html) chunk label, [chunk options](https://yihui.org/knitr/options/)
+  - RStudio UI helpers for chunk options
+    - `echo = FALSE` to hide code but still execute it
+- File extension should be `.Rmd`
+
+````
+`r ''````{r}
+library(ggplot2)
+foo = data.frame(x = 1:25, 
+                 y = rnorm(25, mean = 1, sd = 15))
+ggplot(foo, aes(x, y)) +
+    geom_point()
+```
+````
+
+- Must be assembled with `rmarkdown::render()`
+  - `clean = FALSE`
+- Include R code chunks in paper?  
+  - Pro:  Shows exactly which bits of code were used for which bit of the paper
+  - Cons:
+    - LaTeX is already very slow
+    - Journals require separate image files
+    - Tension with encapsulation and a clear sequence of files for different steps of the analysis
+- An approach I currently use
+  - "Main analysis" `.Rmd` file, generates plots and tables
+  - Automatically reproduced
+  - Knit to HTML, [hosted online](https://dhicks.github.io/p_curve/)
+  - `paper.md` incorporates images and tables generated by analysis script
+
+
+## Reference Management ##
+
+- Recommended: [Zotero](https://www.zotero.org/) with the [Better Bibtex extension](https://retorque.re/zotero-better-bibtex/)
+    - TIL the Better Bibtex devs [recommend exporting in CSL rather than Bib(la)tex](https://retorque.re/zotero-better-bibtex/exporting/pandoc/)
+    - I also find [Zotfile](http://zotfile.com/) extremely useful. 
+
+- [`example-refs.json`](https://drive.google.com/file/d/1MuVaaSYVPBjEkYshbjG3j0YrhOmhzKGL/view?usp=sharing)
+    
+```markdown
+---
+bibliography: example-refs.json
+----
+@YoungReliabilityEnvironmentalEpidemiology2019 have appealed to concerns about p-hacking [@SimonsohnPcurveKeyFiledrawer2014; @HeadExtentConsequencesPHacking2015, 3]. 
+```
+
+@YoungReliabilityEnvironmentalEpidemiology2019 have appealed to concerns about p-hacking [@SimonsohnPcurveKeyFiledrawer2014; @HeadExtentConsequencesPHacking2015, 3]. 
+
+- [Changing citation style](https://bookdown.org/yihui/rmarkdown-cookbook/bibliography.html#changing-citation-style)
+
