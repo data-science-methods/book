@@ -119,7 +119,7 @@
 
 \title{Data Science Methods for Cognitive Science}
 \author{Dan Hicks, \href{mailto:hicks.daniel.j@gmail.com}{\nolinkurl{hicks.daniel.j@gmail.com}}}
-\date{Tue Oct 27 19:20:38 2020}
+\date{Tue Nov 24 21:42:27 2020}
 
 \begin{document}
 \maketitle
@@ -151,7 +151,7 @@ This version of the book was built with R version 4.0.2 (2020-06-22), \href{http
 package & version & source\tabularnewline
 \midrule
 \endhead
-bookdown & 0.21.2 & Github (rstudio/bookdown@285c092)\tabularnewline
+bookdown & 0.21.4 & Github (rstudio/bookdown@9669918)\tabularnewline
 datasauRus & 0.1.4 & CRAN (R 4.0.2)\tabularnewline
 desc & 1.2.0 & CRAN (R 4.0.2)\tabularnewline
 ggbeeswarm & 0.6.0 & CRAN (R 4.0.2)\tabularnewline
@@ -2183,7 +2183,7 @@ The dataset is a zipped \texttt{csv} or comma-separated value file. CSVs are str
 \end{Shaded}
 
 \begin{verbatim}
-## 0.335 sec elapsed
+## 0.341 sec elapsed
 \end{verbatim}
 
 \begin{Shaded}
@@ -7521,6 +7521,283 @@ MX17004 & 2010 & 3 & 5 & 32.1 & 14.2\\
 \hline
 \end{tabular}
 
+\hypertarget{a-tech-stack-for-automatically-reproduced-research}{%
+\section{A Tech Stack for Automatically Reproduced Research}\label{a-tech-stack-for-automatically-reproduced-research}}
+
+Background reading:
+
+\begin{itemize}
+\tightlist
+\item
+  Gentleman and Lang (\protect\hyperlink{ref-GentlemanStatisticalAnalysesReproducible2004}{2004})
+\item
+  Healy (\protect\hyperlink{ref-HealyPlainPersonGuide}{n.d.})
+\end{itemize}
+
+Our goal in this chapter and the next is to assemble a tech stack for automatically reproducing research. Where Gentleman and Lang (\protect\hyperlink{ref-GentlemanStatisticalAnalysesReproducible2004}{2004}) and Healy (\protect\hyperlink{ref-HealyPlainPersonGuide}{n.d.}) focus on preparing code and papers in such a way that outputs are more likely to be \emph{reproducible}, we can use additional tools to \emph{automatically reproduce} outputs. This allows us to do things like automatically post updated preprints or online supplements.
+
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/reproducibility/stack} 
+
+}
+
+\caption{A tech stack for automatically reproduced research.  Yellow tools are used to assemble documents from a markup language and R code.  Light green tools manage references and allow us to automatically format bibliographies.  Git and GitHub Pages, in red, combine version control and webhosting for automatically reproduced research reports.  make and Travis-CI automate the process of running a sequence of scripts.  yaml files, in purple, and R DESCRIPTION files, in aquamarine, are used to configure settings for several different tools in the stack.  A number of extensions to R Markdown, in orange, support specific kinds of complex exports, including books, websites, and package documentation.}\label{fig:stack}
+\end{figure}
+
+This chapter will focus on the \emph{document assembly} side of the stack.
+
+\hypertarget{document-assembly}{%
+\subsection{Document Assembly}\label{document-assembly}}
+
+\begin{itemize}
+\tightlist
+\item
+  Same basic idea as HTML or LaTeX
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Write the ``source code'' for the document in a plaintex format with markup
+  \item
+    Process or typeset the source code to generate the nice-looking document
+  \item
+    We'll be using Markdown instead of HTML or LaTeX, because it's simpler
+  \end{itemize}
+\item
+  \emph{{[}Things to install{]}}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    LaTeX (recommended: \href{https://yihui.name/tinytex/}{TinyTeX})
+  \item
+    \href{https://pandoc.org/}{Pandoc} (recommended: version 2.11 or later, which handles citations more smoothly)
+  \item
+    \texttt{rmarkdown} R package (recommended: version 2.5 or later)
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{write-in-markdown}{%
+\subsubsection{Write in Markdown}\label{write-in-markdown}}
+
+\begin{itemize}
+\tightlist
+\item
+  \href{https://daringfireball.net/projects/markdown/}{Markdown overview}
+\item
+  \href{https://pandoc.org/MANUAL.html\#pandocs-markdown}{Pandoc's Markdown}
+\item
+  \href{https://rstudio.com/wp-content/uploads/2015/03/R\%20Markdown-reference.pdf}{R Markdown reference guide}
+\end{itemize}
+
+\emph{{[}image and URL{]}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{\# Header 1 \#}
+\FunctionTok{\#\# Header 2 \#\#}
+
+\NormalTok{Here\textquotesingle{}s a paragraph. }
+
+\NormalTok{And another, with *emphasis* and **bold**.  This sentence has a footnote.}\OtherTok{[\^{}foo]}
+
+\OtherTok{[\^{}foo]: }\NormalTok{bar}
+
+\SpecialStringTok{{-} }\NormalTok{Itemized}
+\SpecialStringTok{{-} }\NormalTok{lists}
+\SpecialStringTok{{-} }\NormalTok{are}
+\SpecialStringTok{{-} }\NormalTok{easy}
+
+\SpecialStringTok{1. }\NormalTok{So}
+\SpecialStringTok{2. }\NormalTok{are}
+\SpecialStringTok{3. }\NormalTok{enumerated}
+\SpecialStringTok{4. }\NormalTok{lists}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  Conversion
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{pandoc\ ex.md\ -o\ ex.pdf}
+  \item
+    \texttt{pandoc\ ex.md\ -o\ ex.html}
+  \item
+    \texttt{pandoc\ ex.md\ -o\ ex.docx}
+  \item
+    \href{https://pandoc.org/index.html}{More pandoc conversion formats}
+  \item
+    In RStudio, click ``Knitr'' or ``Preview'' (default shortcut Command-Shift-K)
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{add-metadata-and-configuration-with-a-yaml-header}{%
+\subsubsection{Add metadata and configuration with a YAML header}\label{add-metadata-and-configuration-with-a-yaml-header}}
+
+\begin{itemize}
+\tightlist
+\item
+  YAML (\href{https://en.wikipedia.org/wiki/YAML}{``YAML Ain't Markup Language''})
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \href{https://yaml.org/refcard.html}{Syntax cheat sheet}
+  \item
+    Used for configuration files (and headers)
+  \end{itemize}
+\end{itemize}
+
+\begin{verbatim}
+---
+author: "The Jag Cat"
+title: "Let's go outside and do bird murder"
+abstract: >
+  Right now there are birds in the backyard.  They are hopping around and chirping and being birds.  In this paper, I argue that we should go outside and do a murder to them.  
+  
+geometry: "margin=1.25in"
+mainfont: "Georgia"
+fontsize: 11pt
+
+toc: true
+numbersections: true
+colorlinks: true
+---
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  Available options depend on the output format
+\item
+  Difference between top-level configuration options and \texttt{output:pdf\_document} options
+\item
+  \texttt{header-includes} for any LaTeX packages you want to load
+\end{itemize}
+
+\hypertarget{add-r-code-with-r-markdown}{%
+\subsubsection{Add R code with R Markdown}\label{add-r-code-with-r-markdown}}
+
+\begin{itemize}
+\item
+  \href{https://rstudio.com/wp-content/uploads/2015/03/RMarkdown-reference.pdf}{R Markdown reference guide}
+\item
+  \emph{Code chunks} are wrapped in \emph{fences} (3 backticks or tildes)
+
+  \begin{itemize}
+  \tightlist
+  \item
+    In braces: \href{https://rmarkdown.rstudio.com/lesson-5.html}{language} chunk label, \href{https://yihui.org/knitr/options/}{chunk options}
+  \item
+    RStudio UI helpers for chunk options
+
+    \begin{itemize}
+    \tightlist
+    \item
+      \texttt{echo\ =\ FALSE} to hide code but still execute it
+    \end{itemize}
+  \end{itemize}
+\item
+  File extension should be \texttt{.Rmd}
+\end{itemize}
+
+\begin{verbatim}
+```{r}
+library(ggplot2)
+foo = data.frame(x = 1:25, 
+                 y = rnorm(25, mean = 1, sd = 15))
+ggplot(foo, aes(x, y)) +
+    geom_point()
+```
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  Must be assembled with \texttt{rmarkdown::render()}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{clean\ =\ FALSE}
+  \end{itemize}
+\item
+  Include R code chunks in paper?
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Pro: Shows exactly which bits of code were used for which bit of the paper
+  \item
+    Cons:
+
+    \begin{itemize}
+    \tightlist
+    \item
+      LaTeX is already very slow
+    \item
+      Journals require separate image files
+    \item
+      Tension with encapsulation and a clear sequence of files for different steps of the analysis
+    \end{itemize}
+  \end{itemize}
+\item
+  An approach I currently use
+
+  \begin{itemize}
+  \tightlist
+  \item
+    ``Main analysis'' \texttt{.Rmd} file, generates plots and tables
+  \item
+    Automatically reproduced
+  \item
+    Knit to HTML, \href{https://dhicks.github.io/p_curve/}{hosted online}
+  \item
+    \texttt{paper.md} incorporates images and tables generated by analysis script
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{reference-management}{%
+\subsection{Reference Management}\label{reference-management}}
+
+\begin{itemize}
+\tightlist
+\item
+  Recommended: \href{https://www.zotero.org/}{Zotero} with the \href{https://retorque.re/zotero-better-bibtex/}{Better Bibtex extension}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    TIL the Better Bibtex devs \href{https://retorque.re/zotero-better-bibtex/exporting/pandoc/}{recommend exporting in CSL rather than Bib(la)tex}
+  \item
+    I also find \href{http://zotfile.com/}{Zotfile} extremely useful.
+  \end{itemize}
+\item
+  \href{https://drive.google.com/file/d/1MuVaaSYVPBjEkYshbjG3j0YrhOmhzKGL/view?usp=sharing}{\texttt{example-refs.json}}
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{{-}{-}{-}}
+\AnnotationTok{bibliography:}\CommentTok{ example{-}refs.json}
+\CommentTok{{-}{-}{-}}\NormalTok{{-}}
+\NormalTok{@YoungReliabilityEnvironmentalEpidemiology2019 have appealed to concerns about p{-}hacking }\CommentTok{[}\OtherTok{@SimonsohnPcurveKeyFiledrawer2014; @HeadExtentConsequencesPHacking2015, 3}\CommentTok{]}\NormalTok{. }
+\end{Highlighting}
+\end{Shaded}
+
+({\textbf{???}}) have appealed to concerns about p-hacking ({\textbf{???}}; {\textbf{???}}).
+
+\begin{itemize}
+\tightlist
+\item
+  \href{https://bookdown.org/yihui/rmarkdown-cookbook/bibliography.html\#changing-citation-style}{Changing citation style}
+\end{itemize}
+
 \hypertarget{part-case-study-the-compas-dataset}{%
 \part{Case Study: The COMPAS Dataset}\label{part-case-study-the-compas-dataset}}
 
@@ -7576,6 +7853,9 @@ Hanna, Alex, Emily Denton, Andrew Smart, and Jamila Smith-Loud. 2019. ``Towards 
 
 \leavevmode\hypertarget{ref-HealyDataVisualizationPractical2018}{}%
 Healy, Kieran. 2018. \emph{Data Visualization: A Practical Introduction}. Princeton University Press. \url{http://books.google.com?id=3XOYDwAAQBAJ}.
+
+\leavevmode\hypertarget{ref-HealyPlainPersonGuide}{}%
+---------. n.d. ``The Plain Person's Guide to Plain Text Social Science.'' Accessed February 28, 2016. \url{http://kieranhealy.org/publications/plain-person-text/}.
 
 \leavevmode\hypertarget{ref-HerndonDoesHighPublic2014}{}%
 Herndon, Thomas, Michael Ash, and Robert Pollin. 2014. ``Does High Public Debt Consistently Stifle Economic Growth? A Critique of Reinhart and Rogoff.'' \emph{Cambridge Journal of Economics} 38 (2): 257--79. \url{https://doi.org/10.1093/cje/bet075}.

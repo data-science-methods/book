@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 22 A Tech Stack for Automatically Reproduced Research | Data Science Methods for Cognitive Science</title>
+  <meta name="description" content="This document is a set of notes (and perhaps later a textbook) for a course on data science methods for graduate students in social and behavioral sciences." />
+  <meta name="generator" content="bookdown 0.21.4 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 22 A Tech Stack for Automatically Reproduced Research | Data Science Methods for Cognitive Science" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This document is a set of notes (and perhaps later a textbook) for a course on data science methods for graduate students in social and behavioral sciences." />
+  <meta name="github-repo" content="data-science-methods/book" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 22 A Tech Stack for Automatically Reproduced Research | Data Science Methods for Cognitive Science" />
+  
+  <meta name="twitter:description" content="This document is a set of notes (and perhaps later a textbook) for a course on data science methods for graduate students in social and behavioral sciences." />
+  
+
+<meta name="author" content="Dan Hicks, hicks.daniel.j@gmail.com" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="some-data-cleaning-tools.html"/>
+<link rel="next" href="references.html"/>
+<script src="libs/header-attrs-2.5.3/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="" data-path="setting-up.html"><a href="setting-up.html"><i class="fa fa-check"></i>Setting up</a>
+<ul>
+<li class="chapter" data-level="0.1" data-path="setting-up.html"><a href="setting-up.html#a-note-on-accessibility"><i class="fa fa-check"></i><b>0.1</b> A Note on Accessibility</a></li>
+<li class="chapter" data-level="0.2" data-path="setting-up.html"><a href="setting-up.html#hardware-recommendations"><i class="fa fa-check"></i><b>0.2</b> Hardware Recommendations</a></li>
+<li class="chapter" data-level="0.3" data-path="setting-up.html"><a href="setting-up.html#r-and-rstudio"><i class="fa fa-check"></i><b>0.3</b> R and RStudio</a></li>
+<li class="chapter" data-level="0.4" data-path="setting-up.html"><a href="setting-up.html#slack"><i class="fa fa-check"></i><b>0.4</b> Slack</a></li>
+<li class="chapter" data-level="0.5" data-path="setting-up.html"><a href="setting-up.html#github"><i class="fa fa-check"></i><b>0.5</b> GitHub</a></li>
+<li class="chapter" data-level="0.6" data-path="setting-up.html"><a href="setting-up.html#screen-layouts"><i class="fa fa-check"></i><b>0.6</b> Screen Layouts</a></li>
+<li class="chapter" data-level="0.7" data-path="setting-up.html"><a href="setting-up.html#pre-class-survey"><i class="fa fa-check"></i><b>0.7</b> Pre-Class Survey</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#land-acknowledgement"><i class="fa fa-check"></i><b>1.1</b> Land Acknowledgement</a></li>
+<li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#about-me"><i class="fa fa-check"></i><b>1.2</b> About me</a></li>
+<li class="chapter" data-level="1.3" data-path="introduction.html"><a href="introduction.html#what-this-course-isnt-and-is"><i class="fa fa-check"></i><b>1.3</b> What this course isn’t, and is</a></li>
+<li class="chapter" data-level="1.4" data-path="introduction.html"><a href="introduction.html#learning-outcomes"><i class="fa fa-check"></i><b>1.4</b> Learning outcomes</a></li>
+<li class="chapter" data-level="1.5" data-path="introduction.html"><a href="introduction.html#workflow"><i class="fa fa-check"></i><b>1.5</b> Workflow</a></li>
+<li class="chapter" data-level="1.6" data-path="introduction.html"><a href="introduction.html#notes-on-some-course-design-decisions"><i class="fa fa-check"></i><b>1.6</b> Notes on some course design decisions</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="what-is-this-thing-called-data-science.html"><a href="what-is-this-thing-called-data-science.html"><i class="fa fa-check"></i><b>2</b> What is this thing called data science?</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="what-is-this-thing-called-data-science.html"><a href="what-is-this-thing-called-data-science.html#standard-definition"><i class="fa fa-check"></i><b>2.1</b> Standard definition</a></li>
+<li class="chapter" data-level="2.2" data-path="what-is-this-thing-called-data-science.html"><a href="what-is-this-thing-called-data-science.html#a-prior-question-what-is-this-thing-called-data"><i class="fa fa-check"></i><b>2.2</b> A prior question: What is this thing called “data”?</a></li>
+<li class="chapter" data-level="2.3" data-path="what-is-this-thing-called-data-science.html"><a href="what-is-this-thing-called-data-science.html#back-to-data-science"><i class="fa fa-check"></i><b>2.3</b> Back to “data science”</a></li>
+</ul></li>
+<li class="part"><span><b>I Some fundamental tools</b></span></li>
+<li class="chapter" data-level="3" data-path="git-and-version-control.html"><a href="git-and-version-control.html"><i class="fa fa-check"></i><b>3</b> Git and Version Control</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="git-and-version-control.html"><a href="git-and-version-control.html#some-motivating-examples"><i class="fa fa-check"></i><b>3.1</b> Some motivating examples</a></li>
+<li class="chapter" data-level="3.2" data-path="git-and-version-control.html"><a href="git-and-version-control.html#version-control"><i class="fa fa-check"></i><b>3.2</b> Version control</a></li>
+<li class="chapter" data-level="3.3" data-path="git-and-version-control.html"><a href="git-and-version-control.html#how-to-do-things-with-git"><i class="fa fa-check"></i><b>3.3</b> How to do things with git</a></li>
+<li class="chapter" data-level="3.4" data-path="git-and-version-control.html"><a href="git-and-version-control.html#working-with-github-remotes"><i class="fa fa-check"></i><b>3.4</b> Working with GitHub remotes</a></li>
+<li class="chapter" data-level="3.5" data-path="git-and-version-control.html"><a href="git-and-version-control.html#lab"><i class="fa fa-check"></i><b>3.5</b> Lab</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="r-basics.html"><a href="r-basics.html"><i class="fa fa-check"></i><b>4</b> R Basics</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="r-basics.html"><a href="r-basics.html#lets-get-started-with-rstudio"><i class="fa fa-check"></i><b>4.1</b> Let’s get started with RStudio</a></li>
+<li class="chapter" data-level="4.2" data-path="r-basics.html"><a href="r-basics.html#selecting-elements-and-some-math"><i class="fa fa-check"></i><b>4.2</b> Selecting elements, and some math</a></li>
+<li class="chapter" data-level="4.3" data-path="r-basics.html"><a href="r-basics.html#base-r-data-types"><i class="fa fa-check"></i><b>4.3</b> Base R data types</a></li>
+<li class="chapter" data-level="4.4" data-path="r-basics.html"><a href="r-basics.html#examining-variables"><i class="fa fa-check"></i><b>4.4</b> Examining variables</a></li>
+<li class="chapter" data-level="4.5" data-path="r-basics.html"><a href="r-basics.html#logical-operators"><i class="fa fa-check"></i><b>4.5</b> Logical operators</a></li>
+<li class="chapter" data-level="4.6" data-path="r-basics.html"><a href="r-basics.html#missing-data"><i class="fa fa-check"></i><b>4.6</b> Missing data</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="functional-programming-and-data-science.html"><a href="functional-programming-and-data-science.html"><i class="fa fa-check"></i><b>5</b> Functional Programming and Data Science</a></li>
+<li class="chapter" data-level="6" data-path="warnings-errors-and-getting-help.html"><a href="warnings-errors-and-getting-help.html"><i class="fa fa-check"></i><b>6</b> Warnings, Errors, and Getting Help</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="warnings-errors-and-getting-help.html"><a href="warnings-errors-and-getting-help.html#recommended-reading-and-watching"><i class="fa fa-check"></i><b>6.1</b> Recommended reading and watching</a></li>
+<li class="chapter" data-level="6.2" data-path="warnings-errors-and-getting-help.html"><a href="warnings-errors-and-getting-help.html#messages-warnings-and-errors"><i class="fa fa-check"></i><b>6.2</b> Messages, warnings, and errors</a></li>
+<li class="chapter" data-level="6.3" data-path="warnings-errors-and-getting-help.html"><a href="warnings-errors-and-getting-help.html#where-to-go-for-help"><i class="fa fa-check"></i><b>6.3</b> Where to go for help</a></li>
+<li class="chapter" data-level="6.4" data-path="warnings-errors-and-getting-help.html"><a href="warnings-errors-and-getting-help.html#writing-a-reproducible-example-reprex"><i class="fa fa-check"></i><b>6.4</b> Writing a reproducible example: <code>reprex</code></a></li>
+<li class="chapter" data-level="6.5" data-path="warnings-errors-and-getting-help.html"><a href="warnings-errors-and-getting-help.html#do-not-do-these-things-in-your-reprex"><i class="fa fa-check"></i><b>6.5</b> Do not do these things in your reprex</a></li>
+</ul></li>
+<li class="part"><span><b>II Exploratory Data Analysis (EDA)</b></span></li>
+<li class="chapter" data-level="7" data-path="eda-models.html"><a href="eda-models.html"><i class="fa fa-check"></i><b>7</b> Exploratory Data Analysis</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="eda-models.html"><a href="eda-models.html#exploratory-and-confirmatory-research"><i class="fa fa-check"></i><b>7.1</b> Exploratory and Confirmatory Research</a></li>
+<li class="chapter" data-level="7.2" data-path="eda-models.html"><a href="eda-models.html#better-models-for-eda-i-risk-management-in-spiral-development"><i class="fa fa-check"></i><b>7.2</b> Better Models for EDA I: Risk Management in Spiral Development</a></li>
+<li class="chapter" data-level="7.3" data-path="eda-models.html"><a href="eda-models.html#better-models-for-eda-ii-epicycle-of-analysis"><i class="fa fa-check"></i><b>7.3</b> Better Models for EDA II: Epicycle of Analysis</a></li>
+<li class="chapter" data-level="7.4" data-path="eda-models.html"><a href="eda-models.html#better-models-for-eda-iii-developing-phenomena"><i class="fa fa-check"></i><b>7.4</b> Better Models for EDA III: Developing Phenomena</a></li>
+<li class="chapter" data-level="7.5" data-path="eda-models.html"><a href="eda-models.html#discussion-questions"><i class="fa fa-check"></i><b>7.5</b> Discussion questions</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="two-eda-checklists.html"><a href="two-eda-checklists.html"><i class="fa fa-check"></i><b>8</b> Two EDA “Checklists”</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="two-eda-checklists.html"><a href="two-eda-checklists.html#pengartdatascience2016"><i class="fa fa-check"></i><b>8.1</b> <span class="citation">Peng and Matsui (<span>2016</span>)</span></a></li>
+<li class="chapter" data-level="8.2" data-path="two-eda-checklists.html"><a href="two-eda-checklists.html#huebnersystematicapproachinitial2016"><i class="fa fa-check"></i><b>8.2</b> <span class="citation">Huebner, Vach, and le Cessie (<span>2016</span>)</span></a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="inspecting-variables.html"><a href="inspecting-variables.html"><i class="fa fa-check"></i><b>9</b> Inspecting Variables</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="inspecting-variables.html"><a href="inspecting-variables.html#packages"><i class="fa fa-check"></i><b>9.1</b> Packages</a></li>
+<li class="chapter" data-level="9.2" data-path="inspecting-variables.html"><a href="inspecting-variables.html#get-the-data"><i class="fa fa-check"></i><b>9.2</b> Get the Data</a></li>
+<li class="chapter" data-level="9.3" data-path="inspecting-variables.html"><a href="inspecting-variables.html#formulate-your-question"><i class="fa fa-check"></i><b>9.3</b> 1. Formulate your question</a></li>
+<li class="chapter" data-level="9.4" data-path="inspecting-variables.html"><a href="inspecting-variables.html#read-in-your-data"><i class="fa fa-check"></i><b>9.4</b> 2. Read in your data</a></li>
+<li class="chapter" data-level="9.5" data-path="inspecting-variables.html"><a href="inspecting-variables.html#check-the-packaging"><i class="fa fa-check"></i><b>9.5</b> 3. Check the packaging</a></li>
+<li class="chapter" data-level="9.6" data-path="inspecting-variables.html"><a href="inspecting-variables.html#filter-mutate-count-and-pipes"><i class="fa fa-check"></i><b>9.6</b> Filter, mutate, count, and pipes</a></li>
+<li class="chapter" data-level="9.7" data-path="inspecting-variables.html"><a href="inspecting-variables.html#look-at-the-top-and-the-bottom-of-your-data"><i class="fa fa-check"></i><b>9.7</b> 4. Look at the top and the bottom of your data</a></li>
+<li class="chapter" data-level="9.8" data-path="inspecting-variables.html"><a href="inspecting-variables.html#check-your-ns-and-6.-validate-with-at-least-one-external-data-source"><i class="fa fa-check"></i><b>9.8</b> 5. Check your “n”s (and) 6. Validate with at least one external data source</a></li>
+<li class="chapter" data-level="9.9" data-path="inspecting-variables.html"><a href="inspecting-variables.html#from-dates-to-years"><i class="fa fa-check"></i><b>9.9</b> From dates to years</a></li>
+<li class="chapter" data-level="9.10" data-path="inspecting-variables.html"><a href="inspecting-variables.html#make-a-plot"><i class="fa fa-check"></i><b>9.10</b> 7. Make a plot</a></li>
+<li class="chapter" data-level="9.11" data-path="inspecting-variables.html"><a href="inspecting-variables.html#try-the-easy-solution-first"><i class="fa fa-check"></i><b>9.11</b> 8. Try the easy solution first</a></li>
+<li class="chapter" data-level="9.12" data-path="inspecting-variables.html"><a href="inspecting-variables.html#follow-up"><i class="fa fa-check"></i><b>9.12</b> 9. Follow up</a></li>
+<li class="chapter" data-level="9.13" data-path="inspecting-variables.html"><a href="inspecting-variables.html#discussion-questions-1"><i class="fa fa-check"></i><b>9.13</b> Discussion questions</a></li>
+<li class="chapter" data-level="9.14" data-path="inspecting-variables.html"><a href="inspecting-variables.html#lab-1"><i class="fa fa-check"></i><b>9.14</b> Lab</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="joins.html"><a href="joins.html"><i class="fa fa-check"></i><b>10</b> Joins</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="joins.html"><a href="joins.html#types-of-joins"><i class="fa fa-check"></i><b>10.1</b> Types of joins</a></li>
+<li class="chapter" data-level="10.2" data-path="joins.html"><a href="joins.html#hazards"><i class="fa fa-check"></i><b>10.2</b> Hazards</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="visual-eda.html"><a href="visual-eda.html"><i class="fa fa-check"></i><b>11</b> Visual EDA</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="visual-eda.html"><a href="visual-eda.html#the-role-of-visuals-in-eda"><i class="fa fa-check"></i><b>11.1</b> The Role of Visuals in EDA</a></li>
+<li class="chapter" data-level="11.2" data-path="visual-eda.html"><a href="visual-eda.html#plot-your-data"><i class="fa fa-check"></i><b>11.2</b> Plot Your Data</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="the-grammar-of-graphics.html"><a href="the-grammar-of-graphics.html"><i class="fa fa-check"></i><b>12</b> The Grammar of Graphics</a></li>
+<li class="chapter" data-level="13" data-path="common-and-less-common-graphs-for-eda.html"><a href="common-and-less-common-graphs-for-eda.html"><i class="fa fa-check"></i><b>13</b> Common (and less common) Graphs for EDA</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="common-and-less-common-graphs-for-eda.html"><a href="common-and-less-common-graphs-for-eda.html#data-1"><i class="fa fa-check"></i><b>13.1</b> Data</a></li>
+<li class="chapter" data-level="13.2" data-path="common-and-less-common-graphs-for-eda.html"><a href="common-and-less-common-graphs-for-eda.html#d-distributions"><i class="fa fa-check"></i><b>13.2</b> 1D distributions</a></li>
+<li class="chapter" data-level="13.3" data-path="common-and-less-common-graphs-for-eda.html"><a href="common-and-less-common-graphs-for-eda.html#d-distributions-categorical-x-numeric"><i class="fa fa-check"></i><b>13.3</b> 2D distributions: Categorical x Numeric</a></li>
+<li class="chapter" data-level="13.4" data-path="common-and-less-common-graphs-for-eda.html"><a href="common-and-less-common-graphs-for-eda.html#joining-tuition-and-diversity-data"><i class="fa fa-check"></i><b>13.4</b> Joining tuition and diversity data</a></li>
+<li class="chapter" data-level="13.5" data-path="common-and-less-common-graphs-for-eda.html"><a href="common-and-less-common-graphs-for-eda.html#school-diversity-violin-plots"><i class="fa fa-check"></i><b>13.5</b> School Diversity Violin Plots</a></li>
+<li class="chapter" data-level="13.6" data-path="common-and-less-common-graphs-for-eda.html"><a href="common-and-less-common-graphs-for-eda.html#d-distributions-numeric-x-numeric"><i class="fa fa-check"></i><b>13.6</b> 2D Distributions: Numeric x Numeric</a></li>
+<li class="chapter" data-level="13.7" data-path="common-and-less-common-graphs-for-eda.html"><a href="common-and-less-common-graphs-for-eda.html#text-geoms"><i class="fa fa-check"></i><b>13.7</b> Text geoms</a></li>
+<li class="chapter" data-level="13.8" data-path="common-and-less-common-graphs-for-eda.html"><a href="common-and-less-common-graphs-for-eda.html#multivariate-distributions"><i class="fa fa-check"></i><b>13.8</b> Multivariate distributions</a></li>
+<li class="chapter" data-level="13.9" data-path="common-and-less-common-graphs-for-eda.html"><a href="common-and-less-common-graphs-for-eda.html#lab-2"><i class="fa fa-check"></i><b>13.9</b> Lab</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="intermediate-visualization-in-r.html"><a href="intermediate-visualization-in-r.html"><i class="fa fa-check"></i><b>14</b> Intermediate Visualization in R</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="intermediate-visualization-in-r.html"><a href="intermediate-visualization-in-r.html#base-graphics-vs.-ggplot2"><i class="fa fa-check"></i><b>14.1</b> Base graphics vs. <code>ggplot2</code></a></li>
+<li class="chapter" data-level="14.2" data-path="intermediate-visualization-in-r.html"><a href="intermediate-visualization-in-r.html#plot-1-dumbbell-plot"><i class="fa fa-check"></i><b>14.2</b> Plot 1: Dumbbell plot</a></li>
+<li class="chapter" data-level="14.3" data-path="intermediate-visualization-in-r.html"><a href="intermediate-visualization-in-r.html#plot-2-high-density-scatterplots"><i class="fa fa-check"></i><b>14.3</b> Plot 2: High-density scatterplots</a></li>
+<li class="chapter" data-level="14.4" data-path="intermediate-visualization-in-r.html"><a href="intermediate-visualization-in-r.html#plot-3-time-series-model-predictions"><i class="fa fa-check"></i><b>14.4</b> Plot 3: Time series + model predictions</a></li>
+<li class="chapter" data-level="14.5" data-path="intermediate-visualization-in-r.html"><a href="intermediate-visualization-in-r.html#plot-4-visualizing-spatial-data-in-r"><i class="fa fa-check"></i><b>14.5</b> Plot 4: Visualizing spatial data in R</a></li>
+</ul></li>
+<li class="part"><span><b>III Reproducibility</b></span></li>
+<li class="chapter" data-level="15" data-path="reproducibility-replicability-and-robustness.html"><a href="reproducibility-replicability-and-robustness.html"><i class="fa fa-check"></i><b>15</b> Reproducibility, Replicability, and Robustness</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="reproducibility-replicability-and-robustness.html"><a href="reproducibility-replicability-and-robustness.html#the-replication-crisis"><i class="fa fa-check"></i><b>15.1</b> The Replication Crisis</a></li>
+<li class="chapter" data-level="15.2" data-path="reproducibility-replicability-and-robustness.html"><a href="reproducibility-replicability-and-robustness.html#terminology"><i class="fa fa-check"></i><b>15.2</b> Terminology</a></li>
+<li class="chapter" data-level="15.3" data-path="reproducibility-replicability-and-robustness.html"><a href="reproducibility-replicability-and-robustness.html#epistemic-value-of-reproducibility"><i class="fa fa-check"></i><b>15.3</b> Epistemic Value of Reproducibility</a></li>
+<li class="chapter" data-level="15.4" data-path="reproducibility-replicability-and-robustness.html"><a href="reproducibility-replicability-and-robustness.html#open-science-reproducible"><i class="fa fa-check"></i><b>15.4</b> Open Science ≠ Reproducible</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="reproducibility-and-software-engineering.html"><a href="reproducibility-and-software-engineering.html"><i class="fa fa-check"></i><b>16</b> Reproducibility and Software Engineering</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="reproducibility-and-software-engineering.html"><a href="reproducibility-and-software-engineering.html#what-can-we-learn-from-software-engineering"><i class="fa fa-check"></i><b>16.1</b> What can we learn from software engineering?</a></li>
+<li class="chapter" data-level="16.2" data-path="reproducibility-and-software-engineering.html"><a href="reproducibility-and-software-engineering.html#code-style"><i class="fa fa-check"></i><b>16.2</b> Code style</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="organizing-your-projects.html"><a href="organizing-your-projects.html"><i class="fa fa-check"></i><b>17</b> Organizing your projects</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="organizing-your-projects.html"><a href="organizing-your-projects.html#two-templates"><i class="fa fa-check"></i><b>17.1</b> Two templates</a></li>
+<li class="chapter" data-level="17.2" data-path="organizing-your-projects.html"><a href="organizing-your-projects.html#a-note-on-paths"><i class="fa fa-check"></i><b>17.2</b> A Note on Paths</a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="code-review.html"><a href="code-review.html"><i class="fa fa-check"></i><b>18</b> Code review</a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="code-review.html"><a href="code-review.html#a-code-review-checklist"><i class="fa fa-check"></i><b>18.1</b> A code review checklist</a></li>
+<li class="chapter" data-level="18.2" data-path="code-review.html"><a href="code-review.html#an-example-code-review"><i class="fa fa-check"></i><b>18.2</b> An Example Code Review</a></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="code-review-activity.html"><a href="code-review-activity.html"><i class="fa fa-check"></i><b>19</b> Code Review Activity</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="code-review-activity.html"><a href="code-review-activity.html#a-shorter-checklist"><i class="fa fa-check"></i><b>19.1</b> A shorter checklist</a></li>
+<li class="chapter" data-level="19.2" data-path="code-review-activity.html"><a href="code-review-activity.html#part-1"><i class="fa fa-check"></i><b>19.2</b> Part 1</a></li>
+<li class="chapter" data-level="19.3" data-path="code-review-activity.html"><a href="code-review-activity.html#part-2"><i class="fa fa-check"></i><b>19.3</b> Part 2</a></li>
+<li class="chapter" data-level="19.4" data-path="code-review-activity.html"><a href="code-review-activity.html#part-3"><i class="fa fa-check"></i><b>19.4</b> Part 3</a></li>
+</ul></li>
+<li class="chapter" data-level="20" data-path="managing-and-publishing-data.html"><a href="managing-and-publishing-data.html"><i class="fa fa-check"></i><b>20</b> Managing and Publishing Data</a>
+<ul>
+<li class="chapter" data-level="20.1" data-path="managing-and-publishing-data.html"><a href="managing-and-publishing-data.html#fair-principles-for-published-data"><i class="fa fa-check"></i><b>20.1</b> FAIR principles for published data</a></li>
+<li class="chapter" data-level="20.2" data-path="managing-and-publishing-data.html"><a href="managing-and-publishing-data.html#documentation"><i class="fa fa-check"></i><b>20.2</b> Documentation</a></li>
+<li class="chapter" data-level="20.3" data-path="managing-and-publishing-data.html"><a href="managing-and-publishing-data.html#data-management-plans"><i class="fa fa-check"></i><b>20.3</b> Data management plans</a></li>
+<li class="chapter" data-level="20.4" data-path="managing-and-publishing-data.html"><a href="managing-and-publishing-data.html#hazards-of-open-data"><i class="fa fa-check"></i><b>20.4</b> Hazards of open data</a></li>
+</ul></li>
+<li class="chapter" data-level="21" data-path="some-data-cleaning-tools.html"><a href="some-data-cleaning-tools.html"><i class="fa fa-check"></i><b>21</b> Some Data-Cleaning Tools</a>
+<ul>
+<li class="chapter" data-level="21.1" data-path="some-data-cleaning-tools.html"><a href="some-data-cleaning-tools.html#tidy-data"><i class="fa fa-check"></i><b>21.1</b> Tidy Data</a></li>
+<li class="chapter" data-level="21.2" data-path="some-data-cleaning-tools.html"><a href="some-data-cleaning-tools.html#tools-for-tidying-data"><i class="fa fa-check"></i><b>21.2</b> Tools for tidying data</a></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="a-tech-stack-for-automatically-reproduced-research.html"><a href="a-tech-stack-for-automatically-reproduced-research.html"><i class="fa fa-check"></i><b>22</b> A Tech Stack for Automatically Reproduced Research</a>
+<ul>
+<li class="chapter" data-level="22.1" data-path="a-tech-stack-for-automatically-reproduced-research.html"><a href="a-tech-stack-for-automatically-reproduced-research.html#document-assembly"><i class="fa fa-check"></i><b>22.1</b> Document Assembly</a></li>
+<li class="chapter" data-level="22.2" data-path="a-tech-stack-for-automatically-reproduced-research.html"><a href="a-tech-stack-for-automatically-reproduced-research.html#reference-management"><i class="fa fa-check"></i><b>22.2</b> Reference Management</a></li>
+</ul></li>
+<li class="part"><span><b>IV Case Study: The COMPAS Dataset</b></span></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data Science Methods for Cognitive Science</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="a-tech-stack-for-automatically-reproduced-research" class="section level1" number="22">
+<h1><span class="header-section-number">Chapter 22</span> A Tech Stack for Automatically Reproduced Research</h1>
+<p>Background reading:</p>
+<ul>
+<li><span class="citation">Gentleman and Lang (<a href="#ref-GentlemanStatisticalAnalysesReproducible2004" role="doc-biblioref">2004</a>)</span></li>
+<li><span class="citation">Healy (<a href="#ref-HealyPlainPersonGuide" role="doc-biblioref">n.d.</a>)</span></li>
+</ul>
+<p>Our goal in this chapter and the next is to assemble a tech stack for automatically reproducing research. Where <span class="citation">Gentleman and Lang (<a href="#ref-GentlemanStatisticalAnalysesReproducible2004" role="doc-biblioref">2004</a>)</span> and <span class="citation">Healy (<a href="#ref-HealyPlainPersonGuide" role="doc-biblioref">n.d.</a>)</span> focus on preparing code and papers in such a way that outputs are more likely to be <em>reproducible</em>, we can use additional tools to <em>automatically reproduce</em> outputs. This allows us to do things like automatically post updated preprints or online supplements.</p>
+<div class="figure" style="text-align: center"><span id="fig:stack"></span>
+<img src="images/reproducibility/stack.png" alt="A tech stack for automatically reproduced research.  Yellow tools are used to assemble documents from a markup language and R code.  Light green tools manage references and allow us to automatically format bibliographies.  Git and GitHub Pages, in red, combine version control and webhosting for automatically reproduced research reports.  make and Travis-CI automate the process of running a sequence of scripts.  yaml files, in purple, and R DESCRIPTION files, in aquamarine, are used to configure settings for several different tools in the stack.  A number of extensions to R Markdown, in orange, support specific kinds of complex exports, including books, websites, and package documentation." width="100%" />
+<p class="caption">
+Figure 22.1: A tech stack for automatically reproduced research. Yellow tools are used to assemble documents from a markup language and R code. Light green tools manage references and allow us to automatically format bibliographies. Git and GitHub Pages, in red, combine version control and webhosting for automatically reproduced research reports. make and Travis-CI automate the process of running a sequence of scripts. yaml files, in purple, and R DESCRIPTION files, in aquamarine, are used to configure settings for several different tools in the stack. A number of extensions to R Markdown, in orange, support specific kinds of complex exports, including books, websites, and package documentation.
+</p>
+</div>
+<p>This chapter will focus on the <em>document assembly</em> side of the stack.</p>
+<div id="document-assembly" class="section level2" number="22.1">
+<h2><span class="header-section-number">22.1</span> Document Assembly</h2>
+<ul>
+<li>Same basic idea as HTML or LaTeX
+<ul>
+<li>Write the “source code” for the document in a plaintex format with markup</li>
+<li>Process or typeset the source code to generate the nice-looking document</li>
+<li>We’ll be using Markdown instead of HTML or LaTeX, because it’s simpler</li>
+</ul></li>
+<li><em>[Things to install]</em>
+<ul>
+<li>LaTeX (recommended: <a href="https://yihui.name/tinytex/">TinyTeX</a>)</li>
+<li><a href="https://pandoc.org/">Pandoc</a> (recommended: version 2.11 or later, which handles citations more smoothly)</li>
+<li><code>rmarkdown</code> R package (recommended: version 2.5 or later)</li>
+</ul></li>
+</ul>
+<div id="write-in-markdown" class="section level3" number="22.1.1">
+<h3><span class="header-section-number">22.1.1</span> Write in Markdown</h3>
+<ul>
+<li><a href="https://daringfireball.net/projects/markdown/">Markdown overview</a></li>
+<li><a href="https://pandoc.org/MANUAL.html#pandocs-markdown">Pandoc’s Markdown</a></li>
+<li><a href="https://rstudio.com/wp-content/uploads/2015/03/R%20Markdown-reference.pdf">R Markdown reference guide</a></li>
+</ul>
+<p><em>[image and URL]</em></p>
+<div class="sourceCode" id="cb233"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb233-1"><a href="a-tech-stack-for-automatically-reproduced-research.html#cb233-1" aria-hidden="true"></a><span class="fu"># Header 1 #</span></span>
+<span id="cb233-2"><a href="a-tech-stack-for-automatically-reproduced-research.html#cb233-2" aria-hidden="true"></a><span class="fu">## Header 2 ##</span></span>
+<span id="cb233-3"><a href="a-tech-stack-for-automatically-reproduced-research.html#cb233-3" aria-hidden="true"></a></span>
+<span id="cb233-4"><a href="a-tech-stack-for-automatically-reproduced-research.html#cb233-4" aria-hidden="true"></a>Here&#39;s a paragraph. </span>
+<span id="cb233-5"><a href="a-tech-stack-for-automatically-reproduced-research.html#cb233-5" aria-hidden="true"></a></span>
+<span id="cb233-6"><a href="a-tech-stack-for-automatically-reproduced-research.html#cb233-6" aria-hidden="true"></a>And another, with *emphasis* and **bold**.  This sentence has a footnote.<span class="ot">[^foo]</span></span>
+<span id="cb233-7"><a href="a-tech-stack-for-automatically-reproduced-research.html#cb233-7" aria-hidden="true"></a></span>
+<span id="cb233-8"><a href="a-tech-stack-for-automatically-reproduced-research.html#cb233-8" aria-hidden="true"></a><span class="ot">[^foo]: </span>bar</span>
+<span id="cb233-9"><a href="a-tech-stack-for-automatically-reproduced-research.html#cb233-9" aria-hidden="true"></a></span>
+<span id="cb233-10"><a href="a-tech-stack-for-automatically-reproduced-research.html#cb233-10" aria-hidden="true"></a><span class="ss">- </span>Itemized</span>
+<span id="cb233-11"><a href="a-tech-stack-for-automatically-reproduced-research.html#cb233-11" aria-hidden="true"></a><span class="ss">- </span>lists</span>
+<span id="cb233-12"><a href="a-tech-stack-for-automatically-reproduced-research.html#cb233-12" aria-hidden="true"></a><span class="ss">- </span>are</span>
+<span id="cb233-13"><a href="a-tech-stack-for-automatically-reproduced-research.html#cb233-13" aria-hidden="true"></a><span class="ss">- </span>easy</span>
+<span id="cb233-14"><a href="a-tech-stack-for-automatically-reproduced-research.html#cb233-14" aria-hidden="true"></a></span>
+<span id="cb233-15"><a href="a-tech-stack-for-automatically-reproduced-research.html#cb233-15" aria-hidden="true"></a><span class="ss">1. </span>So</span>
+<span id="cb233-16"><a href="a-tech-stack-for-automatically-reproduced-research.html#cb233-16" aria-hidden="true"></a><span class="ss">2. </span>are</span>
+<span id="cb233-17"><a href="a-tech-stack-for-automatically-reproduced-research.html#cb233-17" aria-hidden="true"></a><span class="ss">3. </span>enumerated</span>
+<span id="cb233-18"><a href="a-tech-stack-for-automatically-reproduced-research.html#cb233-18" aria-hidden="true"></a><span class="ss">4. </span>lists</span></code></pre></div>
+<ul>
+<li>Conversion
+<ul>
+<li><code>pandoc ex.md -o ex.pdf</code></li>
+<li><code>pandoc ex.md -o ex.html</code></li>
+<li><code>pandoc ex.md -o ex.docx</code></li>
+<li><a href="https://pandoc.org/index.html">More pandoc conversion formats</a></li>
+<li>In RStudio, click “Knitr” or “Preview” (default shortcut Command-Shift-K)</li>
+</ul></li>
+</ul>
+</div>
+<div id="add-metadata-and-configuration-with-a-yaml-header" class="section level3" number="22.1.2">
+<h3><span class="header-section-number">22.1.2</span> Add metadata and configuration with a YAML header</h3>
+<ul>
+<li>YAML (<a href="https://en.wikipedia.org/wiki/YAML">“YAML Ain’t Markup Language”</a>)
+<ul>
+<li><a href="https://yaml.org/refcard.html">Syntax cheat sheet</a></li>
+<li>Used for configuration files (and headers)</li>
+</ul></li>
+</ul>
+<pre><code>---
+author: &quot;The Jag Cat&quot;
+title: &quot;Let&#39;s go outside and do bird murder&quot;
+abstract: &gt;
+  Right now there are birds in the backyard.  They are hopping around and chirping and being birds.  In this paper, I argue that we should go outside and do a murder to them.  
+  
+geometry: &quot;margin=1.25in&quot;
+mainfont: &quot;Georgia&quot;
+fontsize: 11pt
+
+toc: true
+numbersections: true
+colorlinks: true
+---</code></pre>
+<ul>
+<li>Available options depend on the output format</li>
+<li>Difference between top-level configuration options and <code>output:pdf_document</code> options</li>
+<li><code>header-includes</code> for any LaTeX packages you want to load</li>
+</ul>
+</div>
+<div id="add-r-code-with-r-markdown" class="section level3" number="22.1.3">
+<h3><span class="header-section-number">22.1.3</span> Add R code with R Markdown</h3>
+<ul>
+<li><p><a href="https://rstudio.com/wp-content/uploads/2015/03/RMarkdown-reference.pdf">R Markdown reference guide</a></p></li>
+<li><p><em>Code chunks</em> are wrapped in <em>fences</em> (3 backticks or tildes)</p>
+<ul>
+<li>In braces: <a href="https://rmarkdown.rstudio.com/lesson-5.html">language</a> chunk label, <a href="https://yihui.org/knitr/options/">chunk options</a></li>
+<li>RStudio UI helpers for chunk options
+<ul>
+<li><code>echo = FALSE</code> to hide code but still execute it</li>
+</ul></li>
+</ul></li>
+<li><p>File extension should be <code>.Rmd</code></p></li>
+</ul>
+<pre><code>```{r}
+library(ggplot2)
+foo = data.frame(x = 1:25, 
+                 y = rnorm(25, mean = 1, sd = 15))
+ggplot(foo, aes(x, y)) +
+    geom_point()
+```</code></pre>
+<ul>
+<li>Must be assembled with <code>rmarkdown::render()</code>
+<ul>
+<li><code>clean = FALSE</code></li>
+</ul></li>
+<li>Include R code chunks in paper?
+<ul>
+<li>Pro: Shows exactly which bits of code were used for which bit of the paper</li>
+<li>Cons:
+<ul>
+<li>LaTeX is already very slow</li>
+<li>Journals require separate image files</li>
+<li>Tension with encapsulation and a clear sequence of files for different steps of the analysis</li>
+</ul></li>
+</ul></li>
+<li>An approach I currently use
+<ul>
+<li>“Main analysis” <code>.Rmd</code> file, generates plots and tables</li>
+<li>Automatically reproduced</li>
+<li>Knit to HTML, <a href="https://dhicks.github.io/p_curve/">hosted online</a></li>
+<li><code>paper.md</code> incorporates images and tables generated by analysis script</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="reference-management" class="section level2" number="22.2">
+<h2><span class="header-section-number">22.2</span> Reference Management</h2>
+<ul>
+<li>Recommended: <a href="https://www.zotero.org/">Zotero</a> with the <a href="https://retorque.re/zotero-better-bibtex/">Better Bibtex extension</a>
+<ul>
+<li>TIL the Better Bibtex devs <a href="https://retorque.re/zotero-better-bibtex/exporting/pandoc/">recommend exporting in CSL rather than Bib(la)tex</a></li>
+<li>I also find <a href="http://zotfile.com/">Zotfile</a> extremely useful.</li>
+</ul></li>
+<li><a href="https://drive.google.com/file/d/1MuVaaSYVPBjEkYshbjG3j0YrhOmhzKGL/view?usp=sharing"><code>example-refs.json</code></a></li>
+</ul>
+<div class="sourceCode" id="cb236"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb236-1"><a href="a-tech-stack-for-automatically-reproduced-research.html#cb236-1" aria-hidden="true"></a><span class="co">---</span></span>
+<span id="cb236-2"><a href="a-tech-stack-for-automatically-reproduced-research.html#cb236-2" aria-hidden="true"></a><span class="an">bibliography:</span><span class="co"> example-refs.json</span></span>
+<span id="cb236-3"><a href="a-tech-stack-for-automatically-reproduced-research.html#cb236-3" aria-hidden="true"></a><span class="co">---</span>-</span>
+<span id="cb236-4"><a href="a-tech-stack-for-automatically-reproduced-research.html#cb236-4" aria-hidden="true"></a>@YoungReliabilityEnvironmentalEpidemiology2019 have appealed to concerns about p-hacking <span class="co">[</span><span class="ot">@SimonsohnPcurveKeyFiledrawer2014; @HeadExtentConsequencesPHacking2015, 3</span><span class="co">]</span>. </span></code></pre></div>
+<p><span class="citation">(<span class="citeproc-not-found" data-reference-id="YoungReliabilityEnvironmentalEpidemiology2019"><strong>???</strong></span>)</span> have appealed to concerns about p-hacking <span class="citation">(<span class="citeproc-not-found" data-reference-id="SimonsohnPcurveKeyFiledrawer2014"><strong>???</strong></span>; <span class="citeproc-not-found" data-reference-id="HeadExtentConsequencesPHacking2015"><strong>???</strong></span>)</span>.</p>
+<ul>
+<li><a href="https://bookdown.org/yihui/rmarkdown-cookbook/bibliography.html#changing-citation-style">Changing citation style</a></li>
+</ul>
+
+</div>
+</div>
+
+
+
+</div>
+<h3>References</h3>
+<div id="refs" class="references hanging-indent">
+<div id="ref-GentlemanStatisticalAnalysesReproducible2004">
+<p>Gentleman, Robert, and Duncan Temple Lang. 2004. “Statistical Analyses and Reproducible Research.” <em>Bioconductor Project Working Papers</em>, May. <a href="https://biostats.bepress.com/bioconductor/paper2">https://biostats.bepress.com/bioconductor/paper2</a>.</p>
+</div>
+<div id="ref-HealyPlainPersonGuide">
+<p>Healy, Kieran. n.d. “The Plain Person’s Guide to Plain Text Social Science.” Accessed February 28, 2016. <a href="http://kieranhealy.org/publications/plain-person-text/">http://kieranhealy.org/publications/plain-person-text/</a>.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="some-data-cleaning-tools.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/data-science-methods/book/blob/master/04-08-stack-1.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["book.pdf"],
+"toc": {
+"collapse": "section",
+"scroll_highlight": true
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
