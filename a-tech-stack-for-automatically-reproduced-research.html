@@ -50,8 +50,6 @@
 
 
 
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -285,8 +283,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="21" data-path="some-data-cleaning-tools.html"><a href="some-data-cleaning-tools.html"><i class="fa fa-check"></i><b>21</b> Some Data-Cleaning Tools</a>
 <ul>
-<li class="chapter" data-level="21.1" data-path="some-data-cleaning-tools.html"><a href="some-data-cleaning-tools.html#tidy-data"><i class="fa fa-check"></i><b>21.1</b> Tidy Data</a></li>
-<li class="chapter" data-level="21.2" data-path="some-data-cleaning-tools.html"><a href="some-data-cleaning-tools.html#tools-for-tidying-data"><i class="fa fa-check"></i><b>21.2</b> Tools for tidying data</a></li>
+<li class="chapter" data-level="21.1" data-path="some-data-cleaning-tools.html"><a href="some-data-cleaning-tools.html#rectangular-and-non-rectangular-data"><i class="fa fa-check"></i><b>21.1</b> Rectangular and non-rectangular data</a></li>
+<li class="chapter" data-level="21.2" data-path="some-data-cleaning-tools.html"><a href="some-data-cleaning-tools.html#tidy-data"><i class="fa fa-check"></i><b>21.2</b> Tidy Data</a></li>
+<li class="chapter" data-level="21.3" data-path="some-data-cleaning-tools.html"><a href="some-data-cleaning-tools.html#tools-for-tidying-data"><i class="fa fa-check"></i><b>21.3</b> Tools for tidying data</a></li>
 </ul></li>
 <li class="chapter" data-level="22" data-path="a-tech-stack-for-automatically-reproduced-research.html"><a href="a-tech-stack-for-automatically-reproduced-research.html"><i class="fa fa-check"></i><b>22</b> A Tech Stack for Automatically Reproduced Research</a>
 <ul>
@@ -329,7 +328,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 Figure 22.1: A tech stack for automatically reproduced research. Yellow tools are used to assemble documents from a markup language and R code. Light green tools manage references and allow us to automatically format bibliographies. Git and GitHub Pages, in red, combine version control and webhosting for automatically reproduced research reports. make and Travis-CI automate the process of running a sequence of scripts. yaml files, in purple, and R DESCRIPTION files, in aquamarine, are used to configure settings for several different tools in the stack. A number of extensions to R Markdown, in orange, support specific kinds of complex exports, including books, websites, and package documentation.
 </p>
 </div>
-<p>This chapter will focus on the <em>document assembly</em> side of the stack.</p>
+<ul>
+<li>This chapter will focus on the <em>document assembly</em> side of the stack.<br />
+</li>
+<li>The next chapter will cover <em>automation</em> and using GitHub Pages for <em>webhosting</em>.<br />
+</li>
+<li>The other elements of the stack show how the tools we develop here fit into a larger ecosystem.</li>
+</ul>
 <div id="document-assembly" class="section level2" number="22.1">
 <h2><span class="header-section-number">22.1</span> Document Assembly</h2>
 <ul>
@@ -339,7 +344,7 @@ Figure 22.1: A tech stack for automatically reproduced research. Yellow tools ar
 <li>Process or typeset the source code to generate the nice-looking document</li>
 <li>We’ll be using Markdown instead of HTML or LaTeX, because it’s simpler</li>
 </ul></li>
-<li><em>[Things to install]</em>
+<li>Things to install
 <ul>
 <li>LaTeX (recommended: <a href="https://yihui.name/tinytex/">TinyTeX</a>)</li>
 <li><a href="https://pandoc.org/">Pandoc</a> (recommended: version 2.11 or later, which handles citations more smoothly)</li>
@@ -351,27 +356,28 @@ Figure 22.1: A tech stack for automatically reproduced research. Yellow tools ar
 <ul>
 <li><a href="https://daringfireball.net/projects/markdown/">Markdown overview</a></li>
 <li><a href="https://pandoc.org/MANUAL.html#pandocs-markdown">Pandoc’s Markdown</a></li>
-<li><a href="https://rstudio.com/wp-content/uploads/2015/03/R%20Markdown-reference.pdf">R Markdown reference guide</a></li>
+<li><a href="https://rstudio.com/wp-content/uploads/2015/03/RMarkdown-reference.pdf">R Markdown reference guide</a></li>
 </ul>
-<p><em>[image and URL]</em></p>
 <div class="sourceCode" id="cb233"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb233-1"><a href="a-tech-stack-for-automatically-reproduced-research.html#cb233-1" aria-hidden="true"></a><span class="fu"># Header 1 #</span></span>
 <span id="cb233-2"><a href="a-tech-stack-for-automatically-reproduced-research.html#cb233-2" aria-hidden="true"></a><span class="fu">## Header 2 ##</span></span>
 <span id="cb233-3"><a href="a-tech-stack-for-automatically-reproduced-research.html#cb233-3" aria-hidden="true"></a></span>
 <span id="cb233-4"><a href="a-tech-stack-for-automatically-reproduced-research.html#cb233-4" aria-hidden="true"></a>Here&#39;s a paragraph. </span>
 <span id="cb233-5"><a href="a-tech-stack-for-automatically-reproduced-research.html#cb233-5" aria-hidden="true"></a></span>
-<span id="cb233-6"><a href="a-tech-stack-for-automatically-reproduced-research.html#cb233-6" aria-hidden="true"></a>And another, with *emphasis* and **bold**.  This sentence has a footnote.<span class="ot">[^foo]</span></span>
+<span id="cb233-6"><a href="a-tech-stack-for-automatically-reproduced-research.html#cb233-6" aria-hidden="true"></a>And another, with *emphasis* and **bold**.  This sentence has a footnote.<span class="ot">[^foo]</span>  <span class="co">[</span><span class="ot">And this sentence is a link.</span><span class="co">](https://data-science-methods.github.io)</span></span>
 <span id="cb233-7"><a href="a-tech-stack-for-automatically-reproduced-research.html#cb233-7" aria-hidden="true"></a></span>
-<span id="cb233-8"><a href="a-tech-stack-for-automatically-reproduced-research.html#cb233-8" aria-hidden="true"></a><span class="ot">[^foo]: </span>bar</span>
+<span id="cb233-8"><a href="a-tech-stack-for-automatically-reproduced-research.html#cb233-8" aria-hidden="true"></a><span class="al">![Images use the link syntax](https://upload.wikimedia.org/wikipedia/commons/d/d9/Markdown.png)</span></span>
 <span id="cb233-9"><a href="a-tech-stack-for-automatically-reproduced-research.html#cb233-9" aria-hidden="true"></a></span>
-<span id="cb233-10"><a href="a-tech-stack-for-automatically-reproduced-research.html#cb233-10" aria-hidden="true"></a><span class="ss">- </span>Itemized</span>
-<span id="cb233-11"><a href="a-tech-stack-for-automatically-reproduced-research.html#cb233-11" aria-hidden="true"></a><span class="ss">- </span>lists</span>
-<span id="cb233-12"><a href="a-tech-stack-for-automatically-reproduced-research.html#cb233-12" aria-hidden="true"></a><span class="ss">- </span>are</span>
-<span id="cb233-13"><a href="a-tech-stack-for-automatically-reproduced-research.html#cb233-13" aria-hidden="true"></a><span class="ss">- </span>easy</span>
-<span id="cb233-14"><a href="a-tech-stack-for-automatically-reproduced-research.html#cb233-14" aria-hidden="true"></a></span>
-<span id="cb233-15"><a href="a-tech-stack-for-automatically-reproduced-research.html#cb233-15" aria-hidden="true"></a><span class="ss">1. </span>So</span>
-<span id="cb233-16"><a href="a-tech-stack-for-automatically-reproduced-research.html#cb233-16" aria-hidden="true"></a><span class="ss">2. </span>are</span>
-<span id="cb233-17"><a href="a-tech-stack-for-automatically-reproduced-research.html#cb233-17" aria-hidden="true"></a><span class="ss">3. </span>enumerated</span>
-<span id="cb233-18"><a href="a-tech-stack-for-automatically-reproduced-research.html#cb233-18" aria-hidden="true"></a><span class="ss">4. </span>lists</span></code></pre></div>
+<span id="cb233-10"><a href="a-tech-stack-for-automatically-reproduced-research.html#cb233-10" aria-hidden="true"></a><span class="ot">[^foo]: </span>bar</span>
+<span id="cb233-11"><a href="a-tech-stack-for-automatically-reproduced-research.html#cb233-11" aria-hidden="true"></a></span>
+<span id="cb233-12"><a href="a-tech-stack-for-automatically-reproduced-research.html#cb233-12" aria-hidden="true"></a><span class="ss">- </span>Itemized</span>
+<span id="cb233-13"><a href="a-tech-stack-for-automatically-reproduced-research.html#cb233-13" aria-hidden="true"></a><span class="ss">- </span>lists</span>
+<span id="cb233-14"><a href="a-tech-stack-for-automatically-reproduced-research.html#cb233-14" aria-hidden="true"></a><span class="ss">- </span>are</span>
+<span id="cb233-15"><a href="a-tech-stack-for-automatically-reproduced-research.html#cb233-15" aria-hidden="true"></a><span class="ss">- </span>easy</span>
+<span id="cb233-16"><a href="a-tech-stack-for-automatically-reproduced-research.html#cb233-16" aria-hidden="true"></a></span>
+<span id="cb233-17"><a href="a-tech-stack-for-automatically-reproduced-research.html#cb233-17" aria-hidden="true"></a><span class="ss">1. </span>So</span>
+<span id="cb233-18"><a href="a-tech-stack-for-automatically-reproduced-research.html#cb233-18" aria-hidden="true"></a><span class="ss">2. </span>are</span>
+<span id="cb233-19"><a href="a-tech-stack-for-automatically-reproduced-research.html#cb233-19" aria-hidden="true"></a><span class="ss">3. </span>enumerated</span>
+<span id="cb233-20"><a href="a-tech-stack-for-automatically-reproduced-research.html#cb233-20" aria-hidden="true"></a><span class="ss">4. </span>lists</span></code></pre></div>
 <ul>
 <li>Conversion
 <ul>
@@ -457,6 +463,25 @@ ggplot(foo, aes(x, y)) +
 </ul></li>
 </ul>
 </div>
+<div id="use-roxygen-comments-in-r-scripts" class="section level3" number="22.1.4">
+<h3><span class="header-section-number">22.1.4</span> Use Roxygen comments in R scripts</h3>
+<ul>
+<li><p><a href="https://bookdown.org/yihui/rmarkdown-cookbook/spin.html">“Render an R script to a report”</a></p></li>
+<li><p>Regular <code>.R</code> scripts can incorporate Markdown using Roxygen comments.<br />
+</p></li>
+<li><p>I’ve used this in the labs.<br />
+</p></li>
+<li><p>Click the “Knitr” button in RStudio, or use <code>rmarkdown::render()</code> as with RMarkdown files.</p></li>
+</ul>
+<pre><code>#&#39; This comment gets *Markdown* formating and will be rendered into a text chunk. Inline code uses double braces: {{ 2 + 2 }}. 
+# This comment will appear as a comment in a code block. The next comment specifies chunk options for the next bit of code. 
+#+ out.width = &#39;25%&#39;
+library(ggplot2)
+foo = data.frame(x = 1:25, 
+                 y = rnorm(25, mean = 1, sd = 15))
+ggplot(foo, aes(x, y)) +
+    geom_point()</code></pre>
+</div>
 </div>
 <div id="reference-management" class="section level2" number="22.2">
 <h2><span class="header-section-number">22.2</span> Reference Management</h2>
@@ -468,11 +493,11 @@ ggplot(foo, aes(x, y)) +
 </ul></li>
 <li><a href="https://drive.google.com/file/d/1MuVaaSYVPBjEkYshbjG3j0YrhOmhzKGL/view?usp=sharing"><code>example-refs.json</code></a></li>
 </ul>
-<div class="sourceCode" id="cb236"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb236-1"><a href="a-tech-stack-for-automatically-reproduced-research.html#cb236-1" aria-hidden="true"></a><span class="co">---</span></span>
-<span id="cb236-2"><a href="a-tech-stack-for-automatically-reproduced-research.html#cb236-2" aria-hidden="true"></a><span class="an">bibliography:</span><span class="co"> example-refs.json</span></span>
-<span id="cb236-3"><a href="a-tech-stack-for-automatically-reproduced-research.html#cb236-3" aria-hidden="true"></a><span class="co">---</span>-</span>
-<span id="cb236-4"><a href="a-tech-stack-for-automatically-reproduced-research.html#cb236-4" aria-hidden="true"></a>@YoungReliabilityEnvironmentalEpidemiology2019 have appealed to concerns about p-hacking <span class="co">[</span><span class="ot">@SimonsohnPcurveKeyFiledrawer2014; @HeadExtentConsequencesPHacking2015, 3</span><span class="co">]</span>. </span></code></pre></div>
-<p><span class="citation">(<span class="citeproc-not-found" data-reference-id="YoungReliabilityEnvironmentalEpidemiology2019"><strong>???</strong></span>)</span> have appealed to concerns about p-hacking <span class="citation">(<span class="citeproc-not-found" data-reference-id="SimonsohnPcurveKeyFiledrawer2014"><strong>???</strong></span>; <span class="citeproc-not-found" data-reference-id="HeadExtentConsequencesPHacking2015"><strong>???</strong></span>)</span>.</p>
+<div class="sourceCode" id="cb237"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb237-1"><a href="a-tech-stack-for-automatically-reproduced-research.html#cb237-1" aria-hidden="true"></a><span class="co">---</span></span>
+<span id="cb237-2"><a href="a-tech-stack-for-automatically-reproduced-research.html#cb237-2" aria-hidden="true"></a><span class="an">bibliography:</span><span class="co"> example-refs.json</span></span>
+<span id="cb237-3"><a href="a-tech-stack-for-automatically-reproduced-research.html#cb237-3" aria-hidden="true"></a><span class="co">---</span>-</span>
+<span id="cb237-4"><a href="a-tech-stack-for-automatically-reproduced-research.html#cb237-4" aria-hidden="true"></a>@YoungReliabilityEnvironmentalEpidemiology2019 have appealed to concerns about p-hacking <span class="co">[</span><span class="ot">@SimonsohnPcurveKeyFiledrawer2014; @HeadExtentConsequencesPHacking2015, 3</span><span class="co">]</span>. </span></code></pre></div>
+<p><span class="citation">Young, Acharjee, and Das (<a href="#ref-YoungReliabilityEnvironmentalEpidemiology2019" role="doc-biblioref">2019</a>)</span> have appealed to concerns about p-hacking <span class="citation">(Simonsohn, Nelson, and Simmons <a href="#ref-SimonsohnPcurveKeyFiledrawer2014" role="doc-biblioref">2014</a>; Head et al. <a href="#ref-HeadExtentConsequencesPHacking2015" role="doc-biblioref">2015</a>, 3)</span>.</p>
 <ul>
 <li><a href="https://bookdown.org/yihui/rmarkdown-cookbook/bibliography.html#changing-citation-style">Changing citation style</a></li>
 </ul>
@@ -488,8 +513,17 @@ ggplot(foo, aes(x, y)) +
 <div id="ref-GentlemanStatisticalAnalysesReproducible2004">
 <p>Gentleman, Robert, and Duncan Temple Lang. 2004. “Statistical Analyses and Reproducible Research.” <em>Bioconductor Project Working Papers</em>, May. <a href="https://biostats.bepress.com/bioconductor/paper2">https://biostats.bepress.com/bioconductor/paper2</a>.</p>
 </div>
+<div id="ref-HeadExtentConsequencesPHacking2015">
+<p>Head, Megan L., Luke Holman, Rob Lanfear, Andrew T. Kahn, and Michael D. Jennions. 2015. “The Extent and Consequences of P-Hacking in Science.” <em>PLoS Biol</em> 13 (3): e1002106. <a href="https://doi.org/10.1371/journal.pbio.1002106">https://doi.org/10.1371/journal.pbio.1002106</a>.</p>
+</div>
 <div id="ref-HealyPlainPersonGuide">
 <p>Healy, Kieran. n.d. “The Plain Person’s Guide to Plain Text Social Science.” Accessed February 28, 2016. <a href="http://kieranhealy.org/publications/plain-person-text/">http://kieranhealy.org/publications/plain-person-text/</a>.</p>
+</div>
+<div id="ref-SimonsohnPcurveKeyFiledrawer2014">
+<p>Simonsohn, Uri, Leif D. Nelson, and Joseph P. Simmons. 2014. “P-Curve: A Key to the File-Drawer.” <em>Journal of Experimental Psychology: General</em> 143 (2): 534–47. <a href="https://doi.org/10.1037/a0033242">https://doi.org/10.1037/a0033242</a>.</p>
+</div>
+<div id="ref-YoungReliabilityEnvironmentalEpidemiology2019">
+<p>Young, S. Stanley, Mithun Kumar Acharjee, and Kumer Das. 2019. “The Reliability of an Environmental Epidemiology Meta-Analysis, a Case Study.” <em>Regulatory Toxicology and Pharmacology</em> 102 (March): 47–52. <a href="https://doi.org/10.1016/j.yrtph.2018.12.013">https://doi.org/10.1016/j.yrtph.2018.12.013</a>.</p>
 </div>
 </div>
             </section>

@@ -119,7 +119,7 @@
 
 \title{Data Science Methods for Cognitive Science}
 \author{Dan Hicks, \href{mailto:hicks.daniel.j@gmail.com}{\nolinkurl{hicks.daniel.j@gmail.com}}}
-\date{Tue Nov 24 21:42:27 2020}
+\date{Tue Dec 1 20:54:46 2020}
 
 \begin{document}
 \maketitle
@@ -2183,7 +2183,7 @@ The dataset is a zipped \texttt{csv} or comma-separated value file. CSVs are str
 \end{Shaded}
 
 \begin{verbatim}
-## 0.341 sec elapsed
+## 0.338 sec elapsed
 \end{verbatim}
 
 \begin{Shaded}
@@ -5337,6 +5337,8 @@ Some of the plots include alternative layers, mostly geoms, to illustrate how di
 \item
   Highly recommended: Feest (\protect\hyperlink{ref-FeestWhyReplicationOverrated2019}{2019}), Leonelli (\protect\hyperlink{ref-LeonelliRethinkingReproducibilityCriterion2018}{2018})
 \item
+  *{[}\url{https://ai.facebook.com/blog/how-the-ai-community-can-get-serious-about-reproducibility/}{]}
+\item
   Some data management disasters
 
   \begin{itemize}
@@ -6547,6 +6549,18 @@ Silberzahn and Uhlmann (\protect\hyperlink{ref-SilberzahnCrowdsourcedResearchMan
     \href{https://github.com/stanford-policylab/opp/blob/master/data_readme.md}{Stanford Open Policing codebook}
   \item
     \href{https://kjhealy.github.io/covdata/articles/codebook.html}{``Codebook-like summary'' of the \texttt{covdata} package, automatically generated using \texttt{skimr}}
+  \item
+    \href{https://caitlinhudon.com/2018/10/30/data-dictionaries/}{Caitlin Hudon's approach}
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Table and field name, both verbatim
+    \item
+      Field example value
+    \item
+      Notes for both table and field
+    \end{itemize}
   \end{itemize}
 \item
   Major codebook elements (\url{https://afit-r.github.io/codebook})
@@ -6684,6 +6698,32 @@ Silberzahn and Uhlmann (\protect\hyperlink{ref-SilberzahnCrowdsourcedResearchMan
   reading: Wickham (\protect\hyperlink{ref-WickhamTidyData2014}{2014}\protect\hyperlink{ref-WickhamTidyData2014}{a})
 \end{itemize}
 
+\hypertarget{rectangular-and-non-rectangular-data}{%
+\subsection{Rectangular and non-rectangular data}\label{rectangular-and-non-rectangular-data}}
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.6\linewidth]{images/data/Oseroff-Spicer} 
+
+}
+
+\caption{Tweet by Nathan Oseroff-Spicer (\@nathanoseroff): 'It makes sense, though, since there are rows and columns. It's scientific'. Source: <https://twitter.com/nathanoseroff/status/1321565407568867332>}\label{fig:unnamed-chunk-118}
+\end{figure}
+
+\begin{itemize}
+\tightlist
+\item
+  Data represented in rows and columns is called \emph{rectangular data}.
+\item
+  Common non-rectangular forms include XML and JSON
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Sometimes you might get data in the form of a PDF or image. This is called \emph{cursèd data}.
+  \end{itemize}
+\end{itemize}
+
 \hypertarget{tidy-data}{%
 \subsection{Tidy Data}\label{tidy-data}}
 
@@ -6708,11 +6748,11 @@ Silberzahn and Uhlmann (\protect\hyperlink{ref-SilberzahnCrowdsourcedResearchMan
 
 \begin{figure}
 
-{\centering \includegraphics[width=0.6\linewidth]{images/data/tidy-1} \includegraphics[width=0.6\linewidth]{images/data/tidy-2} 
+{\centering \includegraphics[width=0.6\linewidth]{images/data/tidy-1} \includegraphics[width=1.1\linewidth]{images/data/tidy-2} 
 
 }
 
-\caption{Two tables in a tidy dataset. The first table records students' majors during each term they were enrolled; the second records demographics.  The tables have different units of observation, but can be linked using the ID (internal to this dataset) for an analysis at the level of individual students. Other tables in this dataset include final grades for philosophy courses taken by the students, and demographics of the instructors of those courses.}\label{fig:unnamed-chunk-117}
+\caption{Two tables in a tidy dataset. The first table records students' majors during each term they were enrolled; the second (next figure) records demographics.  The tables have different units of observation, but can be linked using the ID (internal to this dataset) for an analysis at the level of individual students. Other tables in this dataset include final grades for philosophy courses taken by the students, and demographics of the instructors of those courses.}\label{fig:unnamed-chunk-119}
 \end{figure}
 
 \begin{itemize}
@@ -7545,7 +7585,15 @@ Our goal in this chapter and the next is to assemble a tech stack for automatica
 \caption{A tech stack for automatically reproduced research.  Yellow tools are used to assemble documents from a markup language and R code.  Light green tools manage references and allow us to automatically format bibliographies.  Git and GitHub Pages, in red, combine version control and webhosting for automatically reproduced research reports.  make and Travis-CI automate the process of running a sequence of scripts.  yaml files, in purple, and R DESCRIPTION files, in aquamarine, are used to configure settings for several different tools in the stack.  A number of extensions to R Markdown, in orange, support specific kinds of complex exports, including books, websites, and package documentation.}\label{fig:stack}
 \end{figure}
 
-This chapter will focus on the \emph{document assembly} side of the stack.
+\begin{itemize}
+\tightlist
+\item
+  This chapter will focus on the \emph{document assembly} side of the stack.\\
+\item
+  The next chapter will cover \emph{automation} and using GitHub Pages for \emph{webhosting}.\\
+\item
+  The other elements of the stack show how the tools we develop here fit into a larger ecosystem.
+\end{itemize}
 
 \hypertarget{document-assembly}{%
 \subsection{Document Assembly}\label{document-assembly}}
@@ -7565,7 +7613,7 @@ This chapter will focus on the \emph{document assembly} side of the stack.
     We'll be using Markdown instead of HTML or LaTeX, because it's simpler
   \end{itemize}
 \item
-  \emph{{[}Things to install{]}}
+  Things to install
 
   \begin{itemize}
   \tightlist
@@ -7588,10 +7636,8 @@ This chapter will focus on the \emph{document assembly} side of the stack.
 \item
   \href{https://pandoc.org/MANUAL.html\#pandocs-markdown}{Pandoc's Markdown}
 \item
-  \href{https://rstudio.com/wp-content/uploads/2015/03/R\%20Markdown-reference.pdf}{R Markdown reference guide}
+  \href{https://rstudio.com/wp-content/uploads/2015/03/RMarkdown-reference.pdf}{R Markdown reference guide}
 \end{itemize}
-
-\emph{{[}image and URL{]}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -7600,7 +7646,9 @@ This chapter will focus on the \emph{document assembly} side of the stack.
 
 \NormalTok{Here\textquotesingle{}s a paragraph. }
 
-\NormalTok{And another, with *emphasis* and **bold**.  This sentence has a footnote.}\OtherTok{[\^{}foo]}
+\NormalTok{And another, with *emphasis* and **bold**.  This sentence has a footnote.}\OtherTok{[\^{}foo]}  \CommentTok{[}\OtherTok{And this sentence is a link.}\CommentTok{](https://data{-}science{-}methods.github.io)}
+
+\AlertTok{![Images use the link syntax](https://upload.wikimedia.org/wikipedia/commons/d/d9/Markdown.png)}
 
 \OtherTok{[\^{}foo]: }\NormalTok{bar}
 
@@ -7762,6 +7810,31 @@ ggplot(foo, aes(x, y)) +
   \end{itemize}
 \end{itemize}
 
+\hypertarget{use-roxygen-comments-in-r-scripts}{%
+\subsubsection{Use Roxygen comments in R scripts}\label{use-roxygen-comments-in-r-scripts}}
+
+\begin{itemize}
+\item
+  \href{https://bookdown.org/yihui/rmarkdown-cookbook/spin.html}{``Render an R script to a report''}
+\item
+  Regular \texttt{.R} scripts can incorporate Markdown using Roxygen comments.\\
+\item
+  I've used this in the labs.\\
+\item
+  Click the ``Knitr'' button in RStudio, or use \texttt{rmarkdown::render()} as with RMarkdown files.
+\end{itemize}
+
+\begin{verbatim}
+#' This comment gets *Markdown* formating and will be rendered into a text chunk. Inline code uses double braces: {{ 2 + 2 }}. 
+# This comment will appear as a comment in a code block. The next comment specifies chunk options for the next bit of code. 
+#+ out.width = '25%'
+library(ggplot2)
+foo = data.frame(x = 1:25, 
+                 y = rnorm(25, mean = 1, sd = 15))
+ggplot(foo, aes(x, y)) +
+    geom_point()
+\end{verbatim}
+
 \hypertarget{reference-management}{%
 \subsection{Reference Management}\label{reference-management}}
 
@@ -7790,7 +7863,7 @@ ggplot(foo, aes(x, y)) +
 \end{Highlighting}
 \end{Shaded}
 
-({\textbf{???}}) have appealed to concerns about p-hacking ({\textbf{???}}; {\textbf{???}}).
+Young, Acharjee, and Das (\protect\hyperlink{ref-YoungReliabilityEnvironmentalEpidemiology2019}{2019}) have appealed to concerns about p-hacking (Simonsohn, Nelson, and Simmons \protect\hyperlink{ref-SimonsohnPcurveKeyFiledrawer2014}{2014}; Head et al. \protect\hyperlink{ref-HeadExtentConsequencesPHacking2015}{2015}, 3).
 
 \begin{itemize}
 \tightlist
@@ -7850,6 +7923,9 @@ Grus, Joel. n.d. ``I Don't Like Notebooks - Joel Grus - \#JupyterCon 2018.'' Goo
 
 \leavevmode\hypertarget{ref-HannaCriticalRaceMethodology2019}{}%
 Hanna, Alex, Emily Denton, Andrew Smart, and Jamila Smith-Loud. 2019. ``Towards a Critical Race Methodology in Algorithmic Fairness.'' December 7, 2019. \url{https://doi.org/10.1145/3351095.3372826}.
+
+\leavevmode\hypertarget{ref-HeadExtentConsequencesPHacking2015}{}%
+Head, Megan L., Luke Holman, Rob Lanfear, Andrew T. Kahn, and Michael D. Jennions. 2015. ``The Extent and Consequences of P-Hacking in Science.'' \emph{PLoS Biol} 13 (3): e1002106. \url{https://doi.org/10.1371/journal.pbio.1002106}.
 
 \leavevmode\hypertarget{ref-HealyDataVisualizationPractical2018}{}%
 Healy, Kieran. 2018. \emph{Data Visualization: A Practical Introduction}. Princeton University Press. \url{http://books.google.com?id=3XOYDwAAQBAJ}.
@@ -7974,6 +8050,9 @@ Silberzahn, R., E. L. Uhlmann, D. P. Martin, P. Anselmi, F. Aust, E. Awtrey, Š.
 \leavevmode\hypertarget{ref-SimmonsFalsePositivePsychology2011}{}%
 Simmons, Joseph P, Leif D Nelson, and Uri Simonsohn. 2011. ``False-Positive Psychology.'' \emph{Psychological Science} 22 (11): 1359--66. \url{http://pss.sagepub.com/content/22/11/1359.abstract}.
 
+\leavevmode\hypertarget{ref-SimonsohnPcurveKeyFiledrawer2014}{}%
+Simonsohn, Uri, Leif D. Nelson, and Joseph P. Simmons. 2014. ``P-Curve: A Key to the File-Drawer.'' \emph{Journal of Experimental Psychology: General} 143 (2): 534--47. \url{https://doi.org/10.1037/a0033242}.
+
 \leavevmode\hypertarget{ref-SteegenIncreasingTransparencyMultiverse2016}{}%
 Steegen, Sara, Francis Tuerlinckx, Andrew Gelman, and Wolf Vanpaemel. 2016. ``Increasing Transparency Through a Multiverse Analysis.'' \emph{Perspectives on Psychological Science} 11 (5): 702--12. \url{https://doi.org/10.1177/1745691616658637}.
 
@@ -8027,6 +8106,9 @@ Wu, Jun. 2019. ``Python Vs. R --- Choosing the Best Programming Language for Dat
 
 \leavevmode\hypertarget{ref-YongReplicationStudiesBad2012}{}%
 Yong, E. 2012. ``Replication Studies: Bad Copy.'' \emph{Nature} 485 (7398): 298--300. \url{https://doi.org/10.1038/485298a}.
+
+\leavevmode\hypertarget{ref-YoungReliabilityEnvironmentalEpidemiology2019}{}%
+Young, S. Stanley, Mithun Kumar Acharjee, and Kumer Das. 2019. ``The Reliability of an Environmental Epidemiology Meta-Analysis, a Case Study.'' \emph{Regulatory Toxicology and Pharmacology} 102 (March): 47--52. \url{https://doi.org/10.1016/j.yrtph.2018.12.013}.
 
 \leavevmode\hypertarget{ref-ZhangHowTinyWebsite2018}{}%
 Zhang, Sarah. 2018. ``How a Tiny Website Became the Police's Go-to Genealogy Database.'' The Atlantic. June 1, 2018. \url{https://www.theatlantic.com/science/archive/2018/06/gedmatch-police-genealogy-database/561695/}.
