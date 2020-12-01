@@ -41,6 +41,10 @@
 - Many social science fields have a tradition of writing codebooks for their data
     - [Stanford Open Policing codebook](https://github.com/stanford-policylab/opp/blob/master/data_readme.md)
     - ["Codebook-like summary" of the `covdata` package, automatically generated using `skimr`](https://kjhealy.github.io/covdata/articles/codebook.html)
+    - [Caitlin Hudon's approach](https://caitlinhudon.com/2018/10/30/data-dictionaries/)
+        - Table and field name, both verbatim
+        - Field example value
+        - Notes for both table and field
 
 - Major codebook elements (<https://afit-r.github.io/codebook>)
     1. Original source of the data

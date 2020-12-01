@@ -3,8 +3,20 @@
 ```{r, echo = FALSE, message = FALSE}
 library(printr)
 ```
+```{r child = 'knitr_config.Rmd'}
+```
 
 - reading: @WickhamTidyData2014
+
+## Rectangular and non-rectangular data ##
+
+```{r, echo = FALSE, fig.cap = "Tweet by Nathan Oseroff-Spicer (\\@nathanoseroff): 'It makes sense, though, since there are rows and columns. It's scientific'. Source: <https://twitter.com/nathanoseroff/status/1321565407568867332>"}
+knitr::include_graphics(file.path('images', 'data', 'Oseroff-Spicer.png'))
+```
+
+- Data represented in rows and columns is called *rectangular data*. 
+- Common non-rectangular forms include XML and JSON
+    - Sometimes you might get data in the form of a PDF or image.  This is called *cursèd data*. 
 
 ## Tidy Data ##
 
@@ -12,12 +24,13 @@ library(printr)
     1. Each variable forms a column.
     2. Each observation forms a row.
     3. Each type of observational unit forms a table.
+        
 
 - Example: student demographics and major, for students who took a philosophy course at UC Davis, 2005-2015
 
-```{r, echo = FALSE, fig.show = 'hold', fig.cap = "Two tables in a tidy dataset. The first table records students' majors during each term they were enrolled; the second records demographics.  The tables have different units of observation, but can be linked using the ID (internal to this dataset) for an analysis at the level of individual students. Other tables in this dataset include final grades for philosophy courses taken by the students, and demographics of the instructors of those courses."}
-knitr::include_graphics(c(file.path('images', 'data', 'tidy-1.png'), 
-                          file.path('images', 'data', 'tidy-2.png')))
+```{r, echo = FALSE, fig.show = 'hold', out.width = c('60%', '110%'), fig.cap = "Two tables in a tidy dataset. The first table records students' majors during each term they were enrolled; the second (next figure) records demographics.  The tables have different units of observation, but can be linked using the ID (internal to this dataset) for an analysis at the level of individual students. Other tables in this dataset include final grades for philosophy courses taken by the students, and demographics of the instructors of those courses."}
+knitr::include_graphics(file.path('images', 'data', 'tidy-1.png'))
+knitr::include_graphics(file.path('images', 'data', 'tidy-2.png'))
 ```
 
 - slightly rephrased

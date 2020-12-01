@@ -2,6 +2,7 @@
 
 - Reading: @YongReplicationStudiesBad2012, @AschwandenThereNoSuch2017, @HicksCommentSubmittedDaniel2020
 - Highly recommended:  @FeestWhyReplicationOverrated2019, @LeonelliRethinkingReproducibilityCriterion2018
+- *[https://ai.facebook.com/blog/how-the-ai-community-can-get-serious-about-reproducibility/]
 
 - Some data management disasters
     - @ArrayErrors2011, @VideoKeithBaggerly
