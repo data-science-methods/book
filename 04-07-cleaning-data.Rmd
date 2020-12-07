@@ -10,7 +10,9 @@ library(printr)
 
 ## Rectangular and non-rectangular data ##
 
-```{r, echo = FALSE, fig.cap = "Tweet by Nathan Oseroff-Spicer (\\@nathanoseroff): 'It makes sense, though, since there are rows and columns. It's scientific'. Source: <https://twitter.com/nathanoseroff/status/1321565407568867332>"}
+(ref:oseroff-spicer) Tweet by Nathan Oseroff-Spicer (\\@nathanoseroff): 'It makes sense, though, since there are rows and columns. It's scientific'. Source: <https://twitter.com/nathanoseroff/status/1321565407568867332>
+
+```{r, echo = FALSE, fig.cap = "(ref:oseroff-spicer)"}
 knitr::include_graphics(file.path('images', 'data', 'Oseroff-Spicer.png'))
 ```
 
