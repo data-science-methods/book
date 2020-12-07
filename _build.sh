@@ -3,4 +3,4 @@
 set -ev
 
 make all
-make handouts
+#make handouts
