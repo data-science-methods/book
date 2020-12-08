@@ -1,0 +1,147 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+# A Tech Stack for Automatically Reproduced Research, II #
+
+```{r child = 'knitr_config.Rmd'}
+```
+
+## Preliminaries ##
+
+- You'll need to **fork** and clone the [example project](https://GitHub.com/data-science-methods/repro_ex) for this chapter. 
+- Create an account on <https://travis-ci.org/> using your GitHub login. 
+
+
+## Build automation using Make ##
+
+- [Make](https://www.gnu.org/software/make/)
+    - A tool for [build automation](https://en.wikipedia.org/wiki/Build_automation)
+    - [Windows users need to install Rtools](https://cran.r-project.org/bin/windows/Rtools/)
+    
+- `Makefile` syntax
+    - If the depenencies have a later timestamp than the target, run the command
+    - If the target doesn't exist, run the command
+    - **Tab, not spaces**
+        - Because Make is from 1976
+
+```{makefile}
+target: [dependency] [dependency] [...]
+    [command]
+```
+
+A snippet of the example project's `Makefile`:
+
+```{makefile}
+## Paper ----
+paper: $(PAPER)/paper.pdf
+$(PAPER)/paper.pdf: $(PAPER)/paper.md \
+                    $(PAPER)/refs.json \
+                    $(LASTOUT)
+  cd $(PAPER); pandoc paper.md -o paper.pdf --citeproc
+```
+
+- Make commands
+    - `make` = `make` for the first target
+        - By convention, first target should be `all`
+    - `make pipe`
+        - `touch` and then `make pipe` again
+    - `make clean`
+
+- MOAR SYNTAX
+    - Variable declarations and references
+    - `.PHONY`
+    - Functions
+
+## Continuous integration with Travis-CI ##
+
+- What and why is CI
+    - Integration: Combining code written by several different (teams of) software engineers
+    - Problem: "Works on my machine" $\to$ integration was a massive, slow process
+    - Solution: Frequent, automated integration checks
+
+(ref:hudson) Diagram illustrating a continuous integration (CI) workflow. Multiple different (teams of) developers push their work up to a version control system. The CI system automatically retrieves the new version, attempts to build it, runs any defined tests, and reports results. Source:  <http://www.methodsandtools.com/tools/tools.php?hudson>
+
+```{r, echo = FALSE, out.width = "100%", fig.cap = "(ref:hudson)"}
+knitr::include_graphics(file.path('images', 'reproducibility', 'ci.jpg'))
+```
+- Travis setup
+    - [Travis site](https://travis-ci.org/)
+    - Create an account using your GitHub login
+- File prerequisites
+    - `DESCRIPTION`
+        - [R Packages: Package Metadata](https://r-pkgs.org/description.html)
+        - Travis's R support is built for packages, and won't work without a `DESCRIPTION` file
+        - Minimally, list the packages your scripts need under `Imports:`
+        - Exactly the same as the labs (because the labs use Travis)
+    - `.travis.yaml`
+        - Configuration file used by Travis
+        - [Building an R project](https://docs.travis-ci.com/user/languages/r)
+        - [Building a Python project](https://docs.travis-ci.com/user/languages/python)
+        - [Docs for other languages](https://docs.travis-ci.com/user/languages/), doesn't seem to include NetLogo
+    - Later we'll need `_deploy.sh`
+        - But leave it commented out in `.travis.yaml` for the moment
+ 
+```{yaml}
+language: r
+cache: packages
+pandoc_version: 2.11
+
+# before_script:
+#   - chmod +x ./_deploy.sh
+
+script:
+  - make pipe
+  # - ./_deploy.sh
+```
+
+
+## Hosting using GitHub Pages ##
+
+- [GitHub Pages](https://docs.github.com/en/free-pro-team@latest/github/working-with-github-pages) is a simple hosting service for static sites built into GitHub
+    - Every account gets its own subdomain, `username.github.io`
+    - Every repository gets its own folder within the subdomain, `username.github.io/reponame`
+    - Need `index.html`
+
+- GitHub setup
+    - Create a `gh-pages` branch
+    - [Enable gh-pages](https://guides.GitHub.com/features/pages/)
+        - GitHub repo page $\to$ Settings $\to$ GitHub Pages
+    - [GitHub PAT](https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/creating-a-personal-access-token)
+        - Account Settings $\to$ Developer Settings $\to$ Personal access tokens
+- Travis setup
+    - Generate a PAT *for this particular project*
+    - Paste PAT in the Travis settings for this project
+- `_deploy.sh`
+    - Uncomment lines in `.travis.yml`
+    - Change git `user.email` and `user.name`; `OUTPUTFILE.html`
+    - Based on [this](https://bookdown.org/yihui/bookdown/github.html)
+
+```{sh, eval = FALSE}
+#!/bin/sh
+
+set -e
+
+[ -z "${GITHUB_PAT}" ] && exit 0
+[ "${TRAVIS_BRANCH}" != "master" ] && exit 0
+
+git config --global user.email "your@email.here"
+git config --global user.name "Your Name"
+
+git clone -b gh-pages https://${GITHUB_PAT}@github.com/${TRAVIS_REPO_SLUG}.git temp
+cd temp
+mv -f ../scripts/OUTPUTFILE.html index.html
+git add index.html
+git commit -m "Update the reproduced analysis" || true
+git push origin gh-pages
+```
+
+- After Travis has finished, the reproduced analysis should be viewable at `https://username.github.io/reponame`. 
+
+## Going further ##
+
+- [Bookdown](https://bookdown.org/), [blogdown](https://bookdown.org/yihui/blogdown/), and [pkgdown](https://pkgdown.r-lib.org/)
+- [R packages](https://hilaryparker.com/2014/04/29/writing-an-r-package-from-scratch/), with [Roxygen documentation](https://roxygen2.r-lib.org/)
+- [Unit tests](https://testthat.r-lib.org/)
+
