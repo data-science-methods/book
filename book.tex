@@ -119,7 +119,7 @@
 
 \title{Data Science Methods for Cognitive Science}
 \author{Dan Hicks, \href{mailto:hicks.daniel.j@gmail.com}{\nolinkurl{hicks.daniel.j@gmail.com}}}
-\date{Mon Dec 7 23:25:36 2020}
+\date{Tue Dec 8 21:16:02 2020}
 
 \begin{document}
 \maketitle
@@ -2183,7 +2183,7 @@ The dataset is a zipped \texttt{csv} or comma-separated value file. CSVs are str
 \end{Shaded}
 
 \begin{verbatim}
-## 0.325 sec elapsed
+## 0.334 sec elapsed
 \end{verbatim}
 
 \begin{Shaded}
@@ -7873,6 +7873,321 @@ Young, Acharjee, and Das (\protect\hyperlink{ref-YoungReliabilityEnvironmentalEp
 \tightlist
 \item
   \href{https://bookdown.org/yihui/rmarkdown-cookbook/bibliography.html\#changing-citation-style}{Changing citation style}
+\end{itemize}
+
+\hypertarget{a-tech-stack-for-automatically-reproduced-research-ii}{%
+\section{A Tech Stack for Automatically Reproduced Research, II}\label{a-tech-stack-for-automatically-reproduced-research-ii}}
+
+\hypertarget{preliminaries}{%
+\subsection{Preliminaries}\label{preliminaries}}
+
+\begin{itemize}
+\tightlist
+\item
+  You'll need to \textbf{fork} and clone the \href{https://GitHub.com/data-science-methods/repro_ex}{example project} for this chapter.
+\item
+  Create an account on \url{https://travis-ci.org/} using your GitHub login.
+\end{itemize}
+
+\hypertarget{build-automation-using-make}{%
+\subsection{Build automation using Make}\label{build-automation-using-make}}
+
+\begin{itemize}
+\tightlist
+\item
+  \href{https://www.gnu.org/software/make/}{Make}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    A tool for \href{https://en.wikipedia.org/wiki/Build_automation}{build automation}
+  \item
+    \href{https://cran.r-project.org/bin/windows/Rtools/}{Windows users need to install Rtools}
+  \end{itemize}
+\item
+  \texttt{Makefile} syntax
+
+  \begin{itemize}
+  \tightlist
+  \item
+    If the depenencies have a later timestamp than the target, run the command
+  \item
+    If the target doesn't exist, run the command
+  \item
+    \textbf{Tab, not spaces}
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Because Make is from 1976
+    \end{itemize}
+  \end{itemize}
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{target:}\DataTypeTok{ [dependency] [dependency] [...]}
+\NormalTok{    [command]}
+\end{Highlighting}
+\end{Shaded}
+
+A snippet of the example project's \texttt{Makefile}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#\# Paper {-}{-}{-}{-}}
+\DecValTok{paper:}\DataTypeTok{ }\CharTok{$(}\DataTypeTok{PAPER}\CharTok{)}\DataTypeTok{/paper.pdf}
+\DecValTok{$(PAPER)/paper.pdf:}\DataTypeTok{ }\CharTok{$(}\DataTypeTok{PAPER}\CharTok{)}\DataTypeTok{/paper.md }\CharTok{\textbackslash{}}
+\DataTypeTok{                    }\CharTok{$(}\DataTypeTok{PAPER}\CharTok{)}\DataTypeTok{/refs.json }\CharTok{\textbackslash{}}
+\DataTypeTok{                    }\CharTok{$(}\DataTypeTok{LASTOUT}\CharTok{)}
+\NormalTok{  cd }\CharTok{$(}\DataTypeTok{PAPER}\CharTok{)}\NormalTok{; pandoc paper.md {-}o paper.pdf {-}{-}citeproc}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  Make commands
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{make} = \texttt{make} for the first target
+
+    \begin{itemize}
+    \tightlist
+    \item
+      By convention, first target should be \texttt{all}
+    \end{itemize}
+  \item
+    \texttt{make\ pipe}
+
+    \begin{itemize}
+    \tightlist
+    \item
+      \texttt{touch} and then \texttt{make\ pipe} again
+    \end{itemize}
+  \item
+    \texttt{make\ clean}
+  \end{itemize}
+\item
+  MOAR SYNTAX
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Variable declarations and references
+  \item
+    \texttt{.PHONY}
+  \item
+    Functions
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{continuous-integration-with-travis-ci}{%
+\subsection{Continuous integration with Travis-CI}\label{continuous-integration-with-travis-ci}}
+
+\begin{itemize}
+\tightlist
+\item
+  What and why is CI
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Integration: Combining code written by several different (teams of) software engineers
+  \item
+    Problem: ``Works on my machine'' \(\to\) integration was a massive, slow process
+  \item
+    Solution: Frequent, automated integration checks
+  \end{itemize}
+\end{itemize}
+
+
+
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{images/reproducibility/ci} 
+
+}
+
+\caption{Diagram illustrating a continuous integration (CI) workflow. Multiple different (teams of) developers push their work up to a version control system. The CI system automatically retrieves the new version, attempts to build it, runs any defined tests, and reports results. Source: \url{http://www.methodsandtools.com/tools/tools.php?hudson}}\label{fig:unnamed-chunk-128}
+\end{figure}
+
+\begin{itemize}
+\tightlist
+\item
+  Travis setup
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \href{https://travis-ci.org/}{Travis site}
+  \item
+    Create an account using your GitHub login
+  \end{itemize}
+\item
+  File prerequisites
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{DESCRIPTION}
+
+    \begin{itemize}
+    \tightlist
+    \item
+      \href{https://r-pkgs.org/description.html}{R Packages: Package Metadata}
+    \item
+      Travis's R support is built for packages, and won't work without a \texttt{DESCRIPTION} file
+    \item
+      Minimally, list the packages your scripts need under \texttt{Imports:}
+    \item
+      Exactly the same as the labs (because the labs use Travis)
+    \end{itemize}
+  \item
+    \texttt{.travis.yaml}
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Configuration file used by Travis
+    \item
+      \href{https://docs.travis-ci.com/user/languages/r}{Building an R project}
+    \item
+      \href{https://docs.travis-ci.com/user/languages/python}{Building a Python project}
+    \item
+      \href{https://docs.travis-ci.com/user/languages/}{Docs for other languages}, doesn't seem to include NetLogo
+    \end{itemize}
+  \item
+    Later we'll need \texttt{\_deploy.sh}
+
+    \begin{itemize}
+    \tightlist
+    \item
+      But leave it commented out in \texttt{.travis.yaml} for the moment
+    \end{itemize}
+  \end{itemize}
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{language}\KeywordTok{:}\AttributeTok{ r}
+\FunctionTok{cache}\KeywordTok{:}\AttributeTok{ packages}
+\FunctionTok{pandoc\_version}\KeywordTok{:}\AttributeTok{ }\FloatTok{2.11}
+
+\CommentTok{\# before\_script:}
+\CommentTok{\#   {-} chmod +x ./\_deploy.sh}
+
+\FunctionTok{script}\KeywordTok{:}
+\AttributeTok{  }\KeywordTok{{-}}\AttributeTok{ make pipe}
+\CommentTok{  \# {-} ./\_deploy.sh}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{hosting-using-github-pages}{%
+\subsection{Hosting using GitHub Pages}\label{hosting-using-github-pages}}
+
+\begin{itemize}
+\tightlist
+\item
+  \href{https://docs.github.com/en/free-pro-team@latest/github/working-with-github-pages}{GitHub Pages} is a simple hosting service for static sites built into GitHub
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Every account gets its own subdomain, \texttt{username.github.io}
+  \item
+    Every repository gets its own folder within the subdomain, \texttt{username.github.io/reponame}
+  \item
+    Need \texttt{index.html}
+  \end{itemize}
+\item
+  GitHub setup
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Create a \texttt{gh-pages} branch
+  \item
+    \href{https://guides.GitHub.com/features/pages/}{Enable gh-pages}
+
+    \begin{itemize}
+    \tightlist
+    \item
+      GitHub repo page \(\to\) Settings \(\to\) GitHub Pages
+    \end{itemize}
+  \item
+    \href{https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/creating-a-personal-access-token}{GitHub PAT}
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Account Settings \(\to\) Developer Settings \(\to\) Personal access tokens
+    \end{itemize}
+  \end{itemize}
+\item
+  Travis setup
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Generate a PAT \emph{for this particular project}
+  \item
+    Paste PAT in the Travis settings for this project
+  \end{itemize}
+\item
+  \texttt{\_deploy.sh}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Uncomment lines in \texttt{.travis.yml}
+  \item
+    Change git \texttt{user.email} and \texttt{user.name}; \texttt{OUTPUTFILE.html}
+  \item
+    Based on \href{https://bookdown.org/yihui/bookdown/github.html}{this}
+  \end{itemize}
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#!/bin/sh}
+
+\KeywordTok{set} \ExtensionTok{{-}e}
+
+\BuiltInTok{[} \OtherTok{{-}z} \StringTok{"}\VariableTok{$\{GITHUB\_PAT\}}\StringTok{"}\BuiltInTok{ ]} \KeywordTok{\&\&} \BuiltInTok{exit}\NormalTok{ 0}
+\BuiltInTok{[} \StringTok{"}\VariableTok{$\{TRAVIS\_BRANCH\}}\StringTok{"} \OtherTok{!=} \StringTok{"master"}\BuiltInTok{ ]} \KeywordTok{\&\&} \BuiltInTok{exit}\NormalTok{ 0}
+
+\FunctionTok{git}\NormalTok{ config {-}{-}global user.email }\StringTok{"your@email.here"}
+\FunctionTok{git}\NormalTok{ config {-}{-}global user.name }\StringTok{"Your Name"}
+
+\FunctionTok{git}\NormalTok{ clone {-}b gh{-}pages https://}\VariableTok{$\{GITHUB\_PAT\}}\NormalTok{@github.com/}\VariableTok{$\{TRAVIS\_REPO\_SLUG\}}\NormalTok{.git temp}
+\BuiltInTok{cd}\NormalTok{ temp}
+\FunctionTok{mv}\NormalTok{ {-}f ../scripts/OUTPUTFILE.html index.html}
+\FunctionTok{git}\NormalTok{ add index.html}
+\FunctionTok{git}\NormalTok{ commit {-}m }\StringTok{"Update the reproduced analysis"} \KeywordTok{||} \FunctionTok{true}
+\FunctionTok{git}\NormalTok{ push origin gh{-}pages}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  After Travis has finished, the reproduced analysis should be viewable at \texttt{https://username.github.io/reponame}.
+\end{itemize}
+
+\hypertarget{going-further}{%
+\subsection{Going further}\label{going-further}}
+
+\begin{itemize}
+\tightlist
+\item
+  \href{https://bookdown.org/}{Bookdown}, \href{https://bookdown.org/yihui/blogdown/}{blogdown}, and \href{https://pkgdown.r-lib.org/}{pkgdown}
+\item
+  \href{https://hilaryparker.com/2014/04/29/writing-an-r-package-from-scratch/}{R packages}, with \href{https://roxygen2.r-lib.org/}{Roxygen documentation}
+\item
+  \href{https://testthat.r-lib.org/}{Unit tests}
 \end{itemize}
 
 \hypertarget{part-case-study-the-compas-dataset}{%
