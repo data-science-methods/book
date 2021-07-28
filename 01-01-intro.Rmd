@@ -1,11 +1,17 @@
 # Introduction #
 
-## Land Acknowledgement ##
+## Land acknowledgements ##
+
+### [Campus land acknowledgment](https://diversity.ucmerced.edu/values/land-acknowledgement) ###
+
+We pause to acknowledge all local indigenous peoples, including the Yokuts and Miwuk, who inhabited this land. We embrace their continued connection to this region and thank them for allowing us to live, work, learn, and collaborate on their traditional homeland. Let us now take a moment of silence to pay respect to their elders and to all Yokuts and Miwuk people, past and present.
+
+### Instructor's land acknowledgment ###
 
 UC Merced and the City of Merced are on the traditional territory of the Yokut people.  This land was stolen by Spanish, Mexican, and American settlers through acts of slavery and genocide.  In addition, UC Merced is strongly associated with Ahwahne, known as Yosemite Valley.  This valley was the traditional home of the Ahwahnechee people, who were the victims of some especially horrific, state-sponsored genocidal acts.  For more on the history of Ahwahne, see <https://tinyurl.com/y879jw8s>.  For more information on land acknowledgments, see <https://native-land.ca>.  
 
 
-## About me ##
+## About the instructor ##
 
 Dan Hicks is a philosopher turned data scientist turned philosopher.  
 
@@ -22,17 +28,20 @@ Is Not:
 
 - a statistics course (in the way you think)
 - a general introduction to software engineering
-- a basic introduction to R? (Unless that's what you all need?)
+- a basic introduction to R
 - carefully planned out from beginning to end
 
 Is: 
 
 - an introduction to data science
-- about data cleaning, data management, and exploratory data analysis
+- about exploratory data analysis, data management, and reproducibility
 - habituation to some good software engineering practices that are especially valuable for data science work
-- in the [pre-alpha stage of development](https://en.wikipedia.org/wiki/Software_release_life_cycle#Pre-alpha)
+- in the [alpha stage of development](https://en.wikipedia.org/wiki/Software_release_life_cycle#Alpha)
+
 
 ## Learning outcomes ##
+
+*[match to catalog]*
 
 By the end of the course, students will be able to 
 
@@ -56,26 +65,31 @@ By the end of the course, students will be able to
 	- critically discuss profiling and thresholds [@PiersonLargescaleAnalysisRacial2020] as potential explanation for differences in "base rates" of recidivism
 	- critically locate discussions of fairness and recidivism in a broader social context, and identify implications for working data scientists [@SelbstFairnessAbstractionSociotechnical2018; @HoffmannWhereFairnessFails2019; @HannaCriticalRaceMethodology2019]
 
-<!--
+
 ## Prerequisites ##
 
-This course assumes a basic familiarity with R.  
+*This course assumes basic competence with introductory R.* 
 
-- $10 Coursera "guided project": <https://www.coursera.org/projects/getting-started-with-r>
-- A Carpentries workshop that includes the "R for Social Scientists" lesson, or the equivalent: <https://datacarpentry.org/r-socialsci/>
-
--->
-
-## Workflow ##
-
-- The first ~10 weeks of the course will focus on skill development, with a mix of livecoding lectures and labs.  
-    - Labs will be set up to give you automated feedback.  
-    - There will probably be asynchronous discussion using Slack for some of the labs. 
-- On November 10 we'll be working on project with Hanna Gunn's Data Ethics course.  
-- The last few weeks of the course will be devoted to term projects.  
-    - Tentative idea for this:  go find some data; clean it, explore it; produce a codebook and reproducible exploratory data analysis
+- "Introductory R":  Lessons 1-5 of the Carpentries ["R for Social Scientists"](https://datacarpentry.org/r-socialsci/) curriculum
+    - Installing R and packages
+    - Working in the R Studio IDE
+    - Common data types
+    - Reading and writing CSV files
+    - Tidyverse R:  `mutate()`, `filter()`, `select()`; plotting with `ggplot2`
+- "Basic competence":  Given time and a reference ([cheatsheet](https://www.rstudio.com/resources/cheatsheets/), Stack Exchange, mentor) you can figure out how to solve a problem
 
 
+## Requirements and weekly routine ##
+
+*This is aspirational.*
+
+- Tuesdays:  Mix of discussion and lecture based on assigned readings
+- Thursdays:  Live coding leading into work on the week's lab assignment
+- Labs:  10-ish, done individually or in pairs and submitted via GitHub for automated feedback
+- Running project:  Practicing ideas from the course on data sets you find
+
+
+<!--
 ## Notes on some course design decisions ##
 
 ### R, not Python ###
@@ -116,5 +130,4 @@ However,
 
 - Notebooks do not play nicely with version control  [@AhemadVersionControlJupyter2018; @WhitmoreJupyterNotebookBest2015]
 - Notebooks encourage bad software engineering habits and discourage good ones [@GrusDonNotebooksJoel; @HiltchJupyterNotebookCancer2019]
-
-
+-->

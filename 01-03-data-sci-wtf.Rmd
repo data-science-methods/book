@@ -1,7 +1,16 @@
-# What is this thing called data science? #
+# Data Science: What and why #
 
 ```{r child = 'knitr_config.Rmd'}
 ```
+
+## Reading ##
+
+- @WilsonGoodEnoughPractices2017
+- @McElreathScienceAmateurSoftware2020
+
+## Discussion question ##
+
+*Why did you decide to take a class called "data science"?*  
 
 ## Standard definition ##
 
@@ -13,7 +22,17 @@ knitr::include_graphics('images/Abisiga.jpg')
 
 - The intersection of computer science/software engineering, statistics, and "business knowledge"
 
-Or, more concretely, 
+- But this defines data science in terms of *tools and techniques*, not epistemic and practical *goals*.  Compare: 
+    - An ecologist is someone who spends most of their time collecting specimens in the field and processing them in a lab, vs. 
+    - An ecologist is someone who studies interactions among organisms and their environment
+    
+## Discussion question ## 
+
+*What are the epistemic and practical goals of your scientific field?  How do you think "data science" will be useful for pursuing those goals?*
+
+
+<!--
+## What is this thing called "data"? ##
 
 (ref:boykis) Boykis Twitter poll of "data scientists"; 67% said they spend most of their time cleaning data/moving data. Source: <https://twitter.com/vboykis/status/1089920316644704256>
 
@@ -34,13 +53,6 @@ knitr::include_graphics('images/Scott.png')
 knitr::include_graphics('images/Hudon.png')
 ```
 
-However,
-
-- This focuses on *tools and techniques*, not the epistemic and practical *goals* of data science
-    - An ecologist spends most of their time collecting specimens in the field and processing them in a lab, vs. 
-    - An ecologist studies interactions among organisms and their environment
-
-## A prior question: What is this thing called "data"? ##
 
 - *Representational view*: Data are "reliable representations of reality which are produced via the interaction between humans and the world"
     - "The production of data is equivalent to 'capturing' features of the world that can be used for systematic study"
@@ -69,5 +81,5 @@ However,
 - The goal of data science is to **produce data**
     - To create, transform, and juxtapose objects such that they can be used as evidence
     - Can be done experimentally in a lab, but in other ways too
-    
+-->
     
