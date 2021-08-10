@@ -1,5 +1,5 @@
 --- 
-title: "Data Science Methods for Cognitive Science"
+title: "Methods of Data Science I"
 author: "Dan Hicks, <hicks.daniel.j@gmail.com>"
 github-repo: data-science-methods/book
 date: "`r date()`"
