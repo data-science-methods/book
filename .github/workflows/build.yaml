@@ -54,16 +54,16 @@ jobs:
           Rscript -e "install.packages('remotes', repos = 'http://cran.us.r-project.org')"
           Rscript -e "remotes::install_deps(dependencies = TRUE)"
 
-     # Typeset the book
-     - name: make gitbook
-       run: make gitbook
-     
-     # Push the book back up to gh-pages
-     - name: Push book to gh-pages
-       run: |
-         git config --global user.name "Dan Hicks"
-         git config --global user.email "hicks.daniel.j@gmail.com"
-         git checkout -b gh-pages
-         git add docs/*
-         git commit -m "Updated book"
-         git push --set-upstream origin gh-pages --force
+      # Typeset the book
+      - name: make gitbook
+        run: make gitbook
+      
+      # Push the book back up to gh-pages
+      - name: Push book to gh-pages
+        run: |
+          git config --global user.name "Dan Hicks"
+          git config --global user.email "hicks.daniel.j@gmail.com"
+          git checkout -b gh-pages
+          git add docs/*
+          git commit -m "Updated book"
+          git push --set-upstream origin gh-pages --force
