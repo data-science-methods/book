@@ -18,15 +18,15 @@ description: "This document is a set of notes (and perhaps later a textbook) for
 
 This document is a set of notes (and perhaps later a textbook) for a course on data science methods for graduate students in social and behavioral sciences, taught by Professor Dan Hicks (they/them), UC Merced. 
 
-The course overview (including reading and lab assignments) is available here:  <https://docs.google.com/spreadsheets/d/1iS_I-LgT7bBRBUOYEOyJNHBe7Q8X_c3B1E9jap4b6jw/edit?usp=sharing>
+The course site is available [here](..). 
 
-PDF versions of each chapter can be found here:  [Handouts](handouts/index.html)
+<!-- PDF versions of each chapter can be found here:  [Handouts](handouts/index.html) -->
 
-(The URLs to the handouts are buggy.  To get to them, look for `handout/handout/` in the URL; delete the second `handout/`.)
+<!-- (The URLs to the handouts are buggy.  To get to them, look for `handout/handout/` in the URL; delete the second `handout/`.) -->
 
 -----
 
-These notes were written in [RStudio](http://www.rstudio.com/ide/) using [bookdown](http://bookdown.org/). The complete source is available on [GitHub](https://github.com/data-science-methods/book/) and is automatically rebuilt using [Travis CI](https://github.com/data-science-methods/book/). 
+These notes were written in [RStudio](http://www.rstudio.com/ide/) using [bookdown](http://bookdown.org/). The complete source is available on [GitHub](https://github.com/data-science-methods/book/) and is automatically rebuilt using GitHub actions. 
 
 This version of the book was built with `r R.version.string`, [pandoc](https://pandoc.org/) version `r rmarkdown::pandoc_version()`, and the following packages:
 
