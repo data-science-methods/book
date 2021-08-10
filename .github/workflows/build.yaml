@@ -54,7 +54,7 @@ jobs:
           Rscript -e "install.packages('remotes', repos = 'http://cran.us.r-project.org')"
           Rscript -e "remotes::install_deps(dependencies = TRUE)"
 
-      # Typeset the book
+     # Typeset the book
      - name: make gitbook
        run: make gitbook
      
