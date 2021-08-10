@@ -3,8 +3,9 @@
 - [R](https://cran.r-project.org/) and [RStudio](https://rstudio.com/products/rstudio/download/):  
     - Last year R had a major release (version 4)
     - Addressing some bugs has led to some rapid development in R and RStudio
-    - For consistency in class, **please use the latest version of both R and RStudio**
+    - For consistency in class, **I encourage you to use the latest version of both R and RStudio**
     - [Help on switching between different versions of R](https://support.rstudio.com/hc/en-us/articles/200486138-Changing-R-versions-for-the-RStudio-Desktop-IDE)
+    - As of 2021-07-29, the machines in our classroom have R 4.0.2 and RStudio 1.3.1056
     
 - OS:  
     - All of the tools we'll use are available on all major OSes
@@ -27,6 +28,11 @@
         - Mac: 10.13 (High Sierra) or more recent
         - Windows: See [here](https://cran.r-project.org/bin/windows/base/rw-FAQ.html#Does-R-run-under-Windows-Vista_003f)
         - If you're running Linux I'm going to assume you can figure this out yourself
+        
+- Using the computer lab machines
+    - The machines are just a little behind the most recent versions of R and RStudio
+    - But should work fine for our purposes
+    - I recommend carrying your work on a flash drive
 
 ## A Note on Accessibility ##
 
