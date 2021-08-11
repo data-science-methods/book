@@ -9,9 +9,10 @@
     
 - OS:  
     - All of the tools we'll use are available on all major OSes
+        - (Except Sourcetree, which isn't essential.  [List of git GUIs](https://git-scm.com/download/gui/linux))
     - I have much less experience debugging Windows and Linux, but will do what I can
     
-- You'll need a [GitHub](https://github.com/) account
+- You'll need a [GitHub](https://github.com/) account and [Sourcetree](https://www.sourcetreeapp.com/)
     - GitHub is [owned by Microsoft](https://www.cnbc.com/2020/11/29/microsofts-github-has-become-magnet-for-thorny-issues-like-riaa.html)
     - And there are [concerns about how it mined public repositories to develop a code completion tool](https://www.theverge.com/2021/7/7/22561180/github-copilot-legal-copyright-fair-use-public-code)
     - But it offers some key features that I want to use in this course
@@ -36,7 +37,7 @@
 
 ## A Note on Accessibility ##
 
-I chose the tools and platforms for this course in part because they're industry-standard.  If you pursue a career as a data scientist in industry, you'll be expected to use Slack and GitHub on a daily basis.  And RStudio is by far the most commonly used IDE ("integrated development environment") for R.  
+I chose the tools and platforms for this course in part because they're industry-standard.  If you pursue a career as a data scientist in industry, you'll be expected to use GitHub (or something similar) on a daily basis.  And RStudio is by far the most commonly used IDE ("integrated development environment") for R. 
 
 However, like many other technologies, they were originally developed using ableist assumptions about "normal" computer users.  In response to criticism, the developers of these systems and tools have gone back and made their technologies more accessible.  But there may still be barriers to accessibility that I have not anticipated.  
 
