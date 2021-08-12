@@ -183,44 +183,23 @@ knitr::include_graphics(file.path('images', '02-basics', 'origin.png'))
     - **Pull**:  Actually download the remote changes and incorporate them into your local tree. 
 
 
-### Working with *someone else's* repos ###
-*[rewrite as lab]*
-
-
+### Lab: Working with *someone else's* repos ###
 - GitHub lets you download someone else's repo (**clone**), and modify it locally, but *not* upload directly.  
 - You can suggest a change to someone else's code by submitting a **pull request**, which first requires **forking** the repository.  
 
 ```{r, echo=FALSE, fig.cap="*Forking* copies a repository to your GitHub account.  Then you *clone* the copy to your local machine.  You can *push* to your remote copy as usual.  You can suggest changes to the original using a *pull request*.  Source: <https://happygitwithr.com/fork-and-clone.html>"}
-knitr::include_graphics('images/fork-and-clone.png')
+knitr::include_graphics(file.path('images', '02-basics', 'fork-and-clone.png'))
 ```
 
-- A demonstration repository: <https://github.com/data-science-methods/git-demo>
-- *Fork step*: Look for the `fork` button in the upper-right
+- Start with the repo for this week's lab:  <https://github.com/data-science-methods/lab-w02-git>
+- **Fork**: Look for the `fork` button in the upper-right
 
 ```{r, echo=FALSE, fig.cap="The *fork* button is near the upper-right corner of a GitHub repository page.  I wasn't able to find a keyboard shortcut for this.  :-("}
-knitr::include_graphics('images/fork-button.png')
+knitr::include_graphics(file.path('images', '02-basics', 'fork-button.png'))
 ```
 
-- *Clone step*: After creating the fork, you need to download a copy to your machine. Open a Terminal window to the folder *right above* where you want the repository folder to be located, eg, `projects`. 
+- **Clone**: After creating the fork, you need to download a copy to your machine. 
+    - In Sourcetree's repository browser, select New... > Clone from URL
+    
+- This lesson continues in the lab.  Open `lab.html` and `lab.R` to continue.  
 
-```
-$ git clone https://github.com/YourUsername/git-demo
-$ cd git-demo
-$ git status
-```
-
-- *Push step*: Make changes locally, then push them back up to *your* GitHub copy of the repo
-
-## Lab ##
-
-The lab for this section can be found at <https://github.com/data-science-methods/lab-w2-git>. 
-
-
-- `.gitignore`
-    - Create a subfolder `images` and put an image file of some kind in it. 
-    - Create a text file `.gitignore` in `test`.  Put the following line in: 
-```
-images
-```
-    - Add another image file.  Edit `.gitignore` so that it ignores the first image file but not the second.  
-    - Track `.gitignore`
