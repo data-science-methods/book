@@ -203,3 +203,7 @@ knitr::include_graphics(file.path('images', '02-basics', 'fork-button.png'))
     
 - This lesson continues in the lab.  Open `lab.html` and `lab.R` to continue.  
 
+
+## Further reading
+
+- HesterHappyGitGitHub
