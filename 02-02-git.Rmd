@@ -206,4 +206,4 @@ knitr::include_graphics(file.path('images', '02-basics', 'fork-button.png'))
 
 ## Further reading
 
-- HesterHappyGitGitHub
+- @HesterHappyGitGitHub
