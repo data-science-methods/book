@@ -5,7 +5,7 @@
 
 ## Some motivating examples ##
 
-- While working on your analysis code, you accidentally delete the first 35 lines of the script.  You only discover this three days later, when you restart R and try to run the script from the top.  Because of the time you last half of your senior thesis, you've been saving every couple of minutes.  
+- While working on your analysis code, you accidentally delete the first 35 lines of the script.  You only discover this three days later, when you restart R and try to run the script from the top.  Because you lost half of your senior thesis in undergrad, you hit Control+S to save every couple of minutes.  
 - You're working on a paper with two coauthors.  You prepare the final draft to send for submission: `paper final.docx`.  But one of your coauthors discovers a typo.  Now it's `paper final fixed typo.docx`.  Another realizes six references are missing.  `paper final fixed typo refs.docx`.  That's getting confusing so you change it to `paper 2 Aug 2021.docx`.  Once it comes back from review you need to make revisions.  Now you have `paper 30 Jan 2022.docx` and, after your collaborators make their changes, `paper 12 February 2022 DJH.docx` and `paper 12 February 20222 final.docx`. 
 - You have a complicated analysis spread over several scripts.  You want to explore a variant analysis, but doing so will involve changes in 15 different places across 3 different files.  You're not sure if this variant analysis will work; you may or may not want to keep it.  
 
