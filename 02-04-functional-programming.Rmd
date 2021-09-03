@@ -1,12 +1,74 @@
 # Functional Programming and Data Science #
 
-- Recommended reading:  @ChambersObjectOrientedProgrammingFunctional2014; parts II and III of @WickhamAdvanced2014
+- Reading:  
+    - @ChambersObjectOrientedProgrammingFunctional2014
+    - Introductions to parts II and III of @WickhamAdvanced2014
 
 - Programming paradigms
     - *Procedural*:  Software is a series of instructions ("procedures"), which the computer carries out in order.  Special instructions (if-then, loops) are used to change the order based on inputs or other conditions.  
         - Examples: FORTRAN, BASIC, Pascal, C
 
     - *Object-oriented*:  Software is made up of objects, which have properties ("attributes," including other objects) and do things ("methods").  
+    
+    - *Functional*:  Software is made up of functions, which are run sequentially on the inputs
+    
+- R is both object-oriented *and* functional
+    - Object-oriented:  Everything that exists is an object
+    - Functional:  Everything that happens is a function call
+    
+## Object-oriented R:  S3
+
+- board game as OOP
+- regression models as OOP
+- S3 is not the OOP you're used to
+
+## Functional R
+
+- board game as a series of functions
+- regression models as a series of functions
+- breaking R
+
+```
+foo = 3
+`<-` <- function(x, y) x + y
+foo <- 5
+foo = 7
+```
+
+```
+`[` <- function(x, y) x * y
+bar = data.frame(x = rep(1, 15),
+                 y = rep(2, 15))
+bar['x']
+bar[2]
+bar[18]
+```
+
+
+## Actually-useful functional R:  Pipes (and the tidyverse)
+
+- Pipe syntax (`%>%` and `|>`)
+- Tidyverse functions
+- *Immutability*:  Once the value is assigned to a variable, that value cannot be changed
+- *No side effects*:  Functions don't change anything; they only return a value
+
+## Programming paradigms and data science
+
+- OOP is most useful for developers
+- Immutability and no side effects are really useful for data cleaning and analysis
+    - "The analysis pipeline"
+    - Reasoning about the state of our code
+    - Ensuring reproducibility
+
+
+## Lab:  Purrr
+- palmerpenguins
+- broom
+- map() and list columns in dataframes
+- microethics? 
+
+    
+    
         - Example: A board game consists of 1 or more players, a board, and a deck of cards.  
             - Players each have a hand of cards (attribute), can draw cards from the deck into their hand (method, which also changes the deck's attributes), and can play cards to manipulate tokens on the board (method, which also changes the board's attributes).  
             - The game itself is an object, with the players, board, and deck for its attributes and methods to things up, run turns in sequence, determine the winner.  

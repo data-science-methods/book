@@ -25,11 +25,12 @@ stop('Noooooo')
 
 ## Where to go for help
 
+- [Rubber duck debugging](https://en.wikipedia.org/wiki/Rubber_duck_debugging)
 - Isolate the problem
 - Restart your session: Session $\to$ Restart R
 - Local help: `?fun`
 - StackOverflow: <https://stackoverflow.com/questions/tagged/r>
-    - CRAN $\to$ BugReports (usually GitHub Issues)
+- CRAN $\to$ BugReports (usually GitHub Issues)
 
 ## Example: Dates are often problems
 
@@ -124,6 +125,7 @@ This is a known bug; it looks like they're thinking about doing something about 
 ## Do not do these things in your reprex (or anywhere else)
 
 [Or Jenny Bryan will come to your office and set your computer on fire](https://www.tidyverse.org/blog/2017/12/workflow-vs-script/). 
+
 - `setwd('/users/danhicks/projects/catsaregreat/myscript/')`
     - Used to ensure that R is running where your file is
     - Unnecessary if you're opening different projects in different RStudio sessions
@@ -151,4 +153,4 @@ Not on Bryan's list, but also don't do it:
 
 ## Debugging in RStudio
 
-*[point to lab]*
+[This week's lab](https://github.com/data-science-methods/lab-w03-debugging) introduces you to some of RStudio's debugging tools. 
