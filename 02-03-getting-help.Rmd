@@ -11,6 +11,12 @@
 - @FaqHowMake
 - @WickhamDebugging2019
 
+## Dependencies
+
+```{r, eval = FALSE}
+install.packages('lubridate', 'assertthat', 'reprex')
+```
+
 ## Messages, warnings, and errors
 
 - *Message*:  Things are fine, but here's some information you should know
