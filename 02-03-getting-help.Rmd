@@ -1,7 +1,5 @@
 # Warnings, Errors, and Getting Help #
 
-*[todo]*
-
 ```{r child = 'knitr_config.Rmd'}
 ```
 
