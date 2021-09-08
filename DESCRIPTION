@@ -16,5 +16,7 @@ Imports:
 	ggbeeswarm,
 	ggforce,
 	printr,
-	sloop
+	sloop,
+        reticulate
+
 
