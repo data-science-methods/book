@@ -1,4 +1,7 @@
-# Functional Programming and Data Science #
+# Programming Paradigms #
+
+```{r child = 'knitr_config.Rmd'}
+```
 
 ## Reading ##
 
@@ -12,24 +15,33 @@ install.packages('sloop')
 ```
 
 ## Programming paradigms ##
-- *Procedural* or *imperative*:  Software is a series of instructions ("procedures"), which the computer carries out in order.  Special instructions (if-then, loops) are used to change the order based on inputs or other conditions.  
-    - Examples: FORTRAN, BASIC, C, calculator
+Procedural or imperative
+: Software is a series of instructions ("procedures"), which the computer carries out in order.  Special instructions (if-then, loops) are used to change the order based on inputs or other conditions.  
+    - Examples: FORTRAN, BASIC, C, a calculator
 
-- *Object-oriented*:  Software is made up of objects, which have properties ("attributes," including other objects) and do things ("methods").  
+Object-oriented
+: Software is made up of objects, which have properties ("attributes," including other objects) and do things ("methods").  
+    - Examples: Python, Java
 
-- *Functional*:  Software is made up of functions, which are run sequentially on the inputs
+Functional
+: Software is made up of functions, which are run sequentially on the inputs.  
+    - Examples: Lisp, Haskell
 
-- R is both object-oriented *and* functional
-    - Object-oriented:  Everything that exists is an object
-    - Functional:  Everything that happens is a function call
+### R is both object-oriented *and* functional ###
+
+- Object-oriented:  Everything that exists is an object
+- Functional:  Everything that happens is a function call
     
-## Object-oriented R:  S3
+## Object-oriented programming
 
 - board game as OOP
 - regression models as OOP
 
+## The OOP you're used to ##
 
-### S3 is not the OOP you're used to ###
+- Classes are defined by their elements and methods
+- Changing/adding elements and methods requires changing the class definition
+- For $x$ to be an $F$, $x$ must be created as an $F$
 
 ```{python, eval = FALSE}
 ## <https://vegibit.com/python-class-examples/>
@@ -51,33 +63,27 @@ class Vehicle:
             self.fuel_level -= 1
         else:
             print(f'The {self.model} is out of gas!')
-        
-class ElectricVehicle(Vehicle):
-    def __init__(self, brand, model, type):
-        super().__init__(brand, model, type)
-        self.battery_size = 85
-        self.charge_level = 0
 
-    def fuel_up(self):
-        print('This vehicle has no fuel tank!')
-        
 dhCar = Vehicle('Honda', 'Fit', 'Hatchback')
-type(dhCar)
 dhCar.gas_tank_size = 10
 dhCar.fuel_up()
 dhCar.drive()
 ```
 
-S3 classes can be changed on the fly, with no attempt to validate any assumptions. 
+---
 
-```{r}
+## S3 is OOP, but weird
+
+- S3 classes can be changed on the fly, with no attempt to validate any assumptions. 
+
+```{r, eval = FALSE}
 dh_car = list(brand = 'Honda', model = 'Fit', type = 'Hatchback')
 class(dh_car)
 class(dh_car) = c('vehicle', class(dh_car))
 class(dh_car)
 inherits(dh_car, 'vehicle')
 ```
-```{r}
+```{r, eval = FALSE}
 model = lm(log(mpg) ~ log(disp), data = mtcars)
 class(model)
 print(model)
@@ -90,9 +96,11 @@ try(print(model))
     - write constructor, validator, and helper functions
 - S4 and R6 provide more conventional OOP structure
 
-- Instead of "methods are defined within classes," S3 uses **generic functions**
+---
 
-```{r}
+- S3 uses **generic functions**
+
+```{r, eval = FALSE}
 reg_model = lm(log(mpg) ~ log(disp), data = mtcars)
 aov_model = aov(log(mpg) ~ log(disp), data = mtcars)
 
@@ -107,18 +115,32 @@ residuals(aov_model)
 residuals(reg_model)
 ```
 
-- Both `aov_model` and `reg_model` inherit `lm`
-- Different output for `print()`
-- Same output for `residuals()`
+- Both `aov_model` and `reg_model` inherit from `lm`
+- `print()` and `residuals()` are both generics
+    - (There can be) different versions of each function for different classes
+    - Different output for `print()`
+    - Same output for `residuals()`
+
+---
+
+- `print()` is a generic; the call just passes us off using `UseMethod()`
+
+```{r}
+print
+```
+
+- `sloop` package is useful for understanding how S3 figures out which specific function to call
 
 ```{r}
 library(sloop)
-## print() is a generic; the call just passes us off using UseMethod()
-print
+```
+```{r, eval = FALSE}
 s3_dispatch(print(reg_model))
 s3_dispatch(print(aov_model))
+```
 
-## The class-specific methods are hidden
+- Note that the class-specific functions are often hidden
+```{r, eval = FALSE}
 try(print.lm)
 s3_get_method(print.lm)
 # stats:::print.lm
@@ -128,17 +150,45 @@ s3_get_method(print.aov)
 
 - *Use `s3_dispatch()` to explain why the two models have the same output for `residuals()`.*
 
+---
+
+- `sloop::s3_methods_generic()` lists all class-specific versions of generics
+
 ```{r}
-## Finding all class-specific versions of some generics
 s3_methods_generic('print')
-s3_methods_generic('residuals')
 ```
 
-## Functional R
+- And similarly for all generics defined for a given class
 
-- board game as a series of functions
+```{r}
+s3_methods_class('lm')
+```
+
+## Functional programming
+
+- board game as a series of functions? 
 - regression models as a series of functions
-- breaking R
+
+## Common features of functional programming
+
+First-class functions
+:  Functions can be used like any other data type, including as inputs to and outputs from other functions
+
+Determinism
+:  Given a list of input values, a function always returns the same output value
+
+No side effects
+:  A function doesn't have any effects other than returning its output
+
+Immutability
+:  Once a variable is assigned a value, that value cannot be changed
+
+These features make it much easier to reason about how a functional program works. 
+
+
+## Breaking R: Everything that happens is a function ##
+
+- This includes assignment
 
 ```
 foo = 3
@@ -146,6 +196,8 @@ foo = 3
 foo <- 5
 foo = 7
 ```
+
+- And brackets
 
 ```
 `[` <- function(x, y) x * y
@@ -156,36 +208,45 @@ bar[2]
 bar[18]
 ```
 
-
 ## Actually-useful functional R:  Pipes (and the tidyverse)
 
-- Pipe syntax (`%>%` and `|>`)
-- Tidyverse functions
+- Pipe syntax for function composition (`%>%` and `|>`)
+- Tidyverse functions are designed to work with pipes
+
+```{r, message=FALSE}
+library(dplyr)
+```
 
 ```{r}
-library(dplyr)
 mtcars %>%
     filter(cyl > 4) %>% 
     lm(mpg ~ disp, data = .) %>% 
     summary()
 ```
 
-- *Immutability*:  Once the value is assigned to a variable, that value cannot be changed
-- *No side effects*:  Functions don't change anything; they only return a value
+- Using the new native pipes with the new native anonymous functions
+
+```{r}
+mtcars |>
+    filter(cyl > 4) |>
+    {\(d) lm(mpg ~ disp, data = d)}() |>
+    summary()
+```
 
 ## Programming paradigms and data science
 
 - OOP is most useful for developers
-- Immutability and no side effects are really useful for data cleaning and analysis
+- Functional programming rules are really useful for data cleaning and analysis
     - "The analysis pipeline"
     - Reasoning about the state of our code
     - Ensuring reproducibility
 
 
+<!--
 ## Lab:  Purrr
 - palmerpenguins
 - broom
 - map() and list columns in dataframes
 - microethics? 
-
+-->
 
