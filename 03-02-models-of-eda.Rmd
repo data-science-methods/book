@@ -39,7 +39,7 @@ avoids inferential errors       *makes* errors?
 
 - @BrownSmokeMirrorsHow2002
 
-Table: The data/phenomena/theory distinctions
+Table: The data/phenomena/theory distinction
 
 -------------------------------------
                                                Theories/
@@ -50,6 +50,8 @@ numbers, downloaded     between                susceptibility to
 from Qualtrics          partisanship and       anxiety hypothesis
                         sharing Covid 
                         misinformation
+                        
+</br>                                                                                        
 
 collected               abstracted or          postulated
                         extracted from data

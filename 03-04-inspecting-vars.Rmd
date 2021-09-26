@@ -3,16 +3,33 @@
 ```{r child = 'knitr_config.Rmd'}
 ```
 
-For this EDA, we'll work with data on police stops in Oakland, California, that have been pre-cleaned and released by the Stanford Open Policing Project.  Because this analysis focuses on categorical data and counts of observations, most of the elements in @HuebnerSystematicApproachInitial2016 don't really fit.  So we'll follow the checklist from @PengArtDataScience2016. 
+## </br>
 
-We'll also be learning how to use three R packages:  `skimr` and `visdat` for getting an overview of the data in a dataframe, and `dplyr` for manipulating dataframes.  A good cheatsheet for `dplyr` is available here:  <https://raw.githubusercontent.com/rstudio/cheatsheets/master/data-transformation.pdf>. 
+- For this EDA, we'll work with data on police stops in Oakland, California, that have been pre-cleaned and released by the [Stanford Open Policing Project](https://openpolicing.stanford.edu/).  
+    - *[cite paper]*
+- Because this analysis focuses on categorical data and counts of observations, most of the elements in @HuebnerSystematicApproachInitial2016 don't really fit.  
+    - So we'll follow the checklist from @PengArtDataScience2016. 
+- We'll also be learning to use the `skimr` and `visdat` packages
+
+
+## 1. Formulate your question ##
+
+- The Black Lives Matter protests over the last several years have made us aware of the racial aspects of policing.  
+
+- Here we're specifically interested in
+    1. Whether Black people in Oakland might be more likely to be stopped than White people
+    2. Whether Black people who are stopped might be more likely to have contraband
+
+- These are rough questions, but are enough to get us started
+
+*[reflexivity]*
+
 
 ## Packages ##
 
 ```{r, echo=TRUE, message=FALSE}
 library(tidyverse)   # for working with the data
 library(lubridate)   # for working with datetime data
-library(vroom)       # for quickly reading large CSV files
 library(skimr)       # generate a text-based overview of the data
 library(visdat)      # generate plots visualizing data types and missingness
 library(tictoc)      # for timing how long R takes to do the thing
@@ -24,9 +41,16 @@ options(width = 100)  # wider output for skimr
 
 ## Get the Data ##
 
-We'll be using data on police stops in Oakland, California, collected and published by the Stanford Open Policing Project, <https://openpolicing.stanford.edu/>.  We'll start by making a `data` folder and downloading the data, if necessary.  The URL for the data file can be found on <https://openpolicing.stanford.edu/data/>.  It will also be useful to have the readme handy, <https://github.com/stanford-policylab/opp/blob/master/data_readme.md>.  
+- We'll be using data on police stops in Oakland, California, collected and published by the [Stanford Open Policing Project](https://openpolicing.stanford.edu/).  
 
-Because the next chunk of code might be intimidating to type out, and you need the url, I encourage you to copy and paste. 
+- For reproducibility, we'll write a bit of code that automatically downloads the data
+
+- To get the download URL: 
+    1. <https://openpolicing.stanford.edu/data/>
+    2. Scroll down to Oakland
+    3. Right-click on the file symbol to copy the URL
+    
+- README: <https://github.com/stanford-policylab/opp/blob/master/data_readme.md>.  
 
 ```{r}
 data_dir = 'data'
@@ -41,38 +65,12 @@ if (!file.exists(target_file)) {
 }
 ```
 
-## 1. Formulate your question ##
-
-The Black Lives Matter protests over the last several years have made us aware of the racial aspects of policing.  So we're interested in 
-
-1. Whether Black people in Oakland might be more likely to be stopped than White people
-2. Whether Black people who are stopped might be more likely to have contraband
-
-These rough questions will be enough to get us started.  
-
 ## 2. Read in your data ##
 
 The dataset is a zipped `csv` or comma-separated value file.  CSVs are structured like Excel spreadsheets, but are stored in plain text rather than Excel's format.  
 
-```{r, eval=FALSE}
-## Not run
-## The base R function `read.csv()` can't read a zipped file, and returns gibberish
-read.csv(target_file)
-
-## The `read_csv()` function, part of the tidyverse, takes 1.7 seconds on my laptop, but misinterprets several columns as logicals, resulting in parsing problems.
-## (What goes wrong?  By default, `read_csv()` looks at the first 1,000 rows to guess what the type of each column should be.  As we'll see below, columns like `beat` and `subject_age` are missing on the first 5,000+ rows.  So `read_csv()` sees 1,000 missing values and guesses that these columns are `logical`, with values `TRUE` or `FALSE`.  We could fix this by changing the `guess_max` argument, but that would slow things down even more.)
-tic()
-read_csv(target_file)
-toc()
-```
 ```{r}
-## The vroom package is 10x faster on my laptop and doesn't have the parsing problems
-tic()
-dataf = vroom(target_file)
-toc()
-
-# class(dataf$beat)
-# class(dataf$subject_age)
+dataf = read_csv(target_file)
 ```
 
 ## 3. Check the packaging ##
@@ -83,6 +81,8 @@ toc()
 ## May take a couple of seconds
 skim(dataf)
 ```
+
+---
 
 - 133k rows (observations); 28 columns (variables)
 - 16 variables are handled as characters
@@ -97,19 +97,24 @@ skim(dataf)
 - 7 logical variables
     - A lot of these look like coded outcomes that we might be interested in, eg, `search_conducted` and `contraband_found`
     - `search_conducted` has no missing values, but `contraband_found` has a lot of missing values
-    
-- For our motivating questions
-    - Good:  `subject_race` is 100% complete
-    - Also good:  `search_conducted` is also 100% complete
-    - Potentially worrisome:  `contraband_found` is only 31% complete
 
-Let's use `vis_miss()`, from `visdat`, to visualize missing values and check out what's up with `contraband_found`. 
+## For our motivating questions ##
+
+- Good:  `subject_race` is 100% complete
+- Also good:  `search_conducted` is also 100% complete
+- Potentially worrisome:  `contraband_found` is only 31% complete
+
+## Missing values ##
+
+- Let's use `visdat::vis_miss()`to 
+    - visualize missing values and 
+    - check what's up with `contraband_found`. 
 
 ```{r}
 ## This raises a warning about large data
 # vis_miss(dataf)
 ## So we'll use sample_n() to draw a subset
-set.seed(2020-09-10)
+set.seed(2021-09-28)
 dataf_smol = sample_n(dataf, 1000)
 
 vis_miss(dataf_smol)
@@ -119,37 +124,20 @@ vis_miss(dataf_smol)
 vis_miss(dataf_smol, cluster = TRUE)
 ```
 
-- Several variables related to search outcomes are missing together
-    - `contraband_found`, `contraband_drugs`, `contraband_weapons`, `search_basis`, `use_of_force_description`, `raw_subject_typeofsearch`, and `raw_subject_resultofsearch`
-    - However, `search_conducted` is complete
-    - **Critical question:  When a search has been conducted, do we know whether contraband was found?**
-    - Semi-translated:  when `search_conducted == TRUE`, is `!is.na(contraband_found)`? 
+--- 
+
+Several variables related to search outcomes are missing together
+
+- `contraband_found`, `contraband_drugs`, `contraband_weapons`, `search_basis`, `use_of_force_description`, `raw_subject_typeofsearch`, and `raw_subject_resultofsearch`
+
+- However, `search_conducted` is complete
     
-## Filter, mutate, count, and pipes ##
+## A critical question ##
 
-If the answer to this **critical question** is **no** (for a lot of rows), then we probably can't use it to answer our motivating questions.  We'll use 4 tools from the tidyverse to answer this critical question.  
+**When a search has been conducted, do we know whether contraband was found?**
 
-- `filter(dataf, condition1, condition2, ...)` 
-    - Returns a subset of `dataf` where all of the `condition`s are true
-    - We'll use this to construct a subset where `search_conducted == TRUE`
-
-- `mutate(dataf, newvar = f(oldvar))` 
-    - Adds the column `newvar`; it doesn't change `oldvar`
-    - We'll use this to add a variable, `contraband_known`, indicating whether `contraband_found` is missing. 
-
-- `count(dataf, group1, group2, ...)` 
-    - Organizes `dataf` into groups based on the unique values of the `group` variables, then
-    - Counts the number of rows in each group
-    - We'll use this to count the number of rows in our subset where the value of `contraband_found` is known or missing
-
-- The pipe `%>%` 
-    - Lets us string together a series of function calls
-    - The output of one function gets passed as the first argument to the next function
-    - The tidyverse functions are set up to be pipe-friendly: they take a dataframe as the first argument, and output a dataframe
-    - We'll use this to put the function calls together into a single analysis pipeline
-        - More functional: We won't be changing `dataf`
-        - Less cluttered: We don't need to create intermediate variables for each step
-
+- Semi-translated:  when `search_conducted == TRUE`, is `!is.na(contraband_found)`? 
+    
 ```{r}
 dataf %>% 
     filter(search_conducted) %>% 
@@ -270,12 +258,9 @@ We are interested in two rough questions:
 1. Whether Black people in Oakland might be more likely to be stopped than White people
 2. Whether Black people who are stopped might be more likely to have contraband
 
-- The easy solution is to count rows, mostly using the tools we've already developed. 
-    - We'll use `mutate()` after `count()` to calculate shares, ie, what fraction of the total are in each group
-    - We'll also introduce the function `arrange()`, to sort the dataframe from greatest to smallest share
-    - And `group_by()` to calculate shares within racial groups
+- The easy solution is to count rows and then shares within groups
 
-### Number of stops, by race ###
+## Number of stops, by race ##
 
 ```{r}
 dataf %>% 
@@ -299,13 +284,13 @@ dataf %>%
     - Hispanics and API folks are slightly underrepresented
     - Whites are significantly underrepresented
 
-### Contraband search results, by race ###
+## Contraband search results, by race ##
 
-As a preliminary question, what fraction of stops had a search?  Are there disparities by race there?  We can answer the first question using tools we already have.  
+- What fraction of stops had a search?  
+- Are there disparities by race there?  
 
 ```{r}
 ## What fraction of stops had a search? 
-## 31%
 dataf %>% 
     count(search_conducted) %>% 
     mutate(share = n / sum(n))
@@ -313,9 +298,12 @@ dataf %>%
 
 Across all subjects, 31% of stops involved a search. 
 
-For the other question, we need to calculate something like `share` *within* racial groups.  That is, among all stops *of Black folks*, what fraction involved a search?  The `group_by()` function divides the dataset into groups that other tidyverse functions respect.  Specifically, `count()` and `mutate()` will both analyze each group defined by `subject_race` separately.  
+---
 
-After using `group_by()`, it's good practice to always call `ungroup()`.  We don't want to accidentally work with the grouped version in another part of our analysis. 
+- For the other question, we need to calculate something like `share` *within* racial groups.  
+    - That is, among all stops *of Black folks*, what fraction involved a search?  
+    - This is a just for `group_by()`
+- Remember to `ungroup()`
 
 ```{r}
 ## What fraction of stops had a search, by race? 
@@ -328,7 +316,8 @@ dataf %>%
     group_by(subject_race) %>% 
     count(search_conducted) %>% 
     mutate(share = n / sum(n)) %>% 
-    ungroup()
+    ungroup() %>% 
+    filter(search_conducted)
 ```
 
 - For all groups, most stops didn't involve a search
@@ -337,7 +326,11 @@ dataf %>%
 
 - *So police were much more likely to search stopped Black subjects than White subjects*
 
-Finally, let's consider our second main question:  contraband results from searches.  Note that we want to restrict ourselves to only stops where `search_conducted` is true.  
+---
+
+Finally, let's consider our second main question:  contraband results from searches.  
+
+Note that we want to restrict ourselves to only stops where `search_conducted` is true.  
 
 
 ```{r}
@@ -358,6 +351,8 @@ dataf %>%
 
 ## 9. Follow up ##
 
+*[we dropped spiral model]*
+
 - There are several directions we could take this analysis:  
     - Investigate outstanding questions about quality and reliability of the data
         - eg, follow up with Stanford Open Policing Project about the difference in row counts
@@ -374,8 +369,6 @@ dataf %>%
 
 ## Discussion questions ##
 
-Time permitting, we'll discuss these during class.  But more likely we'll talk about them via Slack. 
-
 1. Suppose you've conducted this EDA because you're working with an activist organization that promotes defunding the police and prison abolition.  Should you share the preliminary findings above with your organization contacts?  
 
 2. What influence should the following factors make to your answer?  
@@ -387,11 +380,12 @@ Time permitting, we'll discuss these during class.  But more likely we'll talk a
     
 3. What other factors should be taken into account as you decide whether to share your findings?  Or not taken into account? 
 
-4. How has this "raw data" been shaped by upstream decisions?  (Think of Leonelli's relational account of data.)
+4. How has this "raw data" been shaped by the journey of the data to get to us? 
 
 
 ## Lab ##
 
-The lab related to this material is available at <https://github.com/data-science-methods/lab-w04-eda>. 
+The lab related to this material is available at <https://github.com/data-science-methods/lab-w06-eda>. 
 
 
+## References
