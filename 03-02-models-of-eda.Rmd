@@ -5,7 +5,7 @@
 
 ## <br>
 
-> This book is about exploratory data analysis, about looking at data to see what it seems to say. It concentrates on simple arithmetic and easy-to-draw pictures. It regards whatever appearances we have recognized as partial descriptions, and tries to look beneath them for new insights. Its concern is with appearance, not with confirmation. @TukeyExploratoryDataAnalysis1977 
+> This book is about exploratory data analysis, about looking at data to see what it seems to say. It concentrates on simple arithmetic and easy-to-draw pictures. It regards whatever appearances we have recognized as partial descriptions, and tries to look beneath them for new insights. Its concern is with appearance, not with confirmation. [@TukeyExploratoryDataAnalysis1977]
 
 > Exploratory Data Analysis (EDA) is "an attitude, AND a flexibility, AND some graph paper (or transparencies, or both)" [@TukeyWeNeedBoth1980]
 
@@ -95,7 +95,7 @@ knitr::include_graphics(file.path('images', '03-eda', 'epicycle.png'),
         - **whether (and how) to refine, and redo, the [previous] step** ..., or
         - whether (and how) to proceed to the next step." 
 
----
+## </br>
 
 Table: Aligning the goals of EDA with steps in the "epicycle of analysis" [@PengArtDataScience2016]
 
@@ -113,7 +113,10 @@ Develop sketch of an             1. Developing expectations
 answer
 ------------------------------------------------------------------------
 
----
+## Discussion
 
 - For each of these models, how well do they fit the way you've been taught to do science? 
 - How do they challenge the way you've been taught to do science? 
+
+## References 
+

@@ -22,5 +22,5 @@ $(HANDOUTS_DIR)/%.pdf: %.Rmd
 	Rscript -e "rmarkdown::render('$<', output_format = bookdown::pdf_document2(latex_engine = 'lualatex', includes = rmarkdown::includes(in_header = 'preamble.tex')), output_dir = '$(HANDOUTS_DIR)')"
 
 slides: $(SLIDES)
-$(SLIDES_DIR)/%.html: %.Rmd
-	Rscript -e "rmarkdown::render('$<', output_format = rmarkdown::slidy_presentation(df_print = 'paged'), output_dir = '$(SLIDES_DIR)')"
+$(SLIDES_DIR)/%.html: %.Rmd knitr_config.Rmd
+	Rscript -e "rmarkdown::render('$<', output_format = rmarkdown::slidy_presentation(df_print = 'paged', pandoc_args = c('--bibliography=book.bib', '--citeproc')), output_dir = '$(SLIDES_DIR)')"
