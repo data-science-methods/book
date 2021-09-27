@@ -23,4 +23,4 @@ $(HANDOUTS_DIR)/%.pdf: %.Rmd
 
 slides: $(SLIDES)
 $(SLIDES_DIR)/%.html: %.Rmd knitr_config.Rmd book.bib
-	Rscript -e "rmarkdown::render('$<', output_format = rmarkdown::slidy_presentation(df_print = 'paged', pandoc_args = c('--bibliography=book.bib', '--citeproc')), output_dir = '$(SLIDES_DIR)')"
+	Rscript -e "rmarkdown::render('$<', output_format = rmarkdown::slidy_presentation(df_print = 'paged', pandoc_args = c('--bibliography=book.bib', '--citeproc'), highlight = 'tango', css = 'slides.css'), output_dir = '$(SLIDES_DIR)')"

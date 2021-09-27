@@ -5,8 +5,7 @@
 
 ## </br>
 
-- For this EDA, we'll work with data on police stops in Oakland, California, that have been pre-cleaned and released by the [Stanford Open Policing Project](https://openpolicing.stanford.edu/).  
-    - *[cite paper]*
+- For this EDA, we'll work with data on police stops in Oakland, California, that have been pre-cleaned and released by the [Stanford Open Policing Project](https://openpolicing.stanford.edu/) [@PiersonLargescaleAnalysisRacial2020]. 
 - Because this analysis focuses on categorical data and counts of observations, most of the elements in @HuebnerSystematicApproachInitial2016 don't really fit.  
     - So we'll follow the checklist from @PengArtDataScience2016. 
 - We'll also be learning to use the `skimr` and `visdat` packages
@@ -20,9 +19,29 @@
     1. Whether Black people in Oakland might be more likely to be stopped than White people
     2. Whether Black people who are stopped might be more likely to have contraband
 
-- These are rough questions, but are enough to get us started
+- These aren't very precise, but that's okay: 
+    Part of the goal of EDA is to clarify and refine our research questions
 
-*[reflexivity]*
+
+
+## Reflexivity {.smaller}
+
+1. Whether Black people in Oakland might be more likely to be stopped than White people
+2. Whether Black people who are stopped might be more likely to have contraband
+
+- Once we have a rough idea of *what* we want to know, we need to take a moment to think about *why* we want to know it
+    - Clarify what "success" means to us
+    - Share with others to whom we're accountable
+    - Recognize that we (academic researchers) often lack accountability to people who might be affected by our work, **especially when we claim to be acting for their benefit**
+
+- We'll spend 3 minutes writing responses to each of these questions: 
+
+1. What do I already know about this subject? 
+2. Why am I studying this? 
+3. What do I expect or hope to find/learn, and why? 
+4. Who is affected by this topic, and how am I connected to them? 
+
+[Adapted from TanweerWhyDataRevolution2021, 14-15, and @LiboironPollutionColonialism2021]
 
 
 ## Packages ##

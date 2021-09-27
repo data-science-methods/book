@@ -33,7 +33,16 @@ avoids inferential errors       *makes* errors?
 **rigorous**                    **lacking rigor?**
 
 **real science??**              **h\*cking around with data??**
+
+**assumes experimental          **relevant to all methods**
+methods**
 ------------------------------------
+
+- I agree that it's important to
+    - be thoughtful about how much confidence we're placing in our conclusions
+    - interpret findings from one study in light of other studies
+- But the confirmatory/exploratory distinction can overemphasize the confirmatory side
+    - Making us too rigid and narrow-minded about what counts as good science
 
 ## Better Models for EDA I: Developing Phenomena ##
 
