@@ -41,7 +41,14 @@
 3. What do I expect or hope to find/learn, and why? 
 4. Who is affected by this topic, and how am I connected to them? 
 
-[Adapted from @TanweerWhyDataRevolution2021, 14-15, and @LiboironPollutionColonialism2021]
+(Adapted from @TanweerWhyDataRevolution2021, 14-15, and @LiboironPollutionColonialism2021)
+
+
+## Set up our workspace ##
+
+- Dedicated project folder
+- Clean R session
+- More on project management and organization later in the semester
 
 
 ## Packages ##
