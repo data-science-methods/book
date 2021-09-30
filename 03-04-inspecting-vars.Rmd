@@ -32,7 +32,8 @@
 - Once we have a rough idea of *what* we want to know, we need to take a moment to think about *why* we want to know it
     - Clarify what "success" means to us
     - Share with others to whom we're accountable
-    - Recognize that we (academic researchers) often lack accountability to people who might be affected by our work, **especially when we claim to be acting for their benefit**
+    - Recognize that we (academic researchers) often lack accountability to people who might be affected by our work
+    - **especially when we claim to be acting for their benefit**
 
 - We'll spend 3 minutes writing responses to each of these questions: 
 
@@ -56,10 +57,12 @@
 ```{r, echo=TRUE, message=FALSE}
 library(tidyverse)   # for working with the data
 library(lubridate)   # for working with datetime data
+
 library(skimr)       # generate a text-based overview of the data
 library(visdat)      # generate plots visualizing data types and missingness
-library(tictoc)      # for timing how long R takes to do the thing
+```
 
+```{r, echo=FALSE}
 ## Set for the HTML output
 ## In RStudio, this is overriden by the width of the console pane
 options(width = 100)  # wider output for skimr
