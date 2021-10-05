@@ -380,12 +380,10 @@ dataf %>%
 
 ## 9. Follow up ##
 
-*[we dropped spiral model]*
-
 - There are several directions we could take this analysis:  
     - Investigate outstanding questions about quality and reliability of the data
         - eg, follow up with Stanford Open Policing Project about the difference in row counts
-        - Fits with *risk management* (spiral model): spend a little more time checking to make sure the data aren't corrupted
+        - Fits with *epicycle of analysis*: checking expectations
 
     - Break down our question into more fine-grained analyses
         - eg, the Oakland web site and report talk about policy changes; do we see changes by year in the data? 
