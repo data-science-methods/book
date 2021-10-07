@@ -17,3 +17,7 @@ em {
 pre {
     background-color: white;
 }
+
+.caption {
+  font-size: 60%;
+}
