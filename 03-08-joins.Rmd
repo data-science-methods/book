@@ -1,0 +1,91 @@
+# Joins #
+
+```{r child = 'knitr_config.Rmd'}
+```
+
+*Joins* are an extremely powerful tool for data science, allowing us to combine two datasets by matching columns.  
+
+---
+
+Some common scenarios: 
+
+- Data from two different sources for the same units
+    - Pre- and post-treatment
+    - Multi-round experiments / survey panels
+    - Advertising and vote share
+
+- Data on different levels
+    - Students in classrooms in schools
+    - Census block groups in counties in states
+
+
+## Types of joins ##
+
+```{r, echo = FALSE, fig.show = 'hold', out.width = '45%', fig.cap = 'Join operations combine two dataframes based on one or more matching columns.  Different join operations keep different rows from the combination.  Sources: <https://data-lessons.github.io/gapminder-R/>; <https://notchained.hatenablog.com/entry/2015/01/03/160700>'}
+knitr::include_graphics(file.path('images', '03-eda', 'join-rows.png'))
+knitr::include_graphics(file.path('images', '03-eda', 'join-venn.png'))
+```
+
+- Suppose we have two dataframes, `left` and `right`
+```{r}
+library(tidyverse)
+
+left = tribble(
+    ~animal, ~zoo,
+    'aardvark', 'Sacramento', 
+    'aardvark', 'San Diego',
+    'chimpanzee', 'San Diego',
+    'zebra', 'San Diego'
+)
+right = tribble(
+    ~animal, ~food, 
+    'aardvark', 'insects', 
+    'chimpanzee', 'insects', 
+    'chimpanzee', 'fruit', 
+    'velociraptor', 'animals'
+)
+```
+
+
+- *Left join*: keep all of the rows and columns from `left`; add columns from `right`
+```{r}
+left_join(left, right, by = 'animal')
+```
+
+- *Right join*: keep all of the rows and columns from `right`; add columns from `left`
+```{r}
+right_join(left, right, by = 'animal')
+```
+
+- *Full join*: keep all rows and columns from both `left` and `right`
+```{r}
+full_join(left, right, by = 'animal')
+```
+
+- *Inner join*: keep all columns, but only rows that match
+```{r}
+inner_join(left, right, by = 'animal')
+```
+
+- *Anti-join*: keep all columns from `left`, but only the rows that *don't* match
+```{r}
+anti_join(left, right, by = 'animal')
+```
+
+
+## Hazards ##
+
+Joins can create a number of hazards. 
+
+- *Missing values* from left, right, and full joins
+    - In a left join, rows from `left` that don't match will have missing values in the columns from `right`
+- *Row counts* can be difficult to predict in advance
+    - Rows will be copied if they match multiple times
+- *Column names* can be changed if they're repeated across dataframes but not used for matching
+
+
+## To manage these hazards ##
+
+- Use `anti_join()` to figure out where missing values will be
+- Use `select()` with `distinct()` to check for unexpected duplications
+- Use `names()` to check column names

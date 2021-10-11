@@ -1,0 +1,89 @@
+# Covid EDA 2 #
+
+```{r child = 'knitr_config.Rmd'}
+```
+
+```{r, echo = FALSE, message = FALSE}
+part1 = knitr::knit_child('03-07-covid-eda-1.Rmd', quiet = TRUE)
+```
+
+## Joining covid and population data ##
+
+- [FIPS codes](https://www.census.gov/programs-surveys/geography/guidance/geo-identifiers.html) are machine-friendly geographic identifiers for US administrative regions
+    - Nested:  state or territory (2 digits), county (next 3 digits)
+    - Further codes for county subdivisions, congressional districts, cities, tribal areas, census tracts
+    
+```{r}
+pop_df
+```
+
+---
+
+```{r}
+inner_join(covid_df, pop_df, by = 'fips') |> 
+    nrow()
+```
+
+---
+
+1 county = 1 FIPS code? 
+
+```{r}
+pop_df |> 
+    count(county) |> 
+    filter(n > 1) |> 
+    nrow()
+pop_df |> 
+    count(fips) |> 
+    filter(n > 1) |> 
+    nrow()
+```
+
+```{r}
+covid_df |> 
+    select(county, fips) |> 
+    distinct() |> 
+    count(county) |> 
+    filter(n > 1) |> 
+    nrow()
+```
+
+```{r}
+covid_df |> 
+    select(county, fips) |> 
+    distinct() |> 
+    count(fips) |> 
+    filter(n > 1) |> 
+    nrow()
+```
+
+## Join + rate ##
+
+```{r}
+dataf = inner_join(covid_df, pop_df, 
+                   by = c('state', 'county', 'fips')) |> 
+    mutate(across(.cols = c(cases, deaths, cases_new, deaths_new), 
+                  .fns = list(rate = ~ .x/population * 10000)))
+```
+
+```{r}
+ggplot(dataf, aes(date, cases_new_rate, group = county)) +
+    geom_line() +
+    facet_wrap(vars(county), scales = 'free_y')
+```
+
+```{r}
+dataf |> 
+    filter(county == 'Siskiyou') |> 
+    ggplot(aes(date, cases_new_rate, group = county)) +
+    geom_line()
+```
+
+```{r}
+ggplot(dataf, aes(cases_new_rate, deaths_new_rate)) +
+    geom_point() +
+    # stat_density2d(contour = TRUE, geom = 'polygon',
+    #                aes(fill = after_stat(level)),
+    #                show.legend = FALSE)
+    stat_smooth(method = 'lm')
+```

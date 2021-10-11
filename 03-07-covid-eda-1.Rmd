@@ -1,0 +1,240 @@
+# Covid EDA 1 #
+
+```{r child = 'knitr_config.Rmd'}
+```
+
+- This EDA will start in class and continue on to the lab
+- We're interested in *the role of social distancing in the July 2020 Covid wave in California*
+
+---
+
+A common narrative about the July 2020 wave goes like this: 
+
+- California had some of the first confirmed cases of Covid-19 in the US
+- California was also the first state to institute a stay-at-home order and encourage social distancing
+- These social distancing policies are why California did not experience the large first wave in March 2020 (contrast NYC)
+- Starting in May 2020, these policies were relaxed and "lockdown fatigue" meant that people were ignoring them anyways
+- This is why California did experience a more significant wave in July 2020
+
+--- 
+
+Our research question:  Is reduced social distancing (measured using cellphone tracking data) correlated with increased Covid-19 case counts 4 weeks later? 
+
+</br>
+
+In class, we'll just be *[something]*
+
+---
+
+*[reflexivity questions]*
+
+---
+
+## Setup ##
+
+For the Covid data download link: 
+- <https://github.com/nytimes/covid-19-data##county-level-data>
+- Copy the *Raw CSV file here.* link
+
+```{r, dependencies, message = FALSE, warning = FALSE}
+library(tidyverse)
+library(tidylog)
+library(skimr)
+library(visdat)
+
+library(assertthat)
+
+theme_set(theme_bw())
+```
+
+```{r, daily-diffs, echo = FALSE}
+daily_new = function(x, order_var) {
+    diff = x - dplyr::lag(x, order_by = order_var)
+    return(diff)
+}
+```
+
+```{r, covid-data}
+covid_file = file.path('data', 'counties.csv')
+covid_url = 'https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-counties.csv'
+if (!file.exists(covid_file)) {
+    download.file(covid_url, covid_file)
+}
+## Original version
+covid_df = read_csv(covid_file, show_col_types = FALSE) |>
+    filter(state == 'California')
+## With daily change
+covid_df = read_csv(covid_file, show_col_types = FALSE) |> 
+    filter(state == 'California', county != 'Unknown') |> 
+    group_by(county) |>
+    mutate(across(.cols = c(cases, deaths),
+                  .fns = list(new = daily_new), date)) |> 
+    ungroup()
+```
+
+---
+
+Because we want covid *rates* (per 10,000 people), we'll also need county populations. 
+
+- This week's lab on GitHub
+- `data` -> `county_population.csv` -> `Raw` (copy URL)
+```{r, pop-data}
+pop_file = file.path('data', 'county_population.csv')
+pop_url = 'https://github.com/data-science-methods/lab_w06_covid/raw/main/data/county_population.csv'
+if (!file.exists(pop_file)) {
+    download.file(pop_url, pop_file)
+}
+pop_df = read_csv(pop_file, show_col_types = FALSE)
+```
+
+
+## Some quick data checking ##
+
+Covid data are mostly complete
+
+```{r}
+skim(covid_df)
+```
+
+---
+
+*[what's up with unknown county]*
+
+---
+
+- But have different numbers of observations for each county
+    - *Why?*
+- This style is called a *lollipop plot*
+
+```{r}
+ggplot(covid_df, aes(fct_rev(fct_infreq(county)))) +
+    # geom_bar() +
+    geom_point(stat = 'count') +
+    geom_segment(stat = 'count', 
+                 aes(xend = county),
+                 yend = 0) +
+    coord_flip() +
+    labs(x = 'county')
+```
+
+
+## Cumulative vs. daily cases ##
+
+Both `cases` and `deaths` are cumulative, not the daily new value
+
+```{r}
+covid_df |> 
+    filter(county == 'San Francisco') |> 
+    ggplot(aes(date, cases)) +
+    geom_line()
+```
+
+---
+
+- We'll write a little function to calculate the differences
+- Use it above, when we load the data
+
+```{r, daily-diffs, echo = TRUE, eval = FALSE}
+```
+
+---
+
+- Test it on Orange and LA Counties
+
+```{r, eval = FALSE}
+debugonce(view)
+covid_df |>
+    filter(county %in% c('Orange', 'Los Angeles')) |>
+    group_by(county) |>
+    mutate(across(.cols = c(cases, deaths),
+                  .fns = list(diff = daily_new), date)) |>
+    view()
+```
+
+---
+
+Now we have daily values
+
+```{r}
+covid_df |> 
+    filter(county == 'San Francisco') |> 
+    ggplot(aes(date, cases_new)) +
+    geom_line()
+```
+
+## Add an assertion ##
+
+- For each county, the first daily diff should be `NA`
+- But none of the others
+
+```{r}
+covid_df |> 
+    group_by(county) |> 
+    slice(-1) |> 
+    pull(cases_new) |> 
+    is.na() |> 
+    any() |> 
+    magrittr::not() |> 
+    assert_that(msg = 'missing values in cases_new')
+```
+
+## Distribution of cases by county ##
+
+First pass is hard to read
+
+```{r}
+ggplot(covid_df, aes(county, cases_new)) +
+    geom_boxplot()
+```
+
+---
+
+- `coef = 1000`
+- y-axis on a log scale
+- flip the coordinates
+- reorder the counties by median number of cases
+- filter out `cases_new == 0`
+- meaningful axis labels
+
+```{r}
+covid_df |> 
+    filter(cases_new > 0) |>
+    ggplot(aes(fct_reorder(county, cases_new, 
+                           .fun = median, na.rm = TRUE),
+                     cases_new)) +
+    geom_boxplot(coef = 1000) +
+    scale_y_log10() +
+    coord_flip() +
+    labs(x = 'county', y = 'daily new cases')
+```
+
+## 9 plots of the same plot ##
+
+```{r}
+ggplot(covid_df, aes(x = cases_new, y = deaths_new)) +
+    # geom_point() +
+    # geom_point(alpha = .2) +
+    # geom_count(alpha = .5) +
+    # geom_bin2d() +
+    # geom_hex() +
+    # geom_hex(aes(color = after_stat(count))) +
+    # geom_density2d(size = 1) +
+    # stat_density2d(contour = FALSE, geom = 'raster',
+    #                aes(fill = after_stat(density)),
+    #                show.legend = FALSE) +
+    stat_density2d(contour = TRUE, geom = 'polygon',
+                   aes(fill = after_stat(level)),
+                   show.legend = FALSE) +
+    scale_x_log10() +
+    scale_y_log10() +
+    scale_color_viridis_c(aesthetics = c('color', 'fill'))
+```
+
+
+
+## Bringing in population ##
+
+To combine these covid data with county populations, we need to use a *join*. 
+
+
+
