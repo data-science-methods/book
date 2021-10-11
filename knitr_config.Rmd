@@ -4,5 +4,6 @@ knitr::opts_chunk$set(echo = TRUE,
                       tidy = FALSE, 
                       tidy.opts = list(width.cutoff = 60, 
                                        blank = TRUE, 
-                                       arrow = FALSE))
+                                       arrow = FALSE), 
+                      collapse = TRUE)
 ```

@@ -3,8 +3,10 @@
 ```{r child = 'knitr_config.Rmd'}
 ```
 
+*[todo: try spin_child]*
+
 ```{r, echo = FALSE, message = FALSE}
-part1 = knitr::knit_child('03-07-covid-eda-1.Rmd', quiet = TRUE)
+part1 = knitr::knit_child('03-07-covid-eda-1.Rmd', quiet = FALSE)
 ```
 
 ## Joining covid and population data ##
