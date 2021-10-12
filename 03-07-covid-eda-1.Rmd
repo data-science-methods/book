@@ -26,14 +26,9 @@ Our research question:  Is reduced social distancing (measured using cellphone t
 
 In class, we'll just be looking at the case counts. 
 
-## Reflexivity questions ##
+## Reflexivity
 
-- Is reduced social distancing (measured using cellphone tracking data) correlated with increased Covid-19 case counts 4 weeks later? 
-
-1. What do I already know about this subject? 
-2. Why am I studying this? 
-3. What do I expect or hope to find/learn, and why? 
-4. Who is affected by this topic, and how am I connected to them? 
+(For time, you'll do these on your own as part of the lab.)
 
 ## Setup ##
 
