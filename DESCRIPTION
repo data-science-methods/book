@@ -18,6 +18,7 @@ Imports:
 	printr,
 	sloop,
     reticulate,
-    tidylog
+    tidylog,
+    assertthat
 
 
