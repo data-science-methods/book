@@ -3,10 +3,8 @@
 ```{r child = 'knitr_config.Rmd'}
 ```
 
-*[todo: try spin_child]*
-
 ```{r, echo = FALSE, message = FALSE}
-part1 = knitr::knit_child('03-07-covid-eda-1.Rmd', quiet = FALSE)
+part1 = knitr::knit_child('03-07-covid-eda-1.Rmd', quiet = TRUE)
 ```
 
 ## Joining covid and population data ##
@@ -19,16 +17,14 @@ part1 = knitr::knit_child('03-07-covid-eda-1.Rmd', quiet = FALSE)
 pop_df
 ```
 
----
+## First pass
 
 ```{r}
 inner_join(covid_df, pop_df, by = 'fips') |> 
-    nrow()
+    print()
 ```
 
----
-
-1 county = 1 FIPS code? 
+## 1 county = 1 FIPS code? 
 
 ```{r}
 pop_df |> 
@@ -65,8 +61,10 @@ covid_df |>
 dataf = inner_join(covid_df, pop_df, 
                    by = c('state', 'county', 'fips')) |> 
     mutate(across(.cols = c(cases, deaths, cases_new, deaths_new), 
-                  .fns = list(rate = ~ .x/population * 10000)))
+                  .fns = list(rate = ~ .x/population * 100000)))
 ```
+
+---
 
 ```{r}
 ggplot(dataf, aes(date, cases_new_rate, group = county)) +
@@ -74,12 +72,16 @@ ggplot(dataf, aes(date, cases_new_rate, group = county)) +
     facet_wrap(vars(county), scales = 'free_y')
 ```
 
+---
+
 ```{r}
 dataf |> 
     filter(county == 'Siskiyou') |> 
     ggplot(aes(date, cases_new_rate, group = county)) +
     geom_line()
 ```
+
+---
 
 ```{r}
 ggplot(dataf, aes(cases_new_rate, deaths_new_rate)) +

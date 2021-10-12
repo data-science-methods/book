@@ -20,25 +20,30 @@ knitr::include_graphics('https://upload.wikimedia.org/wikipedia/commons/b/b7/Ste
 
 ---
 
-- In terms of our models of EDA (ch. \@ref(eda-models))
-    - Epicycle of analysis:  
-        - Check expectations about the distribution of variables
-            - Outliers 
-            - Degeneracies (eg, perfect correlation)
-            - Skew or bimodal distributions
-            - Non-linear relationships
-        - Develop expectations about relationships between variables
+## In terms of our models of EDA ##
 
-    - Phenomena development: 
-        - Quickly identify potential patterns
-        - Contrast potential patterns with noise/uncertainty/imprecision
+### Epicycle of analysis
+
+- Check expectations about the distribution of variables
+    - Outliers 
+    - Degeneracies (eg, perfect correlation)
+    - Skew or bimodal distributions
+    - Non-linear relationships
+- Develop expectations about relationships between variables
+
+### Phenomena development 
+
+- Quickly identify potential patterns
+- Contrast potential patterns with noise/uncertainty/imprecision
 
 
 ## Plot Your Data ##
 
 - Summary statistics almost always focus only on central tendency (mean, median) and dispersion (standard deviation, IQR)
     - This is all you would need if the world were made of normal distributions
+        - (Or at least unimodal symmetric ones)
     - The world is not made of normal distributions [@LyonWhyAreNormal2014]
+        - (Or even unimodal symmetric ones) 
 
 - We'll illustrate this using The Datasaurus Dozen [@MatejkaSameStatsDifferent]
 
@@ -102,7 +107,7 @@ ggplot(ds_df, aes(x, y)) +
 
 - @WeissgerberBarLineGraphs2015 argue for the importance of plotting data, not just summaries, even in publications
 
-- Let's pull a few datasets out of datasaurus, as though they were two groups in a study
+- Let's pull a few datasets out of datasaurus, as though they were groups in a study
 
 ```{r}
 cdw_df = ds_df |> 
@@ -115,7 +120,8 @@ cdw_df = ds_df |>
 ggplot(cdw_df, aes(x = dataset, 
                    y = x)) +
     stat_summary(geom = 'errorbar', width = 0.2,
-                 fun.data = mean_cl_boot) +
+                 fun.data = mean_cl_boot, 
+                 fun.args = list(conf.int = .95)) +
     stat_summary(geom = 'bar', fun = mean, 
                  aes(fill = dataset)) +
     scale_fill_viridis_d(guide = 'none')
@@ -127,10 +133,12 @@ ggplot(cdw_df, aes(x = dataset,
 ggplot(cdw_df, aes(x = dataset, 
                    y = x)) +
     # geom_point(aes(color = dataset)) +
-    geom_sina(aes(color = dataset)) +
+    geom_sina(aes(fill = dataset), 
+              shape = 21L) +
     stat_summary(geom = 'errorbar', width = 0.2,
                  fun.data = mean_cl_boot) +
-    scale_color_viridis_d(guide = 'none')
+    scale_color_viridis_d(guide = 'none', 
+                          aesthetics = c('color', 'fill'))
 ```
 
 ## Even fancier: Violin plot ##
@@ -138,7 +146,7 @@ ggplot(cdw_df, aes(x = dataset,
 ```{r}
 ggplot(cdw_df, aes(x = dataset, y = x, fill = dataset)) +
     geom_violin(draw_quantiles = c(.5)) +
-    geom_sina() +
+    geom_sina(shape = 21, fill = 'white') +
     scale_fill_viridis_d(guide = 'none')
 ```
 

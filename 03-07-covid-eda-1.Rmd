@@ -1,14 +1,16 @@
 # Covid EDA 1 #
 
+## </br>
+
 ```{r child = 'knitr_config.Rmd'}
 ```
 
 - This EDA will start in class and continue on to the lab
 - We're interested in *the role of social distancing in the July 2020 Covid wave in California*
 
----
+## The standard narrative ##
 
-A common narrative about the July 2020 wave goes like this: 
+The standard narrative about the July 2020 wave goes like this: 
 
 - California had some of the first confirmed cases of Covid-19 in the US
 - California was also the first state to institute a stay-at-home order and encourage social distancing
@@ -22,19 +24,23 @@ Our research question:  Is reduced social distancing (measured using cellphone t
 
 </br>
 
-In class, we'll just be *[something]*
+In class, we'll just be looking at the case counts. 
 
----
+## Reflexivity questions ##
 
-*[reflexivity questions]*
+- Is reduced social distancing (measured using cellphone tracking data) correlated with increased Covid-19 case counts 4 weeks later? 
 
----
+1. What do I already know about this subject? 
+2. Why am I studying this? 
+3. What do I expect or hope to find/learn, and why? 
+4. Who is affected by this topic, and how am I connected to them? 
 
 ## Setup ##
 
 For the Covid data download link: 
-- <https://github.com/nytimes/covid-19-data##county-level-data>
-- Copy the *Raw CSV file here.* link
+
+- <https://github.com/nytimes/covid-19-data#county-level-data>
+- Copy the *Raw CSV file here* link
 
 ```{r, dependencies, message = FALSE, warning = FALSE}
 library(tidyverse)
@@ -98,10 +104,6 @@ skim(covid_df)
 
 ---
 
-*[what's up with unknown county]*
-
----
-
 - But have different numbers of observations for each county
     - *Why?*
 - This style is called a *lollipop plot*
@@ -142,13 +144,12 @@ covid_df |>
 - Test it on Orange and LA Counties
 
 ```{r, eval = FALSE}
-debugonce(view)
 covid_df |>
     filter(county %in% c('Orange', 'Los Angeles')) |>
     group_by(county) |>
     mutate(across(.cols = c(cases, deaths),
                   .fns = list(diff = daily_new), date)) |>
-    view()
+    View()
 ```
 
 ---
@@ -187,7 +188,7 @@ ggplot(covid_df, aes(county, cases_new)) +
     geom_boxplot()
 ```
 
----
+## Revisions
 
 - `coef = 1000`
 - y-axis on a log scale

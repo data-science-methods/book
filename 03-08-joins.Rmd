@@ -1,13 +1,13 @@
 # Joins #
 
+## </br>
+
 ```{r child = 'knitr_config.Rmd'}
 ```
 
 *Joins* are an extremely powerful tool for data science, allowing us to combine two datasets by matching columns.  
 
----
-
-Some common scenarios: 
+### Some common scenarios
 
 - Data from two different sources for the same units
     - Pre- and post-treatment
@@ -21,15 +21,20 @@ Some common scenarios:
 
 ## Types of joins ##
 
-```{r, echo = FALSE, fig.show = 'hold', out.width = '45%', fig.cap = 'Join operations combine two dataframes based on one or more matching columns.  Different join operations keep different rows from the combination.  Sources: <https://data-lessons.github.io/gapminder-R/>; <https://notchained.hatenablog.com/entry/2015/01/03/160700>'}
+```{r, echo = FALSE, fig.show = 'hold', out.width = '30%', fig.cap = 'Join operations combine two dataframes based on one or more matching columns.  Different join operations keep different rows from the combination.  Sources: <https://data-lessons.github.io/gapminder-R/>; <https://notchained.hatenablog.com/entry/2015/01/03/160700>'}
 knitr::include_graphics(file.path('images', '03-eda', 'join-rows.png'))
 knitr::include_graphics(file.path('images', '03-eda', 'join-venn.png'))
 ```
 
-- Suppose we have two dataframes, `left` and `right`
-```{r}
-library(tidyverse)
+## Setup
 
+Suppose we have two dataframes, `left` and `right`
+
+```{r, message = FALSE}
+library(tidyverse)
+library(tidylog)
+```
+```{r}
 left = tribble(
     ~animal, ~zoo,
     'aardvark', 'Sacramento', 
@@ -46,28 +51,42 @@ right = tribble(
 )
 ```
 
+## Left join
 
-- *Left join*: keep all of the rows and columns from `left`; add columns from `right`
+Keep all of the rows and columns from `left`; add columns from `right`
+
 ```{r}
 left_join(left, right, by = 'animal')
 ```
 
-- *Right join*: keep all of the rows and columns from `right`; add columns from `left`
+## Right join
+
+Keep all of the rows and columns from `right`; add columns from `left`
+
 ```{r}
 right_join(left, right, by = 'animal')
 ```
 
-- *Full join*: keep all rows and columns from both `left` and `right`
+## Full join
+
+Keep all rows and columns from both `left` and `right`
+
 ```{r}
 full_join(left, right, by = 'animal')
 ```
 
-- *Inner join*: keep all columns, but only rows that match
+## Inner join
+
+Keep all columns, but only rows that match
+
 ```{r}
 inner_join(left, right, by = 'animal')
 ```
 
-- *Anti-join*: keep all columns from `left`, but only the rows that *don't* match
+## Anti-join
+
+Keep all columns from `left`, but only the rows that *don't* match
+
 ```{r}
 anti_join(left, right, by = 'animal')
 ```

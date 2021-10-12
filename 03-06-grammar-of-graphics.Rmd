@@ -15,9 +15,11 @@ Many programming languages use the *artist's palette* model of computer graphics
 - Define some low-level tools for drawing on a canvas: `points()`, `lines()`, `curve()`
 - One-liners that bundle these tools into standard plots: `hist()`, `barplot()`
 - This is used by base graphics in R, Python packages including `matplotlib` and `seaborn`, MATLAB, etc.
+- In R: base graphics are *side effects*, not first-class objects
 
-```{r, echo = FALSE, fig.cap = '`matplotlib`, a popular Python package for graphing, uses the artist\'s palette model.', out.width='30%'}
-knitr::include_graphics(file.path('images', '03-eda', 'matplotlib.png'))
+```{r, echo = FALSE, fig.cap = '`matplotlib`, a popular Python package for graphing, uses the artist\'s palette model.  Source: <https://matplotlib.org/stable/gallery/subplots_axes_and_figures/subplot.html>', out.width='30%', fig.show='hold', fig.align='center'}
+knitr::include_graphics(c(file.path('images', '03-eda', 'matplotlib.png'),
+                          file.path('images', '03-eda', 'matplotlib.webp')))
 ```
 
 ## Grammar of graphics ##
