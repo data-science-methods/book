@@ -30,12 +30,7 @@ In class, we'll just be looking at the case counts.
 
 (For time, you'll do these on your own as part of the lab.)
 
-## Setup ##
-
-For the Covid data download link: 
-
-- <https://github.com/nytimes/covid-19-data#county-level-data>
-- Copy the *Raw CSV file here* link
+## Setup 
 
 ```{r, dependencies, message = FALSE, warning = FALSE}
 library(tidyverse)
@@ -55,53 +50,57 @@ daily_new = function(x, order_var) {
 }
 ```
 
+
+## Data ##
+
+To save some time in class, I've prepared a CSV that combines three datasets: 
+
+- [Covid-19 case and death counts, at the county level, collected by the *New York Times*](https://github.com/nytimes/covid-19-data/blob/master/README.md)
+- Estimated county populations in 2018, from the US Census' American Community Survey
+- ["Mobility data," based on cellphone tracking, from Google](https://kjhealy.github.io/covmobility/reference/google_mobility.html)
+
+The dataset has also been filtered down to California.  
+
+## Get the data ##
+
+- This week's lab on GitHub
+    - <https://github.com/data-science-methods/lab_w06_covid>
+- `data` -> `covid.csv` -> "Download" (right-click and copy)
+
 ```{r, covid-data}
-covid_file = file.path('data', 'counties.csv')
-covid_url = 'https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-counties.csv'
+covid_file = file.path('data', 'covid.csv')
+covid_url = 'https://github.com/data-science-methods/lab_w06_covid/raw/main/data/covid.csv'
 if (!file.exists(covid_file)) {
     download.file(covid_url, covid_file)
 }
 ## Original version
-covid_df = read_csv(covid_file, show_col_types = FALSE) |>
-    filter(state == 'California')
+# covid_df = read_csv(covid_file, show_col_types = FALSE)
 ## With daily change
 covid_df = read_csv(covid_file, show_col_types = FALSE) |> 
-    filter(state == 'California', county != 'Unknown') |> 
     group_by(county) |>
     mutate(across(.cols = c(cases, deaths),
                   .fns = list(new = daily_new), date)) |> 
     ungroup()
 ```
 
----
-
-Because we want covid *rates* (per 10,000 people), we'll also need county populations. 
-
-- This week's lab on GitHub
-- `data` -> `county_population.csv` -> `Raw` (copy URL)
-```{r, pop-data}
-pop_file = file.path('data', 'county_population.csv')
-pop_url = 'https://github.com/data-science-methods/lab_w06_covid/raw/main/data/county_population.csv'
-if (!file.exists(pop_file)) {
-    download.file(pop_url, pop_file)
-}
-pop_df = read_csv(pop_file, show_col_types = FALSE)
-```
-
-
 ## Some quick data checking ##
-
-Covid data are mostly complete
 
 ```{r}
 skim(covid_df)
 ```
 
----
+## Variables ##
 
-- But have different numbers of observations for each county
-    - *Why?*
-- This style is called a *lollipop plot*
+- `county`, `state`, and `fips` are all geographic identifiers, and complete
+    - 58 unique values for both `county` and `fips`
+    - How many counties does California have? 
+- `date` gives the date, is also complete
+- `cases` and `deaths` come from the NYT covid data
+- `population` comes from the Census
+- `retail`, `grocery`, `parks`, `transit`, `workplaces`, and `residential` come from the Google Mobility data
+    - Much lower completion rate
+
+## Number of observations per county ##
 
 ```{r}
 ggplot(covid_df, aes(fct_rev(fct_infreq(county)))) +
@@ -112,6 +111,20 @@ ggplot(covid_df, aes(fct_rev(fct_infreq(county)))) +
                  yend = 0) +
     coord_flip() +
     labs(x = 'county')
+```
+
+*Why do different counties have different numbers of observations?*
+
+
+## No more than 1 observation per county per day ##
+
+```{r}
+covid_df |> 
+    count(county, date) |> 
+    filter(n > 1) |> 
+    nrow() |> 
+    identical(0L) |> 
+    assert_that(msg = 'More than 1 observation per county per day')
 ```
 
 
@@ -129,7 +142,8 @@ covid_df |>
 ---
 
 - We'll write a little function to calculate the differences
-- Use it above, when we load the data
+- Incorporate it into the pipe that loads the data
+    - Then restart R and rerun
 
 ```{r, daily-diffs, echo = TRUE, eval = FALSE}
 ```
@@ -143,7 +157,8 @@ covid_df |>
     filter(county %in% c('Orange', 'Los Angeles')) |>
     group_by(county) |>
     mutate(across(.cols = c(cases, deaths),
-                  .fns = list(diff = daily_new), date)) |>
+                  .fns = list(new = daily_new), date)) |>
+    select(date, county, matches('cases'), matches('deaths')) |> 
     View()
 ```
 
@@ -225,12 +240,5 @@ ggplot(covid_df, aes(x = cases_new, y = deaths_new)) +
     scale_y_log10() +
     scale_color_viridis_c(aesthetics = c('color', 'fill'))
 ```
-
-
-
-## Bringing in population ##
-
-To combine these covid data with county populations, we need to use a *join*. 
-
 
 
