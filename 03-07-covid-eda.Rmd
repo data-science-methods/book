@@ -102,6 +102,15 @@ skim(covid_df)
 - `retail`, `grocery`, `parks`, `transit`, `workplaces`, and `residential` come from the Google Mobility data
     - Much lower completion rate
 
+## Too many timeseries plots ##
+
+```{r}
+ggplot(covid_df, aes(date, cases)) +
+    geom_line() +
+    facet_wrap(vars(county), 
+               scales = 'free_y')
+```
+
 ## Number of observations per county ##
 
 ```{r}
@@ -257,6 +266,13 @@ covid_df |>
     arrange(desc(n))
 ```
 
+## Cases vs. population ##
+
+```{r}
+ggplot(covid_df, aes(population, cases_new)) +
+    geom_point()
+```
+
 
 ## Absolute counts to rates ##
 
@@ -293,6 +309,24 @@ test_df |>
 ```
 
 *Incorporate this into the pipe when we load `covid_df`*
+
+## Rates vs. population ##
+
+```{r}
+ggplot(covid_df, aes(population, cases_new_rate)) +
+    geom_point()
+```
+
+## Counties by maximum rate of new cases ##
+
+```{r}
+covid_df |> 
+    group_by(county) |> 
+    summarize(population = max(population),
+              cases = max(cases_new_rate, na.rm = TRUE)) |> 
+    arrange(desc(cases))
+```
+
 
 ## Cases vs. deaths when we control for population ##
 
