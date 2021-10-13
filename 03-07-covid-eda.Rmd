@@ -80,7 +80,9 @@ covid_df = read_csv(covid_file, show_col_types = FALSE) |>
     group_by(county) |>
     mutate(across(.cols = c(cases, deaths),
                   .fns = list(new = daily_new), date)) |> 
-    ungroup()
+    ungroup() |> 
+    mutate(across(.cols = c(matches('cases'), matches('deaths')), 
+                  .fns = list(rate = ~ .x / population * 100000)))
 ```
 
 ## Some quick data checking ##
@@ -134,7 +136,7 @@ Both `cases` and `deaths` are cumulative, not the daily new value
 
 ```{r}
 covid_df |> 
-    filter(county == 'San Francisco') |> 
+    filter(county == 'Merced') |> 
     ggplot(aes(date, cases)) +
     geom_line()
 ```
@@ -168,7 +170,7 @@ Now we have daily values
 
 ```{r}
 covid_df |> 
-    filter(county == 'San Francisco') |> 
+    filter(county == 'Merced') |> 
     ggplot(aes(date, cases_new)) +
     geom_line()
 ```
@@ -241,4 +243,75 @@ ggplot(covid_df, aes(x = cases_new, y = deaths_new)) +
     scale_color_viridis_c(aesthetics = c('color', 'fill'))
 ```
 
+## Why so many dropped values? ##
 
+- The binned plots drop 25,048 rows, or 75% of the data
+- Why? 
+
+```{r}
+covid_df |> 
+    mutate(log_cases_new = log(cases_new)) |> 
+    select(cases_new, log_cases_new) |> 
+    filter(!is.finite(log_cases_new)) |> 
+    count(cases_new) |> 
+    arrange(desc(n))
+```
+
+
+## Absolute counts to rates ##
+
+- `cases` and `deaths` are absolute counts
+- But county populations differ over orders of magnitude
+- *Construct a lollipop plot to illustrate this*
+
+```{r}
+covid_df |> 
+    select(county, population) |> 
+    distinct() |> 
+    ggplot(aes(x = fct_reorder(county, population), 
+               y = population)) +
+    geom_point() +
+    geom_segment(aes(xend = county), yend = 0) +
+    scale_y_log10() +
+    coord_flip()
+```
+
+---
+
+Let's calculate rates for new and cumulative cases and deaths
+
+```{r}
+test_df = covid_df |> 
+    mutate(across(.cols = c(matches('cases'), matches('deaths')), 
+                  .fns = list(rate = ~ .x / population * 100000)))
+
+test_df |> 
+    filter(county %in% c('Merced', 'Fresno', 'Los Angeles')) |> 
+    ggplot(aes(date, cases_new_rate, 
+               group = county, color = county)) +
+    geom_line()
+```
+
+*Incorporate this into the pipe when we load `covid_df`*
+
+## Cases vs. deaths when we control for population ##
+
+```{r}
+ggplot(covid_df, aes(x = cases_new_rate, y = deaths_new_rate)) +
+    # geom_point() +
+    geom_point(alpha = .2) +
+    # geom_count(alpha = .5) +
+    # geom_bin2d() +
+    # geom_hex() +
+    # geom_hex(aes(color = after_stat(count))) +
+    # geom_density2d(size = 1) +
+    # stat_density2d(contour = FALSE, geom = 'raster',
+    #                aes(fill = after_stat(density)),
+    #                show.legend = FALSE) +
+    # stat_density2d(contour = TRUE, geom = 'polygon',
+    #                aes(fill = after_stat(level)),
+    #                show.legend = FALSE) +
+    scale_x_log10() +
+    scale_y_log10() +
+    scale_color_viridis_c(aesthetics = c('color', 'fill'))
+```
