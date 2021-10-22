@@ -1,0 +1,87 @@
+# Readable code is reliable code #
+
+```{r child = 'knitr_config.Rmd'}
+```
+
+## Reading 
+
+- @BryanCodeSmellsFeels2018
+- @PostolovskiYourCodeReview2020
+- @BuckensSelfdocumentingMythHow2019
+
+
+## Writing code is writing
+
+- Multiple target audiences
+    - Collaborators
+    - (Some) reviewers and readers of the paper
+    - Peers who want to analyze and extend your methods
+    - *Yourself in two months/one year/five years*
+
+- Your code is *readable* to the extent that people can use it to easily and reliably 
+    - predict, 
+    - diagnose, and
+    - extend your code
+
+
+## Code style ##
+
+- iNéwritteNélanguagEáconventionSéfoRîpunctuatioNøcapitalizatioNîaiDécomprehensioNébYéindicatinGéstructurE
+    - this is what it's like to read poorly-styled code
+    - conventions only work if they're *shared* conventions
+
+- Style guides provide shared conventions for readable code
+    - In-line spacing makes it easier to pick out distinguish functions, operators, and variables in a line
+    - Returns distinguish arguments in a function call
+    - Indentation corresponds to structure of complex expressions
+    - Common conventions for naming, assignment reduce cognitive load
+
+- Tidyverse style guide:  <https://style.tidyverse.org/>
+
+
+## Highlights from the Tidyverse style guide ##
+
+- Place all `package()` calls at the top of the script
+- Limit your code to 80 characters per line
+- Use at least 4 spaces for indenting multiline expression
+    - Control-I in RStudio will do automagic indenting
+- In multiline function calls, 1 argument = 1 line
+- Use comments to explain "why" rather than "what" or "how"
+    - DH's comment convention: 
+    - Single `#` is for code that isn't currently used but might need to be brought back (eg, for debugging)
+    - `##` is for substantial comments
+
+
+## Spaces
+- Always put spaces after commas, and never before (like English)
+- But not between a function name and the parentheses (like math)
+- And surrounding infix operators (`==`, `+`, `-`, `<-`, `=`)
+- Pipes `%>%` `|>` should have a space before and be at the end of the line
+
+
+## Code blocks
+When you put a block of code in curly braces `{}`: 
+
+- `{` should be the last character on a line
+- `}` should be the first character on the line
+
+```{r, eval = FALSE}
+if (y == 0) {
+  if (x > 0) {
+    log(x)
+  } else {
+    message("x is negative or zero")
+  }
+} else {
+  y^x
+}
+```
+
+
+## Boolean variables vs. control flow
+
+- Functions that return vectors: 
+    - `&`, `|`, `==`, `ifelse()`, `dplyr::if_else()`
+- Functions that return a single value: 
+    - `&&`, `||`, `identical`
+- `if (x) a else b` only looks at the first (hopefully single) value of `x`
