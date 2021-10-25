@@ -16,7 +16,7 @@
 7. Reliability
 8. Scalability
 9. Reusability
-10. Patterns [In-house/lab/team style]
+10. Patterns [style and readability]
 11. Test coverage and quality
 12. Fit for purpose
 13. Notice what's missing
@@ -94,7 +94,7 @@ Because I have less to say, not because they're less important
 
 8. Scalability
 9. Reusability
-10. In-house/lab/team style
+10. Patterns [style and readability]
 11. Test coverage and quality
 12. Fit for purpose
 
