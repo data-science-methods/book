@@ -31,6 +31,7 @@
     - Or at least uses consistent style
 - Whitespace, whitespace, whitespace
 - Meaningful names / self-documenting code [@BuckensSelfdocumentingMythHow2019]
+- For data science: Functionality promotes understandability
     
 ## 2. Maintainability
 
@@ -50,6 +51,7 @@
 - Avoid (repeating) large downloads
 - Cache the results of slow calculations
     - With an easy way to clear the cache and re-run the calculations
+    - Or break them up in to separate steps of the pipeline
 - Use `tictoc` for simple wall time checks
 
 ### Resource use
@@ -61,7 +63,7 @@
 
 ## 5. Documentation
 
-- Scripts: Section markers, signposting of what's happening and why
+- Scripts: Section markers, signposting what's happening and why
 - Functions: Assumptions about inputs, explanation of output
     - Consider using `roxygen2` + R's package infrastructure
     - <https://r-pkgs.org/man.html#man-functions>
