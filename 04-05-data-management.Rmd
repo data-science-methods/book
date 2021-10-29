@@ -5,7 +5,71 @@
 
 ## Reading
 
+- @caitlinhudonFieldNotesBuilding2018
 - @WilkinsonFAIRGuidingPrinciples2016
+
+## Documentation ##
+
+- Many social science fields have a tradition of writing codebooks for their data
+    - [Stanford Open Policing codebook](https://github.com/stanford-policylab/opp/blob/master/data_readme.md)
+    - ["Codebook-like summary" of the `covdata` package, automatically generated using `skimr`](https://kjhealy.github.io/covdata/articles/codebook.html)
+    - Caitlin Hudon's approach [@caitlinhudonFieldNotesBuilding2018]
+        - Table and field name, both verbatim
+        - Field example value
+        - Notes for both table and field
+        
+```{r, echo = FALSE, out.width = '80%', fig.cap = "Example of Caitlin Hudon's approach to building a data dictionary. Source: <https://caitlinhudon.com/2018/10/30/data-dictionaries/>"}
+knitr::include_graphics('https://caitlinhudon.files.wordpress.com/2018/10/screen-shot-2018-10-30-at-11-31-56-am.png?w=1478')
+```
+
+## Questions a codebook should answer
+
+1. What does this field mean? How should I use it? 
+2. What is the data [journey]? 
+    - Where does this data come from? 
+    - How exactly is it collected? 
+    - How often is it updated? 
+    - Where does it go next? 
+3. What does the data in this field actually look like? 
+4. Are there any caveats to keep in mind when using this data? 
+5. Where can I go for more information? 
+
+[@caitlinhudonFieldNotesBuilding2018]
+
+ 
+## Major codebook elements 
+
+(<https://afit-r.github.io/codebook>)
+
+1. Original source of the data
+2. Sampling information
+    - Where and how the data were generated
+3. Variable-level metadata and summaries
+4. Structure of the data
+
+
+## Data management plans ##
+
+- Much like a research plan, data management plans provide an overview of the steps you'll take to gather, publish, and maintain your data
+    - Since 2011, NSF has required a 2-page data management plan for most types of proposals
+
+- Examples and resources
+    - [UCM Library](https://library.ucmerced.edu/research/researchers/research-data-management/data-management-plans)
+    <!-- - [UCM IT support](https://it.ucmerced.edu/content/research-data-management-consultation-service) -->
+    - [UCSD NSF examples](https://library.ucsd.edu/lpw-staging/research-and-collections/data-curation/data-management/dmp-samples.html)
+        - [SBE example 1](https://library.ucsd.edu/lpw-staging/research-and-collections/data-curation/data-management/dmpsample/DMP-Example-Ayelet-Gneezy.pdf)
+        - [SBE example 2](https://library.ucsd.edu/lpw-staging/research-and-collections/data-curation/data-management/dmpsample/DMP-Example-Wixted.pdf)
+    - [NSF policy summary](https://www.nsf.gov/bfa/dias/policy/dmp.jsp)
+        - [SBE-specific guidance](https://www.nsf.gov/sbe/DMP/SBE_DataMgmtPlanPolicy_RevisedApril2018.pdf)
+    
+## Data management plan: Common elements 
+
+- Who is responsible for data management
+- Who else will have access to which data
+- How data will be collected
+- Data formatting standards
+- Whether and how data will be archived and made available for reuse
+
 
 ## FAIR principles for published data ##
 
@@ -29,6 +93,7 @@
         - R1.2. (meta)data are associated with detailed provenance
         - R1.3. (meta)data meet domain-relevant community standards
 
+
 ## DOIs for data
 
 - [Instructions for OSF](https://help.osf.io/hc/en-us/articles/360019931013-Create-DOIs)
@@ -36,44 +101,7 @@
     - [Zenodo also plays nicely with GitHub for minting DOIs for code](https://guides.github.com/activities/citable-code/)
 - [Citation models at Harvard Dataverse](https://dataverse.org/best-practices/data-citation)
 
-
-## Documentation ##
-
-- Many social science fields have a tradition of writing codebooks for their data
-    - [Stanford Open Policing codebook](https://github.com/stanford-policylab/opp/blob/master/data_readme.md)
-    - ["Codebook-like summary" of the `covdata` package, automatically generated using `skimr`](https://kjhealy.github.io/covdata/articles/codebook.html)
-    - [Caitlin Hudon's approach](https://caitlinhudon.com/2018/10/30/data-dictionaries/)
-        - Table and field name, both verbatim
-        - Field example value
-        - Notes for both table and field
-        
-```{r, echo = FALSE, out.width = '80%', fig.cap = "Example of Caitlyn Hudon's approach to building a data dictionary. Source: <https://caitlinhudon.com/2018/10/30/data-dictionaries/>"}
-knitr::include_graphics('https://caitlinhudon.files.wordpress.com/2018/10/screen-shot-2018-10-30-at-11-31-56-am.png?w=1478')
-```
-
-## Major codebook elements 
-
-(<https://afit-r.github.io/codebook>)
-
-1. Original source of the data
-2. Sampling information
-    - Where and how the data were generated
-3. Variable-level metadata and summaries
-4. Structure of the data
-
-
-## Data management plans ##
-
-- Much like a research plan, data management plans provide an overview of the steps you'll take to gather, publish, and maintain your data
-    - Since 2011, NSF has required a 2-page data management plan for most types of proposals
-
-- Examples and resources
-    - [UCM Library](https://library.ucmerced.edu/research/researchers/research-data-management/data-management-plans)
-    - [UCM IT support](https://it.ucmerced.edu/content/research-data-management-consultation-service)
-    - [NSF examples](https://libraries.ucsd.edu/research-and-collections/data-curation/dmp-samples.html)
-    - [NSF policy summary](https://www.nsf.gov/bfa/dias/policy/dmp.jsp)
-
-
+<!--
 ## Hazards of open data ##
 
 - Legal
@@ -99,6 +127,9 @@ knitr::include_graphics('https://caitlinhudon.files.wordpress.com/2018/10/screen
 - Public-but-inaccessible data
     - OKCupid data scrape [@McCookPubliclyAvailableData2016]
         - [Emil O. Kierkegaard is a racist asshole; don't be like Emil O. Kierkegaard](https://rationalwiki.org/wiki/Emil_Kirkegaard)
-    
+-->
+
+## References 
+
 
     
