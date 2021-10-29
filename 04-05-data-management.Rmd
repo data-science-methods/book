@@ -1,11 +1,11 @@
-# Managing and Publishing Data #
+# Managing and publishing data #
 
-- reading:
-    - @WilkinsonFAIRGuidingPrinciples2016
-    - @OpenDataOffer2018
-    - @NicolConsentInsufficientData2019
-    - @McCookPubliclyAvailableData2016
+```{r child = 'knitr_config.Rmd'}
+```
 
+## Reading
+
+- @WilkinsonFAIRGuidingPrinciples2016
 
 ## FAIR principles for published data ##
 
@@ -29,11 +29,12 @@
         - R1.2. (meta)data are associated with detailed provenance
         - R1.3. (meta)data meet domain-relevant community standards
 
-- DOIs for data
-    - [Instructions for OSF](https://help.osf.io/hc/en-us/articles/360019931013-Create-DOIs)
-    - [Notes for Zenodo](https://help.zenodo.org/#versioning)
-        - [Zenodo also plays nicely with GitHub for minting DOIs for code](https://guides.github.com/activities/citable-code/)
-    - [Citation models at Harvard Dataverse](https://dataverse.org/best-practices/data-citation)
+## DOIs for data
+
+- [Instructions for OSF](https://help.osf.io/hc/en-us/articles/360019931013-Create-DOIs)
+- [Notes for Zenodo](https://help.zenodo.org/#versioning)
+    - [Zenodo also plays nicely with GitHub for minting DOIs for code](https://guides.github.com/activities/citable-code/)
+- [Citation models at Harvard Dataverse](https://dataverse.org/best-practices/data-citation)
 
 
 ## Documentation ##
@@ -45,13 +46,20 @@
         - Table and field name, both verbatim
         - Field example value
         - Notes for both table and field
+        
+```{r, echo = FALSE, out.width = '80%', fig.cap = "Example of Caitlyn Hudon's approach to building a data dictionary. Source: <https://caitlinhudon.com/2018/10/30/data-dictionaries/>"}
+knitr::include_graphics('https://caitlinhudon.files.wordpress.com/2018/10/screen-shot-2018-10-30-at-11-31-56-am.png?w=1478')
+```
 
-- Major codebook elements (<https://afit-r.github.io/codebook>)
-    1. Original source of the data
-    2. Sampling information
-        - Where and how the data were generated
-    3. Variable-level metadata and summaries
-    4. Structure of the data
+## Major codebook elements 
+
+(<https://afit-r.github.io/codebook>)
+
+1. Original source of the data
+2. Sampling information
+    - Where and how the data were generated
+3. Variable-level metadata and summaries
+4. Structure of the data
 
 
 ## Data management plans ##
@@ -90,7 +98,7 @@
  
 - Public-but-inaccessible data
     - OKCupid data scrape [@McCookPubliclyAvailableData2016]
-        - [Don't be like Emil O. Kierkegaard](https://rationalwiki.org/wiki/Emil_Kirkegaard)
+        - [Emil O. Kierkegaard is a racist asshole; don't be like Emil O. Kierkegaard](https://rationalwiki.org/wiki/Emil_Kirkegaard)
     
 
     
