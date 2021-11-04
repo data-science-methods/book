@@ -222,7 +222,7 @@ GitHub repo: <https://github.com/dhicks/p_curve>\
 
 ## A larger text-mining project
 
-Published paper: <https://direct.mit.edu/qss/article/doi/10.1162/qss_a_00150/106952/Productivity-and-interdisciplinary-impacts-of>\
+Published paper: <https://doi.org/10.1162/qss_a_00150>\
 GitHub repo: <https://github.com/dhicks/orus>\
 23 directories, 274 files (plus 160k data files)
 
@@ -566,12 +566,12 @@ GitHub repo: <https://github.com/dhicks/orus>\
 
 - Designated folders for data, plots/outputs, and utility functions
 
-- File naming convention
-    - Automatically orders analysis scripts
-    - Coordinates plots, outputs, and intermediate data with the script that creates them
+<!-- - File naming convention -->
+<!--     - Automatically orders analysis scripts -->
+<!--     - Coordinates plots, outputs, and intermediate data with the script that creates them -->
     
-- R package infrastructure: `DESCRIPTION`
-    - Enables one-liner to load the utility functions in `R`: `devtools::load_all('..')`
+<!-- - R package infrastructure: `DESCRIPTION` -->
+<!--     - Enables one-liner to load the utility functions in `R`: `devtools::load_all('..')` -->
 
 
 ## A reminder on paths ##

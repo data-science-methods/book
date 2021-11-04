@@ -5,15 +5,19 @@
 
 ## Reading
 
-- @caitlinhudonFieldNotesBuilding2018
+- @HudonFieldNotesBuilding2018
 - @WilkinsonFAIRGuidingPrinciples2016
+
+## The first rule of data management
+
+*Do not edit your data.*
 
 ## Documentation ##
 
 - Many social science fields have a tradition of writing codebooks for their data
     - [Stanford Open Policing codebook](https://github.com/stanford-policylab/opp/blob/master/data_readme.md)
     - ["Codebook-like summary" of the `covdata` package, automatically generated using `skimr`](https://kjhealy.github.io/covdata/articles/codebook.html)
-    - Caitlin Hudon's approach [@caitlinhudonFieldNotesBuilding2018]
+    - Caitlin Hudon's approach [@HudonFieldNotesBuilding2018]
         - Table and field name, both verbatim
         - Field example value
         - Notes for both table and field
@@ -34,7 +38,7 @@ knitr::include_graphics('https://caitlinhudon.files.wordpress.com/2018/10/screen
 4. Are there any caveats to keep in mind when using this data? 
 5. Where can I go for more information? 
 
-[@caitlinhudonFieldNotesBuilding2018]
+[@HudonFieldNotesBuilding2018]
 
  
 ## Major codebook elements 

@@ -1,5 +1,7 @@
 # Git and Version Control #
 
+<!-- https://happygitwithr.com/common-remote-setups.html -->
+
 ```{r child = 'knitr_config.Rmd'}
 ```
 
