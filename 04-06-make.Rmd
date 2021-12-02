@@ -1,0 +1,4 @@
+# Make #
+
+```{r child = 'knitr_config.Rmd'}
+```
