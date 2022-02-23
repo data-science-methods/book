@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 4 Git and Version Control | Methods of Data Science I</title>
+  <meta name="description" content="This document is a set of notes (and perhaps later a textbook) for a course on data science methods for graduate students in social and behavioral sciences." />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 4 Git and Version Control | Methods of Data Science I" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This document is a set of notes (and perhaps later a textbook) for a course on data science methods for graduate students in social and behavioral sciences." />
+  <meta name="github-repo" content="data-science-methods/book" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 4 Git and Version Control | Methods of Data Science I" />
+  
+  <meta name="twitter:description" content="This document is a set of notes (and perhaps later a textbook) for a course on data science methods for graduate students in social and behavioral sciences." />
+  
+
+<meta name="author" content="Dan Hicks, hicks.daniel.j@gmail.com" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="data-science-what-and-why.html"/>
+<link rel="next" href="warnings-errors-and-getting-help.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#land-acknowledgements"><i class="fa fa-check"></i><b>1.1</b> Land acknowledgements</a></li>
+<li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#about-the-instructor"><i class="fa fa-check"></i><b>1.2</b> About the instructor</a></li>
+<li class="chapter" data-level="1.3" data-path="introduction.html"><a href="introduction.html#what-this-course-isnt-and-is"><i class="fa fa-check"></i><b>1.3</b> What this course isn’t, and is</a></li>
+<li class="chapter" data-level="1.4" data-path="introduction.html"><a href="introduction.html#learning-outcomes"><i class="fa fa-check"></i><b>1.4</b> Learning outcomes</a></li>
+<li class="chapter" data-level="1.5" data-path="introduction.html"><a href="introduction.html#prerequisites"><i class="fa fa-check"></i><b>1.5</b> Prerequisites</a></li>
+<li class="chapter" data-level="1.6" data-path="introduction.html"><a href="introduction.html#requirements-and-weekly-routine"><i class="fa fa-check"></i><b>1.6</b> Requirements and weekly routine</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="software-hardware-and-accounts.html"><a href="software-hardware-and-accounts.html"><i class="fa fa-check"></i><b>2</b> Software, hardware, and accounts</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="software-hardware-and-accounts.html"><a href="software-hardware-and-accounts.html#a-note-on-accessibility"><i class="fa fa-check"></i><b>2.1</b> A Note on Accessibility</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="data-science-what-and-why.html"><a href="data-science-what-and-why.html"><i class="fa fa-check"></i><b>3</b> Data Science: What and why</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="data-science-what-and-why.html"><a href="data-science-what-and-why.html#reading"><i class="fa fa-check"></i><b>3.1</b> Reading</a></li>
+<li class="chapter" data-level="3.2" data-path="data-science-what-and-why.html"><a href="data-science-what-and-why.html#discussion-question"><i class="fa fa-check"></i><b>3.2</b> Discussion question</a></li>
+<li class="chapter" data-level="3.3" data-path="data-science-what-and-why.html"><a href="data-science-what-and-why.html#standard-definition"><i class="fa fa-check"></i><b>3.3</b> Standard definition</a></li>
+<li class="chapter" data-level="3.4" data-path="data-science-what-and-why.html"><a href="data-science-what-and-why.html#discussion-question-1"><i class="fa fa-check"></i><b>3.4</b> Discussion question</a></li>
+</ul></li>
+<li class="part"><span><b>I Some fundamental tools</b></span></li>
+<li class="chapter" data-level="4" data-path="git-and-version-control.html"><a href="git-and-version-control.html"><i class="fa fa-check"></i><b>4</b> Git and Version Control</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="git-and-version-control.html"><a href="git-and-version-control.html#some-motivating-examples"><i class="fa fa-check"></i><b>4.1</b> Some motivating examples</a></li>
+<li class="chapter" data-level="4.2" data-path="git-and-version-control.html"><a href="git-and-version-control.html#version-control"><i class="fa fa-check"></i><b>4.2</b> Version control</a></li>
+<li class="chapter" data-level="4.3" data-path="git-and-version-control.html"><a href="git-and-version-control.html#gitting-started"><i class="fa fa-check"></i><b>4.3</b> Gitting started</a></li>
+<li class="chapter" data-level="4.4" data-path="git-and-version-control.html"><a href="git-and-version-control.html#time-travel"><i class="fa fa-check"></i><b>4.4</b> Time travel</a></li>
+<li class="chapter" data-level="4.5" data-path="git-and-version-control.html"><a href="git-and-version-control.html#the-garden-of-forking-branches"><i class="fa fa-check"></i><b>4.5</b> The garden of forking branches</a></li>
+<li class="chapter" data-level="4.6" data-path="git-and-version-control.html"><a href="git-and-version-control.html#generating-a-github-pat"><i class="fa fa-check"></i><b>4.6</b> Generating a GitHub PAT</a></li>
+<li class="chapter" data-level="4.7" data-path="git-and-version-control.html"><a href="git-and-version-control.html#working-with-github-remotes"><i class="fa fa-check"></i><b>4.7</b> Working with GitHub remotes</a></li>
+<li class="chapter" data-level="4.8" data-path="git-and-version-control.html"><a href="git-and-version-control.html#further-reading"><i class="fa fa-check"></i><b>4.8</b> Further reading</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="warnings-errors-and-getting-help.html"><a href="warnings-errors-and-getting-help.html"><i class="fa fa-check"></i><b>5</b> Warnings, Errors, and Getting Help</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="warnings-errors-and-getting-help.html"><a href="warnings-errors-and-getting-help.html#reading-1"><i class="fa fa-check"></i><b>5.1</b> Reading</a></li>
+<li class="chapter" data-level="5.2" data-path="warnings-errors-and-getting-help.html"><a href="warnings-errors-and-getting-help.html#dependencies"><i class="fa fa-check"></i><b>5.2</b> Dependencies</a></li>
+<li class="chapter" data-level="5.3" data-path="warnings-errors-and-getting-help.html"><a href="warnings-errors-and-getting-help.html#messages-warnings-and-errors"><i class="fa fa-check"></i><b>5.3</b> Messages, warnings, and errors</a></li>
+<li class="chapter" data-level="5.4" data-path="warnings-errors-and-getting-help.html"><a href="warnings-errors-and-getting-help.html#where-to-go-for-help"><i class="fa fa-check"></i><b>5.4</b> Where to go for help</a></li>
+<li class="chapter" data-level="5.5" data-path="warnings-errors-and-getting-help.html"><a href="warnings-errors-and-getting-help.html#example-dates-are-often-problems"><i class="fa fa-check"></i><b>5.5</b> Example: Dates are often problems</a></li>
+<li class="chapter" data-level="5.6" data-path="warnings-errors-and-getting-help.html"><a href="warnings-errors-and-getting-help.html#another-example-more-fun-with-dates"><i class="fa fa-check"></i><b>5.6</b> Another example: More fun with dates</a></li>
+<li class="chapter" data-level="5.7" data-path="warnings-errors-and-getting-help.html"><a href="warnings-errors-and-getting-help.html#writing-a-reproducible-example-reprex"><i class="fa fa-check"></i><b>5.7</b> Writing a reproducible example: <code>reprex</code></a></li>
+<li class="chapter" data-level="5.8" data-path="warnings-errors-and-getting-help.html"><a href="warnings-errors-and-getting-help.html#do-not-do-these-things-in-your-reprex-or-anywhere-else"><i class="fa fa-check"></i><b>5.8</b> Do not do these things in your reprex (or anywhere else)</a></li>
+<li class="chapter" data-level="5.9" data-path="warnings-errors-and-getting-help.html"><a href="warnings-errors-and-getting-help.html#debugging-in-rstudio"><i class="fa fa-check"></i><b>5.9</b> Debugging in RStudio</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="programming-paradigms.html"><a href="programming-paradigms.html"><i class="fa fa-check"></i><b>6</b> Programming Paradigms</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="programming-paradigms.html"><a href="programming-paradigms.html#reading-2"><i class="fa fa-check"></i><b>6.1</b> Reading</a></li>
+<li class="chapter" data-level="6.2" data-path="programming-paradigms.html"><a href="programming-paradigms.html#dependencies-1"><i class="fa fa-check"></i><b>6.2</b> Dependencies</a></li>
+<li class="chapter" data-level="6.3" data-path="programming-paradigms.html"><a href="programming-paradigms.html#programming-paradigms-1"><i class="fa fa-check"></i><b>6.3</b> Programming paradigms</a></li>
+<li class="chapter" data-level="6.4" data-path="programming-paradigms.html"><a href="programming-paradigms.html#object-oriented-programming"><i class="fa fa-check"></i><b>6.4</b> Object-oriented programming</a></li>
+<li class="chapter" data-level="6.5" data-path="programming-paradigms.html"><a href="programming-paradigms.html#the-oop-youre-used-to"><i class="fa fa-check"></i><b>6.5</b> The OOP you’re used to</a></li>
+<li class="chapter" data-level="6.6" data-path="programming-paradigms.html"><a href="programming-paradigms.html#s3-is-oop-but-weird"><i class="fa fa-check"></i><b>6.6</b> S3 is OOP, but weird</a></li>
+<li class="chapter" data-level="6.7" data-path="programming-paradigms.html"><a href="programming-paradigms.html#functional-programming"><i class="fa fa-check"></i><b>6.7</b> Functional programming</a></li>
+<li class="chapter" data-level="6.8" data-path="programming-paradigms.html"><a href="programming-paradigms.html#common-features-of-functional-programming"><i class="fa fa-check"></i><b>6.8</b> Common features of functional programming</a></li>
+<li class="chapter" data-level="6.9" data-path="programming-paradigms.html"><a href="programming-paradigms.html#breaking-r-everything-that-happens-is-a-function"><i class="fa fa-check"></i><b>6.9</b> Breaking R: Everything that happens is a function</a></li>
+<li class="chapter" data-level="6.10" data-path="programming-paradigms.html"><a href="programming-paradigms.html#actually-useful-functional-r-pipes-and-the-tidyverse"><i class="fa fa-check"></i><b>6.10</b> Actually-useful functional R: Pipes (and the tidyverse)</a></li>
+<li class="chapter" data-level="6.11" data-path="programming-paradigms.html"><a href="programming-paradigms.html#programming-paradigms-and-data-science"><i class="fa fa-check"></i><b>6.11</b> Programming paradigms and data science</a></li>
+</ul></li>
+<li class="part"><span><b>II Exploratory Data Analysis (EDA)</b></span></li>
+<li class="chapter" data-level="7" data-path="eda-models.html"><a href="eda-models.html"><i class="fa fa-check"></i><b>7</b> Exploratory Data Analysis</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="eda-models.html"><a href="eda-models.html#section"><i class="fa fa-check"></i><b>7.1</b> <br></a></li>
+<li class="chapter" data-level="7.2" data-path="eda-models.html"><a href="eda-models.html#exploratory-and-confirmatory-research"><i class="fa fa-check"></i><b>7.2</b> Exploratory and Confirmatory Research</a></li>
+<li class="chapter" data-level="7.3" data-path="eda-models.html"><a href="eda-models.html#better-models-for-eda-i-developing-phenomena"><i class="fa fa-check"></i><b>7.3</b> Better Models for EDA I: Developing Phenomena</a></li>
+<li class="chapter" data-level="7.4" data-path="eda-models.html"><a href="eda-models.html#eda-as-phenomena-development"><i class="fa fa-check"></i><b>7.4</b> EDA as phenomena development</a></li>
+<li class="chapter" data-level="7.5" data-path="eda-models.html"><a href="eda-models.html#better-models-for-eda-ii-epicycle-of-analysis"><i class="fa fa-check"></i><b>7.5</b> Better Models for EDA II: Epicycle of Analysis</a></li>
+<li class="chapter" data-level="7.6" data-path="eda-models.html"><a href="eda-models.html#pengartdatascience2016"><i class="fa fa-check"></i><b>7.6</b> <span class="citation"><span>Peng and Matsui</span> (<span>2016</span>)</span></a></li>
+<li class="chapter" data-level="7.7" data-path="eda-models.html"><a href="eda-models.html#section-1"><i class="fa fa-check"></i><b>7.7</b> </br></a></li>
+<li class="chapter" data-level="7.8" data-path="eda-models.html"><a href="eda-models.html#discussion"><i class="fa fa-check"></i><b>7.8</b> Discussion</a></li>
+<li class="chapter" data-level="7.9" data-path="eda-models.html"><a href="eda-models.html#references"><i class="fa fa-check"></i><b>7.9</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="two-eda-checklists.html"><a href="two-eda-checklists.html"><i class="fa fa-check"></i><b>8</b> Two EDA “Checklists”</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="two-eda-checklists.html"><a href="two-eda-checklists.html#pengartdatascience2016-1"><i class="fa fa-check"></i><b>8.1</b> <span class="citation"><span>Peng and Matsui</span> (<span>2016</span>)</span></a></li>
+<li class="chapter" data-level="8.2" data-path="two-eda-checklists.html"><a href="two-eda-checklists.html#huebnersystematicapproachinitial2016"><i class="fa fa-check"></i><b>8.2</b> <span class="citation"><span>Huebner, Vach, and le Cessie</span> (<span>2016</span>)</span></a></li>
+<li class="chapter" data-level="8.3" data-path="two-eda-checklists.html"><a href="two-eda-checklists.html#references-1"><i class="fa fa-check"></i><b>8.3</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="inspecting-variables.html"><a href="inspecting-variables.html"><i class="fa fa-check"></i><b>9</b> Inspecting Variables</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="inspecting-variables.html"><a href="inspecting-variables.html#section-2"><i class="fa fa-check"></i><b>9.1</b> </br></a></li>
+<li class="chapter" data-level="9.2" data-path="inspecting-variables.html"><a href="inspecting-variables.html#formulate-your-question"><i class="fa fa-check"></i><b>9.2</b> 1. Formulate your question</a></li>
+<li class="chapter" data-level="9.3" data-path="inspecting-variables.html"><a href="inspecting-variables.html#reflexivity"><i class="fa fa-check"></i><b>9.3</b> Reflexivity</a></li>
+<li class="chapter" data-level="9.4" data-path="inspecting-variables.html"><a href="inspecting-variables.html#set-up-our-workspace"><i class="fa fa-check"></i><b>9.4</b> Set up our workspace</a></li>
+<li class="chapter" data-level="9.5" data-path="inspecting-variables.html"><a href="inspecting-variables.html#packages"><i class="fa fa-check"></i><b>9.5</b> Packages</a></li>
+<li class="chapter" data-level="9.6" data-path="inspecting-variables.html"><a href="inspecting-variables.html#get-the-data"><i class="fa fa-check"></i><b>9.6</b> Get the Data</a></li>
+<li class="chapter" data-level="9.7" data-path="inspecting-variables.html"><a href="inspecting-variables.html#read-in-your-data"><i class="fa fa-check"></i><b>9.7</b> 2. Read in your data</a></li>
+<li class="chapter" data-level="9.8" data-path="inspecting-variables.html"><a href="inspecting-variables.html#check-the-packaging"><i class="fa fa-check"></i><b>9.8</b> 3. Check the packaging</a></li>
+<li class="chapter" data-level="9.9" data-path="inspecting-variables.html"><a href="inspecting-variables.html#for-our-motivating-questions"><i class="fa fa-check"></i><b>9.9</b> For our motivating questions</a></li>
+<li class="chapter" data-level="9.10" data-path="inspecting-variables.html"><a href="inspecting-variables.html#missing-values"><i class="fa fa-check"></i><b>9.10</b> Missing values</a></li>
+<li class="chapter" data-level="9.11" data-path="inspecting-variables.html"><a href="inspecting-variables.html#a-critical-question"><i class="fa fa-check"></i><b>9.11</b> A critical question</a></li>
+<li class="chapter" data-level="9.12" data-path="inspecting-variables.html"><a href="inspecting-variables.html#look-at-the-top-and-the-bottom-of-your-data"><i class="fa fa-check"></i><b>9.12</b> 4. Look at the top and the bottom of your data</a></li>
+<li class="chapter" data-level="9.13" data-path="inspecting-variables.html"><a href="inspecting-variables.html#check-your-ns-and-6.-validate-with-at-least-one-external-data-source"><i class="fa fa-check"></i><b>9.13</b> 5. Check your “n”s (and) 6. Validate with at least one external data source</a></li>
+<li class="chapter" data-level="9.14" data-path="inspecting-variables.html"><a href="inspecting-variables.html#from-dates-to-years"><i class="fa fa-check"></i><b>9.14</b> From dates to years</a></li>
+<li class="chapter" data-level="9.15" data-path="inspecting-variables.html"><a href="inspecting-variables.html#make-a-plot"><i class="fa fa-check"></i><b>9.15</b> 7. Make a plot</a></li>
+<li class="chapter" data-level="9.16" data-path="inspecting-variables.html"><a href="inspecting-variables.html#try-the-easy-solution-first"><i class="fa fa-check"></i><b>9.16</b> 8. Try the easy solution first</a></li>
+<li class="chapter" data-level="9.17" data-path="inspecting-variables.html"><a href="inspecting-variables.html#number-of-stops-by-race"><i class="fa fa-check"></i><b>9.17</b> Number of stops, by race</a></li>
+<li class="chapter" data-level="9.18" data-path="inspecting-variables.html"><a href="inspecting-variables.html#contraband-search-results-by-race"><i class="fa fa-check"></i><b>9.18</b> Contraband search results, by race</a></li>
+<li class="chapter" data-level="9.19" data-path="inspecting-variables.html"><a href="inspecting-variables.html#follow-up"><i class="fa fa-check"></i><b>9.19</b> 9. Follow up</a></li>
+<li class="chapter" data-level="9.20" data-path="inspecting-variables.html"><a href="inspecting-variables.html#discussion-questions"><i class="fa fa-check"></i><b>9.20</b> Discussion questions</a></li>
+<li class="chapter" data-level="9.21" data-path="inspecting-variables.html"><a href="inspecting-variables.html#lab"><i class="fa fa-check"></i><b>9.21</b> Lab</a></li>
+<li class="chapter" data-level="9.22" data-path="inspecting-variables.html"><a href="inspecting-variables.html#references-2"><i class="fa fa-check"></i><b>9.22</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="visual-eda.html"><a href="visual-eda.html"><i class="fa fa-check"></i><b>10</b> Visual EDA</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="visual-eda.html"><a href="visual-eda.html#reading-3"><i class="fa fa-check"></i><b>10.1</b> Reading</a></li>
+<li class="chapter" data-level="10.2" data-path="visual-eda.html"><a href="visual-eda.html#the-role-of-visuals-in-eda"><i class="fa fa-check"></i><b>10.2</b> The Role of Visuals in EDA</a></li>
+<li class="chapter" data-level="10.3" data-path="visual-eda.html"><a href="visual-eda.html#in-terms-of-our-models-of-eda"><i class="fa fa-check"></i><b>10.3</b> In terms of our models of EDA</a></li>
+<li class="chapter" data-level="10.4" data-path="visual-eda.html"><a href="visual-eda.html#plot-your-data"><i class="fa fa-check"></i><b>10.4</b> Plot Your Data</a></li>
+<li class="chapter" data-level="10.5" data-path="visual-eda.html"><a href="visual-eda.html#bar-plots-and-better-than-bar-plots"><i class="fa fa-check"></i><b>10.5</b> Bar plots, and better than bar plots</a></li>
+<li class="chapter" data-level="10.6" data-path="visual-eda.html"><a href="visual-eda.html#a-bar-plot-of-mean-95-ci"><i class="fa fa-check"></i><b>10.6</b> A bar plot of mean + 95% CI</a></li>
+<li class="chapter" data-level="10.7" data-path="visual-eda.html"><a href="visual-eda.html#replace-the-bar-with-the-data"><i class="fa fa-check"></i><b>10.7</b> Replace the bar with the data</a></li>
+<li class="chapter" data-level="10.8" data-path="visual-eda.html"><a href="visual-eda.html#even-fancier-violin-plot"><i class="fa fa-check"></i><b>10.8</b> Even fancier: Violin plot</a></li>
+<li class="chapter" data-level="10.9" data-path="visual-eda.html"><a href="visual-eda.html#references-3"><i class="fa fa-check"></i><b>10.9</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="the-grammar-of-graphics.html"><a href="the-grammar-of-graphics.html"><i class="fa fa-check"></i><b>11</b> The Grammar of Graphics</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="the-grammar-of-graphics.html"><a href="the-grammar-of-graphics.html#reading-4"><i class="fa fa-check"></i><b>11.1</b> Reading</a></li>
+<li class="chapter" data-level="11.2" data-path="the-grammar-of-graphics.html"><a href="the-grammar-of-graphics.html#artists-palette-model"><i class="fa fa-check"></i><b>11.2</b> Artist’s palette model</a></li>
+<li class="chapter" data-level="11.3" data-path="the-grammar-of-graphics.html"><a href="the-grammar-of-graphics.html#grammar-of-graphics"><i class="fa fa-check"></i><b>11.3</b> Grammar of graphics</a></li>
+<li class="chapter" data-level="11.4" data-path="the-grammar-of-graphics.html"><a href="the-grammar-of-graphics.html#graphs-are-maps"><i class="fa fa-check"></i><b>11.4</b> Graphs are maps</a></li>
+<li class="chapter" data-level="11.5" data-path="the-grammar-of-graphics.html"><a href="the-grammar-of-graphics.html#graphs-are-models"><i class="fa fa-check"></i><b>11.5</b> Graphs are models</a></li>
+<li class="chapter" data-level="11.6" data-path="the-grammar-of-graphics.html"><a href="the-grammar-of-graphics.html#references-4"><i class="fa fa-check"></i><b>11.6</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="covid-eda.html"><a href="covid-eda.html"><i class="fa fa-check"></i><b>12</b> Covid EDA</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="covid-eda.html"><a href="covid-eda.html#section-3"><i class="fa fa-check"></i><b>12.1</b> </br></a></li>
+<li class="chapter" data-level="12.2" data-path="covid-eda.html"><a href="covid-eda.html#the-standard-narrative"><i class="fa fa-check"></i><b>12.2</b> The standard narrative</a></li>
+<li class="chapter" data-level="12.3" data-path="covid-eda.html"><a href="covid-eda.html#reflexivity-1"><i class="fa fa-check"></i><b>12.3</b> Reflexivity</a></li>
+<li class="chapter" data-level="12.4" data-path="covid-eda.html"><a href="covid-eda.html#setup"><i class="fa fa-check"></i><b>12.4</b> Setup</a></li>
+<li class="chapter" data-level="12.5" data-path="covid-eda.html"><a href="covid-eda.html#data"><i class="fa fa-check"></i><b>12.5</b> Data</a></li>
+<li class="chapter" data-level="12.6" data-path="covid-eda.html"><a href="covid-eda.html#get-the-data-1"><i class="fa fa-check"></i><b>12.6</b> Get the data</a></li>
+<li class="chapter" data-level="12.7" data-path="covid-eda.html"><a href="covid-eda.html#some-quick-data-checking"><i class="fa fa-check"></i><b>12.7</b> Some quick data checking</a></li>
+<li class="chapter" data-level="12.8" data-path="covid-eda.html"><a href="covid-eda.html#variables"><i class="fa fa-check"></i><b>12.8</b> Variables</a></li>
+<li class="chapter" data-level="12.9" data-path="covid-eda.html"><a href="covid-eda.html#too-many-timeseries-plots"><i class="fa fa-check"></i><b>12.9</b> Too many timeseries plots</a></li>
+<li class="chapter" data-level="12.10" data-path="covid-eda.html"><a href="covid-eda.html#number-of-observations-per-county"><i class="fa fa-check"></i><b>12.10</b> Number of observations per county</a></li>
+<li class="chapter" data-level="12.11" data-path="covid-eda.html"><a href="covid-eda.html#no-more-than-1-observation-per-county-per-day"><i class="fa fa-check"></i><b>12.11</b> No more than 1 observation per county per day</a></li>
+<li class="chapter" data-level="12.12" data-path="covid-eda.html"><a href="covid-eda.html#cumulative-vs.-daily-cases"><i class="fa fa-check"></i><b>12.12</b> Cumulative vs. daily cases</a></li>
+<li class="chapter" data-level="12.13" data-path="covid-eda.html"><a href="covid-eda.html#add-an-assertion"><i class="fa fa-check"></i><b>12.13</b> Add an assertion</a></li>
+<li class="chapter" data-level="12.14" data-path="covid-eda.html"><a href="covid-eda.html#distribution-of-cases-by-county"><i class="fa fa-check"></i><b>12.14</b> Distribution of cases by county</a></li>
+<li class="chapter" data-level="12.15" data-path="covid-eda.html"><a href="covid-eda.html#revisions"><i class="fa fa-check"></i><b>12.15</b> Revisions</a></li>
+<li class="chapter" data-level="12.16" data-path="covid-eda.html"><a href="covid-eda.html#plots-of-the-same-plot"><i class="fa fa-check"></i><b>12.16</b> 9 plots of the same plot</a></li>
+<li class="chapter" data-level="12.17" data-path="covid-eda.html"><a href="covid-eda.html#why-so-many-dropped-values"><i class="fa fa-check"></i><b>12.17</b> Why so many dropped values?</a></li>
+<li class="chapter" data-level="12.18" data-path="covid-eda.html"><a href="covid-eda.html#cases-vs.-population"><i class="fa fa-check"></i><b>12.18</b> Cases vs. population</a></li>
+<li class="chapter" data-level="12.19" data-path="covid-eda.html"><a href="covid-eda.html#absolute-counts-to-rates"><i class="fa fa-check"></i><b>12.19</b> Absolute counts to rates</a></li>
+<li class="chapter" data-level="12.20" data-path="covid-eda.html"><a href="covid-eda.html#rates-vs.-population"><i class="fa fa-check"></i><b>12.20</b> Rates vs. population</a></li>
+<li class="chapter" data-level="12.21" data-path="covid-eda.html"><a href="covid-eda.html#counties-by-maximum-rate-of-new-cases"><i class="fa fa-check"></i><b>12.21</b> Counties by maximum rate of new cases</a></li>
+<li class="chapter" data-level="12.22" data-path="covid-eda.html"><a href="covid-eda.html#cases-vs.-deaths-when-we-control-for-population"><i class="fa fa-check"></i><b>12.22</b> Cases vs. deaths when we control for population</a></li>
+</ul></li>
+<li class="part"><span><b>III Reproducibility, Replicability, and Robustness</b></span></li>
+<li class="chapter" data-level="13" data-path="readable-code-is-reliable-code.html"><a href="readable-code-is-reliable-code.html"><i class="fa fa-check"></i><b>13</b> Readable code is reliable code</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="readable-code-is-reliable-code.html"><a href="readable-code-is-reliable-code.html#reading-5"><i class="fa fa-check"></i><b>13.1</b> Reading</a></li>
+<li class="chapter" data-level="13.2" data-path="readable-code-is-reliable-code.html"><a href="readable-code-is-reliable-code.html#writing-code-is-writing"><i class="fa fa-check"></i><b>13.2</b> Writing code is writing</a></li>
+<li class="chapter" data-level="13.3" data-path="readable-code-is-reliable-code.html"><a href="readable-code-is-reliable-code.html#code-style"><i class="fa fa-check"></i><b>13.3</b> Code style</a></li>
+<li class="chapter" data-level="13.4" data-path="readable-code-is-reliable-code.html"><a href="readable-code-is-reliable-code.html#highlights-from-the-tidyverse-style-guide"><i class="fa fa-check"></i><b>13.4</b> Highlights from the Tidyverse style guide</a></li>
+<li class="chapter" data-level="13.5" data-path="readable-code-is-reliable-code.html"><a href="readable-code-is-reliable-code.html#spaces"><i class="fa fa-check"></i><b>13.5</b> Spaces</a></li>
+<li class="chapter" data-level="13.6" data-path="readable-code-is-reliable-code.html"><a href="readable-code-is-reliable-code.html#code-blocks"><i class="fa fa-check"></i><b>13.6</b> Code blocks</a></li>
+<li class="chapter" data-level="13.7" data-path="readable-code-is-reliable-code.html"><a href="readable-code-is-reliable-code.html#boolean-variables-vs.-control-flow"><i class="fa fa-check"></i><b>13.7</b> Boolean variables vs. control flow</a></li>
+<li class="chapter" data-level="13.8" data-path="readable-code-is-reliable-code.html"><a href="readable-code-is-reliable-code.html#references-5"><i class="fa fa-check"></i><b>13.8</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="a-code-review-checklist.html"><a href="a-code-review-checklist.html"><i class="fa fa-check"></i><b>14</b> A code review checklist</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="a-code-review-checklist.html"><a href="a-code-review-checklist.html#reading-6"><i class="fa fa-check"></i><b>14.1</b> Reading</a></li>
+<li class="chapter" data-level="14.2" data-path="a-code-review-checklist.html"><a href="a-code-review-checklist.html#readability-understandability"><i class="fa fa-check"></i><b>14.2</b> 1. Readability / understandability</a></li>
+<li class="chapter" data-level="14.3" data-path="a-code-review-checklist.html"><a href="a-code-review-checklist.html#maintainability"><i class="fa fa-check"></i><b>14.3</b> 2. Maintainability</a></li>
+<li class="chapter" data-level="14.4" data-path="a-code-review-checklist.html"><a href="a-code-review-checklist.html#security"><i class="fa fa-check"></i><b>14.4</b> 3. Security</a></li>
+<li class="chapter" data-level="14.5" data-path="a-code-review-checklist.html"><a href="a-code-review-checklist.html#speed-and-performance"><i class="fa fa-check"></i><b>14.5</b> 4. Speed and Performance</a></li>
+<li class="chapter" data-level="14.6" data-path="a-code-review-checklist.html"><a href="a-code-review-checklist.html#documentation"><i class="fa fa-check"></i><b>14.6</b> 5. Documentation</a></li>
+<li class="chapter" data-level="14.7" data-path="a-code-review-checklist.html"><a href="a-code-review-checklist.html#reinventing-the-wheel"><i class="fa fa-check"></i><b>14.7</b> 6. Reinventing the Wheel</a></li>
+<li class="chapter" data-level="14.8" data-path="a-code-review-checklist.html"><a href="a-code-review-checklist.html#reliability"><i class="fa fa-check"></i><b>14.8</b> 7. Reliability</a></li>
+<li class="chapter" data-level="14.9" data-path="a-code-review-checklist.html"><a href="a-code-review-checklist.html#skipping-a-few"><i class="fa fa-check"></i><b>14.9</b> Skipping a few</a></li>
+<li class="chapter" data-level="14.10" data-path="a-code-review-checklist.html"><a href="a-code-review-checklist.html#notice-whats-missing"><i class="fa fa-check"></i><b>14.10</b> 13. Notice what’s missing</a></li>
+<li class="chapter" data-level="14.11" data-path="a-code-review-checklist.html"><a href="a-code-review-checklist.html#zoom-out"><i class="fa fa-check"></i><b>14.11</b> 14. Zoom out</a></li>
+<li class="chapter" data-level="14.12" data-path="a-code-review-checklist.html"><a href="a-code-review-checklist.html#references-6"><i class="fa fa-check"></i><b>14.12</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="the-life-changing-magic-of-tidying-your-projects.html"><a href="the-life-changing-magic-of-tidying-your-projects.html"><i class="fa fa-check"></i><b>15</b> The life-changing magic of tidying your projects</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="the-life-changing-magic-of-tidying-your-projects.html"><a href="the-life-changing-magic-of-tidying-your-projects.html#reading-7"><i class="fa fa-check"></i><b>15.1</b> Reading</a></li>
+<li class="chapter" data-level="15.2" data-path="the-life-changing-magic-of-tidying-your-projects.html"><a href="the-life-changing-magic-of-tidying-your-projects.html#dumpster-organization"><i class="fa fa-check"></i><b>15.2</b> Dumpster organization</a></li>
+<li class="chapter" data-level="15.3" data-path="the-life-changing-magic-of-tidying-your-projects.html"><a href="the-life-changing-magic-of-tidying-your-projects.html#project-organization"><i class="fa fa-check"></i><b>15.3</b> Project organization</a></li>
+<li class="chapter" data-level="15.4" data-path="the-life-changing-magic-of-tidying-your-projects.html"><a href="the-life-changing-magic-of-tidying-your-projects.html#model-1-noblequickguideorganizing2009"><i class="fa fa-check"></i><b>15.4</b> Model 1: <span class="citation"><span>Noble</span> (<span>2009</span>)</span></a></li>
+<li class="chapter" data-level="15.5" data-path="the-life-changing-magic-of-tidying-your-projects.html"><a href="the-life-changing-magic-of-tidying-your-projects.html#model-2-some-of-dhs-projects"><i class="fa fa-check"></i><b>15.5</b> Model 2: Some of DH’s projects</a></li>
+<li class="chapter" data-level="15.6" data-path="the-life-changing-magic-of-tidying-your-projects.html"><a href="the-life-changing-magic-of-tidying-your-projects.html#just-the-directories"><i class="fa fa-check"></i><b>15.6</b> Just the directories</a></li>
+<li class="chapter" data-level="15.7" data-path="the-life-changing-magic-of-tidying-your-projects.html"><a href="the-life-changing-magic-of-tidying-your-projects.html#a-larger-text-mining-project"><i class="fa fa-check"></i><b>15.7</b> A larger text-mining project</a></li>
+<li class="chapter" data-level="15.8" data-path="the-life-changing-magic-of-tidying-your-projects.html"><a href="the-life-changing-magic-of-tidying-your-projects.html#just-the-directories-1"><i class="fa fa-check"></i><b>15.8</b> Just the directories</a></li>
+<li class="chapter" data-level="15.9" data-path="the-life-changing-magic-of-tidying-your-projects.html"><a href="the-life-changing-magic-of-tidying-your-projects.html#dhs-project-template"><i class="fa fa-check"></i><b>15.9</b> DH’s Project Template</a></li>
+<li class="chapter" data-level="15.10" data-path="the-life-changing-magic-of-tidying-your-projects.html"><a href="the-life-changing-magic-of-tidying-your-projects.html#a-reminder-on-paths"><i class="fa fa-check"></i><b>15.10</b> A reminder on paths</a></li>
+<li class="chapter" data-level="15.11" data-path="the-life-changing-magic-of-tidying-your-projects.html"><a href="the-life-changing-magic-of-tidying-your-projects.html#references-7"><i class="fa fa-check"></i><b>15.11</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="managing-and-publishing-data.html"><a href="managing-and-publishing-data.html"><i class="fa fa-check"></i><b>16</b> Managing and publishing data</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="managing-and-publishing-data.html"><a href="managing-and-publishing-data.html#reading-8"><i class="fa fa-check"></i><b>16.1</b> Reading</a></li>
+<li class="chapter" data-level="16.2" data-path="managing-and-publishing-data.html"><a href="managing-and-publishing-data.html#the-first-rule-of-data-management"><i class="fa fa-check"></i><b>16.2</b> The first rule of data management</a></li>
+<li class="chapter" data-level="16.3" data-path="managing-and-publishing-data.html"><a href="managing-and-publishing-data.html#documentation-1"><i class="fa fa-check"></i><b>16.3</b> Documentation</a></li>
+<li class="chapter" data-level="16.4" data-path="managing-and-publishing-data.html"><a href="managing-and-publishing-data.html#questions-a-codebook-should-answer"><i class="fa fa-check"></i><b>16.4</b> Questions a codebook should answer</a></li>
+<li class="chapter" data-level="16.5" data-path="managing-and-publishing-data.html"><a href="managing-and-publishing-data.html#major-codebook-elements"><i class="fa fa-check"></i><b>16.5</b> Major codebook elements</a></li>
+<li class="chapter" data-level="16.6" data-path="managing-and-publishing-data.html"><a href="managing-and-publishing-data.html#data-management-plans"><i class="fa fa-check"></i><b>16.6</b> Data management plans</a></li>
+<li class="chapter" data-level="16.7" data-path="managing-and-publishing-data.html"><a href="managing-and-publishing-data.html#data-management-plan-common-elements"><i class="fa fa-check"></i><b>16.7</b> Data management plan: Common elements</a></li>
+<li class="chapter" data-level="16.8" data-path="managing-and-publishing-data.html"><a href="managing-and-publishing-data.html#fair-principles-for-published-data"><i class="fa fa-check"></i><b>16.8</b> FAIR principles for published data</a></li>
+<li class="chapter" data-level="16.9" data-path="managing-and-publishing-data.html"><a href="managing-and-publishing-data.html#dois-for-data"><i class="fa fa-check"></i><b>16.9</b> DOIs for data</a></li>
+<li class="chapter" data-level="16.10" data-path="managing-and-publishing-data.html"><a href="managing-and-publishing-data.html#references-8"><i class="fa fa-check"></i><b>16.10</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="make.html"><a href="make.html"><i class="fa fa-check"></i><b>17</b> Make</a></li>
+<li class="chapter" data-level="18" data-path="tracking-package-versions-with-renv.html"><a href="tracking-package-versions-with-renv.html"><i class="fa fa-check"></i><b>18</b> Tracking package versions with <code>renv</code></a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="tracking-package-versions-with-renv.html"><a href="tracking-package-versions-with-renv.html#renv"><i class="fa fa-check"></i><b>18.1</b> <code>renv</code></a></li>
+<li class="chapter" data-level="18.2" data-path="tracking-package-versions-with-renv.html"><a href="tracking-package-versions-with-renv.html#the-problem-renv-tries-to-solve"><i class="fa fa-check"></i><b>18.2</b> The problem <code>renv</code> tries to solve</a></li>
+<li class="chapter" data-level="18.3" data-path="tracking-package-versions-with-renv.html"><a href="tracking-package-versions-with-renv.html#how-r-locates-packages"><i class="fa fa-check"></i><b>18.3</b> How R locates packages</a></li>
+<li class="chapter" data-level="18.4" data-path="tracking-package-versions-with-renv.html"><a href="tracking-package-versions-with-renv.html#renv-workflow"><i class="fa fa-check"></i><b>18.4</b> <code>renv</code> workflow</a></li>
+<li class="chapter" data-level="18.5" data-path="tracking-package-versions-with-renv.html"><a href="tracking-package-versions-with-renv.html#example-with-the-learning-make-project"><i class="fa fa-check"></i><b>18.5</b> Example: with the <code>learning-make</code> project</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references-9.html"><a href="references-9.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Methods of Data Science I</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="git-and-version-control" class="section level1" number="4">
+<h1><span class="header-section-number">Chapter 4</span> Git and Version Control</h1>
+<!-- https://happygitwithr.com/common-remote-setups.html -->
+<div id="some-motivating-examples" class="section level2" number="4.1">
+<h2><span class="header-section-number">4.1</span> Some motivating examples</h2>
+<ul>
+<li>While working on your analysis code, you accidentally delete the first 35 lines of the script. You only discover this three days later, when you restart R and try to run the script from the top. Because you lost half of your senior thesis in undergrad, you hit Control+S to save every couple of minutes.<br />
+</li>
+<li>You’re working on a paper with two coauthors. You prepare the final draft to send for submission: <code>paper final.docx</code>. But one of your coauthors discovers a typo. Now it’s <code>paper final fixed typo.docx</code>. Another realizes six references are missing. <code>paper final fixed typo refs.docx</code>. That’s getting confusing so you change it to <code>paper 2 Aug 2021.docx</code>. Once it comes back from review you need to make revisions. Now you have <code>paper 30 Jan 2022.docx</code> and, after your collaborators make their changes, <code>paper 12 February 2022 DJH.docx</code> and <code>paper 12 February 20222 final.docx</code>.</li>
+<li>You have a complicated analysis spread over several scripts. You want to explore a variant analysis, but doing so will involve changes in 15 different places across 3 different files. You’re not sure if this variant analysis will work; you may or may not want to keep it.</li>
+</ul>
+</div>
+<div id="version-control" class="section level2" number="4.2">
+<h2><span class="header-section-number">4.2</span> Version control</h2>
+<ul>
+<li><p>Basic idea: Tools for tracking and reversing changes to code over time</p></li>
+<li><p>Useful for identifying and reversing breaking changes</p></li>
+<li><p>Implementations upload to cloud, track who contributes code, control who can suggest vs. actually change code</p></li>
+<li><p>Good for collaboration, publishing code</p></li>
+<li><p>git</p>
+<ul>
+<li>One of many version control systems</li>
+<li>Very popular in part thanks to GitHub, which provided free hosting for open-source projects
+<ul>
+<li>In April 2020, GitHub also made private/closed-source repositories free</li>
+<li>Resources for students (and teachers): <a href="https://education.github.com/" class="uri">https://education.github.com/</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<div id="gitting-started" class="section level2" number="4.3">
+<h2><span class="header-section-number">4.3</span> Gitting started</h2>
+<ul>
+<li><a href="https://www.ecosia.org/search?q=git+is+too+complicated&amp;addon=firefox&amp;addonversion=4.0.4">git is very hard</a></li>
+<li>We’re going to use the <a href="https://www.sourcetreeapp.com/">Sourcetree GUI</a> to get started</li>
+</ul>
+<div id="initial-commit" class="section level3" number="4.3.1">
+<h3><span class="header-section-number">4.3.1</span> Initial commit</h3>
+<ul>
+<li>Install Sourcetree and go through the configuration steps</li>
+<li>Then you’ll see the (empty) repository browser</li>
+<li>Create a folder called something like <code>learning-git</code></li>
+<li>Then, in Sourcetree:
+<ul>
+<li>On the Local tab</li>
+<li>Select New … &gt; Create a local repository (or) Drag and drop the folder on to the browser</li>
+</ul></li>
+</ul>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-2"></span>
+<img src="images/02-basics/new_local_repo.png" alt="Creating a new local repository in `learning-git`" width="60%" />
+<p class="caption">
+Figure 3.1: Creating a new local repository in <code>learning-git</code>
+</p>
+</div>
+<ul>
+<li>You can open the repository in Sourcetree, but it’s not interesting yet</li>
+<li>In <code>learning-git</code>, create a text file, eg, <code>testing.txt</code></li>
+<li>Sourcetree’s File Status panel shows the new file, ready to be tracked</li>
+<li>Tracking changes to a file involves two steps: <strong>Adding</strong> and <strong>committing</strong></li>
+<li><strong>Add</strong>: Click the checkmark
+<ul>
+<li>This tells git that we want to store these changes to the file in its archive</li>
+</ul></li>
+<li><strong>Commit</strong>: Type a message in the comment field and click Commit
+<ul>
+<li>This tells git to go ahead and do the archiving process</li>
+</ul></li>
+</ul>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-3"></span>
+<img src="images/02-basics/initial_commit.png" alt="Creating a new local repository in `learning-git`" width="60%" />
+<p class="caption">
+Figure 4.1: Creating a new local repository in <code>learning-git</code>
+</p>
+</div>
+<ul>
+<li>The commit is now displayed in the History panel</li>
+</ul>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-4"></span>
+<img src="images/02-basics/history.png" alt="The History panel after our first commit" width="60%" />
+<p class="caption">
+Figure 4.2: The History panel after our first commit
+</p>
+</div>
+<p><em>Make a few more changes to the file. Practice adding and committing them and note how the changes accumulate in the History panel.</em></p>
+</div>
+</div>
+<div id="time-travel" class="section level2" number="4.4">
+<h2><span class="header-section-number">4.4</span> Time travel</h2>
+<ul>
+<li>We can <strong>checkout</strong> previous commits to work with old versions of our files</li>
+<li>In the example, suppose I made a commit with a mistake (my code stopped working or whatever)</li>
+<li>In the History panel, right-click on a previous commit and select Checkout…</li>
+</ul>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-5"></span>
+<img src="images/02-basics/checkout.png" alt="Checking out an old commit to travel through time" width="60%" />
+<p class="caption">
+Figure 4.3: Checking out an old commit to travel through time
+</p>
+</div>
+<ul>
+<li>Sourcetree warns us that we’ll be in an <strong>undetached head state</strong></li>
+<li>To see what this means, try making a change to the file, adding and committing it, then checking out the commit with the <code>main</code> or <code>master</code> tag</li>
+</ul>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-6"></span>
+<img src="images/02-basics/changing_past.png" alt="Trying (and failing) to change the past.  My current HEAD commit will disappear as soon as I check out main." width="60%" />
+<p class="caption">
+Figure 4.4: Trying (and failing) to change the past. My current HEAD commit will disappear as soon as I check out main.
+</p>
+</div>
+</div>
+<div id="the-garden-of-forking-branches" class="section level2" number="4.5">
+<h2><span class="header-section-number">4.5</span> The garden of forking branches</h2>
+<ul>
+<li>To actually change the past, we’ll use a <strong>branch</strong>
+<ul>
+<li>Branches allow git to track multiple distinct “timelines” for files</li>
+<li>For example, most major software projects will have separate “dev” (development) and “release” branches</li>
+<li>Individual branches will also be created for work on specific areas of the project</li>
+<li>This allows each area of active work to be isolated from work happening in other areas</li>
+</ul></li>
+<li>After checking out the previous commit, click on Branch in the toolbar
+<ul>
+<li>Name your new branch something like <code>fixing-mistake</code> (no spaces!)</li>
+</ul></li>
+<li>Start to work on fixing the mistake in the file, then add and commit as usual</li>
+<li>Now checkout <code>main</code>. Notice:
+<ul>
+<li>Your commits on <code>fixing-mistake</code> don’t disappear</li>
+<li>The state of your file changes to the <code>main</code> version</li>
+<li>The History panel shows the split between the two branches</li>
+</ul></li>
+<li>After we’ve finished fixing the mistake, we want to <strong>merge</strong> these changes back into <code>main</code>
+<ul>
+<li>Make sure you’re current on <code>main</code></li>
+<li>Right-click on <code>fixing-mistake</code> and select Merge…</li>
+</ul></li>
+</ul>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-7"></span>
+<img src="images/02-basics/merge.png" alt="Merging `fixing-mistake` into `main`" width="60%" />
+<p class="caption">
+Figure 4.5: Merging <code>fixing-mistake</code> into <code>main</code>
+</p>
+</div>
+<ul>
+<li>Sourcetree will bring up a message about <strong>Merge Conflicts</strong>
+<ul>
+<li>This just means that the files you’re combining have conflicting histories, and git wants you to sort out what to keep and what to throw away</li>
+</ul></li>
+</ul>
+<p><strong>Important:</strong> It’s not obvious (there isn’t a big red status symbol anywhere), but git is now in a special conflict-resolution state. Until you resolve the conflicts and finish the merge, a lot of standard git functionality either won’t work at all or will cause weird problems. <strong>If git starts giving you a bunch of weird errors, check to see if you’re in the middle of a merge and need to resolve conflicts.</strong></p>
+<ul>
+<li>After starting the merge, Sourcetree’s File status panel will indicate exactly which files have conflicts.</li>
+</ul>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-8"></span>
+<img src="images/02-basics/conflicts.png" alt="Sourcetree's File status panel indicates which files have conflicts" width="60%" />
+<p class="caption">
+Figure 4.6: Sourcetree’s File status panel indicates which files have conflicts
+</p>
+</div>
+<ul>
+<li>Your file will look something like this</li>
+</ul>
+<pre><code>test
+another line
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+this line has a mistake
+=======
+no mistake this time
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; fixing-mistake</code></pre>
+<ul>
+<li>The <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code> and <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code> surround each area of conflict.
+<ul>
+<li>The top part (marked <code>HEAD</code>) shows the state of the current branch</li>
+<li>The bottom part (marked <code>fixing-mistake</code>) shows the state of the branch you’re merging</li>
+</ul></li>
+<li>Simply edit these sections so they’re in the state you want,
+<ul>
+<li>Then save, go back to Sourcetree’s File status panel</li>
+<li>Sourcetree generates a commit message indicating that you’re resolving conflicts to complete a merge</li>
+</ul></li>
+<li>Afterwards the History panel shows the two branches merging back together</li>
+</ul>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-9"></span>
+<img src="images/02-basics/post_merge.png" alt="The History panel shows the branches merging back together" width="60%" />
+<p class="caption">
+Figure 4.7: The History panel shows the branches merging back together
+</p>
+</div>
+</div>
+<div id="generating-a-github-pat" class="section level2" number="4.6">
+<h2><span class="header-section-number">4.6</span> Generating a GitHub PAT</h2>
+<ul>
+<li>To get Sourcetree to work with GitHub, we need to generate a PAT (personal access token)</li>
+<li>On GitHub
+<ul>
+<li>Click on your profile image (upper right) to your account settings</li>
+</ul>
+<ol style="list-style-type: decimal">
+<li>Scroll down to Developer Settings</li>
+<li>Then Personal access tokens</li>
+<li>Put a short description in the Note field</li>
+<li>For our class, we’ll need a PAT with the <code>repo</code> and <code>workflow</code> permissions</li>
+<li><strong>Important:</strong> After you close/navigate away from the next page, you won’t be able to view your PAT again.
+<ul>
+<li>Keep a browser window on this page for the next few minutes</li>
+<li>Don’t save the PAT anywhere (that defeats the purpose)</li>
+</ul></li>
+<li>Copy-paste now into Sourcetree’s Password field
+<ul>
+<li>You may need to enter it again in a few minutes, when you first push up to GitHub</li>
+</ul></li>
+</ol></li>
+</ul>
+</div>
+<div id="working-with-github-remotes" class="section level2" number="4.7">
+<h2><span class="header-section-number">4.7</span> Working with GitHub remotes</h2>
+<ul>
+<li>A <strong>remote</strong> is a copy of a repository that lives on a server somewhere else</li>
+</ul>
+<div id="working-with-your-own-repos" class="section level3" number="4.7.1">
+<h3><span class="header-section-number">4.7.1</span> Working with your own repos</h3>
+<ul>
+<li><p>On GitHub, click “New” and walk through the steps to create a new repository</p>
+<ul>
+<li>The name on GitHub doesn’t need to match the local name</li>
+<li>But why wouldn’t you use the same name?</li>
+</ul></li>
+<li><p>Copy the URL: <code>https://github.com/username/learning-git</code></p></li>
+<li><p>Back in Sourcetree</p>
+<ol style="list-style-type: decimal">
+<li>Go to Settings in the toolbar</li>
+<li>Go to the Remotes tab</li>
+<li>Click Add to add a new remote</li>
+</ol></li>
+<li><p>The standard name for a default remote is <code>origin</code></p>
+<ul>
+<li>Paste in the GitHub URL</li>
+</ul></li>
+</ul>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-10"></span>
+<img src="images/02-basics/origin.png" alt="Adding a new remote" width="60%" />
+<p class="caption">
+Figure 4.8: Adding a new remote
+</p>
+</div>
+<ul>
+<li>After adding the remote, we can send the repository (including its full history) up to GitHub using <strong>push</strong>
+<ul>
+<li>Look for Push in the toolbar</li>
+<li>Sourcetree will ask which branches to push</li>
+</ul></li>
+<li>When the push is complete, refresh GitHub in your browser
+<ul>
+<li>You can edit files directly in GitHub</li>
+</ul></li>
+<li>Now we’ll <strong>fetch</strong> and <strong>pull</strong> the changes from GitHub back to our local copy
+<ul>
+<li><strong>Fetch</strong>: Compare the local tree to the remote tree, noting any differences. Use this to preview the changes on the remote</li>
+<li>In Sourcetree, hit Fetch in the toolbar. Note that the GitHub commit shows up in the History panel.</li>
+<li><strong>Pull</strong>: Actually download the remote changes and incorporate them into your local tree.</li>
+</ul></li>
+</ul>
+</div>
+<div id="lab-working-with-someone-elses-repos" class="section level3" number="4.7.2">
+<h3><span class="header-section-number">4.7.2</span> Lab: Working with <em>someone else’s</em> repos</h3>
+<ul>
+<li>GitHub lets you download someone else’s repo (<strong>clone</strong>), and modify it locally, but <em>not</em> upload directly.<br />
+</li>
+<li>You can suggest a change to someone else’s code by submitting a <strong>pull request</strong>, which first requires <strong>forking</strong> the repository.</li>
+</ul>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-11"></span>
+<img src="images/02-basics/fork-and-clone.png" alt="*Forking* copies a repository to your GitHub account.  Then you *clone* the copy to your local machine.  You can *push* to your remote copy as usual.  You can suggest changes to the original using a *pull request*.  Source: &lt;https://happygitwithr.com/fork-and-clone.html&gt;" width="60%" />
+<p class="caption">
+Figure 4.9: <em>Forking</em> copies a repository to your GitHub account. Then you <em>clone</em> the copy to your local machine. You can <em>push</em> to your remote copy as usual. You can suggest changes to the original using a <em>pull request</em>. Source: <a href="https://happygitwithr.com/fork-and-clone.html" class="uri">https://happygitwithr.com/fork-and-clone.html</a>
+</p>
+</div>
+<ul>
+<li>Start with the repo for this week’s lab: <a href="https://github.com/data-science-methods/lab-w02-git" class="uri">https://github.com/data-science-methods/lab-w02-git</a></li>
+<li><strong>Fork</strong>: Look for the <code>fork</code> button in the upper-right</li>
+</ul>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-12"></span>
+<img src="images/02-basics/fork-button.png" alt="The *fork* button is near the upper-right corner of a GitHub repository page.  I wasn't able to find a keyboard shortcut for this.  :-(" width="60%" />
+<p class="caption">
+Figure 4.10: The <em>fork</em> button is near the upper-right corner of a GitHub repository page. I wasn’t able to find a keyboard shortcut for this. :-(
+</p>
+</div>
+<ul>
+<li><strong>Clone</strong>: After creating the fork, you need to download a copy to your machine.
+<ul>
+<li>In Sourcetree’s repository browser, select New… &gt; Clone from URL</li>
+</ul></li>
+<li>This lesson continues in the lab. Open <code>lab.html</code> and <code>lab.R</code> to continue.</li>
+</ul>
+</div>
+</div>
+<div id="further-reading" class="section level2" number="4.8">
+<h2><span class="header-section-number">4.8</span> Further reading</h2>
+<ul>
+<li><span class="citation"><a href="#ref-HesterHappyGitGitHub" role="doc-biblioref">Hester</a> (<a href="#ref-HesterHappyGitGitHub" role="doc-biblioref">n.d.</a>)</span></li>
+</ul>
+
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-HesterHappyGitGitHub" class="csl-entry">
+Hester, Jim, the STAT 545 TAs. n.d. <em>Happy <span>Git</span> and <span>GitHub</span> for the <span class="nocase">useR</span></em>. Accessed March 1, 2020. <a href="https://happygitwithr.com/">https://happygitwithr.com/</a>.
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="data-science-what-and-why.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="warnings-errors-and-getting-help.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/data-science-methods/book/blob/master/02-02-git.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["book.pdf"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section",
+"scroll_highlight": true
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

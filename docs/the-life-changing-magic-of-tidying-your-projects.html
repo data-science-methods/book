@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 15 The life-changing magic of tidying your projects | Methods of Data Science I</title>
+  <meta name="description" content="This document is a set of notes (and perhaps later a textbook) for a course on data science methods for graduate students in social and behavioral sciences." />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 15 The life-changing magic of tidying your projects | Methods of Data Science I" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This document is a set of notes (and perhaps later a textbook) for a course on data science methods for graduate students in social and behavioral sciences." />
+  <meta name="github-repo" content="data-science-methods/book" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 15 The life-changing magic of tidying your projects | Methods of Data Science I" />
+  
+  <meta name="twitter:description" content="This document is a set of notes (and perhaps later a textbook) for a course on data science methods for graduate students in social and behavioral sciences." />
+  
+
+<meta name="author" content="Dan Hicks, hicks.daniel.j@gmail.com" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="a-code-review-checklist.html"/>
+<link rel="next" href="managing-and-publishing-data.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#land-acknowledgements"><i class="fa fa-check"></i><b>1.1</b> Land acknowledgements</a></li>
+<li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#about-the-instructor"><i class="fa fa-check"></i><b>1.2</b> About the instructor</a></li>
+<li class="chapter" data-level="1.3" data-path="introduction.html"><a href="introduction.html#what-this-course-isnt-and-is"><i class="fa fa-check"></i><b>1.3</b> What this course isn’t, and is</a></li>
+<li class="chapter" data-level="1.4" data-path="introduction.html"><a href="introduction.html#learning-outcomes"><i class="fa fa-check"></i><b>1.4</b> Learning outcomes</a></li>
+<li class="chapter" data-level="1.5" data-path="introduction.html"><a href="introduction.html#prerequisites"><i class="fa fa-check"></i><b>1.5</b> Prerequisites</a></li>
+<li class="chapter" data-level="1.6" data-path="introduction.html"><a href="introduction.html#requirements-and-weekly-routine"><i class="fa fa-check"></i><b>1.6</b> Requirements and weekly routine</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="software-hardware-and-accounts.html"><a href="software-hardware-and-accounts.html"><i class="fa fa-check"></i><b>2</b> Software, hardware, and accounts</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="software-hardware-and-accounts.html"><a href="software-hardware-and-accounts.html#a-note-on-accessibility"><i class="fa fa-check"></i><b>2.1</b> A Note on Accessibility</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="data-science-what-and-why.html"><a href="data-science-what-and-why.html"><i class="fa fa-check"></i><b>3</b> Data Science: What and why</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="data-science-what-and-why.html"><a href="data-science-what-and-why.html#reading"><i class="fa fa-check"></i><b>3.1</b> Reading</a></li>
+<li class="chapter" data-level="3.2" data-path="data-science-what-and-why.html"><a href="data-science-what-and-why.html#discussion-question"><i class="fa fa-check"></i><b>3.2</b> Discussion question</a></li>
+<li class="chapter" data-level="3.3" data-path="data-science-what-and-why.html"><a href="data-science-what-and-why.html#standard-definition"><i class="fa fa-check"></i><b>3.3</b> Standard definition</a></li>
+<li class="chapter" data-level="3.4" data-path="data-science-what-and-why.html"><a href="data-science-what-and-why.html#discussion-question-1"><i class="fa fa-check"></i><b>3.4</b> Discussion question</a></li>
+</ul></li>
+<li class="part"><span><b>I Some fundamental tools</b></span></li>
+<li class="chapter" data-level="4" data-path="git-and-version-control.html"><a href="git-and-version-control.html"><i class="fa fa-check"></i><b>4</b> Git and Version Control</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="git-and-version-control.html"><a href="git-and-version-control.html#some-motivating-examples"><i class="fa fa-check"></i><b>4.1</b> Some motivating examples</a></li>
+<li class="chapter" data-level="4.2" data-path="git-and-version-control.html"><a href="git-and-version-control.html#version-control"><i class="fa fa-check"></i><b>4.2</b> Version control</a></li>
+<li class="chapter" data-level="4.3" data-path="git-and-version-control.html"><a href="git-and-version-control.html#gitting-started"><i class="fa fa-check"></i><b>4.3</b> Gitting started</a></li>
+<li class="chapter" data-level="4.4" data-path="git-and-version-control.html"><a href="git-and-version-control.html#time-travel"><i class="fa fa-check"></i><b>4.4</b> Time travel</a></li>
+<li class="chapter" data-level="4.5" data-path="git-and-version-control.html"><a href="git-and-version-control.html#the-garden-of-forking-branches"><i class="fa fa-check"></i><b>4.5</b> The garden of forking branches</a></li>
+<li class="chapter" data-level="4.6" data-path="git-and-version-control.html"><a href="git-and-version-control.html#generating-a-github-pat"><i class="fa fa-check"></i><b>4.6</b> Generating a GitHub PAT</a></li>
+<li class="chapter" data-level="4.7" data-path="git-and-version-control.html"><a href="git-and-version-control.html#working-with-github-remotes"><i class="fa fa-check"></i><b>4.7</b> Working with GitHub remotes</a></li>
+<li class="chapter" data-level="4.8" data-path="git-and-version-control.html"><a href="git-and-version-control.html#further-reading"><i class="fa fa-check"></i><b>4.8</b> Further reading</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="warnings-errors-and-getting-help.html"><a href="warnings-errors-and-getting-help.html"><i class="fa fa-check"></i><b>5</b> Warnings, Errors, and Getting Help</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="warnings-errors-and-getting-help.html"><a href="warnings-errors-and-getting-help.html#reading-1"><i class="fa fa-check"></i><b>5.1</b> Reading</a></li>
+<li class="chapter" data-level="5.2" data-path="warnings-errors-and-getting-help.html"><a href="warnings-errors-and-getting-help.html#dependencies"><i class="fa fa-check"></i><b>5.2</b> Dependencies</a></li>
+<li class="chapter" data-level="5.3" data-path="warnings-errors-and-getting-help.html"><a href="warnings-errors-and-getting-help.html#messages-warnings-and-errors"><i class="fa fa-check"></i><b>5.3</b> Messages, warnings, and errors</a></li>
+<li class="chapter" data-level="5.4" data-path="warnings-errors-and-getting-help.html"><a href="warnings-errors-and-getting-help.html#where-to-go-for-help"><i class="fa fa-check"></i><b>5.4</b> Where to go for help</a></li>
+<li class="chapter" data-level="5.5" data-path="warnings-errors-and-getting-help.html"><a href="warnings-errors-and-getting-help.html#example-dates-are-often-problems"><i class="fa fa-check"></i><b>5.5</b> Example: Dates are often problems</a></li>
+<li class="chapter" data-level="5.6" data-path="warnings-errors-and-getting-help.html"><a href="warnings-errors-and-getting-help.html#another-example-more-fun-with-dates"><i class="fa fa-check"></i><b>5.6</b> Another example: More fun with dates</a></li>
+<li class="chapter" data-level="5.7" data-path="warnings-errors-and-getting-help.html"><a href="warnings-errors-and-getting-help.html#writing-a-reproducible-example-reprex"><i class="fa fa-check"></i><b>5.7</b> Writing a reproducible example: <code>reprex</code></a></li>
+<li class="chapter" data-level="5.8" data-path="warnings-errors-and-getting-help.html"><a href="warnings-errors-and-getting-help.html#do-not-do-these-things-in-your-reprex-or-anywhere-else"><i class="fa fa-check"></i><b>5.8</b> Do not do these things in your reprex (or anywhere else)</a></li>
+<li class="chapter" data-level="5.9" data-path="warnings-errors-and-getting-help.html"><a href="warnings-errors-and-getting-help.html#debugging-in-rstudio"><i class="fa fa-check"></i><b>5.9</b> Debugging in RStudio</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="programming-paradigms.html"><a href="programming-paradigms.html"><i class="fa fa-check"></i><b>6</b> Programming Paradigms</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="programming-paradigms.html"><a href="programming-paradigms.html#reading-2"><i class="fa fa-check"></i><b>6.1</b> Reading</a></li>
+<li class="chapter" data-level="6.2" data-path="programming-paradigms.html"><a href="programming-paradigms.html#dependencies-1"><i class="fa fa-check"></i><b>6.2</b> Dependencies</a></li>
+<li class="chapter" data-level="6.3" data-path="programming-paradigms.html"><a href="programming-paradigms.html#programming-paradigms-1"><i class="fa fa-check"></i><b>6.3</b> Programming paradigms</a></li>
+<li class="chapter" data-level="6.4" data-path="programming-paradigms.html"><a href="programming-paradigms.html#object-oriented-programming"><i class="fa fa-check"></i><b>6.4</b> Object-oriented programming</a></li>
+<li class="chapter" data-level="6.5" data-path="programming-paradigms.html"><a href="programming-paradigms.html#the-oop-youre-used-to"><i class="fa fa-check"></i><b>6.5</b> The OOP you’re used to</a></li>
+<li class="chapter" data-level="6.6" data-path="programming-paradigms.html"><a href="programming-paradigms.html#s3-is-oop-but-weird"><i class="fa fa-check"></i><b>6.6</b> S3 is OOP, but weird</a></li>
+<li class="chapter" data-level="6.7" data-path="programming-paradigms.html"><a href="programming-paradigms.html#functional-programming"><i class="fa fa-check"></i><b>6.7</b> Functional programming</a></li>
+<li class="chapter" data-level="6.8" data-path="programming-paradigms.html"><a href="programming-paradigms.html#common-features-of-functional-programming"><i class="fa fa-check"></i><b>6.8</b> Common features of functional programming</a></li>
+<li class="chapter" data-level="6.9" data-path="programming-paradigms.html"><a href="programming-paradigms.html#breaking-r-everything-that-happens-is-a-function"><i class="fa fa-check"></i><b>6.9</b> Breaking R: Everything that happens is a function</a></li>
+<li class="chapter" data-level="6.10" data-path="programming-paradigms.html"><a href="programming-paradigms.html#actually-useful-functional-r-pipes-and-the-tidyverse"><i class="fa fa-check"></i><b>6.10</b> Actually-useful functional R: Pipes (and the tidyverse)</a></li>
+<li class="chapter" data-level="6.11" data-path="programming-paradigms.html"><a href="programming-paradigms.html#programming-paradigms-and-data-science"><i class="fa fa-check"></i><b>6.11</b> Programming paradigms and data science</a></li>
+</ul></li>
+<li class="part"><span><b>II Exploratory Data Analysis (EDA)</b></span></li>
+<li class="chapter" data-level="7" data-path="eda-models.html"><a href="eda-models.html"><i class="fa fa-check"></i><b>7</b> Exploratory Data Analysis</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="eda-models.html"><a href="eda-models.html#section"><i class="fa fa-check"></i><b>7.1</b> <br></a></li>
+<li class="chapter" data-level="7.2" data-path="eda-models.html"><a href="eda-models.html#exploratory-and-confirmatory-research"><i class="fa fa-check"></i><b>7.2</b> Exploratory and Confirmatory Research</a></li>
+<li class="chapter" data-level="7.3" data-path="eda-models.html"><a href="eda-models.html#better-models-for-eda-i-developing-phenomena"><i class="fa fa-check"></i><b>7.3</b> Better Models for EDA I: Developing Phenomena</a></li>
+<li class="chapter" data-level="7.4" data-path="eda-models.html"><a href="eda-models.html#eda-as-phenomena-development"><i class="fa fa-check"></i><b>7.4</b> EDA as phenomena development</a></li>
+<li class="chapter" data-level="7.5" data-path="eda-models.html"><a href="eda-models.html#better-models-for-eda-ii-epicycle-of-analysis"><i class="fa fa-check"></i><b>7.5</b> Better Models for EDA II: Epicycle of Analysis</a></li>
+<li class="chapter" data-level="7.6" data-path="eda-models.html"><a href="eda-models.html#pengartdatascience2016"><i class="fa fa-check"></i><b>7.6</b> <span class="citation"><span>Peng and Matsui</span> (<span>2016</span>)</span></a></li>
+<li class="chapter" data-level="7.7" data-path="eda-models.html"><a href="eda-models.html#section-1"><i class="fa fa-check"></i><b>7.7</b> </br></a></li>
+<li class="chapter" data-level="7.8" data-path="eda-models.html"><a href="eda-models.html#discussion"><i class="fa fa-check"></i><b>7.8</b> Discussion</a></li>
+<li class="chapter" data-level="7.9" data-path="eda-models.html"><a href="eda-models.html#references"><i class="fa fa-check"></i><b>7.9</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="two-eda-checklists.html"><a href="two-eda-checklists.html"><i class="fa fa-check"></i><b>8</b> Two EDA “Checklists”</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="two-eda-checklists.html"><a href="two-eda-checklists.html#pengartdatascience2016-1"><i class="fa fa-check"></i><b>8.1</b> <span class="citation"><span>Peng and Matsui</span> (<span>2016</span>)</span></a></li>
+<li class="chapter" data-level="8.2" data-path="two-eda-checklists.html"><a href="two-eda-checklists.html#huebnersystematicapproachinitial2016"><i class="fa fa-check"></i><b>8.2</b> <span class="citation"><span>Huebner, Vach, and le Cessie</span> (<span>2016</span>)</span></a></li>
+<li class="chapter" data-level="8.3" data-path="two-eda-checklists.html"><a href="two-eda-checklists.html#references-1"><i class="fa fa-check"></i><b>8.3</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="inspecting-variables.html"><a href="inspecting-variables.html"><i class="fa fa-check"></i><b>9</b> Inspecting Variables</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="inspecting-variables.html"><a href="inspecting-variables.html#section-2"><i class="fa fa-check"></i><b>9.1</b> </br></a></li>
+<li class="chapter" data-level="9.2" data-path="inspecting-variables.html"><a href="inspecting-variables.html#formulate-your-question"><i class="fa fa-check"></i><b>9.2</b> 1. Formulate your question</a></li>
+<li class="chapter" data-level="9.3" data-path="inspecting-variables.html"><a href="inspecting-variables.html#reflexivity"><i class="fa fa-check"></i><b>9.3</b> Reflexivity</a></li>
+<li class="chapter" data-level="9.4" data-path="inspecting-variables.html"><a href="inspecting-variables.html#set-up-our-workspace"><i class="fa fa-check"></i><b>9.4</b> Set up our workspace</a></li>
+<li class="chapter" data-level="9.5" data-path="inspecting-variables.html"><a href="inspecting-variables.html#packages"><i class="fa fa-check"></i><b>9.5</b> Packages</a></li>
+<li class="chapter" data-level="9.6" data-path="inspecting-variables.html"><a href="inspecting-variables.html#get-the-data"><i class="fa fa-check"></i><b>9.6</b> Get the Data</a></li>
+<li class="chapter" data-level="9.7" data-path="inspecting-variables.html"><a href="inspecting-variables.html#read-in-your-data"><i class="fa fa-check"></i><b>9.7</b> 2. Read in your data</a></li>
+<li class="chapter" data-level="9.8" data-path="inspecting-variables.html"><a href="inspecting-variables.html#check-the-packaging"><i class="fa fa-check"></i><b>9.8</b> 3. Check the packaging</a></li>
+<li class="chapter" data-level="9.9" data-path="inspecting-variables.html"><a href="inspecting-variables.html#for-our-motivating-questions"><i class="fa fa-check"></i><b>9.9</b> For our motivating questions</a></li>
+<li class="chapter" data-level="9.10" data-path="inspecting-variables.html"><a href="inspecting-variables.html#missing-values"><i class="fa fa-check"></i><b>9.10</b> Missing values</a></li>
+<li class="chapter" data-level="9.11" data-path="inspecting-variables.html"><a href="inspecting-variables.html#a-critical-question"><i class="fa fa-check"></i><b>9.11</b> A critical question</a></li>
+<li class="chapter" data-level="9.12" data-path="inspecting-variables.html"><a href="inspecting-variables.html#look-at-the-top-and-the-bottom-of-your-data"><i class="fa fa-check"></i><b>9.12</b> 4. Look at the top and the bottom of your data</a></li>
+<li class="chapter" data-level="9.13" data-path="inspecting-variables.html"><a href="inspecting-variables.html#check-your-ns-and-6.-validate-with-at-least-one-external-data-source"><i class="fa fa-check"></i><b>9.13</b> 5. Check your “n”s (and) 6. Validate with at least one external data source</a></li>
+<li class="chapter" data-level="9.14" data-path="inspecting-variables.html"><a href="inspecting-variables.html#from-dates-to-years"><i class="fa fa-check"></i><b>9.14</b> From dates to years</a></li>
+<li class="chapter" data-level="9.15" data-path="inspecting-variables.html"><a href="inspecting-variables.html#make-a-plot"><i class="fa fa-check"></i><b>9.15</b> 7. Make a plot</a></li>
+<li class="chapter" data-level="9.16" data-path="inspecting-variables.html"><a href="inspecting-variables.html#try-the-easy-solution-first"><i class="fa fa-check"></i><b>9.16</b> 8. Try the easy solution first</a></li>
+<li class="chapter" data-level="9.17" data-path="inspecting-variables.html"><a href="inspecting-variables.html#number-of-stops-by-race"><i class="fa fa-check"></i><b>9.17</b> Number of stops, by race</a></li>
+<li class="chapter" data-level="9.18" data-path="inspecting-variables.html"><a href="inspecting-variables.html#contraband-search-results-by-race"><i class="fa fa-check"></i><b>9.18</b> Contraband search results, by race</a></li>
+<li class="chapter" data-level="9.19" data-path="inspecting-variables.html"><a href="inspecting-variables.html#follow-up"><i class="fa fa-check"></i><b>9.19</b> 9. Follow up</a></li>
+<li class="chapter" data-level="9.20" data-path="inspecting-variables.html"><a href="inspecting-variables.html#discussion-questions"><i class="fa fa-check"></i><b>9.20</b> Discussion questions</a></li>
+<li class="chapter" data-level="9.21" data-path="inspecting-variables.html"><a href="inspecting-variables.html#lab"><i class="fa fa-check"></i><b>9.21</b> Lab</a></li>
+<li class="chapter" data-level="9.22" data-path="inspecting-variables.html"><a href="inspecting-variables.html#references-2"><i class="fa fa-check"></i><b>9.22</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="visual-eda.html"><a href="visual-eda.html"><i class="fa fa-check"></i><b>10</b> Visual EDA</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="visual-eda.html"><a href="visual-eda.html#reading-3"><i class="fa fa-check"></i><b>10.1</b> Reading</a></li>
+<li class="chapter" data-level="10.2" data-path="visual-eda.html"><a href="visual-eda.html#the-role-of-visuals-in-eda"><i class="fa fa-check"></i><b>10.2</b> The Role of Visuals in EDA</a></li>
+<li class="chapter" data-level="10.3" data-path="visual-eda.html"><a href="visual-eda.html#in-terms-of-our-models-of-eda"><i class="fa fa-check"></i><b>10.3</b> In terms of our models of EDA</a></li>
+<li class="chapter" data-level="10.4" data-path="visual-eda.html"><a href="visual-eda.html#plot-your-data"><i class="fa fa-check"></i><b>10.4</b> Plot Your Data</a></li>
+<li class="chapter" data-level="10.5" data-path="visual-eda.html"><a href="visual-eda.html#bar-plots-and-better-than-bar-plots"><i class="fa fa-check"></i><b>10.5</b> Bar plots, and better than bar plots</a></li>
+<li class="chapter" data-level="10.6" data-path="visual-eda.html"><a href="visual-eda.html#a-bar-plot-of-mean-95-ci"><i class="fa fa-check"></i><b>10.6</b> A bar plot of mean + 95% CI</a></li>
+<li class="chapter" data-level="10.7" data-path="visual-eda.html"><a href="visual-eda.html#replace-the-bar-with-the-data"><i class="fa fa-check"></i><b>10.7</b> Replace the bar with the data</a></li>
+<li class="chapter" data-level="10.8" data-path="visual-eda.html"><a href="visual-eda.html#even-fancier-violin-plot"><i class="fa fa-check"></i><b>10.8</b> Even fancier: Violin plot</a></li>
+<li class="chapter" data-level="10.9" data-path="visual-eda.html"><a href="visual-eda.html#references-3"><i class="fa fa-check"></i><b>10.9</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="the-grammar-of-graphics.html"><a href="the-grammar-of-graphics.html"><i class="fa fa-check"></i><b>11</b> The Grammar of Graphics</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="the-grammar-of-graphics.html"><a href="the-grammar-of-graphics.html#reading-4"><i class="fa fa-check"></i><b>11.1</b> Reading</a></li>
+<li class="chapter" data-level="11.2" data-path="the-grammar-of-graphics.html"><a href="the-grammar-of-graphics.html#artists-palette-model"><i class="fa fa-check"></i><b>11.2</b> Artist’s palette model</a></li>
+<li class="chapter" data-level="11.3" data-path="the-grammar-of-graphics.html"><a href="the-grammar-of-graphics.html#grammar-of-graphics"><i class="fa fa-check"></i><b>11.3</b> Grammar of graphics</a></li>
+<li class="chapter" data-level="11.4" data-path="the-grammar-of-graphics.html"><a href="the-grammar-of-graphics.html#graphs-are-maps"><i class="fa fa-check"></i><b>11.4</b> Graphs are maps</a></li>
+<li class="chapter" data-level="11.5" data-path="the-grammar-of-graphics.html"><a href="the-grammar-of-graphics.html#graphs-are-models"><i class="fa fa-check"></i><b>11.5</b> Graphs are models</a></li>
+<li class="chapter" data-level="11.6" data-path="the-grammar-of-graphics.html"><a href="the-grammar-of-graphics.html#references-4"><i class="fa fa-check"></i><b>11.6</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="covid-eda.html"><a href="covid-eda.html"><i class="fa fa-check"></i><b>12</b> Covid EDA</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="covid-eda.html"><a href="covid-eda.html#section-3"><i class="fa fa-check"></i><b>12.1</b> </br></a></li>
+<li class="chapter" data-level="12.2" data-path="covid-eda.html"><a href="covid-eda.html#the-standard-narrative"><i class="fa fa-check"></i><b>12.2</b> The standard narrative</a></li>
+<li class="chapter" data-level="12.3" data-path="covid-eda.html"><a href="covid-eda.html#reflexivity-1"><i class="fa fa-check"></i><b>12.3</b> Reflexivity</a></li>
+<li class="chapter" data-level="12.4" data-path="covid-eda.html"><a href="covid-eda.html#setup"><i class="fa fa-check"></i><b>12.4</b> Setup</a></li>
+<li class="chapter" data-level="12.5" data-path="covid-eda.html"><a href="covid-eda.html#data"><i class="fa fa-check"></i><b>12.5</b> Data</a></li>
+<li class="chapter" data-level="12.6" data-path="covid-eda.html"><a href="covid-eda.html#get-the-data-1"><i class="fa fa-check"></i><b>12.6</b> Get the data</a></li>
+<li class="chapter" data-level="12.7" data-path="covid-eda.html"><a href="covid-eda.html#some-quick-data-checking"><i class="fa fa-check"></i><b>12.7</b> Some quick data checking</a></li>
+<li class="chapter" data-level="12.8" data-path="covid-eda.html"><a href="covid-eda.html#variables"><i class="fa fa-check"></i><b>12.8</b> Variables</a></li>
+<li class="chapter" data-level="12.9" data-path="covid-eda.html"><a href="covid-eda.html#too-many-timeseries-plots"><i class="fa fa-check"></i><b>12.9</b> Too many timeseries plots</a></li>
+<li class="chapter" data-level="12.10" data-path="covid-eda.html"><a href="covid-eda.html#number-of-observations-per-county"><i class="fa fa-check"></i><b>12.10</b> Number of observations per county</a></li>
+<li class="chapter" data-level="12.11" data-path="covid-eda.html"><a href="covid-eda.html#no-more-than-1-observation-per-county-per-day"><i class="fa fa-check"></i><b>12.11</b> No more than 1 observation per county per day</a></li>
+<li class="chapter" data-level="12.12" data-path="covid-eda.html"><a href="covid-eda.html#cumulative-vs.-daily-cases"><i class="fa fa-check"></i><b>12.12</b> Cumulative vs. daily cases</a></li>
+<li class="chapter" data-level="12.13" data-path="covid-eda.html"><a href="covid-eda.html#add-an-assertion"><i class="fa fa-check"></i><b>12.13</b> Add an assertion</a></li>
+<li class="chapter" data-level="12.14" data-path="covid-eda.html"><a href="covid-eda.html#distribution-of-cases-by-county"><i class="fa fa-check"></i><b>12.14</b> Distribution of cases by county</a></li>
+<li class="chapter" data-level="12.15" data-path="covid-eda.html"><a href="covid-eda.html#revisions"><i class="fa fa-check"></i><b>12.15</b> Revisions</a></li>
+<li class="chapter" data-level="12.16" data-path="covid-eda.html"><a href="covid-eda.html#plots-of-the-same-plot"><i class="fa fa-check"></i><b>12.16</b> 9 plots of the same plot</a></li>
+<li class="chapter" data-level="12.17" data-path="covid-eda.html"><a href="covid-eda.html#why-so-many-dropped-values"><i class="fa fa-check"></i><b>12.17</b> Why so many dropped values?</a></li>
+<li class="chapter" data-level="12.18" data-path="covid-eda.html"><a href="covid-eda.html#cases-vs.-population"><i class="fa fa-check"></i><b>12.18</b> Cases vs. population</a></li>
+<li class="chapter" data-level="12.19" data-path="covid-eda.html"><a href="covid-eda.html#absolute-counts-to-rates"><i class="fa fa-check"></i><b>12.19</b> Absolute counts to rates</a></li>
+<li class="chapter" data-level="12.20" data-path="covid-eda.html"><a href="covid-eda.html#rates-vs.-population"><i class="fa fa-check"></i><b>12.20</b> Rates vs. population</a></li>
+<li class="chapter" data-level="12.21" data-path="covid-eda.html"><a href="covid-eda.html#counties-by-maximum-rate-of-new-cases"><i class="fa fa-check"></i><b>12.21</b> Counties by maximum rate of new cases</a></li>
+<li class="chapter" data-level="12.22" data-path="covid-eda.html"><a href="covid-eda.html#cases-vs.-deaths-when-we-control-for-population"><i class="fa fa-check"></i><b>12.22</b> Cases vs. deaths when we control for population</a></li>
+</ul></li>
+<li class="part"><span><b>III Reproducibility, Replicability, and Robustness</b></span></li>
+<li class="chapter" data-level="13" data-path="readable-code-is-reliable-code.html"><a href="readable-code-is-reliable-code.html"><i class="fa fa-check"></i><b>13</b> Readable code is reliable code</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="readable-code-is-reliable-code.html"><a href="readable-code-is-reliable-code.html#reading-5"><i class="fa fa-check"></i><b>13.1</b> Reading</a></li>
+<li class="chapter" data-level="13.2" data-path="readable-code-is-reliable-code.html"><a href="readable-code-is-reliable-code.html#writing-code-is-writing"><i class="fa fa-check"></i><b>13.2</b> Writing code is writing</a></li>
+<li class="chapter" data-level="13.3" data-path="readable-code-is-reliable-code.html"><a href="readable-code-is-reliable-code.html#code-style"><i class="fa fa-check"></i><b>13.3</b> Code style</a></li>
+<li class="chapter" data-level="13.4" data-path="readable-code-is-reliable-code.html"><a href="readable-code-is-reliable-code.html#highlights-from-the-tidyverse-style-guide"><i class="fa fa-check"></i><b>13.4</b> Highlights from the Tidyverse style guide</a></li>
+<li class="chapter" data-level="13.5" data-path="readable-code-is-reliable-code.html"><a href="readable-code-is-reliable-code.html#spaces"><i class="fa fa-check"></i><b>13.5</b> Spaces</a></li>
+<li class="chapter" data-level="13.6" data-path="readable-code-is-reliable-code.html"><a href="readable-code-is-reliable-code.html#code-blocks"><i class="fa fa-check"></i><b>13.6</b> Code blocks</a></li>
+<li class="chapter" data-level="13.7" data-path="readable-code-is-reliable-code.html"><a href="readable-code-is-reliable-code.html#boolean-variables-vs.-control-flow"><i class="fa fa-check"></i><b>13.7</b> Boolean variables vs. control flow</a></li>
+<li class="chapter" data-level="13.8" data-path="readable-code-is-reliable-code.html"><a href="readable-code-is-reliable-code.html#references-5"><i class="fa fa-check"></i><b>13.8</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="a-code-review-checklist.html"><a href="a-code-review-checklist.html"><i class="fa fa-check"></i><b>14</b> A code review checklist</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="a-code-review-checklist.html"><a href="a-code-review-checklist.html#reading-6"><i class="fa fa-check"></i><b>14.1</b> Reading</a></li>
+<li class="chapter" data-level="14.2" data-path="a-code-review-checklist.html"><a href="a-code-review-checklist.html#readability-understandability"><i class="fa fa-check"></i><b>14.2</b> 1. Readability / understandability</a></li>
+<li class="chapter" data-level="14.3" data-path="a-code-review-checklist.html"><a href="a-code-review-checklist.html#maintainability"><i class="fa fa-check"></i><b>14.3</b> 2. Maintainability</a></li>
+<li class="chapter" data-level="14.4" data-path="a-code-review-checklist.html"><a href="a-code-review-checklist.html#security"><i class="fa fa-check"></i><b>14.4</b> 3. Security</a></li>
+<li class="chapter" data-level="14.5" data-path="a-code-review-checklist.html"><a href="a-code-review-checklist.html#speed-and-performance"><i class="fa fa-check"></i><b>14.5</b> 4. Speed and Performance</a></li>
+<li class="chapter" data-level="14.6" data-path="a-code-review-checklist.html"><a href="a-code-review-checklist.html#documentation"><i class="fa fa-check"></i><b>14.6</b> 5. Documentation</a></li>
+<li class="chapter" data-level="14.7" data-path="a-code-review-checklist.html"><a href="a-code-review-checklist.html#reinventing-the-wheel"><i class="fa fa-check"></i><b>14.7</b> 6. Reinventing the Wheel</a></li>
+<li class="chapter" data-level="14.8" data-path="a-code-review-checklist.html"><a href="a-code-review-checklist.html#reliability"><i class="fa fa-check"></i><b>14.8</b> 7. Reliability</a></li>
+<li class="chapter" data-level="14.9" data-path="a-code-review-checklist.html"><a href="a-code-review-checklist.html#skipping-a-few"><i class="fa fa-check"></i><b>14.9</b> Skipping a few</a></li>
+<li class="chapter" data-level="14.10" data-path="a-code-review-checklist.html"><a href="a-code-review-checklist.html#notice-whats-missing"><i class="fa fa-check"></i><b>14.10</b> 13. Notice what’s missing</a></li>
+<li class="chapter" data-level="14.11" data-path="a-code-review-checklist.html"><a href="a-code-review-checklist.html#zoom-out"><i class="fa fa-check"></i><b>14.11</b> 14. Zoom out</a></li>
+<li class="chapter" data-level="14.12" data-path="a-code-review-checklist.html"><a href="a-code-review-checklist.html#references-6"><i class="fa fa-check"></i><b>14.12</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="the-life-changing-magic-of-tidying-your-projects.html"><a href="the-life-changing-magic-of-tidying-your-projects.html"><i class="fa fa-check"></i><b>15</b> The life-changing magic of tidying your projects</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="the-life-changing-magic-of-tidying-your-projects.html"><a href="the-life-changing-magic-of-tidying-your-projects.html#reading-7"><i class="fa fa-check"></i><b>15.1</b> Reading</a></li>
+<li class="chapter" data-level="15.2" data-path="the-life-changing-magic-of-tidying-your-projects.html"><a href="the-life-changing-magic-of-tidying-your-projects.html#dumpster-organization"><i class="fa fa-check"></i><b>15.2</b> Dumpster organization</a></li>
+<li class="chapter" data-level="15.3" data-path="the-life-changing-magic-of-tidying-your-projects.html"><a href="the-life-changing-magic-of-tidying-your-projects.html#project-organization"><i class="fa fa-check"></i><b>15.3</b> Project organization</a></li>
+<li class="chapter" data-level="15.4" data-path="the-life-changing-magic-of-tidying-your-projects.html"><a href="the-life-changing-magic-of-tidying-your-projects.html#model-1-noblequickguideorganizing2009"><i class="fa fa-check"></i><b>15.4</b> Model 1: <span class="citation"><span>Noble</span> (<span>2009</span>)</span></a></li>
+<li class="chapter" data-level="15.5" data-path="the-life-changing-magic-of-tidying-your-projects.html"><a href="the-life-changing-magic-of-tidying-your-projects.html#model-2-some-of-dhs-projects"><i class="fa fa-check"></i><b>15.5</b> Model 2: Some of DH’s projects</a></li>
+<li class="chapter" data-level="15.6" data-path="the-life-changing-magic-of-tidying-your-projects.html"><a href="the-life-changing-magic-of-tidying-your-projects.html#just-the-directories"><i class="fa fa-check"></i><b>15.6</b> Just the directories</a></li>
+<li class="chapter" data-level="15.7" data-path="the-life-changing-magic-of-tidying-your-projects.html"><a href="the-life-changing-magic-of-tidying-your-projects.html#a-larger-text-mining-project"><i class="fa fa-check"></i><b>15.7</b> A larger text-mining project</a></li>
+<li class="chapter" data-level="15.8" data-path="the-life-changing-magic-of-tidying-your-projects.html"><a href="the-life-changing-magic-of-tidying-your-projects.html#just-the-directories-1"><i class="fa fa-check"></i><b>15.8</b> Just the directories</a></li>
+<li class="chapter" data-level="15.9" data-path="the-life-changing-magic-of-tidying-your-projects.html"><a href="the-life-changing-magic-of-tidying-your-projects.html#dhs-project-template"><i class="fa fa-check"></i><b>15.9</b> DH’s Project Template</a></li>
+<li class="chapter" data-level="15.10" data-path="the-life-changing-magic-of-tidying-your-projects.html"><a href="the-life-changing-magic-of-tidying-your-projects.html#a-reminder-on-paths"><i class="fa fa-check"></i><b>15.10</b> A reminder on paths</a></li>
+<li class="chapter" data-level="15.11" data-path="the-life-changing-magic-of-tidying-your-projects.html"><a href="the-life-changing-magic-of-tidying-your-projects.html#references-7"><i class="fa fa-check"></i><b>15.11</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="managing-and-publishing-data.html"><a href="managing-and-publishing-data.html"><i class="fa fa-check"></i><b>16</b> Managing and publishing data</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="managing-and-publishing-data.html"><a href="managing-and-publishing-data.html#reading-8"><i class="fa fa-check"></i><b>16.1</b> Reading</a></li>
+<li class="chapter" data-level="16.2" data-path="managing-and-publishing-data.html"><a href="managing-and-publishing-data.html#the-first-rule-of-data-management"><i class="fa fa-check"></i><b>16.2</b> The first rule of data management</a></li>
+<li class="chapter" data-level="16.3" data-path="managing-and-publishing-data.html"><a href="managing-and-publishing-data.html#documentation-1"><i class="fa fa-check"></i><b>16.3</b> Documentation</a></li>
+<li class="chapter" data-level="16.4" data-path="managing-and-publishing-data.html"><a href="managing-and-publishing-data.html#questions-a-codebook-should-answer"><i class="fa fa-check"></i><b>16.4</b> Questions a codebook should answer</a></li>
+<li class="chapter" data-level="16.5" data-path="managing-and-publishing-data.html"><a href="managing-and-publishing-data.html#major-codebook-elements"><i class="fa fa-check"></i><b>16.5</b> Major codebook elements</a></li>
+<li class="chapter" data-level="16.6" data-path="managing-and-publishing-data.html"><a href="managing-and-publishing-data.html#data-management-plans"><i class="fa fa-check"></i><b>16.6</b> Data management plans</a></li>
+<li class="chapter" data-level="16.7" data-path="managing-and-publishing-data.html"><a href="managing-and-publishing-data.html#data-management-plan-common-elements"><i class="fa fa-check"></i><b>16.7</b> Data management plan: Common elements</a></li>
+<li class="chapter" data-level="16.8" data-path="managing-and-publishing-data.html"><a href="managing-and-publishing-data.html#fair-principles-for-published-data"><i class="fa fa-check"></i><b>16.8</b> FAIR principles for published data</a></li>
+<li class="chapter" data-level="16.9" data-path="managing-and-publishing-data.html"><a href="managing-and-publishing-data.html#dois-for-data"><i class="fa fa-check"></i><b>16.9</b> DOIs for data</a></li>
+<li class="chapter" data-level="16.10" data-path="managing-and-publishing-data.html"><a href="managing-and-publishing-data.html#references-8"><i class="fa fa-check"></i><b>16.10</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="make.html"><a href="make.html"><i class="fa fa-check"></i><b>17</b> Make</a></li>
+<li class="chapter" data-level="18" data-path="tracking-package-versions-with-renv.html"><a href="tracking-package-versions-with-renv.html"><i class="fa fa-check"></i><b>18</b> Tracking package versions with <code>renv</code></a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="tracking-package-versions-with-renv.html"><a href="tracking-package-versions-with-renv.html#renv"><i class="fa fa-check"></i><b>18.1</b> <code>renv</code></a></li>
+<li class="chapter" data-level="18.2" data-path="tracking-package-versions-with-renv.html"><a href="tracking-package-versions-with-renv.html#the-problem-renv-tries-to-solve"><i class="fa fa-check"></i><b>18.2</b> The problem <code>renv</code> tries to solve</a></li>
+<li class="chapter" data-level="18.3" data-path="tracking-package-versions-with-renv.html"><a href="tracking-package-versions-with-renv.html#how-r-locates-packages"><i class="fa fa-check"></i><b>18.3</b> How R locates packages</a></li>
+<li class="chapter" data-level="18.4" data-path="tracking-package-versions-with-renv.html"><a href="tracking-package-versions-with-renv.html#renv-workflow"><i class="fa fa-check"></i><b>18.4</b> <code>renv</code> workflow</a></li>
+<li class="chapter" data-level="18.5" data-path="tracking-package-versions-with-renv.html"><a href="tracking-package-versions-with-renv.html#example-with-the-learning-make-project"><i class="fa fa-check"></i><b>18.5</b> Example: with the <code>learning-make</code> project</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references-9.html"><a href="references-9.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Methods of Data Science I</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="the-life-changing-magic-of-tidying-your-projects" class="section level1" number="15">
+<h1><span class="header-section-number">Chapter 15</span> The life-changing magic of tidying your projects</h1>
+<div id="reading-7" class="section level2" number="15.1">
+<h2><span class="header-section-number">15.1</span> Reading</h2>
+<ul>
+<li><span class="citation"><a href="#ref-NobleQuickGuideOrganizing2009" role="doc-biblioref">Noble</a> (<a href="#ref-NobleQuickGuideOrganizing2009" role="doc-biblioref">2009</a>)</span></li>
+</ul>
+<div id="some-data-management-disasters" class="section level3" number="15.1.1">
+<h3><span class="header-section-number">15.1.1</span> Some data management disasters</h3>
+<ul>
+<li><span class="citation"><a href="#ref-ArrayErrors2011" role="doc-biblioref"><em>The Economist</em></a> (<a href="#ref-ArrayErrors2011" role="doc-biblioref">2011</a>)</span>, <span class="citation"><a href="#ref-VideoKeithBaggerly" role="doc-biblioref"><span>“Video: Keith <span>Baggerly</span>, "<span>When</span> Is <span>Reproducibility</span> an <span>Ethical Issue</span>? Genomics, <span>Personalized Medicine</span>, and <span>Human Error</span>"”</span></a> (<a href="#ref-VideoKeithBaggerly" role="doc-biblioref">n.d.</a>)</span></li>
+<li><span class="citation"><a href="#ref-HerndonDoesHighPublic2014" role="doc-biblioref">Herndon, Ash, and Pollin</a> (<a href="#ref-HerndonDoesHighPublic2014" role="doc-biblioref">2014</a>)</span>, but you can just read <span class="citation"><a href="#ref-BaileyReinhartRogoffErrorHow" role="doc-biblioref">Bailey and Borwein (Jon)</a> (<a href="#ref-BaileyReinhartRogoffErrorHow" role="doc-biblioref">n.d.</a>)</span>, <span class="citation"><a href="#ref-CassidyReinhartRogoffControversy" role="doc-biblioref">Cassidy</a> (<a href="#ref-CassidyReinhartRogoffControversy" role="doc-biblioref">n.d.</a>)</span>, and/or watch <span class="citation"><a href="#ref-ReinhartRogoffGrowth2019" role="doc-biblioref"><em>Reinhart &amp; <span>Rogoff</span> - <span>Growth</span> in a <span>Time</span> of <span>Debt</span> - <span>EXERCISE</span>!</em></a> (<a href="#ref-ReinhartRogoffGrowth2019" role="doc-biblioref">2019</a>)</span></li>
+<li><span class="citation"><a href="#ref-LaskowskiWhatWhenYou" role="doc-biblioref">Laskowski</a> (<a href="#ref-LaskowskiWhatWhenYou" role="doc-biblioref">n.d.</a>)</span>, <span class="citation"><a href="#ref-ViglioneAvalancheSpiderpaperRetractions2020" role="doc-biblioref">Viglione</a> (<a href="#ref-ViglioneAvalancheSpiderpaperRetractions2020" role="doc-biblioref">2020</a>)</span>, <span class="citation"><a href="#ref-PennisiProminentSpiderBiologist2020" role="doc-biblioref">Pennisi</a> (<a href="#ref-PennisiProminentSpiderBiologist2020" role="doc-biblioref">2020</a>)</span></li>
+<li><span class="citation"><a href="#ref-HowExcelMay2020" role="doc-biblioref"><span>“How <span>Excel</span> May Have Caused Loss of 16,000 <span>Covid</span> Tests in <span>England</span>”</span></a> (<a href="#ref-HowExcelMay2020" role="doc-biblioref">2020</a>)</span></li>
+</ul>
+</div>
+</div>
+<div id="dumpster-organization" class="section level2" number="15.2">
+<h2><span class="header-section-number">15.2</span> Dumpster organization</h2>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-2"></span>
+<img src="https://pbs.twimg.com/media/DFca5SRXsAAx1NA?format=jpg&name=medium" alt="😱 Source: &lt;https://pbs.twimg.com/media/DFca5SRXsAAx1NA&gt;" width="80%" />
+<p class="caption">
+Figure 3.1: 😱 Source: <a href="https://pbs.twimg.com/media/DFca5SRXsAAx1NA" class="uri">https://pbs.twimg.com/media/DFca5SRXsAAx1NA</a>
+</p>
+</div>
+<ul>
+<li>Dump all of your files into one place</li>
+<li>Use search tools to find what you want</li>
+<li>Just assume that things aren’t getting corrupted</li>
+<li>The way many Gen Z students think about their files? <span class="citation">(<a href="#ref-ChinStudentsWhoGrew2021" role="doc-biblioref">Chin 2021</a>)</span></li>
+</ul>
+</div>
+<div id="project-organization" class="section level2" number="15.3">
+<h2><span class="header-section-number">15.3</span> Project organization</h2>
+<ul>
+<li>Keep your project self-contained</li>
+<li>Locate files quickly</li>
+<li>Play nicely with version control</li>
+<li>Self-document key relationships between project files</li>
+</ul>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-3"></span>
+<img src="images/04-reproducibility/folder_structure.png" alt="Folder organization is your friend. I have top-level folders for teaching, coding, and writing projects. Then each project or collection of projects lives in its own folder. An 'Archives' folder is good for tucking old projects out of the way." width="60%" />
+<p class="caption">
+Figure 4.1: Folder organization is your friend. I have top-level folders for teaching, coding, and writing projects. Then each project or collection of projects lives in its own folder. An ‘Archives’ folder is good for tucking old projects out of the way.
+</p>
+</div>
+</div>
+<div id="model-1-noblequickguideorganizing2009" class="section level2" number="15.4">
+<h2><span class="header-section-number">15.4</span> Model 1: <span class="citation"><a href="#ref-NobleQuickGuideOrganizing2009" role="doc-biblioref">Noble</a> (<a href="#ref-NobleQuickGuideOrganizing2009" role="doc-biblioref">2009</a>)</span></h2>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-4"></span>
+<img src="images/04-reproducibility/noble.png" alt="Noble's [-@NobleQuickGuideOrganizing2009] sample folder structure is designed for experimental biologists." width="60%" />
+<p class="caption">
+Figure 4.2: Noble’s <span class="citation">(<a href="#ref-NobleQuickGuideOrganizing2009" role="doc-biblioref">2009</a>)</span> sample folder structure is designed for experimental biologists.
+</p>
+</div>
+<ul>
+<li>Includes code for
+<ul>
+<li>running experiments</li>
+<li>cleaning and analyzing data</li>
+<li>typesetting a LaTeX file into a PDF</li>
+</ul></li>
+<li>Other features
+<ul>
+<li>notebook file, updated regularly</li>
+<li>chronological folders for experimental runs</li>
+<li><code>bin</code> for compiled code and <code>source</code> for corresponding source files</li>
+</ul></li>
+</ul>
+</div>
+<div id="model-2-some-of-dhs-projects" class="section level2" number="15.5">
+<h2><span class="header-section-number">15.5</span> Model 2: Some of DH’s projects</h2>
+<p>GitHub repo: <a href="https://github.com/dhicks/p_curve" class="uri">https://github.com/dhicks/p_curve</a><br />
+14 directories, 121 files</p>
+<pre><code>.
+├── DESCRIPTION
+├── Makefile
+├── README.md
+├── _deploy.sh
+├── out
+│   ├── estimates_meta.png
+│   ├── estimates_study.png
+│   ├── fig_1_samples_young.png
+│   ├── fig_2_young_composite.png
+│   ├── fig_3_evidence_severity.png
+│   ├── fig_4_evidence_likelihood_zero.png
+│   ├── fig_5_evidence_likelihood_mix.png
+│   ├── likelihood.tex
+│   ├── linearity.png
+│   ├── linearity.tex
+│   ├── samples_schsp.png
+│   ├── samples_simonsohn.png
+│   ├── severity.tex
+│   ├── slopes.png
+│   ├── slopes.tex
+│   ├── slopes_scatter.png
+│   ├── test.png
+│   └── test_out.png
+├── p.curve
+│   ├── DESCRIPTION
+│   ├── NAMESPACE
+│   ├── R
+│   │   └── p-curve.R
+│   ├── man
+│   │   ├── draw_samples.Rd
+│   │   ├── draw_studies.Rd
+│   │   ├── flatten_to_chr.Rd
+│   │   ├── likelihood_ratio.Rd
+│   │   ├── many_metas.Rd
+│   │   ├── p_gap.Rd
+│   │   ├── p_value.Rd
+│   │   ├── qq_linear.Rd
+│   │   ├── qq_plot.Rd
+│   │   ├── qq_slope.Rd
+│   │   ├── schsp_curve.Rd
+│   │   ├── schsp_slope.Rd
+│   │   ├── simonsohn_curve.Rd
+│   │   ├── t_test.Rd
+│   │   ├── young_composite.Rd
+│   │   ├── young_curve.Rd
+│   │   └── young_slope.Rd
+│   └── p.curve.Rproj
+├── paper
+│   ├── *enviro\ epi
+│   │   └── EE\ Submission\ Confirmation\ for\ Young&#39;s\ p-value\ plot\ does\ not\ provide\ evidence\ against\ air\ pollution\ hazards.eml
+│   ├── Young\ papers.gsheet
+│   ├── Young.bib
+│   ├── cover\ letter.pdf
+│   ├── diff.pdf
+│   ├── ehp
+│   │   ├── A\ manuscript\ number\ has\ been\ assigned\ to\ Young&#39;s\ p-value\ plot\ does\ not\ provide\ evidence\ against\ air\ pollution\ hazards\ -\ [EMID_0ef854c3bb0b5cae].eml
+│   │   ├── Decision\ on\ EHP\ Submission\ EHP8013\ -\ [EMID_932e44ac2192c44f].eml
+│   │   ├── EHP-CFI-form.pdf
+│   │   ├── cover\ letter.txt
+│   │   ├── paper_2020-07-31.docx
+│   │   └── title\ page.md
+│   ├── example-refs.bib
+│   ├── fig_1_samples_young.png
+│   ├── fig_2_young_composite.png
+│   ├── fig_3_evidence_severity.png
+│   ├── fig_4_evidence_likelihood_zero.png
+│   ├── fig_5_evidence_likelihood_mix.png
+│   ├── header.yaml
+│   ├── paper.md
+│   ├── paper.pdf
+│   ├── paper.synctex.gz
+│   ├── paper.tex
+│   ├── paper.zip
+│   ├── paper_20201211.md
+│   ├── peerj
+│   │   ├── comments.md
+│   │   └── peerj.pdf
+│   ├── phil\ med
+│   │   ├── [philmed]\ Editor\ Decision.eml
+│   │   └── [philmed]\ Submission\ Acknowledgement.eml
+│   ├── render.R
+│   ├── summary.md
+│   ├── summary.pdf
+│   ├── summary.tex
+│   ├── supplement.md
+│   ├── supplement.pdf
+│   ├── title.md
+│   ├── title.pdf
+│   ├── vancouver-superscript.csl
+│   └── wlpeerj.cls
+├── scripts
+│   ├── Makefile
+│   ├── run_metas.R
+│   ├── run_metas.html
+│   ├── run_metas_cache
+│   │   └── html
+│   │       ├── __packages
+│   │       ├── power_sim_9c372ce79d0c5f5a133f461070cc735c.RData
+│   │       ├── power_sim_9c372ce79d0c5f5a133f461070cc735c.rdb
+│   │       ├── power_sim_9c372ce79d0c5f5a133f461070cc735c.rdx
+│   │       ├── run\ simulations_b1dfebf278eb300e65b865f76b2893d2.RData
+│   │       ├── run\ simulations_b1dfebf278eb300e65b865f76b2893d2.rdb
+│   │       ├── run\ simulations_b1dfebf278eb300e65b865f76b2893d2.rdx
+│   │       ├── vary_N_sim_7d1d09d59ab04fc75046799fcf7506f9.RData
+│   │       ├── vary_N_sim_7d1d09d59ab04fc75046799fcf7506f9.rdb
+│   │       └── vary_N_sim_7d1d09d59ab04fc75046799fcf7506f9.rdx
+│   ├── run_metas_files
+│   │   └── figure-html
+│   │       ├── QQ\ linearity\ tests-1.png
+│   │       ├── gaps-1.png
+│   │       ├── gaps-2.png
+│   │       ├── likelihood\ analysis-1.png
+│   │       ├── likelihood\ analysis-3.png
+│   │       ├── model\ validation-1.png
+│   │       ├── model\ validation-2.png
+│   │       ├── power_sim-1.png
+│   │       ├── power_sim-2.png
+│   │       ├── sample\ plots-1.png
+│   │       ├── sample\ plots-2.png
+│   │       ├── sample\ plots-3.png
+│   │       ├── sample\ plots-4.png
+│   │       ├── severity\ analysis-1.png
+│   │       ├── severity\ analysis-2.png
+│   │       ├── slopes-1.png
+│   │       ├── slopes-2.png
+│   │       ├── slopes-3.png
+│   │       ├── slopes-4.png
+│   │       ├── slopes-5.png
+│   │       ├── slopes-6.png
+│   │       ├── slopes-7.png
+│   │       ├── unnamed-chunk-2-1.png
+│   │       ├── unnamed-chunk-4-1.png
+│   │       └── unnamed-chunk-6-1.png
+│   └── scripts.Rproj
+└── tree.md</code></pre>
+</div>
+<div id="just-the-directories" class="section level2" number="15.6">
+<h2><span class="header-section-number">15.6</span> Just the directories</h2>
+<pre><code>.
+├── out
+├── p.curve
+│   ├── R
+│   └── man
+├── paper
+│   ├── *enviro\ epi
+│   ├── ehp
+│   ├── peerj
+│   └── phil\ med
+└── scripts
+    ├── run_metas_cache
+    │   └── html
+    └── run_metas_files
+        └── figure-html</code></pre>
+<ul>
+<li><code>scripts</code>, <code>paper</code>, and <code>out</code></li>
+<li><code>p.curve</code>, a little package containing the simulation code</li>
+<li>simulation and analysis automatically reproduced: <a href="https://dhicks.github.io/p_curve/" class="uri">https://dhicks.github.io/p_curve/</a></li>
+</ul>
+</div>
+<div id="a-larger-text-mining-project" class="section level2" number="15.7">
+<h2><span class="header-section-number">15.7</span> A larger text-mining project</h2>
+<p>Published paper: <a href="https://doi.org/10.1162/qss_a_00150" class="uri">https://doi.org/10.1162/qss_a_00150</a><br />
+GitHub repo: <a href="https://github.com/dhicks/orus" class="uri">https://github.com/dhicks/orus</a><br />
+23 directories, 274 files (plus 160k data files)</p>
+<pre><code>.
+├── Makefile
+├── ORU\ faculty
+│   ├── ORU\ Faculty.docx
+│   ├── ORU\ Faculty.html
+│   ├── ORU\ Publications.docx
+│   ├── ORU\ Publications.fld
+│   │   ├── colorschememapping.xml
+│   │   ├── filelist.xml
+│   │   ├── header.html
+│   │   ├── image001.png
+│   │   ├── item0001.xml
+│   │   ├── props002.xml
+│   │   └── themedata.thmx
+│   ├── ORU\ Publications.html
+│   └── auids.csv
+├── ORU\ founding\ dates.gsheet
+├── QSS\ forms
+│   ├── QSS-Checklist-AcceptedManuscripts.docx
+│   ├── QSS_pub_agreement.pdf
+│   └── Quantitative\ Science\ Studies\ -\ Decision\ on\ Manuscript\ ID\ QSS-2021-0014.R2.eml
+├── R
+│   ├── api_keys.R
+│   └── hellinger.R
+├── auid\ flow.txt
+├── data
+│   ├── *ORUs\ -\ DSL\ -\ Google\ Drive.webloc
+│   ├── 00_UCD_2016.csv
+│   ├── 00_UCD_2017.csv
+│   ├── 00_UCD_2018.csv
+│   ├── 00_faculty_list.html
+│   ├── 00_manual_matches.csv
+│   ├── 00_publications_list.html
+│   ├── 01_departments.csv
+│   ├── 01_departments_canonical.csv
+│   ├── 01_faculty.Rds
+│   ├── 02_pubs.Rds
+│   ├── 03_codepartmentals.Rds
+│   ├── 03_dropout.Rds
+│   ├── 03_matched.Rds
+│   ├── 03_unmatched.Rds
+│   ├── 04_author_meta.Rds
+│   ├── 04_dropouts.Rds
+│   ├── 04_genderize
+│   ├── 04_namsor.Rds
+│   ├── 05_author_meta.Rds
+│   ├── 05_dept_dummies.Rds
+│   ├── 05_dropouts.Rds
+│   ├── 05_layout.Rds
+│   ├── 05_matched.Rds
+│   ├── 06_author_histories.Rds
+│   ├── 07_coauth_count.Rds
+│   ├── 07_parsed_histories.Rds
+│   ├── 08_phrases.Rds
+│   ├── 09_H.Rds
+│   ├── 09_atm.csv
+│   ├── 09_vocab.tex
+│   ├── 10_atm.csv
+│   ├── 10_atm_pc.Rds
+│   ├── 10_aytm.csv
+│   ├── 10_aytm_comp.csv
+│   ├── 10_aytm_did.csv
+│   ├── 10_model_stats.Rds
+│   ├── 10_models.Rds
+│   ├── 11_au_dept_xwalk.Rds
+│   ├── 11_departments.csv
+│   ├── 11_departments_canonical.csv
+│   ├── 11_dept_dummies.Rds
+│   ├── 11_dept_gamma.Rds
+│   ├── 11_dept_term_matrix.Rds
+│   ├── 11_oru_gamma.Rds
+│   ├── 11_oru_term_matrix.Rds
+│   ├── 11_test_train.Rds
+│   ├── 12_layout.Rds
+│   ├── author_histories [7665 entries exceeds filelimit, not opening dir]
+│   ├── authors_meta [6020 entries exceeds filelimit, not opening dir]
+│   ├── docs [145144 entries exceeds filelimit, not opening dir]
+│   ├── ldatuning_results
+│   │   ├── tuningResult_comp.Rds
+│   │   ├── tuningResult_comp.docx
+│   │   ├── tuningResult_comp.pdf
+│   │   ├── tuningResult_did.Rds
+│   │   └── tuningResult_did.pdf
+│   ├── ldatuning_results-20190415T164055Z-001.zip
+│   ├── parsed_blocks [430 entries exceeds filelimit, not opening dir]
+│   ├── pubs [282 entries exceeds filelimit, not opening dir]
+│   └── temp
+├── interdisciplinarity\ project\ notes.gdoc
+├── notes.txt
+├── paper
+│   ├── QSS_a_00150-Hicks_Proof1.pdf
+│   ├── apa-6th-edition.csl
+│   ├── cover\ letter.txt
+│   ├── diff.pdf
+│   ├── header.yaml
+│   ├── img
+│   │   ├── ORU_DAG.png
+│   │   ├── cites_regression.png
+│   │   ├── coauths_regression.png
+│   │   ├── conceptual_model.png
+│   │   ├── dept_dist_fixed_reg.png
+│   │   ├── dept_dist_reg.png
+│   │   ├── dept_gamma.png
+│   │   ├── dept_hell_net.png
+│   │   ├── dept_hell_net_50.png
+│   │   ├── entropies.png
+│   │   ├── entropies_selected.png
+│   │   ├── entropy_regression.png
+│   │   ├── gender.png
+│   │   ├── mds.png
+│   │   ├── mds_dept.png
+│   │   ├── network.png
+│   │   ├── oru_dept_entropy.png
+│   │   ├── oru_dept_min_dist.png
+│   │   ├── oru_dept_min_dist_ridges.png
+│   │   ├── oru_dept_network.png
+│   │   ├── oru_dept_org_dist.png
+│   │   ├── oru_dept_org_dist_ridges.png
+│   │   ├── oru_gamma.png
+│   │   ├── pub_regression.png
+│   │   └── sample.png
+│   ├── lit\ review\ notes.txt
+│   ├── oru_paper.aux
+│   ├── oru_paper.log
+│   ├── oru_paper.md
+│   ├── oru_paper.out
+│   ├── oru_paper.pdf
+│   ├── oru_paper.synctex.gz
+│   ├── oru_paper.tex
+│   ├── oru_paper.zip
+│   ├── oru_paper_20200616.pdf
+│   ├── oru_paper_20210805.pdf
+│   ├── oru_project.bib
+│   ├── oru_project.yaml
+│   ├── response1.gdoc
+│   ├── response1.pdf
+│   ├── response2.gdoc
+│   ├── response2.pdf
+│   ├── scraps
+│   │   ├── Hellinger.md
+│   │   ├── Holbrook.md
+│   │   ├── table.md
+│   │   └── table.pdf
+│   ├── supplement.md
+│   └── supplement.pdf
+├── plots
+│   ├── 12_beta.tex
+│   ├── 12_cites_regression.png
+│   ├── 12_coauths_regression.png
+│   ├── 12_dept_dist_fixed_reg.png
+│   ├── 12_dept_dist_reg.png
+│   ├── 12_dept_gamma.png
+│   ├── 12_dept_hell_net.png
+│   ├── 12_dept_hell_net_50.png
+│   ├── 12_dept_topics.png
+│   ├── 12_entropies.png
+│   ├── 12_entropies_selected.png
+│   ├── 12_entropy_regression.png
+│   ├── 12_gender.png
+│   ├── 12_mds.png
+│   ├── 12_mds_dept.png
+│   ├── 12_mds_wide.png
+│   ├── 12_network.png
+│   ├── 12_oru_dept_entropy.png
+│   ├── 12_oru_dept_mean_dist.png
+│   ├── 12_oru_dept_mean_dist_ridges.png
+│   ├── 12_oru_dept_min_dist.png
+│   ├── 12_oru_dept_min_dist_ridges.png
+│   ├── 12_oru_dept_network.png
+│   ├── 12_oru_dept_org_dist.png
+│   ├── 12_oru_dept_org_dist_ridges.png
+│   ├── 12_oru_entropy.png
+│   ├── 12_oru_gamma.png
+│   ├── 12_pub_regression.png
+│   ├── 12_sample.png
+│   └── ORU_DAG.png
+├── presentations
+│   └── 2019-06-07\ for\ Paul\ Dodd.gslides
+├── questions\ for\ jane.md
+├── scripts
+│   ├── 01_parse_faculty_list.R
+│   ├── 02_Scopus_search_results.R
+│   ├── 03_match.R
+│   ├── 03_matched.csv
+│   ├── 04_author_meta.R
+│   ├── 05_filtering.R
+│   ├── 06_author_histories.R
+│   ├── 07_complete_histories.R
+│   ├── 08_text_annotation.R
+│   ├── 09_build_vocab.R
+│   ├── 10_topic_modeling.R
+│   ├── 11_depts.R
+│   ├── 11_depts.html
+│   ├── 12_analysis\ copy.html
+│   ├── 12_analysis-matched.html
+│   ├── 12_analysis.R
+│   ├── 12_analysis.html
+│   ├── 12_analysis_cache
+│   │   └── html
+│   │       ├── __packages
+│   │       ├── mds_viz_efd9009c794d667852b2549df2bccf96.RData
+│   │       ├── mds_viz_efd9009c794d667852b2549df2bccf96.rdb
+│   │       ├── mds_viz_efd9009c794d667852b2549df2bccf96.rdx
+│   │       ├── network_c410cd78a4c339cdc4acd1d66c6c5e07.RData
+│   │       ├── network_c410cd78a4c339cdc4acd1d66c6c5e07.rdb
+│   │       ├── network_c410cd78a4c339cdc4acd1d66c6c5e07.rdx
+│   │       ├── silhouette_3170ef648aba325d2ce8c9be48c52e53.RData
+│   │       ├── silhouette_3170ef648aba325d2ce8c9be48c52e53.rdb
+│   │       ├── silhouette_3170ef648aba325d2ce8c9be48c52e53.rdx
+│   │       ├── topic_viz_41d0cb157a88d4ec41810a16e769f5d5.RData
+│   │       ├── topic_viz_41d0cb157a88d4ec41810a16e769f5d5.rdb
+│   │       └── topic_viz_41d0cb157a88d4ec41810a16e769f5d5.rdx
+│   ├── 12_analysis_files
+│   │   └── figure-html
+│   │       ├── author-dept\ distance-1.png
+│   │       ├── author-dept\ distance-2.png
+│   │       ├── author-dept\ distance-3.png
+│   │       ├── author-dept\ distance-4.png
+│   │       ├── author-dept\ distance-5.png
+│   │       ├── desc_plots_tabs-1.png
+│   │       ├── desc_plots_tabs-2.png
+│   │       ├── desc_plots_tabs-3.png
+│   │       ├── desc_plots_tabs-4.png
+│   │       ├── h3-1.png
+│   │       ├── h3-2.png
+│   │       ├── h3-3.png
+│   │       ├── h3-4.png
+│   │       ├── h3-5.png
+│   │       ├── h3-6.png
+│   │       ├── mds_viz-1.png
+│   │       ├── mds_viz-10.png
+│   │       ├── mds_viz-11.png
+│   │       ├── mds_viz-12.png
+│   │       ├── mds_viz-13.png
+│   │       ├── mds_viz-14.png
+│   │       ├── mds_viz-2.png
+│   │       ├── mds_viz-3.png
+│   │       ├── mds_viz-4.png
+│   │       ├── mds_viz-5.png
+│   │       ├── mds_viz-6.png
+│   │       ├── mds_viz-7.png
+│   │       ├── mds_viz-8.png
+│   │       ├── mds_viz-9.png
+│   │       ├── network-1.png
+│   │       ├── network-2.png
+│   │       ├── productivity-1.png
+│   │       ├── productivity-2.png
+│   │       ├── productivity-3.png
+│   │       ├── productivity-4.png
+│   │       ├── productivity-5.png
+│   │       ├── productivity-6.png
+│   │       ├── productivity-7.png
+│   │       ├── productivity-8.png
+│   │       ├── productivity-9.png
+│   │       ├── silhouette-1.png
+│   │       ├── topic_models-1.png
+│   │       ├── topic_models-10.png
+│   │       ├── topic_models-11.png
+│   │       ├── topic_models-12.png
+│   │       ├── topic_models-13.png
+│   │       ├── topic_models-2.png
+│   │       ├── topic_models-3.png
+│   │       ├── topic_models-4.png
+│   │       ├── topic_models-5.png
+│   │       ├── topic_models-6.png
+│   │       ├── topic_models-7.png
+│   │       ├── topic_models-8.png
+│   │       ├── topic_models-9.png
+│   │       ├── topic_viz-1.png
+│   │       └── topic_viz-2.png
+│   ├── api_key.R
+│   └── scraps
+│       ├── 02_parse_pubs_list.R
+│       ├── 03_coe_pubs.R
+│       ├── 03_match_auids.R
+│       ├── 07.R
+│       ├── 12_regressions.R
+│       ├── BML-CMSI\ deep\ dive.R
+│       ├── Hellinger_low_memory.R
+│       ├── dept_hell_net.R
+│       ├── divergence\ against\ lagged\ distributions.R
+│       ├── exploring\ topics.R
+│       ├── fractional_authorship.R
+│       ├── hellinger.R
+│       ├── model_scratch.R
+│       ├── multicore.R
+│       ├── net_viz.R
+│       ├── prcomp.R
+│       ├── propensity.R
+│       ├── rs_diversity.R
+│       ├── spacyr.R
+│       ├── topic\ counts\ rather\ than\ entropies.R
+│       ├── topic_cosine_sim.R
+│       ├── unit-level.R
+│       ├── weighted\ regression.R
+│       ├── word-topic_distance.R
+│       ├── xx_construct_samples.R
+│       └── xx_oru_complete_histories.R
+└── tree.md</code></pre>
+</div>
+<div id="just-the-directories-1" class="section level2" number="15.8">
+<h2><span class="header-section-number">15.8</span> Just the directories</h2>
+<pre><code>.
+├── ORU\ faculty
+│   └── ORU\ Publications.fld
+├── QSS\ forms
+├── R
+├── data
+│   ├── author_histories
+│   ├── authors_meta
+│   ├── docs
+│   ├── ldatuning_results
+│   ├── parsed_blocks
+│   ├── pubs
+│   └── temp
+├── paper
+│   ├── img
+│   └── scraps
+├── plots
+├── presentations
+└── scripts
+    ├── 12_analysis_cache
+    │   └── html
+    ├── 12_analysis_files
+    │   └── figure-html
+    └── scraps</code></pre>
+</div>
+<div id="dhs-project-template" class="section level2" number="15.9">
+<h2><span class="header-section-number">15.9</span> DH’s Project Template</h2>
+<ul>
+<li><p><a href="https://github.com/dhicks/project_template" class="uri">https://github.com/dhicks/project_template</a></p></li>
+<li><p>Configured as a GitHub “template,” making it easy to create new repositories for new projects</p></li>
+<li><p>Designated folders for data, plots/outputs, and utility functions</p></li>
+</ul>
+<!-- - File naming convention -->
+<!--     - Automatically orders analysis scripts -->
+<!--     - Coordinates plots, outputs, and intermediate data with the script that creates them -->
+<!-- - R package infrastructure: `DESCRIPTION` -->
+<!--     - Enables one-liner to load the utility functions in `R`: `devtools::load_all('..')` -->
+</div>
+<div id="a-reminder-on-paths" class="section level2" number="15.10">
+<h2><span class="header-section-number">15.10</span> A reminder on paths</h2>
+<ul>
+<li>Windows and Unix-based systems write paths differently</li>
+<li>Use <code>file.path()</code> or the <code>here</code> package to construct paths</li>
+<li><code>..</code> in a path means “go up to the parent folder”
+<ul>
+<li>so <code>../data/00_raw_data.csv</code> goes up one level (eg, from the <code>scripts</code> folder), then down to the <code>data</code> folder, then the file <code>00_raw_data.csv</code></li>
+</ul></li>
+</ul>
+</div>
+<div id="references-7" class="section level2" number="15.11">
+<h2><span class="header-section-number">15.11</span> References</h2>
+
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-BaileyReinhartRogoffErrorHow" class="csl-entry">
+Bailey, David H., and Jonathan Borwein (Jon). n.d. <span>“The <span>Reinhart</span>-<span>Rogoff</span> Error – or How Not to <span>Excel</span> at Economics.”</span> <span>The Conversation</span>. Accessed May 16, 2020. <a href="http://theconversation.com/the-reinhart-rogoff-error-or-how-not-to-excel-at-economics-13646">http://theconversation.com/the-reinhart-rogoff-error-or-how-not-to-excel-at-economics-13646</a>.
+</div>
+<div id="ref-CassidyReinhartRogoffControversy" class="csl-entry">
+Cassidy, John. n.d. <span>“The <span>Reinhart</span> and <span>Rogoff Controversy</span>: A <span>Summing Up</span>.”</span> <span>The New Yorker</span>. Accessed September 27, 2020. <a href="https://www.newyorker.com/news/john-cassidy/the-reinhart-and-rogoff-controversy-a-summing-up">https://www.newyorker.com/news/john-cassidy/the-reinhart-and-rogoff-controversy-a-summing-up</a>.
+</div>
+<div id="ref-ChinStudentsWhoGrew2021" class="csl-entry">
+Chin, Monica. 2021. <span>“Students Who Grew up with Search Engines Might Change <span>STEM</span> Education Forever.”</span> <span>The Verge</span>. September 22, 2021. <a href="https://www.theverge.com/22684730/students-file-folder-directory-structure-education-gen-z">https://www.theverge.com/22684730/students-file-folder-directory-structure-education-gen-z</a>.
+</div>
+<div id="ref-HerndonDoesHighPublic2014" class="csl-entry">
+Herndon, Thomas, Michael Ash, and Robert Pollin. 2014. <span>“Does High Public Debt Consistently Stifle Economic Growth? A Critique of <span>Reinhart</span> and <span>Rogoff</span>.”</span> <em>Cambridge Journal of Economics</em> 38 (2): 257–79. <a href="https://doi.org/10.1093/cje/bet075">https://doi.org/10.1093/cje/bet075</a>.
+</div>
+<div id="ref-HowExcelMay2020" class="csl-entry">
+<span>“How <span>Excel</span> May Have Caused Loss of 16,000 <span>Covid</span> Tests in <span>England</span>.”</span> 2020. <span>The Guardian</span>. October 5, 2020. <a href="http://www.theguardian.com/politics/2020/oct/05/how-excel-may-have-caused-loss-of-16000-covid-tests-in-england">http://www.theguardian.com/politics/2020/oct/05/how-excel-may-have-caused-loss-of-16000-covid-tests-in-england</a>.
+</div>
+<div id="ref-LaskowskiWhatWhenYou" class="csl-entry">
+Laskowski, Kate. n.d. <span>“What to Do When You Don’t Trust Your Data Anymore – <span>Laskowski Lab</span> at <span>UC Davis</span>.”</span> Accessed January 29, 2020. <a href="https://laskowskilab.faculty.ucdavis.edu/2020/01/29/retractions/">https://laskowskilab.faculty.ucdavis.edu/2020/01/29/retractions/</a>.
+</div>
+<div id="ref-NobleQuickGuideOrganizing2009" class="csl-entry">
+Noble, William Stafford. 2009. <span>“A <span>Quick Guide</span> to <span>Organizing Computational Biology Projects</span>.”</span> <em>PLOS Computational Biology</em> 5 (7): e1000424. <a href="https://doi.org/10.1371/journal.pcbi.1000424">https://doi.org/10.1371/journal.pcbi.1000424</a>.
+</div>
+<div id="ref-PennisiProminentSpiderBiologist2020" class="csl-entry">
+Pennisi, Elizabeth. 2020. <span>“Prominent Spider Biologist Spun a Web of Questionable Data.”</span> <em>Science</em> 367 (6478): 613–14. <a href="https://doi.org/10.1126/science.367.6478.613">https://doi.org/10.1126/science.367.6478.613</a>.
+</div>
+<div id="ref-ReinhartRogoffGrowth2019" class="csl-entry">
+<em>Reinhart &amp; <span>Rogoff</span> - <span>Growth</span> in a <span>Time</span> of <span>Debt</span> - <span>EXERCISE</span>!</em> 2019. <a href="https://www.youtube.com/watch?v=ItGMz0ERvcw">https://www.youtube.com/watch?v=ItGMz0ERvcw</a>.
+</div>
+<div id="ref-ArrayErrors2011" class="csl-entry">
+<em>The Economist</em>. 2011. <span>“An Array of Errors,”</span> September 10, 2011. <a href="https://www.economist.com/science-and-technology/2011/09/10/an-array-of-errors">https://www.economist.com/science-and-technology/2011/09/10/an-array-of-errors</a>.
+</div>
+<div id="ref-VideoKeithBaggerly" class="csl-entry">
+<span>“Video: Keith <span>Baggerly</span>, "<span>When</span> Is <span>Reproducibility</span> an <span>Ethical Issue</span>? Genomics, <span>Personalized Medicine</span>, and <span>Human Error</span>".”</span> n.d. Accessed September 23, 2020. <a href="http://www.birs.ca/events/2013/5-day-workshops/13w5083/videos/watch/201308141121-Baggerly.html">http://www.birs.ca/events/2013/5-day-workshops/13w5083/videos/watch/201308141121-Baggerly.html</a>.
+</div>
+<div id="ref-ViglioneAvalancheSpiderpaperRetractions2020" class="csl-entry">
+Viglione, Giuliana. 2020. <span>“<span>‘<span>Avalanche</span>’</span> of Spider-Paper Retractions Shakes Behavioural-Ecology Community.”</span> <em>Nature</em>, February. <a href="https://doi.org/10.1038/d41586-020-00287-y">https://doi.org/10.1038/d41586-020-00287-y</a>.
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="a-code-review-checklist.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="managing-and-publishing-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/data-science-methods/book/blob/master/04-04-project-organization.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["book.pdf"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section",
+"scroll_highlight": true
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

@@ -1,0 +1,232 @@
+# A code review checklist #
+
+
+
+
+## Reading
+
+- @PostolovskiYourCodeReview2020
+
+1. Readability
+2. Maintainability
+3. Security
+4. Speed and Performance
+5. Documentation
+6. Reinventing the Wheel
+7. Reliability
+8. Scalability
+9. Reusability
+10. Patterns [style and readability]
+11. Test coverage and quality
+12. Fit for purpose
+13. Notice what's missing
+14. Zoom out
+
+
+## 1. Readability / understandability
+
+- [File naming](https://style.tidyverse.org/files.html)
+    - *What order should the scripts be run in?* 
+- Follows a [style guide](https://style.tidyverse.org/)
+    - Or at least uses consistent style
+- Whitespace, whitespace, whitespace
+- Meaningful names / self-documenting code [@BuckensSelfdocumentingMythHow2019]
+- For data science: Functionality promotes understandability
+    
+## 2. Maintainability
+
+- [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself)
+- Avoid hard-coded configuration
+- Check strong assumptions about structure and content of inputs
+- Avoid deprecated or removed features
+
+## 3. Security
+
+- How are passwords for websites, APIs, and *sensitive data* handled? 
+
+## 4. Speed and Performance
+
+### Performance of the script
+
+- Avoid (repeating) large downloads
+- Cache the results of slow calculations
+    - With an easy way to clear the cache and re-run the calculations
+    - Or break them up in to separate steps of the pipeline
+- Use `tictoc` for simple wall time checks
+
+### Resource use
+
+- Does this really need to be run on a compute cluster? 
+- How much will this cost if it's accidentally run 1,000 times?
+- Cache raw returns from web scraping and API queries
+
+
+## 5. Documentation
+
+- Scripts: Section markers, signposting what's happening and why
+- Functions: Assumptions about inputs, explanation of output
+    - Consider using `roxygen2` + R's package infrastructure
+    - <https://r-pkgs.org/man.html#man-functions>
+- Data: Provenance, date and time retrieved, codebook
+- Project: README, NEWS
+
+
+## 6. Reinventing the Wheel
+
+- Is there a (well-maintained, checked) package for this? 
+- [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself)
+
+
+## 7. Reliability
+
+What happens if
+
+- Packages aren't installed?
+    - Reminder: `require()` doesn't stop if the package is missing
+- Data can't be found?
+- Data has missing values or errors? 
+- Data has been altered or corrupted? 
+- A function returns a missing or zero-length value? 
+- One script in the middle of the pipeline is altered? 
+
+
+## Skipping a few
+
+Because I have less to say, not because they're less important
+
+8. Scalability
+9. Reusability
+10. Patterns [style and readability]
+11. Test coverage and quality
+12. Fit for purpose
+
+
+## 13. Notice what's missing
+
+- Using packages that haven't been loaded
+- Data validation
+    - Edge cases, unexpected inputs
+    - Missing values
+- Error handling
+
+    
+## 14. Zoom out
+
+- Does the code fit the analytic approach described in the paper? 
+- Does the analytic approach fit the the research question? 
+
+## References 
+
+<!--
+## An Example Code Review ##
+
+- We'll review the code for @ColomboIntellectuallyHumblePrejudiced2020
+    - Data and code available at <https://osf.io/k5qmw/>
+    
+- I find a lot of problems
+    - But don't read this as criticizing the authors
+    - These types of problems are widespread in computational science
+    - Because researchers aren't trained to look for, prevent, and correct these problems
+    - **Take home message: Do code review as part of your research and it won't be this painful**
+    
+
+### A shortened checklist ###
+
+0. What happens if you just run the script? 
+1. Readability
+2. Maintainability
+3. Documentation
+4. Reliability
+
+### Project organization ###
+
+- No documentation
+    - README, attribution
+    - Data provenance, codebook
+- Folder and file names
+    - Folder names suggest an order
+    - Which files are inputs and which are outputs? 
+    - Date stamps in file names - was version control used? 
+    - Inconsistent styles in file names
+- Are the inputs for the `meta` analysis the outputs from the studies? 
+    - What happens if something changes in the study analyses? 
+
+### `study1` ###
+
+0. Just run the script
+    - Error on line 16
+    - Trying to take a subset of columns from the data being read in
+    - Using column indices
+    - But the indices don't match the number of columns in the data
+    - We can't recover from this without documentation for the data
+        - What columns should be in the raw data, and what columns will be used for the analysis? 
+
+1. Readability
+    - Long lines, inconsistent whitespace
+    - Repetitive chunks of analysis aren't documented
+        - Could be put into function(s) with meaningful names
+
+2. Maintainability
+    - Lots of repetition: lines 25-41; analysis on 90-95; numerous places throughout
+    - Doesn't seem like this analysis is being written out anywhere? 
+        - In particular, how is the output here supposed to feed into the meta-analysis? 
+    - Line 132: why are we deleting things? 
+    - `cor.mtest` is defined multiple times
+    - Line 265: surprise `library()` call
+
+3. Documentation
+    - Line 46: Looks like we're starting one section of the analysis
+        - But it's easy to miss this section break, similar breaks eg line 134
+        - Contrast very visible break on 199
+    - What are these tests, plots, and why are we doing them? 
+    - Contrast with the factor analysis starting on line 79
+    - Lines 116-17: Did they solve the "this is bad"? 
+
+4. Reliability
+    - A quick check with `skimr` and/or `visdat` for study 1 indicates lots of missing values for a few variables
+        - maybe because respondents rated different numbers of groups (why?)
+        - also some sporadic missingness
+        - doesn't seem like this was handled explicitly
+    - No checks to validate data
+
+### `study2` ###
+
+0. Just run the script
+    - Syntax error on line 282
+        - Uncommenting 281 gives a very cryptic error
+        - Commenting out these lines -> everything seems to run
+    - But should we be worried about all of these convergence warnings? 
+
+- Pretty much all the same concerns as with `study1`
+    - Seems to use exactly the same analysis functions
+        - These should be defined once, in a single R file called by the analysis scripts
+        - Could even be a local package loaded using `usethis::load_all()` (<https://devtools.r-lib.org/reference/load_all.html>)
+    
+### `study3` ###
+
+0. Just run the script
+    - Line 47: Missing dependency
+
+1. Readability
+    - Long lines, bad pipe style
+
+2. Maintainability
+    - Again, issues with repetition, not writing things out
+
+3. Documentation
+    - Basically none
+
+4. Reliability
+    - `TRUE` and `FALSE` are reserved words, meaning they can't be used as variable names
+        - `T` and `F` are variables defined by default to match these
+        - Their value can be changed
+        - So using `TRUE` and `FALSE` is preferred
+    - Several repetitions of `export(tidy(m6k, conf.int  = T), "export.xlsx")`
+        - Writing over `m6k` each time with a new regression model
+        - Is `export()` appending the results to `export.xlsx`, or overwriting the file? 
+
+### `study4` and `meta` ###
+
+- Same issues as the other script files
+- Confirm that the input for the meta-analysis isn't directly generated from the study scripts
+-->    

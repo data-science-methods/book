@@ -1,0 +1,133 @@
+# Exploratory Data Analysis # {#eda-models}
+
+
+
+
+## <br>
+
+> This book is about exploratory data analysis, about looking at data to see what it seems to say. It concentrates on simple arithmetic and easy-to-draw pictures. It regards whatever appearances we have recognized as partial descriptions, and tries to look beneath them for new insights. Its concern is with appearance, not with confirmation. [@TukeyExploratoryDataAnalysis1977]
+
+> Exploratory Data Analysis (EDA) is "an attitude, AND a flexibility, AND some graph paper (or transparencies, or both)" [@TukeyWeNeedBoth1980]
+
+
+## Exploratory and Confirmatory Research ##
+
+- Especially in the wake of the replication crisis, one common distinction is between exploratory and confirmatory research [@WagenmakersAgendaPurelyConfirmatory2012]
+
+Table: Exploratory vs. confirmatory research
+
+------------------------------------
+Confirmatory                    Exploratory
+---------------------           -------------------------------
+hypothesis testing              hypothesis development
+
+specified in advance            adaptable
+
+algorithmic                     free, creative
+
+mechanical objectivity          pure subjectivity? 
+[@DastonObjectivity2007]
+
+avoids inferential errors       *makes* errors?
+
+**rigorous**                    **lacking rigor?**
+
+**real science??**              **h\*cking around with data??**
+
+**assumes experimental          **relevant to all methods**
+methods**
+------------------------------------
+
+- I agree that it's important to
+    - be thoughtful about how much confidence we're placing in our conclusions
+    - interpret findings from one study in light of other studies
+- But the confirmatory/exploratory distinction can overemphasize the confirmatory side
+    - Making us too rigid and narrow-minded about what counts as good science
+
+## Better Models for EDA I: Developing Phenomena ##
+
+- @BrownSmokeMirrorsHow2002
+
+Table: The data/phenomena/theory distinction
+
+-------------------------------------
+                                               Theories/
+Data                    Phenomena              Causal processes
+---------------------   ---------------------  ---------------------
+Ex: spreadsheet of      Ex: Correlation        Ex:  Conservative
+numbers, downloaded     between                susceptibility to 
+from Qualtrics          partisanship and       anxiety hypothesis
+                        sharing Covid 
+                        misinformation
+                        
+</br>                                                                                        
+
+collected               abstracted or          postulated
+                        extracted from data
+
+not explained           explained by theories  explain phenomena
+
+highly local to         varying scope          universal? 
+time, place, sample,
+procedure
+
+"raw," messy,           "processed," clean,    "laws of nature"? 
+unwieldy                stylized
+
+-------------------------------------
+
+## EDA as phenomena development ##
+
+- cleaning messy data 
+    - identifying and mitigating (where possible) errors and idiosyncracies
+- identifying *local* patterns ("local phenomena")
+- **not yet claiming these will be stable and appear elsewhere**
+- **not yet worrying (much) about explanations**
+
+
+## Better Models for EDA II: Epicycle of Analysis ##
+
+<div class="figure" style="text-align: center">
+<img src="images/03-eda/epicycle.png" alt="Epicycle of analysis model, @PengArtDataScience2016, 5" width="30%" />
+<p class="caption">(\#fig:unnamed-chunk-2)Epicycle of analysis model, @PengArtDataScience2016, 5</p>
+</div>
+
+## @PengArtDataScience2016
+
+- Data analysis is organized into 5 activities
+- Each activity involves the same 3-step "epicycle" process
+    1. Develop expectations
+    2. Collect information
+    3. Compare and revise expectations
+
+- Not "the scientific method"! [@PengArtDataScience2016 4]
+    - "Highly iterative and non-linear"
+    - "information is learned at each step, which then informs
+        - **whether (and how) to refine, and redo, the [previous] step** ..., or
+        - whether (and how) to proceed to the next step." 
+
+## </br>
+
+Table: Aligning the goals of EDA with steps in the "epicycle of analysis" [@PengArtDataScience2016]
+
+----------------------------------------------------------------------- 
+Goals of EDA                     Epicycle step
+------------------------         ------------------------
+Determine if there are           2. Collecting information
+problems with the data     
+     
+Determine whether our            3. Comparing and revising expectations
+question can be answered     
+with these data     
+     
+Develop sketch of an             1. Developing expectations
+answer
+------------------------------------------------------------------------
+
+## Discussion
+
+- For each of these models, how well do they fit the way you've been taught to do science? 
+- How do they challenge the way you've been taught to do science? 
+
+## References 
+

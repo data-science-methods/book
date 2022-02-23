@@ -1,0 +1,133 @@
+# Introduction #
+
+## Land acknowledgements ##
+
+### [Campus land acknowledgment](https://diversity.ucmerced.edu/values/land-acknowledgement) ###
+
+We pause to acknowledge all local indigenous peoples, including the Yokuts and Miwuk, who inhabited this land. We embrace their continued connection to this region and thank them for allowing us to live, work, learn, and collaborate on their traditional homeland. Let us now take a moment of silence to pay respect to their elders and to all Yokuts and Miwuk people, past and present.
+
+### Instructor's land acknowledgment ###
+
+UC Merced and the City of Merced are on the traditional territory of the Yokut people.  This land was stolen by Spanish, Mexican, and American settlers through acts of slavery and genocide.  In addition, UC Merced is strongly associated with Ahwahne, known as Yosemite Valley.  This valley was the traditional home of the Ahwahnechee people, who were the victims of some especially horrific, state-sponsored genocidal acts.  For more on the history of Ahwahne, see <https://tinyurl.com/y879jw8s>.  For more information on land acknowledgments, see <https://native-land.ca>.  
+
+
+## About the instructor ##
+
+Dan Hicks is a philosopher turned data scientist turned philosopher.  
+
+I use they/them pronouns and identify as nonbinary.  I grew up in Placerville, about two hours north of Merced in the Sierra Foothills.  One branch of my family came to California during the Gold Rush, so I identify heavily as a Californian and have some complicated feelings about the genocide.  I finished my PhD in philosophy of science at Notre Dame in 2012.  After that I worked in a series of research positions in academia and the federal government.  During 2015-2019 I was using data science methods at least half-time.  I joined the faculty at UC Merced in Fall 2019.  
+
+- Email: <dhicks4@ucmerced.edu>
+- Student hours: By appointment: <https://doodle.com/mm/danhicks/office-hours>
+- Website: <https://dhicks.github.io/>
+
+
+## What this course isn't, and is ##
+
+Is Not: 
+
+- a statistics course (in the way you think)
+- a general introduction to software engineering
+- a basic introduction to R
+- carefully planned out from beginning to end
+
+Is: 
+
+- an introduction to data science
+- about exploratory data analysis, data management, and reproducibility
+- habituation to some good software engineering practices that are especially valuable for data science work
+- in the [alpha stage of development](https://en.wikipedia.org/wiki/Software_release_life_cycle#Alpha)
+
+
+## Learning outcomes ##
+
+*[match to catalog]*
+
+By the end of the course, students will be able to 
+
+1. apply concepts from software engineering and philosophy of science to methodological decisions in data science, including
+	- reproducibility vs. robustness vs. replicability
+	- value and hazards of open data
+	- thick data [@WangWhyBigData2016]
+
+3. use exploratory data analysis techniques and tools to identify potential data errors and potential phenomena for further analysis
+
+2. clean raw data and produce a reproducible codebook for both downstream analysis and public release of data according to FAIR standards [@WilkinsonFAIRGuidingPrinciples2016]
+	- [create and use a cloud database to work with big data]
+
+4. manage data, analysis, and outputs for reproducibility [assembling a project compendium; @GentlemanStatisticalAnalysesReproducible2004] using best practices of data handling, a clear directory structure [@WilsonGoodEnoughPractices2017], self-documenting code, version control, build automation, [and continuous integration] 
+
+5. apply philosophical and data science concepts to integrated ethical-technical analysis to case studies in algorithmic injustice
+    - understand the background on the COMPAS case:  @AngwinMachineBiasThere2016; @Corbett-DaviesComputerProgramUsed2016
+	- reproduce several fairness statistics on COMPAS data
+	- explain tradeoffs between false negatives and false positives in terms of inductive risk
+	- explain @KleinbergInherentTradeOffsFair2016 impossibility result (not necessarily the proof) and show that it applies to the COMPAS datas
+	- critically discuss profiling and thresholds [@PiersonLargescaleAnalysisRacial2020] as potential explanation for differences in "base rates" of recidivism
+	- critically locate discussions of fairness and recidivism in a broader social context, and identify implications for working data scientists [@SelbstFairnessAbstractionSociotechnical2018; @HoffmannWhereFairnessFails2019; @HannaCriticalRaceMethodology2019]
+
+
+## Prerequisites ##
+
+*This course assumes basic competence with introductory R.* 
+
+- "Introductory R":  Lessons 1-5 of the Carpentries ["R for Social Scientists"](https://datacarpentry.org/r-socialsci/) curriculum
+    - Installing R and packages
+    - Working in the R Studio IDE
+    - Common data types
+    - Reading and writing CSV files
+    - Tidyverse R:  `mutate()`, `filter()`, `select()`; plotting with `ggplot2`
+- "Basic competence":  Given time and a reference ([cheatsheet](https://www.rstudio.com/resources/cheatsheets/), Stack Exchange, mentor) you can figure out how to solve a problem
+
+
+## Requirements and weekly routine ##
+
+*This is aspirational.*
+
+- Tuesdays:  Mix of discussion and lecture based on assigned readings
+- Thursdays:  Live coding leading into work on the week's lab assignment
+- Labs:  10-ish, done individually or in pairs and submitted via GitHub for automated feedback
+- Running project:  Practicing ideas from the course on data sets you find
+
+
+<!--
+## Notes on some course design decisions ##
+
+### R, not Python ###
+
+- Python is a perfectly good language for general programming
+    - And has some advantages over R in certain data science aspects, including working with strings and developing custom data structures
+
+However, 
+
+- R is a better language for doing data science [@ShotwellWhyUse2019]
+    - Vectors, data frames, and common statistical models are installed and loaded by default
+    - R is more functional [@WuPythonVsChoosing2019; @PaleologoWhatDifferenceMachine2018]
+    
+- R is also better for beginners
+    - [CRAN](https://twitter.com/kccarrell/status/1030482372775620613)
+    - RStudio
+    
+### Tidyverse R, not base R ###
+
+- "Base R" refers to the central code for R and the packages included when you install it
+    - Base R is universal and free of additional dependencies.  Code written entirely in base R will run on any other R installation (with the same version). 
+    - However, because the R Core Development Team has always thought backwards-compatibility is important, base R has some idiosyncracies [@KeyesRbitraryStandards2016]
+    
+- `tidyverse` is a suite of packages developed by the manufacturers of RStudio
+    - A very useful set of general tools can be loaded simply by calling `library(tidyverse)`
+        - And some more specialized tools are also installed as part of the suite
+    - Tidyverse is designed to mitigate a lot of the base R idiosyncracies
+    - While making code more human-readable and easier to reason about
+    - However, several of its tools use something called "non-standard evaluation" (NSE). 
+        - NSE makes tidyverse code easier to write for beginners, because you don't have to think as much about where exactly your variables are located
+        - At the same time, NSE creates problems for intermediate coders, because passing tidyverse-style "bare names" through function arguments causes cryptic errors
+
+### Scripts, not notebooks ###
+
+- Quite a few scientists like the way notebooks mix together code, visualizations, tables, and text [@PerkelWhyJupyterData2018]
+
+However, 
+
+- Notebooks do not play nicely with version control  [@AhemadVersionControlJupyter2018; @WhitmoreJupyterNotebookBest2015]
+- Notebooks encourage bad software engineering habits and discourage good ones [@GrusDonNotebooksJoel; @HiltchJupyterNotebookCancer2019]
+-->
