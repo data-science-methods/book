@@ -1,0 +1,351 @@
+# Covid EDA #
+
+## </br>
+
+```{r child = 'knitr_config.Rmd'}
+```
+
+- This EDA will start in class and continue on to the lab
+- We're interested in *the role of social distancing in the July 2020 Covid wave in California*
+
+## The standard narrative ##
+
+The standard narrative about the July 2020 wave goes like this: 
+
+- California had some of the first confirmed cases of Covid-19 in the US
+- California was also the first state to institute a stay-at-home order and encourage social distancing
+- These social distancing policies are why California did not experience the large first wave in March 2020 (contrast NYC)
+- Starting in May 2020, these policies were relaxed and "lockdown fatigue" meant that people were ignoring them anyways
+- This is why California did experience a more significant wave in July 2020
+
+--- 
+
+Our research question:  Is reduced social distancing (measured using cellphone tracking data) correlated with increased Covid-19 case counts 4 weeks later? 
+
+</br>
+
+In class, we'll just be looking at the case counts. 
+
+## Reflexivity
+
+(For time, you'll do these on your own as part of the lab.)
+
+## Setup 
+
+```{r, dependencies, message = FALSE, warning = FALSE}
+library(tidyverse)
+library(tidylog)
+library(skimr)
+library(visdat)
+
+library(assertthat)
+
+theme_set(theme_bw())
+```
+
+```{r, daily-diffs, echo = FALSE}
+daily_new = function(x, order_var) {
+    diff = x - dplyr::lag(x, order_by = order_var)
+    return(diff)
+}
+```
+
+
+## Data ##
+
+To save some time in class, I've prepared a CSV that combines three datasets: 
+
+- [Covid-19 case and death counts, at the county level, collected by the *New York Times*](https://github.com/nytimes/covid-19-data/blob/master/README.md)
+- Estimated county populations in 2018, from the US Census' American Community Survey
+- ["Mobility data," based on cellphone tracking, from Google](https://kjhealy.github.io/covmobility/reference/google_mobility.html)
+
+The dataset has also been filtered down to California.  
+
+## Get the data ##
+
+- This week's lab on GitHub
+    - <https://github.com/data-science-methods/lab_w06_covid>
+- `data` -> `covid.csv` -> "Download" (right-click and copy)
+
+```{r, covid-data}
+covid_file = file.path('data', 'covid.csv')
+covid_url = 'https://github.com/data-science-methods/lab_w06_covid/raw/main/data/covid.csv'
+if (!file.exists(covid_file)) {
+    download.file(covid_url, covid_file)
+}
+## Original version
+# covid_df = read_csv(covid_file, show_col_types = FALSE)
+## With daily change
+covid_df = read_csv(covid_file, show_col_types = FALSE) |> 
+    group_by(county) |>
+    mutate(across(.cols = c(cases, deaths),
+                  .fns = list(new = daily_new), date)) |> 
+    ungroup() |> 
+    mutate(across(.cols = c(matches('cases'), matches('deaths')), 
+                  .fns = list(rate = ~ .x / population * 100000)))
+```
+
+## Some quick data checking ##
+
+```{r eval=knitr::is_html_output()}
+skim(covid_df)
+```
+
+## Variables ##
+
+- `county`, `state`, and `fips` are all geographic identifiers, and complete
+    - 58 unique values for both `county` and `fips`
+    - How many counties does California have? 
+- `date` gives the date, is also complete
+- `cases` and `deaths` come from the NYT covid data
+- `population` comes from the Census
+- `retail`, `grocery`, `parks`, `transit`, `workplaces`, and `residential` come from the Google Mobility data
+    - Much lower completion rate
+
+## Too many timeseries plots ##
+
+```{r}
+ggplot(covid_df, aes(date, cases)) +
+    geom_line() +
+    facet_wrap(vars(county), 
+               scales = 'free_y')
+```
+
+## Number of observations per county ##
+
+```{r}
+ggplot(covid_df, aes(fct_rev(fct_infreq(county)))) +
+    # geom_bar() +
+    geom_point(stat = 'count') +
+    geom_segment(stat = 'count', 
+                 aes(xend = county),
+                 yend = 0) +
+    coord_flip() +
+    labs(x = 'county')
+```
+
+*Why do different counties have different numbers of observations?*
+
+
+## No more than 1 observation per county per day ##
+
+```{r}
+covid_df |> 
+    count(county, date) |> 
+    filter(n > 1) |> 
+    nrow() |> 
+    identical(0L) |> 
+    assert_that(msg = 'More than 1 observation per county per day')
+```
+
+
+## Cumulative vs. daily cases ##
+
+Both `cases` and `deaths` are cumulative, not the daily new value
+
+```{r}
+covid_df |> 
+    filter(county == 'Merced') |> 
+    ggplot(aes(date, cases)) +
+    geom_line()
+```
+
+---
+
+- We'll write a little function to calculate the differences
+- Incorporate it into the pipe that loads the data
+    - Then restart R and rerun
+
+```{r, daily-diffs, echo = TRUE, eval = FALSE}
+```
+
+---
+
+- Test it on Orange and LA Counties
+
+```{r, eval = FALSE}
+covid_df |>
+    filter(county %in% c('Orange', 'Los Angeles')) |>
+    group_by(county) |>
+    mutate(across(.cols = c(cases, deaths),
+                  .fns = list(new = daily_new), date)) |>
+    select(date, county, matches('cases'), matches('deaths')) |> 
+    View()
+```
+
+---
+
+Now we have daily values
+
+```{r}
+covid_df |> 
+    filter(county == 'Merced') |> 
+    ggplot(aes(date, cases_new)) +
+    geom_line()
+```
+
+## Add an assertion ##
+
+- For each county, the first daily diff should be `NA`
+- But none of the others
+
+```{r}
+covid_df |> 
+    group_by(county) |> 
+    slice(-1) |> 
+    pull(cases_new) |> 
+    is.na() |> 
+    any() |> 
+    magrittr::not() |> 
+    assert_that(msg = 'missing values in cases_new')
+```
+
+## Distribution of cases by county ##
+
+First pass is hard to read
+
+```{r}
+ggplot(covid_df, aes(county, cases_new)) +
+    geom_boxplot()
+```
+
+## Revisions
+
+- `coef = 1000`
+- y-axis on a log scale
+- flip the coordinates
+- reorder the counties by median number of cases
+- filter out `cases_new == 0`
+- meaningful axis labels
+
+```{r}
+covid_df |> 
+    filter(cases_new > 0) |>
+    ggplot(aes(fct_reorder(county, cases_new, 
+                           .fun = median, na.rm = TRUE),
+                     cases_new)) +
+    geom_boxplot(coef = 1000) +
+    scale_y_log10() +
+    coord_flip() +
+    labs(x = 'county', y = 'daily new cases')
+```
+
+## 9 plots of the same plot ##
+
+```{r}
+ggplot(covid_df, aes(x = cases_new, y = deaths_new)) +
+    # geom_point() +
+    # geom_point(alpha = .2) +
+    # geom_count(alpha = .5) +
+    # geom_bin2d() +
+    # geom_hex() +
+    # geom_hex(aes(color = after_stat(count))) +
+    # geom_density2d(size = 1) +
+    # stat_density2d(contour = FALSE, geom = 'raster',
+    #                aes(fill = after_stat(density)),
+    #                show.legend = FALSE) +
+    stat_density2d(contour = TRUE, geom = 'polygon',
+                   aes(fill = after_stat(level)),
+                   show.legend = FALSE) +
+    scale_x_log10() +
+    scale_y_log10() +
+    scale_color_viridis_c(aesthetics = c('color', 'fill'))
+```
+
+## Why so many dropped values? ##
+
+- The binned plots drop 25,048 rows, or 75% of the data
+- Why? 
+
+```{r}
+covid_df |> 
+    mutate(log_cases_new = log(cases_new)) |> 
+    select(cases_new, log_cases_new) |> 
+    filter(!is.finite(log_cases_new)) |> 
+    count(cases_new) |> 
+    arrange(desc(n))
+```
+
+## Cases vs. population ##
+
+```{r}
+ggplot(covid_df, aes(population, cases_new)) +
+    geom_point()
+```
+
+
+## Absolute counts to rates ##
+
+- `cases` and `deaths` are absolute counts
+- But county populations differ over orders of magnitude
+- *Construct a lollipop plot to illustrate this*
+
+```{r}
+covid_df |> 
+    select(county, population) |> 
+    distinct() |> 
+    ggplot(aes(x = fct_reorder(county, population), 
+               y = population)) +
+    geom_point() +
+    geom_segment(aes(xend = county), yend = 0) +
+    scale_y_log10() +
+    coord_flip()
+```
+
+---
+
+Let's calculate rates for new and cumulative cases and deaths
+
+```{r}
+test_df = covid_df |> 
+    mutate(across(.cols = c(matches('cases'), matches('deaths')), 
+                  .fns = list(rate = ~ .x / population * 100000)))
+
+test_df |> 
+    filter(county %in% c('Merced', 'Fresno', 'Los Angeles')) |> 
+    ggplot(aes(date, cases_new_rate, 
+               group = county, color = county)) +
+    geom_line()
+```
+
+*Incorporate this into the pipe when we load `covid_df`*
+
+## Rates vs. population ##
+
+```{r}
+ggplot(covid_df, aes(population, cases_new_rate)) +
+    geom_point()
+```
+
+## Counties by maximum rate of new cases ##
+
+```{r}
+covid_df |> 
+    group_by(county) |> 
+    summarize(population = max(population),
+              cases = max(cases_new_rate, na.rm = TRUE)) |> 
+    arrange(desc(cases))
+```
+
+
+## Cases vs. deaths when we control for population ##
+
+```{r}
+ggplot(covid_df, aes(x = cases_new_rate, y = deaths_new_rate)) +
+    # geom_point() +
+    geom_point(alpha = .2) +
+    # geom_count(alpha = .5) +
+    # geom_bin2d() +
+    # geom_hex() +
+    # geom_hex(aes(color = after_stat(count))) +
+    # geom_density2d(size = 1) +
+    # stat_density2d(contour = FALSE, geom = 'raster',
+    #                aes(fill = after_stat(density)),
+    #                show.legend = FALSE) +
+    # stat_density2d(contour = TRUE, geom = 'polygon',
+    #                aes(fill = after_stat(level)),
+    #                show.legend = FALSE) +
+    scale_x_log10() +
+    scale_y_log10() +
+    scale_color_viridis_c(aesthetics = c('color', 'fill'))
+```

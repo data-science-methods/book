@@ -1,0 +1,21 @@
+project:
+  type: book
+  output-dir: docs
+
+book:
+  title: "Methods of Data Science"
+  author: "Dan Hicks"
+  chapters:
+    - index.qmd
+    - references.qmd
+
+bibliography: book.bib
+
+format:
+  html:
+    theme: cosmo
+  pdf:
+    documentclass: scrreprt
+
+
+

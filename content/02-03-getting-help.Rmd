@@ -1,0 +1,160 @@
+# Warnings, Errors, and Getting Help #
+
+```{r child = 'knitr_config.Rmd'}
+```
+
+## Reading
+
+- @BryanObjectTypeClosure2020
+- @FaqHowMake
+- @WickhamDebugging2019
+
+## Dependencies
+
+```{r, eval = FALSE}
+install.packages('lubridate', 'assertthat', 'reprex')
+```
+
+## Messages, warnings, and errors
+
+- *Message*:  Things are fine, but here's some information you should know
+- *Warning*:  Uhhhh I'm gonna keep going, but maybe this isn't what you want
+- *Error*:  Nope.  I'm stopping here.  You need to fix the thing. 
+
+```{r, eval = FALSE}
+message('Hey, just FYI')
+warning('Uhhhh might want to check this out')
+stop('Noooooo')
+```
+
+## Where to go for help
+
+- [Rubber duck debugging](https://en.wikipedia.org/wiki/Rubber_duck_debugging)
+- Isolate the problem
+- Restart your session: Session $\to$ Restart R
+- Local help: `?fun`
+- StackOverflow: <https://stackoverflow.com/questions/tagged/r>
+- CRAN $\to$ BugReports (usually GitHub Issues)
+
+## Example: Dates are often problems
+
+```{r}
+library(lubridate)
+
+add_six_months = function(date_str) {
+    parsed_dates = parse_date_time(date_str, orders = 'mdY')
+    parsed_dates %m+% months(6) 
+}
+
+some_data = c('June 2002', 'May 15, 2007', 'August 2007')
+add_six_months(some_data)
+```
+
+- Note that this is a warning, not an error
+    - R won't stop running here (unless we tell it to)
+    - Errors might not show up until much later in our code, making it hard to identify the root cause
+    - Or they might cause invisible problems, eg, by default `lm()` silently drops observations with missing values
+- To catch warnings
+    - Set `options(warn = 2)` to turn all warnings into errors
+    - Use `tryCatch()` with the `warning` argument
+        - Example: <https://stackoverflow.com/questions/8217901/breaking-loop-when-warnings-appear-in-r/8218794#8218794>
+    - Write a unit test
+    - My preferred approach: Add an **assertion** to your primary code
+    
+```{r, eval = FALSE}
+## Using an assertion to prevent warnings from cascading
+library(assertthat)
+
+six_months_later = add_six_months(some_data)
+assert_that(all(!is.na(six_months_later)), 
+            msg = 'Missing values in `six_months_later`')
+```
+
+- Let's start by using the RStudio debugger to **isolate the problem**
+
+```{r, eval = FALSE}
+debugonce(add_six_months)
+add_six_months(some_data)
+```
+
+- The problem is in `lubridate::parse_date_time()`.  
+- *Spend a few minutes reading the documentation for this function and playing around with the call.* 
+    - What does the argument `orders` do? 
+
+```{r, eval = FALSE}
+?parse_date_time
+parse_date_time(some_data, orders = 'mdY')
+```
+
+- Let's try SO: <https://stackoverflow.com/search?q=%5BR%5D+lubridate+month-year>
+
+```{r, eval=FALSE}
+parse_date_time(some_data, orders = c('mY', 'mdY'))
+```
+
+- *Make this change in `add_six_months()` and confirm it no longer trips the assertion.* 
+
+## Another example: More fun with dates
+
+```{r, eval=FALSE}
+more_data = c('May 7, 2017', 'May 19, 2017', 'May Fifth, 2017')
+mdy(more_data)
+```
+
+- SO doesn't seem so helpful: <https://stackoverflow.com/search?q=%5BR%5D+lubridate+written+days>
+
+- Let's check the CRAN page for `lubridate`: <https://cran.r-project.org/web/packages/lubridate/index.html>
+
+```{r, echo=FALSE, fig.cap='Screenshot of `lubridate` on CRAN, highlighting the BugReports field'}
+knitr::include_graphics(file.path('images', '02-basics', 'lubridate_cran.png'))
+```
+
+- Trying a couple of searches gives us a promising result: <https://github.com/tidyverse/lubridate/issues?q=is%3Aissue+is%3Aopen+mdy>
+    
+```{r, echo=FALSE, fig.cap='Screenshot of `lubridate` issues page, showing a relevant search result'}
+knitr::include_graphics(file.path('images', '02-basics', 'lubridate_issues.png'))
+```
+
+This is a known bug; it looks like they're thinking about doing something about it, but the only workaround is to create an NA:  <https://github.com/tidyverse/lubridate/issues/685>
+
+
+## Writing a reproducible example: `reprex`
+
+- <https://reprex.tidyverse.org/>
+- <https://reprex.tidyverse.org/articles/articles/learn-reprex.html>
+- <https://reprex.tidyverse.org/articles/reprex-dos-and-donts.html>
+
+- *Practice by writing a reprex for one of our two examples*
+
+## Do not do these things in your reprex (or anywhere else)
+
+[Or Jenny Bryan will come to your office and set your computer on fire](https://www.tidyverse.org/blog/2017/12/workflow-vs-script/). 
+
+- `setwd('/users/danhicks/projects/catsaregreat/myscript/')`
+    - Used to ensure that R is running where your file is
+    - Unnecessary if you're opening different projects in different RStudio sessions
+    - Will cause irrelevant errors on any other system
+
+- Aside:  use `file.path()` or `here::here()` to build paths
+    
+- `rm(list=ls())`
+    - Used because people think it clears out the global environment
+    - Unnecessary if you're regularly using Session $\to$ Restart R
+    - Also unnecessary at the top of a `Rmd` file, which is always knit in a new session
+    - Doesn't actually clear out the global environment
+        - eg, doesn't unload packages or reset `options()`
+        
+Not on Bryan's list, but also don't do it: 
+
+- `require(package)`
+    - If `package` is installed, will act just like `library()`
+    - If not, will return `FALSE`
+        - The script will keep going until there's an error about a missing function 300 lines later
+        - Probably not the error you wanted help with
+        - Annoying to debug because I have no idea where the function is supposed to come from
+    - If `library()` can't find the package, it immediately raises an error
+        - I can tell right away what package needs to be installed
+
+## Debugging in RStudio
+
+[This week's lab](https://github.com/data-science-methods/lab-w03-debugging) introduces you to some of RStudio's debugging tools. 

@@ -1,0 +1,30 @@
+# Two EDA "Checklists" #
+
+```{r child = 'knitr_config.Rmd'}
+```
+
+## @PengArtDataScience2016 ##
+
+1. Formulate your question
+2. Read in your data
+3. Check the packaging
+4. Look at the top and the bottom of your data
+5. Check your “n”s
+6. Validate with at least one external data source 
+7. Make a plot
+8. Try the easy solution first
+9. Follow up [@PengArtDataScience2016 33]
+
+## @HuebnerSystematicApproachInitial2016 ##
+
+1. Duplicate records need to be eliminated
+2. Direction of numerical codes for categorical and ordinal variables
+3. Inconsistencies in date and time stamps
+4. Presence of bimodal distributions
+5. Presence of skewed distributions
+6. Presence of ceilings and floors in continuous variables
+7. Presence of outliers
+8. Distribution of missing data
+9. Indications of recording errors in the main variables [after @HuebnerSystematicApproachInitial2016 26]
+
+## References 
