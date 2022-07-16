@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-0.9.600">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Methods of Data Science - 15&nbsp; The life-changing magic of tidying your projects #</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../content/04-05-data-management.html" rel="next">
+<link href="../content/04-03-code-review.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">The life-changing magic of tidying your projects #</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Methods of Data Science</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">Preface</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/01-01-intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction #</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/01-02-setup.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Software, hardware, and accounts #</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/01-03-data-sci-wtf.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data Science: What and why #</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+    <div class="sidebar-item-container"> 
+        <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Some fundamental tools</a>
+      <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+        <i class="bi bi-chevron-right ms-2"></i>
+      </a>
+    </div>
+    <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/02-02-git.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Git and Version Control #</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/02-03-getting-help.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Warnings, Errors, and Getting Help #</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/02-04-functional-programming.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Programming Paradigms #</span></a>
+  </div>
+</li>
+    </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+    <div class="sidebar-item-container"> 
+        <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Exploratory data analysis</a>
+      <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+        <i class="bi bi-chevron-right ms-2"></i>
+      </a>
+    </div>
+    <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/03-02-models-of-eda.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Exploratory Data Analysis #</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/03-03-checklists.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Two EDA “Checklists” #</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/03-04-inspecting-vars.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Inspecting Variables #</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/03-05-graphs.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Visual EDA #</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/03-06-grammar-of-graphics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">The Grammar of Graphics #</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/03-07-covid-eda.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Covid EDA #</span></a>
+  </div>
+</li>
+    </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+    <div class="sidebar-item-container"> 
+        <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">Replicability &amp; reproducibility</a>
+      <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+        <i class="bi bi-chevron-right ms-2"></i>
+      </a>
+    </div>
+    <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/04-02-readability.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Readable code is reliable code #</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/04-03-code-review.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">A code review checklist #</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/04-04-project-organization.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">The life-changing magic of tidying your projects #</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/04-05-data-management.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Managing and publishing data #</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/04-06-make.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Make #</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/04-07-renv.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Tracking package versions with <code>renv</code> #</span></a>
+  </div>
+</li>
+    </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../references.html" class="sidebar-item-text sidebar-link">References</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#reading" id="toc-reading" class="nav-link active" data-scroll-target="#reading"> <span class="header-section-number">15.1</span> Reading</a>
+  <ul class="collapse">
+  <li><a href="#some-data-management-disasters" id="toc-some-data-management-disasters" class="nav-link" data-scroll-target="#some-data-management-disasters"> <span class="header-section-number">15.1.1</span> Some data management disasters</a></li>
+  </ul></li>
+  <li><a href="#dumpster-organization" id="toc-dumpster-organization" class="nav-link" data-scroll-target="#dumpster-organization"> <span class="header-section-number">15.2</span> Dumpster organization</a></li>
+  <li><a href="#project-organization" id="toc-project-organization" class="nav-link" data-scroll-target="#project-organization"> <span class="header-section-number">15.3</span> Project organization</a></li>
+  <li><a href="#model-1-noblequickguideorganizing2009" id="toc-model-1-noblequickguideorganizing2009" class="nav-link" data-scroll-target="#model-1-noblequickguideorganizing2009"> <span class="header-section-number">15.4</span> Model 1: <span class="citation" data-cites="NobleQuickGuideOrganizing2009">Noble (<span>2009</span>)</span></a></li>
+  <li><a href="#model-2-some-of-dhs-projects" id="toc-model-2-some-of-dhs-projects" class="nav-link" data-scroll-target="#model-2-some-of-dhs-projects"> <span class="header-section-number">15.5</span> Model 2: Some of DH’s projects</a></li>
+  <li><a href="#just-the-directories" id="toc-just-the-directories" class="nav-link" data-scroll-target="#just-the-directories"> <span class="header-section-number">15.6</span> Just the directories</a></li>
+  <li><a href="#a-larger-text-mining-project" id="toc-a-larger-text-mining-project" class="nav-link" data-scroll-target="#a-larger-text-mining-project"> <span class="header-section-number">15.7</span> A larger text-mining project</a></li>
+  <li><a href="#just-the-directories-1" id="toc-just-the-directories-1" class="nav-link" data-scroll-target="#just-the-directories-1"> <span class="header-section-number">15.8</span> Just the directories</a></li>
+  <li><a href="#dhs-project-template" id="toc-dhs-project-template" class="nav-link" data-scroll-target="#dhs-project-template"> <span class="header-section-number">15.9</span> DH’s Project Template</a></li>
+  <li><a href="#a-reminder-on-paths" id="toc-a-reminder-on-paths" class="nav-link" data-scroll-target="#a-reminder-on-paths"> <span class="header-section-number">15.10</span> A reminder on paths</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"> <span class="header-section-number">15.11</span> References</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">The life-changing magic of tidying your projects #</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<section id="reading" class="level2" data-number="15.1">
+<h2 data-number="15.1" class="anchored" data-anchor-id="reading"><span class="header-section-number">15.1</span> Reading</h2>
+<ul>
+<li><span class="citation" data-cites="NobleQuickGuideOrganizing2009">Noble (<a href="../references.html#ref-NobleQuickGuideOrganizing2009" role="doc-biblioref">2009</a>)</span></li>
+</ul>
+<section id="some-data-management-disasters" class="level3" data-number="15.1.1">
+<h3 data-number="15.1.1" class="anchored" data-anchor-id="some-data-management-disasters"><span class="header-section-number">15.1.1</span> Some data management disasters</h3>
+<ul>
+<li><span class="citation" data-cites="ArrayErrors2011"><em>The Economist</em> (<a href="../references.html#ref-ArrayErrors2011" role="doc-biblioref">2011</a>)</span>, <span class="citation" data-cites="VideoKeithBaggerly"><span>“Video: Keith <span>Baggerly</span>, "<span>When</span> Is <span>Reproducibility</span> an <span>Ethical Issue</span>? Genomics, <span>Personalized Medicine</span>, and <span>Human Error</span>"”</span> (<a href="../references.html#ref-VideoKeithBaggerly" role="doc-biblioref">n.d.</a>)</span></li>
+<li><span class="citation" data-cites="HerndonDoesHighPublic2014">Herndon, Ash, and Pollin (<a href="../references.html#ref-HerndonDoesHighPublic2014" role="doc-biblioref">2014</a>)</span>, but you can just read <span class="citation" data-cites="BaileyReinhartRogoffErrorHow">Bailey and Borwein (Jon) (<a href="../references.html#ref-BaileyReinhartRogoffErrorHow" role="doc-biblioref">n.d.</a>)</span>, <span class="citation" data-cites="CassidyReinhartRogoffControversy">Cassidy (<a href="../references.html#ref-CassidyReinhartRogoffControversy" role="doc-biblioref">n.d.</a>)</span>, and/or watch <span class="citation" data-cites="ReinhartRogoffGrowth2019"><em>Reinhart &amp; <span>Rogoff</span> - <span>Growth</span> in a <span>Time</span> of <span>Debt</span> - <span>EXERCISE</span>!</em> (<a href="../references.html#ref-ReinhartRogoffGrowth2019" role="doc-biblioref">2019</a>)</span></li>
+<li><span class="citation" data-cites="LaskowskiWhatWhenYou">Laskowski (<a href="../references.html#ref-LaskowskiWhatWhenYou" role="doc-biblioref">n.d.</a>)</span>, <span class="citation" data-cites="ViglioneAvalancheSpiderpaperRetractions2020">Viglione (<a href="../references.html#ref-ViglioneAvalancheSpiderpaperRetractions2020" role="doc-biblioref">2020</a>)</span>, <span class="citation" data-cites="PennisiProminentSpiderBiologist2020">Pennisi (<a href="../references.html#ref-PennisiProminentSpiderBiologist2020" role="doc-biblioref">2020</a>)</span></li>
+<li><span class="citation" data-cites="HowExcelMay2020"><span>“How <span>Excel</span> May Have Caused Loss of 16,000 <span>Covid</span> Tests in <span>England</span>”</span> (<a href="../references.html#ref-HowExcelMay2020" role="doc-biblioref">2020</a>)</span></li>
+</ul>
+</section>
+</section>
+<section id="dumpster-organization" class="level2" data-number="15.2">
+<h2 data-number="15.2" class="anchored" data-anchor-id="dumpster-organization"><span class="header-section-number">15.2</span> Dumpster organization</h2>
+<p>(ref:dumpster) 😱 Source: <a href="https://pbs.twimg.com/media/DFca5SRXsAAx1NA" class="uri">https://pbs.twimg.com/media/DFca5SRXsAAx1NA</a></p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/04-reproducibility/dumpster.jpg" class="img-fluid figure-img" style="width:80.0%"></p>
+<p></p><figcaption aria-hidden="true" class="figure-caption">(ref:dumpster)</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li>Dump all of your files into one place</li>
+<li>Use search tools to find what you want</li>
+<li>Just assume that things aren’t getting corrupted</li>
+<li>The way many Gen Z students think about their files? <span class="citation" data-cites="ChinStudentsWhoGrew2021">(<a href="../references.html#ref-ChinStudentsWhoGrew2021" role="doc-biblioref">Chin 2021</a>)</span></li>
+</ul>
+</section>
+<section id="project-organization" class="level2" data-number="15.3">
+<h2 data-number="15.3" class="anchored" data-anchor-id="project-organization"><span class="header-section-number">15.3</span> Project organization</h2>
+<ul>
+<li>Keep your project self-contained</li>
+<li>Locate files quickly</li>
+<li>Play nicely with version control</li>
+<li>Self-document key relationships between project files</li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/04-reproducibility/folder_structure.png" class="img-fluid figure-img" style="width:60.0%"></p>
+<p></p><figcaption aria-hidden="true" class="figure-caption">Folder organization is your friend. I have top-level folders for teaching, coding, and writing projects. Then each project or collection of projects lives in its own folder. An ‘Archives’ folder is good for tucking old projects out of the way.</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="model-1-noblequickguideorganizing2009" class="level2" data-number="15.4">
+<h2 data-number="15.4" class="anchored" data-anchor-id="model-1-noblequickguideorganizing2009"><span class="header-section-number">15.4</span> Model 1: <span class="citation" data-cites="NobleQuickGuideOrganizing2009">Noble (<a href="../references.html#ref-NobleQuickGuideOrganizing2009" role="doc-biblioref">2009</a>)</span></h2>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/04-reproducibility/noble.png" class="img-fluid figure-img" width="2067"></p>
+<p></p><figcaption aria-hidden="true" class="figure-caption">Noble’s <span class="citation" data-cites="NobleQuickGuideOrganizing2009">(<a href="../references.html#ref-NobleQuickGuideOrganizing2009" role="doc-biblioref">2009</a>)</span> sample folder structure is designed for experimental biologists.</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li>Includes code for
+<ul>
+<li>running experiments</li>
+<li>cleaning and analyzing data</li>
+<li>typesetting a LaTeX file into a PDF</li>
+</ul></li>
+<li>Other features
+<ul>
+<li>notebook file, updated regularly</li>
+<li>chronological folders for experimental runs</li>
+<li><code>bin</code> for compiled code and <code>source</code> for corresponding source files</li>
+</ul></li>
+</ul>
+</section>
+<section id="model-2-some-of-dhs-projects" class="level2" data-number="15.5">
+<h2 data-number="15.5" class="anchored" data-anchor-id="model-2-some-of-dhs-projects"><span class="header-section-number">15.5</span> Model 2: Some of DH’s projects</h2>
+<p>GitHub repo: <a href="https://github.com/dhicks/p_curve" class="uri">https://github.com/dhicks/p_curve</a><br>
+14 directories, 121 files</p>
+<pre><code>.
+├── DESCRIPTION
+├── Makefile
+├── README.md
+├── _deploy.sh
+├── out
+│&nbsp;&nbsp; ├── estimates_meta.png
+│&nbsp;&nbsp; ├── estimates_study.png
+│&nbsp;&nbsp; ├── fig_1_samples_young.png
+│&nbsp;&nbsp; ├── fig_2_young_composite.png
+│&nbsp;&nbsp; ├── fig_3_evidence_severity.png
+│&nbsp;&nbsp; ├── fig_4_evidence_likelihood_zero.png
+│&nbsp;&nbsp; ├── fig_5_evidence_likelihood_mix.png
+│&nbsp;&nbsp; ├── likelihood.tex
+│&nbsp;&nbsp; ├── linearity.png
+│&nbsp;&nbsp; ├── linearity.tex
+│&nbsp;&nbsp; ├── samples_schsp.png
+│&nbsp;&nbsp; ├── samples_simonsohn.png
+│&nbsp;&nbsp; ├── severity.tex
+│&nbsp;&nbsp; ├── slopes.png
+│&nbsp;&nbsp; ├── slopes.tex
+│&nbsp;&nbsp; ├── slopes_scatter.png
+│&nbsp;&nbsp; ├── test.png
+│&nbsp;&nbsp; └── test_out.png
+├── p.curve
+│&nbsp;&nbsp; ├── DESCRIPTION
+│&nbsp;&nbsp; ├── NAMESPACE
+│&nbsp;&nbsp; ├── R
+│&nbsp;&nbsp; │&nbsp;&nbsp; └── p-curve.R
+│&nbsp;&nbsp; ├── man
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── draw_samples.Rd
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── draw_studies.Rd
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── flatten_to_chr.Rd
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── likelihood_ratio.Rd
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── many_metas.Rd
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── p_gap.Rd
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── p_value.Rd
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── qq_linear.Rd
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── qq_plot.Rd
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── qq_slope.Rd
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── schsp_curve.Rd
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── schsp_slope.Rd
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── simonsohn_curve.Rd
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── t_test.Rd
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── young_composite.Rd
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── young_curve.Rd
+│&nbsp;&nbsp; │&nbsp;&nbsp; └── young_slope.Rd
+│&nbsp;&nbsp; └── p.curve.Rproj
+├── paper
+│&nbsp;&nbsp; ├── *enviro\ epi
+│&nbsp;&nbsp; │&nbsp;&nbsp; └── EE\ Submission\ Confirmation\ for\ Young's\ p-value\ plot\ does\ not\ provide\ evidence\ against\ air\ pollution\ hazards.eml
+│&nbsp;&nbsp; ├── Young\ papers.gsheet
+│&nbsp;&nbsp; ├── Young.bib
+│&nbsp;&nbsp; ├── cover\ letter.pdf
+│&nbsp;&nbsp; ├── diff.pdf
+│&nbsp;&nbsp; ├── ehp
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── A\ manuscript\ number\ has\ been\ assigned\ to\ Young's\ p-value\ plot\ does\ not\ provide\ evidence\ against\ air\ pollution\ hazards\ -\ [EMID_0ef854c3bb0b5cae].eml
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── Decision\ on\ EHP\ Submission\ EHP8013\ -\ [EMID_932e44ac2192c44f].eml
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── EHP-CFI-form.pdf
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── cover\ letter.txt
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── paper_2020-07-31.docx
+│&nbsp;&nbsp; │&nbsp;&nbsp; └── title\ page.md
+│&nbsp;&nbsp; ├── example-refs.bib
+│&nbsp;&nbsp; ├── fig_1_samples_young.png
+│&nbsp;&nbsp; ├── fig_2_young_composite.png
+│&nbsp;&nbsp; ├── fig_3_evidence_severity.png
+│&nbsp;&nbsp; ├── fig_4_evidence_likelihood_zero.png
+│&nbsp;&nbsp; ├── fig_5_evidence_likelihood_mix.png
+│&nbsp;&nbsp; ├── header.yaml
+│&nbsp;&nbsp; ├── paper.md
+│&nbsp;&nbsp; ├── paper.pdf
+│&nbsp;&nbsp; ├── paper.synctex.gz
+│&nbsp;&nbsp; ├── paper.tex
+│&nbsp;&nbsp; ├── paper.zip
+│&nbsp;&nbsp; ├── paper_20201211.md
+│&nbsp;&nbsp; ├── peerj
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── comments.md
+│&nbsp;&nbsp; │&nbsp;&nbsp; └── peerj.pdf
+│&nbsp;&nbsp; ├── phil\ med
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── [philmed]\ Editor\ Decision.eml
+│&nbsp;&nbsp; │&nbsp;&nbsp; └── [philmed]\ Submission\ Acknowledgement.eml
+│&nbsp;&nbsp; ├── render.R
+│&nbsp;&nbsp; ├── summary.md
+│&nbsp;&nbsp; ├── summary.pdf
+│&nbsp;&nbsp; ├── summary.tex
+│&nbsp;&nbsp; ├── supplement.md
+│&nbsp;&nbsp; ├── supplement.pdf
+│&nbsp;&nbsp; ├── title.md
+│&nbsp;&nbsp; ├── title.pdf
+│&nbsp;&nbsp; ├── vancouver-superscript.csl
+│&nbsp;&nbsp; └── wlpeerj.cls
+├── scripts
+│&nbsp;&nbsp; ├── Makefile
+│&nbsp;&nbsp; ├── run_metas.R
+│&nbsp;&nbsp; ├── run_metas.html
+│&nbsp;&nbsp; ├── run_metas_cache
+│&nbsp;&nbsp; │&nbsp;&nbsp; └── html
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── __packages
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── power_sim_9c372ce79d0c5f5a133f461070cc735c.RData
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── power_sim_9c372ce79d0c5f5a133f461070cc735c.rdb
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── power_sim_9c372ce79d0c5f5a133f461070cc735c.rdx
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── run\ simulations_b1dfebf278eb300e65b865f76b2893d2.RData
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── run\ simulations_b1dfebf278eb300e65b865f76b2893d2.rdb
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── run\ simulations_b1dfebf278eb300e65b865f76b2893d2.rdx
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── vary_N_sim_7d1d09d59ab04fc75046799fcf7506f9.RData
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── vary_N_sim_7d1d09d59ab04fc75046799fcf7506f9.rdb
+│&nbsp;&nbsp; │&nbsp;&nbsp;     └── vary_N_sim_7d1d09d59ab04fc75046799fcf7506f9.rdx
+│&nbsp;&nbsp; ├── run_metas_files
+│&nbsp;&nbsp; │&nbsp;&nbsp; └── figure-html
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── QQ\ linearity\ tests-1.png
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── gaps-1.png
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── gaps-2.png
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── likelihood\ analysis-1.png
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── likelihood\ analysis-3.png
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── model\ validation-1.png
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── model\ validation-2.png
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── power_sim-1.png
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── power_sim-2.png
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── sample\ plots-1.png
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── sample\ plots-2.png
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── sample\ plots-3.png
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── sample\ plots-4.png
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── severity\ analysis-1.png
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── severity\ analysis-2.png
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── slopes-1.png
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── slopes-2.png
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── slopes-3.png
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── slopes-4.png
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── slopes-5.png
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── slopes-6.png
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── slopes-7.png
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── unnamed-chunk-2-1.png
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── unnamed-chunk-4-1.png
+│&nbsp;&nbsp; │&nbsp;&nbsp;     └── unnamed-chunk-6-1.png
+│&nbsp;&nbsp; └── scripts.Rproj
+└── tree.md</code></pre>
+</section>
+<section id="just-the-directories" class="level2" data-number="15.6">
+<h2 data-number="15.6" class="anchored" data-anchor-id="just-the-directories"><span class="header-section-number">15.6</span> Just the directories</h2>
+<pre><code>.
+├── out
+├── p.curve
+│&nbsp;&nbsp; ├── R
+│&nbsp;&nbsp; └── man
+├── paper
+│&nbsp;&nbsp; ├── *enviro\ epi
+│&nbsp;&nbsp; ├── ehp
+│&nbsp;&nbsp; ├── peerj
+│&nbsp;&nbsp; └── phil\ med
+└── scripts
+    ├── run_metas_cache
+    │&nbsp;&nbsp; └── html
+    └── run_metas_files
+        └── figure-html</code></pre>
+<ul>
+<li><code>scripts</code>, <code>paper</code>, and <code>out</code></li>
+<li><code>p.curve</code>, a little package containing the simulation code</li>
+<li>simulation and analysis automatically reproduced: <a href="https://dhicks.github.io/p_curve/" class="uri">https://dhicks.github.io/p_curve/</a></li>
+</ul>
+</section>
+<section id="a-larger-text-mining-project" class="level2" data-number="15.7">
+<h2 data-number="15.7" class="anchored" data-anchor-id="a-larger-text-mining-project"><span class="header-section-number">15.7</span> A larger text-mining project</h2>
+<p>Published paper: <a href="https://doi.org/10.1162/qss_a_00150" class="uri">https://doi.org/10.1162/qss_a_00150</a><br>
+GitHub repo: <a href="https://github.com/dhicks/orus" class="uri">https://github.com/dhicks/orus</a><br>
+23 directories, 274 files (plus 160k data files)</p>
+<pre><code>.
+├── Makefile
+├── ORU\ faculty
+│&nbsp;&nbsp; ├── ORU\ Faculty.docx
+│&nbsp;&nbsp; ├── ORU\ Faculty.html
+│&nbsp;&nbsp; ├── ORU\ Publications.docx
+│&nbsp;&nbsp; ├── ORU\ Publications.fld
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── colorschememapping.xml
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── filelist.xml
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── header.html
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── image001.png
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── item0001.xml
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── props002.xml
+│&nbsp;&nbsp; │&nbsp;&nbsp; └── themedata.thmx
+│&nbsp;&nbsp; ├── ORU\ Publications.html
+│&nbsp;&nbsp; └── auids.csv
+├── ORU\ founding\ dates.gsheet
+├── QSS\ forms
+│&nbsp;&nbsp; ├── QSS-Checklist-AcceptedManuscripts.docx
+│&nbsp;&nbsp; ├── QSS_pub_agreement.pdf
+│&nbsp;&nbsp; └── Quantitative\ Science\ Studies\ -\ Decision\ on\ Manuscript\ ID\ QSS-2021-0014.R2.eml
+├── R
+│&nbsp;&nbsp; ├── api_keys.R
+│&nbsp;&nbsp; └── hellinger.R
+├── auid\ flow.txt
+├── data
+│&nbsp;&nbsp; ├── *ORUs\ -\ DSL\ -\ Google\ Drive.webloc
+│&nbsp;&nbsp; ├── 00_UCD_2016.csv
+│&nbsp;&nbsp; ├── 00_UCD_2017.csv
+│&nbsp;&nbsp; ├── 00_UCD_2018.csv
+│&nbsp;&nbsp; ├── 00_faculty_list.html
+│&nbsp;&nbsp; ├── 00_manual_matches.csv
+│&nbsp;&nbsp; ├── 00_publications_list.html
+│&nbsp;&nbsp; ├── 01_departments.csv
+│&nbsp;&nbsp; ├── 01_departments_canonical.csv
+│&nbsp;&nbsp; ├── 01_faculty.Rds
+│&nbsp;&nbsp; ├── 02_pubs.Rds
+│&nbsp;&nbsp; ├── 03_codepartmentals.Rds
+│&nbsp;&nbsp; ├── 03_dropout.Rds
+│&nbsp;&nbsp; ├── 03_matched.Rds
+│&nbsp;&nbsp; ├── 03_unmatched.Rds
+│&nbsp;&nbsp; ├── 04_author_meta.Rds
+│&nbsp;&nbsp; ├── 04_dropouts.Rds
+│&nbsp;&nbsp; ├── 04_genderize
+│&nbsp;&nbsp; ├── 04_namsor.Rds
+│&nbsp;&nbsp; ├── 05_author_meta.Rds
+│&nbsp;&nbsp; ├── 05_dept_dummies.Rds
+│&nbsp;&nbsp; ├── 05_dropouts.Rds
+│&nbsp;&nbsp; ├── 05_layout.Rds
+│&nbsp;&nbsp; ├── 05_matched.Rds
+│&nbsp;&nbsp; ├── 06_author_histories.Rds
+│&nbsp;&nbsp; ├── 07_coauth_count.Rds
+│&nbsp;&nbsp; ├── 07_parsed_histories.Rds
+│&nbsp;&nbsp; ├── 08_phrases.Rds
+│&nbsp;&nbsp; ├── 09_H.Rds
+│&nbsp;&nbsp; ├── 09_atm.csv
+│&nbsp;&nbsp; ├── 09_vocab.tex
+│&nbsp;&nbsp; ├── 10_atm.csv
+│&nbsp;&nbsp; ├── 10_atm_pc.Rds
+│&nbsp;&nbsp; ├── 10_aytm.csv
+│&nbsp;&nbsp; ├── 10_aytm_comp.csv
+│&nbsp;&nbsp; ├── 10_aytm_did.csv
+│&nbsp;&nbsp; ├── 10_model_stats.Rds
+│&nbsp;&nbsp; ├── 10_models.Rds
+│&nbsp;&nbsp; ├── 11_au_dept_xwalk.Rds
+│&nbsp;&nbsp; ├── 11_departments.csv
+│&nbsp;&nbsp; ├── 11_departments_canonical.csv
+│&nbsp;&nbsp; ├── 11_dept_dummies.Rds
+│&nbsp;&nbsp; ├── 11_dept_gamma.Rds
+│&nbsp;&nbsp; ├── 11_dept_term_matrix.Rds
+│&nbsp;&nbsp; ├── 11_oru_gamma.Rds
+│&nbsp;&nbsp; ├── 11_oru_term_matrix.Rds
+│&nbsp;&nbsp; ├── 11_test_train.Rds
+│&nbsp;&nbsp; ├── 12_layout.Rds
+│&nbsp;&nbsp; ├── author_histories [7665 entries exceeds filelimit, not opening dir]
+│&nbsp;&nbsp; ├── authors_meta [6020 entries exceeds filelimit, not opening dir]
+│&nbsp;&nbsp; ├── docs [145144 entries exceeds filelimit, not opening dir]
+│&nbsp;&nbsp; ├── ldatuning_results
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── tuningResult_comp.Rds
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── tuningResult_comp.docx
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── tuningResult_comp.pdf
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── tuningResult_did.Rds
+│&nbsp;&nbsp; │&nbsp;&nbsp; └── tuningResult_did.pdf
+│&nbsp;&nbsp; ├── ldatuning_results-20190415T164055Z-001.zip
+│&nbsp;&nbsp; ├── parsed_blocks [430 entries exceeds filelimit, not opening dir]
+│&nbsp;&nbsp; ├── pubs [282 entries exceeds filelimit, not opening dir]
+│&nbsp;&nbsp; └── temp
+├── interdisciplinarity\ project\ notes.gdoc
+├── notes.txt
+├── paper
+│&nbsp;&nbsp; ├── QSS_a_00150-Hicks_Proof1.pdf
+│&nbsp;&nbsp; ├── apa-6th-edition.csl
+│&nbsp;&nbsp; ├── cover\ letter.txt
+│&nbsp;&nbsp; ├── diff.pdf
+│&nbsp;&nbsp; ├── header.yaml
+│&nbsp;&nbsp; ├── img
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── ORU_DAG.png
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── cites_regression.png
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── coauths_regression.png
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── conceptual_model.png
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── dept_dist_fixed_reg.png
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── dept_dist_reg.png
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── dept_gamma.png
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── dept_hell_net.png
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── dept_hell_net_50.png
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── entropies.png
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── entropies_selected.png
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── entropy_regression.png
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── gender.png
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── mds.png
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── mds_dept.png
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── network.png
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── oru_dept_entropy.png
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── oru_dept_min_dist.png
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── oru_dept_min_dist_ridges.png
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── oru_dept_network.png
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── oru_dept_org_dist.png
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── oru_dept_org_dist_ridges.png
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── oru_gamma.png
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── pub_regression.png
+│&nbsp;&nbsp; │&nbsp;&nbsp; └── sample.png
+│&nbsp;&nbsp; ├── lit\ review\ notes.txt
+│&nbsp;&nbsp; ├── oru_paper.aux
+│&nbsp;&nbsp; ├── oru_paper.log
+│&nbsp;&nbsp; ├── oru_paper.md
+│&nbsp;&nbsp; ├── oru_paper.out
+│&nbsp;&nbsp; ├── oru_paper.pdf
+│&nbsp;&nbsp; ├── oru_paper.synctex.gz
+│&nbsp;&nbsp; ├── oru_paper.tex
+│&nbsp;&nbsp; ├── oru_paper.zip
+│&nbsp;&nbsp; ├── oru_paper_20200616.pdf
+│&nbsp;&nbsp; ├── oru_paper_20210805.pdf
+│&nbsp;&nbsp; ├── oru_project.bib
+│&nbsp;&nbsp; ├── oru_project.yaml
+│&nbsp;&nbsp; ├── response1.gdoc
+│&nbsp;&nbsp; ├── response1.pdf
+│&nbsp;&nbsp; ├── response2.gdoc
+│&nbsp;&nbsp; ├── response2.pdf
+│&nbsp;&nbsp; ├── scraps
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── Hellinger.md
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── Holbrook.md
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── table.md
+│&nbsp;&nbsp; │&nbsp;&nbsp; └── table.pdf
+│&nbsp;&nbsp; ├── supplement.md
+│&nbsp;&nbsp; └── supplement.pdf
+├── plots
+│&nbsp;&nbsp; ├── 12_beta.tex
+│&nbsp;&nbsp; ├── 12_cites_regression.png
+│&nbsp;&nbsp; ├── 12_coauths_regression.png
+│&nbsp;&nbsp; ├── 12_dept_dist_fixed_reg.png
+│&nbsp;&nbsp; ├── 12_dept_dist_reg.png
+│&nbsp;&nbsp; ├── 12_dept_gamma.png
+│&nbsp;&nbsp; ├── 12_dept_hell_net.png
+│&nbsp;&nbsp; ├── 12_dept_hell_net_50.png
+│&nbsp;&nbsp; ├── 12_dept_topics.png
+│&nbsp;&nbsp; ├── 12_entropies.png
+│&nbsp;&nbsp; ├── 12_entropies_selected.png
+│&nbsp;&nbsp; ├── 12_entropy_regression.png
+│&nbsp;&nbsp; ├── 12_gender.png
+│&nbsp;&nbsp; ├── 12_mds.png
+│&nbsp;&nbsp; ├── 12_mds_dept.png
+│&nbsp;&nbsp; ├── 12_mds_wide.png
+│&nbsp;&nbsp; ├── 12_network.png
+│&nbsp;&nbsp; ├── 12_oru_dept_entropy.png
+│&nbsp;&nbsp; ├── 12_oru_dept_mean_dist.png
+│&nbsp;&nbsp; ├── 12_oru_dept_mean_dist_ridges.png
+│&nbsp;&nbsp; ├── 12_oru_dept_min_dist.png
+│&nbsp;&nbsp; ├── 12_oru_dept_min_dist_ridges.png
+│&nbsp;&nbsp; ├── 12_oru_dept_network.png
+│&nbsp;&nbsp; ├── 12_oru_dept_org_dist.png
+│&nbsp;&nbsp; ├── 12_oru_dept_org_dist_ridges.png
+│&nbsp;&nbsp; ├── 12_oru_entropy.png
+│&nbsp;&nbsp; ├── 12_oru_gamma.png
+│&nbsp;&nbsp; ├── 12_pub_regression.png
+│&nbsp;&nbsp; ├── 12_sample.png
+│&nbsp;&nbsp; └── ORU_DAG.png
+├── presentations
+│&nbsp;&nbsp; └── 2019-06-07\ for\ Paul\ Dodd.gslides
+├── questions\ for\ jane.md
+├── scripts
+│&nbsp;&nbsp; ├── 01_parse_faculty_list.R
+│&nbsp;&nbsp; ├── 02_Scopus_search_results.R
+│&nbsp;&nbsp; ├── 03_match.R
+│&nbsp;&nbsp; ├── 03_matched.csv
+│&nbsp;&nbsp; ├── 04_author_meta.R
+│&nbsp;&nbsp; ├── 05_filtering.R
+│&nbsp;&nbsp; ├── 06_author_histories.R
+│&nbsp;&nbsp; ├── 07_complete_histories.R
+│&nbsp;&nbsp; ├── 08_text_annotation.R
+│&nbsp;&nbsp; ├── 09_build_vocab.R
+│&nbsp;&nbsp; ├── 10_topic_modeling.R
+│&nbsp;&nbsp; ├── 11_depts.R
+│&nbsp;&nbsp; ├── 11_depts.html
+│&nbsp;&nbsp; ├── 12_analysis\ copy.html
+│&nbsp;&nbsp; ├── 12_analysis-matched.html
+│&nbsp;&nbsp; ├── 12_analysis.R
+│&nbsp;&nbsp; ├── 12_analysis.html
+│&nbsp;&nbsp; ├── 12_analysis_cache
+│&nbsp;&nbsp; │&nbsp;&nbsp; └── html
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── __packages
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── mds_viz_efd9009c794d667852b2549df2bccf96.RData
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── mds_viz_efd9009c794d667852b2549df2bccf96.rdb
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── mds_viz_efd9009c794d667852b2549df2bccf96.rdx
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── network_c410cd78a4c339cdc4acd1d66c6c5e07.RData
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── network_c410cd78a4c339cdc4acd1d66c6c5e07.rdb
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── network_c410cd78a4c339cdc4acd1d66c6c5e07.rdx
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── silhouette_3170ef648aba325d2ce8c9be48c52e53.RData
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── silhouette_3170ef648aba325d2ce8c9be48c52e53.rdb
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── silhouette_3170ef648aba325d2ce8c9be48c52e53.rdx
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── topic_viz_41d0cb157a88d4ec41810a16e769f5d5.RData
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── topic_viz_41d0cb157a88d4ec41810a16e769f5d5.rdb
+│&nbsp;&nbsp; │&nbsp;&nbsp;     └── topic_viz_41d0cb157a88d4ec41810a16e769f5d5.rdx
+│&nbsp;&nbsp; ├── 12_analysis_files
+│&nbsp;&nbsp; │&nbsp;&nbsp; └── figure-html
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── author-dept\ distance-1.png
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── author-dept\ distance-2.png
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── author-dept\ distance-3.png
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── author-dept\ distance-4.png
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── author-dept\ distance-5.png
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── desc_plots_tabs-1.png
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── desc_plots_tabs-2.png
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── desc_plots_tabs-3.png
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── desc_plots_tabs-4.png
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── h3-1.png
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── h3-2.png
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── h3-3.png
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── h3-4.png
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── h3-5.png
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── h3-6.png
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── mds_viz-1.png
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── mds_viz-10.png
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── mds_viz-11.png
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── mds_viz-12.png
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── mds_viz-13.png
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── mds_viz-14.png
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── mds_viz-2.png
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── mds_viz-3.png
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── mds_viz-4.png
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── mds_viz-5.png
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── mds_viz-6.png
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── mds_viz-7.png
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── mds_viz-8.png
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── mds_viz-9.png
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── network-1.png
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── network-2.png
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── productivity-1.png
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── productivity-2.png
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── productivity-3.png
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── productivity-4.png
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── productivity-5.png
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── productivity-6.png
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── productivity-7.png
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── productivity-8.png
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── productivity-9.png
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── silhouette-1.png
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── topic_models-1.png
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── topic_models-10.png
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── topic_models-11.png
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── topic_models-12.png
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── topic_models-13.png
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── topic_models-2.png
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── topic_models-3.png
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── topic_models-4.png
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── topic_models-5.png
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── topic_models-6.png
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── topic_models-7.png
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── topic_models-8.png
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── topic_models-9.png
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── topic_viz-1.png
+│&nbsp;&nbsp; │&nbsp;&nbsp;     └── topic_viz-2.png
+│&nbsp;&nbsp; ├── api_key.R
+│&nbsp;&nbsp; └── scraps
+│&nbsp;&nbsp;     ├── 02_parse_pubs_list.R
+│&nbsp;&nbsp;     ├── 03_coe_pubs.R
+│&nbsp;&nbsp;     ├── 03_match_auids.R
+│&nbsp;&nbsp;     ├── 07.R
+│&nbsp;&nbsp;     ├── 12_regressions.R
+│&nbsp;&nbsp;     ├── BML-CMSI\ deep\ dive.R
+│&nbsp;&nbsp;     ├── Hellinger_low_memory.R
+│&nbsp;&nbsp;     ├── dept_hell_net.R
+│&nbsp;&nbsp;     ├── divergence\ against\ lagged\ distributions.R
+│&nbsp;&nbsp;     ├── exploring\ topics.R
+│&nbsp;&nbsp;     ├── fractional_authorship.R
+│&nbsp;&nbsp;     ├── hellinger.R
+│&nbsp;&nbsp;     ├── model_scratch.R
+│&nbsp;&nbsp;     ├── multicore.R
+│&nbsp;&nbsp;     ├── net_viz.R
+│&nbsp;&nbsp;     ├── prcomp.R
+│&nbsp;&nbsp;     ├── propensity.R
+│&nbsp;&nbsp;     ├── rs_diversity.R
+│&nbsp;&nbsp;     ├── spacyr.R
+│&nbsp;&nbsp;     ├── topic\ counts\ rather\ than\ entropies.R
+│&nbsp;&nbsp;     ├── topic_cosine_sim.R
+│&nbsp;&nbsp;     ├── unit-level.R
+│&nbsp;&nbsp;     ├── weighted\ regression.R
+│&nbsp;&nbsp;     ├── word-topic_distance.R
+│&nbsp;&nbsp;     ├── xx_construct_samples.R
+│&nbsp;&nbsp;     └── xx_oru_complete_histories.R
+└── tree.md</code></pre>
+</section>
+<section id="just-the-directories-1" class="level2" data-number="15.8">
+<h2 data-number="15.8" class="anchored" data-anchor-id="just-the-directories-1"><span class="header-section-number">15.8</span> Just the directories</h2>
+<pre><code>.
+├── ORU\ faculty
+│&nbsp;&nbsp; └── ORU\ Publications.fld
+├── QSS\ forms
+├── R
+├── data
+│&nbsp;&nbsp; ├── author_histories
+│&nbsp;&nbsp; ├── authors_meta
+│&nbsp;&nbsp; ├── docs
+│&nbsp;&nbsp; ├── ldatuning_results
+│&nbsp;&nbsp; ├── parsed_blocks
+│&nbsp;&nbsp; ├── pubs
+│&nbsp;&nbsp; └── temp
+├── paper
+│&nbsp;&nbsp; ├── img
+│&nbsp;&nbsp; └── scraps
+├── plots
+├── presentations
+└── scripts
+    ├── 12_analysis_cache
+    │&nbsp;&nbsp; └── html
+    ├── 12_analysis_files
+    │&nbsp;&nbsp; └── figure-html
+    └── scraps</code></pre>
+</section>
+<section id="dhs-project-template" class="level2" data-number="15.9">
+<h2 data-number="15.9" class="anchored" data-anchor-id="dhs-project-template"><span class="header-section-number">15.9</span> DH’s Project Template</h2>
+<ul>
+<li><p><a href="https://github.com/dhicks/project_template" class="uri">https://github.com/dhicks/project_template</a></p></li>
+<li><p>Configured as a GitHub “template,” making it easy to create new repositories for new projects</p></li>
+<li><p>Designated folders for data, plots/outputs, and utility functions</p></li>
+</ul>
+<!-- - File naming convention -->
+<!--     - Automatically orders analysis scripts -->
+<!--     - Coordinates plots, outputs, and intermediate data with the script that creates them -->
+<!-- - R package infrastructure: `DESCRIPTION` -->
+<!--     - Enables one-liner to load the utility functions in `R`: `devtools::load_all('..')` -->
+</section>
+<section id="a-reminder-on-paths" class="level2" data-number="15.10">
+<h2 data-number="15.10" class="anchored" data-anchor-id="a-reminder-on-paths"><span class="header-section-number">15.10</span> A reminder on paths</h2>
+<ul>
+<li>Windows and Unix-based systems write paths differently</li>
+<li>Use <code>file.path()</code> or the <code>here</code> package to construct paths</li>
+<li><code>..</code> in a path means “go up to the parent folder”
+<ul>
+<li>so <code>../data/00_raw_data.csv</code> goes up one level (eg, from the <code>scripts</code> folder), then down to the <code>data</code> folder, then the file <code>00_raw_data.csv</code></li>
+</ul></li>
+</ul>
+</section>
+<section id="references" class="level2" data-number="15.11">
+<h2 data-number="15.11" class="anchored" data-anchor-id="references"><span class="header-section-number">15.11</span> References</h2>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
+<div id="ref-BaileyReinhartRogoffErrorHow" class="csl-entry" role="doc-biblioentry">
+Bailey, David H., and Jonathan Borwein (Jon). n.d. <span>“The <span>Reinhart</span>-<span>Rogoff</span> Error – or How Not to <span>Excel</span> at Economics.”</span> <span>The Conversation</span>. Accessed May 16, 2020. <a href="http://theconversation.com/the-reinhart-rogoff-error-or-how-not-to-excel-at-economics-13646">http://theconversation.com/the-reinhart-rogoff-error-or-how-not-to-excel-at-economics-13646</a>.
+</div>
+<div id="ref-CassidyReinhartRogoffControversy" class="csl-entry" role="doc-biblioentry">
+Cassidy, John. n.d. <span>“The <span>Reinhart</span> and <span>Rogoff Controversy</span>: A <span>Summing Up</span>.”</span> <span>The New Yorker</span>. Accessed September 27, 2020. <a href="https://www.newyorker.com/news/john-cassidy/the-reinhart-and-rogoff-controversy-a-summing-up">https://www.newyorker.com/news/john-cassidy/the-reinhart-and-rogoff-controversy-a-summing-up</a>.
+</div>
+<div id="ref-ChinStudentsWhoGrew2021" class="csl-entry" role="doc-biblioentry">
+Chin, Monica. 2021. <span>“Students Who Grew up with Search Engines Might Change <span>STEM</span> Education Forever.”</span> <span>The Verge</span>. September 22, 2021. <a href="https://www.theverge.com/22684730/students-file-folder-directory-structure-education-gen-z">https://www.theverge.com/22684730/students-file-folder-directory-structure-education-gen-z</a>.
+</div>
+<div id="ref-HerndonDoesHighPublic2014" class="csl-entry" role="doc-biblioentry">
+Herndon, Thomas, Michael Ash, and Robert Pollin. 2014. <span>“Does High Public Debt Consistently Stifle Economic Growth? A Critique of <span>Reinhart</span> and <span>Rogoff</span>.”</span> <em>Cambridge Journal of Economics</em> 38 (2): 257–79. <a href="https://doi.org/10.1093/cje/bet075">https://doi.org/10.1093/cje/bet075</a>.
+</div>
+<div id="ref-HowExcelMay2020" class="csl-entry" role="doc-biblioentry">
+<span>“How <span>Excel</span> May Have Caused Loss of 16,000 <span>Covid</span> Tests in <span>England</span>.”</span> 2020. <span>The Guardian</span>. October 5, 2020. <a href="http://www.theguardian.com/politics/2020/oct/05/how-excel-may-have-caused-loss-of-16000-covid-tests-in-england">http://www.theguardian.com/politics/2020/oct/05/how-excel-may-have-caused-loss-of-16000-covid-tests-in-england</a>.
+</div>
+<div id="ref-LaskowskiWhatWhenYou" class="csl-entry" role="doc-biblioentry">
+Laskowski, Kate. n.d. <span>“What to Do When You Don’t Trust Your Data Anymore – <span>Laskowski Lab</span> at <span>UC Davis</span>.”</span> Accessed January 29, 2020. <a href="https://laskowskilab.faculty.ucdavis.edu/2020/01/29/retractions/">https://laskowskilab.faculty.ucdavis.edu/2020/01/29/retractions/</a>.
+</div>
+<div id="ref-NobleQuickGuideOrganizing2009" class="csl-entry" role="doc-biblioentry">
+Noble, William Stafford. 2009. <span>“A <span>Quick Guide</span> to <span>Organizing Computational Biology Projects</span>.”</span> <em>PLOS Computational Biology</em> 5 (7): e1000424. <a href="https://doi.org/10.1371/journal.pcbi.1000424">https://doi.org/10.1371/journal.pcbi.1000424</a>.
+</div>
+<div id="ref-PennisiProminentSpiderBiologist2020" class="csl-entry" role="doc-biblioentry">
+Pennisi, Elizabeth. 2020. <span>“Prominent Spider Biologist Spun a Web of Questionable Data.”</span> <em>Science</em> 367 (6478): 613–14. <a href="https://doi.org/10.1126/science.367.6478.613">https://doi.org/10.1126/science.367.6478.613</a>.
+</div>
+<div id="ref-ReinhartRogoffGrowth2019" class="csl-entry" role="doc-biblioentry">
+<em>Reinhart &amp; <span>Rogoff</span> - <span>Growth</span> in a <span>Time</span> of <span>Debt</span> - <span>EXERCISE</span>!</em> 2019. <a href="https://www.youtube.com/watch?v=ItGMz0ERvcw">https://www.youtube.com/watch?v=ItGMz0ERvcw</a>.
+</div>
+<div id="ref-ArrayErrors2011" class="csl-entry" role="doc-biblioentry">
+<em>The Economist</em>. 2011. <span>“An Array of Errors,”</span> September 10, 2011. <a href="https://www.economist.com/science-and-technology/2011/09/10/an-array-of-errors">https://www.economist.com/science-and-technology/2011/09/10/an-array-of-errors</a>.
+</div>
+<div id="ref-VideoKeithBaggerly" class="csl-entry" role="doc-biblioentry">
+<span>“Video: Keith <span>Baggerly</span>, "<span>When</span> Is <span>Reproducibility</span> an <span>Ethical Issue</span>? Genomics, <span>Personalized Medicine</span>, and <span>Human Error</span>".”</span> n.d. Accessed September 23, 2020. <a href="http://www.birs.ca/events/2013/5-day-workshops/13w5083/videos/watch/201308141121-Baggerly.html">http://www.birs.ca/events/2013/5-day-workshops/13w5083/videos/watch/201308141121-Baggerly.html</a>.
+</div>
+<div id="ref-ViglioneAvalancheSpiderpaperRetractions2020" class="csl-entry" role="doc-biblioentry">
+Viglione, Giuliana. 2020. <span>“<span>‘<span>Avalanche</span>’</span> of Spider-Paper Retractions Shakes Behavioural-Ecology Community.”</span> <em>Nature</em>, February. <a href="https://doi.org/10.1038/d41586-020-00287-y">https://doi.org/10.1038/d41586-020-00287-y</a>.
+</div>
+</div>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../content/04-03-code-review.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">A code review checklist #</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../content/04-05-data-management.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Managing and publishing data #</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

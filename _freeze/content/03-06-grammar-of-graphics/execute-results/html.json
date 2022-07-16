@@ -1,0 +1,16 @@
+{
+  "hash": "246fc12d3b1c4bd576c77dde6a8c0552",
+  "result": {
+    "markdown": "# The Grammar of Graphics #\n\n## Reading\n\n- @WickhamGgplot2ElegantGraphics, ch. 13, \"Mastering the Grammar\"\n- Further reading: @WilkinsonGrammarGraphics1999; @WickhamLayeredGrammarGraphics2010\n\n## Artist's palette model ##\n\nMany programming languages use the *artist's palette* model of computer graphics\n\n- Define some low-level tools for drawing on a canvas: `points()`, `lines()`, `curve()`\n- One-liners that bundle these tools into standard plots: `hist()`, `barplot()`\n- This is used by base graphics in R, Python packages including `matplotlib` and `seaborn`, MATLAB, etc.\n- In R: base graphics are *side effects*, not first-class objects\n\n(ref:matplotlib) `matplotlib`, a popular Python package for graphing, uses the artist\\'s palette model.  Source: <https://matplotlib.org/stable/gallery/subplots_axes_and_figures/subplot.html>\n\n\n::: {.cell layout-align=\"center\"}\n::: {.cell-output-display}\n![(ref:matplotlib)](images/03-eda/matplotlib.png){fig-align='center' width=30%}\n:::\n\n::: {.cell-output-display}\n![(ref:matplotlib)](images/03-eda/matplotlib.webp){fig-align='center' width=30%}\n:::\n:::\n\n\n## Grammar of graphics ##\n\nThe *grammar of graphics* is a fundamentally different approach\n\n- Implemented by `ggplot2` in the tidyverse\n\n\n::: {.cell}\n::: {.cell-output-display}\n![The Grammar of Graphics regards graphs as mappings from variables in the data to features of geometric objects. This means that every graph is a model.](images/03-eda/grammar_of_graphics.png){width=80%}\n:::\n:::\n\n\n## Graphs are maps\n\n- A graph is a mapping from variables in the data to features of geometric objects\n- An individual mapping is called an *aesthetic*\n- So a graph is a collection of aesthetics applied to a dataset\n\n\n::: {.cell}\n\n:::\n\n::: {.cell}\n\n```{.r .cell-code}\noakland_df = read_csv(file.path('data', 'oakland.zip'), \n                      show_col_types = FALSE)\n\nggplot(data = oakland_df, \n       aes(x = subject_race, fill = search_conducted)) +\n    geom_bar(position = 'fill') +\n    scale_fill_brewer(palette = 'Set1')\n```\n\n::: {.cell-output-display}\n![](03-06-grammar-of-graphics_files/figure-html/unnamed-chunk-8-1.png){width=672}\n:::\n:::\n\n\n## Graphs are models\n\n- Simplifications of the data\n- That provide us with cognitive affordances\n    - Fit with our cognitive capabilities\n    - Support pattern detection, inference\n- Direct our attention to certain things and away from others\n- Involve researcher degrees of freedom\n\n<br>\n\nConsider the bar plots vs. dots + CI plots vs. violin plots from the last chapter\n\n- How do these simplify the data? \n- In doing so, how do they provide us with cognitive affordances? \n- How do these different in terms of where they direct our attention? \n- What researcher degrees of freedom does each involve? \n\n## References ",
+    "supporting": [
+      "03-06-grammar-of-graphics_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

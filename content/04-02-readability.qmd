@@ -1,8 +1,5 @@
 # Readable code is reliable code #
 
-```{r child = 'knitr_config.Rmd'}
-```
-
 ## Reading 
 
 - @BryanCodeSmellsFeels2018

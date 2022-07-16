@@ -1,5 +1,25 @@
 # Preface {.unnumbered}
 
-This is a Quarto book.
+This document is a set of notes (and perhaps later a textbook) for a course on data science methods for graduate students in social and behavioral sciences, taught by Professor Dan Hicks (they/them), UC Merced. 
 
-To learn more about Quarto books visit <https://quarto.org/docs/books>.
+The course site is available [here](..). 
+
+-----
+
+These notes were written in [RStudio](http://www.rstudio.com/ide/) using *[quarto]*. The complete source is available on [GitHub](https://github.com/data-science-methods/book/). 
+
+This version of the book was built with `r R.version.string`, [pandoc](https://pandoc.org/) version `r rmarkdown::pandoc_version()`, and the following packages:
+
+
+```{r pkg-list, echo = FALSE, results="asis"}
+## From <https://github.com/tidymodels/TMwR/blob/master/index.Rmd>
+# deps <- desc::desc_get_deps()
+# pkgs <- sort(deps$package[deps$type == "Imports"])
+# pkgs <- sessioninfo::package_info(pkgs, dependencies = FALSE)
+# df <- tibble::tibble(
+#   package = pkgs$package,
+#   version = pkgs$ondiskversion,
+#   source = gsub("@", "\\\\@", pkgs$source)
+# )
+# knitr::kable(df, format = "markdown")
+```

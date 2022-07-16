@@ -1,8 +1,5 @@
 # Two EDA "Checklists" #
 
-```{r child = 'knitr_config.Rmd'}
-```
-
 ## @PengArtDataScience2016 ##
 
 1. Formulate your question

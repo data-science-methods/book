@@ -1,8 +1,5 @@
 # Warnings, Errors, and Getting Help #
 
-```{r child = 'knitr_config.Rmd'}
-```
-
 ## Reading
 
 - @BryanObjectTypeClosure2020

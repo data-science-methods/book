@@ -1,8 +1,5 @@
 # Exploratory Data Analysis # {#eda-models}
 
-```{r child = 'knitr_config.Rmd'}
-```
-
 ## <br>
 
 > This book is about exploratory data analysis, about looking at data to see what it seems to say. It concentrates on simple arithmetic and easy-to-draw pictures. It regards whatever appearances we have recognized as partial descriptions, and tries to look beneath them for new insights. Its concern is with appearance, not with confirmation. [@TukeyExploratoryDataAnalysis1977]

@@ -1,8 +1,5 @@
 # The life-changing magic of tidying your projects #
 
-```{r child = 'knitr_config.Rmd'}
-```
-
 ## Reading
 
 - @NobleQuickGuideOrganizing2009

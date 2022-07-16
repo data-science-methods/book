@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-0.9.600">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Methods of Data Science - 1&nbsp; Introduction #</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../content/01-02-setup.html" rel="next">
+<link href="../index.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction #</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Methods of Data Science</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">Preface</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/01-01-intro.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction #</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/01-02-setup.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Software, hardware, and accounts #</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/01-03-data-sci-wtf.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data Science: What and why #</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+    <div class="sidebar-item-container"> 
+        <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Some fundamental tools</a>
+      <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+        <i class="bi bi-chevron-right ms-2"></i>
+      </a>
+    </div>
+    <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/02-02-git.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Git and Version Control #</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/02-03-getting-help.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Warnings, Errors, and Getting Help #</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/02-04-functional-programming.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Programming Paradigms #</span></a>
+  </div>
+</li>
+    </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+    <div class="sidebar-item-container"> 
+        <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Exploratory data analysis</a>
+      <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+        <i class="bi bi-chevron-right ms-2"></i>
+      </a>
+    </div>
+    <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/03-02-models-of-eda.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Exploratory Data Analysis #</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/03-03-checklists.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Two EDA “Checklists” #</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/03-04-inspecting-vars.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Inspecting Variables #</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/03-05-graphs.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Visual EDA #</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/03-06-grammar-of-graphics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">The Grammar of Graphics #</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/03-07-covid-eda.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Covid EDA #</span></a>
+  </div>
+</li>
+    </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+    <div class="sidebar-item-container"> 
+        <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">Replicability &amp; reproducibility</a>
+      <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+        <i class="bi bi-chevron-right ms-2"></i>
+      </a>
+    </div>
+    <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/04-02-readability.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Readable code is reliable code #</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/04-03-code-review.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">A code review checklist #</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/04-04-project-organization.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">The life-changing magic of tidying your projects #</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/04-05-data-management.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Managing and publishing data #</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/04-06-make.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Make #</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/04-07-renv.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Tracking package versions with <code>renv</code> #</span></a>
+  </div>
+</li>
+    </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../references.html" class="sidebar-item-text sidebar-link">References</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#land-acknowledgements" id="toc-land-acknowledgements" class="nav-link active" data-scroll-target="#land-acknowledgements"> <span class="header-section-number">1.1</span> Land acknowledgements</a>
+  <ul class="collapse">
+  <li><a href="#campus-land-acknowledgment" id="toc-campus-land-acknowledgment" class="nav-link" data-scroll-target="#campus-land-acknowledgment"> <span class="header-section-number">1.1.1</span> <span>Campus land acknowledgment</span></a></li>
+  <li><a href="#instructors-land-acknowledgment" id="toc-instructors-land-acknowledgment" class="nav-link" data-scroll-target="#instructors-land-acknowledgment"> <span class="header-section-number">1.1.2</span> Instructor’s land acknowledgment</a></li>
+  </ul></li>
+  <li><a href="#about-the-instructor" id="toc-about-the-instructor" class="nav-link" data-scroll-target="#about-the-instructor"> <span class="header-section-number">1.2</span> About the instructor</a></li>
+  <li><a href="#what-this-course-isnt-and-is" id="toc-what-this-course-isnt-and-is" class="nav-link" data-scroll-target="#what-this-course-isnt-and-is"> <span class="header-section-number">1.3</span> What this course isn’t, and is</a></li>
+  <li><a href="#learning-outcomes" id="toc-learning-outcomes" class="nav-link" data-scroll-target="#learning-outcomes"> <span class="header-section-number">1.4</span> Learning outcomes</a></li>
+  <li><a href="#prerequisites" id="toc-prerequisites" class="nav-link" data-scroll-target="#prerequisites"> <span class="header-section-number">1.5</span> Prerequisites</a></li>
+  <li><a href="#requirements-and-weekly-routine" id="toc-requirements-and-weekly-routine" class="nav-link" data-scroll-target="#requirements-and-weekly-routine"> <span class="header-section-number">1.6</span> Requirements and weekly routine</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction #</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<section id="land-acknowledgements" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="land-acknowledgements"><span class="header-section-number">1.1</span> Land acknowledgements</h2>
+<section id="campus-land-acknowledgment" class="level3" data-number="1.1.1">
+<h3 data-number="1.1.1" class="anchored" data-anchor-id="campus-land-acknowledgment"><span class="header-section-number">1.1.1</span> <a href="https://diversity.ucmerced.edu/values/land-acknowledgement">Campus land acknowledgment</a></h3>
+<p>We pause to acknowledge all local indigenous peoples, including the Yokuts and Miwuk, who inhabited this land. We embrace their continued connection to this region and thank them for allowing us to live, work, learn, and collaborate on their traditional homeland. Let us now take a moment of silence to pay respect to their elders and to all Yokuts and Miwuk people, past and present.</p>
+</section>
+<section id="instructors-land-acknowledgment" class="level3" data-number="1.1.2">
+<h3 data-number="1.1.2" class="anchored" data-anchor-id="instructors-land-acknowledgment"><span class="header-section-number">1.1.2</span> Instructor’s land acknowledgment</h3>
+<p>UC Merced and the City of Merced are on the traditional territory of the Yokut people. This land was stolen by Spanish, Mexican, and American settlers through acts of slavery and genocide. In addition, UC Merced is strongly associated with Ahwahne, known as Yosemite Valley. This valley was the traditional home of the Ahwahnechee people, who were the victims of some especially horrific, state-sponsored genocidal acts. For more on the history of Ahwahne, see <a href="https://tinyurl.com/y879jw8s" class="uri">https://tinyurl.com/y879jw8s</a>. For more information on land acknowledgments, see <a href="https://native-land.ca" class="uri">https://native-land.ca</a>.</p>
+</section>
+</section>
+<section id="about-the-instructor" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="about-the-instructor"><span class="header-section-number">1.2</span> About the instructor</h2>
+<p>Dan Hicks is a philosopher turned data scientist turned philosopher.</p>
+<p>I use they/them pronouns and identify as nonbinary. I grew up in Placerville, about two hours north of Merced in the Sierra Foothills. One branch of my family came to California during the Gold Rush, so I identify heavily as a Californian and have some complicated feelings about the genocide. I finished my PhD in philosophy of science at Notre Dame in 2012. After that I worked in a series of research positions in academia and the federal government. During 2015-2019 I was using data science methods at least half-time. I joined the faculty at UC Merced in Fall 2019.</p>
+<ul>
+<li>Email: <a href="mailto:dhicks4@ucmerced.edu" class="email">dhicks4@ucmerced.edu</a></li>
+<li>Student hours: By appointment: <a href="https://doodle.com/mm/danhicks/office-hours" class="uri">https://doodle.com/mm/danhicks/office-hours</a></li>
+<li>Website: <a href="https://dhicks.github.io/" class="uri">https://dhicks.github.io/</a></li>
+</ul>
+</section>
+<section id="what-this-course-isnt-and-is" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="what-this-course-isnt-and-is"><span class="header-section-number">1.3</span> What this course isn’t, and is</h2>
+<p>Is Not:</p>
+<ul>
+<li>a statistics course (in the way you think)</li>
+<li>a general introduction to software engineering</li>
+<li>a basic introduction to R</li>
+<li>carefully planned out from beginning to end</li>
+</ul>
+<p>Is:</p>
+<ul>
+<li>an introduction to data science</li>
+<li>about exploratory data analysis, data management, and reproducibility</li>
+<li>habituation to some good software engineering practices that are especially valuable for data science work</li>
+<li>in the <a href="https://en.wikipedia.org/wiki/Software_release_life_cycle#Alpha">alpha stage of development</a></li>
+</ul>
+</section>
+<section id="learning-outcomes" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="learning-outcomes"><span class="header-section-number">1.4</span> Learning outcomes</h2>
+<p><em>[match to catalog]</em></p>
+<p>By the end of the course, students will be able to</p>
+<ol type="1">
+<li><p>apply concepts from software engineering and philosophy of science to methodological decisions in data science, including</p>
+<ul>
+<li>reproducibility vs.&nbsp;robustness vs.&nbsp;replicability</li>
+<li>value and hazards of open data</li>
+<li>thick data <span class="citation" data-cites="WangWhyBigData2016">(<a href="../references.html#ref-WangWhyBigData2016" role="doc-biblioref">Wang 2016</a>)</span></li>
+</ul></li>
+<li><p>use exploratory data analysis techniques and tools to identify potential data errors and potential phenomena for further analysis</p></li>
+<li><p>clean raw data and produce a reproducible codebook for both downstream analysis and public release of data according to FAIR standards <span class="citation" data-cites="WilkinsonFAIRGuidingPrinciples2016">(<a href="../references.html#ref-WilkinsonFAIRGuidingPrinciples2016" role="doc-biblioref">Wilkinson et al. 2016</a>)</span></p>
+<ul>
+<li>[create and use a cloud database to work with big data]</li>
+</ul></li>
+<li><p>manage data, analysis, and outputs for reproducibility [assembling a project compendium; <span class="citation" data-cites="GentlemanStatisticalAnalysesReproducible2004">Gentleman and Lang (<a href="../references.html#ref-GentlemanStatisticalAnalysesReproducible2004" role="doc-biblioref">2004</a>)</span>] using best practices of data handling, a clear directory structure <span class="citation" data-cites="WilsonGoodEnoughPractices2017">(<a href="../references.html#ref-WilsonGoodEnoughPractices2017" role="doc-biblioref">Wilson et al. 2017</a>)</span>, self-documenting code, version control, build automation, [and continuous integration]</p></li>
+<li><p>apply philosophical and data science concepts to integrated ethical-technical analysis to case studies in algorithmic injustice</p>
+<ul>
+<li>understand the background on the COMPAS case: <span class="citation" data-cites="AngwinMachineBiasThere2016">Angwin et al. (<a href="../references.html#ref-AngwinMachineBiasThere2016" role="doc-biblioref">2016</a>)</span>; <span class="citation" data-cites="Corbett-DaviesComputerProgramUsed2016">Corbett-Davies et al. (<a href="../references.html#ref-Corbett-DaviesComputerProgramUsed2016" role="doc-biblioref">2016</a>)</span></li>
+<li>reproduce several fairness statistics on COMPAS data</li>
+<li>explain tradeoffs between false negatives and false positives in terms of inductive risk</li>
+<li>explain <span class="citation" data-cites="KleinbergInherentTradeOffsFair2016">Kleinberg, Mullainathan, and Raghavan (<a href="../references.html#ref-KleinbergInherentTradeOffsFair2016" role="doc-biblioref">2016</a>)</span> impossibility result (not necessarily the proof) and show that it applies to the COMPAS datas</li>
+<li>critically discuss profiling and thresholds <span class="citation" data-cites="PiersonLargescaleAnalysisRacial2020">(<a href="../references.html#ref-PiersonLargescaleAnalysisRacial2020" role="doc-biblioref">Pierson et al. 2020</a>)</span> as potential explanation for differences in “base rates” of recidivism</li>
+<li>critically locate discussions of fairness and recidivism in a broader social context, and identify implications for working data scientists <span class="citation" data-cites="SelbstFairnessAbstractionSociotechnical2018 HoffmannWhereFairnessFails2019 HannaCriticalRaceMethodology2019">(<a href="../references.html#ref-SelbstFairnessAbstractionSociotechnical2018" role="doc-biblioref">Selbst et al. 2018</a>; <a href="../references.html#ref-HoffmannWhereFairnessFails2019" role="doc-biblioref">Hoffmann 2019</a>; <a href="../references.html#ref-HannaCriticalRaceMethodology2019" role="doc-biblioref">Hanna et al. 2019</a>)</span></li>
+</ul></li>
+</ol>
+</section>
+<section id="prerequisites" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="prerequisites"><span class="header-section-number">1.5</span> Prerequisites</h2>
+<p><em>This course assumes basic competence with introductory R.</em></p>
+<ul>
+<li>“Introductory R”: Lessons 1-5 of the Carpentries <a href="https://datacarpentry.org/r-socialsci/">“R for Social Scientists”</a> curriculum
+<ul>
+<li>Installing R and packages</li>
+<li>Working in the R Studio IDE</li>
+<li>Common data types</li>
+<li>Reading and writing CSV files</li>
+<li>Tidyverse R: <code>mutate()</code>, <code>filter()</code>, <code>select()</code>; plotting with <code>ggplot2</code></li>
+</ul></li>
+<li>“Basic competence”: Given time and a reference (<a href="https://www.rstudio.com/resources/cheatsheets/">cheatsheet</a>, Stack Exchange, mentor) you can figure out how to solve a problem</li>
+</ul>
+</section>
+<section id="requirements-and-weekly-routine" class="level2" data-number="1.6">
+<h2 data-number="1.6" class="anchored" data-anchor-id="requirements-and-weekly-routine"><span class="header-section-number">1.6</span> Requirements and weekly routine</h2>
+<p><em>This is aspirational.</em></p>
+<ul>
+<li>Tuesdays: Mix of discussion and lecture based on assigned readings</li>
+<li>Thursdays: Live coding leading into work on the week’s lab assignment</li>
+<li>Labs: 10-ish, done individually or in pairs and submitted via GitHub for automated feedback</li>
+<li>Running project: Practicing ideas from the course on data sets you find</li>
+</ul>
+
+<!--
+## Notes on some course design decisions ##
+
+### R, not Python ###
+
+- Python is a perfectly good language for general programming
+    - And has some advantages over R in certain data science aspects, including working with strings and developing custom data structures
+
+However, 
+
+- R is a better language for doing data science [@ShotwellWhyUse2019]
+    - Vectors, data frames, and common statistical models are installed and loaded by default
+    - R is more functional [@WuPythonVsChoosing2019; @PaleologoWhatDifferenceMachine2018]
+    
+- R is also better for beginners
+    - [CRAN](https://twitter.com/kccarrell/status/1030482372775620613)
+    - RStudio
+    
+### Tidyverse R, not base R ###
+
+- "Base R" refers to the central code for R and the packages included when you install it
+    - Base R is universal and free of additional dependencies.  Code written entirely in base R will run on any other R installation (with the same version). 
+    - However, because the R Core Development Team has always thought backwards-compatibility is important, base R has some idiosyncracies [@KeyesRbitraryStandards2016]
+    
+- `tidyverse` is a suite of packages developed by the manufacturers of RStudio
+    - A very useful set of general tools can be loaded simply by calling `library(tidyverse)`
+        - And some more specialized tools are also installed as part of the suite
+    - Tidyverse is designed to mitigate a lot of the base R idiosyncracies
+    - While making code more human-readable and easier to reason about
+    - However, several of its tools use something called "non-standard evaluation" (NSE). 
+        - NSE makes tidyverse code easier to write for beginners, because you don't have to think as much about where exactly your variables are located
+        - At the same time, NSE creates problems for intermediate coders, because passing tidyverse-style "bare names" through function arguments causes cryptic errors
+
+### Scripts, not notebooks ###
+
+- Quite a few scientists like the way notebooks mix together code, visualizations, tables, and text [@PerkelWhyJupyterData2018]
+
+However, 
+
+- Notebooks do not play nicely with version control  [@AhemadVersionControlJupyter2018; @WhitmoreJupyterNotebookBest2015]
+- Notebooks encourage bad software engineering habits and discourage good ones [@GrusDonNotebooksJoel; @HiltchJupyterNotebookCancer2019]
+-->
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
+<div id="ref-AngwinMachineBiasThere2016" class="csl-entry" role="doc-biblioentry">
+Angwin, Julia, Jeff Larson, Surya Mattu, and Lauren Kirchner. 2016. <span>“Machine <span>Bias</span>: There’s <span>Software Used Across</span> the <span>Country</span> to <span>Predict Future Criminals</span>. <span>And</span> It’s <span>Biased Against Blacks</span>.”</span> <span>ProPublica</span>. May 23, 2016. <a href="https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing">https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing</a>.
+</div>
+<div id="ref-Corbett-DaviesComputerProgramUsed2016" class="csl-entry" role="doc-biblioentry">
+Corbett-Davies, Sam, Emma Pierson, Avi Feller, and Sharad Goel. 2016. <span>“A Computer Program Used for Bail and Sentencing Decisions Was Labeled Biased Against Blacks. <span>It</span>’s Actually Not That Clear.”</span> <span>Washington Post</span>. October 17, 2016. <a href="https://www.washingtonpost.com/news/monkey-cage/wp/2016/10/17/can-an-algorithm-be-racist-our-analysis-is-more-cautious-than-propublicas/">https://www.washingtonpost.com/news/monkey-cage/wp/2016/10/17/can-an-algorithm-be-racist-our-analysis-is-more-cautious-than-propublicas/</a>.
+</div>
+<div id="ref-GentlemanStatisticalAnalysesReproducible2004" class="csl-entry" role="doc-biblioentry">
+Gentleman, Robert, and Duncan Temple Lang. 2004. <span>“Statistical <span>Analyses</span> and <span>Reproducible Research</span>.”</span> <em>Bioconductor Project Working Papers</em>, May. <a href="https://biostats.bepress.com/bioconductor/paper2">https://biostats.bepress.com/bioconductor/paper2</a>.
+</div>
+<div id="ref-HannaCriticalRaceMethodology2019" class="csl-entry" role="doc-biblioentry">
+Hanna, Alex, Emily Denton, Andrew Smart, and Jamila Smith-Loud. 2019. <span>“Towards a <span>Critical Race Methodology</span> in <span>Algorithmic Fairness</span>.”</span> December 7, 2019. <a href="https://doi.org/10.1145/3351095.3372826">https://doi.org/10.1145/3351095.3372826</a>.
+</div>
+<div id="ref-HoffmannWhereFairnessFails2019" class="csl-entry" role="doc-biblioentry">
+Hoffmann, Anna Lauren. 2019. <span>“Where Fairness Fails: Data, Algorithms, and the Limits of Antidiscrimination Discourse.”</span> <em>Information, Communication &amp; Society</em> 22 (7): 900–915. <a href="https://doi.org/10.1080/1369118X.2019.1573912">https://doi.org/10.1080/1369118X.2019.1573912</a>.
+</div>
+<div id="ref-KleinbergInherentTradeOffsFair2016" class="csl-entry" role="doc-biblioentry">
+Kleinberg, Jon, Sendhil Mullainathan, and Manish Raghavan. 2016. <span>“Inherent <span>Trade</span>-<span>Offs</span> in the <span>Fair Determination</span> of <span>Risk Scores</span>.”</span> November 17, 2016. <a href="http://arxiv.org/abs/1609.05807">http://arxiv.org/abs/1609.05807</a>.
+</div>
+<div id="ref-PiersonLargescaleAnalysisRacial2020" class="csl-entry" role="doc-biblioentry">
+Pierson, Emma, Camelia Simoiu, Jan Overgoor, Sam Corbett-Davies, Daniel Jenson, Amy Shoemaker, Vignesh Ramachandran, et al. 2020. <span>“A Large-Scale Analysis of Racial Disparities in Police Stops Across the <span>United States</span>.”</span> <em>Nature Human Behaviour</em>, May, 1–10. <a href="https://doi.org/10.1038/s41562-020-0858-1">https://doi.org/10.1038/s41562-020-0858-1</a>.
+</div>
+<div id="ref-SelbstFairnessAbstractionSociotechnical2018" class="csl-entry" role="doc-biblioentry">
+Selbst, Andrew D., Danah Boyd, Sorelle Friedler, Suresh Venkatasubramanian, and Janet Vertesi. 2018. <span>“Fairness and <span>Abstraction</span> in <span>Sociotechnical Systems</span>.”</span> SSRN Scholarly Paper ID 3265913. <span>Rochester, NY</span>: <span>Social Science Research Network</span>. <a href="https://papers.ssrn.com/abstract=3265913">https://papers.ssrn.com/abstract=3265913</a>.
+</div>
+<div id="ref-WangWhyBigData2016" class="csl-entry" role="doc-biblioentry">
+Wang, Tricia. 2016. <span>“Why <span>Big Data Needs Thick Data</span>.”</span> <span>Medium</span>. January 20, 2016. <a href="https://medium.com/ethnography-matters/why-big-data-needs-thick-data-b4b3e75e3d7#.ur5gl84nj">https://medium.com/ethnography-matters/why-big-data-needs-thick-data-b4b3e75e3d7#.ur5gl84nj</a>.
+</div>
+<div id="ref-WilkinsonFAIRGuidingPrinciples2016" class="csl-entry" role="doc-biblioentry">
+Wilkinson, Mark D., Michel Dumontier, IJsbrand Jan Aalbersberg, Gabrielle Appleton, Myles Axton, Arie Baak, Niklas Blomberg, et al. 2016. <span>“The <span>FAIR Guiding Principles</span> for Scientific Data Management and Stewardship.”</span> <em>Scientific Data</em> 3 (1, 1): 1–9. <a href="https://doi.org/10.1038/sdata.2016.18">https://doi.org/10.1038/sdata.2016.18</a>.
+</div>
+<div id="ref-WilsonGoodEnoughPractices2017" class="csl-entry" role="doc-biblioentry">
+Wilson, Greg, Jennifer Bryan, Karen Cranston, Justin Kitzes, Lex Nederbragt, and Tracy K. Teal. 2017. <span>“Good Enough Practices in Scientific Computing.”</span> <em>PLOS Computational Biology</em> 13 (6): e1005510. <a href="https://doi.org/10.1371/journal.pcbi.1005510">https://doi.org/10.1371/journal.pcbi.1005510</a>.
+</div>
+</div>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../index.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Preface</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../content/01-02-setup.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Software, hardware, and accounts #</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

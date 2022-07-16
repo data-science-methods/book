@@ -1,8 +1,5 @@
 # Managing and publishing data #
 
-```{r child = 'knitr_config.Rmd'}
-```
-
 ## Reading
 
 - @HudonFieldNotesBuilding2018

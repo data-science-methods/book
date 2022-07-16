@@ -2,9 +2,6 @@
 
 ## </br>
 
-```{r child = 'knitr_config.Rmd'}
-```
-
 - This EDA will start in class and continue on to the lab
 - We're interested in *the role of social distancing in the July 2020 Covid wave in California*
 

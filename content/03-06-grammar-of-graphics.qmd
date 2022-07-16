@@ -1,8 +1,5 @@
 # The Grammar of Graphics #
 
-```{r child = 'knitr_config.Rmd'}
-```
-
 ## Reading
 
 - @WickhamGgplot2ElegantGraphics, ch. 13, "Mastering the Grammar"

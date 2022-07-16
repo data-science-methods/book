@@ -1,8 +1,5 @@
 # A code review checklist #
 
-```{r child = 'knitr_config.Rmd'}
-```
-
 ## Reading
 
 - @PostolovskiYourCodeReview2020

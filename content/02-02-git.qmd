@@ -2,9 +2,6 @@
 
 <!-- https://happygitwithr.com/common-remote-setups.html -->
 
-```{r child = 'knitr_config.Rmd'}
-```
-
 ## Some motivating examples ##
 
 - While working on your analysis code, you accidentally delete the first 35 lines of the script.  You only discover this three days later, when you restart R and try to run the script from the top.  Because you lost half of your senior thesis in undergrad, you hit Control+S to save every couple of minutes.  

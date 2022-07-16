@@ -1,8 +1,5 @@
 # Inspecting Variables #
 
-```{r child = 'knitr_config.Rmd'}
-```
-
 ## </br>
 
 - For this EDA, we'll work with data on police stops in Oakland, California, that have been pre-cleaned and released by the [Stanford Open Policing Project](https://openpolicing.stanford.edu/) [@PiersonLargescaleAnalysisRacial2020]. 

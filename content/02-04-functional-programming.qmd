@@ -1,8 +1,5 @@
 # Programming Paradigms #
 
-```{r child = 'knitr_config.Rmd'}
-```
-
 ## Reading ##
 
 - Introductions to parts II and III of @WickhamAdvanced2014

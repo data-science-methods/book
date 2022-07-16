@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-0.9.600">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Methods of Data Science - 7&nbsp; Exploratory Data Analysis #</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../content/03-03-checklists.html" rel="next">
+<link href="../content/02-04-functional-programming.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Exploratory Data Analysis #</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Methods of Data Science</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">Preface</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/01-01-intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction #</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/01-02-setup.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Software, hardware, and accounts #</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/01-03-data-sci-wtf.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data Science: What and why #</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+    <div class="sidebar-item-container"> 
+        <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Some fundamental tools</a>
+      <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+        <i class="bi bi-chevron-right ms-2"></i>
+      </a>
+    </div>
+    <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/02-02-git.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Git and Version Control #</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/02-03-getting-help.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Warnings, Errors, and Getting Help #</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/02-04-functional-programming.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Programming Paradigms #</span></a>
+  </div>
+</li>
+    </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+    <div class="sidebar-item-container"> 
+        <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Exploratory data analysis</a>
+      <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+        <i class="bi bi-chevron-right ms-2"></i>
+      </a>
+    </div>
+    <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/03-02-models-of-eda.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Exploratory Data Analysis #</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/03-03-checklists.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Two EDA “Checklists” #</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/03-04-inspecting-vars.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Inspecting Variables #</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/03-05-graphs.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Visual EDA #</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/03-06-grammar-of-graphics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">The Grammar of Graphics #</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/03-07-covid-eda.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Covid EDA #</span></a>
+  </div>
+</li>
+    </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+    <div class="sidebar-item-container"> 
+        <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">Replicability &amp; reproducibility</a>
+      <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+        <i class="bi bi-chevron-right ms-2"></i>
+      </a>
+    </div>
+    <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/04-02-readability.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Readable code is reliable code #</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/04-03-code-review.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">A code review checklist #</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/04-04-project-organization.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">The life-changing magic of tidying your projects #</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/04-05-data-management.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Managing and publishing data #</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/04-06-make.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Make #</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/04-07-renv.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Tracking package versions with <code>renv</code> #</span></a>
+  </div>
+</li>
+    </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../references.html" class="sidebar-item-text sidebar-link">References</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#section" id="toc-section" class="nav-link active" data-scroll-target="#section"> <span class="header-section-number">7.1</span> <br></a></li>
+  <li><a href="#exploratory-and-confirmatory-research" id="toc-exploratory-and-confirmatory-research" class="nav-link" data-scroll-target="#exploratory-and-confirmatory-research"> <span class="header-section-number">7.2</span> Exploratory and Confirmatory Research</a></li>
+  <li><a href="#better-models-for-eda-i-developing-phenomena" id="toc-better-models-for-eda-i-developing-phenomena" class="nav-link" data-scroll-target="#better-models-for-eda-i-developing-phenomena"> <span class="header-section-number">7.3</span> Better Models for EDA I: Developing Phenomena</a></li>
+  <li><a href="#eda-as-phenomena-development" id="toc-eda-as-phenomena-development" class="nav-link" data-scroll-target="#eda-as-phenomena-development"> <span class="header-section-number">7.4</span> EDA as phenomena development</a></li>
+  <li><a href="#better-models-for-eda-ii-epicycle-of-analysis" id="toc-better-models-for-eda-ii-epicycle-of-analysis" class="nav-link" data-scroll-target="#better-models-for-eda-ii-epicycle-of-analysis"> <span class="header-section-number">7.5</span> Better Models for EDA II: Epicycle of Analysis</a></li>
+  <li><a href="#pengartdatascience2016" id="toc-pengartdatascience2016" class="nav-link" data-scroll-target="#pengartdatascience2016"> <span class="header-section-number">7.6</span> <span class="citation" data-cites="PengArtDataScience2016">Peng and Matsui (<span>2016</span>)</span></a></li>
+  <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1"> <span class="header-section-number">7.7</span> <br></a></li>
+  <li><a href="#discussion" id="toc-discussion" class="nav-link" data-scroll-target="#discussion"> <span class="header-section-number">7.8</span> Discussion</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"> <span class="header-section-number">7.9</span> References</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="eda-models" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Exploratory Data Analysis #</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<section id="section" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="section"><span class="header-section-number">7.1</span> <br></h2>
+<blockquote class="blockquote">
+<p>This book is about exploratory data analysis, about looking at data to see what it seems to say. It concentrates on simple arithmetic and easy-to-draw pictures. It regards whatever appearances we have recognized as partial descriptions, and tries to look beneath them for new insights. Its concern is with appearance, not with confirmation. <span class="citation" data-cites="TukeyExploratoryDataAnalysis1977">(<a href="../references.html#ref-TukeyExploratoryDataAnalysis1977" role="doc-biblioref">John Wilder Tukey 1977</a>)</span></p>
+</blockquote>
+<blockquote class="blockquote">
+<p>Exploratory Data Analysis (EDA) is “an attitude, AND a flexibility, AND some graph paper (or transparencies, or both)” <span class="citation" data-cites="TukeyWeNeedBoth1980">(<a href="../references.html#ref-TukeyWeNeedBoth1980" role="doc-biblioref">John W. Tukey 1980</a>)</span></p>
+</blockquote>
+</section>
+<section id="exploratory-and-confirmatory-research" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="exploratory-and-confirmatory-research"><span class="header-section-number">7.2</span> Exploratory and Confirmatory Research</h2>
+<ul>
+<li>Especially in the wake of the replication crisis, one common distinction is between exploratory and confirmatory research <span class="citation" data-cites="WagenmakersAgendaPurelyConfirmatory2012">(<a href="../references.html#ref-WagenmakersAgendaPurelyConfirmatory2012" role="doc-biblioref">Wagenmakers et al. 2012</a>)</span></li>
+</ul>
+<table class="table">
+<caption>Exploratory vs.&nbsp;confirmatory research</caption>
+<colgroup>
+<col style="width: 44%">
+<col style="width: 44%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Confirmatory</th>
+<th style="text-align: left;">Exploratory</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">hypothesis testing</td>
+<td style="text-align: left;">hypothesis development</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">specified in advance</td>
+<td style="text-align: left;">adaptable</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">algorithmic</td>
+<td style="text-align: left;">free, creative</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">mechanical objectivity <span class="citation" data-cites="DastonObjectivity2007">(<a href="../references.html#ref-DastonObjectivity2007" role="doc-biblioref">Daston and Galison 2007</a>)</span></td>
+<td style="text-align: left;">pure subjectivity?</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">avoids inferential errors</td>
+<td style="text-align: left;"><em>makes</em> errors?</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>rigorous</strong></td>
+<td style="text-align: left;"><strong>lacking rigor?</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>real science??</strong></td>
+<td style="text-align: left;"><strong>h*cking around with data??</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>assumes experimental methods</strong></td>
+<td style="text-align: left;"><strong>relevant to all methods</strong></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>I agree that it’s important to
+<ul>
+<li>be thoughtful about how much confidence we’re placing in our conclusions</li>
+<li>interpret findings from one study in light of other studies</li>
+</ul></li>
+<li>But the confirmatory/exploratory distinction can overemphasize the confirmatory side
+<ul>
+<li>Making us too rigid and narrow-minded about what counts as good science</li>
+</ul></li>
+</ul>
+</section>
+<section id="better-models-for-eda-i-developing-phenomena" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="better-models-for-eda-i-developing-phenomena"><span class="header-section-number">7.3</span> Better Models for EDA I: Developing Phenomena</h2>
+<ul>
+<li><span class="citation" data-cites="BrownSmokeMirrorsHow2002">Brown (<a href="../references.html#ref-BrownSmokeMirrorsHow2002" role="doc-biblioref">2002</a>)</span></li>
+</ul>
+<table class="table">
+<caption>The data/phenomena/theory distinction</caption>
+<colgroup>
+<col style="width: 33%">
+<col style="width: 31%">
+<col style="width: 31%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Data</th>
+<th style="text-align: left;">Phenomena</th>
+<th style="text-align: left;">Theories/ Causal processes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Ex: spreadsheet of numbers, downloaded from Qualtrics</td>
+<td style="text-align: left;">Ex: Correlation between partisanship and sharing Covid misinformation</td>
+<td style="text-align: left;">Ex: Conservative susceptibility to anxiety hypothesis</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><br></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">collected</td>
+<td style="text-align: left;">abstracted or extracted from data</td>
+<td style="text-align: left;">postulated</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">not explained</td>
+<td style="text-align: left;">explained by theories</td>
+<td style="text-align: left;">explain phenomena</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">highly local to time, place, sample, procedure</td>
+<td style="text-align: left;">varying scope</td>
+<td style="text-align: left;">universal?</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">“raw,” messy, unwieldy</td>
+<td style="text-align: left;">“processed,” clean, stylized</td>
+<td style="text-align: left;">“laws of nature”?</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="eda-as-phenomena-development" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="eda-as-phenomena-development"><span class="header-section-number">7.4</span> EDA as phenomena development</h2>
+<ul>
+<li>cleaning messy data
+<ul>
+<li>identifying and mitigating (where possible) errors and idiosyncracies</li>
+</ul></li>
+<li>identifying <em>local</em> patterns (“local phenomena”)</li>
+<li><strong>not yet claiming these will be stable and appear elsewhere</strong></li>
+<li><strong>not yet worrying (much) about explanations</strong></li>
+</ul>
+</section>
+<section id="better-models-for-eda-ii-epicycle-of-analysis" class="level2" data-number="7.5">
+<h2 data-number="7.5" class="anchored" data-anchor-id="better-models-for-eda-ii-epicycle-of-analysis"><span class="header-section-number">7.5</span> Better Models for EDA II: Epicycle of Analysis</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/03-eda/epicycle.png" class="img-fluid figure-img" style="width:30.0%"></p>
+<p></p><figcaption aria-hidden="true" class="figure-caption">Epicycle of analysis model, <span class="citation" data-cites="PengArtDataScience2016">Peng and Matsui (<a href="../references.html#ref-PengArtDataScience2016" role="doc-biblioref">2016</a>)</span>, 5</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="pengartdatascience2016" class="level2" data-number="7.6">
+<h2 data-number="7.6" class="anchored" data-anchor-id="pengartdatascience2016"><span class="header-section-number">7.6</span> <span class="citation" data-cites="PengArtDataScience2016">Peng and Matsui (<a href="../references.html#ref-PengArtDataScience2016" role="doc-biblioref">2016</a>)</span></h2>
+<ul>
+<li>Data analysis is organized into 5 activities</li>
+<li>Each activity involves the same 3-step “epicycle” process
+<ol type="1">
+<li>Develop expectations</li>
+<li>Collect information</li>
+<li>Compare and revise expectations</li>
+</ol></li>
+<li>Not “the scientific method”! <span class="citation" data-cites="PengArtDataScience2016">(<a href="../references.html#ref-PengArtDataScience2016" role="doc-biblioref">Peng and Matsui 2016, 4</a>)</span>
+<ul>
+<li>“Highly iterative and non-linear”</li>
+<li>“information is learned at each step, which then informs
+<ul>
+<li><strong>whether (and how) to refine, and redo, the [previous] step</strong> …, or</li>
+<li>whether (and how) to proceed to the next step.”</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="section-1" class="level2" data-number="7.7">
+<h2 data-number="7.7" class="anchored" data-anchor-id="section-1"><span class="header-section-number">7.7</span> <br></h2>
+<table class="table">
+<caption>Aligning the goals of EDA with steps in the “epicycle of analysis” <span class="citation" data-cites="PengArtDataScience2016">(<a href="../references.html#ref-PengArtDataScience2016" role="doc-biblioref">Peng and Matsui 2016</a>)</span></caption>
+<colgroup>
+<col style="width: 45%">
+<col style="width: 34%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Goals of EDA</th>
+<th style="text-align: left;">Epicycle step</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Determine if there are problems with the data</td>
+<td style="text-align: left;">2. Collecting information</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Determine whether our question can be answered with these data</td>
+<td style="text-align: left;">3. Comparing and revising expectations</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Develop sketch of an answer</td>
+<td style="text-align: left;">1. Developing expectations</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="discussion" class="level2" data-number="7.8">
+<h2 data-number="7.8" class="anchored" data-anchor-id="discussion"><span class="header-section-number">7.8</span> Discussion</h2>
+<ul>
+<li>For each of these models, how well do they fit the way you’ve been taught to do science?</li>
+<li>How do they challenge the way you’ve been taught to do science?</li>
+</ul>
+</section>
+<section id="references" class="level2" data-number="7.9">
+<h2 data-number="7.9" class="anchored" data-anchor-id="references"><span class="header-section-number">7.9</span> References</h2>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
+<div id="ref-BrownSmokeMirrorsHow2002" class="csl-entry" role="doc-biblioentry">
+Brown, James Robert. 2002. <em>Smoke and <span>Mirrors</span>: How <span>Science Reflects Reality</span></em>. <span>Routledge</span>.
+</div>
+<div id="ref-DastonObjectivity2007" class="csl-entry" role="doc-biblioentry">
+Daston, Lorraine, and Peter Galison. 2007. <em>Objectivity</em>. <span>New York : Cambridge, Mass</span>: <span>Zone Books ; Distributed by the MIT Press</span>.
+</div>
+<div id="ref-PengArtDataScience2016" class="csl-entry" role="doc-biblioentry">
+Peng, Roger D., and Elizabeth Matsui. 2016. <em>The <span>Art</span> of <span>Data Science</span>: A <span>Guide</span> for <span>Anyone Who Works</span> with <span>Data</span></em>. <span>Leanpub</span>. <a href="http://leanpub.com/artofdatascience">http://leanpub.com/artofdatascience</a>.
+</div>
+<div id="ref-TukeyWeNeedBoth1980" class="csl-entry" role="doc-biblioentry">
+Tukey, John W. 1980. <span>“We <span>Need Both Exploratory</span> and <span>Confirmatory</span>.”</span> <em>The American Statistician</em> 34 (1): 23–25. <a href="https://doi.org/10.1080/00031305.1980.10482706">https://doi.org/10.1080/00031305.1980.10482706</a>.
+</div>
+<div id="ref-TukeyExploratoryDataAnalysis1977" class="csl-entry" role="doc-biblioentry">
+Tukey, John Wilder. 1977. <em>Exploratory Data Analysis</em>. Addison-<span>Wesley</span> Series in Behavioral Science. <span>Reading, Mass</span>: <span>Addison-Wesley Pub. Co</span>. <a href="https://archive.org/details/exploratorydataa00tuke_0">https://archive.org/details/exploratorydataa00tuke_0</a>.
+</div>
+<div id="ref-WagenmakersAgendaPurelyConfirmatory2012" class="csl-entry" role="doc-biblioentry">
+Wagenmakers, Eric-Jan, Ruud Wetzels, Denny Borsboom, Han L. J. van der Maas, and Rogier A. Kievit. 2012. <span>“An <span>Agenda</span> for <span>Purely Confirmatory Research</span>.”</span> <em>Perspectives on Psychological Science</em> 7 (6): 632–38. <a href="https://doi.org/10.1177/1745691612463078">https://doi.org/10.1177/1745691612463078</a>.
+</div>
+</div>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../content/02-04-functional-programming.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Programming Paradigms #</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../content/03-03-checklists.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Two EDA “Checklists” #</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

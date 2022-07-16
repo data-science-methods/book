@@ -5,9 +5,6 @@
 - Reading: @WeissgerberBarLineGraphs2015
 - Further reading: @HealyDataVisualizationPractical2018, ch. 1; @MatejkaSameStatsDifferent
 
-```{r child = 'knitr_config.Rmd'}
-```
-
 ## The Role of Visuals in EDA ##
 
 - @TukeyExploratoryDataAnalysis1977 emphasized visual methods for EDA

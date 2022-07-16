@@ -1,8 +1,5 @@
 # Tracking package versions with `renv` #
 
-```{r child = 'knitr_config.Rmd'}
-```
-
 ## `renv`
 
 - [`renv` homepage](https://rstudio.github.io/renv/articles/renv.html)

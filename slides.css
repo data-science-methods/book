@@ -1,0 +1,23 @@
+code {
+  font-size: 80%;
+}
+
+li ul li {
+    font-style: normal;
+}
+
+li ol li {
+    font-style: normal;
+}
+
+em {
+    color: blue;
+}
+
+pre {
+    background-color: white;
+}
+
+.caption {
+  font-size: 60%;
+}

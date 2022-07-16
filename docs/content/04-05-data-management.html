@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-0.9.600">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Methods of Data Science - 16&nbsp; Managing and publishing data #</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../content/04-06-make.html" rel="next">
+<link href="../content/04-04-project-organization.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Managing and publishing data #</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Methods of Data Science</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">Preface</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/01-01-intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction #</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/01-02-setup.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Software, hardware, and accounts #</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/01-03-data-sci-wtf.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data Science: What and why #</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+    <div class="sidebar-item-container"> 
+        <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Some fundamental tools</a>
+      <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+        <i class="bi bi-chevron-right ms-2"></i>
+      </a>
+    </div>
+    <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/02-02-git.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Git and Version Control #</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/02-03-getting-help.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Warnings, Errors, and Getting Help #</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/02-04-functional-programming.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Programming Paradigms #</span></a>
+  </div>
+</li>
+    </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+    <div class="sidebar-item-container"> 
+        <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Exploratory data analysis</a>
+      <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+        <i class="bi bi-chevron-right ms-2"></i>
+      </a>
+    </div>
+    <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/03-02-models-of-eda.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Exploratory Data Analysis #</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/03-03-checklists.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Two EDA “Checklists” #</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/03-04-inspecting-vars.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Inspecting Variables #</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/03-05-graphs.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Visual EDA #</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/03-06-grammar-of-graphics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">The Grammar of Graphics #</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/03-07-covid-eda.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Covid EDA #</span></a>
+  </div>
+</li>
+    </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+    <div class="sidebar-item-container"> 
+        <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">Replicability &amp; reproducibility</a>
+      <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+        <i class="bi bi-chevron-right ms-2"></i>
+      </a>
+    </div>
+    <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/04-02-readability.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Readable code is reliable code #</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/04-03-code-review.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">A code review checklist #</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/04-04-project-organization.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">The life-changing magic of tidying your projects #</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/04-05-data-management.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Managing and publishing data #</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/04-06-make.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Make #</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/04-07-renv.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Tracking package versions with <code>renv</code> #</span></a>
+  </div>
+</li>
+    </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../references.html" class="sidebar-item-text sidebar-link">References</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#reading" id="toc-reading" class="nav-link active" data-scroll-target="#reading"> <span class="header-section-number">16.1</span> Reading</a></li>
+  <li><a href="#the-first-rule-of-data-management" id="toc-the-first-rule-of-data-management" class="nav-link" data-scroll-target="#the-first-rule-of-data-management"> <span class="header-section-number">16.2</span> The first rule of data management</a></li>
+  <li><a href="#documentation" id="toc-documentation" class="nav-link" data-scroll-target="#documentation"> <span class="header-section-number">16.3</span> Documentation</a></li>
+  <li><a href="#questions-a-codebook-should-answer" id="toc-questions-a-codebook-should-answer" class="nav-link" data-scroll-target="#questions-a-codebook-should-answer"> <span class="header-section-number">16.4</span> Questions a codebook should answer</a></li>
+  <li><a href="#major-codebook-elements" id="toc-major-codebook-elements" class="nav-link" data-scroll-target="#major-codebook-elements"> <span class="header-section-number">16.5</span> Major codebook elements</a></li>
+  <li><a href="#data-management-plans" id="toc-data-management-plans" class="nav-link" data-scroll-target="#data-management-plans"> <span class="header-section-number">16.6</span> Data management plans</a></li>
+  <li><a href="#data-management-plan-common-elements" id="toc-data-management-plan-common-elements" class="nav-link" data-scroll-target="#data-management-plan-common-elements"> <span class="header-section-number">16.7</span> Data management plan: Common elements</a></li>
+  <li><a href="#fair-principles-for-published-data" id="toc-fair-principles-for-published-data" class="nav-link" data-scroll-target="#fair-principles-for-published-data"> <span class="header-section-number">16.8</span> FAIR principles for published data</a></li>
+  <li><a href="#dois-for-data" id="toc-dois-for-data" class="nav-link" data-scroll-target="#dois-for-data"> <span class="header-section-number">16.9</span> DOIs for data</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"> <span class="header-section-number">16.10</span> References</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Managing and publishing data #</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<section id="reading" class="level2" data-number="16.1">
+<h2 data-number="16.1" class="anchored" data-anchor-id="reading"><span class="header-section-number">16.1</span> Reading</h2>
+<ul>
+<li><span class="citation" data-cites="HudonFieldNotesBuilding2018">Hudon (<a href="../references.html#ref-HudonFieldNotesBuilding2018" role="doc-biblioref">2018</a>)</span></li>
+<li><span class="citation" data-cites="WilkinsonFAIRGuidingPrinciples2016">Wilkinson et al. (<a href="../references.html#ref-WilkinsonFAIRGuidingPrinciples2016" role="doc-biblioref">2016</a>)</span></li>
+</ul>
+</section>
+<section id="the-first-rule-of-data-management" class="level2" data-number="16.2">
+<h2 data-number="16.2" class="anchored" data-anchor-id="the-first-rule-of-data-management"><span class="header-section-number">16.2</span> The first rule of data management</h2>
+<p><em>Do not edit your data.</em></p>
+</section>
+<section id="documentation" class="level2" data-number="16.3">
+<h2 data-number="16.3" class="anchored" data-anchor-id="documentation"><span class="header-section-number">16.3</span> Documentation</h2>
+<ul>
+<li>Many social science fields have a tradition of writing codebooks for their data
+<ul>
+<li><a href="https://github.com/stanford-policylab/opp/blob/master/data_readme.md">Stanford Open Policing codebook</a></li>
+<li><a href="https://kjhealy.github.io/covdata/articles/codebook.html">“Codebook-like summary” of the <code>covdata</code> package, automatically generated using <code>skimr</code></a></li>
+<li>Caitlin Hudon’s approach <span class="citation" data-cites="HudonFieldNotesBuilding2018">(<a href="../references.html#ref-HudonFieldNotesBuilding2018" role="doc-biblioref">Hudon 2018</a>)</span>
+<ul>
+<li>Table and field name, both verbatim</li>
+<li>Field example value</li>
+<li>Notes for both table and field</li>
+</ul></li>
+</ul></li>
+</ul>
+<p>(ref:Hudson-tbl) Example of Caitlin Hudon’s approach to building a data dictionary. Source: <a href="https://caitlinhudon.com/2018/10/30/data-dictionaries/" class="uri">https://caitlinhudon.com/2018/10/30/data-dictionaries/</a></p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/04-reproducibility/Hudon.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<p></p><figcaption aria-hidden="true" class="figure-caption">(ref:Hudson-tbl)</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="questions-a-codebook-should-answer" class="level2" data-number="16.4">
+<h2 data-number="16.4" class="anchored" data-anchor-id="questions-a-codebook-should-answer"><span class="header-section-number">16.4</span> Questions a codebook should answer</h2>
+<ol type="1">
+<li>What does this field mean? How should I use it?</li>
+<li>What is the data [journey]?
+<ul>
+<li>Where does this data come from?</li>
+<li>How exactly is it collected?</li>
+<li>How often is it updated?</li>
+<li>Where does it go next?</li>
+</ul></li>
+<li>What does the data in this field actually look like?</li>
+<li>Are there any caveats to keep in mind when using this data?</li>
+<li>Where can I go for more information?</li>
+</ol>
+<p><span class="citation" data-cites="HudonFieldNotesBuilding2018">(<a href="../references.html#ref-HudonFieldNotesBuilding2018" role="doc-biblioref">Hudon 2018</a>)</span></p>
+</section>
+<section id="major-codebook-elements" class="level2" data-number="16.5">
+<h2 data-number="16.5" class="anchored" data-anchor-id="major-codebook-elements"><span class="header-section-number">16.5</span> Major codebook elements</h2>
+<p>(<a href="https://afit-r.github.io/codebook" class="uri">https://afit-r.github.io/codebook</a>)</p>
+<ol type="1">
+<li>Original source of the data</li>
+<li>Sampling information
+<ul>
+<li>Where and how the data were generated</li>
+</ul></li>
+<li>Variable-level metadata and summaries</li>
+<li>Structure of the data</li>
+</ol>
+</section>
+<section id="data-management-plans" class="level2" data-number="16.6">
+<h2 data-number="16.6" class="anchored" data-anchor-id="data-management-plans"><span class="header-section-number">16.6</span> Data management plans</h2>
+<ul>
+<li>Much like a research plan, data management plans provide an overview of the steps you’ll take to gather, publish, and maintain your data
+<ul>
+<li>Since 2011, NSF has required a 2-page data management plan for most types of proposals</li>
+</ul></li>
+<li>Examples and resources
+<ul>
+<li><a href="https://library.ucmerced.edu/research/researchers/research-data-management/data-management-plans">UCM Library</a> <!-- - [UCM IT support](https://it.ucmerced.edu/content/research-data-management-consultation-service) --></li>
+<li><a href="https://library.ucsd.edu/lpw-staging/research-and-collections/data-curation/data-management/dmp-samples.html">UCSD NSF examples</a>
+<ul>
+<li><a href="https://library.ucsd.edu/lpw-staging/research-and-collections/data-curation/data-management/dmpsample/DMP-Example-Ayelet-Gneezy.pdf">SBE example 1</a></li>
+<li><a href="https://library.ucsd.edu/lpw-staging/research-and-collections/data-curation/data-management/dmpsample/DMP-Example-Wixted.pdf">SBE example 2</a></li>
+</ul></li>
+<li><a href="https://www.nsf.gov/bfa/dias/policy/dmp.jsp">NSF policy summary</a>
+<ul>
+<li><a href="https://www.nsf.gov/sbe/DMP/SBE_DataMgmtPlanPolicy_RevisedApril2018.pdf">SBE-specific guidance</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="data-management-plan-common-elements" class="level2" data-number="16.7">
+<h2 data-number="16.7" class="anchored" data-anchor-id="data-management-plan-common-elements"><span class="header-section-number">16.7</span> Data management plan: Common elements</h2>
+<ul>
+<li>Who is responsible for data management</li>
+<li>Who else will have access to which data</li>
+<li>How data will be collected</li>
+<li>Data formatting standards</li>
+<li>Whether and how data will be archived and made available for reuse</li>
+</ul>
+</section>
+<section id="fair-principles-for-published-data" class="level2" data-number="16.8">
+<h2 data-number="16.8" class="anchored" data-anchor-id="fair-principles-for-published-data"><span class="header-section-number">16.8</span> FAIR principles for published data</h2>
+<ul>
+<li><em>Findable</em>
+<ul>
+<li>F1. (meta)data are assigned a globally unique and persistent identifier</li>
+<li>F2. data are described with rich metadata (defined by R1 below)</li>
+<li>F3. metadata clearly and explicitly include the identifier of the data it describes</li>
+<li>F4. (meta)data are registered or indexed in a searchable resource</li>
+</ul></li>
+<li><em>Accessible</em>
+<ul>
+<li>A1. (meta)data are retrievable by their identifier using a standardized communications protocol
+<ul>
+<li>A1.1 the protocol is open, free, and universally implementable</li>
+<li>A1.2 the protocol allows for an authentication and authorization procedure, where necessary</li>
+</ul></li>
+<li>A2. metadata are accessible, even when the data are no longer available</li>
+</ul></li>
+<li><em>Interoperable</em>
+<ul>
+<li>I1. (meta)data use a formal, accessible, shared, and broadly applicable language for knowledge representation.</li>
+<li>I2. (meta)data use vocabularies that follow FAIR principles</li>
+<li>I3. (meta)data include qualified references to other (meta)data</li>
+</ul></li>
+<li><em>Reusable</em>
+<ul>
+<li>R1. meta(data) are richly described with a plurality of accurate and relevant attributes
+<ul>
+<li>R1.1. (meta)data are released with a clear and accessible data usage license</li>
+<li>R1.2. (meta)data are associated with detailed provenance</li>
+<li>R1.3. (meta)data meet domain-relevant community standards</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="dois-for-data" class="level2" data-number="16.9">
+<h2 data-number="16.9" class="anchored" data-anchor-id="dois-for-data"><span class="header-section-number">16.9</span> DOIs for data</h2>
+<ul>
+<li><a href="https://help.osf.io/hc/en-us/articles/360019931013-Create-DOIs">Instructions for OSF</a></li>
+<li><a href="https://help.zenodo.org/#versioning">Notes for Zenodo</a>
+<ul>
+<li><a href="https://guides.github.com/activities/citable-code/">Zenodo also plays nicely with GitHub for minting DOIs for code</a></li>
+</ul></li>
+<li><a href="https://dataverse.org/best-practices/data-citation">Citation models at Harvard Dataverse</a></li>
+</ul>
+<!--
+## Hazards of open data ##
+
+- Legal
+    - Privacy
+        - Personally identifiable information (PII): "information which can be used to **distinguish or trace an individual's identity**, such as their name, social security number, biometric records, etc. *alone, or when combined with other ... information*" [Source](https://www.osec.doc.gov/opog/privacy/PII_BII.html)
+        - Sensitive information: "if the loss, compromission [sic], or disclosure without authorization of this data could **result in harm, embarrassment, inconvenience, or unfairness** to an individual" [Source](https://techgdpr.com/blog/difference-between-pii-and-personal-data/)
+        - IRB will require you to
+            - indicate what PII and sensitive information you're collecting
+            - explain why you need to collect it
+            - outline a plan to keep it secure
+            - notify or mitigate issues with participants if security is compromised
+
+    - Copyright
+        - Data that you've bought from a broker
+        - Journal article text, *but also* article metadata if you used a private service to retrieve it
+    
+- Community-level hazards
+    - Location of endangered species [@OpenDataOffer2018]
+    - Indigenous community sacred sites
+    - Antiquities
+    - Identifying the Golden State Killer through GEDmatch [@ZhangHowTinyWebsite2018]
+ 
+- Public-but-inaccessible data
+    - OKCupid data scrape [@McCookPubliclyAvailableData2016]
+        - [Emil O. Kierkegaard is a racist asshole; don't be like Emil O. Kierkegaard](https://rationalwiki.org/wiki/Emil_Kirkegaard)
+-->
+</section>
+<section id="references" class="level2" data-number="16.10">
+<h2 data-number="16.10" class="anchored" data-anchor-id="references"><span class="header-section-number">16.10</span> References</h2>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
+<div id="ref-HudonFieldNotesBuilding2018" class="csl-entry" role="doc-biblioentry">
+Hudon, Caitlin. 2018. <span>“Field <span>Notes</span>: Building <span>Data Dictionaries</span>.”</span> <span>Haystacks</span>. October 30, 2018. <a href="https://caitlinhudon.com/2018/10/30/data-dictionaries/">https://caitlinhudon.com/2018/10/30/data-dictionaries/</a>.
+</div>
+<div id="ref-WilkinsonFAIRGuidingPrinciples2016" class="csl-entry" role="doc-biblioentry">
+Wilkinson, Mark D., Michel Dumontier, IJsbrand Jan Aalbersberg, Gabrielle Appleton, Myles Axton, Arie Baak, Niklas Blomberg, et al. 2016. <span>“The <span>FAIR Guiding Principles</span> for Scientific Data Management and Stewardship.”</span> <em>Scientific Data</em> 3 (1, 1): 1–9. <a href="https://doi.org/10.1038/sdata.2016.18">https://doi.org/10.1038/sdata.2016.18</a>.
+</div>
+</div>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../content/04-04-project-organization.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">The life-changing magic of tidying your projects #</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../content/04-06-make.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Make #</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>
