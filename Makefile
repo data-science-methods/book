@@ -1,14 +1,14 @@
 CONTENT := $(wildcard content/*.qmd)
 
-all: site slides
-
-.PHONY: fullsite
-fullsite:
-	quarto render
+all: pages slides
 
 .PHONY: site
+site:
+	quarto render
+
+.PHONY: pages
 site_files := $(patsubst content/%, docs/content/%, $(patsubst %.qmd, %.html, $(CONTENT)))
-site: $(site_files)
+pages: $(site_files)
 docs/content/%.html: content/%.qmd
 	quarto render $<
 

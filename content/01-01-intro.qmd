@@ -1,4 +1,4 @@
-# Introduction #
+# Introduction 
 
 ## Land acknowledgements ##
 
@@ -29,14 +29,12 @@ Is Not:
 - a statistics course (in the way you think)
 - a general introduction to software engineering
 - a basic introduction to R
-- carefully planned out from beginning to end
 
 Is: 
 
 - an introduction to data science
 - about exploratory data analysis, data management, and reproducibility
 - habituation to some good software engineering practices that are especially valuable for data science work
-- in the [alpha stage of development](https://en.wikipedia.org/wiki/Software_release_life_cycle#Alpha)
 
 
 ## Learning outcomes ##
@@ -45,38 +43,39 @@ Is:
 
 By the end of the course, students will be able to 
 
-1. apply concepts from software engineering and philosophy of science to methodological decisions in data science, including
-	- reproducibility vs. robustness vs. replicability
-	- value and hazards of open data
-	- thick data [@WangWhyBigData2016]
+1. apply concepts from software engineering and philosophy of science to methodological decisions in data science, such as
+    - object-oriented and functional programming paradigms
+    - exploratory data analysis and the data-phenomenon-theory distinction
+	- reproducibility vs. replicability
 
 3. use exploratory data analysis techniques and tools to identify potential data errors and potential phenomena for further analysis
 
 2. clean raw data and produce a reproducible codebook for both downstream analysis and public release of data according to FAIR standards [@WilkinsonFAIRGuidingPrinciples2016]
-	- [create and use a cloud database to work with big data]
 
-4. manage data, analysis, and outputs for reproducibility [assembling a project compendium; @GentlemanStatisticalAnalysesReproducible2004] using best practices of data handling, a clear directory structure [@WilsonGoodEnoughPractices2017], self-documenting code, version control, build automation, [and continuous integration] 
+4. manage data, analysis, and outputs for reproducibility, using practices such as
+    - reproducible data cleaning
+    - clear directory structure [@WilsonGoodEnoughPractices2017]
+    - self-documenting code
+    - version control
+    - build automation
 
-5. apply philosophical and data science concepts to integrated ethical-technical analysis to case studies in algorithmic injustice
-    - understand the background on the COMPAS case:  @AngwinMachineBiasThere2016; @Corbett-DaviesComputerProgramUsed2016
-	- reproduce several fairness statistics on COMPAS data
-	- explain tradeoffs between false negatives and false positives in terms of inductive risk
-	- explain @KleinbergInherentTradeOffsFair2016 impossibility result (not necessarily the proof) and show that it applies to the COMPAS datas
-	- critically discuss profiling and thresholds [@PiersonLargescaleAnalysisRacial2020] as potential explanation for differences in "base rates" of recidivism
-	- critically locate discussions of fairness and recidivism in a broader social context, and identify implications for working data scientists [@SelbstFairnessAbstractionSociotechnical2018; @HoffmannWhereFairnessFails2019; @HannaCriticalRaceMethodology2019]
+5. apply philosophical and data science concepts to integrated ethical-technical analysis of case studies
 
 
 ## Prerequisites ##
 
 *This course assumes basic competence with introductory R.* 
 
-- "Introductory R":  Lessons 1-5 of the Carpentries ["R for Social Scientists"](https://datacarpentry.org/r-socialsci/) curriculum
+"Introductory R" 
+ ~ Lessons 1-5 of the Carpentries ["R for Social Scientists"](https://datacarpentry.org/r-socialsci/) curriculum
     - Installing R and packages
     - Working in the R Studio IDE
     - Common data types
     - Reading and writing CSV files
     - Tidyverse R:  `mutate()`, `filter()`, `select()`; plotting with `ggplot2`
-- "Basic competence":  Given time and a reference ([cheatsheet](https://www.rstudio.com/resources/cheatsheets/), Stack Exchange, mentor) you can figure out how to solve a problem
+
+"Basic competence"
+ ~ Given time and a reference ([cheatsheet](https://www.rstudio.com/resources/cheatsheets/), Stack Exchange, mentor) you can figure out how to solve a problem
 
 
 ## Requirements and weekly routine ##
@@ -85,49 +84,7 @@ By the end of the course, students will be able to
 
 - Tuesdays:  Mix of discussion and lecture based on assigned readings
 - Thursdays:  Live coding leading into work on the week's lab assignment
-- Labs:  10-ish, done individually or in pairs and submitted via GitHub for automated feedback
+- Labs:  *[10-ish]*, done individually or in pairs and submitted via GitHub for automated feedback
 - Running project:  Practicing ideas from the course on data sets you find
 
-
-<!--
-## Notes on some course design decisions ##
-
-### R, not Python ###
-
-- Python is a perfectly good language for general programming
-    - And has some advantages over R in certain data science aspects, including working with strings and developing custom data structures
-
-However, 
-
-- R is a better language for doing data science [@ShotwellWhyUse2019]
-    - Vectors, data frames, and common statistical models are installed and loaded by default
-    - R is more functional [@WuPythonVsChoosing2019; @PaleologoWhatDifferenceMachine2018]
-    
-- R is also better for beginners
-    - [CRAN](https://twitter.com/kccarrell/status/1030482372775620613)
-    - RStudio
-    
-### Tidyverse R, not base R ###
-
-- "Base R" refers to the central code for R and the packages included when you install it
-    - Base R is universal and free of additional dependencies.  Code written entirely in base R will run on any other R installation (with the same version). 
-    - However, because the R Core Development Team has always thought backwards-compatibility is important, base R has some idiosyncracies [@KeyesRbitraryStandards2016]
-    
-- `tidyverse` is a suite of packages developed by the manufacturers of RStudio
-    - A very useful set of general tools can be loaded simply by calling `library(tidyverse)`
-        - And some more specialized tools are also installed as part of the suite
-    - Tidyverse is designed to mitigate a lot of the base R idiosyncracies
-    - While making code more human-readable and easier to reason about
-    - However, several of its tools use something called "non-standard evaluation" (NSE). 
-        - NSE makes tidyverse code easier to write for beginners, because you don't have to think as much about where exactly your variables are located
-        - At the same time, NSE creates problems for intermediate coders, because passing tidyverse-style "bare names" through function arguments causes cryptic errors
-
-### Scripts, not notebooks ###
-
-- Quite a few scientists like the way notebooks mix together code, visualizations, tables, and text [@PerkelWhyJupyterData2018]
-
-However, 
-
-- Notebooks do not play nicely with version control  [@AhemadVersionControlJupyter2018; @WhitmoreJupyterNotebookBest2015]
-- Notebooks encourage bad software engineering habits and discourage good ones [@GrusDonNotebooksJoel; @HiltchJupyterNotebookCancer2019]
--->
+## References 

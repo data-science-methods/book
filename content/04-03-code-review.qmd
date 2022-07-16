@@ -1,4 +1,4 @@
-# A code review checklist #
+# A code review checklist 
 
 ## Reading
 

@@ -1,4 +1,4 @@
-# Exploratory Data Analysis # {#eda-models}
+# Exploratory Data Analysis {#eda-models}
 
 ## <br>
 

@@ -1,4 +1,4 @@
-# Inspecting Variables #
+# Inspecting Variables 
 
 ## </br>
 

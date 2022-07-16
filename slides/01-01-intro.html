@@ -1691,14 +1691,12 @@ window.onload = function() {
 <li>a statistics course (in the way you think)</li>
 <li>a general introduction to software engineering</li>
 <li>a basic introduction to R</li>
-<li>carefully planned out from beginning to end</li>
 </ul>
 <p>Is:</p>
 <ul>
 <li>an introduction to data science</li>
 <li>about exploratory data analysis, data management, and reproducibility</li>
 <li>habituation to some good software engineering practices that are especially valuable for data science work</li>
-<li>in the <a href="https://en.wikipedia.org/wiki/Software_release_life_cycle#Alpha">alpha stage of development</a></li>
 </ul>
 </div>
 <div id="learning-outcomes" class="slide section level2">
@@ -1706,43 +1704,36 @@ window.onload = function() {
 <p><em>[match to catalog]</em></p>
 <p>By the end of the course, students will be able to</p>
 <ol style="list-style-type: decimal">
-<li><p>apply concepts from software engineering and philosophy of science to methodological decisions in data science, including</p>
+<li><p>apply concepts from software engineering and philosophy of science to methodological decisions in data science, such as</p>
 <ul>
-<li>reproducibility vs. robustness vs. replicability</li>
-<li>value and hazards of open data</li>
-<li>thick data <span class="citation">(Wang 2016)</span></li>
+<li>object-oriented and functional programming paradigms</li>
+<li>exploratory data analysis and the data-phenomenon-theory distinction</li>
+<li>reproducibility vs. replicability</li>
 </ul></li>
 <li><p>use exploratory data analysis techniques and tools to identify potential data errors and potential phenomena for further analysis</p></li>
-<li><p>clean raw data and produce a reproducible codebook for both downstream analysis and public release of data according to FAIR standards <span class="citation">(Wilkinson et al. 2016)</span></p>
+<li><p>clean raw data and produce a reproducible codebook for both downstream analysis and public release of data according to FAIR standards <span class="citation">(Wilkinson et al. 2016)</span></p></li>
+<li><p>manage data, analysis, and outputs for reproducibility, using practices such as</p>
 <ul>
-<li>[create and use a cloud database to work with big data]</li>
+<li>reproducible data cleaning</li>
+<li>clear directory structure <span class="citation">(Wilson et al. 2017)</span></li>
+<li>self-documenting code</li>
+<li>version control</li>
+<li>build automation</li>
 </ul></li>
-<li><p>manage data, analysis, and outputs for reproducibility [assembling a project compendium; <span class="citation">Gentleman and Lang (2004)</span>] using best practices of data handling, a clear directory structure <span class="citation">(Wilson et al. 2017)</span>, self-documenting code, version control, build automation, [and continuous integration]</p></li>
-<li><p>apply philosophical and data science concepts to integrated ethical-technical analysis to case studies in algorithmic injustice</p>
-<ul>
-<li>understand the background on the COMPAS case: <span class="citation">Angwin et al. (2016)</span>; <span class="citation">Corbett-Davies et al. (2016)</span></li>
-<li>reproduce several fairness statistics on COMPAS data</li>
-<li>explain tradeoffs between false negatives and false positives in terms of inductive risk</li>
-<li>explain <span class="citation">Kleinberg, Mullainathan, and Raghavan (2016)</span> impossibility result (not necessarily the proof) and show that it applies to the COMPAS datas</li>
-<li>critically discuss profiling and thresholds <span class="citation">(Pierson et al. 2020)</span> as potential explanation for differences in “base rates” of recidivism</li>
-<li>critically locate discussions of fairness and recidivism in a broader social context, and identify implications for working data scientists <span class="citation">(Selbst et al. 2018; Hoffmann 2019; Hanna et al. 2019)</span></li>
-</ul></li>
+<li><p>apply philosophical and data science concepts to integrated ethical-technical analysis of case studies</p></li>
 </ol>
 </div>
 <div id="prerequisites" class="slide section level2">
 <h1>Prerequisites</h1>
 <p><em>This course assumes basic competence with introductory R.</em></p>
-<ul>
-<li>“Introductory R”: Lessons 1-5 of the Carpentries <a href="https://datacarpentry.org/r-socialsci/">“R for Social Scientists”</a> curriculum
-<ul>
-<li>Installing R and packages</li>
-<li>Working in the R Studio IDE</li>
-<li>Common data types</li>
-<li>Reading and writing CSV files</li>
-<li>Tidyverse R: <code>mutate()</code>, <code>filter()</code>, <code>select()</code>; plotting with <code>ggplot2</code></li>
-</ul></li>
-<li>“Basic competence”: Given time and a reference (<a href="https://www.rstudio.com/resources/cheatsheets/">cheatsheet</a>, Stack Exchange, mentor) you can figure out how to solve a problem</li>
-</ul>
+<dl>
+<dt>“Introductory R”</dt>
+<dd>Lessons 1-5 of the Carpentries <a href="https://datacarpentry.org/r-socialsci/">“R for Social Scientists”</a> curriculum - Installing R and packages - Working in the R Studio IDE - Common data types - Reading and writing CSV files - Tidyverse R: <code>mutate()</code>, <code>filter()</code>, <code>select()</code>; plotting with <code>ggplot2</code>
+</dd>
+<dt>“Basic competence”</dt>
+<dd>Given time and a reference (<a href="https://www.rstudio.com/resources/cheatsheets/">cheatsheet</a>, Stack Exchange, mentor) you can figure out how to solve a problem
+</dd>
+</dl>
 </div>
 <div id="requirements-and-weekly-routine" class="slide section level2">
 <h1>Requirements and weekly routine</h1>
@@ -1750,79 +1741,13 @@ window.onload = function() {
 <ul>
 <li>Tuesdays: Mix of discussion and lecture based on assigned readings</li>
 <li>Thursdays: Live coding leading into work on the week’s lab assignment</li>
-<li>Labs: 10-ish, done individually or in pairs and submitted via GitHub for automated feedback</li>
+<li>Labs: <em>[10-ish]</em>, done individually or in pairs and submitted via GitHub for automated feedback</li>
 <li>Running project: Practicing ideas from the course on data sets you find</li>
 </ul>
-<!--
-## Notes on some course design decisions ##
-
-### R, not Python ###
-
-- Python is a perfectly good language for general programming
-    - And has some advantages over R in certain data science aspects, including working with strings and developing custom data structures
-
-However, 
-
-- R is a better language for doing data science [@ShotwellWhyUse2019]
-    - Vectors, data frames, and common statistical models are installed and loaded by default
-    - R is more functional [@WuPythonVsChoosing2019; @PaleologoWhatDifferenceMachine2018]
-    
-- R is also better for beginners
-    - [CRAN](https://twitter.com/kccarrell/status/1030482372775620613)
-    - RStudio
-    
-### Tidyverse R, not base R ###
-
-- "Base R" refers to the central code for R and the packages included when you install it
-    - Base R is universal and free of additional dependencies.  Code written entirely in base R will run on any other R installation (with the same version). 
-    - However, because the R Core Development Team has always thought backwards-compatibility is important, base R has some idiosyncracies [@KeyesRbitraryStandards2016]
-    
-- `tidyverse` is a suite of packages developed by the manufacturers of RStudio
-    - A very useful set of general tools can be loaded simply by calling `library(tidyverse)`
-        - And some more specialized tools are also installed as part of the suite
-    - Tidyverse is designed to mitigate a lot of the base R idiosyncracies
-    - While making code more human-readable and easier to reason about
-    - However, several of its tools use something called "non-standard evaluation" (NSE). 
-        - NSE makes tidyverse code easier to write for beginners, because you don't have to think as much about where exactly your variables are located
-        - At the same time, NSE creates problems for intermediate coders, because passing tidyverse-style "bare names" through function arguments causes cryptic errors
-
-### Scripts, not notebooks ###
-
-- Quite a few scientists like the way notebooks mix together code, visualizations, tables, and text [@PerkelWhyJupyterData2018]
-
-However, 
-
-- Notebooks do not play nicely with version control  [@AhemadVersionControlJupyter2018; @WhitmoreJupyterNotebookBest2015]
-- Notebooks encourage bad software engineering habits and discourage good ones [@GrusDonNotebooksJoel; @HiltchJupyterNotebookCancer2019]
--->
+</div>
+<div id="references" class="slide section level2 unnumbered">
+<h1 class="unnumbered">References</h1>
 <div id="refs" class="references csl-bib-body hanging-indent">
-<div id="ref-AngwinMachineBiasThere2016" class="csl-entry">
-Angwin, Julia, Jeff Larson, Surya Mattu, and Lauren Kirchner. 2016. <span>“Machine <span>Bias</span>: There’s <span>Software Used Across</span> the <span>Country</span> to <span>Predict Future Criminals</span>. <span>And</span> It’s <span>Biased Against Blacks</span>.”</span> <span>ProPublica</span>. May 23, 2016. <a href="https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing">https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing</a>.
-</div>
-<div id="ref-Corbett-DaviesComputerProgramUsed2016" class="csl-entry">
-Corbett-Davies, Sam, Emma Pierson, Avi Feller, and Sharad Goel. 2016. <span>“A Computer Program Used for Bail and Sentencing Decisions Was Labeled Biased Against Blacks. <span>It</span>’s Actually Not That Clear.”</span> <span>Washington Post</span>. October 17, 2016. <a href="https://www.washingtonpost.com/news/monkey-cage/wp/2016/10/17/can-an-algorithm-be-racist-our-analysis-is-more-cautious-than-propublicas/">https://www.washingtonpost.com/news/monkey-cage/wp/2016/10/17/can-an-algorithm-be-racist-our-analysis-is-more-cautious-than-propublicas/</a>.
-</div>
-<div id="ref-GentlemanStatisticalAnalysesReproducible2004" class="csl-entry">
-Gentleman, Robert, and Duncan Temple Lang. 2004. <span>“Statistical <span>Analyses</span> and <span>Reproducible Research</span>.”</span> <em>Bioconductor Project Working Papers</em>, May. <a href="https://biostats.bepress.com/bioconductor/paper2">https://biostats.bepress.com/bioconductor/paper2</a>.
-</div>
-<div id="ref-HannaCriticalRaceMethodology2019" class="csl-entry">
-Hanna, Alex, Emily Denton, Andrew Smart, and Jamila Smith-Loud. 2019. <span>“Towards a <span>Critical Race Methodology</span> in <span>Algorithmic Fairness</span>.”</span> December 7, 2019. <a href="https://doi.org/10.1145/3351095.3372826">https://doi.org/10.1145/3351095.3372826</a>.
-</div>
-<div id="ref-HoffmannWhereFairnessFails2019" class="csl-entry">
-Hoffmann, Anna Lauren. 2019. <span>“Where Fairness Fails: Data, Algorithms, and the Limits of Antidiscrimination Discourse.”</span> <em>Information, Communication &amp; Society</em> 22 (7): 900–915. <a href="https://doi.org/10.1080/1369118X.2019.1573912">https://doi.org/10.1080/1369118X.2019.1573912</a>.
-</div>
-<div id="ref-KleinbergInherentTradeOffsFair2016" class="csl-entry">
-Kleinberg, Jon, Sendhil Mullainathan, and Manish Raghavan. 2016. <span>“Inherent <span>Trade</span>-<span>Offs</span> in the <span>Fair Determination</span> of <span>Risk Scores</span>.”</span> November 17, 2016. <a href="http://arxiv.org/abs/1609.05807">http://arxiv.org/abs/1609.05807</a>.
-</div>
-<div id="ref-PiersonLargescaleAnalysisRacial2020" class="csl-entry">
-Pierson, Emma, Camelia Simoiu, Jan Overgoor, Sam Corbett-Davies, Daniel Jenson, Amy Shoemaker, Vignesh Ramachandran, et al. 2020. <span>“A Large-Scale Analysis of Racial Disparities in Police Stops Across the <span>United States</span>.”</span> <em>Nature Human Behaviour</em>, May, 1–10. <a href="https://doi.org/10.1038/s41562-020-0858-1">https://doi.org/10.1038/s41562-020-0858-1</a>.
-</div>
-<div id="ref-SelbstFairnessAbstractionSociotechnical2018" class="csl-entry">
-Selbst, Andrew D., Danah Boyd, Sorelle Friedler, Suresh Venkatasubramanian, and Janet Vertesi. 2018. <span>“Fairness and <span>Abstraction</span> in <span>Sociotechnical Systems</span>.”</span> SSRN Scholarly Paper ID 3265913. <span>Rochester, NY</span>: <span>Social Science Research Network</span>. <a href="https://papers.ssrn.com/abstract=3265913">https://papers.ssrn.com/abstract=3265913</a>.
-</div>
-<div id="ref-WangWhyBigData2016" class="csl-entry">
-Wang, Tricia. 2016. <span>“Why <span>Big Data Needs Thick Data</span>.”</span> <span>Medium</span>. January 20, 2016. <a href="https://medium.com/ethnography-matters/why-big-data-needs-thick-data-b4b3e75e3d7#.ur5gl84nj">https://medium.com/ethnography-matters/why-big-data-needs-thick-data-b4b3e75e3d7#.ur5gl84nj</a>.
-</div>
 <div id="ref-WilkinsonFAIRGuidingPrinciples2016" class="csl-entry">
 Wilkinson, Mark D., Michel Dumontier, IJsbrand Jan Aalbersberg, Gabrielle Appleton, Myles Axton, Arie Baak, Niklas Blomberg, et al. 2016. <span>“The <span>FAIR Guiding Principles</span> for Scientific Data Management and Stewardship.”</span> <em>Scientific Data</em> 3 (1, 1): 1–9. <a href="https://doi.org/10.1038/sdata.2016.18">https://doi.org/10.1038/sdata.2016.18</a>.
 </div>

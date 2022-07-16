@@ -1,4 +1,4 @@
-# Warnings, Errors, and Getting Help #
+# Warnings, Errors, and Getting Help 
 
 ## Reading
 

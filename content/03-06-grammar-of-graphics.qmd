@@ -1,4 +1,4 @@
-# The Grammar of Graphics #
+# The Grammar of Graphics 
 
 ## Reading
 
