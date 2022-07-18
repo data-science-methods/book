@@ -53,7 +53,7 @@
     "href": "content/01-02-setup.html",
     "title": "2  Software, hardware, and accounts",
     "section": "",
-    "text": "R 4.1 or higher\n\nRStudio\n\ngit [package manager]\n\nGitHub account\n\nSourcetree"
+    "text": "R 4.1 or higher\n\nRStudio\n\nPackage manager for your OS\n\ngit\n\npandoc\n\nGitHub account\n\nSourcetree"
   },
   {
     "objectID": "content/01-02-setup.html#a-note-on-accessibility",
@@ -165,7 +165,7 @@
     "href": "content/02-03-getting-help.html#messages-warnings-and-errors",
     "title": "5  Warnings, Errors, and Getting Help",
     "section": "5.3 Messages, warnings, and errors",
-    "text": "5.3 Messages, warnings, and errors\n\nMessage: Things are fine, but here’s some information you should know\nWarning: Uhhhh I’m gonna keep going, but maybe this isn’t what you want\nError: Nope. I’m stopping here. You need to fix the thing.\n\n\nmessage('Hey, just FYI')\nwarning('Uhhhh might want to check this out')\nstop('Noooooo')"
+    "text": "5.3 Messages, warnings, and errors\n\nMessage: Things are fine, but here’s some information you should know\nWarning: Uhhhh I’m gonna keep going, but maybe this isn’t what you want\nError: Nope. I’m stopping here. You need to fix the thing.\n\n\nmessage('Hey, just FYI')\n\nHey, just FYI\n\nwarning('Uhhhh might want to check this out')\n\nWarning: Uhhhh might want to check this out\n\nstop('Noooooo')\n\nError in eval(expr, envir, enclos): Noooooo"
   },
   {
     "objectID": "content/02-03-getting-help.html#where-to-go-for-help",
@@ -179,35 +179,35 @@
     "href": "content/02-03-getting-help.html#example-dates-are-often-problems",
     "title": "5  Warnings, Errors, and Getting Help",
     "section": "5.5 Example: Dates are often problems",
-    "text": "5.5 Example: Dates are often problems\n\nlibrary(lubridate)\n\n\nAttaching package: 'lubridate'\n\n\nThe following objects are masked from 'package:base':\n\n    date, intersect, setdiff, union\n\nadd_six_months = function(date_str) {\n    parsed_dates = parse_date_time(date_str, orders = 'mdY')\n    parsed_dates %m+% months(6) \n}\n\nsome_data = c('June 2002', 'May 15, 2007', 'August 2007')\nadd_six_months(some_data)\n\nWarning: 2 failed to parse.\n\n\n[1] NA               \"2007-11-15 UTC\" NA              \n\n\n\nNote that this is a warning, not an error\n\nR won’t stop running here (unless we tell it to)\nErrors might not show up until much later in our code, making it hard to identify the root cause\nOr they might cause invisible problems, eg, by default lm() silently drops observations with missing values\n\nTo catch warnings\n\nSet options(warn = 2) to turn all warnings into errors\nUse tryCatch() with the warning argument\n\nExample: https://stackoverflow.com/questions/8217901/breaking-loop-when-warnings-appear-in-r/8218794#8218794\n\nWrite a unit test\nMy preferred approach: Add an assertion to your primary code\n\n\n\n## Using an assertion to prevent warnings from cascading\nlibrary(assertthat)\n\nsix_months_later = add_six_months(some_data)\nassert_that(all(!is.na(six_months_later)), \n            msg = 'Missing values in `six_months_later`')\n\n\nLet’s start by using the RStudio debugger to isolate the problem\n\n\ndebugonce(add_six_months)\nadd_six_months(some_data)\n\n\nThe problem is in lubridate::parse_date_time().\n\nSpend a few minutes reading the documentation for this function and playing around with the call.\n\nWhat does the argument orders do?\n\n\n\n?parse_date_time\nparse_date_time(some_data, orders = 'mdY')\n\n\nLet’s try SO: https://stackoverflow.com/search?q=%5BR%5D+lubridate+month-year\n\n\nparse_date_time(some_data, orders = c('mY', 'mdY'))\n\n\nMake this change in add_six_months() and confirm it no longer trips the assertion."
+    "text": "5.5 Example: Dates are often problems\n\nlibrary(lubridate)\n\n\nAttaching package: 'lubridate'\n\n\nThe following objects are masked from 'package:base':\n\n    date, intersect, setdiff, union\n\nadd_six_months = function(date_str) {\n    parsed_dates = parse_date_time(date_str, orders = 'mdY')\n    parsed_dates %m+% months(6) \n}\n\nsome_data = c('June 2002', 'May 15, 2007', 'August 2007')\nadd_six_months(some_data)\n\nWarning: 2 failed to parse.\n\n\n[1] NA               \"2007-11-15 UTC\" NA              \n\n\n\n\nNote that this is a warning, not an error\n\nR won’t stop running here (unless we tell it to)\nErrors might not show up until much later in our code, making it hard to identify the root cause\nOr they might cause invisible problems, eg, by default lm() silently drops observations with missing values"
   },
   {
     "objectID": "content/02-03-getting-help.html#another-example-more-fun-with-dates",
     "href": "content/02-03-getting-help.html#another-example-more-fun-with-dates",
     "title": "5  Warnings, Errors, and Getting Help",
-    "section": "5.6 Another example: More fun with dates",
-    "text": "5.6 Another example: More fun with dates\n\nmore_data = c('May 7, 2017', 'May 19, 2017', 'May Fifth, 2017')\nmdy(more_data)\n\n\nSO doesn’t seem so helpful: https://stackoverflow.com/search?q=%5BR%5D+lubridate+written+days\nLet’s check the CRAN page for lubridate: https://cran.r-project.org/web/packages/lubridate/index.html\n\n\n\n\n\n\nScreenshot of lubridate on CRAN, highlighting the BugReports field\n\n\n\n\n\nTrying a couple of searches gives us a promising result: https://github.com/tidyverse/lubridate/issues?q=is%3Aissue+is%3Aopen+mdy\n\n\n\n\n\n\nScreenshot of lubridate issues page, showing a relevant search result\n\n\n\n\nThis is a known bug; it looks like they’re thinking about doing something about it, but the only workaround is to create an NA: https://github.com/tidyverse/lubridate/issues/685"
+    "section": "5.8 Another example: More fun with dates",
+    "text": "5.8 Another example: More fun with dates\n\nmore_data = c('May 7, 2017', 'May 19, 2017', 'May Fifth, 2017')\nmdy(more_data)\n\n[1] \"2017-05-07\" \"2017-05-19\" \"2017-05-20\"\n\n\n\nSO doesn’t seem so helpful: https://stackoverflow.com/search?q=%5BR%5D+lubridate+written+days\n\n\n\nThe CRAN page for lubridate includes a link to report bugs: https://cran.r-project.org/web/packages/lubridate/index.html\n\n\n\n\nScreenshot of lubridate on CRAN, highlighting the BugReports field\n\n\n\n\nTrying a couple of searches gives us a promising result: https://github.com/tidyverse/lubridate/issues?q=is%3Aissue+is%3Aopen+mdy\n\n\n\n\nScreenshot of lubridate issues page, showing a relevant search result (August 2021)\n\n\n\nThis is a known bug; it looks like they’re thinking about doing something about it, but the only workaround is to create an NA: https://github.com/tidyverse/lubridate/issues/685"
   },
   {
     "objectID": "content/02-03-getting-help.html#writing-a-reproducible-example-reprex",
     "href": "content/02-03-getting-help.html#writing-a-reproducible-example-reprex",
     "title": "5  Warnings, Errors, and Getting Help",
-    "section": "5.7 Writing a reproducible example: reprex",
-    "text": "5.7 Writing a reproducible example: reprex\n\nhttps://reprex.tidyverse.org/\nhttps://reprex.tidyverse.org/articles/articles/learn-reprex.html\nhttps://reprex.tidyverse.org/articles/reprex-dos-and-donts.html\nPractice by writing a reprex for one of our two examples"
+    "section": "5.9 Writing a reproducible example: reprex",
+    "text": "5.9 Writing a reproducible example: reprex\n\nhttps://reprex.tidyverse.org/\nhttps://reprex.tidyverse.org/articles/articles/learn-reprex.html\nhttps://reprex.tidyverse.org/articles/reprex-dos-and-donts.html\nPractice by writing a reprex for one of our two examples"
   },
   {
     "objectID": "content/02-03-getting-help.html#do-not-do-these-things-in-your-reprex-or-anywhere-else",
     "href": "content/02-03-getting-help.html#do-not-do-these-things-in-your-reprex-or-anywhere-else",
     "title": "5  Warnings, Errors, and Getting Help",
-    "section": "5.8 Do not do these things in your reprex (or anywhere else)",
-    "text": "5.8 Do not do these things in your reprex (or anywhere else)\nOr Jenny Bryan will come to your office and set your computer on fire.\n\nsetwd('/users/danhicks/projects/catsaregreat/myscript/')\n\nUsed to ensure that R is running where your file is\nUnnecessary if you’re opening different projects in different RStudio sessions\nWill cause irrelevant errors on any other system\n\nAside: use file.path() or here::here() to build paths\nrm(list=ls())\n\nUsed because people think it clears out the global environment\nUnnecessary if you’re regularly using Session \\(\\to\\) Restart R\nAlso unnecessary at the top of a Rmd file, which is always knit in a new session\nDoesn’t actually clear out the global environment\n\neg, doesn’t unload packages or reset options()\n\n\n\nNot on Bryan’s list, but also don’t do it:\n\nrequire(package)\n\nIf package is installed, will act just like library()\nIf not, will return FALSE\n\nThe script will keep going until there’s an error about a missing function 300 lines later\nProbably not the error you wanted help with\nAnnoying to debug because I have no idea where the function is supposed to come from\n\nIf library() can’t find the package, it immediately raises an error\n\nI can tell right away what package needs to be installed"
+    "section": "5.10 Do not do these things in your reprex (or anywhere else)",
+    "text": "5.10 Do not do these things in your reprex (or anywhere else)\nOr Jenny Bryan will come to your office and set your computer on fire.\n\nsetwd('/users/danhicks/projects/catsaregreat/myscript/')\n\nUsed to ensure that R is running where your file is\nUnnecessary if you’re opening different projects in different RStudio sessions\nWill cause irrelevant errors on any other system\n\nAside: use file.path() or here::here() to build paths\nrm(list=ls())\n\nUsed because people think it clears out the global environment\nUnnecessary if you’re regularly using Session \\(\\to\\) Restart R\nAlso unnecessary at the top of a Rmd file, which is always knit in a new session\nDoesn’t actually clear out the global environment\n\neg, doesn’t unload packages or reset options()\n\n\n\nNot on Bryan’s list, but also don’t do it:\n\nrequire(package)\n\nIf package is installed, will act just like library()\nIf not, will return FALSE\n\nThe script will keep going until there’s an error about a missing function 300 lines later\nProbably not the error you wanted help with\nAnnoying to debug because I have no idea where the function is supposed to come from\n\nIf library() can’t find the package, it immediately raises an error\n\nI can tell right away what package needs to be installed"
   },
   {
     "objectID": "content/02-03-getting-help.html#debugging-in-rstudio",
     "href": "content/02-03-getting-help.html#debugging-in-rstudio",
     "title": "5  Warnings, Errors, and Getting Help",
-    "section": "5.9 Debugging in RStudio",
-    "text": "5.9 Debugging in RStudio\nThis week’s lab introduces you to some of RStudio’s debugging tools.\n\n\n\n\nBryan, Jenny. 2020. “Object of Type ‘Closure’ Is Not Subsettable.” Presented at the RSTUDIO::CONF 2020, January 31. https://rstudio.com/resources/rstudioconf-2020/object-of-type-closure-is-not-subsettable/.\n\n\n“R Faq - How to Make a Great R Reproducible Example.” n.d. Stack Overflow. Accessed August 31, 2018. https://stackoverflow.com/questions/5963269/how-to-make-a-great-r-reproducible-example.\n\n\nWickham, Hadley. 2019. “Debugging.” In Advanced R, Second Edition, ch. 22. CRC Press. https://adv-r.hadley.nz/debugging.html."
+    "section": "5.11 Debugging in RStudio",
+    "text": "5.11 Debugging in RStudio\nThis week’s lab introduces you to some of RStudio’s debugging tools.\n\n\n\n\nBryan, Jenny. 2020. “Object of Type ‘Closure’ Is Not Subsettable.” Presented at the RSTUDIO::CONF 2020, January 31. https://rstudio.com/resources/rstudioconf-2020/object-of-type-closure-is-not-subsettable/.\n\n\n“R Faq - How to Make a Great R Reproducible Example.” n.d. Stack Overflow. Accessed August 31, 2018. https://stackoverflow.com/questions/5963269/how-to-make-a-great-r-reproducible-example.\n\n\nWickham, Hadley. 2019. “Debugging.” In Advanced R, Second Edition, ch. 22. CRC Press. https://adv-r.hadley.nz/debugging.html."
   },
   {
     "objectID": "content/02-04-functional-programming.html",
@@ -1123,15 +1123,15 @@
     "objectID": "content/01-02-setup.html#r-and-rstudio",
     "href": "content/01-02-setup.html#r-and-rstudio",
     "title": "2  Software, hardware, and accounts",
-    "section": "2.2 R and RStudio",
-    "text": "2.2 R and RStudio\nR and RStudio\n\n\nIn 2000 R had a major release (version 4)\nAddressing some bugs has led to some rapid development in R and RStudio\nFor consistency in class, I encourage you to use the latest version of both R and RStudio\nHelp on switching between different versions of R"
+    "section": "2.4 R and RStudio",
+    "text": "2.4 R and RStudio\nR and RStudio\n\n\nIn 2000 R had a major release (version 4)\nAddressing some bugs has led to some rapid development in R and RStudio\nFor consistency in class, I encourage you to use the latest version of both R and RStudio\nHelp on switching between different versions of R"
   },
   {
     "objectID": "content/01-02-setup.html#os",
     "href": "content/01-02-setup.html#os",
     "title": "2  Software, hardware, and accounts",
-    "section": "2.3 OS",
-    "text": "2.3 OS\n[package managers]\n\nAll of the tools we’ll use are available on all major OSes\n\n(Except Sourcetree, which isn’t essential. List of git GUIs)\n\nI have much less experience debugging Windows and Linux, but will do what I can"
+    "section": "2.5 OS",
+    "text": "2.5 OS\n\nAll of the tools we’ll use are available on all major OSes\n\nExcept Sourcetree, which isn’t essential\nFind an alternative git GUI here)\n\nI have much less experience debugging Windows and Linux, but will do what I can"
   },
   {
     "objectID": "content/01-02-setup.html#github",
@@ -1144,15 +1144,15 @@
     "objectID": "content/01-02-setup.html#hardware",
     "href": "content/01-02-setup.html#hardware",
     "title": "2  Software, hardware, and accounts",
-    "section": "2.5 Hardware",
-    "text": "2.5 Hardware\n\nMost sessions will involve writing code in class\nI strongly recommend against tablets (iPad, Surface) for this course\nI recommend that your machine have at least\n\n200 GB free hard drive space\n8 GB RAM\nIntel i5 processor\nOperating system capable of running R 4.1 or higher\n\nMac: 10.13 (High Sierra) or more recent\nWindows: See here\nIf you’re running Linux I’m going to assume you can figure this out yourself"
+    "section": "2.2 Hardware",
+    "text": "2.2 Hardware\n\nMost sessions will involve writing code in class\nI strongly recommend against tablets (iPad, Surface) for this course\nI recommend that your machine have at least\n\n200 GB free hard drive space\n8 GB RAM\nIntel i5 processor\nOperating system capable of running R 4.1 or higher\n\nMac: 10.13 (High Sierra) or more recent\nWindows: See here\nIf you’re running Linux I’m going to assume you can figure this out yourself"
   },
   {
     "objectID": "content/01-02-setup.html#accessibility",
     "href": "content/01-02-setup.html#accessibility",
     "title": "2  Software, hardware, and accounts",
-    "section": "2.6 Accessibility",
-    "text": "2.6 Accessibility\nI chose the tools and platforms for this course in part because they’re industry-standard. If you pursue a career as a data scientist in industry, you’ll be expected to use GitHub (or something similar) on a daily basis. And RStudio is by far the most commonly used IDE (“integrated development environment”) for R.\nHowever, like many other technologies, they were originally developed using ableist assumptions about “normal” computer users. In response to criticism, the developers of these systems and tools have gone back and made their technologies more accessible. But there may still be barriers to accessibility that I have not anticipated.\nIf you encounter a barrier to participating in this course — even a small inconvenience — please let me know. Similarly, if you have ideas for making the course more accessible, please share them with me."
+    "section": "2.3 Accessibility",
+    "text": "2.3 Accessibility\nI chose the tools and platforms for this course in part because they’re industry-standard. If you pursue a career as a data scientist in industry, you’ll be expected to use GitHub (or something similar) on a daily basis. And RStudio is by far the most commonly used IDE (“integrated development environment”) for R.\nHowever, like many other technologies, they were originally developed using ableist assumptions about “normal” computer users. In response to criticism, the developers of these systems and tools have gone back and made their technologies more accessible. But there may still be barriers to accessibility that I have not anticipated.\nIf you encounter a barrier to participating in this course — even a small inconvenience — please let me know. Similarly, if you have ideas for making the course more accessible, please share them with me."
   },
   {
     "objectID": "content/01-03-data-sci-wtf.html#references",
@@ -1180,7 +1180,7 @@
     "href": "content/02-02-git.html#working-with-your-own-repos",
     "title": "4  Git for version control",
     "section": "4.10 Working with your own repos",
-    "text": "4.10 Working with your own repos\n\nOn GitHub, click “New” and walk through the steps to create a new repository\n\nThe name on GitHub doesn’t need to match the local name\nBut why wouldn’t you use the same name?\n\nCopy the URL: https://github.com/username/learning-git\nBack in Sourcetree\n\nGo to Settings in the toolbar\nGo to the Remotes tab\nClick Add to add a new remote\n\nThe standard name for a default remote is origin\n\nPaste in the GitHub URL\n\n\n\n\n\nAdding a new remote\n\n\n\n\nAfter adding the remote, we can send the repository (including its full history) up to GitHub using push\n\nLook for Push in the toolbar\nSourcetree will ask which branches to push\n\nWhen the push is complete, refresh GitHub in your browser\n\nYou can edit files directly in GitHub\n\nNow we’ll fetch and pull the changes from GitHub back to our local copy\n\nFetch: Compare the local tree to the remote tree, noting any differences. Use this to preview the changes on the remote\nIn Sourcetree, hit Fetch in the toolbar. Note that the GitHub commit shows up in the History panel.\nPull: Actually download the remote changes and incorporate them into your local tree."
+    "text": "4.10 Working with your own repos\n\nOn GitHub, click “New” and walk through the steps to create a new repository\n\nThe name on GitHub doesn’t need to match the local name\nBut why wouldn’t you use the same name?\n\nCopy the URL: https://github.com/[username]/learning-git\nBack in Sourcetree\n\nGo to Settings in the toolbar\nGo to the Remotes tab\nClick Add to add a new remote\n\nThe standard name for a default remote is origin\n\nPaste in the GitHub URL\n\n\n\n\n\nAdding a new remote\n\n\n\n\nAfter adding the remote, we can send the repository (including its full history) up to GitHub using push\n\nLook for Push in the toolbar\nSourcetree will ask which branches to push\n\nWhen the push is complete, refresh GitHub in your browser\n\nYou can edit files directly in GitHub\n\nNow we’ll fetch and pull the changes from GitHub back to our local copy\n\nFetch: Compare the local tree to the remote tree, noting any differences. Use this to preview the changes on the remote\nIn Sourcetree, hit Fetch in the toolbar. Note that the GitHub commit shows up in the History panel.\nPull: Actually download the remote changes and incorporate them into your local tree."
   },
   {
     "objectID": "content/02-02-git.html#lab-working-with-someone-elses-repos",
@@ -1194,6 +1194,41 @@
     "href": "content/02-02-git.html#authenticating-sourcetree-with-github",
     "title": "4  Git for version control",
     "section": "4.8 Authenticating Sourcetree with GitHub",
-    "text": "4.8 Authenticating Sourcetree with GitHub\n\nMake sure you’re logged in to GitHub in your default web browser\nIn Sourcetree\n\nGo to a New Tab\nThen Remote (just underneath the tabs)\nAdd an account …\nHosting Service: GitHub\nAuthentication: OAuth\nUsername: [shouldn’t be able to enter anything]\nClick “Refresh OAuth Token”\n\nFocus should switch to a new tab in your web browser\n\nScroll down and click “Authorize atlassian” green button\n\nBrowser should now say “Authentication Successful” and GitHub should send you a security notice via email\nBack in Sourcetree, click okay and “Refresh” (optional, underneath search bar)"
+    "text": "4.8 Authenticating Sourcetree with GitHub\n\nMake sure you’re logged in to GitHub in your default web browser\nIn Sourcetree\n\nGo to a New Tab\nThen Remote (just underneath the tabs)\nAdd an account …\nHosting Service: GitHub\nAuthentication: OAuth\nUsername: [shouldn’t be able to enter anything]\nClick “Refresh OAuth Token”\n\nFocus should switch to a new tab in your web browser\n\nScroll down and click “Authorize atlassian” green button\n\nBrowser should now say “Authentication Successful” and GitHub should send you a security notice via email\nBack in Sourcetree, click okay"
+  },
+  {
+    "objectID": "content/02-03-getting-help.html#to-catch-warnings",
+    "href": "content/02-03-getting-help.html#to-catch-warnings",
+    "title": "5  Warnings, Errors, and Getting Help",
+    "section": "5.6 To catch warnings",
+    "text": "5.6 To catch warnings\n\nSet options(warn = 2) to turn all warnings into errors\nUse tryCatch() with the warning argument\n\nExample: https://stackoverflow.com/questions/8217901/breaking-loop-when-warnings-appear-in-r/8218794#8218794\n\nWrite a unit test\nMy preferred approach: Add an assertion to your primary code\n\n\n## Using an assertion to prevent warnings from cascading\nlibrary(assertthat)\n\nsix_months_later = add_six_months(some_data)\n\nWarning: 2 failed to parse.\n\nassert_that(all(!is.na(six_months_later)), \n            msg = 'Missing values in `six_months_later`')\n\nError: Missing values in `six_months_later`"
+  },
+  {
+    "objectID": "content/02-03-getting-help.html#debugging",
+    "href": "content/02-03-getting-help.html#debugging",
+    "title": "5  Warnings, Errors, and Getting Help",
+    "section": "5.7 Debugging",
+    "text": "5.7 Debugging\n\nLet’s start by using the RStudio debugger to isolate the problem\n\n\ndebugonce(add_six_months)\nadd_six_months(some_data)\n\ndebugging in: add_six_months(some_data)\ndebug at <text>#3: {\n    parsed_dates = parse_date_time(date_str, orders = \"mdY\")\n    parsed_dates %m+% months(6)\n}\ndebug at <text>#4: parsed_dates = parse_date_time(date_str, orders = \"mdY\")\n\n\nWarning: 2 failed to parse.\n\n\ndebug at <text>#5: parsed_dates %m+% months(6)\nexiting from: add_six_months(some_data)\n\n\n[1] NA               \"2007-11-15 UTC\" NA              \n\n\n\nThe problem is in lubridate::parse_date_time().\n\nSpend a few minutes reading the documentation for this function and playing around with the call.\n\nWhat does the argument orders do?\n\n\n\n?parse_date_time\n\n\nparse_date_time(some_data, orders = 'mdY')\n\nWarning: 2 failed to parse.\n\n\n[1] NA               \"2007-05-15 UTC\" NA              \n\n\n\n\nLet’s try SO: https://stackoverflow.com/search?q=%5BR%5D+lubridate+month-year\n\n\nparse_date_time(some_data, orders = c('mY', 'mdY'))\n\n[1] \"2002-06-01 UTC\" \"2007-05-15 UTC\" \"2007-08-01 UTC\"\n\n\n\nMake this change in add_six_months() and confirm it no longer trips the assertion."
+  },
+  {
+    "objectID": "content/01-02-setup.html#package-manager",
+    "href": "content/01-02-setup.html#package-manager",
+    "title": "2  Software, hardware, and accounts",
+    "section": "2.6 Package manager",
+    "text": "2.6 Package manager\n\nSoftware to facilitate installing, upgrading, and removing other software\nHighly recommended for installing git, pandoc, and some other tools we’ll use later\n\nUse OS installer for R and RStudio\n\nMac OS: Homebrew or MacPorts\n\nPros and cons of these two main options\nI use Homebrew\n\nWindows: Chocolatey\n\nI guess there are others, but this is what previous students have recommended\n\n\n - Once your package manager is ready to go, install git and pandoc - Mac, Homebrew: brew install git         brew install pandoc - Windows, Chocolatey: - Needs to be in elevated/administrator mode - If prompted, Yes to running additional scripts choco install git         choco install pandoc"
+  },
+  {
+    "objectID": "content/01-02-setup.html#latex",
+    "href": "content/01-02-setup.html#latex",
+    "title": "2  Software, hardware, and accounts",
+    "section": "2.7 LaTeX",
+    "text": "2.7 LaTeX\n\nNot strictly required for this class, but necessary for turning Rmarkdown into PDFs\nIf you have no idea what that meant, don’t worry about it for now\nI recommend the TinyTeX distribution, which you can install via R: install.packages('tinytex')     tinytex::install_tinytex()"
+  },
+  {
+    "objectID": "content/01-02-setup.html#github-and-sourcetree",
+    "href": "content/01-02-setup.html#github-and-sourcetree",
+    "title": "2  Software, hardware, and accounts",
+    "section": "2.8 GitHub and Sourcetree",
+    "text": "2.8 GitHub and Sourcetree\n\nYou’ll need a GitHub account and Sourcetree\n\n\n\nGitHub is owned by Microsoft\nAnd there are concerns about how it mined public repositories to develop a code completion tool\nBut it offers some key features that I want to use in this course\nYou can do everything this course requires in private repositories, so long as you give access to the people who need access"
   }
 ]

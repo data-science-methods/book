@@ -315,10 +315,12 @@ div.csl-indent {
   <li><a href="#messages-warnings-and-errors" id="toc-messages-warnings-and-errors" class="nav-link" data-scroll-target="#messages-warnings-and-errors"> <span class="header-section-number">5.3</span> Messages, warnings, and errors</a></li>
   <li><a href="#where-to-go-for-help" id="toc-where-to-go-for-help" class="nav-link" data-scroll-target="#where-to-go-for-help"> <span class="header-section-number">5.4</span> Where to go for help</a></li>
   <li><a href="#example-dates-are-often-problems" id="toc-example-dates-are-often-problems" class="nav-link" data-scroll-target="#example-dates-are-often-problems"> <span class="header-section-number">5.5</span> Example: Dates are often problems</a></li>
-  <li><a href="#another-example-more-fun-with-dates" id="toc-another-example-more-fun-with-dates" class="nav-link" data-scroll-target="#another-example-more-fun-with-dates"> <span class="header-section-number">5.6</span> Another example: More fun with dates</a></li>
-  <li><a href="#writing-a-reproducible-example-reprex" id="toc-writing-a-reproducible-example-reprex" class="nav-link" data-scroll-target="#writing-a-reproducible-example-reprex"> <span class="header-section-number">5.7</span> Writing a reproducible example: <code>reprex</code></a></li>
-  <li><a href="#do-not-do-these-things-in-your-reprex-or-anywhere-else" id="toc-do-not-do-these-things-in-your-reprex-or-anywhere-else" class="nav-link" data-scroll-target="#do-not-do-these-things-in-your-reprex-or-anywhere-else"> <span class="header-section-number">5.8</span> Do not do these things in your reprex (or anywhere else)</a></li>
-  <li><a href="#debugging-in-rstudio" id="toc-debugging-in-rstudio" class="nav-link" data-scroll-target="#debugging-in-rstudio"> <span class="header-section-number">5.9</span> Debugging in RStudio</a></li>
+  <li><a href="#to-catch-warnings" id="toc-to-catch-warnings" class="nav-link" data-scroll-target="#to-catch-warnings"> <span class="header-section-number">5.6</span> To catch warnings</a></li>
+  <li><a href="#debugging" id="toc-debugging" class="nav-link" data-scroll-target="#debugging"> <span class="header-section-number">5.7</span> Debugging</a></li>
+  <li><a href="#another-example-more-fun-with-dates" id="toc-another-example-more-fun-with-dates" class="nav-link" data-scroll-target="#another-example-more-fun-with-dates"> <span class="header-section-number">5.8</span> Another example: More fun with dates</a></li>
+  <li><a href="#writing-a-reproducible-example-reprex" id="toc-writing-a-reproducible-example-reprex" class="nav-link" data-scroll-target="#writing-a-reproducible-example-reprex"> <span class="header-section-number">5.9</span> Writing a reproducible example: <code>reprex</code></a></li>
+  <li><a href="#do-not-do-these-things-in-your-reprex-or-anywhere-else" id="toc-do-not-do-these-things-in-your-reprex-or-anywhere-else" class="nav-link" data-scroll-target="#do-not-do-these-things-in-your-reprex-or-anywhere-else"> <span class="header-section-number">5.10</span> Do not do these things in your reprex (or anywhere else)</a></li>
+  <li><a href="#debugging-in-rstudio" id="toc-debugging-in-rstudio" class="nav-link" data-scroll-target="#debugging-in-rstudio"> <span class="header-section-number">5.11</span> Debugging in RStudio</a></li>
   </ul>
 </nav>
     </div>
@@ -363,9 +365,18 @@ div.csl-indent {
 <li><em>Error</em>: Nope. I’m stopping here. You need to fix the thing.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">message</span>(<span class="st">'Hey, just FYI'</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">warning</span>(<span class="st">'Uhhhh might want to check this out'</span>)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">stop</span>(<span class="st">'Noooooo'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">message</span>(<span class="st">'Hey, just FYI'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Hey, just FYI</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">warning</span>(<span class="st">'Uhhhh might want to check this out'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Uhhhh might want to check this out</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stop</span>(<span class="st">'Noooooo'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error in eval(expr, envir, enclos): Noooooo</code></pre>
+</div>
 </div>
 </section>
 <section id="where-to-go-for-help" class="level2" data-number="5.4">
@@ -382,7 +393,7 @@ div.csl-indent {
 <section id="example-dates-are-often-problems" class="level2" data-number="5.5">
 <h2 data-number="5.5" class="anchored" data-anchor-id="example-dates-are-often-problems"><span class="header-section-number">5.5</span> Example: Dates are often problems</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>
 Attaching package: 'lubridate'</code></pre>
@@ -392,13 +403,13 @@ Attaching package: 'lubridate'</code></pre>
 
     date, intersect, setdiff, union</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>add_six_months <span class="ot">=</span> <span class="cf">function</span>(date_str) {</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    parsed_dates <span class="ot">=</span> <span class="fu">parse_date_time</span>(date_str, <span class="at">orders =</span> <span class="st">'mdY'</span>)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    parsed_dates <span class="sc">%m+%</span> <span class="fu">months</span>(<span class="dv">6</span>) </span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>some_data <span class="ot">=</span> <span class="fu">c</span>(<span class="st">'June 2002'</span>, <span class="st">'May 15, 2007'</span>, <span class="st">'August 2007'</span>)</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="fu">add_six_months</span>(some_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>add_six_months <span class="ot">=</span> <span class="cf">function</span>(date_str) {</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    parsed_dates <span class="ot">=</span> <span class="fu">parse_date_time</span>(date_str, <span class="at">orders =</span> <span class="st">'mdY'</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    parsed_dates <span class="sc">%m+%</span> <span class="fu">months</span>(<span class="dv">6</span>) </span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>some_data <span class="ot">=</span> <span class="fu">c</span>(<span class="st">'June 2002'</span>, <span class="st">'May 15, 2007'</span>, <span class="st">'August 2007'</span>)</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="fu">add_six_months</span>(some_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: 2 failed to parse.</code></pre>
 </div>
@@ -406,6 +417,7 @@ Attaching package: 'lubridate'</code></pre>
 <pre><code>[1] NA               "2007-11-15 UTC" NA              </code></pre>
 </div>
 </div>
+<hr>
 <ul>
 <li>Note that this is a warning, not an error
 <ul>
@@ -413,7 +425,10 @@ Attaching package: 'lubridate'</code></pre>
 <li>Errors might not show up until much later in our code, making it hard to identify the root cause</li>
 <li>Or they might cause invisible problems, eg, by default <code>lm()</code> silently drops observations with missing values</li>
 </ul></li>
-<li>To catch warnings
+</ul>
+</section>
+<section id="to-catch-warnings" class="level2" data-number="5.6">
+<h2 data-number="5.6" class="anchored" data-anchor-id="to-catch-warnings"><span class="header-section-number">5.6</span> To catch warnings</h2>
 <ul>
 <li>Set <code>options(warn = 2)</code> to turn all warnings into errors</li>
 <li>Use <code>tryCatch()</code> with the <code>warning</code> argument
@@ -422,22 +437,48 @@ Attaching package: 'lubridate'</code></pre>
 </ul></li>
 <li>Write a unit test</li>
 <li>My preferred approach: Add an <strong>assertion</strong> to your primary code</li>
-</ul></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Using an assertion to prevent warnings from cascading</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(assertthat)</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>six_months_later <span class="ot">=</span> <span class="fu">add_six_months</span>(some_data)</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="fu">assert_that</span>(<span class="fu">all</span>(<span class="sc">!</span><span class="fu">is.na</span>(six_months_later)), </span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">msg =</span> <span class="st">'Missing values in `six_months_later`'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Using an assertion to prevent warnings from cascading</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(assertthat)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>six_months_later <span class="ot">=</span> <span class="fu">add_six_months</span>(some_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: 2 failed to parse.</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">assert_that</span>(<span class="fu">all</span>(<span class="sc">!</span><span class="fu">is.na</span>(six_months_later)), </span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">msg =</span> <span class="st">'Missing values in `six_months_later`'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error: Missing values in `six_months_later`</code></pre>
+</div>
+</div>
+</section>
+<section id="debugging" class="level2" data-number="5.7">
+<h2 data-number="5.7" class="anchored" data-anchor-id="debugging"><span class="header-section-number">5.7</span> Debugging</h2>
 <ul>
 <li>Let’s start by using the RStudio debugger to <strong>isolate the problem</strong></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">debugonce</span>(add_six_months)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">add_six_months</span>(some_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">debugonce</span>(add_six_months)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">add_six_months</span>(some_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>debugging in: add_six_months(some_data)
+debug at &lt;text&gt;#3: {
+    parsed_dates = parse_date_time(date_str, orders = "mdY")
+    parsed_dates %m+% months(6)
+}
+debug at &lt;text&gt;#4: parsed_dates = parse_date_time(date_str, orders = "mdY")</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: 2 failed to parse.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>debug at &lt;text&gt;#5: parsed_dates %m+% months(6)
+exiting from: add_six_months(some_data)</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] NA               "2007-11-15 UTC" NA              </code></pre>
+</div>
 </div>
 <ul>
 <li>The problem is in <code>lubridate::parse_date_time()</code>.<br>
@@ -448,56 +489,68 @@ Attaching package: 'lubridate'</code></pre>
 </ul></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>?parse_date_time</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">parse_date_time</span>(some_data, <span class="at">orders =</span> <span class="st">'mdY'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>?parse_date_time</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">parse_date_time</span>(some_data, <span class="at">orders =</span> <span class="st">'mdY'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: 2 failed to parse.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] NA               "2007-05-15 UTC" NA              </code></pre>
+</div>
+</div>
+<hr>
 <ul>
 <li>Let’s try SO: <a href="https://stackoverflow.com/search?q=%5BR%5D+lubridate+month-year" class="uri">https://stackoverflow.com/search?q=%5BR%5D+lubridate+month-year</a></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">parse_date_time</span>(some_data, <span class="at">orders =</span> <span class="fu">c</span>(<span class="st">'mY'</span>, <span class="st">'mdY'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">parse_date_time</span>(some_data, <span class="at">orders =</span> <span class="fu">c</span>(<span class="st">'mY'</span>, <span class="st">'mdY'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "2002-06-01 UTC" "2007-05-15 UTC" "2007-08-01 UTC"</code></pre>
+</div>
 </div>
 <ul>
 <li><em>Make this change in <code>add_six_months()</code> and confirm it no longer trips the assertion.</em></li>
 </ul>
 </section>
-<section id="another-example-more-fun-with-dates" class="level2" data-number="5.6">
-<h2 data-number="5.6" class="anchored" data-anchor-id="another-example-more-fun-with-dates"><span class="header-section-number">5.6</span> Another example: More fun with dates</h2>
+<section id="another-example-more-fun-with-dates" class="level2" data-number="5.8">
+<h2 data-number="5.8" class="anchored" data-anchor-id="another-example-more-fun-with-dates"><span class="header-section-number">5.8</span> Another example: More fun with dates</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>more_data <span class="ot">=</span> <span class="fu">c</span>(<span class="st">'May 7, 2017'</span>, <span class="st">'May 19, 2017'</span>, <span class="st">'May Fifth, 2017'</span>)</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mdy</span>(more_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>more_data <span class="ot">=</span> <span class="fu">c</span>(<span class="st">'May 7, 2017'</span>, <span class="st">'May 19, 2017'</span>, <span class="st">'May Fifth, 2017'</span>)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mdy</span>(more_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "2017-05-07" "2017-05-19" "2017-05-20"</code></pre>
+</div>
 </div>
 <ul>
-<li><p>SO doesn’t seem so helpful: <a href="https://stackoverflow.com/search?q=%5BR%5D+lubridate+written+days" class="uri">https://stackoverflow.com/search?q=%5BR%5D+lubridate+written+days</a></p></li>
-<li><p>Let’s check the CRAN page for <code>lubridate</code>: <a href="https://cran.r-project.org/web/packages/lubridate/index.html" class="uri">https://cran.r-project.org/web/packages/lubridate/index.html</a></p></li>
+<li>SO doesn’t seem so helpful: <a href="https://stackoverflow.com/search?q=%5BR%5D+lubridate+written+days" class="uri">https://stackoverflow.com/search?q=%5BR%5D+lubridate+written+days</a></li>
 </ul>
-<div class="cell">
-<div class="cell-output-display">
+<hr>
+<ul>
+<li>The CRAN page for <code>lubridate</code> includes a link to report bugs: <a href="https://cran.r-project.org/web/packages/lubridate/index.html" class="uri">https://cran.r-project.org/web/packages/lubridate/index.html</a></li>
+</ul>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images/02-basics/lubridate_cran.png" class="img-fluid figure-img" width="592"></p>
+<p><img src="images/02-basics/lubridate_cran.png" class="img-fluid figure-img"></p>
 <p></p><figcaption aria-hidden="true" class="figure-caption">Screenshot of <code>lubridate</code> on CRAN, highlighting the BugReports field</figcaption><p></p>
 </figure>
 </div>
-</div>
-</div>
+<hr>
 <ul>
 <li>Trying a couple of searches gives us a promising result: <a href="https://github.com/tidyverse/lubridate/issues?q=is%3Aissue+is%3Aopen+mdy" class="uri">https://github.com/tidyverse/lubridate/issues?q=is%3Aissue+is%3Aopen+mdy</a></li>
 </ul>
-<div class="cell">
-<div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images/02-basics/lubridate_issues.png" class="img-fluid figure-img" width="729"></p>
-<p></p><figcaption aria-hidden="true" class="figure-caption">Screenshot of <code>lubridate</code> issues page, showing a relevant search result</figcaption><p></p>
+<p><img src="images/02-basics/lubridate_issues.png" class="img-fluid figure-img"></p>
+<p></p><figcaption aria-hidden="true" class="figure-caption">Screenshot of <code>lubridate</code> issues page, showing a relevant search result (August 2021)</figcaption><p></p>
 </figure>
 </div>
-</div>
-</div>
+<hr>
 <p>This is a known bug; it looks like they’re thinking about doing something about it, but the only workaround is to create an NA: <a href="https://github.com/tidyverse/lubridate/issues/685" class="uri">https://github.com/tidyverse/lubridate/issues/685</a></p>
 </section>
-<section id="writing-a-reproducible-example-reprex" class="level2" data-number="5.7">
-<h2 data-number="5.7" class="anchored" data-anchor-id="writing-a-reproducible-example-reprex"><span class="header-section-number">5.7</span> Writing a reproducible example: <code>reprex</code></h2>
+<section id="writing-a-reproducible-example-reprex" class="level2" data-number="5.9">
+<h2 data-number="5.9" class="anchored" data-anchor-id="writing-a-reproducible-example-reprex"><span class="header-section-number">5.9</span> Writing a reproducible example: <code>reprex</code></h2>
 <ul>
 <li><p><a href="https://reprex.tidyverse.org/" class="uri">https://reprex.tidyverse.org/</a></p></li>
 <li><p><a href="https://reprex.tidyverse.org/articles/articles/learn-reprex.html" class="uri">https://reprex.tidyverse.org/articles/articles/learn-reprex.html</a></p></li>
@@ -505,8 +558,8 @@ Attaching package: 'lubridate'</code></pre>
 <li><p><em>Practice by writing a reprex for one of our two examples</em></p></li>
 </ul>
 </section>
-<section id="do-not-do-these-things-in-your-reprex-or-anywhere-else" class="level2" data-number="5.8">
-<h2 data-number="5.8" class="anchored" data-anchor-id="do-not-do-these-things-in-your-reprex-or-anywhere-else"><span class="header-section-number">5.8</span> Do not do these things in your reprex (or anywhere else)</h2>
+<section id="do-not-do-these-things-in-your-reprex-or-anywhere-else" class="level2" data-number="5.10">
+<h2 data-number="5.10" class="anchored" data-anchor-id="do-not-do-these-things-in-your-reprex-or-anywhere-else"><span class="header-section-number">5.10</span> Do not do these things in your reprex (or anywhere else)</h2>
 <p><a href="https://www.tidyverse.org/blog/2017/12/workflow-vs-script/">Or Jenny Bryan will come to your office and set your computer on fire</a>.</p>
 <ul>
 <li><p><code>setwd('/users/danhicks/projects/catsaregreat/myscript/')</code></p>
@@ -545,8 +598,8 @@ Attaching package: 'lubridate'</code></pre>
 </ul></li>
 </ul>
 </section>
-<section id="debugging-in-rstudio" class="level2" data-number="5.9">
-<h2 data-number="5.9" class="anchored" data-anchor-id="debugging-in-rstudio"><span class="header-section-number">5.9</span> Debugging in RStudio</h2>
+<section id="debugging-in-rstudio" class="level2" data-number="5.11">
+<h2 data-number="5.11" class="anchored" data-anchor-id="debugging-in-rstudio"><span class="header-section-number">5.11</span> Debugging in RStudio</h2>
 <p><a href="https://github.com/data-science-methods/lab-w03-debugging">This week’s lab</a> introduces you to some of RStudio’s debugging tools.</p>
 
 

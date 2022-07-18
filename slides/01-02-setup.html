@@ -1675,53 +1675,23 @@ R 4.1 or higher</li>
 <li><input type="checkbox" disabled></input>
 RStudio</li>
 <li><input type="checkbox" disabled></input>
-git <em>[package manager]</em></li>
+Package manager for your OS</li>
+<li><input type="checkbox" disabled></input>
+git</li>
+<li><input type="checkbox" disabled></input>
+pandoc</li>
 <li><input type="checkbox" disabled></input>
 GitHub account</li>
 <li><input type="checkbox" disabled></input>
 Sourcetree</li>
 </ul>
 </div>
-<div id="r-and-rstudio" class="slide section level2">
-<h1>R and RStudio</h1>
-<p><a href="https://cran.r-project.org/">R</a> and <a href="https://rstudio.com/products/rstudio/download/">RStudio</a></p>
-<p></br></p>
-<ul>
-<li>In 2000 R had a major release (version 4)</li>
-<li>Addressing some bugs has led to some rapid development in R and RStudio</li>
-<li>For consistency in class, <strong>I encourage you to use the latest version of both R and RStudio</strong></li>
-<li><a href="https://support.rstudio.com/hc/en-us/articles/200486138-Changing-R-versions-for-the-RStudio-Desktop-IDE">Help on switching between different versions of R</a></li>
-</ul>
-</div>
-<div id="os" class="slide section level2">
-<h1>OS</h1>
-<p><em>[package managers]</em></p>
-<ul>
-<li>All of the tools we’ll use are available on all major OSes
-<ul>
-<li>(Except Sourcetree, which isn’t essential. <a href="https://git-scm.com/download/gui/linux">List of git GUIs</a>)</li>
-</ul></li>
-<li>I have much less experience debugging Windows and Linux, but will do what I can</li>
-</ul>
-</div>
-<div id="github" class="slide section level2">
-<h1>GitHub</h1>
-<ul>
-<li>You’ll need a <a href="https://github.com/">GitHub</a> account and <a href="https://www.sourcetreeapp.com/">Sourcetree</a></li>
-</ul>
-<p></br></p>
-<ul>
-<li>GitHub is <a href="https://www.cnbc.com/2020/11/29/microsofts-github-has-become-magnet-for-thorny-issues-like-riaa.html">owned by Microsoft</a></li>
-<li>And there are <a href="https://www.theverge.com/2021/7/7/22561180/github-copilot-legal-copyright-fair-use-public-code">concerns about how it mined public repositories to develop a code completion tool</a></li>
-<li>But it offers some key features that I want to use in this course</li>
-<li>You can do everything this course requires in private repositories, so long as you give access to the people who need access</li>
-</ul>
-</div>
 <div id="hardware" class="slide section level2">
 <h1>Hardware</h1>
 <ul>
 <li>Most sessions will involve writing code in class</li>
-<li>I strongly recommend <em>against</em> tablets (iPad, Surface) for this course</li>
+<li>I strongly recommend <em>against</em> tablets (iPad, Surface) for
+this course</li>
 <li>I recommend that your machine have at least
 <ul>
 <li>200 GB free hard drive space</li>
@@ -1731,16 +1701,115 @@ Sourcetree</li>
 <ul>
 <li>Mac: 10.13 (High Sierra) or more recent</li>
 <li>Windows: See <a href="https://cran.r-project.org/bin/windows/base/rw-FAQ.html#Does-R-run-under-Windows-Vista_003f">here</a></li>
-<li>If you’re running Linux I’m going to assume you can figure this out yourself</li>
+<li>If you’re running Linux I’m going to assume you can figure this out
+yourself</li>
 </ul></li>
 </ul></li>
 </ul>
 </div>
 <div id="accessibility" class="slide section level2">
 <h1>Accessibility</h1>
-<p>I chose the tools and platforms for this course in part because they’re industry-standard. If you pursue a career as a data scientist in industry, you’ll be expected to use GitHub (or something similar) on a daily basis. And RStudio is by far the most commonly used IDE (“integrated development environment”) for R.</p>
-<p>However, like many other technologies, they were originally developed using ableist assumptions about “normal” computer users. In response to criticism, the developers of these systems and tools have gone back and made their technologies more accessible. But there may still be barriers to accessibility that I have not anticipated.</p>
-<p><strong>If you encounter a barrier to participating in this course — even a small inconvenience — please let me know.</strong> Similarly, if you have ideas for making the course more accessible, please share them with me.</p>
+<p>I chose the tools and platforms for this course in part because
+they’re industry-standard. If you pursue a career as a data scientist in
+industry, you’ll be expected to use GitHub (or something similar) on a
+daily basis. And RStudio is by far the most commonly used IDE
+(“integrated development environment”) for R.</p>
+<p>However, like many other technologies, they were originally developed
+using ableist assumptions about “normal” computer users. In response to
+criticism, the developers of these systems and tools have gone back and
+made their technologies more accessible. But there may still be barriers
+to accessibility that I have not anticipated.</p>
+<p><strong>If you encounter a barrier to participating in this course —
+even a small inconvenience — please let me know.</strong> Similarly, if
+you have ideas for making the course more accessible, please share them
+with me.</p>
+</div>
+<div id="r-and-rstudio" class="slide section level2">
+<h1>R and RStudio</h1>
+<p><a href="https://cran.r-project.org/">R</a> and <a href="https://rstudio.com/products/rstudio/download/">RStudio</a></p>
+<p></br></p>
+<ul>
+<li>In 2000 R had a major release (version 4)</li>
+<li>Addressing some bugs has led to some rapid development in R and
+RStudio</li>
+<li>For consistency in class, <strong>I encourage you to use the latest
+version of both R and RStudio</strong></li>
+<li><a href="https://support.rstudio.com/hc/en-us/articles/200486138-Changing-R-versions-for-the-RStudio-Desktop-IDE">Help
+on switching between different versions of R</a></li>
+</ul>
+</div>
+<div id="os" class="slide section level2">
+<h1>OS</h1>
+<ul>
+<li>All of the tools we’ll use are available on all major OSes
+<ul>
+<li>Except Sourcetree, which isn’t essential</li>
+<li><a href="https://git-scm.com/download/gui/linux">Find an alternative
+git GUI here</a>)</li>
+</ul></li>
+<li>I have much less experience debugging Windows and Linux, but will do
+what I can</li>
+</ul>
+</div>
+<div id="package-manager" class="slide section level2">
+<h1>Package manager</h1>
+<ul>
+<li>Software to facilitate installing, upgrading, and removing other
+software</li>
+<li><strong>Highly recommended</strong> for installing git, pandoc, and
+some other tools we’ll use later
+<ul>
+<li>Use OS installer for R and RStudio</li>
+</ul></li>
+<li>Mac OS: <a href="https://brew.sh/">Homebrew</a> or <a href="https://www.macports.org/install.php">MacPorts</a>
+<ul>
+<li><a href="https://apple.stackexchange.com/questions/32724/what-are-pros-and-cons-for-macports-fink-and-homebrew">Pros
+and cons of these two main options</a></li>
+<li>I use Homebrew</li>
+</ul></li>
+<li>Windows: <a href="https://chocolatey.org/install">Chocolatey</a>
+<ul>
+<li>I guess there are others, but this is what previous students have
+recommended</li>
+</ul></li>
+</ul>
+<p></br> - Once your package manager is ready to go, install git and
+pandoc - Mac, Homebrew:
+<code>brew install git         brew install pandoc</code> - Windows,
+Chocolatey: - Needs to be in elevated/administrator mode - If prompted,
+Yes to running additional scripts
+<code>choco install git         choco install pandoc</code></p>
+</div>
+<div id="latex" class="slide section level2">
+<h1>LaTeX</h1>
+<ul>
+<li>Not strictly required for this class, but necessary for turning
+Rmarkdown into PDFs</li>
+<li>If you have no idea what that meant, don’t worry about it for
+now</li>
+<li>I recommend the <a href="https://yihui.org/tinytex/">TinyTeX
+distribution</a>, which you can install via R:
+<code>install.packages(&#39;tinytex&#39;)     tinytex::install_tinytex()</code></li>
+</ul>
+</div>
+<div id="github-and-sourcetree" class="slide section level2">
+<h1>GitHub and Sourcetree</h1>
+<ul>
+<li>You’ll need a <a href="https://github.com/">GitHub</a> account and
+<a href="https://www.sourcetreeapp.com/">Sourcetree</a></li>
+</ul>
+<p></br></p>
+<ul>
+<li>GitHub is <a href="https://www.cnbc.com/2020/11/29/microsofts-github-has-become-magnet-for-thorny-issues-like-riaa.html">owned
+by Microsoft</a></li>
+<li>And there are <a href="https://www.theverge.com/2021/7/7/22561180/github-copilot-legal-copyright-fair-use-public-code">concerns
+about how it mined public repositories to develop a code completion
+tool</a></li>
+<li>But it offers some key features that I want to use in this
+course</li>
+<li>You can do everything this course requires in private repositories,
+so long as you give access to the people who need access</li>
+</ul>
 </div>
 
   <!-- dynamically load mathjax for compatibility with self-contained -->
