@@ -148,8 +148,7 @@ This is a known bug; it looks like they're thinking about doing something about 
     - Used to ensure that R is running where your file is
     - Unnecessary if you're opening different projects in different RStudio sessions
     - Will cause irrelevant errors on any other system
-
-- Aside:  use `file.path()` or `here::here()` to build paths
+    - Instead, use `file.path()` or `here::here()` to build paths
     
 - `rm(list=ls())`
     - Used because people think it clears out the global environment

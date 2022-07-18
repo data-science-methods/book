@@ -45,12 +45,29 @@ However, like many other technologies, they were originally developed using able
 - For consistency in class, **I encourage you to use the latest version of both R and RStudio**
 - [Help on switching between different versions of R](https://support.rstudio.com/hc/en-us/articles/200486138-Changing-R-versions-for-the-RStudio-Desktop-IDE)
 
+## Compilers
+
+Sometimes you'll need to compile a package in order to install it.  
+
+- Mac
+    - In a terminal, simply enter
+    ```
+    sudo xcode-select --install
+    ```
+    You'll need to enter an administrator password
+    - [If you also need a Fortran compiler](https://mac.r-project.org/tools/) \
+      (personally I've never needed one)
+- Windows
+    - [Rtools42](https://cran.r-project.org/bin/windows/Rtools/rtools42/rtools.html) (R 4.2 and higher) or
+    - [Rtools4](https://cran.r-project.org/bin/windows/Rtools/rtools40.html) (older versions of R)
+- Linux
+    - I'm pretty sure Linux and the like come with the necessary compilers
 
 ## OS
 
 - All of the tools we'll use are available on all major OSes
     - Except Sourcetree, which isn't essential
-    - [Find an alternative git GUI here](https://git-scm.com/download/gui/linux))
+    - [You can find an alternative git GUI here](https://git-scm.com/download/gui/linux))
 - I have much less experience debugging Windows and Linux, but will do what I can
 
 
