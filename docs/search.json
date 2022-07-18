@@ -102,14 +102,14 @@
     "href": "content/02-02-git.html#version-control",
     "title": "4  Git for version control",
     "section": "4.2 Version control",
-    "text": "4.2 Version control\n\nBasic idea: Tools for tracking and reversing changes to code over time\nUseful for identifying and reversing breaking changes\nImplementations upload to cloud, track who contributes code, control who can suggest vs. actually change code\nGood for collaboration, publishing code\ngit\n\nOne of many version control systems\nVery popular in part thanks to GitHub, which provided free hosting for open-source projects\n\nIn April 2020, GitHub also made private/closed-source repositories free\nResources for students (and teachers): https://education.github.com/"
+    "text": "4.2 Version control\n\nBasic idea: Tools for tracking and reversing changes to code over time\nUseful for identifying and reversing breaking changes\nImplementations upload to cloud, track who contributes code, control who can suggest vs. actually change code\nGood for collaboration, publishing code\ngit\n\nOne of many version control systems\nVery popular in part thanks to GitHub, which provides free hosting git repositories\n\nResources for students (and teachers): https://education.github.com/"
   },
   {
     "objectID": "content/02-02-git.html#gitting-started",
     "href": "content/02-02-git.html#gitting-started",
     "title": "4  Git for version control",
     "section": "4.3 Gitting started",
-    "text": "4.3 Gitting started\n\ngit is very hard\nWe’re going to use the Sourcetree GUI to get started"
+    "text": "4.3 Gitting started\n\ngit is very hard\nWe’re going to use the Sourcetree GUI to ease into things"
   },
   {
     "objectID": "content/02-02-git.html#time-travel",
@@ -1188,5 +1188,12 @@
     "title": "4  Git for version control",
     "section": "4.11 Lab: Working with someone else’s repos",
     "text": "4.11 Lab: Working with someone else’s repos\n\nGitHub lets you download someone else’s repo (clone), and modify it locally, but not upload directly.\n\nYou can suggest a change to someone else’s code by submitting a pull request, which first requires forking the repository.\n\n\n\n\nForking copies a repository to your GitHub account. Then you clone the copy to your local machine. You can push to your remote copy as usual. You can suggest changes to the original using a pull request. Source: https://happygitwithr.com/fork-and-clone.html\n\n\n\n\nStart with the repo for this week’s lab: https://github.com/data-science-methods/lab-w02-git\nFork: Look for the fork button in the upper-right\n\n\n\n\nThe fork button is near the upper-right corner of a GitHub repository page. I wasn’t able to find a keyboard shortcut for this. :-(\n\n\n\n\nClone: After creating the fork, you need to download a copy to your machine.\n\nIn Sourcetree’s repository browser, select New… > Clone from URL\n\nThis lesson continues in the lab. Open lab.html and lab.R to continue."
+  },
+  {
+    "objectID": "content/02-02-git.html#authenticating-sourcetree-with-github",
+    "href": "content/02-02-git.html#authenticating-sourcetree-with-github",
+    "title": "4  Git for version control",
+    "section": "4.8 Authenticating Sourcetree with GitHub",
+    "text": "4.8 Authenticating Sourcetree with GitHub\n\nMake sure you’re logged in to GitHub in your default web browser\nIn Sourcetree\n\nGo to a New Tab\nThen Remote (just underneath the tabs)\nAdd an account …\nHosting Service: GitHub\nAuthentication: OAuth\nUsername: [shouldn’t be able to enter anything]\nClick “Refresh OAuth Token”\n\nFocus should switch to a new tab in your web browser\n\nScroll down and click “Authorize atlassian” green button\n\nBrowser should now say “Authentication Successful” and GitHub should send you a security notice via email\nBack in Sourcetree, click okay and “Refresh” (optional, underneath search bar)"
   }
 ]

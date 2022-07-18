@@ -234,7 +234,7 @@ ul.task-list{list-style: none;}
   <li><a href="#tracking-changes" id="toc-tracking-changes" class="nav-link" data-scroll-target="#tracking-changes"> <span class="header-section-number">4.5</span> Tracking changes</a></li>
   <li><a href="#time-travel" id="toc-time-travel" class="nav-link" data-scroll-target="#time-travel"> <span class="header-section-number">4.6</span> Time travel</a></li>
   <li><a href="#the-garden-of-forking-branches" id="toc-the-garden-of-forking-branches" class="nav-link" data-scroll-target="#the-garden-of-forking-branches"> <span class="header-section-number">4.7</span> The garden of forking branches</a></li>
-  <li><a href="#generating-a-github-pat" id="toc-generating-a-github-pat" class="nav-link" data-scroll-target="#generating-a-github-pat"> <span class="header-section-number">4.8</span> Generating a GitHub PAT</a></li>
+  <li><a href="#authenticating-sourcetree-with-github" id="toc-authenticating-sourcetree-with-github" class="nav-link" data-scroll-target="#authenticating-sourcetree-with-github"> <span class="header-section-number">4.8</span> Authenticating Sourcetree with GitHub</a></li>
   <li><a href="#working-with-github-remotes" id="toc-working-with-github-remotes" class="nav-link" data-scroll-target="#working-with-github-remotes"> <span class="header-section-number">4.9</span> Working with GitHub remotes</a></li>
   <li><a href="#working-with-your-own-repos" id="toc-working-with-your-own-repos" class="nav-link" data-scroll-target="#working-with-your-own-repos"> <span class="header-section-number">4.10</span> Working with your own repos</a></li>
   <li><a href="#lab-working-with-someone-elses-repos" id="toc-lab-working-with-someone-elses-repos" class="nav-link" data-scroll-target="#lab-working-with-someone-elses-repos"> <span class="header-section-number">4.11</span> Lab: Working with <em>someone else’s</em> repos</a></li>
@@ -280,9 +280,8 @@ ul.task-list{list-style: none;}
 <li><p>git</p>
 <ul>
 <li>One of many version control systems</li>
-<li>Very popular in part thanks to GitHub, which provided free hosting for open-source projects
+<li>Very popular in part thanks to GitHub, which provides free hosting git repositories
 <ul>
-<li>In April 2020, GitHub also made private/closed-source repositories free</li>
 <li>Resources for students (and teachers): <a href="https://education.github.com/" class="uri">https://education.github.com/</a></li>
 </ul></li>
 </ul></li>
@@ -292,7 +291,7 @@ ul.task-list{list-style: none;}
 <h2 data-number="4.3" class="anchored" data-anchor-id="gitting-started"><span class="header-section-number">4.3</span> Gitting started</h2>
 <ul>
 <li><a href="https://www.ecosia.org/search?q=git+is+too+complicated&amp;addon=firefox&amp;addonversion=4.0.4">git is very hard</a></li>
-<li>We’re going to use the <a href="https://www.sourcetreeapp.com/">Sourcetree GUI</a> to get started</li>
+<li>We’re going to use the <a href="https://www.sourcetreeapp.com/">Sourcetree GUI</a> to ease into things</li>
 </ul>
 </section>
 <section id="initial-commit" class="level2" data-number="4.4">
@@ -464,30 +463,27 @@ no mistake this time
 </figure>
 </div>
 </section>
-<section id="generating-a-github-pat" class="level2" data-number="4.8">
-<h2 data-number="4.8" class="anchored" data-anchor-id="generating-a-github-pat"><span class="header-section-number">4.8</span> Generating a GitHub PAT</h2>
-<ul>
-<li>To get Sourcetree to work with GitHub, we need to generate a PAT (personal access token)</li>
-<li>On GitHub
-<ul>
-<li>Click on your profile image (upper right) to your account settings</li>
-</ul>
+<section id="authenticating-sourcetree-with-github" class="level2" data-number="4.8">
+<h2 data-number="4.8" class="anchored" data-anchor-id="authenticating-sourcetree-with-github"><span class="header-section-number">4.8</span> Authenticating Sourcetree with GitHub</h2>
 <ol type="1">
-<li>Scroll down to Developer Settings</li>
-<li>Then Personal access tokens</li>
-<li>Put a short description in the Note field</li>
-<li>For our class, we’ll need a PAT with the <code>repo</code> and <code>workflow</code> permissions</li>
-<li><strong>Important:</strong> After you close/navigate away from the next page, you won’t be able to view your PAT again.
+<li>Make sure you’re logged in to GitHub in your default web browser</li>
+<li>In Sourcetree
 <ul>
-<li>Keep a browser window on this page for the next few minutes</li>
-<li>Don’t save the PAT anywhere (that defeats the purpose)</li>
+<li>Go to a New Tab</li>
+<li>Then Remote (just underneath the tabs)</li>
+<li>Add an account …</li>
+<li><p>Hosting Service: GitHub<br>
+Authentication: OAuth<br>
+Username: [shouldn’t be able to enter anything]</p></li>
+<li>Click “Refresh OAuth Token”</li>
 </ul></li>
-<li>Copy-paste now into Sourcetree’s Password field
+<li>Focus should switch to a new tab in your web browser
 <ul>
-<li>You may need to enter it again in a few minutes, when you first push up to GitHub</li>
+<li>Scroll down and click “Authorize atlassian” green button</li>
 </ul></li>
-</ol></li>
-</ul>
+<li>Browser should now say “Authentication Successful” and GitHub should send you a security notice via email</li>
+<li>Back in Sourcetree, click okay and “Refresh” (optional, underneath search bar)</li>
+</ol>
 </section>
 <section id="working-with-github-remotes" class="level2" data-number="4.9">
 <h2 data-number="4.9" class="anchored" data-anchor-id="working-with-github-remotes"><span class="header-section-number">4.9</span> Working with GitHub remotes</h2>

@@ -17,14 +17,13 @@
     
 - git
     - One of many version control systems
-    - Very popular in part thanks to GitHub, which provided free hosting for open-source projects
-        - In April 2020, GitHub also made private/closed-source repositories free
+    - Very popular in part thanks to GitHub, which provides free hosting git repositories
         - Resources for students (and teachers):  <https://education.github.com/>
     
 ## Gitting started ##
 
 - [git is very hard](https://www.ecosia.org/search?q=git+is+too+complicated&addon=firefox&addonversion=4.0.4)
-- We're going to use the [Sourcetree GUI](https://www.sourcetreeapp.com/) to get started
+- We're going to use the [Sourcetree GUI](https://www.sourcetreeapp.com/) to ease into things
 
 
 ## Initial commit ##
@@ -142,20 +141,21 @@ no mistake this time
 ![The History panel shows the branches merging back together](images/02-basics/post_merge.png)
 
 
-## Generating a GitHub PAT ##
+## Authenticating Sourcetree with GitHub ##
 
-- To get Sourcetree to work with GitHub, we need to generate a PAT (personal access token)
-- On GitHub
-    - Click on your profile image (upper right) to your account settings
-    1. Scroll down to Developer Settings
-    2. Then Personal access tokens
-    3. Put a short description in the Note field
-    4. For our class, we'll need a PAT with the `repo` and `workflow` permissions
-    5. **Important:** After you close/navigate away from the next page, you won't be able to view your PAT again.  
-        - Keep a browser window on this page for the next few minutes
-        - Don't save the PAT anywhere (that defeats the purpose)
-    6. Copy-paste now into Sourcetree's Password field
-        - You may need to enter it again in a few minutes, when you first push up to GitHub 
+1. Make sure you're logged in to GitHub in your default web browser
+2. In Sourcetree
+    - Go to a New Tab
+    - Then Remote (just underneath the tabs)
+    - Add an account ...
+    - | Hosting Service: GitHub
+      | Authentication: OAuth
+      | Username: [shouldn't be able to enter anything]
+    - Click "Refresh OAuth Token"
+3. Focus should switch to a new tab in your web browser
+    - Scroll down and click "Authorize atlassian" green button
+4. Browser should  now say "Authentication Successful" and GitHub should send you a security notice via email
+5. Back in Sourcetree, click okay
 
 
 ## Working with GitHub remotes ##
@@ -167,7 +167,7 @@ no mistake this time
 - On GitHub, click "New" and walk through the steps to create a new repository
     - The name on GitHub doesn't need to match the local name
     - But why wouldn't you use the same name? 
-- Copy the URL: `https://github.com/username/learning-git`
+- Copy the URL: `https://github.com/[username]/learning-git`
 
 - Back in Sourcetree
     1. Go to Settings in the toolbar
