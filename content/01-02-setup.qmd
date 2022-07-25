@@ -81,6 +81,9 @@ Sometimes you'll need to compile a package in order to install it.
 	- I use Homebrew
 - Windows: [Chocolatey](https://chocolatey.org/install)
 	- I guess there are others, but this is what previous students have recommended
+- Either: [Anaconda](https://www.anaconda.com/) is popular among Python folks, and works as a package manager for multiple OSes
+    - But sometimes packages aren't up to date
+    - Ex: Most recent version of R appears to be 3.6.0, released April 2019
 	
 </br>
 - Once your package manager is ready to go, install git and pandoc
