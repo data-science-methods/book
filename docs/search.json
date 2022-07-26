@@ -11,7 +11,7 @@
     "href": "content/01-01-intro.html",
     "title": "1  Introduction",
     "section": "",
-    "text": "We pause to acknowledge all local indigenous peoples, including the Yokuts and Miwuk, who inhabited this land. We embrace their continued connection to this region and thank them for allowing us to live, work, learn, and collaborate on their traditional homeland. Let us now take a moment of silence to pay respect to their elders and to all Yokuts and Miwuk people, past and present.\n\n\n\nUC Merced and the City of Merced are on the traditional territory of the Yokut people. This land was stolen by Spanish, Mexican, and American settlers through acts of slavery and genocide. In addition, UC Merced is strongly associated with Ahwahne, known as Yosemite Valley. This valley was the traditional home of the Ahwahnechee people, who were the victims of some especially horrific, state-sponsored genocidal acts. For more on the history of Ahwahne, see https://tinyurl.com/y879jw8s. For more information on land acknowledgments, see https://native-land.ca."
+    "text": "flowchart LR\n  A[Hard edge] --> B(Round edge)\n  B --> C{Decision}\n  C --> D[Result one]\n  C --> E[Result two]"
   },
   {
     "objectID": "content/01-01-intro.html#about-the-instructor",
@@ -49,6 +49,13 @@
     "text": "1.6 Requirements and weekly routine\nThis is aspirational.\n\nTuesdays: Mix of discussion and lecture based on assigned readings\nThursdays: Live coding leading into work on the week’s lab assignment\nLabs: [10-ish], done individually or in pairs and submitted via GitHub for automated feedback\nRunning project: Practicing ideas from the course on data sets you find"
   },
   {
+    "objectID": "content/01-01-intro.html#references",
+    "href": "content/01-01-intro.html#references",
+    "title": "1  Introduction",
+    "section": "1.7 References",
+    "text": "1.7 References\n\n\n\n\nWilkinson, Mark D., Michel Dumontier, IJsbrand Jan Aalbersberg, Gabrielle Appleton, Myles Axton, Arie Baak, Niklas Blomberg, et al. 2016. “The FAIR Guiding Principles for Scientific Data Management and Stewardship.” Scientific Data 3 (1, 1): 1–9. https://doi.org/10.1038/sdata.2016.18.\n\n\nWilson, Greg, Jennifer Bryan, Karen Cranston, Justin Kitzes, Lex Nederbragt, and Tracy K. Teal. 2017. “Good Enough Practices in Scientific Computing.” PLOS Computational Biology 13 (6): e1005510. https://doi.org/10.1371/journal.pcbi.1005510."
+  },
+  {
     "objectID": "content/01-02-setup.html",
     "href": "content/01-02-setup.html",
     "title": "2  Software, hardware, and accounts",
@@ -56,11 +63,60 @@
     "text": "R 4.1 or higher\n\nRStudio\n\nPackage manager for your OS\n\ngit\n\npandoc\n\nGitHub account\n\nSourcetree"
   },
   {
-    "objectID": "content/01-02-setup.html#a-note-on-accessibility",
-    "href": "content/01-02-setup.html#a-note-on-accessibility",
+    "objectID": "content/01-02-setup.html#hardware",
+    "href": "content/01-02-setup.html#hardware",
     "title": "2  Software, hardware, and accounts",
-    "section": "2.1 A Note on Accessibility",
-    "text": "2.1 A Note on Accessibility\nI chose the tools and platforms for this course in part because they’re industry-standard. If you pursue a career as a data scientist in industry, you’ll be expected to use GitHub (or something similar) on a daily basis. And RStudio is by far the most commonly used IDE (“integrated development environment”) for R.\nHowever, like many other technologies, they were originally developed using ableist assumptions about “normal” computer users. In response to criticism, the developers of these systems and tools have gone back and made their technologies more accessible. But there may still be barriers to accessibility that I have not anticipated.\nIf you encounter a barrier to participating in this course — even a small inconvenience — please let me know. Similarly, if you have ideas for making the course more accessible, please share them with me."
+    "section": "2.2 Hardware",
+    "text": "2.2 Hardware\n\nMost sessions will involve writing code in class\nI strongly recommend against tablets (iPad, Surface) for this course\nI recommend that your machine have at least\n\n200 GB free hard drive space\n8 GB RAM\nIntel i5 processor\nOperating system capable of running R 4.1 or higher\n\nMac: 10.13 (High Sierra) or more recent\nWindows: See here\nIf you’re running Linux I’m going to assume you can figure this out yourself"
+  },
+  {
+    "objectID": "content/01-02-setup.html#accessibility",
+    "href": "content/01-02-setup.html#accessibility",
+    "title": "2  Software, hardware, and accounts",
+    "section": "2.3 Accessibility",
+    "text": "2.3 Accessibility\nI chose the tools and platforms for this course in part because they’re industry-standard. If you pursue a career as a data scientist in industry, you’ll be expected to use GitHub (or something similar) on a daily basis. And RStudio is by far the most commonly used IDE (“integrated development environment”) for R.\nHowever, like many other technologies, they were originally developed using ableist assumptions about “normal” computer users. In response to criticism, the developers of these systems and tools have gone back and made their technologies more accessible. But there may still be barriers to accessibility that I have not anticipated.\nIf you encounter a barrier to participating in this course — even a small inconvenience — please let me know. Similarly, if you have ideas for making the course more accessible, please share them with me."
+  },
+  {
+    "objectID": "content/01-02-setup.html#r-and-rstudio",
+    "href": "content/01-02-setup.html#r-and-rstudio",
+    "title": "2  Software, hardware, and accounts",
+    "section": "2.4 R and RStudio",
+    "text": "2.4 R and RStudio\nR and RStudio\n\n\nIn 2000 R had a major release (version 4)\nAddressing some bugs has led to some rapid development in R and RStudio\nFor consistency in class, I encourage you to use the latest version of both R and RStudio\nHelp on switching between different versions of R"
+  },
+  {
+    "objectID": "content/01-02-setup.html#compilers",
+    "href": "content/01-02-setup.html#compilers",
+    "title": "2  Software, hardware, and accounts",
+    "section": "2.5 Compilers",
+    "text": "2.5 Compilers\nSometimes you’ll need to compile a package in order to install it.\n\nMac\n\nIn a terminal, simply enter\n\nsudo xcode-select --install\nYou’ll need to enter an administrator password\n\nIf you also need a Fortran compiler\n(personally I’ve never needed one)\n\nWindows\n\nRtools42 (R 4.2 and higher) or\nRtools4 (older versions of R)\n\nLinux\n\nI’m pretty sure Linux and the like come with the necessary compilers"
+  },
+  {
+    "objectID": "content/01-02-setup.html#os",
+    "href": "content/01-02-setup.html#os",
+    "title": "2  Software, hardware, and accounts",
+    "section": "2.6 OS",
+    "text": "2.6 OS\n\nAll of the tools we’ll use are available on all major OSes\n\nExcept Sourcetree, which isn’t essential\nYou can find an alternative git GUI here)\n\nI have much less experience debugging Windows and Linux, but will do what I can"
+  },
+  {
+    "objectID": "content/01-02-setup.html#package-manager",
+    "href": "content/01-02-setup.html#package-manager",
+    "title": "2  Software, hardware, and accounts",
+    "section": "2.7 Package manager",
+    "text": "2.7 Package manager\n\nSoftware to facilitate installing, upgrading, and removing other software\nHighly recommended for installing git, pandoc, and some other tools we’ll use later\n\nUse OS installer for R and RStudio\n\nMac OS: Homebrew or MacPorts\n\nPros and cons of these two main options\nI use Homebrew\n\nWindows: Chocolatey\n\nI guess there are others, but this is what previous students have recommended\n\nEither: Anaconda is popular among Python folks, and works as a package manager for multiple OSes\n\nBut sometimes packages aren’t up to date\nEx: Most recent version of R appears to be 3.6.0, released April 2019\n\n\n - Once your package manager is ready to go, install git and pandoc - Mac, Homebrew: brew install git         brew install pandoc - Windows, Chocolatey: - Needs to be in elevated/administrator mode - If prompted, Yes to running additional scripts choco install git         choco install pandoc"
+  },
+  {
+    "objectID": "content/01-02-setup.html#latex",
+    "href": "content/01-02-setup.html#latex",
+    "title": "2  Software, hardware, and accounts",
+    "section": "2.8 LaTeX",
+    "text": "2.8 LaTeX\n\nNot strictly required for this class, but necessary for turning Rmarkdown into PDFs\nIf you have no idea what that meant, don’t worry about it for now\nI recommend the TinyTeX distribution, which you can install via R: install.packages('tinytex')     tinytex::install_tinytex()"
+  },
+  {
+    "objectID": "content/01-02-setup.html#github-and-sourcetree",
+    "href": "content/01-02-setup.html#github-and-sourcetree",
+    "title": "2  Software, hardware, and accounts",
+    "section": "2.9 GitHub and Sourcetree",
+    "text": "2.9 GitHub and Sourcetree\n\nYou’ll need a GitHub account and Sourcetree\n\n\n\nGitHub is owned by Microsoft\nAnd there are concerns about how it mined public repositories to develop a code completion tool\nBut it offers some key features that I want to use in this course\nYou can do everything this course requires in private repositories, so long as you give access to the people who need access"
   },
   {
     "objectID": "content/01-03-data-sci-wtf.html",
@@ -91,6 +147,13 @@
     "text": "3.4 Discussion question\nWhat are the epistemic and practical goals of your scientific field? How do you think “data science” will be useful for pursuing those goals?"
   },
   {
+    "objectID": "content/01-03-data-sci-wtf.html#references",
+    "href": "content/01-03-data-sci-wtf.html#references",
+    "title": "3  Data Science: What and why",
+    "section": "3.5 References",
+    "text": "3.5 References\n\n\n\n\nMcElreath, Richard, dir. 2020. Science as Amateur Software Development. https://www.youtube.com/watch?v=zwRdO9_GGhY.\n\n\nWilson, Greg, Jennifer Bryan, Karen Cranston, Justin Kitzes, Lex Nederbragt, and Tracy K. Teal. 2017. “Good Enough Practices in Scientific Computing.” PLOS Computational Biology 13 (6): e1005510. https://doi.org/10.1371/journal.pcbi.1005510."
+  },
+  {
     "objectID": "content/02-02-git.html",
     "href": "content/02-02-git.html",
     "title": "4  Git for version control",
@@ -112,6 +175,20 @@
     "text": "4.3 Gitting started\n\ngit is very hard\nWe’re going to use the Sourcetree GUI to ease into things"
   },
   {
+    "objectID": "content/02-02-git.html#initial-commit",
+    "href": "content/02-02-git.html#initial-commit",
+    "title": "4  Git for version control",
+    "section": "4.4 Initial commit",
+    "text": "4.4 Initial commit\n\nInstall Sourcetree and go through the configuration steps\nThen you’ll see the (empty) repository browser\nCreate a folder called something like learning-git\nThen, in Sourcetree:\n\nOn the Local tab\nSelect New … > Create a local repository (or) Drag and drop the folder on to the browser\n\n\n\n\n\nCreating a new local repository in learning-git\n\n\n\n\nYou can open the repository in Sourcetree, but it’s not interesting yet\nIn learning-git, create a text file, eg, testing.txt\nSourcetree’s File Status panel shows the new file, ready to be tracked"
+  },
+  {
+    "objectID": "content/02-02-git.html#tracking-changes",
+    "href": "content/02-02-git.html#tracking-changes",
+    "title": "4  Git for version control",
+    "section": "4.5 Tracking changes",
+    "text": "4.5 Tracking changes\n\nTracking changes to a file involves two steps: Adding and committing\nAdd: Click the checkmark\n\nThis tells git that we want to store these changes to the file in its archive\n\nCommit: Type a message in the comment field and click Commit\n\nThis tells git to go ahead and do the archiving process\n\n\n\n\n\nMaking your initial commit\n\n\n\n\nThe commit is now displayed in the History panel\n\n\n\n\nThe History panel after our first commit\n\n\nMake a few more changes to the file. Practice adding and committing them and note how the changes accumulate in the History panel."
+  },
+  {
     "objectID": "content/02-02-git.html#time-travel",
     "href": "content/02-02-git.html#time-travel",
     "title": "4  Git for version control",
@@ -126,11 +203,11 @@
     "text": "4.7 The garden of forking branches\n\nTo actually change the past, we’ll use a branch\n\nBranches allow git to track multiple distinct “timelines” for files\nFor example, most major software projects will have separate “dev” (development) and “release” branches\nIndividual branches will also be created for work on specific areas of the project\nThis allows each area of active work to be isolated from work happening in other areas\n\n\n\n\nAfter checking out the previous commit, click on Branch in the toolbar\n\nName your new branch something like fixing-mistake (no spaces!)\n\nStart to work on fixing the mistake in the file, then add and commit as usual\nNow checkout main. Notice:\n\nYour commits on fixing-mistake don’t disappear\nThe state of your file changes to the main version\nThe History panel shows the split between the two branches\n\nAfter we’ve finished fixing the mistake, we want to merge these changes back into main\n\nMake sure you’re current on main\nRight-click on fixing-mistake and select Merge…\n\n\n\n\n\nMerging fixing-mistake into main\n\n\n\n\nSourcetree will bring up a message about Merge Conflicts\n\nThis just means that the files you’re combining have conflicting histories, and git wants you to sort out what to keep and what to throw away\n\n\nImportant: It’s not obvious (there isn’t a big red status symbol anywhere), but git is now in a special conflict-resolution state. Until you resolve the conflicts and finish the merge, a lot of standard git functionality either won’t work at all or will cause weird problems. If git starts giving you a bunch of weird errors, check to see if you’re in the middle of a merge and need to resolve conflicts.\n\n\nAfter starting the merge, Sourcetree’s File status panel will indicate exactly which files have conflicts.\n\n\n\n\nSourcetree’s File status panel indicates which files have conflicts\n\n\n\n\nYour file will look something like this\n\ntest\nanother line\n<<<<<<< HEAD\nthis line has a mistake\n=======\nno mistake this time\n>>>>>>> fixing-mistake\n\nThe <<<<<<< and >>>>>>> surround each area of conflict.\n\nThe top part (marked HEAD) shows the state of the current branch\nThe bottom part (marked fixing-mistake) shows the state of the branch you’re merging\n\nSimply edit these sections so they’re in the state you want,\n\nThen save, go back to Sourcetree’s File status panel\nSourcetree generates a commit message indicating that you’re resolving conflicts to complete a merge\n\n\n\n\nAfterwards the History panel shows the two branches merging back together\n\n\n\n\nThe History panel shows the branches merging back together"
   },
   {
-    "objectID": "content/02-02-git.html#generating-a-github-pat",
-    "href": "content/02-02-git.html#generating-a-github-pat",
+    "objectID": "content/02-02-git.html#authenticating-sourcetree-with-github",
+    "href": "content/02-02-git.html#authenticating-sourcetree-with-github",
     "title": "4  Git for version control",
-    "section": "4.8 Generating a GitHub PAT",
-    "text": "4.8 Generating a GitHub PAT\n\nTo get Sourcetree to work with GitHub, we need to generate a PAT (personal access token)\nOn GitHub\n\nClick on your profile image (upper right) to your account settings\n\n\nScroll down to Developer Settings\nThen Personal access tokens\nPut a short description in the Note field\nFor our class, we’ll need a PAT with the repo and workflow permissions\nImportant: After you close/navigate away from the next page, you won’t be able to view your PAT again.\n\nKeep a browser window on this page for the next few minutes\nDon’t save the PAT anywhere (that defeats the purpose)\n\nCopy-paste now into Sourcetree’s Password field\n\nYou may need to enter it again in a few minutes, when you first push up to GitHub"
+    "section": "4.8 Authenticating Sourcetree with GitHub",
+    "text": "4.8 Authenticating Sourcetree with GitHub\n\nMake sure you’re logged in to GitHub in your default web browser\nIn Sourcetree\n\nGo to a New Tab\nThen Remote (just underneath the tabs)\nAdd an account …\nHosting Service: GitHub\nAuthentication: OAuth\nUsername: [shouldn’t be able to enter anything]\nClick “Refresh OAuth Token”\n\nFocus should switch to a new tab in your web browser\n\nScroll down and click “Authorize atlassian” green button\n\nBrowser should now say “Authentication Successful” and GitHub should send you a security notice via email\nBack in Sourcetree, click okay"
   },
   {
     "objectID": "content/02-02-git.html#working-with-github-remotes",
@@ -140,11 +217,18 @@
     "text": "4.9 Working with GitHub remotes\n\nA remote is a copy of a repository that lives on a server somewhere else"
   },
   {
-    "objectID": "content/02-02-git.html#further-reading",
-    "href": "content/02-02-git.html#further-reading",
+    "objectID": "content/02-02-git.html#working-with-your-own-repos",
+    "href": "content/02-02-git.html#working-with-your-own-repos",
     "title": "4  Git for version control",
-    "section": "4.10 Further reading",
-    "text": "4.10 Further reading\n\nHester (n.d.)\n\n\n\n\n\nHester, Jim, the STAT 545 TAs. n.d. Happy Git and GitHub for the useR. Accessed March 1, 2020. https://happygitwithr.com/."
+    "section": "4.10 Working with your own repos",
+    "text": "4.10 Working with your own repos\n\nOn GitHub, click “New” and walk through the steps to create a new repository\n\nThe name on GitHub doesn’t need to match the local name\nBut why wouldn’t you use the same name?\n\nCopy the URL: https://github.com/[username]/learning-git\nBack in Sourcetree\n\nGo to Settings in the toolbar\nGo to the Remotes tab\nClick Add to add a new remote\n\nThe standard name for a default remote is origin\n\nPaste in the GitHub URL\n\n\n\n\n\nAdding a new remote\n\n\n\n\nAfter adding the remote, we can send the repository (including its full history) up to GitHub using push\n\nLook for Push in the toolbar\nSourcetree will ask which branches to push\n\nWhen the push is complete, refresh GitHub in your browser\n\nYou can edit files directly in GitHub\n\nNow we’ll fetch and pull the changes from GitHub back to our local copy\n\nFetch: Compare the local tree to the remote tree, noting any differences. Use this to preview the changes on the remote\nIn Sourcetree, hit Fetch in the toolbar. Note that the GitHub commit shows up in the History panel.\nPull: Actually download the remote changes and incorporate them into your local tree."
+  },
+  {
+    "objectID": "content/02-02-git.html#lab-working-with-someone-elses-repos",
+    "href": "content/02-02-git.html#lab-working-with-someone-elses-repos",
+    "title": "4  Git for version control",
+    "section": "4.11 Lab: Working with someone else’s repos",
+    "text": "4.11 Lab: Working with someone else’s repos\n\nGitHub lets you download someone else’s repo (clone), and modify it locally, but not upload directly.\n\nYou can suggest a change to someone else’s code by submitting a pull request, which first requires forking the repository.\n\n\n\n\nForking copies a repository to your GitHub account. Then you clone the copy to your local machine. You can push to your remote copy as usual. You can suggest changes to the original using a pull request. Source: https://happygitwithr.com/fork-and-clone.html\n\n\n\n\nStart with the repo for this week’s lab: https://github.com/data-science-methods/lab-w02-git\nFork: Look for the fork button in the upper-right\n\n\n\n\nThe fork button is near the upper-right corner of a GitHub repository page. I wasn’t able to find a keyboard shortcut for this. :-(\n\n\n\n\nClone: After creating the fork, you need to download a copy to your machine.\n\nIn Sourcetree’s repository browser, select New… > Clone from URL\n\nThis lesson continues in the lab. Open lab.html and lab.R to continue."
   },
   {
     "objectID": "content/02-03-getting-help.html",
@@ -182,6 +266,20 @@
     "text": "5.5 Example: Dates are often problems\n\nlibrary(lubridate)\n\n\nAttaching package: 'lubridate'\n\n\nThe following objects are masked from 'package:base':\n\n    date, intersect, setdiff, union\n\nadd_six_months = function(date_str) {\n    parsed_dates = parse_date_time(date_str, orders = 'mdY')\n    parsed_dates %m+% months(6) \n}\n\nsome_data = c('June 2002', 'May 15, 2007', 'August 2007')\nadd_six_months(some_data)\n\nWarning: 2 failed to parse.\n\n\n[1] NA               \"2007-11-15 UTC\" NA              \n\n\n\n\nNote that this is a warning, not an error\n\nR won’t stop running here (unless we tell it to)\nErrors might not show up until much later in our code, making it hard to identify the root cause\nOr they might cause invisible problems, eg, by default lm() silently drops observations with missing values"
   },
   {
+    "objectID": "content/02-03-getting-help.html#to-catch-warnings",
+    "href": "content/02-03-getting-help.html#to-catch-warnings",
+    "title": "5  Warnings, Errors, and Getting Help",
+    "section": "5.6 To catch warnings",
+    "text": "5.6 To catch warnings\n\nSet options(warn = 2) to turn all warnings into errors\nUse tryCatch() with the warning argument\n\nExample: https://stackoverflow.com/questions/8217901/breaking-loop-when-warnings-appear-in-r/8218794#8218794\n\nWrite a unit test\nMy preferred approach: Add an assertion to your primary code\n\n\n## Using an assertion to prevent warnings from cascading\nlibrary(assertthat)\n\nsix_months_later = add_six_months(some_data)\n\nWarning: 2 failed to parse.\n\nassert_that(all(!is.na(six_months_later)), \n            msg = 'Missing values in `six_months_later`')\n\nError: Missing values in `six_months_later`"
+  },
+  {
+    "objectID": "content/02-03-getting-help.html#debugging",
+    "href": "content/02-03-getting-help.html#debugging",
+    "title": "5  Warnings, Errors, and Getting Help",
+    "section": "5.7 Debugging",
+    "text": "5.7 Debugging\n\nLet’s start by using the RStudio debugger to isolate the problem\n\n\ndebugonce(add_six_months)\nadd_six_months(some_data)\n\ndebugging in: add_six_months(some_data)\ndebug at <text>#3: {\n    parsed_dates = parse_date_time(date_str, orders = \"mdY\")\n    parsed_dates %m+% months(6)\n}\ndebug at <text>#4: parsed_dates = parse_date_time(date_str, orders = \"mdY\")\n\n\nWarning: 2 failed to parse.\n\n\ndebug at <text>#5: parsed_dates %m+% months(6)\nexiting from: add_six_months(some_data)\n\n\n[1] NA               \"2007-11-15 UTC\" NA              \n\n\n\nThe problem is in lubridate::parse_date_time().\n\nSpend a few minutes reading the documentation for this function and playing around with the call.\n\nWhat does the argument orders do?\n\n\n\n?parse_date_time\n\n\nparse_date_time(some_data, orders = 'mdY')\n\nWarning: 2 failed to parse.\n\n\n[1] NA               \"2007-05-15 UTC\" NA              \n\n\n\n\nLet’s try SO: https://stackoverflow.com/search?q=%5BR%5D+lubridate+month-year\n\n\nparse_date_time(some_data, orders = c('mY', 'mdY'))\n\n[1] \"2002-06-01 UTC\" \"2007-05-15 UTC\" \"2007-08-01 UTC\"\n\n\n\nMake this change in add_six_months() and confirm it no longer trips the assertion."
+  },
+  {
     "objectID": "content/02-03-getting-help.html#another-example-more-fun-with-dates",
     "href": "content/02-03-getting-help.html#another-example-more-fun-with-dates",
     "title": "5  Warnings, Errors, and Getting Help",
@@ -200,7 +298,7 @@
     "href": "content/02-03-getting-help.html#do-not-do-these-things-in-your-reprex-or-anywhere-else",
     "title": "5  Warnings, Errors, and Getting Help",
     "section": "5.10 Do not do these things in your reprex (or anywhere else)",
-    "text": "5.10 Do not do these things in your reprex (or anywhere else)\nOr Jenny Bryan will come to your office and set your computer on fire.\n\nsetwd('/users/danhicks/projects/catsaregreat/myscript/')\n\nUsed to ensure that R is running where your file is\nUnnecessary if you’re opening different projects in different RStudio sessions\nWill cause irrelevant errors on any other system\n\nAside: use file.path() or here::here() to build paths\nrm(list=ls())\n\nUsed because people think it clears out the global environment\nUnnecessary if you’re regularly using Session \\(\\to\\) Restart R\nAlso unnecessary at the top of a Rmd file, which is always knit in a new session\nDoesn’t actually clear out the global environment\n\neg, doesn’t unload packages or reset options()\n\n\n\nNot on Bryan’s list, but also don’t do it:\n\nrequire(package)\n\nIf package is installed, will act just like library()\nIf not, will return FALSE\n\nThe script will keep going until there’s an error about a missing function 300 lines later\nProbably not the error you wanted help with\nAnnoying to debug because I have no idea where the function is supposed to come from\n\nIf library() can’t find the package, it immediately raises an error\n\nI can tell right away what package needs to be installed"
+    "text": "5.10 Do not do these things in your reprex (or anywhere else)\nOr Jenny Bryan will come to your office and set your computer on fire.\n\nsetwd('/users/danhicks/projects/catsaregreat/myscript/')\n\nUsed to ensure that R is running where your file is\nUnnecessary if you’re opening different projects in different RStudio sessions\nWill cause irrelevant errors on any other system\nInstead, use file.path() or here::here() to build paths\n\nrm(list=ls())\n\nUsed because people think it clears out the global environment\nUnnecessary if you’re regularly using Session \\(\\to\\) Restart R\nAlso unnecessary at the top of a Rmd file, which is always knit in a new session\nDoesn’t actually clear out the global environment\n\neg, doesn’t unload packages or reset options()\n\n\n\nNot on Bryan’s list, but also don’t do it:\n\nrequire(package)\n\nIf package is installed, will act just like library()\nIf not, will return FALSE\n\nThe script will keep going until there’s an error about a missing function 300 lines later\nProbably not the error you wanted help with\nAnnoying to debug because I have no idea where the function is supposed to come from\n\nIf library() can’t find the package, it immediately raises an error\n\nI can tell right away what package needs to be installed"
   },
   {
     "objectID": "content/02-03-getting-help.html#debugging-in-rstudio",
@@ -210,81 +308,95 @@
     "text": "5.11 Debugging in RStudio\nThis week’s lab introduces you to some of RStudio’s debugging tools.\n\n\n\n\nBryan, Jenny. 2020. “Object of Type ‘Closure’ Is Not Subsettable.” Presented at the RSTUDIO::CONF 2020, January 31. https://rstudio.com/resources/rstudioconf-2020/object-of-type-closure-is-not-subsettable/.\n\n\n“R Faq - How to Make a Great R Reproducible Example.” n.d. Stack Overflow. Accessed August 31, 2018. https://stackoverflow.com/questions/5963269/how-to-make-a-great-r-reproducible-example.\n\n\nWickham, Hadley. 2019. “Debugging.” In Advanced R, Second Edition, ch. 22. CRC Press. https://adv-r.hadley.nz/debugging.html."
   },
   {
-    "objectID": "content/02-04-functional-programming.html",
-    "href": "content/02-04-functional-programming.html",
+    "objectID": "content/02-04-paradigms.html",
+    "href": "content/02-04-paradigms.html",
     "title": "6  Programming Paradigms",
     "section": "",
     "text": "Introductions to parts II and III of Wickham (2014)\nChambers (2014)"
   },
   {
-    "objectID": "content/02-04-functional-programming.html#dependencies",
-    "href": "content/02-04-functional-programming.html#dependencies",
+    "objectID": "content/02-04-paradigms.html#dependencies",
+    "href": "content/02-04-paradigms.html#dependencies",
     "title": "6  Programming Paradigms",
     "section": "6.2 Dependencies",
     "text": "6.2 Dependencies\n\ninstall.packages('sloop')"
   },
   {
-    "objectID": "content/02-04-functional-programming.html#programming-paradigms",
-    "href": "content/02-04-functional-programming.html#programming-paradigms",
+    "objectID": "content/02-04-paradigms.html#programming-paradigms",
+    "href": "content/02-04-paradigms.html#programming-paradigms",
     "title": "6  Programming Paradigms",
     "section": "6.3 Programming paradigms",
     "text": "6.3 Programming paradigms\n\nProcedural or imperative\n\nSoftware is a series of instructions (“procedures”), which the computer carries out in order. Special instructions (if-then, loops) are used to change the order based on inputs or other conditions.\n- Examples: FORTRAN, BASIC, C, a calculator\n\nObject-oriented\n\nSoftware is made up of objects, which have properties (“attributes,” including other objects) and do things (“methods”).\n- Examples: Python, Java\n\nFunctional\n\nSoftware is made up of functions, which are run sequentially on the inputs.\n- Examples: Lisp, Haskell\n\n\n\n6.3.1 R is both object-oriented and functional\n\nObject-oriented: Everything that exists is an object\nFunctional: Everything that happens is a function call"
   },
   {
-    "objectID": "content/02-04-functional-programming.html#object-oriented-programming",
-    "href": "content/02-04-functional-programming.html#object-oriented-programming",
+    "objectID": "content/02-04-paradigms.html#object-oriented-programming",
+    "href": "content/02-04-paradigms.html#object-oriented-programming",
     "title": "6  Programming Paradigms",
     "section": "6.4 Object-oriented programming",
     "text": "6.4 Object-oriented programming\n\nboard game as OOP\nregression models as OOP"
   },
   {
-    "objectID": "content/02-04-functional-programming.html#the-oop-youre-used-to",
-    "href": "content/02-04-functional-programming.html#the-oop-youre-used-to",
+    "objectID": "content/02-04-paradigms.html#the-oop-youre-used-to",
+    "href": "content/02-04-paradigms.html#the-oop-youre-used-to",
     "title": "6  Programming Paradigms",
     "section": "6.5 The OOP you’re used to",
-    "text": "6.5 The OOP you’re used to\n\nClasses are defined by their elements and methods\nChanging/adding elements and methods requires changing the class definition\nFor \\(x\\) to be an \\(F\\), \\(x\\) must be created as an \\(F\\)\n\n\n## <https://vegibit.com/python-class-examples/>\nclass Vehicle:\n    def __init__(self, brand, model, type):\n        self.brand = brand\n        self.model = model\n        self.type = type\n        self.gas_tank_size = 14\n        self.fuel_level = 0\n\n    def fuel_up(self):\n        self.fuel_level = self.gas_tank_size\n        print('Gas tank is now full.')\n\n    def drive(self):\n        if self.fuel_level > 0:\n            print(f'The {self.model} is now driving.')\n            self.fuel_level -= 1\n        else:\n            print(f'The {self.model} is out of gas!')\n\ndhCar = Vehicle('Honda', 'Fit', 'Hatchback')\ndhCar.gas_tank_size = 10\ndhCar.fuel_up()\ndhCar.drive()"
+    "text": "6.5 The OOP you’re used to\n\nClasses are defined by their elements and methods\nChanging/adding elements and methods requires changing the class definition\nFor \\(x\\) to be an \\(F\\), \\(x\\) must be created as an \\(F\\)\n\n\n## <https://vegibit.com/python-class-examples/>\nclass Vehicle:\n    def __init__(self, brand, model, type):\n        self.brand = brand\n        self.model = model\n        self.type = type\n        self.gas_tank_size = 14\n        self.fuel_level = 0\n    \n    def fuel_up(self):\n        self.fuel_level = self.gas_tank_size\n        print('Gas tank is now full.')\n    \n    def drive(self):\n        if self.fuel_level > 0:\n            print(f'The {self.model} is now driving.')\n            self.fuel_level -= 1\n        else:\n            print(f'The {self.model} is out of gas!')\n\ndhCar = Vehicle('Honda', 'Fit', 'Hatchback')\ndhCar.gas_tank_size = 10\ndhCar.fuel_up()\n\nGas tank is now full.\n\ndhCar.drive()\n\nThe Fit is now driving."
   },
   {
-    "objectID": "content/02-04-functional-programming.html#s3-is-oop-but-weird",
-    "href": "content/02-04-functional-programming.html#s3-is-oop-but-weird",
+    "objectID": "content/02-04-paradigms.html#s3-is-oop-but-weird",
+    "href": "content/02-04-paradigms.html#s3-is-oop-but-weird",
     "title": "6  Programming Paradigms",
     "section": "6.6 S3 is OOP, but weird",
-    "text": "6.6 S3 is OOP, but weird\n\nS3 classes can be changed on the fly, with no attempt to validate any assumptions.\n\n\ndh_car = list(brand = 'Honda', model = 'Fit', type = 'Hatchback')\nclass(dh_car)\nclass(dh_car) = c('vehicle', class(dh_car))\nclass(dh_car)\ninherits(dh_car, 'vehicle')\n\n\nmodel = lm(log(mpg) ~ log(disp), data = mtcars)\nclass(model)\nprint(model)\nclass(model) = 'Date'\nclass(model)\ntry(print(model))\n\n\nWickham discusses good practices to reduce this chaos in S3\n\nwrite constructor, validator, and helper functions\n\nS4 and R6 provide more conventional OOP structure\n\n\n\nS3 uses generic functions\n\n\nreg_model = lm(log(mpg) ~ log(disp), data = mtcars)\naov_model = aov(log(mpg) ~ log(disp), data = mtcars)\n\nclass(reg_model)\nclass(aov_model)\ninherits(aov_model, 'lm')\n\nprint(reg_model)\nprint(aov_model)\n\nresiduals(aov_model)\nresiduals(reg_model)\n\n\nBoth aov_model and reg_model inherit from lm\nprint() and residuals() are both generics\n\n(There can be) different versions of each function for different classes\nDifferent output for print()\nSame output for residuals()\n\n\n\n\nprint() is a generic; the call just passes us off using UseMethod()\n\n\nprint\n\nfunction (x, ...) \nUseMethod(\"print\")\n<bytecode: 0x7fea0043c040>\n<environment: namespace:base>\n\n\n\nsloop package is useful for understanding how S3 figures out which specific function to call\n\n\nlibrary(sloop)\n\n\ns3_dispatch(print(reg_model))\ns3_dispatch(print(aov_model))\n\n\nNote that the class-specific functions are often hidden ::: {.cell}\n\ntry(print.lm)\ns3_get_method(print.lm)\n# stats:::print.lm\ns3_get_method(print.aov)\n# stats:::print.aov\n:::\n\nUse s3_dispatch() to explain why the two models have the same output for residuals().\n\n\n\nsloop::s3_methods_generic() lists all class-specific versions of generics\n\n\ns3_methods_generic('print')\n\n# A tibble: 253 × 4\n   generic class   visible source             \n   <chr>   <chr>   <lgl>   <chr>              \n 1 print   acf     FALSE   registered S3method\n 2 print   AES     FALSE   registered S3method\n 3 print   anova   FALSE   registered S3method\n 4 print   aov     FALSE   registered S3method\n 5 print   aovlist FALSE   registered S3method\n 6 print   ar      FALSE   registered S3method\n 7 print   Arima   FALSE   registered S3method\n 8 print   arima0  FALSE   registered S3method\n 9 print   AsIs    TRUE    base               \n10 print   aspell  FALSE   registered S3method\n# … with 243 more rows\n\n\n\nAnd similarly for all generics defined for a given class\n\n\ns3_methods_class('lm')\n\n# A tibble: 35 × 4\n   generic        class visible source             \n   <chr>          <chr> <lgl>   <chr>              \n 1 add1           lm    FALSE   registered S3method\n 2 alias          lm    FALSE   registered S3method\n 3 anova          lm    FALSE   registered S3method\n 4 case.names     lm    FALSE   registered S3method\n 5 confint        lm    TRUE    stats              \n 6 cooks.distance lm    FALSE   registered S3method\n 7 deviance       lm    FALSE   registered S3method\n 8 dfbeta         lm    FALSE   registered S3method\n 9 dfbetas        lm    FALSE   registered S3method\n10 drop1          lm    FALSE   registered S3method\n# … with 25 more rows"
+    "text": "6.6 S3 is OOP, but weird\n\nS3 classes can be changed on the fly, with no attempt to validate any assumptions.\n\n\ndh_car = list(brand = 'Honda', model = 'Fit', type = 'Hatchback')\nclass(dh_car)\n\n[1] \"list\"\n\nclass(dh_car) = c('vehicle', class(dh_car))\nclass(dh_car)\n\n[1] \"vehicle\" \"list\"   \n\ninherits(dh_car, 'vehicle')\n\n[1] TRUE\n\n\n\n\nnotamodel = list()\nnotamodel$residuals = 1:10\nclass(notamodel) = 'lm'\nresiduals(notamodel)\n\n [1]  1  2  3  4  5  6  7  8  9 10\n\nprint(notamodel)\n\n\nCall:\nNULL\n\nNo coefficients\n\n\n\n\nmodel = lm(log(mpg) ~ log(disp), data = mtcars)\nclass(model)\n\n[1] \"lm\"\n\nprint(model)\n\n\nCall:\nlm(formula = log(mpg) ~ log(disp), data = mtcars)\n\nCoefficients:\n(Intercept)    log(disp)  \n     5.3810      -0.4586  \n\nclass(model) = 'Date'\nclass(model)\n\n[1] \"Date\"\n\ntry(print(model))\n\nError in as.POSIXlt.Date(x) : \n  'list' object cannot be coerced to type 'double'\n\n\n\n\nWickham discusses good practices to reduce this chaos in S3\n\nwrite constructor, validator, and helper functions\n\nS4 and R6 provide more conventional OOP structure"
   },
   {
-    "objectID": "content/02-04-functional-programming.html#functional-programming",
-    "href": "content/02-04-functional-programming.html#functional-programming",
+    "objectID": "content/02-04-paradigms.html#models-as-objects",
+    "href": "content/02-04-paradigms.html#models-as-objects",
     "title": "6  Programming Paradigms",
-    "section": "6.7 Functional programming",
-    "text": "6.7 Functional programming\n\nboard game as a series of functions?\nregression models as a series of functions"
+    "section": "6.7 Models as objects",
+    "text": "6.7 Models as objects\n\nmodel = lm(mpg ~ disp, data = mtcars)\nstr(model, give.attr = FALSE)\n\nList of 12\n $ coefficients : Named num [1:2] 29.5999 -0.0412\n $ residuals    : Named num [1:32] -2.01 -2.01 -2.35 2.43 3.94 ...\n $ effects      : Named num [1:32] -113.65 -28.44 -1.79 2.65 3.92 ...\n $ rank         : int 2\n $ fitted.values: Named num [1:32] 23 23 25.1 19 14.8 ...\n $ assign       : int [1:2] 0 1\n $ qr           :List of 5\n  ..$ qr   : num [1:32, 1:2] -5.657 0.177 0.177 0.177 0.177 ...\n  ..$ qraux: num [1:2] 1.18 1.09\n  ..$ pivot: int [1:2] 1 2\n  ..$ tol  : num 1e-07\n  ..$ rank : int 2\n $ df.residual  : int 30\n $ xlevels      : Named list()\n $ call         : language lm(formula = mpg ~ disp, data = mtcars)\n $ terms        :Classes 'terms', 'formula'  language mpg ~ disp\n $ model        :'data.frame':  32 obs. of  2 variables:\n  ..$ mpg : num [1:32] 21 21 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 ...\n  ..$ disp: num [1:32] 160 160 108 258 360 ..."
   },
   {
-    "objectID": "content/02-04-functional-programming.html#common-features-of-functional-programming",
-    "href": "content/02-04-functional-programming.html#common-features-of-functional-programming",
+    "objectID": "content/02-04-paradigms.html#s3-generics",
+    "href": "content/02-04-paradigms.html#s3-generics",
     "title": "6  Programming Paradigms",
-    "section": "6.8 Common features of functional programming",
-    "text": "6.8 Common features of functional programming\n\nFirst-class functions\n\nFunctions can be used like any other data type, including as inputs to and outputs from other functions\n\nDeterminism\n\nGiven a list of input values, a function always returns the same output value\n\nNo side effects\n\nA function doesn’t have any effects other than returning its output\n\nImmutability\n\nOnce a variable is assigned a value, that value cannot be changed\n\n\nThese features make it much easier to reason about how a functional program works."
+    "section": "6.8 S3 generics",
+    "text": "6.8 S3 generics\n\nIn S3, methods (class-specific functions) are managed using generic functions\n\n\nreg_model = lm(log(mpg) ~ log(disp), data = mtcars)\naov_model = aov(log(mpg) ~ log(disp), data = mtcars)\n\nclass(reg_model)\n\n[1] \"lm\"\n\nclass(aov_model)\n\n[1] \"aov\" \"lm\" \n\ninherits(aov_model, 'lm')\n\n[1] TRUE\n\nprint(reg_model)\n\n\nCall:\nlm(formula = log(mpg) ~ log(disp), data = mtcars)\n\nCoefficients:\n(Intercept)    log(disp)  \n     5.3810      -0.4586  \n\nprint(aov_model)\n\nCall:\n   aov(formula = log(mpg) ~ log(disp), data = mtcars)\n\nTerms:\n                log(disp) Residuals\nSum of Squares  2.2559626 0.4927736\nDeg. of Freedom         1        30\n\nResidual standard error: 0.1281631\nEstimated effects may be unbalanced\n\nresiduals(aov_model)\n\n          Mazda RX4       Mazda RX4 Wag          Datsun 710      Hornet 4 Drive \n       -0.009136238        -0.009136238        -0.107135015         0.228829658 \n  Hornet Sportabout             Valiant          Duster 360           Merc 240D \n        0.246731745        -0.001408610        -0.021532242         0.101128004 \n           Merc 230            Merc 280           Merc 280C          Merc 450SE \n        0.014481527        -0.077467905        -0.153179727        -0.006685912 \n         Merc 450SL         Merc 450SLC  Cadillac Fleetwood Lincoln Continental \n        0.046739255        -0.082671818        -0.215771303        -0.227580582 \n  Chrysler Imperial            Fiat 128         Honda Civic      Toyota Corolla \n        0.098076936         0.099131472         0.017593403         0.097817784 \n      Toyota Corona    Dodge Challenger         AMC Javelin          Camaro Z28 \n       -0.117145641         0.002161632        -0.038029398        -0.106946015 \n   Pontiac Firebird           Fiat X1-9       Porsche 914-2        Lotus Europa \n        0.321433494        -0.070395535         0.073660971         0.122216133 \n     Ford Pantera L        Ferrari Dino       Maserati Bora          Volvo 142E \n        0.066608217        -0.118181538        -0.055822446        -0.118384067 \n\nresiduals(reg_model)\n\n          Mazda RX4       Mazda RX4 Wag          Datsun 710      Hornet 4 Drive \n       -0.009136238        -0.009136238        -0.107135015         0.228829658 \n  Hornet Sportabout             Valiant          Duster 360           Merc 240D \n        0.246731745        -0.001408610        -0.021532242         0.101128004 \n           Merc 230            Merc 280           Merc 280C          Merc 450SE \n        0.014481527        -0.077467905        -0.153179727        -0.006685912 \n         Merc 450SL         Merc 450SLC  Cadillac Fleetwood Lincoln Continental \n        0.046739255        -0.082671818        -0.215771303        -0.227580582 \n  Chrysler Imperial            Fiat 128         Honda Civic      Toyota Corolla \n        0.098076936         0.099131472         0.017593403         0.097817784 \n      Toyota Corona    Dodge Challenger         AMC Javelin          Camaro Z28 \n       -0.117145641         0.002161632        -0.038029398        -0.106946015 \n   Pontiac Firebird           Fiat X1-9       Porsche 914-2        Lotus Europa \n        0.321433494        -0.070395535         0.073660971         0.122216133 \n     Ford Pantera L        Ferrari Dino       Maserati Bora          Volvo 142E \n        0.066608217        -0.118181538        -0.055822446        -0.118384067 \n\n\n\n\nBoth aov_model and reg_model inherit from lm\nprint() and residuals() are both generics\n\n(There can be) different versions of each function for different classes\nDifferent output for print()\nSame output for residuals()\n\n\n\n\nprint() and residuals() are generics:\nthe call just passes us off to a class-specific function using UseMethod()\n\n\nprint\n\nfunction (x, ...) \nUseMethod(\"print\")\n<bytecode: 0x7f899cb51870>\n<environment: namespace:base>\n\nresiduals\n\nfunction (object, ...) \nUseMethod(\"residuals\")\n<bytecode: 0x7f899d437448>\n<environment: namespace:stats>\n\n\n\n\nsloop package is is designed to figure out which specific function is called\n\n\nlibrary(sloop)\n\ns3_dispatch(print(reg_model))\n\n=> print.lm\n * print.default\n\ns3_dispatch(print(aov_model))\n\n=> print.aov\n * print.lm\n * print.default\n\n\n\nNote that the methods are hidden\n\ntry(print.lm)\n\nError in try(print.lm) : object 'print.lm' not found\n\ntry(stats::print.lm)\n\nError : 'print.lm' is not an exported object from 'namespace:stats'\n\nstats:::print.lm\n\nfunction (x, digits = max(3L, getOption(\"digits\") - 3L), ...) \n{\n    cat(\"\\nCall:\\n\", paste(deparse(x$call), sep = \"\\n\", collapse = \"\\n\"), \n        \"\\n\\n\", sep = \"\")\n    if (length(coef(x))) {\n        cat(\"Coefficients:\\n\")\n        print.default(format(coef(x), digits = digits), print.gap = 2L, \n            quote = FALSE)\n    }\n    else cat(\"No coefficients\\n\")\n    cat(\"\\n\")\n    invisible(x)\n}\n<bytecode: 0x7f89a2e7d858>\n<environment: namespace:stats>\n\ns3_get_method(print.lm)\n\nfunction (x, digits = max(3L, getOption(\"digits\") - 3L), ...) \n{\n    cat(\"\\nCall:\\n\", paste(deparse(x$call), sep = \"\\n\", collapse = \"\\n\"), \n        \"\\n\\n\", sep = \"\")\n    if (length(coef(x))) {\n        cat(\"Coefficients:\\n\")\n        print.default(format(coef(x), digits = digits), print.gap = 2L, \n            quote = FALSE)\n    }\n    else cat(\"No coefficients\\n\")\n    cat(\"\\n\")\n    invisible(x)\n}\n<bytecode: 0x7f89a2e7d858>\n<environment: namespace:stats>\n\n\n\nUse s3_dispatch() to explain why the two models have the same output for residuals().\n\n\n\nsloop::s3_methods_generic() lists all class-specific versions of generics\n\n\ns3_methods_generic('print')\n\n# A tibble: 261 × 4\n   generic class   visible source             \n   <chr>   <chr>   <lgl>   <chr>              \n 1 print   acf     FALSE   registered S3method\n 2 print   AES     FALSE   registered S3method\n 3 print   anova   FALSE   registered S3method\n 4 print   aov     FALSE   registered S3method\n 5 print   aovlist FALSE   registered S3method\n 6 print   ar      FALSE   registered S3method\n 7 print   Arima   FALSE   registered S3method\n 8 print   arima0  FALSE   registered S3method\n 9 print   AsIs    TRUE    base               \n10 print   aspell  FALSE   registered S3method\n# … with 251 more rows\n\n\n\nAnd similarly for all generics defined for a given class\n\n\ns3_methods_class('lm')\n\n# A tibble: 35 × 4\n   generic        class visible source             \n   <chr>          <chr> <lgl>   <chr>              \n 1 add1           lm    FALSE   registered S3method\n 2 alias          lm    FALSE   registered S3method\n 3 anova          lm    FALSE   registered S3method\n 4 case.names     lm    FALSE   registered S3method\n 5 confint        lm    TRUE    stats              \n 6 cooks.distance lm    FALSE   registered S3method\n 7 deviance       lm    FALSE   registered S3method\n 8 dfbeta         lm    FALSE   registered S3method\n 9 dfbetas        lm    FALSE   registered S3method\n10 drop1          lm    FALSE   registered S3method\n# … with 25 more rows"
   },
   {
-    "objectID": "content/02-04-functional-programming.html#breaking-r-everything-that-happens-is-a-function",
-    "href": "content/02-04-functional-programming.html#breaking-r-everything-that-happens-is-a-function",
+    "objectID": "content/02-04-paradigms.html#functional-programming",
+    "href": "content/02-04-paradigms.html#functional-programming",
     "title": "6  Programming Paradigms",
-    "section": "6.9 Breaking R: Everything that happens is a function",
-    "text": "6.9 Breaking R: Everything that happens is a function\n\nThis includes assignment\n\nfoo = 3\n`<-` <- function(x, y) x + y\nfoo <- 5\nfoo = 7\n\nAnd brackets\n\n`[` <- function(x, y) x * y\nbar = data.frame(x = rep(1, 15),\n                 y = rep(2, 15))\nbar['x']\nbar[2]\nbar[18]"
+    "section": "6.9 Functional programming",
+    "text": "6.9 Functional programming\n\nboard game as a series of functions?\nregression models as a series of functions\n\n\n\n\n\nflowchart LR\n  pre[\" \"] -- data --> extract\n  extract -- X --> QR[QR\\ndecomposition] -- \"Q, R\" --> combine\n  extract -- Y --> combine\n  combine -- \"Rβ = QTY\" --> backsolve\n  backsolve -- β --> post[\" \"]\n  style pre height:0px;\n  style post height:0px;"
   },
   {
-    "objectID": "content/02-04-functional-programming.html#actually-useful-functional-r-pipes-and-the-tidyverse",
-    "href": "content/02-04-functional-programming.html#actually-useful-functional-r-pipes-and-the-tidyverse",
+    "objectID": "content/02-04-paradigms.html#common-features-of-functional-programming",
+    "href": "content/02-04-paradigms.html#common-features-of-functional-programming",
     "title": "6  Programming Paradigms",
-    "section": "6.10 Actually-useful functional R: Pipes (and the tidyverse)",
-    "text": "6.10 Actually-useful functional R: Pipes (and the tidyverse)\n\nPipe syntax for function composition (%>% and |>)\nTidyverse functions are designed to work with pipes\n\n\nlibrary(dplyr)\n\n\nmtcars %>%\n    filter(cyl > 4) %>% \n    lm(mpg ~ disp, data = .) %>% \n    summary()\n\n\nCall:\nlm(formula = mpg ~ disp, data = .)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-2.4010 -1.5419 -0.5121  1.1408  4.9873 \n\nCoefficients:\n             Estimate Std. Error t value Pr(>|t|)    \n(Intercept) 23.623520   1.463181  16.145 1.50e-12 ***\ndisp        -0.023527   0.004682  -5.025 7.52e-05 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 2.118 on 19 degrees of freedom\nMultiple R-squared:  0.5706,    Adjusted R-squared:  0.548 \nF-statistic: 25.25 on 1 and 19 DF,  p-value: 7.521e-05\n\n\n\nUsing the new native pipes with the new native anonymous functions\n\n\nmtcars |>\n    filter(cyl > 4) |>\n    {\\(d) lm(mpg ~ disp, data = d)}() |>\n    summary()\n\n\nCall:\nlm(formula = mpg ~ disp, data = d)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-2.4010 -1.5419 -0.5121  1.1408  4.9873 \n\nCoefficients:\n             Estimate Std. Error t value Pr(>|t|)    \n(Intercept) 23.623520   1.463181  16.145 1.50e-12 ***\ndisp        -0.023527   0.004682  -5.025 7.52e-05 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 2.118 on 19 degrees of freedom\nMultiple R-squared:  0.5706,    Adjusted R-squared:  0.548 \nF-statistic: 25.25 on 1 and 19 DF,  p-value: 7.521e-05"
+    "section": "6.10 Common features of functional programming",
+    "text": "6.10 Common features of functional programming\n\nFirst-class functions\n\nFunctions can be used like any other data type, including as inputs to and outputs from other functions\n\nDeterminism\n\nGiven a list of input values, a function always returns the same output value\n\nNo side effects\n\nA function doesn’t have any effects other than returning its output\n\nImmutability\n\nOnce a variable is assigned a value, that value cannot be changed\n\n\nThese features make it much easier to reason about how a functional program works."
   },
   {
-    "objectID": "content/02-04-functional-programming.html#programming-paradigms-and-data-science",
-    "href": "content/02-04-functional-programming.html#programming-paradigms-and-data-science",
+    "objectID": "content/02-04-paradigms.html#breaking-r-everything-that-happens-is-a-function",
+    "href": "content/02-04-paradigms.html#breaking-r-everything-that-happens-is-a-function",
     "title": "6  Programming Paradigms",
-    "section": "6.11 Programming paradigms and data science",
-    "text": "6.11 Programming paradigms and data science\n\nOOP is most useful for developers\nFunctional programming rules are really useful for data cleaning and analysis\n\n“The analysis pipeline”\nReasoning about the state of our code\nEnsuring reproducibility\n\n\n\n\n\n\n\nChambers, John M. 2014. “Object-Oriented Programming, Functional Programming and R.” Statistical Science 29 (2): 167–80. https://doi.org/10.1214/13-STS452.\n\n\nWickham, Hadley. 2014. Advanced R. CRC Press. https://adv-r.hadley.nz."
+    "section": "6.11 Breaking R: Everything that happens is a function",
+    "text": "6.11 Breaking R: Everything that happens is a function\n\nThis includes assignment\n\n\nfoo = 3\n`<-` <- function(x, y) x + y\nfoo <- 5\nfoo = 7\n\n\nAnd brackets\n\n\n`[` <- function(x, y) x * y\nbar = data.frame(x = rep(1, 15),\n                 y = rep(2, 15))\nbar['x']\nbar[2]\nbar[18]"
+  },
+  {
+    "objectID": "content/02-04-paradigms.html#actually-useful-functional-r-pipes-and-the-tidyverse",
+    "href": "content/02-04-paradigms.html#actually-useful-functional-r-pipes-and-the-tidyverse",
+    "title": "6  Programming Paradigms",
+    "section": "6.12 Actually-useful functional R: Pipes (and the tidyverse)",
+    "text": "6.12 Actually-useful functional R: Pipes (and the tidyverse)\n\nPipe syntax for function composition (%>% and |>)\nTidyverse functions are designed to work with pipes\n\n\nlibrary(dplyr)\n\n\nmtcars %>%\n    filter(cyl > 4) %>% \n    lm(mpg ~ disp, data = .) %>% \n    summary()\n\n\nCall:\nlm(formula = mpg ~ disp, data = .)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-2.4010 -1.5419 -0.5121  1.1408  4.9873 \n\nCoefficients:\n             Estimate Std. Error t value Pr(>|t|)    \n(Intercept) 23.623520   1.463181  16.145 1.50e-12 ***\ndisp        -0.023527   0.004682  -5.025 7.52e-05 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 2.118 on 19 degrees of freedom\nMultiple R-squared:  0.5706,    Adjusted R-squared:  0.548 \nF-statistic: 25.25 on 1 and 19 DF,  p-value: 7.521e-05\n\n\n\nUsing the new native pipes with the new native anonymous functions\n\n\nmtcars |>\n    filter(cyl > 4) |>\n    {\\(d) lm(mpg ~ disp, data = d)}() |>\n    summary()\n\n\nCall:\nlm(formula = mpg ~ disp, data = d)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-2.4010 -1.5419 -0.5121  1.1408  4.9873 \n\nCoefficients:\n             Estimate Std. Error t value Pr(>|t|)    \n(Intercept) 23.623520   1.463181  16.145 1.50e-12 ***\ndisp        -0.023527   0.004682  -5.025 7.52e-05 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 2.118 on 19 degrees of freedom\nMultiple R-squared:  0.5706,    Adjusted R-squared:  0.548 \nF-statistic: 25.25 on 1 and 19 DF,  p-value: 7.521e-05"
+  },
+  {
+    "objectID": "content/02-04-paradigms.html#programming-paradigms-and-data-science",
+    "href": "content/02-04-paradigms.html#programming-paradigms-and-data-science",
+    "title": "6  Programming Paradigms",
+    "section": "6.13 Programming paradigms and data science",
+    "text": "6.13 Programming paradigms and data science\n\nOOP is most useful for developers\nFunctional programming rules are really useful for data cleaning and analysis\n\n“The analysis pipeline”\nReasoning about the state of our code\nEnsuring reproducibility\n\n\n\n\n\n\n\nChambers, John M. 2014. “Object-Oriented Programming, Functional Programming and R.” Statistical Science 29 (2): 167–80. https://doi.org/10.1214/13-STS452.\n\n\nWickham, Hadley. 2014. Advanced R. CRC Press. https://adv-r.hadley.nz."
   },
   {
     "objectID": "content/03-02-models-of-eda.html",
@@ -1110,125 +1222,13 @@
     "href": "references.html",
     "title": "References",
     "section": "",
-    "text": "Angwin, Julia, Jeff Larson, Surya Mattu, and Lauren Kirchner. 2016.\n“Machine Bias: There’s Software Used\nAcross the Country to Predict Future\nCriminals. And It’s Biased Against\nBlacks.” ProPublica. May 23, 2016. https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing.\n\n\nBailey, David H., and Jonathan Borwein (Jon). n.d. “The\nReinhart-Rogoff Error – or How Not to\nExcel at Economics.” The Conversation.\nAccessed May 16, 2020. http://theconversation.com/the-reinhart-rogoff-error-or-how-not-to-excel-at-economics-13646.\n\n\nBrown, James Robert. 2002. Smoke and Mirrors: How\nScience Reflects Reality. Routledge.\n\n\nBryan, Jenny. 2020. “Object of Type ‘Closure’ Is Not\nSubsettable.” Presented at the\nRSTUDIO::CONF 2020, January 31. https://rstudio.com/resources/rstudioconf-2020/object-of-type-closure-is-not-subsettable/.\n\n\nBuckens, Wouter. 2019. “Self-Documenting Is a Myth, and How to\nMake Your Code Self-Documenting.” woubuc. August 3,\n2019. https://blog.woubuc.be/post/self-documenting-code-is-a-myth/.\n\n\nCassidy, John. n.d. “The Reinhart and Rogoff\nControversy: A Summing Up.” The New\nYorker. Accessed September 27, 2020. https://www.newyorker.com/news/john-cassidy/the-reinhart-and-rogoff-controversy-a-summing-up.\n\n\nChambers, John M. 2014. “Object-Oriented Programming,\nFunctional Programming and R.”\nStatistical Science 29 (2): 167–80. https://doi.org/10.1214/13-STS452.\n\n\nChin, Monica. 2021. “Students Who Grew up with Search Engines\nMight Change STEM Education Forever.” The\nVerge. September 22, 2021. https://www.theverge.com/22684730/students-file-folder-directory-structure-education-gen-z.\n\n\nCorbett-Davies, Sam, Emma Pierson, Avi Feller, and Sharad Goel. 2016.\n“A Computer Program Used for Bail and Sentencing Decisions Was\nLabeled Biased Against Blacks. It’s Actually Not That\nClear.” Washington Post. October 17, 2016. https://www.washingtonpost.com/news/monkey-cage/wp/2016/10/17/can-an-algorithm-be-racist-our-analysis-is-more-cautious-than-propublicas/.\n\n\nDaston, Lorraine, and Peter Galison. 2007. Objectivity.\nNew York : Cambridge, Mass: Zone Books ; Distributed\nby the MIT Press.\n\n\nGentleman, Robert, and Duncan Temple Lang. 2004. “Statistical\nAnalyses and Reproducible Research.”\nBioconductor Project Working Papers, May. https://biostats.bepress.com/bioconductor/paper2.\n\n\nHanna, Alex, Emily Denton, Andrew Smart, and Jamila Smith-Loud. 2019.\n“Towards a Critical Race Methodology in\nAlgorithmic Fairness.” December 7, 2019. https://doi.org/10.1145/3351095.3372826.\n\n\nHealy, Kieran. 2018. Data Visualization: A\nPractical Introduction. Princeton University\nPress. https://books.google.com?id=3XOYDwAAQBAJ.\n\n\nHerndon, Thomas, Michael Ash, and Robert Pollin. 2014. “Does High\nPublic Debt Consistently Stifle Economic Growth? A Critique of\nReinhart and Rogoff.” Cambridge\nJournal of Economics 38 (2): 257–79. https://doi.org/10.1093/cje/bet075.\n\n\nHester, Jim, the STAT 545 TAs. n.d. Happy Git and\nGitHub for the useR.\nAccessed March 1, 2020. https://happygitwithr.com/.\n\n\nHoffmann, Anna Lauren. 2019. “Where Fairness Fails: Data,\nAlgorithms, and the Limits of Antidiscrimination Discourse.”\nInformation, Communication & Society 22 (7): 900–915. https://doi.org/10.1080/1369118X.2019.1573912.\n\n\n“How Excel May Have Caused Loss of 16,000\nCovid Tests in England.” 2020.\nThe Guardian. October 5, 2020. http://www.theguardian.com/politics/2020/oct/05/how-excel-may-have-caused-loss-of-16000-covid-tests-in-england.\n\n\nHudon, Caitlin. 2018. “Field Notes: Building\nData Dictionaries.” Haystacks. October\n30, 2018. https://caitlinhudon.com/2018/10/30/data-dictionaries/.\n\n\nHuebner, Marianne, Werner Vach, and Saskia le Cessie. 2016. “A\nSystematic Approach to Initial Data Analysis Is Good Research\nPractice.” The Journal of Thoracic and Cardiovascular\nSurgery 151 (1): 25–27. https://doi.org/10.1016/j.jtcvs.2015.09.085.\n\n\nKleinberg, Jon, Sendhil Mullainathan, and Manish Raghavan. 2016.\n“Inherent Trade-Offs in the Fair\nDetermination of Risk Scores.” November 17,\n2016. http://arxiv.org/abs/1609.05807.\n\n\nLaskowski, Kate. n.d. “What to Do When You Don’t Trust Your Data\nAnymore – Laskowski Lab at UC Davis.”\nAccessed January 29, 2020. https://laskowskilab.faculty.ucdavis.edu/2020/01/29/retractions/.\n\n\nLiboiron, Max. 2021. Pollution Is Colonialism.\nDuke University Press. https://books.google.com?id=NL4lEAAAQBAJ.\n\n\nLyon, A. 2014. “Why Are Normal Distributions\nNormal?” The British Journal for the Philosophy of\nScience 65 (3): 621–49. https://doi.org/10.1093/bjps/axs046.\n\n\nMatejka, Justin, and George Fitzmaurice. n.d. “Same\nStats, Different Graphs: Generating\nDatasets with Varied Appearance and\nIdentical Statistics Through Simulated\nAnnealing (The Datasaurus Dozen) | Autodesk\nResearch.” Accessed May 21, 2017. https://www.autodeskresearch.com/publications/samestats.\n\n\nMcElreath, Richard, dir. 2020. Science as Amateur Software\nDevelopment. https://www.youtube.com/watch?v=zwRdO9_GGhY.\n\n\nNoble, William Stafford. 2009. “A Quick Guide to\nOrganizing Computational Biology Projects.” PLOS\nComputational Biology 5 (7): e1000424. https://doi.org/10.1371/journal.pcbi.1000424.\n\n\nPeng, Roger D., and Elizabeth Matsui. 2016. The Art of\nData Science: A Guide for Anyone Who\nWorks with Data. Leanpub. http://leanpub.com/artofdatascience.\n\n\nPennisi, Elizabeth. 2020. “Prominent Spider Biologist Spun a Web\nof Questionable Data.” Science 367 (6478): 613–14. https://doi.org/10.1126/science.367.6478.613.\n\n\nPierson, Emma, Camelia Simoiu, Jan Overgoor, Sam Corbett-Davies, Daniel\nJenson, Amy Shoemaker, Vignesh Ramachandran, et al. 2020. “A\nLarge-Scale Analysis of Racial Disparities in Police Stops Across the\nUnited States.” Nature Human Behaviour,\nMay, 1–10. https://doi.org/10.1038/s41562-020-0858-1.\n\n\nPostolovski, Tash. 2020. “Your Code Review Checklist:\n14 Things to Include.” July 6, 2020. https://www.codementor.io/blog/code-review-checklist-76q7ovkaqj.\n\n\n“R Faq - How to Make a Great R\nReproducible Example.” n.d. Stack Overflow. Accessed\nAugust 31, 2018. https://stackoverflow.com/questions/5963269/how-to-make-a-great-r-reproducible-example.\n\n\nReinhart & Rogoff - Growth in a\nTime of Debt - EXERCISE!\n2019. https://www.youtube.com/watch?v=ItGMz0ERvcw.\n\n\nSelbst, Andrew D., Danah Boyd, Sorelle Friedler, Suresh\nVenkatasubramanian, and Janet Vertesi. 2018. “Fairness and\nAbstraction in Sociotechnical Systems.”\nSSRN Scholarly Paper ID 3265913. Rochester, NY:\nSocial Science Research Network. https://papers.ssrn.com/abstract=3265913.\n\n\nTanweer, Anissa, Emily Kalah Gade, P. M. Krafft, and Sarah K. Dreier.\n2021. “Why the Data Revolution Needs Qualitative\nThinking.” Harvard Data Science Review, July. https://doi.org/10.1162/99608f92.eee0b0da.\n\n\nThe Economist. 2011. “An Array of Errors,”\nSeptember 10, 2011. https://www.economist.com/science-and-technology/2011/09/10/an-array-of-errors.\n\n\nTukey, John W. 1980. “We Need Both Exploratory and\nConfirmatory.” The American Statistician 34\n(1): 23–25. https://doi.org/10.1080/00031305.1980.10482706.\n\n\nTukey, John Wilder. 1977. Exploratory Data Analysis.\nAddison-Wesley Series in Behavioral Science. Reading,\nMass: Addison-Wesley Pub. Co. https://archive.org/details/exploratorydataa00tuke_0.\n\n\n“Video: Keith Baggerly, \"When Is\nReproducibility an Ethical Issue? Genomics,\nPersonalized Medicine, and Human\nError\".” n.d. Accessed September 23, 2020. http://www.birs.ca/events/2013/5-day-workshops/13w5083/videos/watch/201308141121-Baggerly.html.\n\n\nViglione, Giuliana. 2020. “‘Avalanche’\nof Spider-Paper Retractions Shakes Behavioural-Ecology\nCommunity.” Nature, February. https://doi.org/10.1038/d41586-020-00287-y.\n\n\nWagenmakers, Eric-Jan, Ruud Wetzels, Denny Borsboom, Han L. J. van der\nMaas, and Rogier A. Kievit. 2012. “An Agenda for\nPurely Confirmatory Research.” Perspectives on\nPsychological Science 7 (6): 632–38. https://doi.org/10.1177/1745691612463078.\n\n\nWang, Tricia. 2016. “Why Big Data Needs Thick\nData.” Medium. January 20, 2016. https://medium.com/ethnography-matters/why-big-data-needs-thick-data-b4b3e75e3d7#.ur5gl84nj.\n\n\nWeissgerber, Tracey L., Natasa M. Milic, Stacey J. Winham, and Vesna D.\nGarovic. 2015. “Beyond Bar and Line\nGraphs: Time for a New Data Presentation\nParadigm.” PLoS Biol 13 (4): e1002128. https://doi.org/10.1371/journal.pbio.1002128.\n\n\nWickham, Hadley. 2010. “A Layered Grammar of\nGraphics.” Journal of Computational and\nGraphical Statistics 19 (1): 3–28. https://doi.org/10.1198/jcgs.2009.07098.\n\n\n———. 2014. Advanced R. CRC Press. https://adv-r.hadley.nz.\n\n\n———. 2019. “Debugging.” In Advanced R,\nSecond Edition, ch. 22. CRC Press. https://adv-r.hadley.nz/debugging.html.\n\n\nWickham, Hadley, Danielle Navarro, and Thomas Lin Pedersen. n.d.\nGgplot2: Elegant Graphics for Data\nAnalysis. Third edition. Accessed September 20, 2021. https://ggplot2-book.org/index.html.\n\n\nWilkinson, Leland. 1999. The Grammar of\nGraphics. Statistics and Computing.\nNew York, NY: Springer New York. https://doi.org/10.1007/978-1-4757-3100-2.\n\n\nWilkinson, Mark D., Michel Dumontier, IJsbrand Jan Aalbersberg,\nGabrielle Appleton, Myles Axton, Arie Baak, Niklas Blomberg, et al.\n2016. “The FAIR Guiding Principles for Scientific\nData Management and Stewardship.” Scientific Data 3 (1,\n1): 1–9. https://doi.org/10.1038/sdata.2016.18.\n\n\nWilson, Greg, Jennifer Bryan, Karen Cranston, Justin Kitzes, Lex\nNederbragt, and Tracy K. Teal. 2017. “Good Enough Practices in\nScientific Computing.” PLOS Computational Biology 13\n(6): e1005510. https://doi.org/10.1371/journal.pcbi.1005510."
+    "text": "Bailey, David H., and Jonathan Borwein (Jon). n.d. “The\nReinhart-Rogoff Error – or How Not to Excel at\nEconomics.” The Conversation. Accessed May 16, 2020.\nhttp://theconversation.com/the-reinhart-rogoff-error-or-how-not-to-excel-at-economics-13646.\n\n\nBrown, James Robert. 2002. Smoke and Mirrors: How\nScience Reflects Reality. Routledge.\n\n\nBryan, Jenny. 2020. “Object of Type ‘Closure’ Is Not\nSubsettable.” Presented at the\nRSTUDIO::CONF 2020, January 31. https://rstudio.com/resources/rstudioconf-2020/object-of-type-closure-is-not-subsettable/.\n\n\nBuckens, Wouter. 2019. “Self-Documenting Is a Myth, and How to\nMake Your Code Self-Documenting.” woubuc. August 3,\n2019. https://blog.woubuc.be/post/self-documenting-code-is-a-myth/.\n\n\nCassidy, John. n.d. “The Reinhart and Rogoff\nControversy: A Summing Up.” The New\nYorker. Accessed September 27, 2020. https://www.newyorker.com/news/john-cassidy/the-reinhart-and-rogoff-controversy-a-summing-up.\n\n\nChambers, John M. 2014. “Object-Oriented Programming,\nFunctional Programming and R.”\nStatistical Science 29 (2): 167–80. https://doi.org/10.1214/13-STS452.\n\n\nChin, Monica. 2021. “Students Who Grew up with Search Engines\nMight Change STEM Education Forever.” The\nVerge. September 22, 2021. https://www.theverge.com/22684730/students-file-folder-directory-structure-education-gen-z.\n\n\nDaston, Lorraine, and Peter Galison. 2007. Objectivity.\nNew York : Cambridge, Mass: Zone Books ; Distributed\nby the MIT Press.\n\n\nHealy, Kieran. 2018. Data Visualization: A\nPractical Introduction. Princeton University\nPress. https://books.google.com?id=3XOYDwAAQBAJ.\n\n\nHerndon, Thomas, Michael Ash, and Robert Pollin. 2014. “Does High\nPublic Debt Consistently Stifle Economic Growth? A Critique\nof Reinhart and Rogoff.” Cambridge\nJournal of Economics 38 (2): 257–79. https://doi.org/10.1093/cje/bet075.\n\n\n“How Excel May Have Caused Loss of 16,000\nCovid Tests in England.” 2020.\nThe Guardian. October 5, 2020. http://www.theguardian.com/politics/2020/oct/05/how-excel-may-have-caused-loss-of-16000-covid-tests-in-england.\n\n\nHudon, Caitlin. 2018. “Field Notes: Building\nData Dictionaries.” Haystacks. October 30,\n2018. https://caitlinhudon.com/2018/10/30/data-dictionaries/.\n\n\nHuebner, Marianne, Werner Vach, and Saskia le Cessie. 2016. “A\nSystematic Approach to Initial Data Analysis Is Good Research\nPractice.” The Journal of Thoracic and Cardiovascular\nSurgery 151 (1): 25–27. https://doi.org/10.1016/j.jtcvs.2015.09.085.\n\n\nLaskowski, Kate. n.d. “What to Do When You Don’t Trust Your Data\nAnymore – Laskowski Lab at UC Davis.”\nAccessed January 29, 2020. https://laskowskilab.faculty.ucdavis.edu/2020/01/29/retractions/.\n\n\nLiboiron, Max. 2021. Pollution Is Colonialism.\nDuke University Press. https://books.google.com?id=NL4lEAAAQBAJ.\n\n\nLyon, A. 2014. “Why Are Normal Distributions\nNormal?” The British Journal for the Philosophy of\nScience 65 (3): 621–49. https://doi.org/10.1093/bjps/axs046.\n\n\nMatejka, Justin, and George Fitzmaurice. n.d. “Same\nStats, Different Graphs: Generating\nDatasets with Varied Appearance and Identical\nStatistics Through Simulated Annealing (The\nDatasaurus Dozen) | Autodesk Research.”\nAccessed May 21, 2017. https://www.autodeskresearch.com/publications/samestats.\n\n\nMcElreath, Richard, dir. 2020. Science as Amateur Software\nDevelopment. https://www.youtube.com/watch?v=zwRdO9_GGhY.\n\n\nNoble, William Stafford. 2009. “A Quick Guide to\nOrganizing Computational Biology Projects.” PLOS\nComputational Biology 5 (7): e1000424. https://doi.org/10.1371/journal.pcbi.1000424.\n\n\nPeng, Roger D., and Elizabeth Matsui. 2016. The Art of\nData Science: A Guide for Anyone Who\nWorks with Data. Leanpub. http://leanpub.com/artofdatascience.\n\n\nPennisi, Elizabeth. 2020. “Prominent Spider Biologist Spun a Web\nof Questionable Data.” Science 367 (6478): 613–14. https://doi.org/10.1126/science.367.6478.613.\n\n\nPierson, Emma, Camelia Simoiu, Jan Overgoor, Sam Corbett-Davies, Daniel\nJenson, Amy Shoemaker, Vignesh Ramachandran, et al. 2020. “A\nLarge-Scale Analysis of Racial Disparities in Police Stops Across the\nUnited States.” Nature Human Behaviour,\nMay, 1–10. https://doi.org/10.1038/s41562-020-0858-1.\n\n\nPostolovski, Tash. 2020. “Your Code Review Checklist:\n14 Things to Include.” July 6, 2020. https://www.codementor.io/blog/code-review-checklist-76q7ovkaqj.\n\n\n“R Faq - How to Make a Great R\nReproducible Example.” n.d. Stack Overflow. Accessed\nAugust 31, 2018. https://stackoverflow.com/questions/5963269/how-to-make-a-great-r-reproducible-example.\n\n\nReinhart & Rogoff - Growth in a\nTime of Debt - EXERCISE!\n2019. https://www.youtube.com/watch?v=ItGMz0ERvcw.\n\n\nTanweer, Anissa, Emily Kalah Gade, P. M. Krafft, and Sarah K. Dreier.\n2021. “Why the Data Revolution Needs Qualitative\nThinking.” Harvard Data Science Review, July. https://doi.org/10.1162/99608f92.eee0b0da.\n\n\nThe Economist. 2011. “An Array of Errors,”\nSeptember 10, 2011. https://www.economist.com/science-and-technology/2011/09/10/an-array-of-errors.\n\n\nTukey, John W. 1980. “We Need Both Exploratory and\nConfirmatory.” The American Statistician 34\n(1): 23–25. https://doi.org/10.1080/00031305.1980.10482706.\n\n\nTukey, John Wilder. 1977. Exploratory Data Analysis.\nAddison-Wesley Series in Behavioral Science. Reading,\nMass: Addison-Wesley Pub. Co. https://archive.org/details/exploratorydataa00tuke_0.\n\n\n“Video: Keith Baggerly, \"When Is\nReproducibility an Ethical Issue?\nGenomics, Personalized Medicine, and\nHuman Error\".” n.d. Accessed September 23, 2020. http://www.birs.ca/events/2013/5-day-workshops/13w5083/videos/watch/201308141121-Baggerly.html.\n\n\nViglione, Giuliana. 2020. “‘Avalanche’\nof Spider-Paper Retractions Shakes Behavioural-Ecology\nCommunity.” Nature, February. https://doi.org/10.1038/d41586-020-00287-y.\n\n\nWagenmakers, Eric-Jan, Ruud Wetzels, Denny Borsboom, Han L. J. van der\nMaas, and Rogier A. Kievit. 2012. “An Agenda for\nPurely Confirmatory Research.” Perspectives on\nPsychological Science 7 (6): 632–38. https://doi.org/10.1177/1745691612463078.\n\n\nWeissgerber, Tracey L., Natasa M. Milic, Stacey J. Winham, and Vesna D.\nGarovic. 2015. “Beyond Bar and Line\nGraphs: Time for a New Data Presentation\nParadigm.” PLoS Biol 13 (4): e1002128. https://doi.org/10.1371/journal.pbio.1002128.\n\n\nWickham, Hadley. 2010. “A Layered Grammar of\nGraphics.” Journal of Computational and\nGraphical Statistics 19 (1): 3–28. https://doi.org/10.1198/jcgs.2009.07098.\n\n\n———. 2014. Advanced R. CRC Press. https://adv-r.hadley.nz.\n\n\n———. 2019. “Debugging.” In Advanced R,\nSecond Edition, ch. 22. CRC Press. https://adv-r.hadley.nz/debugging.html.\n\n\nWickham, Hadley, Danielle Navarro, and Thomas Lin Pedersen. n.d.\nGgplot2: Elegant Graphics for Data\nAnalysis. Third edition. Accessed September 20, 2021. https://ggplot2-book.org/index.html.\n\n\nWilkinson, Leland. 1999. The Grammar of\nGraphics. Statistics and Computing.\nNew York, NY: Springer New York. https://doi.org/10.1007/978-1-4757-3100-2.\n\n\nWilkinson, Mark D., Michel Dumontier, IJsbrand Jan Aalbersberg,\nGabrielle Appleton, Myles Axton, Arie Baak, Niklas Blomberg, et al.\n2016. “The FAIR Guiding Principles for Scientific\nData Management and Stewardship.” Scientific Data 3 (1,\n1): 1–9. https://doi.org/10.1038/sdata.2016.18.\n\n\nWilson, Greg, Jennifer Bryan, Karen Cranston, Justin Kitzes, Lex\nNederbragt, and Tracy K. Teal. 2017. “Good Enough Practices in\nScientific Computing.” PLOS Computational Biology 13\n(6): e1005510. https://doi.org/10.1371/journal.pcbi.1005510."
   },
   {
-    "objectID": "content/01-01-intro.html#references",
-    "href": "content/01-01-intro.html#references",
+    "objectID": "content/01-01-intro.html#land-acknowledgements",
+    "href": "content/01-01-intro.html#land-acknowledgements",
     "title": "1  Introduction",
-    "section": "1.7 References",
-    "text": "1.7 References\n\n\n\n\nWilkinson, Mark D., Michel Dumontier, IJsbrand Jan Aalbersberg, Gabrielle Appleton, Myles Axton, Arie Baak, Niklas Blomberg, et al. 2016. “The FAIR Guiding Principles for Scientific Data Management and Stewardship.” Scientific Data 3 (1, 1): 1–9. https://doi.org/10.1038/sdata.2016.18.\n\n\nWilson, Greg, Jennifer Bryan, Karen Cranston, Justin Kitzes, Lex Nederbragt, and Tracy K. Teal. 2017. “Good Enough Practices in Scientific Computing.” PLOS Computational Biology 13 (6): e1005510. https://doi.org/10.1371/journal.pcbi.1005510."
-  },
-  {
-    "objectID": "content/01-02-setup.html#r-and-rstudio",
-    "href": "content/01-02-setup.html#r-and-rstudio",
-    "title": "2  Software, hardware, and accounts",
-    "section": "2.4 R and RStudio",
-    "text": "2.4 R and RStudio\nR and RStudio\n\n\nIn 2000 R had a major release (version 4)\nAddressing some bugs has led to some rapid development in R and RStudio\nFor consistency in class, I encourage you to use the latest version of both R and RStudio\nHelp on switching between different versions of R"
-  },
-  {
-    "objectID": "content/01-02-setup.html#os",
-    "href": "content/01-02-setup.html#os",
-    "title": "2  Software, hardware, and accounts",
-    "section": "2.5 OS",
-    "text": "2.5 OS\n\nAll of the tools we’ll use are available on all major OSes\n\nExcept Sourcetree, which isn’t essential\nFind an alternative git GUI here)\n\nI have much less experience debugging Windows and Linux, but will do what I can"
-  },
-  {
-    "objectID": "content/01-02-setup.html#github",
-    "href": "content/01-02-setup.html#github",
-    "title": "2  Software, hardware, and accounts",
-    "section": "2.4 GitHub",
-    "text": "2.4 GitHub\n\nYou’ll need a GitHub account and Sourcetree\n\n\n\nGitHub is owned by Microsoft\nAnd there are concerns about how it mined public repositories to develop a code completion tool\nBut it offers some key features that I want to use in this course\nYou can do everything this course requires in private repositories, so long as you give access to the people who need access"
-  },
-  {
-    "objectID": "content/01-02-setup.html#hardware",
-    "href": "content/01-02-setup.html#hardware",
-    "title": "2  Software, hardware, and accounts",
-    "section": "2.2 Hardware",
-    "text": "2.2 Hardware\n\nMost sessions will involve writing code in class\nI strongly recommend against tablets (iPad, Surface) for this course\nI recommend that your machine have at least\n\n200 GB free hard drive space\n8 GB RAM\nIntel i5 processor\nOperating system capable of running R 4.1 or higher\n\nMac: 10.13 (High Sierra) or more recent\nWindows: See here\nIf you’re running Linux I’m going to assume you can figure this out yourself"
-  },
-  {
-    "objectID": "content/01-02-setup.html#accessibility",
-    "href": "content/01-02-setup.html#accessibility",
-    "title": "2  Software, hardware, and accounts",
-    "section": "2.3 Accessibility",
-    "text": "2.3 Accessibility\nI chose the tools and platforms for this course in part because they’re industry-standard. If you pursue a career as a data scientist in industry, you’ll be expected to use GitHub (or something similar) on a daily basis. And RStudio is by far the most commonly used IDE (“integrated development environment”) for R.\nHowever, like many other technologies, they were originally developed using ableist assumptions about “normal” computer users. In response to criticism, the developers of these systems and tools have gone back and made their technologies more accessible. But there may still be barriers to accessibility that I have not anticipated.\nIf you encounter a barrier to participating in this course — even a small inconvenience — please let me know. Similarly, if you have ideas for making the course more accessible, please share them with me."
-  },
-  {
-    "objectID": "content/01-03-data-sci-wtf.html#references",
-    "href": "content/01-03-data-sci-wtf.html#references",
-    "title": "3  Data Science: What and why",
-    "section": "3.5 References",
-    "text": "3.5 References\n\n\n\n\nMcElreath, Richard, dir. 2020. Science as Amateur Software Development. https://www.youtube.com/watch?v=zwRdO9_GGhY.\n\n\nWilson, Greg, Jennifer Bryan, Karen Cranston, Justin Kitzes, Lex Nederbragt, and Tracy K. Teal. 2017. “Good Enough Practices in Scientific Computing.” PLOS Computational Biology 13 (6): e1005510. https://doi.org/10.1371/journal.pcbi.1005510."
-  },
-  {
-    "objectID": "content/02-02-git.html#initial-commit",
-    "href": "content/02-02-git.html#initial-commit",
-    "title": "4  Git for version control",
-    "section": "4.4 Initial commit",
-    "text": "4.4 Initial commit\n\nInstall Sourcetree and go through the configuration steps\nThen you’ll see the (empty) repository browser\nCreate a folder called something like learning-git\nThen, in Sourcetree:\n\nOn the Local tab\nSelect New … > Create a local repository (or) Drag and drop the folder on to the browser\n\n\n\n\n\nCreating a new local repository in learning-git\n\n\n\n\nYou can open the repository in Sourcetree, but it’s not interesting yet\nIn learning-git, create a text file, eg, testing.txt\nSourcetree’s File Status panel shows the new file, ready to be tracked"
-  },
-  {
-    "objectID": "content/02-02-git.html#tracking-changes",
-    "href": "content/02-02-git.html#tracking-changes",
-    "title": "4  Git for version control",
-    "section": "4.5 Tracking changes",
-    "text": "4.5 Tracking changes\n\nTracking changes to a file involves two steps: Adding and committing\nAdd: Click the checkmark\n\nThis tells git that we want to store these changes to the file in its archive\n\nCommit: Type a message in the comment field and click Commit\n\nThis tells git to go ahead and do the archiving process\n\n\n\n\n\nMaking your initial commit\n\n\n\n\nThe commit is now displayed in the History panel\n\n\n\n\nThe History panel after our first commit\n\n\nMake a few more changes to the file. Practice adding and committing them and note how the changes accumulate in the History panel."
-  },
-  {
-    "objectID": "content/02-02-git.html#working-with-your-own-repos",
-    "href": "content/02-02-git.html#working-with-your-own-repos",
-    "title": "4  Git for version control",
-    "section": "4.10 Working with your own repos",
-    "text": "4.10 Working with your own repos\n\nOn GitHub, click “New” and walk through the steps to create a new repository\n\nThe name on GitHub doesn’t need to match the local name\nBut why wouldn’t you use the same name?\n\nCopy the URL: https://github.com/[username]/learning-git\nBack in Sourcetree\n\nGo to Settings in the toolbar\nGo to the Remotes tab\nClick Add to add a new remote\n\nThe standard name for a default remote is origin\n\nPaste in the GitHub URL\n\n\n\n\n\nAdding a new remote\n\n\n\n\nAfter adding the remote, we can send the repository (including its full history) up to GitHub using push\n\nLook for Push in the toolbar\nSourcetree will ask which branches to push\n\nWhen the push is complete, refresh GitHub in your browser\n\nYou can edit files directly in GitHub\n\nNow we’ll fetch and pull the changes from GitHub back to our local copy\n\nFetch: Compare the local tree to the remote tree, noting any differences. Use this to preview the changes on the remote\nIn Sourcetree, hit Fetch in the toolbar. Note that the GitHub commit shows up in the History panel.\nPull: Actually download the remote changes and incorporate them into your local tree."
-  },
-  {
-    "objectID": "content/02-02-git.html#lab-working-with-someone-elses-repos",
-    "href": "content/02-02-git.html#lab-working-with-someone-elses-repos",
-    "title": "4  Git for version control",
-    "section": "4.11 Lab: Working with someone else’s repos",
-    "text": "4.11 Lab: Working with someone else’s repos\n\nGitHub lets you download someone else’s repo (clone), and modify it locally, but not upload directly.\n\nYou can suggest a change to someone else’s code by submitting a pull request, which first requires forking the repository.\n\n\n\n\nForking copies a repository to your GitHub account. Then you clone the copy to your local machine. You can push to your remote copy as usual. You can suggest changes to the original using a pull request. Source: https://happygitwithr.com/fork-and-clone.html\n\n\n\n\nStart with the repo for this week’s lab: https://github.com/data-science-methods/lab-w02-git\nFork: Look for the fork button in the upper-right\n\n\n\n\nThe fork button is near the upper-right corner of a GitHub repository page. I wasn’t able to find a keyboard shortcut for this. :-(\n\n\n\n\nClone: After creating the fork, you need to download a copy to your machine.\n\nIn Sourcetree’s repository browser, select New… > Clone from URL\n\nThis lesson continues in the lab. Open lab.html and lab.R to continue."
-  },
-  {
-    "objectID": "content/02-02-git.html#authenticating-sourcetree-with-github",
-    "href": "content/02-02-git.html#authenticating-sourcetree-with-github",
-    "title": "4  Git for version control",
-    "section": "4.8 Authenticating Sourcetree with GitHub",
-    "text": "4.8 Authenticating Sourcetree with GitHub\n\nMake sure you’re logged in to GitHub in your default web browser\nIn Sourcetree\n\nGo to a New Tab\nThen Remote (just underneath the tabs)\nAdd an account …\nHosting Service: GitHub\nAuthentication: OAuth\nUsername: [shouldn’t be able to enter anything]\nClick “Refresh OAuth Token”\n\nFocus should switch to a new tab in your web browser\n\nScroll down and click “Authorize atlassian” green button\n\nBrowser should now say “Authentication Successful” and GitHub should send you a security notice via email\nBack in Sourcetree, click okay"
-  },
-  {
-    "objectID": "content/02-03-getting-help.html#to-catch-warnings",
-    "href": "content/02-03-getting-help.html#to-catch-warnings",
-    "title": "5  Warnings, Errors, and Getting Help",
-    "section": "5.6 To catch warnings",
-    "text": "5.6 To catch warnings\n\nSet options(warn = 2) to turn all warnings into errors\nUse tryCatch() with the warning argument\n\nExample: https://stackoverflow.com/questions/8217901/breaking-loop-when-warnings-appear-in-r/8218794#8218794\n\nWrite a unit test\nMy preferred approach: Add an assertion to your primary code\n\n\n## Using an assertion to prevent warnings from cascading\nlibrary(assertthat)\n\nsix_months_later = add_six_months(some_data)\n\nWarning: 2 failed to parse.\n\nassert_that(all(!is.na(six_months_later)), \n            msg = 'Missing values in `six_months_later`')\n\nError: Missing values in `six_months_later`"
-  },
-  {
-    "objectID": "content/02-03-getting-help.html#debugging",
-    "href": "content/02-03-getting-help.html#debugging",
-    "title": "5  Warnings, Errors, and Getting Help",
-    "section": "5.7 Debugging",
-    "text": "5.7 Debugging\n\nLet’s start by using the RStudio debugger to isolate the problem\n\n\ndebugonce(add_six_months)\nadd_six_months(some_data)\n\ndebugging in: add_six_months(some_data)\ndebug at <text>#3: {\n    parsed_dates = parse_date_time(date_str, orders = \"mdY\")\n    parsed_dates %m+% months(6)\n}\ndebug at <text>#4: parsed_dates = parse_date_time(date_str, orders = \"mdY\")\n\n\nWarning: 2 failed to parse.\n\n\ndebug at <text>#5: parsed_dates %m+% months(6)\nexiting from: add_six_months(some_data)\n\n\n[1] NA               \"2007-11-15 UTC\" NA              \n\n\n\nThe problem is in lubridate::parse_date_time().\n\nSpend a few minutes reading the documentation for this function and playing around with the call.\n\nWhat does the argument orders do?\n\n\n\n?parse_date_time\n\n\nparse_date_time(some_data, orders = 'mdY')\n\nWarning: 2 failed to parse.\n\n\n[1] NA               \"2007-05-15 UTC\" NA              \n\n\n\n\nLet’s try SO: https://stackoverflow.com/search?q=%5BR%5D+lubridate+month-year\n\n\nparse_date_time(some_data, orders = c('mY', 'mdY'))\n\n[1] \"2002-06-01 UTC\" \"2007-05-15 UTC\" \"2007-08-01 UTC\"\n\n\n\nMake this change in add_six_months() and confirm it no longer trips the assertion."
-  },
-  {
-    "objectID": "content/01-02-setup.html#package-manager",
-    "href": "content/01-02-setup.html#package-manager",
-    "title": "2  Software, hardware, and accounts",
-    "section": "2.6 Package manager",
-    "text": "2.6 Package manager\n\nSoftware to facilitate installing, upgrading, and removing other software\nHighly recommended for installing git, pandoc, and some other tools we’ll use later\n\nUse OS installer for R and RStudio\n\nMac OS: Homebrew or MacPorts\n\nPros and cons of these two main options\nI use Homebrew\n\nWindows: Chocolatey\n\nI guess there are others, but this is what previous students have recommended\n\n\n - Once your package manager is ready to go, install git and pandoc - Mac, Homebrew: brew install git         brew install pandoc - Windows, Chocolatey: - Needs to be in elevated/administrator mode - If prompted, Yes to running additional scripts choco install git         choco install pandoc"
-  },
-  {
-    "objectID": "content/01-02-setup.html#latex",
-    "href": "content/01-02-setup.html#latex",
-    "title": "2  Software, hardware, and accounts",
-    "section": "2.7 LaTeX",
-    "text": "2.7 LaTeX\n\nNot strictly required for this class, but necessary for turning Rmarkdown into PDFs\nIf you have no idea what that meant, don’t worry about it for now\nI recommend the TinyTeX distribution, which you can install via R: install.packages('tinytex')     tinytex::install_tinytex()"
-  },
-  {
-    "objectID": "content/01-02-setup.html#github-and-sourcetree",
-    "href": "content/01-02-setup.html#github-and-sourcetree",
-    "title": "2  Software, hardware, and accounts",
-    "section": "2.8 GitHub and Sourcetree",
-    "text": "2.8 GitHub and Sourcetree\n\nYou’ll need a GitHub account and Sourcetree\n\n\n\nGitHub is owned by Microsoft\nAnd there are concerns about how it mined public repositories to develop a code completion tool\nBut it offers some key features that I want to use in this course\nYou can do everything this course requires in private repositories, so long as you give access to the people who need access"
+    "section": "1.1 Land acknowledgements",
+    "text": "1.1 Land acknowledgements\n\n1.1.1 Campus land acknowledgment\nWe pause to acknowledge all local indigenous peoples, including the Yokuts and Miwuk, who inhabited this land. We embrace their continued connection to this region and thank them for allowing us to live, work, learn, and collaborate on their traditional homeland. Let us now take a moment of silence to pay respect to their elders and to all Yokuts and Miwuk people, past and present.\n\n\n1.1.2 Instructor’s land acknowledgment\nUC Merced and the City of Merced are on the traditional territory of the Yokut people. This land was stolen by Spanish, Mexican, and American settlers through acts of slavery and genocide. In addition, UC Merced is strongly associated with Ahwahne, known as Yosemite Valley. This valley was the traditional home of the Ahwahnechee people, who were the victims of some especially horrific, state-sponsored genocidal acts. For more on the history of Ahwahne, see https://tinyurl.com/y879jw8s. For more information on land acknowledgments, see https://native-land.ca."
   }
 ]

@@ -128,7 +128,7 @@ ul.task-list{list-style: none;}
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../content/02-04-functional-programming.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Programming Paradigms</span></a>
+  <a href="../content/02-04-paradigms.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Programming Paradigms</span></a>
   </div>
 </li>
     </ul>
@@ -231,10 +231,11 @@ ul.task-list{list-style: none;}
   <li><a href="#hardware" id="toc-hardware" class="nav-link" data-scroll-target="#hardware"> <span class="header-section-number">2.2</span> Hardware</a></li>
   <li><a href="#accessibility" id="toc-accessibility" class="nav-link" data-scroll-target="#accessibility"> <span class="header-section-number">2.3</span> Accessibility</a></li>
   <li><a href="#r-and-rstudio" id="toc-r-and-rstudio" class="nav-link" data-scroll-target="#r-and-rstudio"> <span class="header-section-number">2.4</span> R and RStudio</a></li>
-  <li><a href="#os" id="toc-os" class="nav-link" data-scroll-target="#os"> <span class="header-section-number">2.5</span> OS</a></li>
-  <li><a href="#package-manager" id="toc-package-manager" class="nav-link" data-scroll-target="#package-manager"> <span class="header-section-number">2.6</span> Package manager</a></li>
-  <li><a href="#latex" id="toc-latex" class="nav-link" data-scroll-target="#latex"> <span class="header-section-number">2.7</span> LaTeX</a></li>
-  <li><a href="#github-and-sourcetree" id="toc-github-and-sourcetree" class="nav-link" data-scroll-target="#github-and-sourcetree"> <span class="header-section-number">2.8</span> GitHub and Sourcetree</a></li>
+  <li><a href="#compilers" id="toc-compilers" class="nav-link" data-scroll-target="#compilers"> <span class="header-section-number">2.5</span> Compilers</a></li>
+  <li><a href="#os" id="toc-os" class="nav-link" data-scroll-target="#os"> <span class="header-section-number">2.6</span> OS</a></li>
+  <li><a href="#package-manager" id="toc-package-manager" class="nav-link" data-scroll-target="#package-manager"> <span class="header-section-number">2.7</span> Package manager</a></li>
+  <li><a href="#latex" id="toc-latex" class="nav-link" data-scroll-target="#latex"> <span class="header-section-number">2.8</span> LaTeX</a></li>
+  <li><a href="#github-and-sourcetree" id="toc-github-and-sourcetree" class="nav-link" data-scroll-target="#github-and-sourcetree"> <span class="header-section-number">2.9</span> GitHub and Sourcetree</a></li>
   </ul>
 </nav>
     </div>
@@ -312,19 +313,44 @@ Sourcetree</li>
 <li><a href="https://support.rstudio.com/hc/en-us/articles/200486138-Changing-R-versions-for-the-RStudio-Desktop-IDE">Help on switching between different versions of R</a></li>
 </ul>
 </section>
-<section id="os" class="level2" data-number="2.5">
-<h2 data-number="2.5" class="anchored" data-anchor-id="os"><span class="header-section-number">2.5</span> OS</h2>
+<section id="compilers" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="compilers"><span class="header-section-number">2.5</span> Compilers</h2>
+<p>Sometimes you’ll need to compile a package in order to install it.</p>
+<ul>
+<li>Mac
+<ul>
+<li>In a terminal, simply enter</li>
+</ul>
+<pre><code>sudo xcode-select --install</code></pre>
+You’ll need to enter an administrator password
+<ul>
+<li><a href="https://mac.r-project.org/tools/">If you also need a Fortran compiler</a><br>
+(personally I’ve never needed one)</li>
+</ul></li>
+<li>Windows
+<ul>
+<li><a href="https://cran.r-project.org/bin/windows/Rtools/rtools42/rtools.html">Rtools42</a> (R 4.2 and higher) or</li>
+<li><a href="https://cran.r-project.org/bin/windows/Rtools/rtools40.html">Rtools4</a> (older versions of R)</li>
+</ul></li>
+<li>Linux
+<ul>
+<li>I’m pretty sure Linux and the like come with the necessary compilers</li>
+</ul></li>
+</ul>
+</section>
+<section id="os" class="level2" data-number="2.6">
+<h2 data-number="2.6" class="anchored" data-anchor-id="os"><span class="header-section-number">2.6</span> OS</h2>
 <ul>
 <li>All of the tools we’ll use are available on all major OSes
 <ul>
 <li>Except Sourcetree, which isn’t essential</li>
-<li><a href="https://git-scm.com/download/gui/linux">Find an alternative git GUI here</a>)</li>
+<li><a href="https://git-scm.com/download/gui/linux">You can find an alternative git GUI here</a>)</li>
 </ul></li>
 <li>I have much less experience debugging Windows and Linux, but will do what I can</li>
 </ul>
 </section>
-<section id="package-manager" class="level2" data-number="2.6">
-<h2 data-number="2.6" class="anchored" data-anchor-id="package-manager"><span class="header-section-number">2.6</span> Package manager</h2>
+<section id="package-manager" class="level2" data-number="2.7">
+<h2 data-number="2.7" class="anchored" data-anchor-id="package-manager"><span class="header-section-number">2.7</span> Package manager</h2>
 <ul>
 <li>Software to facilitate installing, upgrading, and removing other software</li>
 <li><strong>Highly recommended</strong> for installing git, pandoc, and some other tools we’ll use later
@@ -340,19 +366,24 @@ Sourcetree</li>
 <ul>
 <li>I guess there are others, but this is what previous students have recommended</li>
 </ul></li>
+<li>Either: <a href="https://www.anaconda.com/">Anaconda</a> is popular among Python folks, and works as a package manager for multiple OSes
+<ul>
+<li>But sometimes packages aren’t up to date</li>
+<li>Ex: Most recent version of R appears to be 3.6.0, released April 2019</li>
+</ul></li>
 </ul>
 <p><br> - Once your package manager is ready to go, install git and pandoc - Mac, Homebrew: <code>brew install git         brew install pandoc</code> - Windows, Chocolatey: - Needs to be in elevated/administrator mode - If prompted, Yes to running additional scripts <code>choco install git         choco install pandoc</code></p>
 </section>
-<section id="latex" class="level2" data-number="2.7">
-<h2 data-number="2.7" class="anchored" data-anchor-id="latex"><span class="header-section-number">2.7</span> LaTeX</h2>
+<section id="latex" class="level2" data-number="2.8">
+<h2 data-number="2.8" class="anchored" data-anchor-id="latex"><span class="header-section-number">2.8</span> LaTeX</h2>
 <ul>
 <li>Not strictly required for this class, but necessary for turning Rmarkdown into PDFs</li>
 <li>If you have no idea what that meant, don’t worry about it for now</li>
 <li>I recommend the <a href="https://yihui.org/tinytex/">TinyTeX distribution</a>, which you can install via R: <code>install.packages('tinytex')     tinytex::install_tinytex()</code></li>
 </ul>
 </section>
-<section id="github-and-sourcetree" class="level2" data-number="2.8">
-<h2 data-number="2.8" class="anchored" data-anchor-id="github-and-sourcetree"><span class="header-section-number">2.8</span> GitHub and Sourcetree</h2>
+<section id="github-and-sourcetree" class="level2" data-number="2.9">
+<h2 data-number="2.9" class="anchored" data-anchor-id="github-and-sourcetree"><span class="header-section-number">2.9</span> GitHub and Sourcetree</h2>
 <ul>
 <li>You’ll need a <a href="https://github.com/">GitHub</a> account and <a href="https://www.sourcetreeapp.com/">Sourcetree</a></li>
 </ul>

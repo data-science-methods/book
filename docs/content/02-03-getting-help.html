@@ -107,7 +107,7 @@ div.csl-indent {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../content/02-04-functional-programming.html" rel="next">
+<link href="../content/02-04-paradigms.html" rel="next">
 <link href="../content/02-02-git.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -211,7 +211,7 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../content/02-04-functional-programming.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Programming Paradigms</span></a>
+  <a href="../content/02-04-paradigms.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Programming Paradigms</span></a>
   </div>
 </li>
     </ul>
@@ -562,14 +562,14 @@ exiting from: add_six_months(some_data)</code></pre>
 <h2 data-number="5.10" class="anchored" data-anchor-id="do-not-do-these-things-in-your-reprex-or-anywhere-else"><span class="header-section-number">5.10</span> Do not do these things in your reprex (or anywhere else)</h2>
 <p><a href="https://www.tidyverse.org/blog/2017/12/workflow-vs-script/">Or Jenny Bryan will come to your office and set your computer on fire</a>.</p>
 <ul>
-<li><p><code>setwd('/users/danhicks/projects/catsaregreat/myscript/')</code></p>
+<li><code>setwd('/users/danhicks/projects/catsaregreat/myscript/')</code>
 <ul>
 <li>Used to ensure that R is running where your file is</li>
 <li>Unnecessary if you’re opening different projects in different RStudio sessions</li>
 <li>Will cause irrelevant errors on any other system</li>
+<li>Instead, use <code>file.path()</code> or <code>here::here()</code> to build paths</li>
 </ul></li>
-<li><p>Aside: use <code>file.path()</code> or <code>here::here()</code> to build paths</p></li>
-<li><p><code>rm(list=ls())</code></p>
+<li><code>rm(list=ls())</code>
 <ul>
 <li>Used because people think it clears out the global environment</li>
 <li>Unnecessary if you’re regularly using Session <span class="math inline">\(\to\)</span> Restart R</li>
@@ -703,7 +703,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../content/02-04-functional-programming.html" class="pagination-link">
+      <a href="../content/02-04-paradigms.html" class="pagination-link">
         <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Programming Paradigms</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
