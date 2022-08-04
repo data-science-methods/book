@@ -1986,16 +1986,16 @@ examples</em></p></li>
 Jenny Bryan will come to your office and set your computer on
 fire</a>.</p>
 <ul>
-<li><p><code>setwd(&#39;/users/danhicks/projects/catsaregreat/myscript/&#39;)</code></p>
+<li><code>setwd(&#39;/users/danhicks/projects/catsaregreat/myscript/&#39;)</code>
 <ul>
 <li>Used to ensure that R is running where your file is</li>
 <li>Unnecessary if you’re opening different projects in different
 RStudio sessions</li>
 <li>Will cause irrelevant errors on any other system</li>
+<li>Instead, use <code>file.path()</code> or <code>here::here()</code>
+to build paths</li>
 </ul></li>
-<li><p>Aside: use <code>file.path()</code> or <code>here::here()</code>
-to build paths</p></li>
-<li><p><code>rm(list=ls())</code></p>
+<li><code>rm(list=ls())</code>
 <ul>
 <li>Used because people think it clears out the global environment</li>
 <li>Unnecessary if you’re regularly using Session <span class="math inline">\(\to\)</span> Restart R</li>

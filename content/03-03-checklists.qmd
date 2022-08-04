@@ -1,4 +1,4 @@
-# Two EDA "Checklists" 
+# Two EDA "Checklists" {@sec-checklists}
 
 ## @PengArtDataScience2016 ##
 

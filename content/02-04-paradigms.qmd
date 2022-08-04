@@ -7,7 +7,8 @@
 
 ## Dependencies ##
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
 install.packages('sloop')
 ```
 
@@ -40,7 +41,7 @@ Functional
 - Changing/adding elements and methods requires changing the class definition
 - For $x$ to be an $F$, $x$ must be created as an $F$
 
-```{python, eval = FALSE}
+```{python}
 ## <https://vegibit.com/python-class-examples/>
 class Vehicle:
     def __init__(self, brand, model, type):
@@ -49,11 +50,11 @@ class Vehicle:
         self.type = type
         self.gas_tank_size = 14
         self.fuel_level = 0
-
+    
     def fuel_up(self):
         self.fuel_level = self.gas_tank_size
         print('Gas tank is now full.')
-
+    
     def drive(self):
         if self.fuel_level > 0:
             print(f'The {self.model} is now driving.')
@@ -64,23 +65,36 @@ class Vehicle:
 dhCar = Vehicle('Honda', 'Fit', 'Hatchback')
 dhCar.gas_tank_size = 10
 dhCar.fuel_up()
+dhCar.fuel_level
 dhCar.drive()
+dhCar.fuel_level
 ```
-
----
 
 ## S3 is OOP, but weird
 
 - S3 classes can be changed on the fly, with no attempt to validate any assumptions. 
 
-```{r, eval = FALSE}
+```{r}
 dh_car = list(brand = 'Honda', model = 'Fit', type = 'Hatchback')
 class(dh_car)
 class(dh_car) = c('vehicle', class(dh_car))
 class(dh_car)
 inherits(dh_car, 'vehicle')
 ```
-```{r, eval = FALSE}
+
+---
+
+```{r}
+notamodel = list()
+notamodel$residuals = 1:10
+class(notamodel) = 'lm'
+residuals(notamodel)
+print(notamodel)
+```
+
+---
+
+```{r}
 model = lm(log(mpg) ~ log(disp), data = mtcars)
 class(model)
 print(model)
@@ -89,15 +103,25 @@ class(model)
 try(print(model))
 ```
 
+---
+
 - Wickham discusses good practices to reduce this chaos in S3
     - write constructor, validator, and helper functions
 - S4 and R6 provide more conventional OOP structure
 
----
+## Models as objects
 
-- S3 uses **generic functions**
+```{r}
+model = lm(mpg ~ disp, data = mtcars)
+str(model, give.attr = FALSE)
+```
 
-```{r, eval = FALSE}
+
+## S3 generics
+
+- In S3, methods (class-specific functions) are managed using **generic functions**
+
+```{r}
 reg_model = lm(log(mpg) ~ log(disp), data = mtcars)
 aov_model = aov(log(mpg) ~ log(disp), data = mtcars)
 
@@ -112,6 +136,8 @@ residuals(aov_model)
 residuals(reg_model)
 ```
 
+---
+
 - Both `aov_model` and `reg_model` inherit from `lm`
 - `print()` and `residuals()` are both generics
     - (There can be) different versions of each function for different classes
@@ -120,29 +146,34 @@ residuals(reg_model)
 
 ---
 
-- `print()` is a generic; the call just passes us off using `UseMethod()`
+- `print()` and `residuals()` are generics: 
+- the call just passes us off to a class-specific function using `UseMethod()`
 
 ```{r}
 print
+residuals
 ```
 
-- `sloop` package is useful for understanding how S3 figures out which specific function to call
+---
+
+- `sloop` package is is designed to figure out which specific function is called
 
 ```{r}
 library(sloop)
-```
-```{r, eval = FALSE}
+
 s3_dispatch(print(reg_model))
 s3_dispatch(print(aov_model))
 ```
 
-- Note that the class-specific functions are often hidden
-```{r, eval = FALSE}
+---
+
+Note that the methods are hidden
+
+```{r}
 try(print.lm)
+try(stats::print.lm)
+stats:::print.lm
 s3_get_method(print.lm)
-# stats:::print.lm
-s3_get_method(print.aov)
-# stats:::print.aov
 ```
 
 - *Use `s3_dispatch()` to explain why the two models have the same output for `residuals()`.*
@@ -161,10 +192,23 @@ s3_methods_generic('print')
 s3_methods_class('lm')
 ```
 
+
 ## Functional programming
 
 - board game as a series of functions? 
 - regression models as a series of functions
+
+```{mermaid}
+flowchart LR
+  pre[" "] -- data --> extract
+  extract -- X --> QR[QR\ndecomposition] -- "Q, R" --> combine
+  extract -- Y --> combine
+  combine -- "Rβ = Q<sup>T</sup>Y" --> backsolve
+  backsolve -- β --> post[" "]
+  style pre height:0px;
+  style post height:0px;
+```
+
 
 ## Common features of functional programming
 
@@ -182,12 +226,12 @@ Immutability
 
 These features make it much easier to reason about how a functional program works. 
 
-
 ## Breaking R: Everything that happens is a function ##
 
 - This includes assignment
 
-```
+```{r}
+#| eval: false
 foo = 3
 `<-` <- function(x, y) x + y
 foo <- 5
@@ -196,7 +240,8 @@ foo = 7
 
 - And brackets
 
-```
+```{r}
+#| eval: false
 `[` <- function(x, y) x * y
 bar = data.frame(x = rep(1, 15),
                  y = rep(2, 15))
