@@ -32,8 +32,65 @@ Functional
     
 ## Object-oriented programming
 
-- board game as OOP
-- regression models as OOP
+- Objects have properties (aka fields, attributes) and functions (procedures, methods)
+- Objects interact with each other using functions
+- Objects change state (values of their properties) as the program runs
+
+```{mermaid}
+%%| fig-cap: "Representing a board game for object-oriented programming.  Each class of objects has its own properties and functions, and instances of these classes will interact with each other as the program runs."
+classDiagram
+   class Game{
+      players: Player
+      board: Board
+      deck: Deck
+      __init__()
+      startGame()
+      runTurn()
+      checkVictory()
+      endGame()
+   }
+   Game <.. Player
+   Game <.. Board
+   Game <.. Deck   
+   class Player{
+      name: String
+      points: Int
+      tokenLocation: Int
+      hand: Deck
+      playedCards: Deck
+      __init__()
+      drawCard()
+      playCard()
+      moveToken()
+      updatePoints()
+      takeTurn()
+   }
+   class Board{
+      locations: Location
+      __init__()
+      moveToken()
+   }
+   Board <.. Location
+   class Location{
+        name: String
+        landingEffect()
+   }
+   class Deck{
+      stack: Card
+      discard: Card
+      __init__()
+      shuffle()
+      drawCard()
+   }
+   Deck <.. Card
+   class Card{
+      pointValue: int
+      __init__()
+      drawEffect()
+      playEffect()
+      discardEffect()
+   }
+```
 
 ## The OOP you're used to ##
 
@@ -82,7 +139,7 @@ class(dh_car)
 inherits(dh_car, 'vehicle')
 ```
 
----
+----
 
 ```{r}
 notamodel = list()
@@ -92,7 +149,7 @@ residuals(notamodel)
 print(notamodel)
 ```
 
----
+----
 
 ```{r}
 model = lm(log(mpg) ~ log(disp), data = mtcars)
@@ -103,7 +160,7 @@ class(model)
 try(print(model))
 ```
 
----
+----
 
 - Wickham discusses good practices to reduce this chaos in S3
     - write constructor, validator, and helper functions
@@ -111,11 +168,26 @@ try(print(model))
 
 ## Models as objects
 
+```{mermaid}
+%%| fig-cap: "A regression model as an OOP object, showing how different attributes and methods work together."
+flowchart LR
+    subgraph RegressionModel
+       data 
+       specification
+       
+       data & specification --> fit[[fit]] 
+       fit --> coefficients
+       fit --> gof[R2]
+    
+       coefficients --> predict[[predict]]
+       coefficients & gof --> print[[print]]
+    end
+```
+
 ```{r}
 model = lm(mpg ~ disp, data = mtcars)
 str(model, give.attr = FALSE)
 ```
-
 
 ## S3 generics
 
@@ -136,7 +208,7 @@ residuals(aov_model)
 residuals(reg_model)
 ```
 
----
+----
 
 - Both `aov_model` and `reg_model` inherit from `lm`
 - `print()` and `residuals()` are both generics
@@ -144,7 +216,7 @@ residuals(reg_model)
     - Different output for `print()`
     - Same output for `residuals()`
 
----
+----
 
 - `print()` and `residuals()` are generics: 
 - the call just passes us off to a class-specific function using `UseMethod()`
@@ -154,7 +226,7 @@ print
 residuals
 ```
 
----
+----
 
 - `sloop` package is is designed to figure out which specific function is called
 
@@ -165,7 +237,7 @@ s3_dispatch(print(reg_model))
 s3_dispatch(print(aov_model))
 ```
 
----
+----
 
 Note that the methods are hidden
 
@@ -178,7 +250,7 @@ s3_get_method(print.lm)
 
 - *Use `s3_dispatch()` to explain why the two models have the same output for `residuals()`.*
 
----
+----
 
 - `sloop::s3_methods_generic()` lists all class-specific versions of generics
 
@@ -195,17 +267,17 @@ s3_methods_class('lm')
 
 ## Functional programming
 
-- board game as a series of functions? 
-- regression models as a series of functions
-
 ```{mermaid}
+%%| fig-cap: "A regression model as a series of functions"
 flowchart LR
-  pre[" "] -- data --> extract
+  pre1[" "] -- data --> extract[extract\nDV & IV]
+  pre2[" "] -- specification --> extract
   extract -- X --> QR[QR\ndecomposition] -- "Q, R" --> combine
   extract -- Y --> combine
   combine -- "Rβ = Q<sup>T</sup>Y" --> backsolve
   backsolve -- β --> post[" "]
-  style pre height:0px;
+  style pre1 height:0px;
+  style pre2 height:0px;
   style post height:0px;
 ```
 
@@ -226,7 +298,7 @@ Immutability
 
 These features make it much easier to reason about how a functional program works. 
 
-## Breaking R: Everything that happens is a function ##
+<!--## Breaking R: Everything that happens is a function ##
 
 - This includes assignment
 
@@ -249,8 +321,9 @@ bar['x']
 bar[2]
 bar[18]
 ```
+-->
 
-## Actually-useful functional R:  Pipes (and the tidyverse)
+## Functional R:  Pipes (and the tidyverse)
 
 - Pipe syntax for function composition (`%>%` and `|>`)
 - Tidyverse functions are designed to work with pipes
@@ -266,6 +339,7 @@ mtcars %>%
     summary()
 ```
 
+<!--
 - Using the new native pipes with the new native anonymous functions
 
 ```{r}
@@ -274,6 +348,7 @@ mtcars |>
     {\(d) lm(mpg ~ disp, data = d)}() |>
     summary()
 ```
+-->
 
 ## Programming paradigms and data science
 
@@ -282,13 +357,3 @@ mtcars |>
     - "The analysis pipeline"
     - Reasoning about the state of our code
     - Ensuring reproducibility
-
-
-<!--
-## Lab:  Purrr
-- palmerpenguins
-- broom
-- map() and list columns in dataframes
-- microethics? 
--->
-

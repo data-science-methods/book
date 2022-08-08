@@ -38,6 +38,7 @@ bibliography: book.bib
 format:
   html:
     theme: cosmo
+    number-sections: false
 
 execute: 
     freeze: auto
