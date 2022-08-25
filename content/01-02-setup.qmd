@@ -40,8 +40,8 @@ However, like many other technologies, they were originally developed using able
 
 </br>
 
-- In 2000 R had a major release (version 4)
-- Addressing some bugs has led to some rapid development in R and RStudio
+- In 2020 R had a major release (version 4)
+- Addressing some bugs surrounding version 4 has led to rapid development in R and RStudio
 - For consistency in class, **I encourage you to use the latest version of both R and RStudio**
 - [Help on switching between different versions of R](https://support.rstudio.com/hc/en-us/articles/200486138-Changing-R-versions-for-the-RStudio-Desktop-IDE)
 
@@ -67,7 +67,7 @@ Sometimes you'll need to compile a package in order to install it.
 
 - All of the tools we'll use are available on all major OSes
     - Except Sourcetree, which isn't essential
-    - [You can find an alternative git GUI here](https://git-scm.com/download/gui/linux))
+    - [You can find an alternative git GUI here](https://git-scm.com/download/gui/linux)
 - I have much less experience debugging Windows and Linux, but will do what I can
 
 
@@ -75,7 +75,6 @@ Sometimes you'll need to compile a package in order to install it.
 
 - Software to facilitate installing, upgrading, and removing other software
 - **Highly recommended** for installing git, pandoc, and some other tools we'll use later
-	- Use OS installer for R and RStudio
 - Mac OS: [Homebrew](https://brew.sh/) or [MacPorts](https://www.macports.org/install.php)
 	- [Pros and cons of these two main options](https://apple.stackexchange.com/questions/32724/what-are-pros-and-cons-for-macports-fink-and-homebrew)
 	- I use Homebrew
@@ -85,26 +84,31 @@ Sometimes you'll need to compile a package in order to install it.
     - But sometimes packages aren't up to date
     - Ex: Most recent version of R appears to be 3.6.0, released April 2019
 	
-</br>
-- Once your package manager is ready to go, install git and pandoc
-	- Mac, Homebrew: 
-		```
-		brew install git
-		brew install pandoc
-		```
-	- Windows, Chocolatey: 
-		- Needs to be in elevated/administrator mode
-		- If prompted, Yes to running additional scripts
-		```
-		choco install git
-		choco install pandoc
-		```
+----
+Once your package manager is ready to go, install git and pandoc
+
+- Mac, Homebrew: 
+
+	```
+	brew install git
+	brew install pandoc
+	```
+
+- Windows, Chocolatey: 
+	- Needs to be in elevated/administrator mode
+	- If prompted, Yes to running additional scripts
+
+	```
+	choco install git
+	choco install pandoc
+	```
 
 ## LaTeX
 
-- Not strictly required for this class, but necessary for turning Rmarkdown into PDFs
+- We don't use it directly, but it turns Rmarkdown into PDFs
 - If you have no idea what that meant, don't worry about it for now
 - I recommend the [TinyTeX distribution](https://yihui.org/tinytex/), which you can install via R: 
+
 	```
 	install.packages('tinytex')
 	tinytex::install_tinytex()
@@ -118,7 +122,9 @@ Sometimes you'll need to compile a package in order to install it.
 </br>
 
 - GitHub is [owned by Microsoft](https://www.cnbc.com/2020/11/29/microsofts-github-has-become-magnet-for-thorny-issues-like-riaa.html)
-- And there are [concerns about how it mined public repositories to develop a code completion tool](https://www.theverge.com/2021/7/7/22561180/github-copilot-legal-copyright-fair-use-public-code)
+- And there are concerns about 
+    - [how it mined public repositories to develop a code completion tool](https://www.theverge.com/2021/7/7/22561180/github-copilot-legal-copyright-fair-use-public-code), and
+    - [a recent change to its privacy policy for Enterprise (business) customers](https://www.businessinsider.com/github-rolls-back-privacy-policy-over-business-concerns-2022-8)
 - But it offers some key features that I want to use in this course
 - You can do everything this course requires in private repositories, so long as you give access to the people who need access
 

@@ -19,8 +19,10 @@
     - An ecologist is someone who spends most of their time collecting specimens in the field and processing them in a lab, vs. 
     - An ecologist is someone who studies interactions among organisms and their environment
     
-## Discussion question ## 
+## Discussion questions ## 
 
-*What are the epistemic and practical goals of your scientific field?  How do you think "data science" will be useful for pursuing those goals?*
+- *What are the epistemic and practical goals of your scientific field?* 
+
+- *How do you think "data science" will be useful for pursuing those goals?*
 
 ## References 

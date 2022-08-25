@@ -1729,9 +1729,9 @@ with me.</p>
 <p><a href="https://cran.r-project.org/">R</a> and <a href="https://rstudio.com/products/rstudio/download/">RStudio</a></p>
 <p></br></p>
 <ul>
-<li>In 2000 R had a major release (version 4)</li>
-<li>Addressing some bugs has led to some rapid development in R and
-RStudio</li>
+<li>In 2020 R had a major release (version 4)</li>
+<li>Addressing some bugs surrounding version 4 has led to rapid
+development in R and RStudio</li>
 <li>For consistency in class, <strong>I encourage you to use the latest
 version of both R and RStudio</strong></li>
 <li><a href="https://support.rstudio.com/hc/en-us/articles/200486138-Changing-R-versions-for-the-RStudio-Desktop-IDE">Help
@@ -1775,7 +1775,7 @@ compilers</li>
 <ul>
 <li>Except Sourcetree, which isn’t essential</li>
 <li><a href="https://git-scm.com/download/gui/linux">You can find an
-alternative git GUI here</a>)</li>
+alternative git GUI here</a></li>
 </ul></li>
 <li>I have much less experience debugging Windows and Linux, but will do
 what I can</li>
@@ -1787,10 +1787,7 @@ what I can</li>
 <li>Software to facilitate installing, upgrading, and removing other
 software</li>
 <li><strong>Highly recommended</strong> for installing git, pandoc, and
-some other tools we’ll use later
-<ul>
-<li>Use OS installer for R and RStudio</li>
-</ul></li>
+some other tools we’ll use later</li>
 <li>Mac OS: <a href="https://brew.sh/">Homebrew</a> or <a href="https://www.macports.org/install.php">MacPorts</a>
 <ul>
 <li><a href="https://apple.stackexchange.com/questions/32724/what-are-pros-and-cons-for-macports-fink-and-homebrew">Pros
@@ -1810,23 +1807,34 @@ among Python folks, and works as a package manager for multiple OSes
 2019</li>
 </ul></li>
 </ul>
-<p></br> - Once your package manager is ready to go, install git and
-pandoc - Mac, Homebrew:
-<code>brew install git         brew install pandoc</code> - Windows,
-Chocolatey: - Needs to be in elevated/administrator mode - If prompted,
-Yes to running additional scripts
-<code>choco install git         choco install pandoc</code></p>
+</div>
+<div class="slide section level2">
+
+<p>Once your package manager is ready to go, install git and pandoc</p>
+<ul>
+<li><p>Mac, Homebrew:</p>
+<pre><code>brew install git
+brew install pandoc</code></pre></li>
+<li><p>Windows, Chocolatey:</p>
+<ul>
+<li>Needs to be in elevated/administrator mode</li>
+<li>If prompted, Yes to running additional scripts</li>
+</ul>
+<pre><code>choco install git
+choco install pandoc</code></pre></li>
+</ul>
 </div>
 <div id="latex" class="slide section level2">
 <h1>LaTeX</h1>
 <ul>
-<li>Not strictly required for this class, but necessary for turning
-Rmarkdown into PDFs</li>
-<li>If you have no idea what that meant, don’t worry about it for
-now</li>
-<li>I recommend the <a href="https://yihui.org/tinytex/">TinyTeX
-distribution</a>, which you can install via R:
-<code>install.packages(&#39;tinytex&#39;)     tinytex::install_tinytex()</code></li>
+<li><p>We don’t use it directly, but it turns Rmarkdown into
+PDFs</p></li>
+<li><p>If you have no idea what that meant, don’t worry about it for
+now</p></li>
+<li><p>I recommend the <a href="https://yihui.org/tinytex/">TinyTeX
+distribution</a>, which you can install via R:</p>
+<pre><code>install.packages(&#39;tinytex&#39;)
+tinytex::install_tinytex()</code></pre></li>
 </ul>
 </div>
 <div id="github-and-sourcetree" class="slide section level2">
@@ -1839,9 +1847,15 @@ distribution</a>, which you can install via R:
 <ul>
 <li>GitHub is <a href="https://www.cnbc.com/2020/11/29/microsofts-github-has-become-magnet-for-thorny-issues-like-riaa.html">owned
 by Microsoft</a></li>
-<li>And there are <a href="https://www.theverge.com/2021/7/7/22561180/github-copilot-legal-copyright-fair-use-public-code">concerns
-about how it mined public repositories to develop a code completion
-tool</a></li>
+<li>And there are concerns about
+<ul>
+<li><a href="https://www.theverge.com/2021/7/7/22561180/github-copilot-legal-copyright-fair-use-public-code">how
+it mined public repositories to develop a code completion tool</a>,
+and</li>
+<li><a href="https://www.businessinsider.com/github-rolls-back-privacy-policy-over-business-concerns-2022-8">a
+recent change to its privacy policy for Enterprise (business)
+customers</a></li>
+</ul></li>
 <li>But it offers some key features that I want to use in this
 course</li>
 <li>You can do everything this course requires in private repositories,

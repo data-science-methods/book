@@ -39,8 +39,6 @@ Is:
 
 ## Learning outcomes ##
 
-*[match to catalog]*
-
 By the end of the course, students will be able to 
 
 1. apply concepts from software engineering and philosophy of science to methodological decisions in data science, such as
@@ -58,8 +56,6 @@ By the end of the course, students will be able to
     - self-documenting code
     - version control
     - build automation
-
-5. apply philosophical and data science concepts to integrated ethical-technical analysis of case studies
 
 
 ## Prerequisites ##
@@ -80,11 +76,17 @@ By the end of the course, students will be able to
 
 ## Requirements and weekly routine ##
 
-*This is aspirational.*
+*This is a very rough approximation*
 
 - Tuesdays:  Mix of discussion and lecture based on assigned readings
-- Thursdays:  Live coding leading into work on the week's lab assignment
-- Labs:  *[10-ish]*, done individually or in pairs and submitted via GitHub for automated feedback
-- Running project:  Practicing ideas from the course on data sets you find
+- Thursdays:  Live coding leading into your own work
+- Labs:  6, done in pairs and submitted via GitHub for automated feedback
+- Running project:  Practicing ideas from the course on a data set of your choice
+
+## Course materials ##
+
+- Course website: <https://data-science-methods.github.io/>
+- All readings are linked on the schedule
+- [Lecture notes](https://data-science-methods.github.io/book/) takes you to a pretty version of my slides and notes for class
 
 ## References 

@@ -729,14 +729,14 @@ Estimated effects may be unbalanced</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>function (x, ...) 
 UseMethod("print")
-&lt;bytecode: 0x7fca2883e108&gt;
+&lt;bytecode: 0x7fe9bb057b70&gt;
 &lt;environment: namespace:base&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>residuals</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>function (object, ...) 
 UseMethod("residuals")
-&lt;bytecode: 0x7fca2c124848&gt;
+&lt;bytecode: 0x7fe9ba7a1470&gt;
 &lt;environment: namespace:stats&gt;</code></pre>
 </div>
 </div>
@@ -785,7 +785,7 @@ UseMethod("residuals")
     cat("\n")
     invisible(x)
 }
-&lt;bytecode: 0x7fca340c2400&gt;
+&lt;bytecode: 0x7fe9c2e3b7e8&gt;
 &lt;environment: namespace:stats&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">s3_get_method</span>(print.lm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -803,7 +803,7 @@ UseMethod("residuals")
     cat("\n")
     invisible(x)
 }
-&lt;bytecode: 0x7fca340c2400&gt;
+&lt;bytecode: 0x7fe9c2e3b7e8&gt;
 &lt;environment: namespace:stats&gt;</code></pre>
 </div>
 </div>
@@ -817,7 +817,7 @@ UseMethod("residuals")
 <div class="cell">
 <div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">s3_methods_generic</span>(<span class="st">'print'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 262 × 4
+<pre><code># A tibble: 264 × 4
    generic class   visible source             
    &lt;chr&gt;   &lt;chr&gt;   &lt;lgl&gt;   &lt;chr&gt;              
  1 print   acf     FALSE   registered S3method
@@ -830,7 +830,7 @@ UseMethod("residuals")
  8 print   arima0  FALSE   registered S3method
  9 print   AsIs    TRUE    base               
 10 print   aspell  FALSE   registered S3method
-# … with 252 more rows
+# … with 254 more rows
 # ℹ Use `print(n = ...)` to see more rows</code></pre>
 </div>
 </div>
@@ -1023,13 +1023,6 @@ F-statistic: 25.25 on 1 and 19 DF,  p-value: 7.521e-05
 <li>Ensuring reproducibility</li>
 </ul></li>
 </ul>
-<!--
-## Lab:  Purrr
-- palmerpenguins
-- broom
-- map() and list columns in dataframes
-- microethics? 
--->
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">

@@ -109,7 +109,7 @@ dataf = read_csv(target_file)
 skim(dataf)
 ```
 
----
+----
 
 - 133k rows (observations); 28 columns (variables)
 - 16 variables are handled as characters
@@ -144,7 +144,7 @@ But this raises a warning about large data
 vis_miss(dataf)
 ```
 
----
+----
 
 So we'll use `sample_n()` to draw a subset
 ```{r}
@@ -154,7 +154,7 @@ dataf_smol = sample_n(dataf, 1000)
 vis_miss(dataf_smol)
 ```
 
----
+----
 
 Arguments in vis_miss() are useful for picking up patterns in missing values
 ```{r}
@@ -163,7 +163,7 @@ vis_miss(dataf_smol, cluster = TRUE) +
     coord_flip()
 ```
 
---- 
+---- 
 
 Several variables related to search outcomes are missing together
 
@@ -203,7 +203,7 @@ dataf |>
 View(dataf_smol)
 ```
 
----
+----
 
 Some of my observations: 
 
@@ -213,7 +213,7 @@ Some of my observations:
     - Fortunately we also get latitude and longitude columns
 - `use_of_force_description` doesn't seem to be a descriptive text field; instead it seems to be mostly missing or "handcuffed"
 
----
+----
 
 We can also use `skimr` to check data quality by looking at the minimum and maximum values.  Do these ranges make sense for what we expect the variable to be?  
 
@@ -221,7 +221,7 @@ We can also use `skimr` to check data quality by looking at the minimum and maxi
 skim(dataf)
 ```
 
----
+----
 
 More observations: 
 
@@ -240,7 +240,7 @@ More observations:
 - We can't do that here
     - So we'll combine steps 5 and 6 together
 
----
+----
 
 - A web search leads us to this City of Oakland page on police stop data:  <https://www.oaklandca.gov/resources/stop-data>
     - The page mentions a Stanford study that was released in June 2016
@@ -248,7 +248,7 @@ More observations:
     - Our data run through December 2017
     - So there's a good chance we're using a superset of the "Stanford study" data
     
----
+----
 
 - The page links to this report: <https://cao-94612.s3.amazonaws.com/documents/OPD-Racial-Impact-Report-2016-2018-Final-16Apr19.pdf>
     - Page 8 has two summary tables that we can compare to our data
@@ -264,7 +264,7 @@ More observations:
     - Filter to the years in our data that overlap with the tables
     - And then aggregate by year and gender using `count`
 
----
+----
 
 ```{r}
 dataf |> 
@@ -278,13 +278,13 @@ dataf |>
     count(year, subject_sex)
 ```
 
----
+----
 
 - **For both years, we have fewer observations than the report table indicates**
     - Could our data have been pre-filtered? 
     - Let's check the documentation for our data:  <https://github.com/stanford-policylab/opp/blob/master/data_readme.md#oakland-ca>
 
----
+----
 
 - "Data is deduplicated on raw columns contactdate, contacttime, streetname, subject_sdrace, subject_sex, and subject_age, reducing the number of records by ~5.2%"
     - The difference with the report is on this order of magnitude, 
@@ -319,7 +319,7 @@ dataf |>
     geom_bar()
 ```
 
----
+----
 
 How about counts per year by race/ethnicity? 
 
@@ -332,7 +332,8 @@ dataf |>
     geom_bar()
 ```
 
----
+----
+
 Let's switch from bars to points and lines and change up the color palette
 
 - *Why does this produce 2 warnings?* 
@@ -346,7 +347,7 @@ dataf |>
     scale_color_brewer(palette = 'Set1')
 ```
 
----
+----
 
 `plotly::ggplotly()` creates an interactive version of a `ggplot` object
 
@@ -356,7 +357,7 @@ dataf |>
 ggplotly()
 ```
 
----
+----
 
 - These plots confirm our expectation of lower counts in 2013
 - Do they help us develop any new expectations as we move on to addressing our research questions? 
@@ -400,7 +401,7 @@ dataf |>
     mutate(share = scales::percent(share, accuracy = 1))
 ```
 
----
+----
 
 - Police stop demographics
     - 59% of subjects stopped by police are Black
@@ -444,7 +445,7 @@ dataf |>
 
 Across all subjects, 31% of stops involved a search. 
 
----
+----
 
 - Now we break down the search rate by race-ethnicity
 
@@ -504,7 +505,7 @@ This preliminary analysis indicates that
 
 What are some further directions we could take this analysis? 
 
----
+----
 
 - Investigate outstanding questions about quality and reliability of the data
     - eg, follow up with Stanford Open Policing Project about the difference in row counts
