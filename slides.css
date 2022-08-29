@@ -21,3 +21,8 @@ pre {
 .caption {
   font-size: 60%;
 }
+
+img {
+    margin: auto;
+    display: block;
+}

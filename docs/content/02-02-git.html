@@ -214,6 +214,7 @@ ul.task-list{list-style: none;}
   <ul>
   <li><a href="#some-motivating-examples" id="toc-some-motivating-examples" class="nav-link active" data-scroll-target="#some-motivating-examples">Some motivating examples</a></li>
   <li><a href="#version-control" id="toc-version-control" class="nav-link" data-scroll-target="#version-control">Version control</a></li>
+  <li><a href="#git" id="toc-git" class="nav-link" data-scroll-target="#git">Git</a></li>
   <li><a href="#gitting-started" id="toc-gitting-started" class="nav-link" data-scroll-target="#gitting-started">Gitting started</a></li>
   <li><a href="#initial-commit" id="toc-initial-commit" class="nav-link" data-scroll-target="#initial-commit">Initial commit</a></li>
   <li><a href="#tracking-changes" id="toc-tracking-changes" class="nav-link" data-scroll-target="#tracking-changes">Tracking changes</a></li>
@@ -249,26 +250,39 @@ ul.task-list{list-style: none;}
 <h2 class="anchored" data-anchor-id="some-motivating-examples">Some motivating examples</h2>
 <!-- https://happygitwithr.com/common-remote-setups.html -->
 <ul>
-<li>While working on your analysis code, you accidentally delete the first 35 lines of the script. You only discover this three days later, when you restart R and try to run the script from the top. Because you lost half of your senior thesis in undergrad, you hit Control+S to save every couple of minutes.<br>
-</li>
-<li>You’re working on a paper with two coauthors. You prepare the final draft to send for submission: <code>paper final.docx</code>. But one of your coauthors discovers a typo. Now it’s <code>paper final fixed typo.docx</code>. Another realizes six references are missing. <code>paper final fixed typo refs.docx</code>. That’s getting confusing so you change it to <code>paper 2 Aug 2021.docx</code>. Once it comes back from review you need to make revisions. Now you have <code>paper 30 Jan 2022.docx</code> and, after your collaborators make their changes, <code>paper 12 February 2022 DJH.docx</code> and <code>paper 12 February 20222 final.docx</code>.</li>
-<li>You have a complicated analysis spread over several scripts. You want to explore a variant analysis, but doing so will involve changes in 15 different places across 3 different files. You’re not sure if this variant analysis will work; you may or may not want to keep it.</li>
+<li><p>While working on your analysis code, you accidentally erase the first 35 lines of the script. You only discover this three days later, when you restart R and try to run the script from the top.</p></li>
+<li><p>The code you wrote last week is suddenly giving you different results. A bunch of variables are missing, and the standard errors are huge. When you’re talking with your collaborator, he says that he was cleaning the data a few days ago and everything seemed fine. When you go to check, you discover that he’s replaced your 827 survey responses with 6 group summaries.</p></li>
 </ul>
+<hr>
+<div class="columns">
+<div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="http://www.phdcomics.com/comics/archive/phd101212s.gif" class="img-fluid figure-img"></p>
+<p></p><figcaption aria-hidden="true" class="figure-caption">Piled Higher and Deeper comic on file names. Source: <a href="https://phdcomics.com/comics.php?f=1531" class="uri">https://phdcomics.com/comics.php?f=1531</a></figcaption><p></p>
+</figure>
+</div>
+</div><div class="column">
+<p>You’re working on a paper with two coauthors. You prepare the final draft to send for submission: <code>paper final.docx</code>. But one of your coauthors discovers a typo. Now it’s <code>paper final fixed typo.docx</code>. Another realizes six references are missing. <code>paper final fixed typo refs.docx</code>. That’s getting confusing so you change it to <code>paper 2 Aug 2021.docx</code>. Once it comes back from review you need to make revisions. Now you have <code>paper 30 Jan 2022.docx</code> and, after your collaborators make their changes, <code>paper 12 February 2022 DJH.docx</code> and <code>paper 12 February 20222 final.docx</code>.</p>
+</div>
+</div>
 </section>
 <section id="version-control" class="level2">
 <h2 class="anchored" data-anchor-id="version-control">Version control</h2>
 <ul>
-<li><p>Basic idea: Tools for tracking and reversing changes to code over time</p></li>
-<li><p>Useful for identifying and reversing breaking changes</p></li>
-<li><p>Implementations upload to cloud, track who contributes code, control who can suggest vs.&nbsp;actually change code</p></li>
-<li><p>Good for collaboration, publishing code</p></li>
-<li><p>git</p>
+<li>Basic idea: Tools for tracking and reversing changes to code over time</li>
+<li>Useful for identifying and reversing breaking changes</li>
+<li>Implementations upload to cloud, track who contributes code, control who can suggest vs.&nbsp;actually change code</li>
+<li>Good for collaboration, publishing code</li>
+</ul>
+</section>
+<section id="git" class="level2">
+<h2 class="anchored" data-anchor-id="git">Git</h2>
 <ul>
 <li>One of many version control systems</li>
 <li>Very popular in part thanks to GitHub, which provides free hosting git repositories
 <ul>
 <li>Resources for students (and teachers): <a href="https://education.github.com/" class="uri">https://education.github.com/</a></li>
-</ul></li>
 </ul></li>
 </ul>
 </section>
@@ -281,6 +295,15 @@ ul.task-list{list-style: none;}
 </section>
 <section id="initial-commit" class="level2">
 <h2 class="anchored" data-anchor-id="initial-commit">Initial commit</h2>
+<div class="columns">
+<div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/02-basics/new_local_repo.png" height="400" class="figure-img"></p>
+<p></p><figcaption aria-hidden="true" class="figure-caption">Creating a new local repository in <code>learning-git</code></figcaption><p></p>
+</figure>
+</div>
+</div><div class="column">
 <ul>
 <li>Install Sourcetree and go through the configuration steps</li>
 <li>Then you’ll see the (empty) repository browser</li>
@@ -291,11 +314,7 @@ ul.task-list{list-style: none;}
 <li>Select New … &gt; Create a local repository (or) Drag and drop the folder on to the browser</li>
 </ul></li>
 </ul>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/02-basics/new_local_repo.png" class="img-fluid figure-img"></p>
-<p></p><figcaption aria-hidden="true" class="figure-caption">Creating a new local repository in <code>learning-git</code></figcaption><p></p>
-</figure>
+</div>
 </div>
 <hr>
 <ul>
