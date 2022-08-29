@@ -36,7 +36,7 @@ You're working on a paper with two coauthors.  You prepare the final draft to se
     
 ## Gitting started ##
 
-- [git is very hard](https://www.ecosia.org/search?q=git+is+too+complicated&addon=firefox&addonversion=4.0.4)
+- [git is very hard](https://www.google.com/search?q=git+is+too+complicated)
 - We're going to use the [Sourcetree GUI](https://www.sourcetreeapp.com/) to ease into things
 
 
@@ -65,19 +65,20 @@ You're working on a paper with two coauthors.  You prepare the final draft to se
 
 ## Tracking changes 
 
+![Making your initial commit](images/02-basics/initial_commit.png){height="300px"}
+
 - Tracking changes to a file involves two steps:  **Adding** and **committing**
 - **Add**: Click the checkmark
     - This tells git that we want to store these changes to the file in its archive
 - **Commit**:  Type a message in the comment field and click Commit
     - This tells git to go ahead and do the archiving process
 
-![Making your initial commit](images/02-basics/initial_commit.png)
 
 ---
 
 - The commit is now displayed in the History panel
 
-![The History panel after our first commit](images/02-basics/history.png)
+![The History panel after our first commit](images/02-basics/history.png){height="500px"}
 
 *Make a few more changes to the file.  Practice adding and committing them and note how the changes accumulate in the History panel.*
 
@@ -87,14 +88,15 @@ You're working on a paper with two coauthors.  You prepare the final draft to se
 - In the example, suppose I made a commit with a mistake (my code stopped working or whatever)
 - In the History panel, right-click on a previous commit and select Checkout...
 
-![Checking out an old commit to travel through time](images/02-basics/checkout.png)
+![Checking out an old commit to travel through time](images/02-basics/checkout.png){height="400px"}
 
 ---
+
+![Trying (and failing) to change the past.  My current HEAD commit will disappear as soon as I check out main.](images/02-basics/changing_past.png){height="500px"}
 
 - Sourcetree warns us that we'll be in an **undetached head state**
 - To see what this means, try making a change to the file, adding and committing it, then checking out the commit with the `main` or `master` tag
 
-![Trying (and failing) to change the past.  My current HEAD commit will disappear as soon as I check out main.](images/02-basics/changing_past.png)
 
 
 ## The garden of forking branches ##
@@ -107,6 +109,12 @@ You're working on a paper with two coauthors.  You prepare the final draft to se
 
 ---
 
+:::: columns
+::: {.column width=.7}
+![Merging `fixing-mistake` into `main`](images/02-basics/merge.png){width="100%"}
+:::
+
+::: {.column width=.3}
 - After checking out the previous commit, click on Branch in the toolbar  
     - Name your new branch something like `fixing-mistake` (no spaces!)
 - Start to work on fixing the mistake in the file, then add and commit as usual
@@ -117,25 +125,31 @@ You're working on a paper with two coauthors.  You prepare the final draft to se
 - After we've finished fixing the mistake, we want to **merge** these changes back into `main`
     - Make sure you're current on `main`
     - Right-click on `fixing-mistake` and select Merge...
-    
-![Merging `fixing-mistake` into `main`](images/02-basics/merge.png)
+:::
+::::
 
 ---
 
 - Sourcetree will bring up a message about **Merge Conflicts**
     - This just means that the files you're combining have conflicting histories, and git wants you to sort out what to keep and what to throw away
-    
-**Important:**  It's not obvious (there isn't a big red status symbol anywhere), but git is now in a special conflict-resolution state.  Until you resolve the conflicts and finish the merge, a lot of standard git functionality either won't work at all or will cause weird problems.  **If git starts giving you a bunch of weird errors, check to see if you're in the middle of a merge and need to resolve conflicts.** 
+
+:::{.callout-important}
+It's not obvious (there isn't a big red status symbol anywhere), but git is now in a special conflict-resolution state.  
+
+Until you resolve the conflicts and finish the merge, a lot of standard git functionality either won't work at all or will cause weird problems.  
+
+**If git starts giving you a bunch of weird errors, check to see if you're in the middle of a merge and need to resolve conflicts.** 
+:::
 
 ---
 
-- After starting the merge, Sourcetree's File status panel will indicate exactly which files have conflicts.  
+![Sourcetree's File status panel indicates which files have conflicts](images/02-basics/conflicts.png){height="500px"}
 
-![Sourcetree's File status panel indicates which files have conflicts](images/02-basics/conflicts.png)
+After starting the merge, Sourcetree's File status panel will indicate exactly which files have conflicts.  
 
 ---
 
-- Your file will look something like this
+Your file will look something like this
 
 ```
 test
@@ -156,9 +170,9 @@ no mistake this time
 
 ---
 
-- Afterwards the History panel shows the two branches merging back together
+Afterwards the History panel shows the two branches merging back together
 
-![The History panel shows the branches merging back together](images/02-basics/post_merge.png)
+![The History panel shows the branches merging back together](images/02-basics/post_merge.png){height="500px"}
 
 
 ## Authenticating Sourcetree with GitHub ##
@@ -180,7 +194,9 @@ no mistake this time
 
 ## Working with GitHub remotes ##
 
-- A **remote** is a copy of a repository that lives on a server somewhere else
+![The remote `origin` lives on GitHub. Source: <https://happygitwithr.com/common-remote-setups.html#ours-you>](https://happygitwithr.com/img/ours-them.jpeg){height="500px"}
+
+A **remote** is a copy of a repository that lives on a server somewhere else
 
 ## Working with your own repos ##
 
@@ -189,14 +205,20 @@ no mistake this time
     - But why wouldn't you use the same name? 
 - Copy the URL: `https://github.com/[username]/learning-git`
 
+:::: columns
+::: column
 - Back in Sourcetree
     1. Go to Settings in the toolbar
     2. Go to the Remotes tab
     3. Click Add to add a new remote
 - The standard name for a default remote is `origin`
     - Paste in the GitHub URL
-    
-![Adding a new remote](images/02-basics/origin.png)
+:::
+   
+::: column 
+![Adding a new remote](images/02-basics/origin.png){width="500px"}
+:::
+::::
 
 ---
 
@@ -216,7 +238,7 @@ no mistake this time
 - GitHub lets you download someone else's repo (**clone**), and modify it locally, but *not* upload directly.  
 - You can suggest a change to someone else's code by submitting a **pull request**, which first requires **forking** the repository.  
 
-![*Forking* copies a repository to your GitHub account.  Then you *clone* the copy to your local machine.  You can *push* to your remote copy as usual.  You can suggest changes to the original using a *pull request*.  Source: <https://happygitwithr.com/fork-and-clone.html>](images/02-basics/fork-and-clone.png)
+![*Forking* copies a repository to your GitHub account.  Then you *clone* the copy to your local machine.  You can *push* to your remote copy as usual.  You can suggest changes to the original using a *pull request*.  Source: <https://happygitwithr.com/fork-and-clone.html>](images/02-basics/fork-and-clone.png){height="500px"}
 
 
 ---
@@ -231,6 +253,6 @@ no mistake this time
 - **Clone**: After creating the fork, you need to download a copy to your machine. 
     - In Sourcetree's repository browser, select New... > Clone from URL
     
-- This lesson continues in the lab.  Open `lab.html` and `lab.R` to continue.  
+- This lesson continues in the lab.  Open `lab.html` and `lab.Rmd` to continue.  
 
 

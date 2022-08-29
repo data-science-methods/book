@@ -258,7 +258,7 @@ ul.task-list{list-style: none;}
 <div class="column">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="http://www.phdcomics.com/comics/archive/phd101212s.gif" class="img-fluid figure-img"></p>
+<p><img src="http://www.phdcomics.com/comics/archive/phd101212s.gif" height="500" class="figure-img"></p>
 <p></p><figcaption aria-hidden="true" class="figure-caption">Piled Higher and Deeper comic on file names. Source: <a href="https://phdcomics.com/comics.php?f=1531" class="uri">https://phdcomics.com/comics.php?f=1531</a></figcaption><p></p>
 </figure>
 </div>
@@ -289,7 +289,7 @@ ul.task-list{list-style: none;}
 <section id="gitting-started" class="level2">
 <h2 class="anchored" data-anchor-id="gitting-started">Gitting started</h2>
 <ul>
-<li><a href="https://www.ecosia.org/search?q=git+is+too+complicated&amp;addon=firefox&amp;addonversion=4.0.4">git is very hard</a></li>
+<li><a href="https://www.google.com/search?q=git+is+too+complicated">git is very hard</a></li>
 <li>We’re going to use the <a href="https://www.sourcetreeapp.com/">Sourcetree GUI</a> to ease into things</li>
 </ul>
 </section>
@@ -299,7 +299,7 @@ ul.task-list{list-style: none;}
 <div class="column">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images/02-basics/new_local_repo.png" height="400" class="figure-img"></p>
+<p><img src="images/02-basics/new_local_repo.png" height="500" class="figure-img"></p>
 <p></p><figcaption aria-hidden="true" class="figure-caption">Creating a new local repository in <code>learning-git</code></figcaption><p></p>
 </figure>
 </div>
@@ -325,6 +325,12 @@ ul.task-list{list-style: none;}
 </section>
 <section id="tracking-changes" class="level2">
 <h2 class="anchored" data-anchor-id="tracking-changes">Tracking changes</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/02-basics/initial_commit.png" height="300" class="figure-img"></p>
+<p></p><figcaption aria-hidden="true" class="figure-caption">Making your initial commit</figcaption><p></p>
+</figure>
+</div>
 <ul>
 <li>Tracking changes to a file involves two steps: <strong>Adding</strong> and <strong>committing</strong></li>
 <li><strong>Add</strong>: Click the checkmark
@@ -336,19 +342,13 @@ ul.task-list{list-style: none;}
 <li>This tells git to go ahead and do the archiving process</li>
 </ul></li>
 </ul>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/02-basics/initial_commit.png" class="img-fluid figure-img"></p>
-<p></p><figcaption aria-hidden="true" class="figure-caption">Making your initial commit</figcaption><p></p>
-</figure>
-</div>
 <hr>
 <ul>
 <li>The commit is now displayed in the History panel</li>
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images/02-basics/history.png" class="img-fluid figure-img"></p>
+<p><img src="images/02-basics/history.png" height="500" class="figure-img"></p>
 <p></p><figcaption aria-hidden="true" class="figure-caption">The History panel after our first commit</figcaption><p></p>
 </figure>
 </div>
@@ -363,21 +363,21 @@ ul.task-list{list-style: none;}
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images/02-basics/checkout.png" class="img-fluid figure-img"></p>
+<p><img src="images/02-basics/checkout.png" height="400" class="figure-img"></p>
 <p></p><figcaption aria-hidden="true" class="figure-caption">Checking out an old commit to travel through time</figcaption><p></p>
 </figure>
 </div>
 <hr>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/02-basics/changing_past.png" height="500" class="figure-img"></p>
+<p></p><figcaption aria-hidden="true" class="figure-caption">Trying (and failing) to change the past. My current HEAD commit will disappear as soon as I check out main.</figcaption><p></p>
+</figure>
+</div>
 <ul>
 <li>Sourcetree warns us that we’ll be in an <strong>undetached head state</strong></li>
 <li>To see what this means, try making a change to the file, adding and committing it, then checking out the commit with the <code>main</code> or <code>master</code> tag</li>
 </ul>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/02-basics/changing_past.png" class="img-fluid figure-img"></p>
-<p></p><figcaption aria-hidden="true" class="figure-caption">Trying (and failing) to change the past. My current HEAD commit will disappear as soon as I check out main.</figcaption><p></p>
-</figure>
-</div>
 </section>
 <section id="the-garden-of-forking-branches" class="level2">
 <h2 class="anchored" data-anchor-id="the-garden-of-forking-branches">The garden of forking branches</h2>
@@ -391,6 +391,15 @@ ul.task-list{list-style: none;}
 </ul></li>
 </ul>
 <hr>
+<div class="columns">
+<div class="column" style="width:.7;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/02-basics/merge.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption aria-hidden="true" class="figure-caption">Merging <code>fixing-mistake</code> into <code>main</code></figcaption><p></p>
+</figure>
+</div>
+</div><div class="column" style="width:.3;">
 <ul>
 <li>After checking out the previous commit, click on Branch in the toolbar
 <ul>
@@ -409,11 +418,7 @@ ul.task-list{list-style: none;}
 <li>Right-click on <code>fixing-mistake</code> and select Merge…</li>
 </ul></li>
 </ul>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/02-basics/merge.png" class="img-fluid figure-img"></p>
-<p></p><figcaption aria-hidden="true" class="figure-caption">Merging <code>fixing-mistake</code> into <code>main</code></figcaption><p></p>
-</figure>
+</div>
 </div>
 <hr>
 <ul>
@@ -422,21 +427,31 @@ ul.task-list{list-style: none;}
 <li>This just means that the files you’re combining have conflicting histories, and git wants you to sort out what to keep and what to throw away</li>
 </ul></li>
 </ul>
-<p><strong>Important:</strong> It’s not obvious (there isn’t a big red status symbol anywhere), but git is now in a special conflict-resolution state. Until you resolve the conflicts and finish the merge, a lot of standard git functionality either won’t work at all or will cause weird problems. <strong>If git starts giving you a bunch of weird errors, check to see if you’re in the middle of a merge and need to resolve conflicts.</strong></p>
+<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>It’s not obvious (there isn’t a big red status symbol anywhere), but git is now in a special conflict-resolution state.</p>
+<p>Until you resolve the conflicts and finish the merge, a lot of standard git functionality either won’t work at all or will cause weird problems.</p>
+<p><strong>If git starts giving you a bunch of weird errors, check to see if you’re in the middle of a merge and need to resolve conflicts.</strong></p>
+</div>
+</div>
 <hr>
-<ul>
-<li>After starting the merge, Sourcetree’s File status panel will indicate exactly which files have conflicts.</li>
-</ul>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images/02-basics/conflicts.png" class="img-fluid figure-img"></p>
+<p><img src="images/02-basics/conflicts.png" height="500" class="figure-img"></p>
 <p></p><figcaption aria-hidden="true" class="figure-caption">Sourcetree’s File status panel indicates which files have conflicts</figcaption><p></p>
 </figure>
 </div>
+<p>After starting the merge, Sourcetree’s File status panel will indicate exactly which files have conflicts.</p>
 <hr>
-<ul>
-<li>Your file will look something like this</li>
-</ul>
+<p>Your file will look something like this</p>
 <pre><code>test
 another line
 &lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
@@ -457,12 +472,10 @@ no mistake this time
 </ul></li>
 </ul>
 <hr>
-<ul>
-<li>Afterwards the History panel shows the two branches merging back together</li>
-</ul>
+<p>Afterwards the History panel shows the two branches merging back together</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images/02-basics/post_merge.png" class="img-fluid figure-img"></p>
+<p><img src="images/02-basics/post_merge.png" height="500" class="figure-img"></p>
 <p></p><figcaption aria-hidden="true" class="figure-caption">The History panel shows the branches merging back together</figcaption><p></p>
 </figure>
 </div>
@@ -491,35 +504,46 @@ Username: [shouldn’t be able to enter anything]</p></li>
 </section>
 <section id="working-with-github-remotes" class="level2">
 <h2 class="anchored" data-anchor-id="working-with-github-remotes">Working with GitHub remotes</h2>
-<ul>
-<li>A <strong>remote</strong> is a copy of a repository that lives on a server somewhere else</li>
-</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://happygitwithr.com/img/ours-them.jpeg" height="500" class="figure-img"></p>
+<p></p><figcaption aria-hidden="true" class="figure-caption">The remote <code>origin</code> lives on GitHub. Source: <a href="https://happygitwithr.com/common-remote-setups.html#ours-you" class="uri">https://happygitwithr.com/common-remote-setups.html#ours-you</a></figcaption><p></p>
+</figure>
+</div>
+<p>A <strong>remote</strong> is a copy of a repository that lives on a server somewhere else</p>
 </section>
 <section id="working-with-your-own-repos" class="level2">
 <h2 class="anchored" data-anchor-id="working-with-your-own-repos">Working with your own repos</h2>
 <ul>
-<li><p>On GitHub, click “New” and walk through the steps to create a new repository</p>
+<li>On GitHub, click “New” and walk through the steps to create a new repository
 <ul>
 <li>The name on GitHub doesn’t need to match the local name</li>
 <li>But why wouldn’t you use the same name?</li>
 </ul></li>
-<li><p>Copy the URL: <code>https://github.com/[username]/learning-git</code></p></li>
-<li><p>Back in Sourcetree</p>
+<li>Copy the URL: <code>https://github.com/[username]/learning-git</code></li>
+</ul>
+<div class="columns">
+<div class="column">
+<ul>
+<li>Back in Sourcetree
 <ol type="1">
 <li>Go to Settings in the toolbar</li>
 <li>Go to the Remotes tab</li>
 <li>Click Add to add a new remote</li>
 </ol></li>
-<li><p>The standard name for a default remote is <code>origin</code></p>
+<li>The standard name for a default remote is <code>origin</code>
 <ul>
 <li>Paste in the GitHub URL</li>
 </ul></li>
 </ul>
+</div><div class="column">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images/02-basics/origin.png" class="img-fluid figure-img"></p>
+<p><img src="images/02-basics/origin.png" class="img-fluid figure-img" width="500"></p>
 <p></p><figcaption aria-hidden="true" class="figure-caption">Adding a new remote</figcaption><p></p>
 </figure>
+</div>
+</div>
 </div>
 <hr>
 <ul>
@@ -549,7 +573,7 @@ Username: [shouldn’t be able to enter anything]</p></li>
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images/02-basics/fork-and-clone.png" class="img-fluid figure-img"></p>
+<p><img src="images/02-basics/fork-and-clone.png" height="500" class="figure-img"></p>
 <p></p><figcaption aria-hidden="true" class="figure-caption"><em>Forking</em> copies a repository to your GitHub account. Then you <em>clone</em> the copy to your local machine. You can <em>push</em> to your remote copy as usual. You can suggest changes to the original using a <em>pull request</em>. Source: <a href="https://happygitwithr.com/fork-and-clone.html" class="uri">https://happygitwithr.com/fork-and-clone.html</a></figcaption><p></p>
 </figure>
 </div>
@@ -570,7 +594,7 @@ Username: [shouldn’t be able to enter anything]</p></li>
 <ul>
 <li>In Sourcetree’s repository browser, select New… &gt; Clone from URL</li>
 </ul></li>
-<li>This lesson continues in the lab. Open <code>lab.html</code> and <code>lab.R</code> to continue.</li>
+<li>This lesson continues in the lab. Open <code>lab.html</code> and <code>lab.Rmd</code> to continue.</li>
 </ul>
 
 

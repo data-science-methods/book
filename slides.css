@@ -26,3 +26,8 @@ img {
     margin: auto;
     display: block;
 }
+
+.callout-important {
+    color: red;
+    background: yellow;
+}
