@@ -1,0 +1,7 @@
+slidy_presentation:
+    df_print: 'paged'
+    highlight: 'tango'
+    css: '../slides.css'
+    pandoc_args: 
+        - '--bibliography=../book.bib'
+        - '--citeproc'

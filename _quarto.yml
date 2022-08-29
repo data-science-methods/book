@@ -7,9 +7,11 @@ book:
   author: "Dan Hicks"
   chapters:
     - index.qmd
-    - content/01-01-intro.qmd
-    - content/01-02-setup.qmd
-    - content/01-03-data-sci-wtf.qmd
+    - part: "Introduction"
+      chapters:
+        - content/01-01-intro.qmd
+        - content/01-02-setup.qmd
+        - content/01-03-data-sci-wtf.qmd
     - part: "Some fundamental tools"
       chapters:
         - content/02-02-git.qmd
