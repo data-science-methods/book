@@ -1,0 +1,20 @@
+{
+  "hash": "b40196174f124b96e9d44ab5b1d4b415",
+  "result": {
+    "markdown": "# Preface {.unnumbered}\n\nThis document is a set of notes (and perhaps later a textbook) for a course on data science methods for graduate students in social and behavioral sciences, taught by Professor Dan Hicks (they/them), UC Merced. \n\nThe course site is available [here](..). \n\n-----\n\nThese notes were written in [RStudio](http://www.rstudio.com/ide/) using *[quarto]*. The complete source is available on [GitHub](https://github.com/data-science-methods/book/). \n\nThis version of the book was built with R version 4.1.2 (2021-11-01), [pandoc](https://pandoc.org/) version 2.18, and the following packages:\n\n\n\n\n",
+    "supporting": [
+      "index_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {
+      "knitr": [
+        "{\"type\":\"list\",\"attributes\":{},\"value\":[]}"
+      ]
+    },
+    "preserve": null,
+    "postProcess": false
+  }
+}
