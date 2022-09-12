@@ -25,7 +25,7 @@ Functional
 : Software is made up of functions, which are run sequentially on the inputs.  
     - Examples: Lisp, Haskell
 
-### R is both object-oriented *and* functional ###
+## R is both object-oriented *and* functional ##
 
 - Object-oriented:  Everything that exists is an object
 - Functional:  Everything that happens is a function call
@@ -36,7 +36,11 @@ Functional
 - Objects interact with each other using functions
 - Objects change state (values of their properties) as the program runs
 
+----
+
 ```{mermaid}
+%%| echo: false
+%%| fig-height: 5
 %%| fig-cap: "Representing a board game for object-oriented programming.  Each class of objects has its own properties and functions, and instances of these classes will interact with each other as the program runs."
 classDiagram
    class Game{
@@ -97,6 +101,8 @@ classDiagram
 - Classes are defined by their elements and methods
 - Changing/adding elements and methods requires changing the class definition
 - For $x$ to be an $F$, $x$ must be created as an $F$
+
+----
 
 ```{python}
 ## <https://vegibit.com/python-class-examples/>
@@ -169,6 +175,7 @@ try(print(model))
 ## Models as objects
 
 ```{mermaid}
+%%| echo: false
 %%| fig-cap: "A regression model as an OOP object, showing how different attributes and methods work together."
 flowchart LR
     subgraph RegressionModel
@@ -183,6 +190,8 @@ flowchart LR
        coefficients & gof --> print[[print]]
     end
 ```
+
+----
 
 ```{r}
 model = lm(mpg ~ disp, data = mtcars)
@@ -268,6 +277,7 @@ s3_methods_class('lm')
 ## Functional programming
 
 ```{mermaid}
+%%| echo: false
 %%| fig-cap: "A regression model as a series of functions"
 flowchart LR
   pre1[" "] -- data --> extract[extract\nDV & IV]
@@ -357,3 +367,5 @@ mtcars |>
     - "The analysis pipeline"
     - Reasoning about the state of our code
     - Ensuring reproducibility
+
+----

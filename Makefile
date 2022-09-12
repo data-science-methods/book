@@ -14,9 +14,13 @@ docs/content/%.html: content/%.qmd
 
 
 .PHONY: slides
-slides_files := $(patsubst content/%, slides/%, $(patsubst %.qmd, %.html, $(CONTENT)))
+slides_files := $(patsubst content/%, _slides/content/%, $(patsubst %.qmd, %.html, $(CONTENT)))
 slides: $(slides_files)
-slides/%.html: content/%.qmd
+_slides/content/%.html: content/%.qmd
 	#Rscript -e "rmarkdown::render('$<', output_format = rmarkdown::slidy_presentation(df_print = 'paged', pandoc_args = c('--bibliography=../book.bib', '--citeproc'), highlight = 'tango', css = '../slides.css'), output_dir = 'slides')"
-	Rscript -e "rmarkdown::render('$<', output_dir = 'slides', output_yaml = '../_output.yml')"
-	
+	# Rscript -e "rmarkdown::render('$<', output_dir = 'slides', output_yaml = '../_output.yml')"
+	mv _quarto.yml _quarto_book.yml
+	mv _quarto_slides.yml _quarto.yml
+	quarto render $<
+	mv _quarto.yml _quarto_slides.yml
+	mv _quarto_book.yml _quarto.yml

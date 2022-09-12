@@ -1,0 +1,11 @@
+project:
+  output-dir: _slides
+
+bibliography: book.bib
+
+format: 
+    revealjs:
+        scrollable: true
+        echo: true
+        mermaid-format: svg
+        css: slides.css
