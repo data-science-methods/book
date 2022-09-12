@@ -12,7 +12,7 @@
 install.packages('sloop')
 ```
 
-## Programming paradigms ##
+## Programming paradigms {.smaller}
 Procedural or imperative
 : Software is a series of instructions ("procedures"), which the computer carries out in order.  Special instructions (if-then, loops) are used to change the order based on inputs or other conditions.  
     - Examples: FORTRAN, BASIC, C, a calculator
@@ -257,7 +257,9 @@ stats:::print.lm
 s3_get_method(print.lm)
 ```
 
-- *Use `s3_dispatch()` to explain why the two models have the same output for `residuals()`.*
+----
+
+*Use `s3_dispatch()` to explain why the two models have the same output for `residuals()`.*
 
 ----
 
@@ -292,7 +294,7 @@ flowchart LR
 ```
 
 
-## Common features of functional programming
+## Common features of functional programming {.smaller}
 
 First-class functions
 :  Functions can be used like any other data type, including as inputs to and outputs from other functions
