@@ -294,7 +294,7 @@ flowchart LR
 ```
 
 
-## Common features of functional programming {.smaller}
+## Features of functional programming {.smaller}
 
 First-class functions
 :  Functions can be used like any other data type, including as inputs to and outputs from other functions
@@ -308,7 +308,10 @@ No side effects
 Immutability
 :  Once a variable is assigned a value, that value cannot be changed
 
-These features make it much easier to reason about how a functional program works. 
+\
+
+- R doesn't enforce determinism, no side effects, or immutability
+- But writing your own code around them makes it easier to reason about how your code works
 
 <!--## Breaking R: Everything that happens is a function ##
 
@@ -335,10 +338,11 @@ bar[18]
 ```
 -->
 
-## Functional R:  Pipes (and the tidyverse)
+## Pipes (and the tidyverse) {.smaller}
 
-- Pipe syntax for function composition (`%>%` and `|>`)
-- Tidyverse functions are designed to work with pipes
+- (Almost) every function is made up of smaller functions, chained together
+- Pipe syntax (`%>%` and `|>`) lets us chain functions together in a readable way
+- Tidyverse functions are designed to work well in pipes
 
 ```{r, message=FALSE}
 library(dplyr)
@@ -369,5 +373,14 @@ mtcars |>
     - "The analysis pipeline"
     - Reasoning about the state of our code
     - Ensuring reproducibility
+
+## Lab
+
+[Lab 3](https://github.com/data-science-methods/lab-3-paradigms) explores functional programming in R: 
+
+- Assembling pipes using tidyverse functions
+- Writing code that respects immutability
+- Using the `map()` functional to apply a function to each element of a list
+- Writing a function factory to change the way a function behaves
 
 ----

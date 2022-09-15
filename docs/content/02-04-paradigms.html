@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.1.163">
+<meta name="generator" content="quarto-1.1.245">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -323,9 +323,10 @@ div.csl-indent {
   <li><a href="#models-as-objects" id="toc-models-as-objects" class="nav-link" data-scroll-target="#models-as-objects">Models as objects</a></li>
   <li><a href="#s3-generics" id="toc-s3-generics" class="nav-link" data-scroll-target="#s3-generics">S3 generics</a></li>
   <li><a href="#functional-programming" id="toc-functional-programming" class="nav-link" data-scroll-target="#functional-programming">Functional programming</a></li>
-  <li><a href="#common-features-of-functional-programming" id="toc-common-features-of-functional-programming" class="nav-link" data-scroll-target="#common-features-of-functional-programming">Common features of functional programming</a></li>
-  <li><a href="#functional-r-pipes-and-the-tidyverse" id="toc-functional-r-pipes-and-the-tidyverse" class="nav-link" data-scroll-target="#functional-r-pipes-and-the-tidyverse">Functional R: Pipes (and the tidyverse)</a></li>
+  <li><a href="#features-of-functional-programming" id="toc-features-of-functional-programming" class="nav-link" data-scroll-target="#features-of-functional-programming">Features of functional programming</a></li>
+  <li><a href="#pipes-and-the-tidyverse" id="toc-pipes-and-the-tidyverse" class="nav-link" data-scroll-target="#pipes-and-the-tidyverse">Pipes (and the tidyverse)</a></li>
   <li><a href="#programming-paradigms-and-data-science" id="toc-programming-paradigms-and-data-science" class="nav-link" data-scroll-target="#programming-paradigms-and-data-science">Programming paradigms and data science</a></li>
+  <li><a href="#lab" id="toc-lab" class="nav-link" data-scroll-target="#lab">Lab</a></li>
   </ul>
 </nav>
     </div>
@@ -361,8 +362,8 @@ div.csl-indent {
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">'sloop'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="programming-paradigms" class="level2">
-<h2 class="anchored" data-anchor-id="programming-paradigms">Programming paradigms</h2>
+<section id="programming-paradigms" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="programming-paradigms">Programming paradigms</h2>
 <dl>
 <dt>Procedural or imperative</dt>
 <dd>
@@ -745,14 +746,14 @@ Estimated effects may be unbalanced</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>function (x, ...) 
 UseMethod("print")
-&lt;bytecode: 0x7fbf8d0c7480&gt;
+&lt;bytecode: 0x7fc07124dee8&gt;
 &lt;environment: namespace:base&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>residuals</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>function (object, ...) 
 UseMethod("residuals")
-&lt;bytecode: 0x7fbf891dfe70&gt;
+&lt;bytecode: 0x7fc07132cec0&gt;
 &lt;environment: namespace:stats&gt;</code></pre>
 </div>
 </div>
@@ -801,7 +802,7 @@ UseMethod("residuals")
     cat("\n")
     invisible(x)
 }
-&lt;bytecode: 0x7fbf93b2a198&gt;
+&lt;bytecode: 0x7fc074f1bd70&gt;
 &lt;environment: namespace:stats&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">s3_get_method</span>(print.lm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -819,13 +820,12 @@ UseMethod("residuals")
     cat("\n")
     invisible(x)
 }
-&lt;bytecode: 0x7fbf93b2a198&gt;
+&lt;bytecode: 0x7fc074f1bd70&gt;
 &lt;environment: namespace:stats&gt;</code></pre>
 </div>
 </div>
-<ul>
-<li><em>Use <code>s3_dispatch()</code> to explain why the two models have the same output for <code>residuals()</code>.</em></li>
-</ul>
+<hr>
+<p><em>Use <code>s3_dispatch()</code> to explain why the two models have the same output for <code>residuals()</code>.</em></p>
 <hr>
 <ul>
 <li><code>sloop::s3_methods_generic()</code> lists all class-specific versions of generics</li>
@@ -833,7 +833,7 @@ UseMethod("residuals")
 <div class="cell">
 <div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">s3_methods_generic</span>(<span class="st">'print'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 264 × 4
+<pre><code># A tibble: 268 × 4
    generic class   visible source             
    &lt;chr&gt;   &lt;chr&gt;   &lt;lgl&gt;   &lt;chr&gt;              
  1 print   acf     FALSE   registered S3method
@@ -846,7 +846,7 @@ UseMethod("residuals")
  8 print   arima0  FALSE   registered S3method
  9 print   AsIs    TRUE    base               
 10 print   aspell  FALSE   registered S3method
-# … with 254 more rows</code></pre>
+# … with 258 more rows</code></pre>
 </div>
 </div>
 <ul>
@@ -898,8 +898,8 @@ UseMethod("residuals")
 </div>
 </div>
 </section>
-<section id="common-features-of-functional-programming" class="level2">
-<h2 class="anchored" data-anchor-id="common-features-of-functional-programming">Common features of functional programming</h2>
+<section id="features-of-functional-programming" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="features-of-functional-programming">Features of functional programming</h2>
 <dl>
 <dt>First-class functions</dt>
 <dd>
@@ -918,7 +918,12 @@ A function doesn’t have any effects other than returning its output
 Once a variable is assigned a value, that value cannot be changed
 </dd>
 </dl>
-<p>These features make it much easier to reason about how a functional program works.</p>
+<p><br>
+</p>
+<ul>
+<li>R doesn’t enforce determinism, no side effects, or immutability</li>
+<li>But writing your own code around them makes it easier to reason about how your code works</li>
+</ul>
 <!--## Breaking R: Everything that happens is a function ##
 
 - This includes assignment
@@ -952,11 +957,12 @@ bar[18]
 
 -->
 </section>
-<section id="functional-r-pipes-and-the-tidyverse" class="level2">
-<h2 class="anchored" data-anchor-id="functional-r-pipes-and-the-tidyverse">Functional R: Pipes (and the tidyverse)</h2>
+<section id="pipes-and-the-tidyverse" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="pipes-and-the-tidyverse">Pipes (and the tidyverse)</h2>
 <ul>
-<li>Pipe syntax for function composition (<code>%&gt;%</code> and <code>|&gt;</code>)</li>
-<li>Tidyverse functions are designed to work with pipes</li>
+<li>(Almost) every function is made up of smaller functions, chained together</li>
+<li>Pipe syntax (<code>%&gt;%</code> and <code>|&gt;</code>) lets us chain functions together in a readable way</li>
+<li>Tidyverse functions are designed to work well in pipes</li>
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1036,6 +1042,16 @@ F-statistic: 25.25 on 1 and 19 DF,  p-value: 7.521e-05
 <li>Reasoning about the state of our code</li>
 <li>Ensuring reproducibility</li>
 </ul></li>
+</ul>
+</section>
+<section id="lab" class="level2">
+<h2 class="anchored" data-anchor-id="lab">Lab</h2>
+<p><a href="https://github.com/data-science-methods/lab-3-paradigms">Lab 3</a> explores functional programming in R:</p>
+<ul>
+<li>Assembling pipes using tidyverse functions</li>
+<li>Writing code that respects immutability</li>
+<li>Using the <code>map()</code> functional to apply a function to each element of a list</li>
+<li>Writing a function factory to change the way a function behaves</li>
 </ul>
 <hr>
 
