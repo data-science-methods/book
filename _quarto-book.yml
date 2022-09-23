@@ -1,0 +1,46 @@
+project:
+  type: book
+  output-dir: docs
+
+book:
+  title: "Methods of Data Science"
+  author: "Dan Hicks"
+  chapters:
+    - index.qmd
+    - part: "Introduction"
+      chapters:
+        - content/01-01-intro.qmd
+        - content/01-02-setup.qmd
+        - content/01-03-data-sci-wtf.qmd
+    - part: "Some fundamental tools"
+      chapters:
+        - content/02-02-git.qmd
+        - content/02-03-getting-help.qmd
+        - content/02-04-paradigms.qmd
+    - part: "Exploratory data analysis"
+      chapters:
+        - content/03-02-models-of-eda.qmd
+        - content/03-03-checklists.qmd
+        - content/03-04-oakland-eda.qmd
+        # - content/03-05-graphs.qmd
+        # - content/03-06-grammar-of-graphics.qmd
+        # - content/03-07-covid-eda.qmd
+    - part: "Replicability & reproducibility"
+      chapters:
+        - content/04-02-readability.qmd
+        - content/04-03-code-review.qmd
+        - content/04-04-project-organization.qmd
+        - content/04-05-data-management.qmd
+        - content/04-06-make.qmd
+        - content/04-07-renv.qmd
+    - references.qmd
+
+bibliography: book.bib
+
+format:
+  html:
+    theme: cosmo
+    number-sections: false
+
+execute: 
+    freeze: auto
