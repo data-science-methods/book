@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.151">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Methods of Data Science - 4&nbsp; Git for version control</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../content/02-03-getting-help.html" rel="next">
+<link href="../content/01-03-data-sci-wtf.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-title">Git for version control</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Methods of Data Science</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">Preface</a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Introduction</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/01-01-intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introduction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/01-02-setup.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Software, hardware, and accounts</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/01-03-data-sci-wtf.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Data Science: What and why</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Some fundamental tools</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/02-02-git.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Git for version control</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/02-03-getting-help.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Warnings, Errors, and Getting Help</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/02-04-paradigms.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Programming Paradigms</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">Exploratory data analysis</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/03-02-models-of-eda.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Exploratory Data Analysis</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/03-03-checklists.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Two EDA “Checklists”</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/03-04-oakland-eda.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Case Study: Police Stops in Oakland</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">Replicability &amp; reproducibility</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/04-02-readability.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Readable code is reliable code</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/04-03-code-review.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">A code review checklist</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/04-04-project-organization.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">The life-changing magic of tidying your projects</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/04-05-data-management.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Managing and publishing data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/04-06-make.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Make</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/04-07-renv.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Tracking package versions with <code>renv</code></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../references.html" class="sidebar-item-text sidebar-link">References</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#some-motivating-examples" id="toc-some-motivating-examples" class="nav-link active" data-scroll-target="#some-motivating-examples">Some motivating examples</a></li>
+  <li><a href="#version-control" id="toc-version-control" class="nav-link" data-scroll-target="#version-control">Version control</a></li>
+  <li><a href="#git" id="toc-git" class="nav-link" data-scroll-target="#git">Git</a></li>
+  <li><a href="#gitting-started" id="toc-gitting-started" class="nav-link" data-scroll-target="#gitting-started">Gitting started</a></li>
+  <li><a href="#initial-commit" id="toc-initial-commit" class="nav-link" data-scroll-target="#initial-commit">Initial commit</a></li>
+  <li><a href="#tracking-changes" id="toc-tracking-changes" class="nav-link" data-scroll-target="#tracking-changes">Tracking changes</a></li>
+  <li><a href="#time-travel" id="toc-time-travel" class="nav-link" data-scroll-target="#time-travel">Time travel</a></li>
+  <li><a href="#the-garden-of-forking-branches" id="toc-the-garden-of-forking-branches" class="nav-link" data-scroll-target="#the-garden-of-forking-branches">The garden of forking branches</a></li>
+  <li><a href="#authenticating-sourcetree-with-github" id="toc-authenticating-sourcetree-with-github" class="nav-link" data-scroll-target="#authenticating-sourcetree-with-github">Authenticating Sourcetree with GitHub</a></li>
+  <li><a href="#working-with-github-remotes" id="toc-working-with-github-remotes" class="nav-link" data-scroll-target="#working-with-github-remotes">Working with GitHub remotes</a></li>
+  <li><a href="#working-with-your-own-repos" id="toc-working-with-your-own-repos" class="nav-link" data-scroll-target="#working-with-your-own-repos">Working with your own repos</a></li>
+  <li><a href="#lab-working-with-someone-elses-repos" id="toc-lab-working-with-someone-elses-repos" class="nav-link" data-scroll-target="#lab-working-with-someone-elses-repos">Lab: Working with <em>someone else’s</em> repos</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-title">Git for version control</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="some-motivating-examples" class="level2">
+<h2 class="anchored" data-anchor-id="some-motivating-examples">Some motivating examples</h2>
+<!-- https://happygitwithr.com/common-remote-setups.html -->
+<ul>
+<li><p>While working on your analysis code, you accidentally erase the first 35 lines of the script. You only discover this three days later, when you restart R and try to run the script from the top.</p></li>
+<li><p>The code you wrote last week is suddenly giving you different results. A bunch of variables are missing, and the standard errors are huge. When you’re talking with your collaborator, he says that he was cleaning the data a few days ago and everything seemed fine. When you go to check, you discover that he’s replaced your 827 survey responses with 6 group summaries.</p></li>
+</ul>
+<hr>
+<div class="columns">
+<div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="http://www.phdcomics.com/comics/archive/phd101212s.gif" height="500" class="figure-img"></p>
+<p></p><figcaption class="figure-caption">Piled Higher and Deeper comic on file names. Source: <a href="https://phdcomics.com/comics.php?f=1531" class="uri">https://phdcomics.com/comics.php?f=1531</a></figcaption><p></p>
+</figure>
+</div>
+</div><div class="column">
+<p>You’re working on a paper with two coauthors. You prepare the final draft to send for submission: <code>paper final.docx</code>. But one of your coauthors discovers a typo. Now it’s <code>paper final fixed typo.docx</code>. Another realizes six references are missing. <code>paper final fixed typo refs.docx</code>. That’s getting confusing so you change it to <code>paper 2 Aug 2021.docx</code>. Once it comes back from review you need to make revisions. Now you have <code>paper 30 Jan 2022.docx</code> and, after your collaborators make their changes, <code>paper 12 February 2022 DJH.docx</code> and <code>paper 12 February 20222 final.docx</code>.</p>
+</div>
+</div>
+</section>
+<section id="version-control" class="level2">
+<h2 class="anchored" data-anchor-id="version-control">Version control</h2>
+<ul>
+<li>Basic idea: Tools for tracking and reversing changes to code over time</li>
+<li>Useful for identifying and reversing breaking changes</li>
+<li>Implementations upload to cloud, track who contributes code, control who can suggest vs.&nbsp;actually change code</li>
+<li>Good for collaboration, publishing code</li>
+</ul>
+</section>
+<section id="git" class="level2">
+<h2 class="anchored" data-anchor-id="git">Git</h2>
+<ul>
+<li>One of many version control systems</li>
+<li>Very popular in part thanks to GitHub, which provides free hosting git repositories
+<ul>
+<li>Resources for students (and teachers): <a href="https://education.github.com/" class="uri">https://education.github.com/</a></li>
+</ul></li>
+</ul>
+</section>
+<section id="gitting-started" class="level2">
+<h2 class="anchored" data-anchor-id="gitting-started">Gitting started</h2>
+<ul>
+<li><a href="https://www.google.com/search?q=git+is+too+complicated">git is very hard</a></li>
+<li>We’re going to use the <a href="https://www.sourcetreeapp.com/">Sourcetree GUI</a> to ease into things</li>
+</ul>
+</section>
+<section id="initial-commit" class="level2">
+<h2 class="anchored" data-anchor-id="initial-commit">Initial commit</h2>
+<div class="columns">
+<div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/02-basics/new_local_repo.png" height="500" class="figure-img"></p>
+<p></p><figcaption class="figure-caption">Creating a new local repository in <code>learning-git</code></figcaption><p></p>
+</figure>
+</div>
+</div><div class="column">
+<ul>
+<li>Install Sourcetree and go through the configuration steps</li>
+<li>Then you’ll see the (empty) repository browser</li>
+<li>Create a folder called something like <code>learning-git</code></li>
+<li>Then, in Sourcetree:
+<ul>
+<li>On the Local tab</li>
+<li>Select New … &gt; Create a local repository (or) Drag and drop the folder on to the browser</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<hr>
+<ul>
+<li>You can open the repository in Sourcetree, but it’s not interesting yet</li>
+<li>In <code>learning-git</code>, create a text file, eg, <code>testing.txt</code></li>
+<li>Sourcetree’s File Status panel shows the new file, ready to be tracked</li>
+</ul>
+</section>
+<section id="tracking-changes" class="level2">
+<h2 class="anchored" data-anchor-id="tracking-changes">Tracking changes</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/02-basics/initial_commit.png" height="300" class="figure-img"></p>
+<p></p><figcaption class="figure-caption">Making your initial commit</figcaption><p></p>
+</figure>
+</div>
+<ul>
+<li>Tracking changes to a file involves two steps: <strong>Adding</strong> and <strong>committing</strong></li>
+<li><strong>Add</strong>: Click the checkmark
+<ul>
+<li>This tells git that we want to store these changes to the file in its archive</li>
+</ul></li>
+<li><strong>Commit</strong>: Type a message in the comment field and click Commit
+<ul>
+<li>This tells git to go ahead and do the archiving process</li>
+</ul></li>
+</ul>
+<hr>
+<ul>
+<li>The commit is now displayed in the History panel</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/02-basics/history.png" height="500" class="figure-img"></p>
+<p></p><figcaption class="figure-caption">The History panel after our first commit</figcaption><p></p>
+</figure>
+</div>
+<p><em>Make a few more changes to the file. Practice adding and committing them and note how the changes accumulate in the History panel.</em></p>
+</section>
+<section id="time-travel" class="level2">
+<h2 class="anchored" data-anchor-id="time-travel">Time travel</h2>
+<ul>
+<li>We can <strong>checkout</strong> previous commits to work with old versions of our files</li>
+<li>In the example, suppose I made a commit with a mistake (my code stopped working or whatever)</li>
+<li>In the History panel, right-click on a previous commit and select Checkout…</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/02-basics/checkout.png" height="400" class="figure-img"></p>
+<p></p><figcaption class="figure-caption">Checking out an old commit to travel through time</figcaption><p></p>
+</figure>
+</div>
+<hr>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/02-basics/changing_past.png" height="500" class="figure-img"></p>
+<p></p><figcaption class="figure-caption">Trying (and failing) to change the past. My current HEAD commit will disappear as soon as I check out main.</figcaption><p></p>
+</figure>
+</div>
+<ul>
+<li>Sourcetree warns us that we’ll be in an <strong>undetached head state</strong></li>
+<li>To see what this means, try making a change to the file, adding and committing it, then checking out the commit with the <code>main</code> or <code>master</code> tag</li>
+</ul>
+</section>
+<section id="the-garden-of-forking-branches" class="level2">
+<h2 class="anchored" data-anchor-id="the-garden-of-forking-branches">The garden of forking branches</h2>
+<ul>
+<li>To actually change the past, we’ll use a <strong>branch</strong>
+<ul>
+<li>Branches allow git to track multiple distinct “timelines” for files</li>
+<li>For example, most major software projects will have separate “dev” (development) and “release” branches</li>
+<li>Individual branches will also be created for work on specific areas of the project</li>
+<li>This allows each area of active work to be isolated from work happening in other areas</li>
+</ul></li>
+</ul>
+<hr>
+<div class="columns">
+<div class="column" style="width:.7;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/02-basics/merge.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Merging <code>fixing-mistake</code> into <code>main</code></figcaption><p></p>
+</figure>
+</div>
+</div><div class="column" style="width:.3;">
+<ul>
+<li>After checking out the previous commit, click on Branch in the toolbar
+<ul>
+<li>Name your new branch something like <code>fixing-mistake</code> (no spaces!)</li>
+</ul></li>
+<li>Start to work on fixing the mistake in the file, then add and commit as usual</li>
+<li>Now checkout <code>main</code>. Notice:
+<ul>
+<li>Your commits on <code>fixing-mistake</code> don’t disappear</li>
+<li>The state of your file changes to the <code>main</code> version</li>
+<li>The History panel shows the split between the two branches</li>
+</ul></li>
+<li>After we’ve finished fixing the mistake, we want to <strong>merge</strong> these changes back into <code>main</code>
+<ul>
+<li>Make sure you’re current on <code>main</code></li>
+<li>Right-click on <code>fixing-mistake</code> and select Merge…</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<hr>
+<ul>
+<li>Sourcetree will bring up a message about <strong>Merge Conflicts</strong>
+<ul>
+<li>This just means that the files you’re combining have conflicting histories, and git wants you to sort out what to keep and what to throw away</li>
+</ul></li>
+</ul>
+<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>It’s not obvious (there isn’t a big red status symbol anywhere), but git is now in a special conflict-resolution state.</p>
+<p>Until you resolve the conflicts and finish the merge, a lot of standard git functionality either won’t work at all or will cause weird problems.</p>
+<p><strong>If git starts giving you a bunch of weird errors, check to see if you’re in the middle of a merge and need to resolve conflicts.</strong></p>
+</div>
+</div>
+<hr>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/02-basics/conflicts.png" height="500" class="figure-img"></p>
+<p></p><figcaption class="figure-caption">Sourcetree’s File status panel indicates which files have conflicts</figcaption><p></p>
+</figure>
+</div>
+<p>After starting the merge, Sourcetree’s File status panel will indicate exactly which files have conflicts.</p>
+<hr>
+<p>Your file will look something like this</p>
+<pre><code>test
+another line
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+this line has a mistake
+=======
+no mistake this time
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; fixing-mistake</code></pre>
+<ul>
+<li>The <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code> and <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code> surround each area of conflict.
+<ul>
+<li>The top part (marked <code>HEAD</code>) shows the state of the current branch</li>
+<li>The bottom part (marked <code>fixing-mistake</code>) shows the state of the branch you’re merging</li>
+</ul></li>
+<li>Simply edit these sections so they’re in the state you want,
+<ul>
+<li>Then save, go back to Sourcetree’s File status panel</li>
+<li>Sourcetree generates a commit message indicating that you’re resolving conflicts to complete a merge</li>
+</ul></li>
+</ul>
+<hr>
+<p>Afterwards the History panel shows the two branches merging back together</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/02-basics/post_merge.png" height="500" class="figure-img"></p>
+<p></p><figcaption class="figure-caption">The History panel shows the branches merging back together</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="authenticating-sourcetree-with-github" class="level2">
+<h2 class="anchored" data-anchor-id="authenticating-sourcetree-with-github">Authenticating Sourcetree with GitHub</h2>
+<ol type="1">
+<li>Make sure you’re logged in to GitHub in your default web browser</li>
+<li>In Sourcetree
+<ul>
+<li>Go to a New Tab</li>
+<li>Then Remote (just underneath the tabs)</li>
+<li>Add an account …</li>
+<li><p>Hosting Service: GitHub<br>
+Authentication: OAuth<br>
+Username: [shouldn’t be able to enter anything]</p></li>
+<li>Click “Refresh OAuth Token”</li>
+</ul></li>
+<li>Focus should switch to a new tab in your web browser
+<ul>
+<li>Scroll down and click “Authorize atlassian” green button</li>
+</ul></li>
+<li>Browser should now say “Authentication Successful” and GitHub should send you a security notice via email</li>
+<li>Back in Sourcetree, click okay</li>
+</ol>
+</section>
+<section id="working-with-github-remotes" class="level2">
+<h2 class="anchored" data-anchor-id="working-with-github-remotes">Working with GitHub remotes</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://happygitwithr.com/img/ours-them.jpeg" height="500" class="figure-img"></p>
+<p></p><figcaption class="figure-caption">The remote <code>origin</code> lives on GitHub. Source: <a href="https://happygitwithr.com/common-remote-setups.html#ours-you" class="uri">https://happygitwithr.com/common-remote-setups.html#ours-you</a></figcaption><p></p>
+</figure>
+</div>
+<p>A <strong>remote</strong> is a copy of a repository that lives on a server somewhere else</p>
+</section>
+<section id="working-with-your-own-repos" class="level2">
+<h2 class="anchored" data-anchor-id="working-with-your-own-repos">Working with your own repos</h2>
+<ul>
+<li>On GitHub, click “New” and walk through the steps to create a new repository
+<ul>
+<li>The name on GitHub doesn’t need to match the local name</li>
+<li>But why wouldn’t you use the same name?</li>
+</ul></li>
+<li>Copy the URL: <code>https://github.com/[username]/learning-git</code></li>
+</ul>
+<div class="columns">
+<div class="column">
+<ul>
+<li>Back in Sourcetree
+<ol type="1">
+<li>Go to Settings in the toolbar</li>
+<li>Go to the Remotes tab</li>
+<li>Click Add to add a new remote</li>
+</ol></li>
+<li>The standard name for a default remote is <code>origin</code>
+<ul>
+<li>Paste in the GitHub URL</li>
+</ul></li>
+</ul>
+</div><div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/02-basics/origin.png" class="img-fluid figure-img" width="500"></p>
+<p></p><figcaption class="figure-caption">Adding a new remote</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<hr>
+<ul>
+<li>After adding the remote, we can send the repository (including its full history) up to GitHub using <strong>push</strong>
+<ul>
+<li>Look for Push in the toolbar</li>
+<li>Sourcetree will ask which branches to push</li>
+</ul></li>
+<li>When the push is complete, refresh GitHub in your browser
+<ul>
+<li>You can edit files directly in GitHub</li>
+</ul></li>
+<li>Now we’ll <strong>fetch</strong> and <strong>pull</strong> the changes from GitHub back to our local copy
+<ul>
+<li><strong>Fetch</strong>: Compare the local tree to the remote tree, noting any differences. Use this to preview the changes on the remote</li>
+<li>In Sourcetree, hit Fetch in the toolbar. Note that the GitHub commit shows up in the History panel.</li>
+<li><strong>Pull</strong>: Actually download the remote changes and incorporate them into your local tree.</li>
+</ul></li>
+</ul>
+</section>
+<section id="lab-working-with-someone-elses-repos" class="level2">
+<h2 class="anchored" data-anchor-id="lab-working-with-someone-elses-repos">Lab: Working with <em>someone else’s</em> repos</h2>
+<ul>
+<li>GitHub lets you download someone else’s repo (<strong>clone</strong>), and modify it locally, but <em>not</em> upload directly.<br>
+</li>
+<li>You can suggest a change to someone else’s code by submitting a <strong>pull request</strong>, which first requires <strong>forking</strong> the repository.</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/02-basics/fork-and-clone.png" height="500" class="figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Forking</em> copies a repository to your GitHub account. Then you <em>clone</em> the copy to your local machine. You can <em>push</em> to your remote copy as usual. You can suggest changes to the original using a <em>pull request</em>. Source: <a href="https://happygitwithr.com/fork-and-clone.html" class="uri">https://happygitwithr.com/fork-and-clone.html</a></figcaption><p></p>
+</figure>
+</div>
+<hr>
+<ul>
+<li>Start with the repo for this week’s lab: <a href="https://github.com/data-science-methods/lab-w02-git" class="uri">https://github.com/data-science-methods/lab-w02-git</a></li>
+<li><strong>Fork</strong>: Look for the <code>fork</code> button in the upper-right</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/02-basics/fork-button.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">The <em>fork</em> button is near the upper-right corner of a GitHub repository page. I wasn’t able to find a keyboard shortcut for this. :-(</figcaption><p></p>
+</figure>
+</div>
+<hr>
+<ul>
+<li><strong>Clone</strong>: After creating the fork, you need to download a copy to your machine.
+<ul>
+<li>In Sourcetree’s repository browser, select New… &gt; Clone from URL</li>
+</ul></li>
+<li>This lesson continues in the lab. Open <code>lab.html</code> and <code>lab.Rmd</code> to continue.</li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../content/01-03-data-sci-wtf.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Data Science: What and why</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../content/02-03-getting-help.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-title">Warnings, Errors, and Getting Help</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>
