@@ -7,7 +7,7 @@
 <link href="03-02-models-of-eda_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="03-02-models-of-eda_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="03-02-models-of-eda_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.1.163">
+  <meta name="generator" content="quarto-1.2.151">
 
   <title>models-of-eda</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -410,23 +410,22 @@
 </tr>
 </tbody>
 </table>
-<ul>
-<li>I agree that it’s important to
+</section>
+<section class="slide level2">
+
+<p>I agree that it’s important to</p>
 <ul>
 <li>be thoughtful about how much confidence we’re placing in our conclusions</li>
 <li>interpret findings from one study in light of other studies</li>
-</ul></li>
-<li>But the confirmatory/exploratory distinction can overemphasize the confirmatory side
+</ul>
+<p>But the confirmatory/exploratory distinction can overemphasize the confirmatory side</p>
 <ul>
 <li>Making us too rigid and narrow-minded about what counts as good science</li>
-</ul></li>
 </ul>
 </section>
 <section id="better-models-for-eda-i-developing-phenomena" class="slide level2">
 <h2>Better Models for EDA I: Developing Phenomena</h2>
-<ul>
-<li><span class="citation" data-cites="BrownSmokeMirrorsHow2002">Brown (<a href="#/references" role="doc-biblioref" onclick="">2002</a>)</span></li>
-</ul>
+<p><span class="citation" data-cites="BrownSmokeMirrorsHow2002">Brown (<a href="#/references" role="doc-biblioref" onclick="">2002</a>)</span></p>
 <table style="width:97%;">
 <caption>The data/phenomena/theory distinction</caption>
 <colgroup>
@@ -752,9 +751,9 @@ Wagenmakers, Eric-Jan, Ruud Wetzels, Denny Borsboom, Han L. J. van der Maas, and
         // The "normal" size of the presentation, aspect ratio will be preserved
         // when the presentation is scaled to fit different resolutions. Can be
         // specified using percentage units.
-        width: 1050,
+        width: 1440,
 
-        height: 700,
+        height: 1080,
 
         // Factor of the display size that should remain empty around the content
         margin: 0.1,
@@ -866,7 +865,24 @@ Wagenmakers, Eric-Jan, Ruud Wetzels, Denny Borsboom, Han L. J. van der Maas, and
         button.classList.add('code-copy-button-checked');
         var currentTitle = button.getAttribute("title");
         button.setAttribute("title", "Copied!");
+        let tooltip;
+        if (window.bootstrap) {
+          button.setAttribute("data-bs-toggle", "tooltip");
+          button.setAttribute("data-bs-placement", "left");
+          button.setAttribute("data-bs-title", "Copied!");
+          tooltip = new bootstrap.Tooltip(button, 
+            { trigger: "manual", 
+              customClass: "code-copy-button-tooltip",
+              offset: [0, -8]});
+          tooltip.show();    
+        }
         setTimeout(function() {
+          if (tooltip) {
+            tooltip.hide();
+            button.removeAttribute("data-bs-title");
+            button.removeAttribute("data-bs-toggle");
+            button.removeAttribute("data-bs-placement");
+          }
           button.setAttribute("title", currentTitle);
           button.classList.remove('code-copy-button-checked');
         }, 1000);
@@ -904,24 +920,42 @@ Wagenmakers, Eric-Jan, Ruud Wetzels, Denny Borsboom, Han L. J. van der Maas, and
           return note.innerHTML;
         });
       }
+      const findCites = (el) => {
+        const parentEl = el.parentElement;
+        if (parentEl) {
+          const cites = parentEl.dataset.cites;
+          if (cites) {
+            return {
+              el,
+              cites: cites.split(' ')
+            };
+          } else {
+            return findCites(el.parentElement)
+          }
+        } else {
+          return undefined;
+        }
+      };
       var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
       for (var i=0; i<bibliorefs.length; i++) {
         const ref = bibliorefs[i];
-        const cites = ref.parentNode.getAttribute('data-cites').split(' ');
-        tippyHover(ref, function() {
-          var popup = window.document.createElement('div');
-          cites.forEach(function(cite) {
-            var citeDiv = window.document.createElement('div');
-            citeDiv.classList.add('hanging-indent');
-            citeDiv.classList.add('csl-entry');
-            var biblioDiv = window.document.getElementById('ref-' + cite);
-            if (biblioDiv) {
-              citeDiv.innerHTML = biblioDiv.innerHTML;
-            }
-            popup.appendChild(citeDiv);
+        const citeInfo = findCites(ref);
+        if (citeInfo) {
+          tippyHover(citeInfo.el, function() {
+            var popup = window.document.createElement('div');
+            citeInfo.cites.forEach(function(cite) {
+              var citeDiv = window.document.createElement('div');
+              citeDiv.classList.add('hanging-indent');
+              citeDiv.classList.add('csl-entry');
+              var biblioDiv = window.document.getElementById('ref-' + cite);
+              if (biblioDiv) {
+                citeDiv.innerHTML = biblioDiv.innerHTML;
+              }
+              popup.appendChild(citeDiv);
+            });
+            return popup.innerHTML;
           });
-          return popup.innerHTML;
-        });
+        }
       }
     });
     </script>

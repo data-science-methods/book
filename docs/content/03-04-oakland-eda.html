@@ -383,8 +383,8 @@ div.csl-indent {
 <li><p>The Black Lives Matter protests over the last several years have made us aware of the racial aspects of policing.</p></li>
 <li><p>Here we’re specifically interested in</p>
 <ol type="1">
-<li>Whether Black people in Oakland might be more likely to be stopped than White people</li>
-<li>Whether Black people who are stopped might be more likely to have contraband</li>
+<li><em>Whether Black people in Oakland might be more likely to be stopped than White people</em></li>
+<li><em>Whether Black people who are stopped might be more likely to have contraband</em></li>
 </ol></li>
 <li><p>These aren’t very precise, but that’s okay: Part of the goal of EDA is to clarify and refine our research questions</p></li>
 </ul>
@@ -417,6 +417,7 @@ div.csl-indent {
 <h2 class="anchored" data-anchor-id="set-up-our-workspace">Set up our workspace</h2>
 <ul>
 <li>Dedicated project folder</li>
+<li>Optional: Create an RStudio Project</li>
 <li>Clean R session</li>
 <li>More on project management and organization later in the semester</li>
 </ul>
@@ -435,8 +436,8 @@ div.csl-indent {
 
 </div>
 </section>
-<section id="get-the-data" class="level2">
-<h2 class="anchored" data-anchor-id="get-the-data">Get the Data</h2>
+<section id="get-the-data" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="get-the-data">Get the Data</h2>
 <ul>
 <li><p>We’ll be using data on police stops in Oakland, California, collected and published by the <a href="https://openpolicing.stanford.edu/">Stanford Open Policing Project</a>.</p></li>
 <li><p>For reproducibility, we’ll write a bit of code that automatically downloads the data</p></li>
@@ -547,6 +548,11 @@ Group variables            None
 3 subject_age      102724         0.230   33.2 13.3      10     23     29     41     97   ▇▆▃▁▁</code></pre>
 </div>
 </div>
+<ul>
+<li>How many rows and columns?</li>
+<li>What variables are represented as different variable types?</li>
+<li>Are there any types that might indicate parsing problems?</li>
+</ul>
 <hr>
 <ul>
 <li>133k rows (observations); 28 columns (variables)</li>
@@ -593,17 +599,22 @@ Group variables            None
 <li>check what’s up with <code>contraband_found</code>.</li>
 </ul></li>
 </ul>
-<p><br> But this raises a warning about large data</p>
+<p><br>
+But this raises an error about large data</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vis_miss</span>(dataf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error in vis_miss(dataf): Data exceeds recommended size for visualisation, please consider
+         downsampling your data, or set argument 'warn_large_data' to FALSE.</code></pre>
+</div>
 </div>
 <hr>
 <p>So we’ll use <code>sample_n()</code> to draw a subset</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2021-09-28</span>)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>dataf_smol <span class="ot">=</span> <span class="fu">sample_n</span>(dataf, <span class="dv">1000</span>)</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">vis_miss</span>(dataf_smol)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2021-09-28</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>dataf_smol <span class="ot">=</span> <span class="fu">sample_n</span>(dataf, <span class="dv">1000</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">vis_miss</span>(dataf_smol)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: `gather_()` was deprecated in tidyr 1.2.0.
 Please use `gather()` instead.
@@ -617,9 +628,9 @@ Call `lifecycle::last_lifecycle_warnings()` to see where this warning was genera
 <hr>
 <p>Arguments in vis_miss() are useful for picking up patterns in missing values</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="do">## cluster = TRUE uses hierarchical clustering to order the rows</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">vis_miss</span>(dataf_smol, <span class="at">cluster =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">coord_flip</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="do">## cluster = TRUE uses hierarchical clustering to order the rows</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">vis_miss</span>(dataf_smol, <span class="at">cluster =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">coord_flip</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="03-04-oakland-eda_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -638,9 +649,9 @@ Call `lifecycle::last_lifecycle_warnings()` to see where this warning was genera
 <li>Or: are there cases where a search was conducted, but <code>contraband_found</code> is missing?</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>dataf  <span class="sc">|&gt;</span>  </span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(search_conducted) <span class="sc">|&gt;</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">count</span>(search_conducted, <span class="fu">is.na</span>(contraband_found))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>dataf  <span class="sc">|&gt;</span>  </span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(search_conducted) <span class="sc">|&gt;</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">count</span>(search_conducted, <span class="fu">is.na</span>(contraband_found))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 3
   search_conducted `is.na(contraband_found)`     n
@@ -649,22 +660,44 @@ Call `lifecycle::last_lifecycle_warnings()` to see where this warning was genera
 </div>
 </div>
 </section>
-<section id="look-at-the-top-and-the-bottom-of-your-data" class="level2">
-<h2 class="anchored" data-anchor-id="look-at-the-top-and-the-bottom-of-your-data">4. Look at the top and the bottom of your data</h2>
-<p>With 28 columns, the dataframe is too wide to print in a readable way.</p>
-<p>Instead we’ll use the base R function <code>View()</code> in an interactive session. This shows us an Excel-like spreadsheet presentation of a dataframe.</p>
-<p><code>View()</code> can cause significant problems if you use it with a large dataframe on a slower machine. So we’ll use a pipe: first extract the <code>head()</code> or <code>tail()</code> of the dataset, and then <code>View()</code> it. We’ll also go ahead and view <code>dataf_smol</code>, the subset we created for <code>visdat</code> above.</p>
+<section id="look-at-the-top-and-the-bottom-of-your-data" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="look-at-the-top-and-the-bottom-of-your-data">4. Look at the top and the bottom of your data</h2>
+<ul>
+<li><p>With 28 columns, the dataframe is too wide to print in a readable way.</p></li>
+<li><p>Instead we’ll use the base R function <code>View()</code> in an interactive session</p>
+<ul>
+<li>An Excel-like spreadsheet presentation</li>
+</ul></li>
+<li><p><code>View()</code> can cause significant problems if you use it with a large dataframe on a slower machine</p>
+<ul>
+<li>We’ll use a pipe:
+<ul>
+<li>First extract the <code>head()</code> or <code>tail()</code> of the dataset</li>
+<li>Then <code>View()</code> it</li>
+</ul></li>
+<li>We’ll also use <code>dataf_smol</code></li>
+</ul></li>
+</ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>dataf <span class="sc">|&gt;</span> </span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">View</span>()</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>dataf <span class="sc">|&gt;</span> </span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tail</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">View</span>()</span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(dataf_smol)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">interactive</span>()) {</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    dataf <span class="sc">|&gt;</span> </span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">head</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">View</span>()</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    dataf <span class="sc">|&gt;</span> </span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">tail</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>        <span class="fu">View</span>()</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">View</span>(dataf_smol)</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<ul>
+<li>This is <em>interactive</em> code
+<ul>
+<li>Don’t want it to run when we run the script automatically or render it to HTML</li>
+<li>Use <code>if</code> with <code>interactive()</code> or <code>rlang::is_interactive()</code></li>
+</ul></li>
+</ul>
 <hr>
 <p>Some of my observations:</p>
 <ul>
@@ -679,7 +712,7 @@ Call `lifecycle::last_lifecycle_warnings()` to see where this warning was genera
 <hr>
 <p>We can also use <code>skimr</code> to check data quality by looking at the minimum and maximum values. Do these ranges make sense for what we expect the variable to be?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">skim</span>(dataf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">skim</span>(dataf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>── Data Summary ────────────────────────
                            Values
@@ -746,12 +779,14 @@ Group variables            None
 <li>Date range is April 1, 2013 to December 31, 2017
 <ul>
 <li>If we break things down by year, we should expect 2013 to have fewer cases</li>
-<li>For some purposes, we might need to exclude 2013 data: <code>filter(dataf, date &gt;= '2014-01-01')</code></li>
+<li>For some purposes, we might need to exclude 2013 data<br>
+<code>filter(dataf, date &gt;= '2014-01-01')</code></li>
 </ul></li>
 <li>Age range is from 10 years old (!) to 97 (!)
 <ul>
 <li>Median (<code>p50</code>) is 29; 50% of values are between 23 and 41</li>
-<li>For some purposes, we might need to restrict the analysis to working-age adults: <code>filter(dataf, subject_age &gt;= 18, subject_age &lt; 65)</code></li>
+<li>For some purposes, we might need to restrict the analysis to working-age adults<br>
+<code>filter(dataf, subject_age &gt;= 18, subject_age &lt; 65)</code></li>
 </ul></li>
 </ul>
 </section>
@@ -773,13 +808,15 @@ Group variables            None
 <ul>
 <li>The page mentions a Stanford study that was released in June 2016</li>
 <li>Recall we got our data from the Stanford Open Policing Project</li>
-<li>Our data run through December 2017</li>
+<li>Our data run April 2013 through December 2017</li>
 <li>So there’s a good chance we’re using a superset of the “Stanford study” data</li>
+<li>Though the links under that section don’t have nice descriptive tables</li>
 </ul></li>
 </ul>
 <hr>
 <ul>
-<li>The page links to this report: <a href="https://cao-94612.s3.amazonaws.com/documents/OPD-Racial-Impact-Report-2016-2018-Final-16Apr19.pdf" class="uri">https://cao-94612.s3.amazonaws.com/documents/OPD-Racial-Impact-Report-2016-2018-Final-16Apr19.pdf</a>
+<li>Let’s try <a href="https://www.oaklandca.gov/resources/historical-stop-data">Historical Stop Data and Reports</a></li>
+<li>Then <a href="https://cao-94612.s3.amazonaws.com/documents/OPD-Racial-Impact-Report-2016-2018-Final-16Apr19.pdf">OPD Racial Impact Report: 2016-2018</a>
 <ul>
 <li>Page 8 has two summary tables that we can compare to our data</li>
 </ul></li>
@@ -805,11 +842,13 @@ Group variables            None
 </ul></li>
 </ul>
 <hr>
+<div class="columns">
+<div class="column">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>dataf <span class="sc">|&gt;</span> </span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">year</span>(date)) <span class="sc">|&gt;</span> </span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(year <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">2016</span>, <span class="dv">2017</span>)) <span class="sc">|&gt;</span> </span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">count</span>(year)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>dataf <span class="sc">|&gt;</span> </span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">year</span>(date)) <span class="sc">|&gt;</span> </span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(year <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">2016</span>, <span class="dv">2017</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">count</span>(year)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 2
    year     n
@@ -817,10 +856,10 @@ Group variables            None
 1  2016 30268
 2  2017 30715</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>dataf <span class="sc">|&gt;</span> </span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">year</span>(date)) <span class="sc">|&gt;</span> </span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(year <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">2016</span>, <span class="dv">2017</span>)) <span class="sc">|&gt;</span> </span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">count</span>(year, subject_sex)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>dataf <span class="sc">|&gt;</span> </span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">year</span>(date)) <span class="sc">|&gt;</span> </span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(year <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">2016</span>, <span class="dv">2017</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">count</span>(year, subject_sex)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 3
    year subject_sex     n
@@ -833,6 +872,15 @@ Group variables            None
 6  2017 &lt;NA&gt;           18</code></pre>
 </div>
 </div>
+</div><div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/03-eda/Oakland_report_tables.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Screenshot of the two summary tables from the Oakland report. Source: <a href="https://cao-94612.s3.amazonaws.com/documents/OPD-Racial-Impact-Report-2016-2018-Final-16Apr19.pdf" class="uri">https://cao-94612.s3.amazonaws.com/documents/OPD-Racial-Impact-Report-2016-2018-Final-16Apr19.pdf</a>, page 8</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
 <hr>
 <ul>
 <li><strong>For both years, we have fewer observations than the report table indicates</strong>
@@ -842,28 +890,26 @@ Group variables            None
 </ul></li>
 </ul>
 <hr>
-<ul>
-<li>“Data is deduplicated on raw columns contactdate, contacttime, streetname, subject_sdrace, subject_sex, and subject_age, reducing the number of records by ~5.2%”
+<p>“Data is deduplicated on raw columns contactdate, contacttime, streetname, subject_sdrace, subject_sex, and subject_age, reducing the number of records by ~5.2%”</p>
 <ul>
 <li>The difference with the report is on this order of magnitude,</li>
 <li>But varies within groups by several percentage points</li>
 <li>So deduplication <em>might</em> explain the difference</li>
 <li>But in a more serious analysis we might want to check, eg, with the Stanford Open Policing folks</li>
-</ul></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Men in 2016 in the report vs. our data: 8.2%</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>(<span class="dv">24576</span> <span class="sc">-</span> <span class="dv">22563</span>) <span class="sc">/</span> <span class="dv">24576</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Men in 2016 in the report vs. our data: 8.2%</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>(<span class="dv">24576</span> <span class="sc">-</span> <span class="dv">22563</span>) <span class="sc">/</span> <span class="dv">24576</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.08190918</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Women in 2016 in the report vs. our data: 3.6%</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>(<span class="dv">7965</span> <span class="sc">-</span> <span class="dv">7677</span>) <span class="sc">/</span> <span class="dv">7965</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Women in 2016 in the report vs. our data: 3.6%</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>(<span class="dv">7965</span> <span class="sc">-</span> <span class="dv">7677</span>) <span class="sc">/</span> <span class="dv">7965</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.03615819</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="do">## All of 2016 in the report vs. our data: 7.1%</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>(<span class="dv">32569</span> <span class="sc">-</span> <span class="dv">30268</span>) <span class="sc">/</span> <span class="dv">32569</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="do">## All of 2016 in the report vs. our data: 7.1%</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>(<span class="dv">32569</span> <span class="sc">-</span> <span class="dv">30268</span>) <span class="sc">/</span> <span class="dv">32569</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.07065</code></pre>
 </div>
@@ -879,10 +925,10 @@ Group variables            None
 <li><em>What’s up with the warnings?</em></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>dataf <span class="sc">|&gt;</span> </span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">year</span>(date)) <span class="sc">|&gt;</span> </span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(year)) <span class="sc">+</span></span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_bar</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>dataf <span class="sc">|&gt;</span> </span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">year</span>(date)) <span class="sc">|&gt;</span> </span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(year)) <span class="sc">+</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_bar</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: Removed 2 rows containing non-finite values (stat_count).</code></pre>
 </div>
@@ -896,10 +942,10 @@ Group variables            None
 <li>This version is too hard to read</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>dataf <span class="sc">|&gt;</span> </span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">year</span>(date)) <span class="sc">|&gt;</span> </span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(year, <span class="at">fill =</span> subject_race)) <span class="sc">+</span></span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_bar</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>dataf <span class="sc">|&gt;</span> </span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">year</span>(date)) <span class="sc">|&gt;</span> </span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(year, <span class="at">fill =</span> subject_race)) <span class="sc">+</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_bar</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: Removed 2 rows containing non-finite values (stat_count).</code></pre>
 </div>
@@ -913,12 +959,12 @@ Group variables            None
 <li><em>Why does this produce 2 warnings?</em></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>dataf <span class="sc">|&gt;</span> </span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">year</span>(date)) <span class="sc">|&gt;</span> </span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(year, <span class="at">color =</span> subject_race)) <span class="sc">+</span></span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">stat =</span> <span class="st">'count'</span>) <span class="sc">+</span></span>
-<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="at">stat =</span> <span class="st">'count'</span>) <span class="sc">+</span></span>
-<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">'Set1'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>dataf <span class="sc">|&gt;</span> </span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">year</span>(date)) <span class="sc">|&gt;</span> </span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(year, <span class="at">color =</span> subject_race)) <span class="sc">+</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">stat =</span> <span class="st">'count'</span>) <span class="sc">+</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="at">stat =</span> <span class="st">'count'</span>) <span class="sc">+</span></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">'Set1'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: Removed 2 rows containing non-finite values (stat_count).
 Removed 2 rows containing non-finite values (stat_count).</code></pre>
@@ -933,14 +979,14 @@ Removed 2 rows containing non-finite values (stat_count).</code></pre>
 <li><em>Why don’t I need to give it the plot we just created?</em></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplotly</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplotly</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: Removed 2 rows containing non-finite values (stat_count).
 Removed 2 rows containing non-finite values (stat_count).</code></pre>
 </div>
 <div class="cell-output-display">
 <div id="htmlwidget-c4c927ee41f7940f68c8" style="width:100%;height:464px;" class="plotly html-widget"></div>
-<script type="application/json" data-for="htmlwidget-c4c927ee41f7940f68c8">{"x":{"data":[{"x":[2013,2014,2015,2016,2017],"y":[1022,2274,1673,1586,1543],"text":["count:  1022<br />year: 2013<br />subject_race: asian/pacific islander","count:  2274<br />year: 2014<br />subject_race: asian/pacific islander","count:  1673<br />year: 2015<br />subject_race: asian/pacific islander","count:  1586<br />year: 2016<br />subject_race: asian/pacific islander","count:  1543<br />year: 2017<br />subject_race: asian/pacific islander"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(228,26,28,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(228,26,28,1)"}},"hoveron":"points","name":"asian/pacific islander","legendgroup":"asian/pacific islander","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(228,26,28,1)","dash":"solid"},"frame":null},{"x":[2013,2014,2015,2016,2017],"y":[9841,17744,14462,18286,18591],"text":["count:  9841<br />year: 2013<br />subject_race: black","count: 17744<br />year: 2014<br />subject_race: black","count: 14462<br />year: 2015<br />subject_race: black","count: 18286<br />year: 2016<br />subject_race: black","count: 18591<br />year: 2017<br />subject_race: black"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(55,126,184,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(55,126,184,1)"}},"hoveron":"points","name":"black","legendgroup":"black","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(55,126,184,1)","dash":"solid"},"frame":null},{"x":[2013,2014,2015,2016,2017],"y":[2911,5824,4694,6162,6666],"text":["count:  2911<br />year: 2013<br />subject_race: hispanic","count:  5824<br />year: 2014<br />subject_race: hispanic","count:  4694<br />year: 2015<br />subject_race: hispanic","count:  6162<br />year: 2016<br />subject_race: hispanic","count:  6666<br />year: 2017<br />subject_race: hispanic"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(77,175,74,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(77,175,74,1)"}},"hoveron":"points","name":"hispanic","legendgroup":"hispanic","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(77,175,74,1)","dash":"solid"},"frame":null},{"x":[2013,2014,2015,2016,2017],"y":[489,1113,751,1021,1124],"text":["count:   489<br />year: 2013<br />subject_race: other","count:  1113<br />year: 2014<br />subject_race: other","count:   751<br />year: 2015<br />subject_race: other","count:  1021<br />year: 2016<br />subject_race: other","count:  1124<br />year: 2017<br />subject_race: other"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(152,78,163,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(152,78,163,1)"}},"hoveron":"points","name":"other","legendgroup":"other","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(152,78,163,1)","dash":"solid"},"frame":null},{"x":[2013,2014,2015,2016,2017],"y":[1997,4560,3067,3213,2791],"text":["count:  1997<br />year: 2013<br />subject_race: white","count:  4560<br />year: 2014<br />subject_race: white","count:  3067<br />year: 2015<br />subject_race: white","count:  3213<br />year: 2016<br />subject_race: white","count:  2791<br />year: 2017<br />subject_race: white"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(255,127,0,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(255,127,0,1)"}},"hoveron":"points","name":"white","legendgroup":"white","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(255,127,0,1)","dash":"solid"},"frame":null}],"layout":{"margin":{"t":26.2283105022831,"r":7.30593607305936,"b":40.1826484018265,"l":54.7945205479452},"plot_bgcolor":"rgba(235,235,235,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[2012.8,2017.2],"tickmode":"array","ticktext":["2013","2014","2015","2016","2017"],"tickvals":[2013,2014,2015,2016,2017],"categoryorder":"array","categoryarray":["2013","2014","2015","2016","2017"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":{"text":"year","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-416.1,19496.1],"tickmode":"array","ticktext":["0","5000","10000","15000"],"tickvals":[0,5000,10000,15000],"categoryorder":"array","categoryarray":["0","5000","10000","15000"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":{"text":"count","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.88976377952756,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895},"title":{"text":"subject_race","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"155421b79aa0":{"x":{},"colour":{},"type":"scatter"},"155423d087f41":{"x":{},"colour":{}}},"cur_data":"155421b79aa0","visdat":{"155421b79aa0":["function (y) ","x"],"155423d087f41":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-c4c927ee41f7940f68c8">{"x":{"data":[{"x":[2013,2014,2015,2016,2017],"y":[1022,2274,1673,1586,1543],"text":["count:  1022<br />year: 2013<br />subject_race: asian/pacific islander","count:  2274<br />year: 2014<br />subject_race: asian/pacific islander","count:  1673<br />year: 2015<br />subject_race: asian/pacific islander","count:  1586<br />year: 2016<br />subject_race: asian/pacific islander","count:  1543<br />year: 2017<br />subject_race: asian/pacific islander"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(228,26,28,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(228,26,28,1)"}},"hoveron":"points","name":"asian/pacific islander","legendgroup":"asian/pacific islander","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(228,26,28,1)","dash":"solid"},"frame":null},{"x":[2013,2014,2015,2016,2017],"y":[9841,17744,14462,18286,18591],"text":["count:  9841<br />year: 2013<br />subject_race: black","count: 17744<br />year: 2014<br />subject_race: black","count: 14462<br />year: 2015<br />subject_race: black","count: 18286<br />year: 2016<br />subject_race: black","count: 18591<br />year: 2017<br />subject_race: black"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(55,126,184,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(55,126,184,1)"}},"hoveron":"points","name":"black","legendgroup":"black","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(55,126,184,1)","dash":"solid"},"frame":null},{"x":[2013,2014,2015,2016,2017],"y":[2911,5824,4694,6162,6666],"text":["count:  2911<br />year: 2013<br />subject_race: hispanic","count:  5824<br />year: 2014<br />subject_race: hispanic","count:  4694<br />year: 2015<br />subject_race: hispanic","count:  6162<br />year: 2016<br />subject_race: hispanic","count:  6666<br />year: 2017<br />subject_race: hispanic"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(77,175,74,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(77,175,74,1)"}},"hoveron":"points","name":"hispanic","legendgroup":"hispanic","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(77,175,74,1)","dash":"solid"},"frame":null},{"x":[2013,2014,2015,2016,2017],"y":[489,1113,751,1021,1124],"text":["count:   489<br />year: 2013<br />subject_race: other","count:  1113<br />year: 2014<br />subject_race: other","count:   751<br />year: 2015<br />subject_race: other","count:  1021<br />year: 2016<br />subject_race: other","count:  1124<br />year: 2017<br />subject_race: other"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(152,78,163,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(152,78,163,1)"}},"hoveron":"points","name":"other","legendgroup":"other","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(152,78,163,1)","dash":"solid"},"frame":null},{"x":[2013,2014,2015,2016,2017],"y":[1997,4560,3067,3213,2791],"text":["count:  1997<br />year: 2013<br />subject_race: white","count:  4560<br />year: 2014<br />subject_race: white","count:  3067<br />year: 2015<br />subject_race: white","count:  3213<br />year: 2016<br />subject_race: white","count:  2791<br />year: 2017<br />subject_race: white"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(255,127,0,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(255,127,0,1)"}},"hoveron":"points","name":"white","legendgroup":"white","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(255,127,0,1)","dash":"solid"},"frame":null}],"layout":{"margin":{"t":26.2283105022831,"r":7.30593607305936,"b":40.1826484018265,"l":54.7945205479452},"plot_bgcolor":"rgba(235,235,235,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[2012.8,2017.2],"tickmode":"array","ticktext":["2013","2014","2015","2016","2017"],"tickvals":[2013,2014,2015,2016,2017],"categoryorder":"array","categoryarray":["2013","2014","2015","2016","2017"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":{"text":"year","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-416.1,19496.1],"tickmode":"array","ticktext":["0","5000","10000","15000"],"tickvals":[0,5000,10000,15000],"categoryorder":"array","categoryarray":["0","5000","10000","15000"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":{"text":"count","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.88976377952756,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895},"title":{"text":"subject_race","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"440bfce2012":{"x":{},"colour":{},"type":"scatter"},"440b259b85d9":{"x":{},"colour":{}}},"cur_data":"440bfce2012","visdat":{"440bfce2012":["function (y) ","x"],"440b259b85d9":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <hr>
@@ -953,24 +999,26 @@ Removed 2 rows containing non-finite values (stat_count).</code></pre>
 <h2 class="anchored" data-anchor-id="try-the-easy-solution-first">8. Try the easy solution first</h2>
 <p>Let’s translate our natural-language research questions into statistical questions:</p>
 <ol type="1">
-<li><p>Whether Black people in Oakland might be more likely to be stopped than White people <span class="math display">\[ \Pr(stopped | Black) \textrm{ vs } \Pr(stopped | White) \]</span></p></li>
-<li><p>Whether Black people who are stopped might be more likely to have contraband <span class="math display">\[ \Pr(contraband | stopped, searched, Black) \textrm{ vs } \Pr(contraband | stopped, searched, White) \]</span></p></li>
+<li>Whether Black people in Oakland might be more likely to be stopped than White people</li>
 </ol>
-<ul>
-<li>The easy solution is to estimate probabilities by calculating rates within groups</li>
-</ul>
+<p><span class="math display">\[ \Pr(stopped | Black) \textrm{ vs } \Pr(stopped | White) \]</span></p>
+<ol start="2" type="1">
+<li>Whether Black people who are stopped might be more likely to have contraband</li>
+</ol>
+<p><span class="math display">\[ \Pr(contraband | stopped, searched, Black) \textrm{ vs } \Pr(contraband | stopped, searched, White) \]</span> - The easy solution is to estimate probabilities by calculating rates within groups</p>
 </section>
 <section id="mathematical-aside" class="level2">
 <h2 class="anchored" data-anchor-id="mathematical-aside">Mathematical aside</h2>
 <ul>
 <li>For Q1, we can’t calculate <span class="math inline">\(\Pr(stopped | Black)\)</span> directly:<br>
 everyone in our data was stopped</li>
-<li>But Bayes’ theorem lets us get at the comparison indirectly <span class="math display">\[ \Pr(stopped | Black) = \frac{\Pr(Black | stopped) \times \Pr(stopped)}{\Pr(Black)} \]</span></li>
+<li>But Bayes’ theorem lets us get at the comparison indirectly</li>
 </ul>
-<p><span class="math display">\[ \frac{\Pr(stopped | Black)}{\Pr(stopped | White)} = \frac{\Pr(Black|stopped)}{\Pr(Black)} \frac{\Pr(White)}{\Pr(White|stopped)} \]</span></p>
+<p><span class="math display">\[ \Pr(stopped | Black) = \frac{\Pr(Black | stopped) \times \Pr(stopped)}{\Pr(Black)} \]</span></p>
+<p><span class="math display">\[ \Pr(stopped | Black) : \Pr(stopped | White) = \frac{\Pr(Black|stopped)}{\Pr(Black)} : \frac{\Pr(White|stopped)}{\Pr(White)} \]</span></p>
 <ul>
-<li><span class="math inline">\(\Pr(Black)\)</span> is the share of the statistical population that’s Black</li>
-<li>If we assume the statistical population = residents of Oakland, can use Census data</li>
+<li><span class="math inline">\(\Pr(Black)\)</span> is the share of the target population that’s Black</li>
+<li>If we assume the target population = residents of Oakland, can use Census data</li>
 <li><em>Why is this assumption probably false? Is it okay to use it anyways?</em></li>
 </ul>
 </section>
@@ -978,11 +1026,11 @@ everyone in our data was stopped</li>
 <h2 class="anchored" data-anchor-id="stops-by-race">Stops, by race</h2>
 <p><span class="math display">\[ \Pr(Black|stopped) \]</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>dataf <span class="sc">|&gt;</span> </span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">count</span>(subject_race) <span class="sc">|&gt;</span> </span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">share =</span> n <span class="sc">/</span> <span class="fu">sum</span>(n)) <span class="sc">|&gt;</span> </span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(<span class="fu">desc</span>(share)) <span class="sc">|&gt;</span> </span>
-<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">share =</span> scales<span class="sc">::</span><span class="fu">percent</span>(share, <span class="at">accuracy =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>dataf <span class="sc">|&gt;</span> </span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">count</span>(subject_race) <span class="sc">|&gt;</span> </span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">share =</span> n <span class="sc">/</span> <span class="fu">sum</span>(n)) <span class="sc">|&gt;</span> </span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(<span class="fu">desc</span>(share)) <span class="sc">|&gt;</span> </span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">share =</span> scales<span class="sc">::</span><span class="fu">percent</span>(share, <span class="at">accuracy =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 5 × 3
   subject_race               n share
@@ -1050,8 +1098,8 @@ everyone in our data was stopped</li>
 </table>
 <ul>
 <li><em>Blacks are severely overrepresented in police stops</em></li>
-<li>Hispanics and API folks are slightly underrepresented</li>
-<li>Whites are significantly underrepresented</li>
+<li>Hispanics are slightly underrepresented</li>
+<li>White and API folks are significantly underrepresented</li>
 </ul>
 </section>
 <section id="searches-by-race" class="level2">
@@ -1061,10 +1109,10 @@ everyone in our data was stopped</li>
 <li>Are there disparities by race there? <span class="math display">\[ \Pr(searched | stopped, Black) \textrm{ vs } \Pr(searched | stopped, White) \]</span></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="do">## What fraction of stops had a search? </span></span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>dataf <span class="sc">|&gt;</span> </span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">count</span>(search_conducted) <span class="sc">|&gt;</span> </span>
-<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">share =</span> n <span class="sc">/</span> <span class="fu">sum</span>(n))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="do">## What fraction of stops had a search? </span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>dataf <span class="sc">|&gt;</span> </span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">count</span>(search_conducted) <span class="sc">|&gt;</span> </span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">share =</span> n <span class="sc">/</span> <span class="fu">sum</span>(n))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 3
   search_conducted     n share
@@ -1075,23 +1123,24 @@ everyone in our data was stopped</li>
 </div>
 <p>Across all subjects, 31% of stops involved a search.</p>
 <hr>
-<ul>
-<li>Now we break down the search rate by race-ethnicity</li>
-</ul>
+<p>Now we break down the search rate by race-ethnicity</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dataf, <span class="fu">aes</span>(subject_race, <span class="at">fill =</span> search_conducted)) <span class="sc">+</span></span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="fu">position_fill</span>()) <span class="sc">+</span></span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">'transparent'</span>, <span class="st">'red'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dataf, <span class="fu">aes</span>(subject_race, <span class="at">fill =</span> search_conducted)) <span class="sc">+</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="fu">position_fill</span>()) <span class="sc">+</span></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">'transparent'</span>, <span class="st">'red'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="03-04-oakland-eda_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>dataf <span class="sc">|&gt;</span> </span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">count</span>(subject_race, search_conducted) <span class="sc">|&gt;</span> </span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(subject_race) <span class="sc">|&gt;</span> </span>
-<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">rate =</span> n <span class="sc">/</span> <span class="fu">sum</span>(n)) <span class="sc">|&gt;</span> </span>
-<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ungroup</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(search_conducted) <span class="sc">|&gt;</span> </span>
-<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">rate =</span> scales<span class="sc">::</span><span class="fu">percent</span>(rate, <span class="at">accuracy =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<hr>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>dataf <span class="sc">|&gt;</span> </span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">count</span>(subject_race, search_conducted) <span class="sc">|&gt;</span> </span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(subject_race) <span class="sc">|&gt;</span> </span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">rate =</span> n <span class="sc">/</span> <span class="fu">sum</span>(n)) <span class="sc">|&gt;</span> </span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ungroup</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(search_conducted) <span class="sc">|&gt;</span> </span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">rate =</span> scales<span class="sc">::</span><span class="fu">percent</span>(rate, <span class="at">accuracy =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 5 × 4
   subject_race           search_conducted     n rate 
@@ -1114,26 +1163,29 @@ everyone in our data was stopped</li>
 <h2 class="anchored" data-anchor-id="contraband-finds-by-race">Contraband finds, by race</h2>
 <p><span class="math display">\[ \Pr(contraband | searched, stopped, Black) \]</span> We want to <code>filter()</code> down to only stops where a search was conducted</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>dataf <span class="sc">|&gt;</span> </span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(search_conducted) <span class="sc">|&gt;</span> </span>
-<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(subject_race, <span class="at">fill =</span> contraband_found)) <span class="sc">+</span></span>
-<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="fu">position_fill</span>()) <span class="sc">+</span></span>
-<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">'transparent'</span>, <span class="st">'blue'</span>)) <span class="sc">+</span></span>
-<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylim</span>(<span class="dv">0</span>, .<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>dataf <span class="sc">|&gt;</span> </span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(search_conducted) <span class="sc">|&gt;</span> </span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(subject_race, <span class="at">fill =</span> contraband_found)) <span class="sc">+</span></span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="fu">position_fill</span>()) <span class="sc">+</span></span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">'transparent'</span>, <span class="st">'blue'</span>)) <span class="sc">+</span></span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylim</span>(<span class="dv">0</span>, .<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: Removed 5 rows containing missing values (geom_bar).</code></pre>
 </div>
 <div class="cell-output-display">
-<p><img src="03-04-oakland-eda_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid" width="672"></p>
+<p><img src="03-04-oakland-eda_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>dataf <span class="sc">|&gt;</span> </span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(search_conducted) <span class="sc">|&gt;</span> </span>
-<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">count</span>(subject_race, contraband_found) <span class="sc">|&gt;</span> </span>
-<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(subject_race) <span class="sc">|&gt;</span> </span>
-<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">rate =</span> n <span class="sc">/</span> <span class="fu">sum</span>(n)) <span class="sc">|&gt;</span> </span>
-<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ungroup</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(contraband_found) <span class="sc">|&gt;</span> </span>
-<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">rate =</span> scales<span class="sc">::</span><span class="fu">percent</span>(rate, <span class="at">accuracy =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<hr>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>dataf <span class="sc">|&gt;</span> </span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(search_conducted) <span class="sc">|&gt;</span> </span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">count</span>(subject_race, contraband_found) <span class="sc">|&gt;</span> </span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(subject_race) <span class="sc">|&gt;</span> </span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">rate =</span> n <span class="sc">/</span> <span class="fu">sum</span>(n)) <span class="sc">|&gt;</span> </span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ungroup</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(contraband_found) <span class="sc">|&gt;</span> </span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">rate =</span> scales<span class="sc">::</span><span class="fu">percent</span>(rate, <span class="at">accuracy =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 5 × 4
   subject_race           contraband_found     n rate 
@@ -1198,7 +1250,8 @@ everyone in our data was stopped</li>
 </section>
 <section id="lab" class="level2">
 <h2 class="anchored" data-anchor-id="lab">Lab</h2>
-<p>The lab related to this material is available at <a href="https://github.com/data-science-methods/lab-w06-eda" class="uri">https://github.com/data-science-methods/lab-w06-eda</a>.</p>
+<p>The EDA lab walks you through an EDA of Covid-19 vaccine hesitancy data, looking at changes over time across racial-ethnic groups.</p>
+<p><a href="https://github.com/data-science-methods/lab-4-eda" class="uri">https://github.com/data-science-methods/lab-4-eda</a></p>
 </section>
 <section id="references" class="level2">
 <h2 class="anchored" data-anchor-id="references">References</h2>

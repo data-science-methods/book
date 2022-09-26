@@ -2,6 +2,11 @@ code {
   font-size: 80%;
 }
 
+pre {
+    font-size: 100%!important;
+}
+
+
 li ul li {
     font-style: normal;
 }
@@ -30,4 +35,8 @@ img {
 .callout-important {
     color: red;
     background: yellow;
+}
+
+.smaller {
+    font-size: 80%!important;
 }

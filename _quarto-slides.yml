@@ -9,3 +9,7 @@ format:
         echo: true
         mermaid-format: svg
         css: slides.css
+        width: 1440
+        height: 1080
+        execute:
+            freeze: auto
