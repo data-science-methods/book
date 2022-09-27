@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "Methods of Data Science",
     "section": "",
-    "text": "Preface\nThis document is a set of notes (and perhaps later a textbook) for a course on data science methods for graduate students in social and behavioral sciences, taught by Professor Dan Hicks (they/them), UC Merced.\nThe course site is available here.\n\nThese notes were written in RStudio using [quarto]. The complete source is available on GitHub.\nThis version of the book was built with R version 4.1.2 (2021-11-01), pandoc version 2.16.2, and the following packages:"
+    "text": "Preface\nThis document is a set of notes (and perhaps later a textbook) for a course on data science methods for graduate students in social and behavioral sciences, taught by Professor Dan Hicks (they/them), UC Merced.\nThe course site is available here.\n\nThese notes were written in RStudio using Quarto version 1.2.151. The complete source is available on GitHub."
   },
   {
     "objectID": "content/01-01-intro.html#land-acknowledgements",
