@@ -6,7 +6,8 @@ The course site is available [here](..).
 
 -----
 
-These notes were written in [RStudio](http://www.rstudio.com/ide/) using [Quarto](https://quarto.org/) version `r quarto::quarto_version()`. The complete source is available on [GitHub](https://github.com/data-science-methods/book/). 
+These notes were written in [RStudio](http://www.rstudio.com/ide/) using
+`r base::R.version.string` and [Quarto](https://quarto.org/) version `r quarto::quarto_version()`. The complete source is available on [GitHub](https://github.com/data-science-methods/book/). 
 
 
 ```{r pkg-list, echo = FALSE, results="asis"}
