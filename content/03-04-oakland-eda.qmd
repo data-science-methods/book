@@ -37,9 +37,9 @@
 1. What do I already know about this subject? 
 2. Why am I studying this? 
 3. What do I expect or hope to find/learn, and why? 
-4. Who is affected by this topic, and how am I connected to them? 
+4. Who and what is affected by this topic? How can I respect them through the work I’m about to do? 
 
-(Adapted from @TanweerWhyDataRevolution2021, 14-15, and @LiboironPollutionColonialism2021)
+[Adapted from @TanweerWhyDataRevolution2021, 14-15, and @LiboironPollutionColonialism2021]
 
 
 ## Set up our workspace ##

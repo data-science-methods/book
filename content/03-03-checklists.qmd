@@ -10,7 +10,7 @@
 6. Validate with at least one external data source 
 7. Make a plot
 8. Try the easy solution first
-9. Follow up [@PengArtDataScience2016 33]
+9. Follow up
 
 ## @HuebnerSystematicApproachInitial2016 ##
 
@@ -22,6 +22,6 @@
 6. Presence of ceilings and floors in continuous variables
 7. Presence of outliers
 8. Distribution of missing data
-9. Indications of recording errors in the main variables [after @HuebnerSystematicApproachInitial2016 26]
+9. Indications of recording errors in the main variables
 
 ## References 
