@@ -9,11 +9,13 @@
 
 ## Writing code is writing
 
-- Multiple target audiences
+- Multiple audiences
     - Collaborators
     - (Some) reviewers and readers of the paper
     - Peers who want to analyze and extend your methods
-    - *Yourself in two months/one year/five years*
+    - *Yourself in six months*
+
+> Any code of your own that you haven't looked at for six or more months might as well have been written by someone else. ("Eagleson's Law")
 
 - Your code is *readable* to the extent that people can use it to easily and reliably 
     - predict, 
@@ -23,7 +25,8 @@
 
 ## Code style ##
 
-- iNéwritteNélanguagEáconventionSéfoRîpunctuatioNøcapitalizatioNîaiDécomprehensioNébYéindicatinGéstructurE
+- iNéwritteNélanguagEáconventionSéfoRîpunctuatioNøcapitalizatioNîaiDécompr\
+  ehensioNébYéindicatinGéstructurE
     - this is what it's like to read poorly-styled code
     - conventions only work if they're *shared* conventions
 
@@ -43,13 +46,82 @@
 - Use at least 4 spaces for indenting multiline expression
     - Control-I in RStudio will do automagic indenting
 - In multiline function calls, 1 argument = 1 line
-- Use comments to explain "why" rather than "what" or "how"
-    - DH's comment convention: 
-    - Single `#` is for code that isn't currently used but might need to be brought back (eg, for debugging)
-    - `##` is for substantial comments
+
+```{r}
+#| eval: false
+long_function_name <- function(a = "a long argument",
+                               b = "another argument",
+                               c = "another long argument") {
+  # As usual code is indented by two spaces.
+}
+```
+
+## Using comments to explain why and indicate structure {.smaller}
+
+```{r}
+#| eval: false
+loading_table = function(model, 
+                         threshold = .3, 
+                         quiet = FALSE, 
+                         path = NULL, 
+                         overwrite = FALSE) {
+    loadings_unfltd = model |> 
+        ## Extract loadings and tidy
+        loadings() |> 
+        unclass() |> 
+        as_tibble(rownames = 'item') |> 
+        ## loadings() returns a wide item x factor matrix
+        pivot_longer(-item, names_to = 'factor', values_to = 'loading')
+        ## Will filter based on `threshold` below
+    
+    ## Dropped items
+    if (!quiet) {
+        loadings_df = filter(loadings_unfltd, abs(loading) > threshold)
+        dropped_df = loadings_unfltd |> 
+            pivot_wider(names_from = 'factor', values_from = 'loading') |> 
+            anti_join(pivot_wider(loadings_df, 
+                                  names_from = 'factor', 
+                                  values_from = 'loading'), 
+                      by = 'item')
+        message('Dropped items')
+        print(dropped_df)
+    }
+    
+    ## Cross-loaded items
+    if (!quiet) {
+        xload_df = loadings_df |>
+            add_count(item) |>
+            filter(n > 1) |>
+            select(-n) |>
+            pivot_wider(names_from = 'factor', values_from = 'loading')
+        message('Cross-loaded items')
+        print(xload_df)
+    }
+    
+    loadings_clean = loadings_df |>
+        anti_join(xload_df, by = 'item') |>
+        ## Spread back out to item x factor for presentation
+        pivot_wider(names_from = 'factor', values_from = 'loading') |>
+        arrange(across(starts_with('MR'), desc)) |> 
+        left_join(vis_labels, by = c('item' = 'tag')) |> 
+        select(-item.y)
+    
+    if (!is.null(path)) {
+        if (!file.exists(path) || overwrite) {
+            write_csv(loadings_clean, path, na = '')
+        }
+        if (file.exists(path) && !overwrite) {
+            warning('CSV already exists; skipping overwrite')
+        }
+    }
+    
+    return(loadings_clean)
+}
+```
 
 
-## Spaces
+## Spaces: Let your code  b r e a t h e
+
 - Always put spaces after commas, and never before (like English)
 - But not between a function name and the parentheses (like math)
 - And surrounding infix operators (`==`, `+`, `-`, `<-`, `=`)

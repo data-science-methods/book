@@ -313,7 +313,8 @@ div.csl-indent {
   <li><a href="#writing-code-is-writing" id="toc-writing-code-is-writing" class="nav-link" data-scroll-target="#writing-code-is-writing">Writing code is writing</a></li>
   <li><a href="#code-style" id="toc-code-style" class="nav-link" data-scroll-target="#code-style">Code style</a></li>
   <li><a href="#highlights-from-the-tidyverse-style-guide" id="toc-highlights-from-the-tidyverse-style-guide" class="nav-link" data-scroll-target="#highlights-from-the-tidyverse-style-guide">Highlights from the Tidyverse style guide</a></li>
-  <li><a href="#spaces" id="toc-spaces" class="nav-link" data-scroll-target="#spaces">Spaces</a></li>
+  <li><a href="#using-comments-to-explain-why-and-indicate-structure" id="toc-using-comments-to-explain-why-and-indicate-structure" class="nav-link" data-scroll-target="#using-comments-to-explain-why-and-indicate-structure">Using comments to explain why and indicate structure</a></li>
+  <li><a href="#spaces-let-your-code-b-r-e-a-t-h-e" id="toc-spaces-let-your-code-b-r-e-a-t-h-e" class="nav-link" data-scroll-target="#spaces-let-your-code-b-r-e-a-t-h-e">Spaces: Let your code b r e a t h e</a></li>
   <li><a href="#code-blocks" id="toc-code-blocks" class="nav-link" data-scroll-target="#code-blocks">Code blocks</a></li>
   <li><a href="#boolean-variables-vs.-control-flow" id="toc-boolean-variables-vs.-control-flow" class="nav-link" data-scroll-target="#boolean-variables-vs.-control-flow">Boolean variables vs.&nbsp;control flow</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
@@ -343,7 +344,7 @@ div.csl-indent {
 <section id="reading" class="level2">
 <h2 class="anchored" data-anchor-id="reading">Reading</h2>
 <ul>
-<li><span class="citation" data-cites="BryanCodeSmellsFeels2018">(<a href="../references.html#ref-BryanCodeSmellsFeels2018" role="doc-biblioref"><strong>BryanCodeSmellsFeels2018?</strong></a>)</span></li>
+<li><span class="citation" data-cites="BryanCodeSmellsFeels2018">Bryan (<a href="../references.html#ref-BryanCodeSmellsFeels2018" role="doc-biblioref">2018</a>)</span></li>
 <li><span class="citation" data-cites="PostolovskiYourCodeReview2020">Postolovski (<a href="../references.html#ref-PostolovskiYourCodeReview2020" role="doc-biblioref">2020</a>)</span></li>
 <li><span class="citation" data-cites="BuckensSelfdocumentingMythHow2019">Buckens (<a href="../references.html#ref-BuckensSelfdocumentingMythHow2019" role="doc-biblioref">2019</a>)</span></li>
 </ul>
@@ -351,13 +352,18 @@ div.csl-indent {
 <section id="writing-code-is-writing" class="level2">
 <h2 class="anchored" data-anchor-id="writing-code-is-writing">Writing code is writing</h2>
 <ul>
-<li>Multiple target audiences
+<li>Multiple audiences
 <ul>
 <li>Collaborators</li>
 <li>(Some) reviewers and readers of the paper</li>
 <li>Peers who want to analyze and extend your methods</li>
-<li><em>Yourself in two months/one year/five years</em></li>
+<li><em>Yourself in six months</em></li>
 </ul></li>
+</ul>
+<blockquote class="blockquote">
+<p>Any code of your own that you haven’t looked at for six or more months might as well have been written by someone else. (“Eagleson’s Law”)</p>
+</blockquote>
+<ul>
 <li>Your code is <em>readable</em> to the extent that people can use it to easily and reliably
 <ul>
 <li>predict,</li>
@@ -369,7 +375,8 @@ div.csl-indent {
 <section id="code-style" class="level2">
 <h2 class="anchored" data-anchor-id="code-style">Code style</h2>
 <ul>
-<li>iNéwritteNélanguagEáconventionSéfoRîpunctuatioNøcapitalizatioNîaiDécomprehensioNébYéindicatinGéstructurE
+<li>iNéwritteNélanguagEáconventionSéfoRîpunctuatioNøcapitalizatioNîaiDécompr<br>
+ehensioNébYéindicatinGéstructurE
 <ul>
 <li>this is what it’s like to read poorly-styled code</li>
 <li>conventions only work if they’re <em>shared</em> conventions</li>
@@ -394,16 +401,79 @@ div.csl-indent {
 <li>Control-I in RStudio will do automagic indenting</li>
 </ul></li>
 <li>In multiline function calls, 1 argument = 1 line</li>
-<li>Use comments to explain “why” rather than “what” or “how”
-<ul>
-<li>DH’s comment convention:</li>
-<li>Single <code>#</code> is for code that isn’t currently used but might need to be brought back (eg, for debugging)</li>
-<li><code>##</code> is for substantial comments</li>
-</ul></li>
 </ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>long_function_name <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">a =</span> <span class="st">"a long argument"</span>,</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>                               <span class="at">b =</span> <span class="st">"another argument"</span>,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>                               <span class="at">c =</span> <span class="st">"another long argument"</span>) {</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># As usual code is indented by two spaces.</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
-<section id="spaces" class="level2">
-<h2 class="anchored" data-anchor-id="spaces">Spaces</h2>
+<section id="using-comments-to-explain-why-and-indicate-structure" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="using-comments-to-explain-why-and-indicate-structure">Using comments to explain why and indicate structure</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>loading_table <span class="ot">=</span> <span class="cf">function</span>(model, </span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>                         <span class="at">threshold =</span> .<span class="dv">3</span>, </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">quiet =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">path =</span> <span class="cn">NULL</span>, </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>                         <span class="at">overwrite =</span> <span class="cn">FALSE</span>) {</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    loadings_unfltd <span class="ot">=</span> model <span class="sc">|&gt;</span> </span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>        <span class="do">## Extract loadings and tidy</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        <span class="fu">loadings</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>        <span class="fu">unclass</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>        <span class="fu">as_tibble</span>(<span class="at">rownames =</span> <span class="st">'item'</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>        <span class="do">## loadings() returns a wide item x factor matrix</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>        <span class="fu">pivot_longer</span>(<span class="sc">-</span>item, <span class="at">names_to =</span> <span class="st">'factor'</span>, <span class="at">values_to =</span> <span class="st">'loading'</span>)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>        <span class="do">## Will filter based on `threshold` below</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="do">## Dropped items</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="sc">!</span>quiet) {</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>        loadings_df <span class="ot">=</span> <span class="fu">filter</span>(loadings_unfltd, <span class="fu">abs</span>(loading) <span class="sc">&gt;</span> threshold)</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>        dropped_df <span class="ot">=</span> loadings_unfltd <span class="sc">|&gt;</span> </span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>            <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> <span class="st">'factor'</span>, <span class="at">values_from =</span> <span class="st">'loading'</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>            <span class="fu">anti_join</span>(<span class="fu">pivot_wider</span>(loadings_df, </span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">names_from =</span> <span class="st">'factor'</span>, </span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">values_from =</span> <span class="st">'loading'</span>), </span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>                      <span class="at">by =</span> <span class="st">'item'</span>)</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>        <span class="fu">message</span>(<span class="st">'Dropped items'</span>)</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>        <span class="fu">print</span>(dropped_df)</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>    <span class="do">## Cross-loaded items</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="sc">!</span>quiet) {</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>        xload_df <span class="ot">=</span> loadings_df <span class="sc">|&gt;</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>            <span class="fu">add_count</span>(item) <span class="sc">|&gt;</span></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>            <span class="fu">filter</span>(n <span class="sc">&gt;</span> <span class="dv">1</span>) <span class="sc">|&gt;</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>            <span class="fu">select</span>(<span class="sc">-</span>n) <span class="sc">|&gt;</span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>            <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> <span class="st">'factor'</span>, <span class="at">values_from =</span> <span class="st">'loading'</span>)</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>        <span class="fu">message</span>(<span class="st">'Cross-loaded items'</span>)</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>        <span class="fu">print</span>(xload_df)</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>    loadings_clean <span class="ot">=</span> loadings_df <span class="sc">|&gt;</span></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>        <span class="fu">anti_join</span>(xload_df, <span class="at">by =</span> <span class="st">'item'</span>) <span class="sc">|&gt;</span></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>        <span class="do">## Spread back out to item x factor for presentation</span></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>        <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> <span class="st">'factor'</span>, <span class="at">values_from =</span> <span class="st">'loading'</span>) <span class="sc">|&gt;</span></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>        <span class="fu">arrange</span>(<span class="fu">across</span>(<span class="fu">starts_with</span>(<span class="st">'MR'</span>), desc)) <span class="sc">|&gt;</span> </span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>        <span class="fu">left_join</span>(vis_labels, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">'item'</span> <span class="ot">=</span> <span class="st">'tag'</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>        <span class="fu">select</span>(<span class="sc">-</span>item.y)</span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(path)) {</span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> (<span class="sc">!</span><span class="fu">file.exists</span>(path) <span class="sc">||</span> overwrite) {</span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>            <span class="fu">write_csv</span>(loadings_clean, path, <span class="at">na =</span> <span class="st">''</span>)</span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> (<span class="fu">file.exists</span>(path) <span class="sc">&amp;&amp;</span> <span class="sc">!</span>overwrite) {</span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>            <span class="fu">warning</span>(<span class="st">'CSV already exists; skipping overwrite'</span>)</span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(loadings_clean)</span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="spaces-let-your-code-b-r-e-a-t-h-e" class="level2">
+<h2 class="anchored" data-anchor-id="spaces-let-your-code-b-r-e-a-t-h-e">Spaces: Let your code b r e a t h e</h2>
 <ul>
 <li>Always put spaces after commas, and never before (like English)</li>
 <li>But not between a function name and the parentheses (like math)</li>
@@ -419,15 +489,15 @@ div.csl-indent {
 <li><code>}</code> should be the first character on the line</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (y <span class="sc">==</span> <span class="dv">0</span>) {</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (x <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">log</span>(x)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">message</span>(<span class="st">"x is negative or zero"</span>)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  y<span class="sc">^</span>x</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (y <span class="sc">==</span> <span class="dv">0</span>) {</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (x <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">log</span>(x)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">message</span>(<span class="st">"x is negative or zero"</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  y<span class="sc">^</span>x</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="boolean-variables-vs.-control-flow" class="level2">
@@ -449,6 +519,9 @@ div.csl-indent {
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
+<div id="ref-BryanCodeSmellsFeels2018" class="csl-entry" role="doc-biblioentry">
+Bryan, Jenny. 2018. <span>“Code Smells and Feels.”</span> Presented at the <span class="nocase">useR</span> 2018, July 21. <a href="https://www.youtube.com/watch?v=7oyiPBjLAWY">https://www.youtube.com/watch?v=7oyiPBjLAWY</a>.
+</div>
 <div id="ref-BuckensSelfdocumentingMythHow2019" class="csl-entry" role="doc-biblioentry">
 Buckens, Wouter. 2019. <span>“Self-Documenting Is a Myth, and How to Make Your Code Self-Documenting.”</span> <span>woubuc</span>. August 3, 2019. <a href="https://blog.woubuc.be/post/self-documenting-code-is-a-myth/">https://blog.woubuc.be/post/self-documenting-code-is-a-myth/</a>.
 </div>
