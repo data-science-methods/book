@@ -13,8 +13,8 @@
 
 ## Hardware 
 
-- Most sessions will involve writing code in class
-- I strongly recommend *against* tablets (iPad, Surface) for this course
+- Many sessions will involve writing code in class
+- Tablets (iPad, Surface) will only work if you're using them to access a cloud computing setup
 - I recommend that your machine have at least
     - 200 GB free hard drive space
     - 8 GB RAM
@@ -38,12 +38,12 @@ However, like many other technologies, they were originally developed using able
 
 [R](https://cran.r-project.org/) and [RStudio](https://rstudio.com/products/rstudio/download/)
 
-</br>
+\
 
-- In 2020 R had a major release (version 4)
-- Addressing some bugs surrounding version 4 has led to rapid development in R and RStudio
+- R is updated regularly, and there's a breaking change about once per year
+- RStudio also regularly gets new features, though breaking changes are less frequent
 - For consistency in class, **I encourage you to use the latest version of both R and RStudio**
-- [Help on switching between different versions of R](https://support.rstudio.com/hc/en-us/articles/200486138-Changing-R-versions-for-the-RStudio-Desktop-IDE)
+- I use [rig](https://github.com/r-lib/rig) to switch between different versions of R
 
 ## Compilers
 
@@ -119,7 +119,7 @@ Once your package manager is ready to go, install git and pandoc
 
 - You'll need a [GitHub](https://github.com/) account and [Sourcetree](https://www.sourcetreeapp.com/)
 
-</br>
+\
 
 - GitHub is [owned by Microsoft](https://www.cnbc.com/2020/11/29/microsofts-github-has-become-magnet-for-thorny-issues-like-riaa.html)
 - And there are concerns about 

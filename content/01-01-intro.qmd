@@ -29,11 +29,12 @@ Is Not:
 - a statistics course (in the way you think)
 - a general introduction to software engineering
 - a basic introduction to R
+- an introduction to machine learning or AI
 
 Is: 
 
 - an introduction to data science
-- about exploratory data analysis, data management, and reproducibility
+- about exploratory data analysis, data management, reproducibility — and a little philosophy of science
 - habituation to some good software engineering practices that are especially valuable for data science work
 
 
@@ -41,29 +42,28 @@ Is:
 
 By the end of the course, students will be able to 
 
-1. apply concepts from software engineering and philosophy of science to methodological decisions in data science, such as
-    - object-oriented and functional programming paradigms
+1. Apply concepts from software engineering and philosophy of science to methodological decisions in data science (CIS PLO 2 and 4; PSY PLO 2 and 6), such as
+    - debugging techniques and functional programming
     - exploratory data analysis and the data-phenomenon-theory distinction
 	- reproducibility vs. replicability
+	- data justice
 
-3. use exploratory data analysis techniques and tools to identify potential data errors and potential phenomena for further analysis
+2. Use exploratory data analysis techniques and tools to identify potential data errors and potential phenomena for further analysis (CIS PLO 2 and 4; PSY PLO 2 and 6)
 
-2. clean raw data and produce a reproducible codebook for both downstream analysis and public release of data according to FAIR standards [@WilkinsonFAIRGuidingPrinciples2016]
+3. Manage data, analysis, and outputs for reproducibility using practices such as data management, clear directory structure, self-documenting code, version control, and code review (CIS PLO 2, 3, 4; PSY PLO 2, 4, 6)
 
-4. manage data, analysis, and outputs for reproducibility, using practices such as
-    - reproducible data cleaning
-    - clear directory structure [@WilsonGoodEnoughPractices2017]
-    - self-documenting code
-    - version control
-    - build automation
+4. Identify ethical responsibilities to data providers and subjects and take these responsibilities into account during data collection, analysis, and communication (CIS PLO 2 and 3; PSY PLO 4 and 6)
+
+5. Identify and justify key methodological decisions, analysis practices, exploratory data analysis findings, and ethical responsibilities to data subjects in written and oral media (CIS PLO 3; PSY PLO 4)
 
 
-## Prerequisites ##
+## Prerequisites
 
-*This course assumes basic competence with introductory R.* 
+This course assumes **basic competence** with **introductory R**. 
 
 "Introductory R" 
  ~ Lessons 1-5 of the Carpentries ["R for Social Scientists"](https://datacarpentry.org/r-socialsci/) curriculum
+
     - Installing R and packages
     - Working in the R Studio IDE
     - Common data types
@@ -71,22 +71,26 @@ By the end of the course, students will be able to
     - Tidyverse R:  `mutate()`, `filter()`, `select()`; plotting with `ggplot2`
 
 "Basic competence"
- ~ Given time and a reference ([cheatsheet](https://www.rstudio.com/resources/cheatsheets/), Stack Exchange, mentor) you can figure out how to solve a problem
+ ~ Given time and a reference ([cheatsheet](https://rstudio.github.io/cheatsheets/), Stack Exchange, partner, mentor) you can figure out how to solve a problem
 
-
-## Requirements and weekly routine ##
-
-*This is a very rough approximation*
-
-- Tuesdays:  Mix of discussion and lecture based on assigned readings
-- Thursdays:  Live coding leading into your own work
-- Labs:  6, done in pairs and submitted via GitHub for automated feedback
-- Running project:  Practicing ideas from the course on a data set of your choice
 
 ## Course materials ##
 
 - Course website: <https://data-science-methods.github.io/>
 - All readings are linked on the schedule
 - [Lecture notes](https://data-science-methods.github.io/book/) takes you to a pretty version of my slides and notes for class
+- [Cheatsheets](https://rstudio.github.io/cheatsheets/) might be useful, depending on how much R background you have
+
+
+## Requirements ##
+
+Class time
+ ~ Mix of lecture/live coding, seminar-style discussion, and work time
+    
+Labs
+ ~ 6, done in pairs/small groups and submitted via GitHub
+
+Semester-long project
+ ~ Practicing ideas from the course on a data set of your choice
 
 ## References 

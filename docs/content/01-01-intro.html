@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.151">
+<meta name="generator" content="quarto-1.2.280">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -19,25 +19,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
-}
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
 }
 </style>
 
@@ -255,8 +236,8 @@ div.csl-indent {
   <li><a href="#what-this-course-isnt-and-is" id="toc-what-this-course-isnt-and-is" class="nav-link" data-scroll-target="#what-this-course-isnt-and-is">What this course isn’t, and is</a></li>
   <li><a href="#learning-outcomes" id="toc-learning-outcomes" class="nav-link" data-scroll-target="#learning-outcomes">Learning outcomes</a></li>
   <li><a href="#prerequisites" id="toc-prerequisites" class="nav-link" data-scroll-target="#prerequisites">Prerequisites</a></li>
-  <li><a href="#requirements-and-weekly-routine" id="toc-requirements-and-weekly-routine" class="nav-link" data-scroll-target="#requirements-and-weekly-routine">Requirements and weekly routine</a></li>
   <li><a href="#course-materials" id="toc-course-materials" class="nav-link" data-scroll-target="#course-materials">Course materials</a></li>
+  <li><a href="#requirements" id="toc-requirements" class="nav-link" data-scroll-target="#requirements">Requirements</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
 </nav>
@@ -309,11 +290,12 @@ div.csl-indent {
 <li>a statistics course (in the way you think)</li>
 <li>a general introduction to software engineering</li>
 <li>a basic introduction to R</li>
+<li>an introduction to machine learning or AI</li>
 </ul>
 <p>Is:</p>
 <ul>
 <li>an introduction to data science</li>
-<li>about exploratory data analysis, data management, and reproducibility</li>
+<li>about exploratory data analysis, data management, reproducibility — and a little philosophy of science</li>
 <li>habituation to some good software engineering practices that are especially valuable for data science work</li>
 </ul>
 </section>
@@ -321,47 +303,39 @@ div.csl-indent {
 <h2 class="anchored" data-anchor-id="learning-outcomes">Learning outcomes</h2>
 <p>By the end of the course, students will be able to</p>
 <ol type="1">
-<li><p>apply concepts from software engineering and philosophy of science to methodological decisions in data science, such as</p>
+<li><p>Apply concepts from software engineering and philosophy of science to methodological decisions in data science (CIS PLO 2 and 4; PSY PLO 2 and 6), such as</p>
 <ul>
-<li>object-oriented and functional programming paradigms</li>
+<li>debugging techniques and functional programming</li>
 <li>exploratory data analysis and the data-phenomenon-theory distinction</li>
 <li>reproducibility vs.&nbsp;replicability</li>
+<li>data justice</li>
 </ul></li>
-<li><p>use exploratory data analysis techniques and tools to identify potential data errors and potential phenomena for further analysis</p></li>
-<li><p>clean raw data and produce a reproducible codebook for both downstream analysis and public release of data according to FAIR standards <span class="citation" data-cites="WilkinsonFAIRGuidingPrinciples2016">(<a href="../references.html#ref-WilkinsonFAIRGuidingPrinciples2016" role="doc-biblioref">Wilkinson et al. 2016</a>)</span></p></li>
-<li><p>manage data, analysis, and outputs for reproducibility, using practices such as</p>
-<ul>
-<li>reproducible data cleaning</li>
-<li>clear directory structure <span class="citation" data-cites="WilsonGoodEnoughPractices2017">(<a href="../references.html#ref-WilsonGoodEnoughPractices2017" role="doc-biblioref">Wilson et al. 2017</a>)</span></li>
-<li>self-documenting code</li>
-<li>version control</li>
-<li>build automation</li>
-</ul></li>
+<li><p>Use exploratory data analysis techniques and tools to identify potential data errors and potential phenomena for further analysis (CIS PLO 2 and 4; PSY PLO 2 and 6)</p></li>
+<li><p>Manage data, analysis, and outputs for reproducibility using practices such as data management, clear directory structure, self-documenting code, version control, and code review (CIS PLO 2, 3, 4; PSY PLO 2, 4, 6)</p></li>
+<li><p>Identify ethical responsibilities to data providers and subjects and take these responsibilities into account during data collection, analysis, and communication (CIS PLO 2 and 3; PSY PLO 4 and 6)</p></li>
+<li><p>Identify and justify key methodological decisions, analysis practices, exploratory data analysis findings, and ethical responsibilities to data subjects in written and oral media (CIS PLO 3; PSY PLO 4)</p></li>
 </ol>
 </section>
 <section id="prerequisites" class="level2">
 <h2 class="anchored" data-anchor-id="prerequisites">Prerequisites</h2>
-<p><em>This course assumes basic competence with introductory R.</em></p>
+<p>This course assumes <strong>basic competence</strong> with <strong>introductory R</strong>.</p>
 <dl>
 <dt>“Introductory R”</dt>
 <dd>
-Lessons 1-5 of the Carpentries <a href="https://datacarpentry.org/r-socialsci/">“R for Social Scientists”</a> curriculum - Installing R and packages - Working in the R Studio IDE - Common data types - Reading and writing CSV files - Tidyverse R: <code>mutate()</code>, <code>filter()</code>, <code>select()</code>; plotting with <code>ggplot2</code>
+<p>Lessons 1-5 of the Carpentries <a href="https://datacarpentry.org/r-socialsci/">“R for Social Scientists”</a> curriculum</p>
+<ul>
+<li>Installing R and packages</li>
+<li>Working in the R Studio IDE</li>
+<li>Common data types</li>
+<li>Reading and writing CSV files</li>
+<li>Tidyverse R: <code>mutate()</code>, <code>filter()</code>, <code>select()</code>; plotting with <code>ggplot2</code></li>
+</ul>
 </dd>
 <dt>“Basic competence”</dt>
 <dd>
-Given time and a reference (<a href="https://www.rstudio.com/resources/cheatsheets/">cheatsheet</a>, Stack Exchange, mentor) you can figure out how to solve a problem
+Given time and a reference (<a href="https://rstudio.github.io/cheatsheets/">cheatsheet</a>, Stack Exchange, partner, mentor) you can figure out how to solve a problem
 </dd>
 </dl>
-</section>
-<section id="requirements-and-weekly-routine" class="level2">
-<h2 class="anchored" data-anchor-id="requirements-and-weekly-routine">Requirements and weekly routine</h2>
-<p><em>This is a very rough approximation</em></p>
-<ul>
-<li>Tuesdays: Mix of discussion and lecture based on assigned readings</li>
-<li>Thursdays: Live coding leading into your own work</li>
-<li>Labs: 6, done in pairs and submitted via GitHub for automated feedback</li>
-<li>Running project: Practicing ideas from the course on a data set of your choice</li>
-</ul>
 </section>
 <section id="course-materials" class="level2">
 <h2 class="anchored" data-anchor-id="course-materials">Course materials</h2>
@@ -369,20 +343,30 @@ Given time and a reference (<a href="https://www.rstudio.com/resources/cheatshee
 <li>Course website: <a href="https://data-science-methods.github.io/" class="uri">https://data-science-methods.github.io/</a></li>
 <li>All readings are linked on the schedule</li>
 <li><a href="https://data-science-methods.github.io/book/">Lecture notes</a> takes you to a pretty version of my slides and notes for class</li>
+<li><a href="https://rstudio.github.io/cheatsheets/">Cheatsheets</a> might be useful, depending on how much R background you have</li>
 </ul>
+</section>
+<section id="requirements" class="level2">
+<h2 class="anchored" data-anchor-id="requirements">Requirements</h2>
+<dl>
+<dt>Class time</dt>
+<dd>
+Mix of lecture/live coding, seminar-style discussion, and work time
+</dd>
+<dt>Labs</dt>
+<dd>
+6, done in pairs/small groups and submitted via GitHub
+</dd>
+<dt>Semester-long project</dt>
+<dd>
+Practicing ideas from the course on a data set of your choice
+</dd>
+</dl>
 </section>
 <section id="references" class="level2">
 <h2 class="anchored" data-anchor-id="references">References</h2>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
-<div id="ref-WilkinsonFAIRGuidingPrinciples2016" class="csl-entry" role="doc-biblioentry">
-Wilkinson, Mark D., Michel Dumontier, IJsbrand Jan Aalbersberg, Gabrielle Appleton, Myles Axton, Arie Baak, Niklas Blomberg, et al. 2016. <span>“The <span>FAIR Guiding Principles</span> for Scientific Data Management and Stewardship.”</span> <em>Scientific Data</em> 3 (1, 1): 1–9. <a href="https://doi.org/10.1038/sdata.2016.18">https://doi.org/10.1038/sdata.2016.18</a>.
-</div>
-<div id="ref-WilsonGoodEnoughPractices2017" class="csl-entry" role="doc-biblioentry">
-Wilson, Greg, Jennifer Bryan, Karen Cranston, Justin Kitzes, Lex Nederbragt, and Tracy K. Teal. 2017. <span>“Good Enough Practices in Scientific Computing.”</span> <em>PLOS Computational Biology</em> 13 (6): e1005510. <a href="https://doi.org/10.1371/journal.pcbi.1005510">https://doi.org/10.1371/journal.pcbi.1005510</a>.
-</div>
-</div>
 </section>
 
 </main> <!-- /main -->
