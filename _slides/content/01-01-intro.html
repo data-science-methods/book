@@ -7,7 +7,7 @@
 <link href="01-01-intro_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="01-01-intro_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="01-01-intro_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.2.151">
+  <meta name="generator" content="quarto-1.2.280">
 
   <title>intro</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -26,25 +26,6 @@
       width: 0.8em;
       margin: 0 0.8em 0.2em -1.6em;
       vertical-align: middle;
-    }
-    div.csl-bib-body { }
-    div.csl-entry {
-      clear: both;
-    }
-    .hanging div.csl-entry {
-      margin-left:2em;
-      text-indent:-2em;
-    }
-    div.csl-left-margin {
-      min-width:2em;
-      float:left;
-    }
-    div.csl-right-inline {
-      margin-left:2em;
-      padding-left:1em;
-    }
-    div.csl-indent {
-      margin-left: 2em;
     }
   </style>
   <link rel="stylesheet" href="01-01-intro_files/libs/revealjs/dist/theme/quarto.css" id="theme">
@@ -373,11 +354,12 @@
 <li>a statistics course (in the way you think)</li>
 <li>a general introduction to software engineering</li>
 <li>a basic introduction to R</li>
+<li>an introduction to machine learning or AI</li>
 </ul>
 <p>Is:</p>
 <ul>
 <li>an introduction to data science</li>
-<li>about exploratory data analysis, data management, and reproducibility</li>
+<li>about exploratory data analysis, data management, reproducibility — and a little philosophy of science</li>
 <li>habituation to some good software engineering practices that are especially valuable for data science work</li>
 </ul>
 </section>
@@ -385,47 +367,39 @@
 <h2>Learning outcomes</h2>
 <p>By the end of the course, students will be able to</p>
 <ol type="1">
-<li><p>apply concepts from software engineering and philosophy of science to methodological decisions in data science, such as</p>
+<li><p>Apply concepts from software engineering and philosophy of science to methodological decisions in data science (CIS PLO 2 and 4; PSY PLO 2 and 6), such as</p>
 <ul>
-<li>object-oriented and functional programming paradigms</li>
+<li>debugging techniques and functional programming</li>
 <li>exploratory data analysis and the data-phenomenon-theory distinction</li>
 <li>reproducibility vs.&nbsp;replicability</li>
+<li>data justice</li>
 </ul></li>
-<li><p>use exploratory data analysis techniques and tools to identify potential data errors and potential phenomena for further analysis</p></li>
-<li><p>clean raw data and produce a reproducible codebook for both downstream analysis and public release of data according to FAIR standards <span class="citation" data-cites="WilkinsonFAIRGuidingPrinciples2016">(<a href="#/references" role="doc-biblioref" onclick="">Wilkinson et al. 2016</a>)</span></p></li>
-<li><p>manage data, analysis, and outputs for reproducibility, using practices such as</p>
-<ul>
-<li>reproducible data cleaning</li>
-<li>clear directory structure <span class="citation" data-cites="WilsonGoodEnoughPractices2017">(<a href="#/references" role="doc-biblioref" onclick="">Wilson et al. 2017</a>)</span></li>
-<li>self-documenting code</li>
-<li>version control</li>
-<li>build automation</li>
-</ul></li>
+<li><p>Use exploratory data analysis techniques and tools to identify potential data errors and potential phenomena for further analysis (CIS PLO 2 and 4; PSY PLO 2 and 6)</p></li>
+<li><p>Manage data, analysis, and outputs for reproducibility using practices such as data management, clear directory structure, self-documenting code, version control, and code review (CIS PLO 2, 3, 4; PSY PLO 2, 4, 6)</p></li>
+<li><p>Identify ethical responsibilities to data providers and subjects and take these responsibilities into account during data collection, analysis, and communication (CIS PLO 2 and 3; PSY PLO 4 and 6)</p></li>
+<li><p>Identify and justify key methodological decisions, analysis practices, exploratory data analysis findings, and ethical responsibilities to data subjects in written and oral media (CIS PLO 3; PSY PLO 4)</p></li>
 </ol>
 </section>
 <section id="prerequisites" class="slide level2">
 <h2>Prerequisites</h2>
-<p><em>This course assumes basic competence with introductory R.</em></p>
+<p>This course assumes <strong>basic competence</strong> with <strong>introductory R</strong>.</p>
 <dl>
 <dt>“Introductory R”</dt>
 <dd>
-Lessons 1-5 of the Carpentries <a href="https://datacarpentry.org/r-socialsci/">“R for Social Scientists”</a> curriculum - Installing R and packages - Working in the R Studio IDE - Common data types - Reading and writing CSV files - Tidyverse R: <code>mutate()</code>, <code>filter()</code>, <code>select()</code>; plotting with <code>ggplot2</code>
+<p>Lessons 1-5 of the Carpentries <a href="https://datacarpentry.org/r-socialsci/">“R for Social Scientists”</a> curriculum</p>
+<ul>
+<li>Installing R and packages</li>
+<li>Working in the R Studio IDE</li>
+<li>Common data types</li>
+<li>Reading and writing CSV files</li>
+<li>Tidyverse R: <code>mutate()</code>, <code>filter()</code>, <code>select()</code>; plotting with <code>ggplot2</code></li>
+</ul>
 </dd>
 <dt>“Basic competence”</dt>
 <dd>
-Given time and a reference (<a href="https://www.rstudio.com/resources/cheatsheets/">cheatsheet</a>, Stack Exchange, mentor) you can figure out how to solve a problem
+Given time and a reference (<a href="https://rstudio.github.io/cheatsheets/">cheatsheet</a>, Stack Exchange, partner, mentor) you can figure out how to solve a problem
 </dd>
 </dl>
-</section>
-<section id="requirements-and-weekly-routine" class="slide level2">
-<h2>Requirements and weekly routine</h2>
-<p><em>This is a very rough approximation</em></p>
-<ul>
-<li>Tuesdays: Mix of discussion and lecture based on assigned readings</li>
-<li>Thursdays: Live coding leading into your own work</li>
-<li>Labs: 6, done in pairs and submitted via GitHub for automated feedback</li>
-<li>Running project: Practicing ideas from the course on a data set of your choice</li>
-</ul>
 </section>
 <section id="course-materials" class="slide level2">
 <h2>Course materials</h2>
@@ -433,20 +407,30 @@ Given time and a reference (<a href="https://www.rstudio.com/resources/cheatshee
 <li>Course website: <a href="https://data-science-methods.github.io/" class="uri">https://data-science-methods.github.io/</a></li>
 <li>All readings are linked on the schedule</li>
 <li><a href="https://data-science-methods.github.io/book/">Lecture notes</a> takes you to a pretty version of my slides and notes for class</li>
+<li><a href="https://rstudio.github.io/cheatsheets/">Cheatsheets</a> might be useful, depending on how much R background you have</li>
 </ul>
 </section>
-<section id="references" class="slide level2 smaller scrollable">
+<section id="requirements" class="slide level2">
+<h2>Requirements</h2>
+<dl>
+<dt>Class time</dt>
+<dd>
+Mix of lecture/live coding, seminar-style discussion, and work time
+</dd>
+<dt>Labs</dt>
+<dd>
+6, done in pairs/small groups and submitted via GitHub
+</dd>
+<dt>Semester-long project</dt>
+<dd>
+Practicing ideas from the course on a data set of your choice
+</dd>
+</dl>
+</section>
+<section id="references" class="slide level2">
 <h2>References</h2>
 <div class="footer footer-default">
 
-</div>
-<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
-<div id="ref-WilkinsonFAIRGuidingPrinciples2016" class="csl-entry" role="doc-biblioentry">
-Wilkinson, Mark D., Michel Dumontier, IJsbrand Jan Aalbersberg, Gabrielle Appleton, Myles Axton, Arie Baak, Niklas Blomberg, et al. 2016. <span>“The <span>FAIR Guiding Principles</span> for Scientific Data Management and Stewardship.”</span> <em>Scientific Data</em> 3 (1, 1): 1–9. <a href="https://doi.org/10.1038/sdata.2016.18">https://doi.org/10.1038/sdata.2016.18</a>.
-</div>
-<div id="ref-WilsonGoodEnoughPractices2017" class="csl-entry" role="doc-biblioentry">
-Wilson, Greg, Jennifer Bryan, Karen Cranston, Justin Kitzes, Lex Nederbragt, and Tracy K. Teal. 2017. <span>“Good Enough Practices in Scientific Computing.”</span> <em>PLOS Computational Biology</em> 13 (6): e1005510. <a href="https://doi.org/10.1371/journal.pcbi.1005510">https://doi.org/10.1371/journal.pcbi.1005510</a>.
-</div>
 </div>
 </section></section>
     </div>
@@ -626,9 +610,9 @@ Wilson, Greg, Jennifer Bryan, Karen Cranston, Justin Kitzes, Lex Nederbragt, and
         // The "normal" size of the presentation, aspect ratio will be preserved
         // when the presentation is scaled to fit different resolutions. Can be
         // specified using percentage units.
-        width: 1050,
+        width: 1440,
 
-        height: 700,
+        height: 1080,
 
         // Factor of the display size that should remain empty around the content
         margin: 0.1,

@@ -7,7 +7,7 @@
 <link href="02-02-git_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="02-02-git_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="02-02-git_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.1.163">
+  <meta name="generator" content="quarto-1.2.280">
 
   <title>git</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -344,7 +344,7 @@
 <div class="column">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="http://www.phdcomics.com/comics/archive/phd101212s.gif" height="500"></p>
+<p><img data-src="http://www.phdcomics.com/comics/archive/phd101212s.gif" style="width:80.0%"></p>
 <p></p><figcaption>Piled Higher and Deeper comic on file names. Source: <a href="https://phdcomics.com/comics.php?f=1531" class="uri">https://phdcomics.com/comics.php?f=1531</a></figcaption><p></p>
 </figure>
 </div>
@@ -376,52 +376,55 @@
 <h2>Gitting started</h2>
 <ul>
 <li><a href="https://www.google.com/search?q=git+is+too+complicated">git is very hard</a></li>
-<li>We’re going to use the <a href="https://www.sourcetreeapp.com/">Sourcetree GUI</a> to ease into things</li>
+<li>We’re going to use the <a href="https://www.gitkraken.com/">GitKraken GUI</a> to ease into things</li>
 </ul>
 </section>
 <section id="initial-commit" class="slide level2">
 <h2>Initial commit</h2>
-<div class="columns">
-<div class="column">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="images/02-basics/new_local_repo.png" height="500"></p>
-<p></p><figcaption>Creating a new local repository in <code>learning-git</code></figcaption><p></p>
-</figure>
-</div>
-</div><div class="column">
+
+<img data-src="images/02-basics/new_local_repo.png" style="width:80.0%" class="r-stretch quarto-figure-center"><p class="caption">Location of the new local repository button in GitKraken</p><ul>
+<li>Install GitKraken and go through the configuration steps
 <ul>
-<li>Install Sourcetree and go through the configuration steps</li>
-<li>Then you’ll see the (empty) repository browser</li>
-<li>Create a folder called something like <code>learning-git</code></li>
-<li>Then, in Sourcetree:
+<li>Optional: Preferences -&gt; UI Customization -&gt; Theme -&gt; GitKraken Light</li>
+</ul></li>
+<li>Create a new local repository
 <ul>
-<li>On the Local tab</li>
-<li>Select New … &gt; Create a local repository (or) Drag and drop the folder on to the browser</li>
+<li>New Tab -&gt; Repositories -&gt; Create a Repository -&gt; Laptop symbol</li>
 </ul></li>
 </ul>
-</div>
-</div>
 </section>
 <section class="slide level2">
 
+
+<img data-src="images/02-basics/learning-git.png" style="width:80.0%" class="r-stretch quarto-figure-center"><p class="caption">Creating a new local repository in <code>learning-git</code> with GitKraken</p><ul>
+<li>Name the new repo <code>learning-git</code></li>
+<li>Outside of GitKraken, create a folder for materials for this class, and then a subfolder for livecoding exercises. Use this livecoding folder for “Initialize in.”</li>
+</ul>
+</section>
+<section class="slide level2">
+
+
+<img data-src="images/02-basics/open-folder.png" style="width:80.0%" class="r-stretch quarto-figure-center"><p class="caption">Open your OS’s file browser to the new repo</p><ul>
+<li>GitKraken creates a new folder, <code>learning-git</code>, with the file <code>README.md</code>
 <ul>
-<li>You can open the repository in Sourcetree, but it’s not interesting yet</li>
-<li>In <code>learning-git</code>, create a text file, eg, <code>testing.txt</code></li>
-<li>Sourcetree’s File Status panel shows the new file, ready to be tracked</li>
+<li><code>md</code> is Markdown, a plain-text format that can be read by any text editor</li>
+</ul></li>
+<li>The context (right-click) menu for a file has shortcuts to open the file or show it in your OS’s file browser</li>
+<li>For now, open the file in GitKraken’s built-in text editor
+<ul>
+<li>Click on the file to bring up the viewer</li>
+<li>Then click “Edit this file”</li>
+</ul></li>
+<li>Add some text and save (command/control-S)</li>
+<li>GitKraken automatically opens up the file stage pane</li>
 </ul>
 </section>
 <section id="tracking-changes" class="slide level2">
 <h2>Tracking changes</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="images/02-basics/initial_commit.png" height="300"></p>
-<p></p><figcaption>Making your initial commit</figcaption><p></p>
-</figure>
-</div>
-<ul>
-<li>Tracking changes to a file involves two steps: <strong>Adding</strong> and <strong>committing</strong></li>
-<li><strong>Add</strong>: Click the checkmark
+
+<img data-src="images/02-basics/initial_commit.png" style="width:80.0%" class="r-stretch quarto-figure-center"><p class="caption">Making your initial commit</p><ul>
+<li>Tracking changes to a file involves two steps: <strong>Staging</strong> and <strong>committing</strong></li>
+<li><strong>Stage</strong>: You can stage files one at a time, or use the “Stage all changes” button
 <ul>
 <li>This tells git that we want to store these changes to the file in its archive</li>
 </ul></li>
@@ -429,45 +432,25 @@
 <ul>
 <li>This tells git to go ahead and do the archiving process</li>
 </ul></li>
+<li>The commit is now displayed in the history panel</li>
 </ul>
-</section>
-<section class="slide level2">
-
-<ul>
-<li>The commit is now displayed in the History panel</li>
-</ul>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="images/02-basics/history.png" height="500"></p>
-<p></p><figcaption>The History panel after our first commit</figcaption><p></p>
-</figure>
-</div>
-<p><em>Make a few more changes to the file. Practice adding and committing them and note how the changes accumulate in the History panel.</em></p>
+<p><em>Make a few more changes to the file. Practice adding text, removing text, and committing them. Note how the changes accumulate in the history panel, and that you can view each change using Diff View.</em></p>
 </section>
 <section id="time-travel" class="slide level2">
 <h2>Time travel</h2>
 <ul>
 <li>We can <strong>checkout</strong> previous commits to work with old versions of our files</li>
 <li>In the example, suppose I made a commit with a mistake (my code stopped working or whatever)</li>
-<li>In the History panel, right-click on a previous commit and select Checkout…</li>
+<li>In the history panel, right-click on a previous commit and select Checkout this commit</li>
 </ul>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="images/02-basics/checkout.png" height="400"></p>
-<p></p><figcaption>Checking out an old commit to travel through time</figcaption><p></p>
-</figure>
-</div>
-</section>
+
+<img data-src="images/02-basics/checkout.png" style="width:80.0%" class="r-stretch quarto-figure-center"><p class="caption">Checking out an old commit to travel through time</p></section>
 <section class="slide level2">
 
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="images/02-basics/changing_past.png" height="500"></p>
-<p></p><figcaption>Trying (and failing) to change the past. My current HEAD commit will disappear as soon as I check out main.</figcaption><p></p>
-</figure>
-</div>
-<ul>
-<li>Sourcetree warns us that we’ll be in an <strong>undetached head state</strong></li>
+
+<img data-src="images/02-basics/changing_past.png" style="width:80.0%" class="r-stretch quarto-figure-center"><p class="caption">Trying (and failing) to change the past. My current HEAD commit will disappear as soon as I check out main.</p><ul>
+<li>We can make changes to the file in the same way as usual,</li>
+<li>But when we go to stage, GitKraken warns us that we’re in an <strong>undetached head state</strong></li>
 <li>To see what this means, try making a change to the file, adding and committing it, then checking out the commit with the <code>main</code> or <code>master</code> tag</li>
 </ul>
 </section>
@@ -485,19 +468,11 @@
 </section>
 <section class="slide level2">
 
-<div class="columns">
-<div class="column" style="width:.7;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="images/02-basics/merge.png" style="width:100.0%"></p>
-<p></p><figcaption>Merging <code>fixing-mistake</code> into <code>main</code></figcaption><p></p>
-</figure>
-</div>
-</div><div class="column" style="width:.3;">
-<ul>
+
+<img data-src="images/02-basics/merge.png" style="width:80.0%" class="r-stretch quarto-figure-center"><p class="caption">Merging <code>fixing-mistake</code> into <code>main</code></p><ul>
 <li>After checking out the previous commit, click on Branch in the toolbar
 <ul>
-<li>Name your new branch something like <code>fixing-mistake</code> (no spaces!)</li>
+<li>Name your new branch <code>fixing-mistake</code> (no spaces!)</li>
 </ul></li>
 <li>Start to work on fixing the mistake in the file, then add and commit as usual</li>
 <li>Now checkout <code>main</code>. Notice:
@@ -508,19 +483,17 @@
 </ul></li>
 <li>After we’ve finished fixing the mistake, we want to <strong>merge</strong> these changes back into <code>main</code>
 <ul>
-<li>Make sure you’re current on <code>main</code></li>
-<li>Right-click on <code>fixing-mistake</code> and select Merge…</li>
+<li>Make sure you’re on <code>main</code></li>
+<li>Right-click on <code>fixing-mistake</code> and select “Merge fixing-mistake into main”</li>
 </ul></li>
 </ul>
-</div>
-</div>
 </section>
 <section class="slide level2">
 
 <ul>
-<li>Sourcetree will bring up a message about <strong>Merge Conflicts</strong>
+<li>GitKraken will show the commit pane, with a warning about <strong>Merge Conflicts</strong>
 <ul>
-<li>This just means that the files you’re combining have conflicting histories, and git wants you to sort out what to keep and what to throw away</li>
+<li>This just means that the files you’re combining have conflicting histories, and git needs you to manually sort out what to keep and what to throw away</li>
 </ul></li>
 </ul>
 <div class="callout callout-important callout-captioned callout-style-default">
@@ -532,7 +505,7 @@
 <p><strong>Important</strong></p>
 </div>
 <div class="callout-content">
-<p>It’s not obvious (there isn’t a big red status symbol anywhere), but git is now in a special conflict-resolution state.</p>
+<p>git is now in a special conflict-resolution state.</p>
 <p>Until you resolve the conflicts and finish the merge, a lot of standard git functionality either won’t work at all or will cause weird problems.</p>
 <p><strong>If git starts giving you a bunch of weird errors, check to see if you’re in the middle of a merge and need to resolve conflicts.</strong></p>
 </div>
@@ -541,131 +514,41 @@
 </section>
 <section class="slide level2">
 
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="images/02-basics/conflicts.png" height="500"></p>
-<p></p><figcaption>Sourcetree’s File status panel indicates which files have conflicts</figcaption><p></p>
-</figure>
-</div>
-<p>After starting the merge, Sourcetree’s File status panel will indicate exactly which files have conflicts.</p>
-</section>
-<section class="slide level2">
 
-<p>Your file will look something like this</p>
-<pre><code>test
-another line
-&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
-this line has a mistake
-=======
-no mistake this time
-&gt;&gt;&gt;&gt;&gt;&gt;&gt; fixing-mistake</code></pre>
-<ul>
-<li>The <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code> and <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code> surround each area of conflict.
-<ul>
-<li>The top part (marked <code>HEAD</code>) shows the state of the current branch</li>
-<li>The bottom part (marked <code>fixing-mistake</code>) shows the state of the branch you’re merging</li>
-</ul></li>
-<li>Simply edit these sections so they’re in the state you want,
-<ul>
-<li>Then save, go back to Sourcetree’s File status panel</li>
-<li>Sourcetree generates a commit message indicating that you’re resolving conflicts to complete a merge</li>
-</ul></li>
+<img data-src="images/02-basics/conflicts.png" class="r-stretch quarto-figure-center"><p class="caption">GitKraken’s merge conflict resolution tool</p><ul>
+<li>GitKraken will pull up a conflict resolution tool</li>
+<li>Choose which versions of conflicted lines to keep, and/or make edits directly in the bottom pane</li>
+<li>The output file will be automatically staged</li>
+<li>Hit “Commit and Merge” to complete the merge</li>
+<li>Main now points to the merge commit</li>
 </ul>
-</section>
-<section class="slide level2">
-
-<p>Afterwards the History panel shows the two branches merging back together</p>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="images/02-basics/post_merge.png" height="500"></p>
-<p></p><figcaption>The History panel shows the branches merging back together</figcaption><p></p>
-</figure>
-</div>
-</section>
-<section id="authenticating-sourcetree-with-github" class="slide level2">
-<h2>Authenticating Sourcetree with GitHub</h2>
-<ol type="1">
-<li>Make sure you’re logged in to GitHub in your default web browser</li>
-<li>In Sourcetree
-<ul>
-<li>Go to a New Tab</li>
-<li>Then Remote (just underneath the tabs)</li>
-<li>Add an account …</li>
-<li><p>Hosting Service: GitHub<br>
-Authentication: OAuth<br>
-Username: [shouldn’t be able to enter anything]</p></li>
-<li>Click “Refresh OAuth Token”</li>
-</ul></li>
-<li>Focus should switch to a new tab in your web browser
-<ul>
-<li>Scroll down and click “Authorize atlassian” green button</li>
-</ul></li>
-<li>Browser should now say “Authentication Successful” and GitHub should send you a security notice via email</li>
-<li>Back in Sourcetree, click okay</li>
-</ol>
 </section>
 <section id="working-with-github-remotes" class="slide level2">
 <h2>Working with GitHub remotes</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="https://happygitwithr.com/img/ours-them.jpeg" height="500"></p>
-<p></p><figcaption>The remote <code>origin</code> lives on GitHub. Source: <a href="https://happygitwithr.com/common-remote-setups.html#ours-you" class="uri">https://happygitwithr.com/common-remote-setups.html#ours-you</a></figcaption><p></p>
-</figure>
-</div>
-<p>A <strong>remote</strong> is a copy of a repository that lives on a server somewhere else</p>
+
+<img data-src="https://happygitwithr.com/img/ours-them.jpeg" style="width:80.0%" class="r-stretch quarto-figure-center"><p class="caption">The remote <code>origin</code> lives on GitHub. Source: <a href="https://happygitwithr.com/common-remote-setups.html#ours-you" class="uri">https://happygitwithr.com/common-remote-setups.html#ours-you</a></p><p>A <strong>remote</strong> is a copy of a repository that lives on a server somewhere else</p>
 </section>
 <section id="working-with-your-own-repos" class="slide level2">
 <h2>Working with your own repos</h2>
 <ul>
-<li>On GitHub, click “New” and walk through the steps to create a new repository
-<ul>
-<li>The name on GitHub doesn’t need to match the local name</li>
-<li>But why wouldn’t you use the same name?</li>
-</ul></li>
-<li>Copy the URL: <code>https://github.com/[username]/learning-git</code></li>
+<li>Look for the Remote section of left panel. Hover over the 0/0 and click to start creating a new remote</li>
+<li>Select GitHub, your account, and then click “Create remote and push local refs”</li>
+<li>GitKraken will take a moment to <strong>push</strong> (upload) the repo, then display a notification</li>
+<li>Click to view the repo on GitHub</li>
+<li>The URL should be <code>https://github.com/[username]/learning-git</code></li>
 </ul>
-<div class="columns">
-<div class="column">
-<ul>
-<li>Back in Sourcetree
-<ol type="1">
-<li>Go to Settings in the toolbar</li>
-<li>Go to the Remotes tab</li>
-<li>Click Add to add a new remote</li>
-</ol></li>
-<li>The standard name for a default remote is <code>origin</code>
-<ul>
-<li>Paste in the GitHub URL</li>
-</ul></li>
-</ul>
-</div><div class="column">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="images/02-basics/origin.png" width="500"></p>
-<p></p><figcaption>Adding a new remote</figcaption><p></p>
-</figure>
-</div>
-</div>
-</div>
 </section>
 <section class="slide level2">
 
 <ul>
-<li>After adding the remote, we can send the repository (including its full history) up to GitHub using <strong>push</strong>
+<li>GitHub also provides a simple text editor</li>
+<li>Make a change or two, then look for the green “Commit changes…” button</li>
+<li>GitKraken may check in GitHub, and pick up the new commits on the remote
 <ul>
-<li>Look for Push in the toolbar</li>
-<li>Sourcetree will ask which branches to push</li>
+<li>If not: Confirm the changes show up on GitHub. Then, in GitKraken, bring up the command palette (control/command + P), type “fetch,” and select “Fetch All.”</li>
 </ul></li>
-<li>When the push is complete, refresh GitHub in your browser
-<ul>
-<li>You can edit files directly in GitHub</li>
-</ul></li>
-<li>Now we’ll <strong>fetch</strong> and <strong>pull</strong> the changes from GitHub back to our local copy
-<ul>
-<li><strong>Fetch</strong>: Compare the local tree to the remote tree, noting any differences. Use this to preview the changes on the remote</li>
-<li>In Sourcetree, hit Fetch in the toolbar. Note that the GitHub commit shows up in the History panel.</li>
-<li><strong>Pull</strong>: Actually download the remote changes and incorporate them into your local tree.</li>
-</ul></li>
+<li>But the remote commits aren’t automatically loaded locally</li>
+<li>Click “Pull” to download them to your local copy</li>
 </ul>
 </section>
 <section id="lab-working-with-someone-elses-repos" class="slide level2">
@@ -675,29 +558,31 @@ Username: [shouldn’t be able to enter anything]</p></li>
 </li>
 <li>You can suggest a change to someone else’s code by submitting a <strong>pull request</strong>, which first requires <strong>forking</strong> the repository.</li>
 </ul>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="images/02-basics/fork-and-clone.png" height="500"></p>
-<p></p><figcaption><em>Forking</em> copies a repository to your GitHub account. Then you <em>clone</em> the copy to your local machine. You can <em>push</em> to your remote copy as usual. You can suggest changes to the original using a <em>pull request</em>. Source: <a href="https://happygitwithr.com/fork-and-clone.html" class="uri">https://happygitwithr.com/fork-and-clone.html</a></figcaption><p></p>
-</figure>
-</div>
+
+<img data-src="images/02-basics/fork-and-clone.png" style="width:80.0%" class="r-stretch quarto-figure-center"><p class="caption"><em>Forking</em> copies a repository to your GitHub account. Then you <em>clone</em> the copy to your local machine. You can <em>push</em> to your remote copy as usual. You can suggest changes to the original using a <em>pull request</em>. Source: <a href="https://happygitwithr.com/fork-and-clone.html" class="uri">https://happygitwithr.com/fork-and-clone.html</a></p></section>
+<section class="slide level2">
+
+
+<img data-src="images/02-basics/fork-button.png" style="width:80.0%" class="r-stretch quarto-figure-center"><p class="caption">The <em>fork</em> button is near the upper-right corner of a GitHub repository page. I wasn’t able to find a keyboard shortcut for this. :-(</p><ul>
+<li>Start with the repo for this week’s lab: <a href="https://github.com/data-science-methods/lab-1-git" class="uri">https://github.com/data-science-methods/lab-1-git</a></li>
+<li><strong>Fork</strong>: Look for the <code>fork</code> button in the upper-right</li>
+<li>After forking, notice you’re now in <em>your</em> copy of the lab: <code>https://github.com/[username]/lab-1-git</code>.</li>
+</ul>
 </section>
 <section class="slide level2">
 
-<ul>
-<li>Start with the repo for this week’s lab: <a href="https://github.com/data-science-methods/lab-w02-git" class="uri">https://github.com/data-science-methods/lab-w02-git</a></li>
-<li><strong>Fork</strong>: Look for the <code>fork</code> button in the upper-right</li>
-</ul>
 
-<img data-src="images/02-basics/fork-button.png" class="r-stretch quarto-figure-center"><p class="caption">The <em>fork</em> button is near the upper-right corner of a GitHub repository page. I wasn’t able to find a keyboard shortcut for this. :-(</p></section>
-<section class="slide level2">
-
+<img data-src="images/02-basics/cloning.png" style="width:80.0%" class="r-stretch quarto-figure-center"><p class="caption">Cloning the lab repo. The screenshot shows two copies of the lab: the original course version, and the fork to my personal account.</p><ul>
+<li><strong>Clone</strong>: After creating the fork, you need to download a copy to your machine.</li>
+<li>In GitKraken, open a New Tab, then click “Clone a repo”
 <ul>
-<li><strong>Clone</strong>: After creating the fork, you need to download a copy to your machine.
-<ul>
-<li>In Sourcetree’s repository browser, select New… &gt; Clone from URL</li>
+<li>Select GitHub.com</li>
+<li>Recommended: Change “Where to clone to” to a specific folder for all the labs for this class</li>
+<li>Type “lab-1-git” into the text box. (Or just use the dropdown.)</li>
+<li>If GitKraken tells you that it can’t clone a private repo, this probably means you haven’t finished getting access to the <a href="https://education.github.com/pack">GitHub Student Developer Pack</a>. Back out of the cloning process, finish with GitHub, and then try cloning again.</li>
 </ul></li>
-<li>This lesson continues in the lab. Open <code>lab.html</code> and <code>lab.Rmd</code> to continue.</li>
+<li>After opening the repo, click the “View All Files” checkbox or open the folder in your OS file browser</li>
+<li>Open <code>lab.html</code> in your web browser and <code>lab.Rmd</code> in RStudio</li>
 </ul>
 <div class="footer footer-default">
 
@@ -880,9 +765,9 @@ Username: [shouldn’t be able to enter anything]</p></li>
         // The "normal" size of the presentation, aspect ratio will be preserved
         // when the presentation is scaled to fit different resolutions. Can be
         // specified using percentage units.
-        width: 1050,
+        width: 1440,
 
-        height: 700,
+        height: 1080,
 
         // Factor of the display size that should remain empty around the content
         margin: 0.1,
@@ -952,7 +837,24 @@ Username: [shouldn’t be able to enter anything]</p></li>
         button.classList.add('code-copy-button-checked');
         var currentTitle = button.getAttribute("title");
         button.setAttribute("title", "Copied!");
+        let tooltip;
+        if (window.bootstrap) {
+          button.setAttribute("data-bs-toggle", "tooltip");
+          button.setAttribute("data-bs-placement", "left");
+          button.setAttribute("data-bs-title", "Copied!");
+          tooltip = new bootstrap.Tooltip(button, 
+            { trigger: "manual", 
+              customClass: "code-copy-button-tooltip",
+              offset: [0, -8]});
+          tooltip.show();    
+        }
         setTimeout(function() {
+          if (tooltip) {
+            tooltip.hide();
+            button.removeAttribute("data-bs-title");
+            button.removeAttribute("data-bs-toggle");
+            button.removeAttribute("data-bs-placement");
+          }
           button.setAttribute("title", currentTitle);
           button.classList.remove('code-copy-button-checked');
         }, 1000);
@@ -990,24 +892,42 @@ Username: [shouldn’t be able to enter anything]</p></li>
           return note.innerHTML;
         });
       }
+      const findCites = (el) => {
+        const parentEl = el.parentElement;
+        if (parentEl) {
+          const cites = parentEl.dataset.cites;
+          if (cites) {
+            return {
+              el,
+              cites: cites.split(' ')
+            };
+          } else {
+            return findCites(el.parentElement)
+          }
+        } else {
+          return undefined;
+        }
+      };
       var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
       for (var i=0; i<bibliorefs.length; i++) {
         const ref = bibliorefs[i];
-        const cites = ref.parentNode.getAttribute('data-cites').split(' ');
-        tippyHover(ref, function() {
-          var popup = window.document.createElement('div');
-          cites.forEach(function(cite) {
-            var citeDiv = window.document.createElement('div');
-            citeDiv.classList.add('hanging-indent');
-            citeDiv.classList.add('csl-entry');
-            var biblioDiv = window.document.getElementById('ref-' + cite);
-            if (biblioDiv) {
-              citeDiv.innerHTML = biblioDiv.innerHTML;
-            }
-            popup.appendChild(citeDiv);
+        const citeInfo = findCites(ref);
+        if (citeInfo) {
+          tippyHover(citeInfo.el, function() {
+            var popup = window.document.createElement('div');
+            citeInfo.cites.forEach(function(cite) {
+              var citeDiv = window.document.createElement('div');
+              citeDiv.classList.add('hanging-indent');
+              citeDiv.classList.add('csl-entry');
+              var biblioDiv = window.document.getElementById('ref-' + cite);
+              if (biblioDiv) {
+                citeDiv.innerHTML = biblioDiv.innerHTML;
+              }
+              popup.appendChild(citeDiv);
+            });
+            return popup.innerHTML;
           });
-          return popup.innerHTML;
-        });
+        }
       }
     });
     </script>

@@ -115,9 +115,13 @@ Once your package manager is ready to go, install git and pandoc
 	```
 
 
-## GitHub and Sourcetree
+## GitHub and GitKraken
 
-- You'll need a [GitHub](https://github.com/) account and [Sourcetree](https://www.sourcetreeapp.com/)
+- You'll need 
+    - a [GitHub](https://github.com/) account,
+    - the [GitHub Student Developer Pack](https://education.github.com/pack), and 
+    - [GitKraken](https://www.gitkraken.com/)
+- After you have access to the Student Developer Pack, activate GitHub integration in GitKraken.  This should enable all of GitKraken's Pro features. 
 
 \
 
