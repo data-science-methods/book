@@ -10,14 +10,17 @@
 
 ```{r}
 #| eval: false
-install.packages('lubridate', 'assertthat', 'reprex')
+install.packages("lubridate", "reprex")
 ```
 
 ## Messages, warnings, and errors
 
-- *Message*:  Things are fine, but here's some information you should know
-- *Warning*:  Uhhhh I'm gonna keep going, but maybe this isn't what you want
-- *Error*:  Nope.  I'm stopping here.  You need to fix the thing. 
+Message
+  ~ Things are fine, but here's some information you should know
+Warning
+  ~ Uhhhh I'm gonna keep going, but maybe this isn't what you want
+Error
+  ~ Nope.  I'm stopping here.  You need to fix the thing. 
 
 ```{r}
 #| error: true
@@ -25,15 +28,6 @@ message('Hey, just FYI')
 warning('Uhhhh might want to check this out')
 stop('Noooooo')
 ```
-
-## Where to go for help
-
-- [Rubber duck debugging](https://en.wikipedia.org/wiki/Rubber_duck_debugging)
-- Isolate the problem
-- Restart your session: Session $\to$ Restart R
-- Local help: `?fun`
-- StackOverflow: <https://stackoverflow.com/questions/tagged/r>
-- CRAN $\to$ BugReports (usually GitHub Issues)
 
 ## Example: Dates are often problems
 
@@ -49,30 +43,34 @@ some_data = c('June 2002', 'May 15, 2007', 'August 2007')
 add_six_months(some_data)
 ```
 
----
+## Warning: This is a warning, not an error
 
-- Note that this is a warning, not an error
-    - R won't stop running here (unless we tell it to)
-    - Errors might not show up until much later in our code, making it hard to identify the root cause
-    - Or they might cause invisible problems, eg, by default `lm()` silently drops observations with missing values
+- R won't stop running here (unless we tell it to)
+- Errors might not show up until much later in our code, making it hard to identify the root cause
+- Or they might cause invisible problems, eg, by default `lm()` silently drops observations with missing values
 
-## To catch warnings
+## A debugging mindset
 
-- Set `options(warn = 2)` to turn all warnings into errors
-- Use `tryCatch()` with the `warning` argument
-    - Example: <https://stackoverflow.com/questions/8217901/breaking-loop-when-warnings-appear-in-r/8218794#8218794>
-- Write a unit test
-- My preferred approach: Add an **assertion** to your primary code
-    
-```{r}
-#| error: true
-## Using an assertion to prevent warnings from cascading
-library(assertthat)
+*[https://jvns.ca/blog/2022/12/08/a-debugging-manifesto/]*
 
-six_months_later = add_six_months(some_data)
-assert_that(all(!is.na(six_months_later)), 
-            msg = 'Missing values in `six_months_later`')
-```
+1. Inspect, don't squash
+2. Being stuck is temporary
+3. Trust nobody and nothing
+4. It's probably your code
+5. Don't go it alone
+6. There's always a reason
+7. Build your toolkit
+8. It can be an adventure
+
+
+## Some debugging tactics
+
+- [Rubber duck debugging](https://en.wikipedia.org/wiki/Rubber_duck_debugging)
+- Restart your session: Session $\to$ Restart R
+- Local help: `?fun`
+- Isolate the problem
+- StackOverflow: <https://stackoverflow.com/questions/tagged/r>
+- CRAN $\to$ BugReports (usually GitHub Issues)
 
 ## Debugging 
 
@@ -131,7 +129,6 @@ mdy(more_data)
 
 This is a known bug; it looks like they're thinking about doing something about it, but the only workaround is to create an NA:  <https://github.com/tidyverse/lubridate/issues/685>
 
-
 ## Writing a reproducible example: `reprex`
 
 - <https://reprex.tidyverse.org/>
@@ -152,10 +149,10 @@ This is a known bug; it looks like they're thinking about doing something about 
     
 - `rm(list=ls())`
     - Used because people think it clears out the global environment
-    - Unnecessary if you're regularly using Session $\to$ Restart R
-    - Also unnecessary at the top of a `Rmd` file, which is always knit in a new session
     - Doesn't actually clear out the global environment
         - eg, doesn't unload packages or reset `options()`
+    - Unnecessary if you're regularly using Session $\to$ Restart R
+    - Also unnecessary at the top of a `Rmd` file, which is always knit in a new session
         
 Not on Bryan's list, but also don't do it: 
 
@@ -168,6 +165,21 @@ Not on Bryan's list, but also don't do it:
     - If `library()` can't find the package, it immediately raises an error
         - I can tell right away what package needs to be installed
 
-## Debugging in RStudio
 
-[This week's lab](https://github.com/data-science-methods/lab-w03-debugging) introduces you to some of RStudio's debugging tools. 
+
+
+
+
+## Labs
+
+[Lab 2](https://github.com/data-science-methods/lab-2-debugging) introduces you to some of RStudio's debugging tools. 
+
+[Lab 3](https://github.com/data-science-methods/lab-3-paradigms) explores functional programming in R: 
+
+- Assembling pipes using tidyverse functions
+- Writing code that respects immutability
+- Using the `map()` functional to apply a function to each element of a list
+- Writing a function factory to change the way a function behaves
+
+
+

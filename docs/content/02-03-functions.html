@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Methods of Data Science - Software, hardware, and accounts</title>
+<title>Methods of Data Science - Functions and functional programming</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,7 +20,60 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -30,8 +83,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../content/01-03-data-sci-wtf.html" rel="next">
-<link href="../content/01-01-intro.html" rel="prev">
+<link href="../content/02-04-getting-help.html" rel="next">
+<link href="../content/02-02-git.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -61,6 +114,9 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 </head>
@@ -74,7 +130,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../content/01-01-intro.html">Introduction</a></li><li class="breadcrumb-item"><a href="../content/01-02-setup.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Software, hardware, and accounts</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../content/02-02-git.html">Some fundamental tools</a></li><li class="breadcrumb-item"><a href="../content/02-03-functions.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Functions and functional programming</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -121,7 +177,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../content/01-02-setup.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Software, hardware, and accounts</span></a>
+  <a href="../content/01-02-setup.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Software, hardware, and accounts</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -147,7 +203,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../content/02-03-functions.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Functions and functional programming</span></a>
+  <a href="../content/02-03-functions.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Functions and functional programming</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -230,15 +286,12 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#checklist" id="toc-checklist" class="nav-link active" data-scroll-target="#checklist">Checklist</a></li>
-  <li><a href="#hardware" id="toc-hardware" class="nav-link" data-scroll-target="#hardware">Hardware</a></li>
-  <li><a href="#accessibility" id="toc-accessibility" class="nav-link" data-scroll-target="#accessibility">Accessibility</a></li>
-  <li><a href="#r-and-rstudio" id="toc-r-and-rstudio" class="nav-link" data-scroll-target="#r-and-rstudio">R and RStudio</a></li>
-  <li><a href="#compilers" id="toc-compilers" class="nav-link" data-scroll-target="#compilers">Compilers</a></li>
-  <li><a href="#os" id="toc-os" class="nav-link" data-scroll-target="#os">OS</a></li>
-  <li><a href="#package-manager" id="toc-package-manager" class="nav-link" data-scroll-target="#package-manager">Package manager</a></li>
-  <li><a href="#latex" id="toc-latex" class="nav-link" data-scroll-target="#latex">LaTeX</a></li>
-  <li><a href="#github-and-gitkraken" id="toc-github-and-gitkraken" class="nav-link" data-scroll-target="#github-and-gitkraken">GitHub and GitKraken</a></li>
+  <li><a href="#reading" id="toc-reading" class="nav-link active" data-scroll-target="#reading">Reading</a></li>
+  <li><a href="#programming-paradigms" id="toc-programming-paradigms" class="nav-link" data-scroll-target="#programming-paradigms">Programming paradigms</a></li>
+  <li><a href="#r-is-both-object-oriented-and-functional" id="toc-r-is-both-object-oriented-and-functional" class="nav-link" data-scroll-target="#r-is-both-object-oriented-and-functional">R is both object-oriented <em>and</em> functional</a></li>
+  <li><a href="#functional-programming" id="toc-functional-programming" class="nav-link" data-scroll-target="#functional-programming">Functional programming</a></li>
+  <li><a href="#writing-functions-in-r" id="toc-writing-functions-in-r" class="nav-link" data-scroll-target="#writing-functions-in-r">Writing functions in R</a></li>
+  <li><a href="#features-of-functional-programming" id="toc-features-of-functional-programming" class="nav-link" data-scroll-target="#features-of-functional-programming">Features of functional programming</a></li>
   </ul>
 </nav>
     </div>
@@ -247,7 +300,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-title">Software, hardware, and accounts</span></h1>
+<h1 class="title"><span class="chapter-title">Functions and functional programming</span></h1>
 </div>
 
 
@@ -262,157 +315,149 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="checklist" class="level2">
-<h2 class="anchored" data-anchor-id="checklist">Checklist</h2>
-<ul class="task-list">
-<li><input type="checkbox">R 4.1 or higher</li>
-<li><input type="checkbox">RStudio</li>
-<li><input type="checkbox">Package manager for your OS</li>
-<li><input type="checkbox">git and GitKraken</li>
-<li><input type="checkbox">pandoc or Quarto</li>
-<li><input type="checkbox">GitHub account</li>
-<li><input type="checkbox">Sourcetree</li>
+<section id="reading" class="level2">
+<h2 class="anchored" data-anchor-id="reading">Reading</h2>
+<ul>
+<li><span class="citation" data-cites="SpringateFunctionalProgramming2013">Springate (<a href="../references.html#ref-SpringateFunctionalProgramming2013" role="doc-biblioref">2013</a>)</span></li>
 </ul>
 </section>
-<section id="hardware" class="level2">
-<h2 class="anchored" data-anchor-id="hardware">Hardware</h2>
+<section id="programming-paradigms" class="level2">
+<h2 class="anchored" data-anchor-id="programming-paradigms">Programming paradigms</h2>
 <ul>
-<li>Many sessions will involve writing code in class</li>
-<li>Tablets (iPad, Surface) will only work if you’re using them to access a cloud computing setup</li>
-<li>I recommend that your machine have at least
-<ul>
-<li>200 GB free hard drive space</li>
-<li>8 GB RAM</li>
-<li>Intel i5 processor</li>
-<li>Operating system capable of running R 4.1 or higher
-<ul>
-<li>Mac: 10.13 (High Sierra) or more recent</li>
-<li>Windows: See <a href="https://cran.r-project.org/bin/windows/base/rw-FAQ.html#Does-R-run-under-Windows-Vista_003f">here</a></li>
-<li>If you’re running Linux I’m going to assume you can figure this out yourself</li>
-</ul></li>
-</ul></li>
-</ul>
-</section>
-<section id="accessibility" class="level2">
-<h2 class="anchored" data-anchor-id="accessibility">Accessibility</h2>
-<p>I chose the tools and platforms for this course in part because they’re industry-standard. If you pursue a career as a data scientist in industry, you’ll be expected to use GitHub (or something similar) on a daily basis. And RStudio is by far the most commonly used IDE (“integrated development environment”) for R.</p>
-<p>However, like many other technologies, they were originally developed using ableist assumptions about “normal” computer users. In response to criticism, the developers of these systems and tools have gone back and made their technologies more accessible. But there may still be barriers to accessibility that I have not anticipated.</p>
-<p><strong>If you encounter a barrier to participating in this course — even a small inconvenience — please let me know.</strong> Similarly, if you have ideas for making the course more accessible, please share them with me.</p>
-</section>
-<section id="r-and-rstudio" class="level2">
-<h2 class="anchored" data-anchor-id="r-and-rstudio">R and RStudio</h2>
-<p><a href="https://cran.r-project.org/">R</a> and <a href="https://rstudio.com/products/rstudio/download/">RStudio</a></p>
-<p><br>
-</p>
-<ul>
-<li>R is updated regularly, and there’s a breaking change about once per year</li>
-<li>RStudio also regularly gets new features, though breaking changes are less frequent</li>
-<li>For consistency in class, <strong>I encourage you to use the latest version of both R and RStudio</strong></li>
-<li>I use <a href="https://github.com/r-lib/rig">rig</a> to switch between different versions of R</li>
-</ul>
-</section>
-<section id="compilers" class="level2">
-<h2 class="anchored" data-anchor-id="compilers">Compilers</h2>
-<p>Sometimes you’ll need to compile a package in order to install it.</p>
-<ul>
-<li>Mac
-<ul>
-<li>In a terminal, simply enter</li>
-</ul>
-<pre><code>sudo xcode-select --install</code></pre>
-You’ll need to enter an administrator password
-<ul>
-<li><a href="https://mac.r-project.org/tools/">If you also need a Fortran compiler</a><br>
-(personally I’ve never needed one)</li>
-</ul></li>
-<li>Windows
-<ul>
-<li><a href="https://cran.r-project.org/bin/windows/Rtools/rtools42/rtools.html">Rtools42</a> (R 4.2 and higher) or</li>
-<li><a href="https://cran.r-project.org/bin/windows/Rtools/rtools40.html">Rtools4</a> (older versions of R)</li>
-</ul></li>
-<li>Linux
-<ul>
-<li>I’m pretty sure Linux and the like come with the necessary compilers</li>
-</ul></li>
-</ul>
-</section>
-<section id="os" class="level2">
-<h2 class="anchored" data-anchor-id="os">OS</h2>
-<ul>
-<li>All of the tools we’ll use are available on all major OSes</li>
-<li>I have much less experience debugging Windows and Linux, but will do what I can</li>
-</ul>
-</section>
-<section id="package-manager" class="level2">
-<h2 class="anchored" data-anchor-id="package-manager">Package manager</h2>
-<ul>
-<li>Software to facilitate installing, upgrading, and removing other software</li>
-<li><strong>Highly recommended</strong> for installing git, pandoc, and some other tools we’ll use later</li>
-<li>Mac OS: <a href="https://brew.sh/">Homebrew</a> or <a href="https://www.macports.org/install.php">MacPorts</a>
-<ul>
-<li><a href="https://apple.stackexchange.com/questions/32724/what-are-pros-and-cons-for-macports-fink-and-homebrew">Pros and cons of these two main options</a></li>
-<li>I use Homebrew</li>
-</ul></li>
-<li>Windows: <a href="https://chocolatey.org/install">Chocolatey</a>
-<ul>
-<li>I guess there are others, but this is what previous students have recommended</li>
-</ul></li>
-<li>Either: <a href="https://www.anaconda.com/">Anaconda</a> is popular among Python folks, and works as a package manager for multiple OSes
-<ul>
-<li>But sometimes packages aren’t up to date</li>
-<li>Ex: Most recent version of R appears to be 3.6.0, released April 2019</li>
-</ul></li>
+<li>Conceptual frameworks for software engineering</li>
+<li>Ways of understanding how a piece of software works</li>
+<li>Ways of writing a piece of software</li>
 </ul>
 <hr>
-<p>Once your package manager is ready to go, install git and pandoc. (You might consider <a href="https://quarto.org/">Quarto</a>, which includes pandoc and possibly also LaTeX.)</p>
+<p>{.smaller}</p>
+<dl>
+<dt>Procedural or imperative</dt>
+<dd>
+Software is a series of instructions (“procedures”), which the computer carries out in order. Special instructions (if-then, loops) are used to change the order based on inputs or other conditions.<br>
+- Examples: FORTRAN, BASIC, C, a calculator
+</dd>
+<dt>Object-oriented</dt>
+<dd>
+Software is made up of objects, which have properties (“attributes,” including other objects) and do things (“methods”).<br>
+- Examples: Python, Java
+</dd>
+<dt>Functional</dt>
+<dd>
+Software is made up of functions, which are run sequentially on the inputs.<br>
+- Examples: Lisp, Haskell
+</dd>
+</dl>
+</section>
+<section id="r-is-both-object-oriented-and-functional" class="level2">
+<h2 class="anchored" data-anchor-id="r-is-both-object-oriented-and-functional">R is both object-oriented <em>and</em> functional</h2>
 <ul>
-<li><p>Mac, Homebrew:</p>
-<pre><code>brew install git
-brew install pandoc</code></pre></li>
-<li><p>Windows, Chocolatey:</p>
-<ul>
-<li>Needs to be in elevated/administrator mode</li>
-<li>If prompted, Yes to running additional scripts</li>
-</ul>
-<pre><code>choco install git
-choco install pandoc</code></pre></li>
+<li>But the object-oriented side is … idiosyncratic <span class="citation" data-cites="ChambersObjectOrientedProgrammingFunctional2014">(<a href="../references.html#ref-ChambersObjectOrientedProgrammingFunctional2014" role="doc-biblioref">Chambers 2014</a>)</span></li>
 </ul>
 </section>
-<section id="latex" class="level2">
-<h2 class="anchored" data-anchor-id="latex">LaTeX</h2>
-<ul>
-<li><p>We don’t use it directly, but it turns Rmarkdown into PDFs</p></li>
-<li><p>If you have no idea what that meant, don’t worry about it for now</p></li>
-<li><p>I recommend the <a href="https://yihui.org/tinytex/">TinyTeX distribution</a>, which you can install via R:</p>
-<pre><code>install.packages('tinytex')
-tinytex::install_tinytex()</code></pre></li>
-</ul>
+<section id="functional-programming" class="level2">
+<h2 class="anchored" data-anchor-id="functional-programming">Functional programming</h2>
+<p>“Software is made up of functions, which are run sequentially on the inputs.”</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+  pre1[" "] -- data --&gt; extract[extract\nDV &amp; IV]
+  pre2[" "] -- specification --&gt; extract
+  extract -- X --&gt; QR[QR\ndecomposition] -- "Q, R" --&gt; combine
+  extract -- Y --&gt; combine
+  combine -- "Rβ = Q&lt;sup&gt;T&lt;/sup&gt;Y" --&gt; backsolve
+  backsolve -- β --&gt; post[" "]
+  style pre1 height:0px;
+  style pre2 height:0px;
+  style post height:0px;
+</pre>
+</div>
+<p>A regression model as a series of functions</p>
+</div>
+</div>
+</div>
 </section>
-<section id="github-and-gitkraken" class="level2">
-<h2 class="anchored" data-anchor-id="github-and-gitkraken">GitHub and GitKraken</h2>
-<ul>
-<li>You’ll need
-<ul>
-<li>a <a href="https://github.com/">GitHub</a> account,</li>
-<li>the <a href="https://education.github.com/pack">GitHub Student Developer Pack</a>, and</li>
-<li><a href="https://www.gitkraken.com/">GitKraken</a></li>
-</ul></li>
-<li>After you have access to the Student Developer Pack, activate GitHub integration in GitKraken. This should enable all of GitKraken’s Pro features.</li>
-</ul>
+<section id="writing-functions-in-r" class="level2">
+<h2 class="anchored" data-anchor-id="writing-functions-in-r">Writing functions in R</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Standard syntax</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>normalize <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    z <span class="ot">=</span> (x <span class="sc">-</span> <span class="fu">mean</span>(x)) <span class="sc">/</span> <span class="fu">sd</span>(x)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(z)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Lambda syntax (R &gt;= 4.1.0)</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>normalize <span class="ot">&lt;-</span> \(x){(x <span class="sc">-</span> <span class="fu">mean</span>(x)) <span class="sc">/</span> <span class="fu">sd</span>(x)}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">normalize</span>(mtcars<span class="sc">$</span>mpg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]  0.15088482  0.15088482  0.44954345  0.21725341 -0.23073453 -0.33028740
+ [7] -0.96078893  0.71501778  0.44954345 -0.14777380 -0.38006384 -0.61235388
+[13] -0.46302456 -0.81145962 -1.60788262 -1.60788262 -0.89442035  2.04238943
+[19]  1.71054652  2.29127162  0.23384555 -0.76168319 -0.81145962 -1.12671039
+[25] -0.14777380  1.19619000  0.98049211  1.71054652 -0.71190675 -0.06481307
+[31] -0.84464392  0.21725341</code></pre>
+</div>
+</div>
+<hr>
+<dl>
+<dt>arguments</dt>
+<dd>
+The inputs to the function, the things inside the parentheses
+</dd>
+<dt>calling a function</dt>
+<dd>
+<code>normalize</code> is the function itself, as an object. <code>normalize(mtcars$mpg)</code> calls or applies the function to the argument <code>mtcars$mpg</code>
+</dd>
+<dt>passing</dt>
+<dd>
+The relationship between arguments in the call and the function’s internal variables. In <code>normalize(mtcars$mpg)</code>, <code>mtcars$mpg</code> is passed to <code>x</code>.
+</dd>
+<dt>return</dt>
+<dd>
+The output of the function. Either (a) the argument passed to <code>return</code> or (b) the value of the last line of the function.
+</dd>
+</dl>
+</section>
+<section id="features-of-functional-programming" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="features-of-functional-programming">Features of functional programming</h2>
+<dl>
+<dt>first-class functions</dt>
+<dd>
+Functions can be used like any other data type, including as inputs to and outputs from other functions (functionals; function factories)
+</dd>
+<dt>determinism</dt>
+<dd>
+Given the same input values, the function always returns the same output value
+</dd>
+<dt>no side effects</dt>
+<dd>
+The function doesn’t have any effects other than returning its output
+</dd>
+<dt>immutability</dt>
+<dd>
+Once a variable is assigned a value, that value cannot be changed
+</dd>
+</dl>
 <p><br>
 </p>
 <ul>
-<li>GitHub is <a href="https://www.cnbc.com/2020/11/29/microsofts-github-has-become-magnet-for-thorny-issues-like-riaa.html">owned by Microsoft</a></li>
-<li>And there are concerns about
-<ul>
-<li><a href="https://www.theverge.com/2021/7/7/22561180/github-copilot-legal-copyright-fair-use-public-code">how it mined public repositories to develop a code completion tool</a>, and</li>
-<li><a href="https://www.businessinsider.com/github-rolls-back-privacy-policy-over-business-concerns-2022-8">a recent change to its privacy policy for Enterprise (business) customers</a></li>
-</ul></li>
-<li>But it offers some key features that I want to use in this course</li>
-<li>You can do everything this course requires in private repositories, so long as you give access to the people who need access</li>
+<li>Functional programming implements software as strict input-output flow</li>
+<li>R doesn’t enforce determinism, no side effects, or immutability</li>
+<li>But writing your own code around them makes it easier to reason about how your code works</li>
 </ul>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-ChambersObjectOrientedProgrammingFunctional2014" class="csl-entry" role="listitem">
+Chambers, John M. 2014. <span>“Object-<span>Oriented Programming</span>, <span>Functional Programming</span> and <span>R</span>.”</span> <em>Statistical Science</em> 29 (2): 167–80. <a href="https://doi.org/10.1214/13-STS452">https://doi.org/10.1214/13-STS452</a>.
+</div>
+<div id="ref-SpringateFunctionalProgramming2013" class="csl-entry" role="listitem">
+Springate, David. 2013. <span>“Functional Programming in <span>R</span>.”</span> <span>DataJujitsu</span>. May 16, 2013. <a href="https://www.datajujitsu.co.uk/blog/2013/05/16/functional-programming-in-r/">https://www.datajujitsu.co.uk/blog/2013/05/16/functional-programming-in-r/</a>.
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->
@@ -651,13 +696,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../content/01-01-intro.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Introduction</span></span>
+      <a href="../content/02-02-git.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Git for version control</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../content/01-03-data-sci-wtf.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-title">Data Science: What and why</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../content/02-04-getting-help.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-title">Warnings, Errors, and Getting Help</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

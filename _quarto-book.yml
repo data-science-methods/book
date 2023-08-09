@@ -15,8 +15,8 @@ book:
     - part: "Some fundamental tools"
       chapters:
         - content/02-02-git.qmd
-        - content/02-03-getting-help.qmd
-        - content/02-04-paradigms.qmd
+        - content/02-03-functions.qmd
+        - content/02-04-getting-help.qmd
     - part: "Exploratory data analysis"
       chapters:
         - content/03-02-models-of-eda.qmd
@@ -31,8 +31,6 @@ book:
         - content/04-03-code-review.qmd
         - content/04-04-project-organization.qmd
         - content/04-05-data-management.qmd
-        - content/04-06-make.qmd
-        - content/04-07-renv.qmd
     - references.qmd
 
 bibliography: book.bib

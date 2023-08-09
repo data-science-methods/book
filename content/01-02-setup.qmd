@@ -5,8 +5,8 @@
 - [ ] R 4.1 or higher
 - [ ] RStudio
 - [ ] Package manager for your OS
-- [ ] git
-- [ ] pandoc
+- [ ] git and GitKraken
+- [ ] pandoc or Quarto
 - [ ] GitHub account
 - [ ] Sourcetree
 
@@ -66,8 +66,6 @@ Sometimes you'll need to compile a package in order to install it.
 ## OS
 
 - All of the tools we'll use are available on all major OSes
-    - Except Sourcetree, which isn't essential
-    - [You can find an alternative git GUI here](https://git-scm.com/download/gui/linux)
 - I have much less experience debugging Windows and Linux, but will do what I can
 
 
@@ -85,7 +83,7 @@ Sometimes you'll need to compile a package in order to install it.
     - Ex: Most recent version of R appears to be 3.6.0, released April 2019
 	
 ----
-Once your package manager is ready to go, install git and pandoc
+Once your package manager is ready to go, install git and pandoc.  (You might consider [Quarto](https://quarto.org/), which includes pandoc and possibly also LaTeX.) 
 
 - Mac, Homebrew: 
 

@@ -62,7 +62,7 @@ By the end of the course, students will be able to
 This course assumes **basic competence** with **introductory R**. 
 
 "Introductory R" 
- ~ Lessons 1-5 of the Carpentries ["R for Social Scientists"](https://datacarpentry.org/r-socialsci/) curriculum
+ ~ Lessons 1-6 of the Carpentries ["R for Social Scientists"](https://datacarpentry.org/r-socialsci/) curriculum
 
     - Installing R and packages
     - Working in the R Studio IDE

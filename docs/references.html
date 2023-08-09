@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.280">
+<meta name="generator" content="quarto-1.3.433">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -17,14 +17,15 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
 }
-.hanging div.csl-entry {
+.hanging-indent div.csl-entry {
   margin-left:2em;
   text-indent:-2em;
 }
@@ -38,8 +39,7 @@ div.csl-right-inline {
 }
 div.csl-indent {
   margin-left: 2em;
-}
-</style>
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -49,7 +49,7 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./content/04-07-renv.html" rel="prev">
+<link href="./content/04-05-data-management.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -75,7 +75,8 @@ div.csl-indent {
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 
@@ -86,11 +87,16 @@ div.csl-indent {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-    <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">References</h1>
-      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
-        <i class="bi bi-chevron-right"></i>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./references.html">References</a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
       </button>
     </div>
   </nav>
@@ -98,28 +104,30 @@ div.csl-indent {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Methods of Data Science</a> 
     </div>
       </div>
-      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
         </div>
-      </div>
+        </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">Preface</a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Introduction</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Introduction</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -143,8 +151,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Some fundamental tools</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Some fundamental tools</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -156,20 +165,21 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./content/02-03-getting-help.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Warnings, Errors, and Getting Help</span></a>
+  <a href="./content/02-03-functions.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Functions and functional programming</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./content/02-04-paradigms.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Programming Paradigms</span></a>
+  <a href="./content/02-04-getting-help.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Warnings, Errors, and Getting Help</span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">Exploratory data analysis</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Exploratory data analysis</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -193,8 +203,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">Replicability &amp; reproducibility</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text">Replicability &amp; reproducibility</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -219,26 +230,18 @@ div.csl-indent {
   <a href="./content/04-05-data-management.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Managing and publishing data</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./content/04-06-make.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Make</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./content/04-07-renv.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Tracking package versions with <code>renv</code></span></a>
-  </div>
-</li>
       </ul>
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./references.html" class="sidebar-item-text sidebar-link active">References</a>
+  <a href="./references.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">References</span></a>
   </div>
 </li>
     </ul>
     </div>
 </nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
@@ -248,7 +251,7 @@ div.csl-indent {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">References</h1>
+<h1 class="title">References</h1>
 </div>
 
 
@@ -263,174 +266,175 @@ div.csl-indent {
 
 </header>
 
-<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
-<div id="ref-BaileyReinhartRogoffErrorHow" class="csl-entry" role="doc-biblioentry">
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-BaileyReinhartRogoffErrorHow" class="csl-entry" role="listitem">
 Bailey, David H., and Jonathan Borwein (Jon). n.d. <span>“The
 <span>Reinhart-Rogoff</span> Error – or How Not to <span>Excel</span> at
 Economics.”</span> <span>The Conversation</span>. Accessed May 16, 2020.
 <a href="http://theconversation.com/the-reinhart-rogoff-error-or-how-not-to-excel-at-economics-13646">http://theconversation.com/the-reinhart-rogoff-error-or-how-not-to-excel-at-economics-13646</a>.
 </div>
-<div id="ref-BogenSavingPhenomena1988" class="csl-entry" role="doc-biblioentry">
+<div id="ref-BogenSavingPhenomena1988" class="csl-entry" role="listitem">
 Bogen, James, and James Woodward. 1988. <span>“Saving the
 <span>Phenomena</span>.”</span> <em>The Philosophical Review</em> 97
-(3): 303–52. <a href="https://www.jstor.org/stable/2185445">https://www.jstor.org/stable/2185445</a>.
+(3): 303–52. <a href="http://www.jstor.org/stable/2185445">http://www.jstor.org/stable/2185445</a>.
 </div>
-<div id="ref-BrownSmokeMirrorsHow2002" class="csl-entry" role="doc-biblioentry">
+<div id="ref-BrownSmokeMirrorsHow2002" class="csl-entry" role="listitem">
 Brown, James Robert. 2002. <em>Smoke and <span>Mirrors</span>: <span>How
 Science Reflects Reality</span></em>. <span>Routledge</span>.
 </div>
-<div id="ref-BryanCodeSmellsFeels2018" class="csl-entry" role="doc-biblioentry">
+<div id="ref-BryanCodeSmellsFeels2018" class="csl-entry" role="listitem">
 Bryan, Jenny. 2018. <span>“Code Smells and Feels.”</span> Presented at
 the <span class="nocase">useR</span> 2018, July 21. <a href="https://www.youtube.com/watch?v=7oyiPBjLAWY">https://www.youtube.com/watch?v=7oyiPBjLAWY</a>.
 </div>
-<div id="ref-BryanObjectTypeClosure2020" class="csl-entry" role="doc-biblioentry">
+<div id="ref-BryanObjectTypeClosure2020" class="csl-entry" role="listitem">
 ———. 2020. <span>“Object of Type <span>‘Closure’</span> Is Not
 Subsettable.”</span> Presented at the
 <span>RSTUDIO</span>::<span>CONF</span> 2020, January 31. <a href="https://rstudio.com/resources/rstudioconf-2020/object-of-type-closure-is-not-subsettable/">https://rstudio.com/resources/rstudioconf-2020/object-of-type-closure-is-not-subsettable/</a>.
 </div>
-<div id="ref-BuckensSelfdocumentingMythHow2019" class="csl-entry" role="doc-biblioentry">
+<div id="ref-BuckensSelfdocumentingMythHow2019" class="csl-entry" role="listitem">
 Buckens, Wouter. 2019. <span>“Self-Documenting Is a Myth, and How to
 Make Your Code Self-Documenting.”</span> <span>woubuc</span>. August 3,
 2019. <a href="https://blog.woubuc.be/post/self-documenting-code-is-a-myth/">https://blog.woubuc.be/post/self-documenting-code-is-a-myth/</a>.
 </div>
-<div id="ref-CassidyReinhartRogoffControversy" class="csl-entry" role="doc-biblioentry">
+<div id="ref-CassidyReinhartRogoffControversy" class="csl-entry" role="listitem">
 Cassidy, John. n.d. <span>“The <span>Reinhart</span> and <span>Rogoff
 Controversy</span>: <span>A Summing Up</span>.”</span> <span>The New
 Yorker</span>. Accessed September 27, 2020. <a href="https://www.newyorker.com/news/john-cassidy/the-reinhart-and-rogoff-controversy-a-summing-up">https://www.newyorker.com/news/john-cassidy/the-reinhart-and-rogoff-controversy-a-summing-up</a>.
 </div>
-<div id="ref-ChambersObjectOrientedProgrammingFunctional2014" class="csl-entry" role="doc-biblioentry">
+<div id="ref-ChambersObjectOrientedProgrammingFunctional2014" class="csl-entry" role="listitem">
 Chambers, John M. 2014. <span>“Object-<span>Oriented Programming</span>,
 <span>Functional Programming</span> and <span>R</span>.”</span>
 <em>Statistical Science</em> 29 (2): 167–80. <a href="https://doi.org/10.1214/13-STS452">https://doi.org/10.1214/13-STS452</a>.
 </div>
-<div id="ref-ChinStudentsWhoGrew2021" class="csl-entry" role="doc-biblioentry">
+<div id="ref-ChinStudentsWhoGrew2021" class="csl-entry" role="listitem">
 Chin, Monica. 2021. <span>“Students Who Grew up with Search Engines
 Might Change <span>STEM</span> Education Forever.”</span> <span>The
 Verge</span>. September 22, 2021. <a href="https://www.theverge.com/22684730/students-file-folder-directory-structure-education-gen-z">https://www.theverge.com/22684730/students-file-folder-directory-structure-education-gen-z</a>.
 </div>
-<div id="ref-DastonObjectivity2007" class="csl-entry" role="doc-biblioentry">
+<div id="ref-DastonObjectivity2007" class="csl-entry" role="listitem">
 Daston, Lorraine, and Peter Galison. 2007. <em>Objectivity</em>.
 <span>New York : Cambridge, Mass</span>: <span>Zone Books ; Distributed
 by the MIT Press</span>.
 </div>
-<div id="ref-HerndonDoesHighPublic2014" class="csl-entry" role="doc-biblioentry">
+<div id="ref-HerndonDoesHighPublic2014" class="csl-entry" role="listitem">
 Herndon, Thomas, Michael Ash, and Robert Pollin. 2014. <span>“Does High
 Public Debt Consistently Stifle Economic Growth? <span>A</span> Critique
 of <span>Reinhart</span> and <span>Rogoff</span>.”</span> <em>Cambridge
 Journal of Economics</em> 38 (2): 257–79. <a href="https://doi.org/10.1093/cje/bet075">https://doi.org/10.1093/cje/bet075</a>.
 </div>
-<div id="ref-HowExcelMay2020" class="csl-entry" role="doc-biblioentry">
+<div id="ref-HowExcelMay2020" class="csl-entry" role="listitem">
 <span>“How <span>Excel</span> May Have Caused Loss of 16,000
 <span>Covid</span> Tests in <span>England</span>.”</span> 2020.
 <span>The Guardian</span>. October 5, 2020. <a href="http://www.theguardian.com/politics/2020/oct/05/how-excel-may-have-caused-loss-of-16000-covid-tests-in-england">http://www.theguardian.com/politics/2020/oct/05/how-excel-may-have-caused-loss-of-16000-covid-tests-in-england</a>.
 </div>
-<div id="ref-HudonFieldNotesBuilding2018" class="csl-entry" role="doc-biblioentry">
+<div id="ref-HudonFieldNotesBuilding2018" class="csl-entry" role="listitem">
 Hudon, Caitlin. 2018. <span>“Field <span>Notes</span>: <span>Building
 Data Dictionaries</span>.”</span> <span>Haystacks</span>. October 30,
 2018. <a href="https://caitlinhudon.com/2018/10/30/data-dictionaries/">https://caitlinhudon.com/2018/10/30/data-dictionaries/</a>.
 </div>
-<div id="ref-HuebnerSystematicApproachInitial2016" class="csl-entry" role="doc-biblioentry">
+<div id="ref-HuebnerSystematicApproachInitial2016" class="csl-entry" role="listitem">
 Huebner, Marianne, Werner Vach, and Saskia le Cessie. 2016. <span>“A
 Systematic Approach to Initial Data Analysis Is Good Research
 Practice.”</span> <em>The Journal of Thoracic and Cardiovascular
 Surgery</em> 151 (1): 25–27. <a href="https://doi.org/10.1016/j.jtcvs.2015.09.085">https://doi.org/10.1016/j.jtcvs.2015.09.085</a>.
 </div>
-<div id="ref-LaskowskiWhatWhenYou" class="csl-entry" role="doc-biblioentry">
+<div id="ref-LaskowskiWhatWhenYou" class="csl-entry" role="listitem">
 Laskowski, Kate. n.d. <span>“What to Do When You Don’t Trust Your Data
 Anymore – <span>Laskowski Lab</span> at <span>UC Davis</span>.”</span>
 Accessed January 29, 2020. <a href="https://laskowskilab.faculty.ucdavis.edu/2020/01/29/retractions/">https://laskowskilab.faculty.ucdavis.edu/2020/01/29/retractions/</a>.
 </div>
-<div id="ref-McElreathScienceAmateurSoftware2020" class="csl-entry" role="doc-biblioentry">
+<div id="ref-McElreathScienceAmateurSoftware2020" class="csl-entry" role="listitem">
 McElreath, Richard, dir. 2020. <em>Science as <span>Amateur Software
 Development</span></em>. <a href="https://www.youtube.com/watch?v=zwRdO9_GGhY">https://www.youtube.com/watch?v=zwRdO9_GGhY</a>.
 </div>
-<div id="ref-NobleQuickGuideOrganizing2009" class="csl-entry" role="doc-biblioentry">
+<div id="ref-NobleQuickGuideOrganizing2009" class="csl-entry" role="listitem">
 Noble, William Stafford. 2009. <span>“A <span>Quick Guide</span> to
 <span>Organizing Computational Biology Projects</span>.”</span> <em>PLOS
 Computational Biology</em> 5 (7): e1000424. <a href="https://doi.org/10.1371/journal.pcbi.1000424">https://doi.org/10.1371/journal.pcbi.1000424</a>.
 </div>
-<div id="ref-PengArtDataScience2016" class="csl-entry" role="doc-biblioentry">
+<div id="ref-PengArtDataScience2016" class="csl-entry" role="listitem">
 Peng, Roger D., and Elizabeth Matsui. 2016. <em>The <span>Art</span> of
 <span>Data Science</span>: <span>A Guide</span> for <span>Anyone Who
 Works</span> with <span>Data</span></em>. <span>Leanpub</span>. <a href="http://leanpub.com/artofdatascience">http://leanpub.com/artofdatascience</a>.
 </div>
-<div id="ref-PennisiProminentSpiderBiologist2020" class="csl-entry" role="doc-biblioentry">
+<div id="ref-PennisiProminentSpiderBiologist2020" class="csl-entry" role="listitem">
 Pennisi, Elizabeth. 2020. <span>“Prominent Spider Biologist Spun a Web
 of Questionable Data.”</span> <em>Science</em> 367 (6478): 613–14. <a href="https://doi.org/10.1126/science.367.6478.613">https://doi.org/10.1126/science.367.6478.613</a>.
 </div>
-<div id="ref-PiersonLargescaleAnalysisRacial2020" class="csl-entry" role="doc-biblioentry">
+<div id="ref-PiersonLargescaleAnalysisRacial2020" class="csl-entry" role="listitem">
 Pierson, Emma, Camelia Simoiu, Jan Overgoor, Sam Corbett-Davies, Daniel
 Jenson, Amy Shoemaker, Vignesh Ramachandran, et al. 2020. <span>“A
 Large-Scale Analysis of Racial Disparities in Police Stops Across the
 <span>United States</span>.”</span> <em>Nature Human Behaviour</em>,
 May, 1–10. <a href="https://doi.org/10.1038/s41562-020-0858-1">https://doi.org/10.1038/s41562-020-0858-1</a>.
 </div>
-<div id="ref-PostolovskiYourCodeReview2020" class="csl-entry" role="doc-biblioentry">
+<div id="ref-PostolovskiYourCodeReview2020" class="csl-entry" role="listitem">
 Postolovski, Tash. 2020. <span>“Your <span>Code Review Checklist</span>:
 14 <span>Things</span> to <span>Include</span>.”</span> July 6, 2020. <a href="https://www.codementor.io/blog/code-review-checklist-76q7ovkaqj">https://www.codementor.io/blog/code-review-checklist-76q7ovkaqj</a>.
 </div>
-<div id="ref-FaqHowMake" class="csl-entry" role="doc-biblioentry">
+<div id="ref-FaqHowMake" class="csl-entry" role="listitem">
 <span>“R Faq - <span>How</span> to Make a Great <span>R</span>
 Reproducible Example.”</span> n.d. <span>Stack Overflow</span>. Accessed
 August 31, 2018. <a href="https://stackoverflow.com/questions/5963269/how-to-make-a-great-r-reproducible-example">https://stackoverflow.com/questions/5963269/how-to-make-a-great-r-reproducible-example</a>.
 </div>
-<div id="ref-ReinhartRogoffGrowth2019" class="csl-entry" role="doc-biblioentry">
+<div id="ref-ReinhartRogoffGrowth2019" class="csl-entry" role="listitem">
 <em>Reinhart &amp; <span>Rogoff</span> - <span>Growth</span> in a
 <span>Time</span> of <span>Debt</span> - <span>EXERCISE</span>!</em>
 2019. <a href="https://www.youtube.com/watch?v=ItGMz0ERvcw">https://www.youtube.com/watch?v=ItGMz0ERvcw</a>.
 </div>
-<div id="ref-TanweerWhyDataRevolution2021" class="csl-entry" role="doc-biblioentry">
+<div id="ref-SpringateFunctionalProgramming2013" class="csl-entry" role="listitem">
+Springate, David. 2013. <span>“Functional Programming in
+<span>R</span>.”</span> <span>DataJujitsu</span>. May 16, 2013. <a href="https://www.datajujitsu.co.uk/blog/2013/05/16/functional-programming-in-r/">https://www.datajujitsu.co.uk/blog/2013/05/16/functional-programming-in-r/</a>.
+</div>
+<div id="ref-TanweerWhyDataRevolution2021" class="csl-entry" role="listitem">
 Tanweer, Anissa, Emily Kalah Gade, P. M. Krafft, and Sarah K. Dreier.
 2021. <span>“Why the <span>Data Revolution Needs Qualitative
 Thinking</span>.”</span> <em>Harvard Data Science Review</em>, July. <a href="https://doi.org/10.1162/99608f92.eee0b0da">https://doi.org/10.1162/99608f92.eee0b0da</a>.
 </div>
-<div id="ref-ArrayErrors2011" class="csl-entry" role="doc-biblioentry">
+<div id="ref-ArrayErrors2011" class="csl-entry" role="listitem">
 <em>The Economist</em>. 2011. <span>“An Array of Errors,”</span>
 September 10, 2011. <a href="https://www.economist.com/science-and-technology/2011/09/10/an-array-of-errors">https://www.economist.com/science-and-technology/2011/09/10/an-array-of-errors</a>.
 </div>
-<div id="ref-TukeyWeNeedBoth1980" class="csl-entry" role="doc-biblioentry">
+<div id="ref-TukeyWeNeedBoth1980" class="csl-entry" role="listitem">
 Tukey, John W. 1980. <span>“We <span>Need Both Exploratory</span> and
 <span>Confirmatory</span>.”</span> <em>The American Statistician</em> 34
 (1): 23–25. <a href="https://doi.org/10.1080/00031305.1980.10482706">https://doi.org/10.1080/00031305.1980.10482706</a>.
 </div>
-<div id="ref-TukeyExploratoryDataAnalysis1977" class="csl-entry" role="doc-biblioentry">
+<div id="ref-TukeyExploratoryDataAnalysis1977" class="csl-entry" role="listitem">
 Tukey, John Wilder. 1977. <em>Exploratory Data Analysis</em>.
 Addison-<span>Wesley</span> Series in Behavioral Science. <span>Reading,
 Mass</span>: <span>Addison-Wesley Pub. Co</span>. <a href="https://archive.org/details/exploratorydataa00tuke_0">https://archive.org/details/exploratorydataa00tuke_0</a>.
 </div>
-<div id="ref-VideoKeithBaggerly" class="csl-entry" role="doc-biblioentry">
+<div id="ref-VideoKeithBaggerly" class="csl-entry" role="listitem">
 <span>“Video: <span>Keith Baggerly</span>, "<span>When</span> Is
 <span>Reproducibility</span> an <span>Ethical Issue</span>?
 <span>Genomics</span>, <span>Personalized Medicine</span>, and
 <span>Human Error</span>".”</span> n.d. Accessed September 23, 2020. <a href="http://www.birs.ca/events/2013/5-day-workshops/13w5083/videos/watch/201308141121-Baggerly.html">http://www.birs.ca/events/2013/5-day-workshops/13w5083/videos/watch/201308141121-Baggerly.html</a>.
 </div>
-<div id="ref-ViglioneAvalancheSpiderpaperRetractions2020" class="csl-entry" role="doc-biblioentry">
+<div id="ref-ViglioneAvalancheSpiderpaperRetractions2020" class="csl-entry" role="listitem">
 Viglione, Giuliana. 2020. <span>“<span>‘<span>Avalanche</span>’</span>
 of Spider-Paper Retractions Shakes Behavioural-Ecology
 Community.”</span> <em>Nature</em>, February. <a href="https://doi.org/10.1038/d41586-020-00287-y">https://doi.org/10.1038/d41586-020-00287-y</a>.
 </div>
-<div id="ref-WagenmakersAgendaPurelyConfirmatory2012" class="csl-entry" role="doc-biblioentry">
+<div id="ref-WagenmakersAgendaPurelyConfirmatory2012" class="csl-entry" role="listitem">
 Wagenmakers, Eric-Jan, Ruud Wetzels, Denny Borsboom, Han L. J. van der
 Maas, and Rogier A. Kievit. 2012. <span>“An <span>Agenda</span> for
 <span>Purely Confirmatory Research</span>.”</span> <em>Perspectives on
 Psychological Science</em> 7 (6): 632–38. <a href="https://doi.org/10.1177/1745691612463078">https://doi.org/10.1177/1745691612463078</a>.
 </div>
-<div id="ref-WickhamAdvanced2014" class="csl-entry" role="doc-biblioentry">
-Wickham, Hadley. 2014. <em>Advanced <span>R</span></em>. <span>CRC
-Press</span>. <a href="https://adv-r.hadley.nz">https://adv-r.hadley.nz</a>.
+<div id="ref-WickhamDebugging2019" class="csl-entry" role="listitem">
+Wickham, Hadley. 2019. <span>“Debugging.”</span> In <em>Advanced
+<span>R</span>, <span>Second Edition</span></em>, ch. 22. <span>CRC
+Press</span>. <a href="https://adv-r.hadley.nz/debugging.html">https://adv-r.hadley.nz/debugging.html</a>.
 </div>
-<div id="ref-WickhamDebugging2019" class="csl-entry" role="doc-biblioentry">
-———. 2019. <span>“Debugging.”</span> In <em>Advanced <span>R</span>,
-<span>Second Edition</span></em>, ch. 22. <span>CRC Press</span>. <a href="https://adv-r.hadley.nz/debugging.html">https://adv-r.hadley.nz/debugging.html</a>.
-</div>
-<div id="ref-WilkinsonFAIRGuidingPrinciples2016" class="csl-entry" role="doc-biblioentry">
+<div id="ref-WilkinsonFAIRGuidingPrinciples2016" class="csl-entry" role="listitem">
 Wilkinson, Mark D., Michel Dumontier, IJsbrand Jan Aalbersberg,
 Gabrielle Appleton, Myles Axton, Arie Baak, Niklas Blomberg, et al.
 2016. <span>“The <span>FAIR Guiding Principles</span> for Scientific
 Data Management and Stewardship.”</span> <em>Scientific Data</em> 3 (1,
 1): 1–9. <a href="https://doi.org/10.1038/sdata.2016.18">https://doi.org/10.1038/sdata.2016.18</a>.
 </div>
-<div id="ref-WilsonGoodEnoughPractices2017" class="csl-entry" role="doc-biblioentry">
+<div id="ref-WilsonGoodEnoughPractices2017" class="csl-entry" role="listitem">
 Wilson, Greg, Jennifer Bryan, Karen Cranston, Justin Kitzes, Lex
 Nederbragt, and Tracy K. Teal. 2017. <span>“Good Enough Practices in
 Scientific Computing.”</span> <em>PLOS Computational Biology</em> 13
@@ -468,9 +472,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -535,6 +553,92 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {
@@ -576,8 +680,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./content/04-07-renv.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Tracking package versions with <code>renv</code></span></span>
+      <a href="./content/04-05-data-management.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Managing and publishing data</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

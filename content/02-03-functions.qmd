@@ -1,0 +1,105 @@
+# Functions and functional programming
+
+## Reading
+
+- @SpringateFunctionalProgramming2013
+
+## Programming paradigms
+
+- Conceptual frameworks for software engineering
+- Ways of understanding how a piece of software works
+- Ways of writing a piece of software
+
+--- 
+
+{.smaller}
+
+Procedural or imperative
+: Software is a series of instructions ("procedures"), which the computer carries out in order.  Special instructions (if-then, loops) are used to change the order based on inputs or other conditions.  
+    - Examples: FORTRAN, BASIC, C, a calculator
+
+Object-oriented
+: Software is made up of objects, which have properties ("attributes," including other objects) and do things ("methods").  
+    - Examples: Python, Java
+
+Functional
+: Software is made up of functions, which are run sequentially on the inputs.  
+    - Examples: Lisp, Haskell
+    
+## R is both object-oriented *and* functional ##
+
+- But the object-oriented side is ... idiosyncratic [@ChambersObjectOrientedProgrammingFunctional2014]
+
+## Functional programming
+
+"Software is made up of functions, which are run sequentially on the inputs."
+
+```{mermaid}
+%%| echo: false
+%%| fig-cap: "A regression model as a series of functions"
+flowchart LR
+  pre1[" "] -- data --> extract[extract\nDV & IV]
+  pre2[" "] -- specification --> extract
+  extract -- X --> QR[QR\ndecomposition] -- "Q, R" --> combine
+  extract -- Y --> combine
+  combine -- "Rβ = Q<sup>T</sup>Y" --> backsolve
+  backsolve -- β --> post[" "]
+  style pre1 height:0px;
+  style pre2 height:0px;
+  style post height:0px;
+```
+
+
+## Writing functions in R
+
+```{r}
+## Standard syntax
+normalize <- function(x) {
+    z = (x - mean(x)) / sd(x)
+    return(z)
+}
+
+## Lambda syntax (R >= 4.1.0)
+normalize <- \(x){(x - mean(x)) / sd(x)}
+```
+```{r}
+normalize(mtcars$mpg)
+```
+
+---
+
+arguments
+ ~ The inputs to the function, the things inside the parentheses
+
+calling a function
+ ~ `normalize` is the function itself, as an object. `normalize(mtcars$mpg)` calls or applies the function to the argument `mtcars$mpg`
+
+passing
+ ~ The relationship between arguments in the call and the function's internal variables.  In `normalize(mtcars$mpg)`, `mtcars$mpg` is passed to `x`.  
+
+return
+ ~ The output of the function. Either (a) the argument passed to `return` or (b) the value of the last line of the function. 
+
+
+
+## Features of functional programming {.smaller}
+
+first-class functions
+:  Functions can be used like any other data type, including as inputs to and outputs from other functions (functionals; function factories)
+
+determinism
+:  Given the same input values, the function always returns the same output value
+
+no side effects
+:  The function doesn't have any effects other than returning its output
+
+immutability
+:  Once a variable is assigned a value, that value cannot be changed
+
+\
+
+- Functional programming implements software as strict input-output flow
+- R doesn't enforce determinism, no side effects, or immutability
+- But writing your own code around them makes it easier to reason about how your code works
+
+

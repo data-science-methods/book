@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.280">
+<meta name="generator" content="quarto-1.3.433">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Methods of Data Science - 5&nbsp; Warnings, Errors, and Getting Help</title>
+<title>Methods of Data Science - Warnings, Errors, and Getting Help</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -17,9 +17,10 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -46,48 +47,19 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+/* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
 }
-.hanging div.csl-entry {
+.hanging-indent div.csl-entry {
   margin-left:2em;
   text-indent:-2em;
 }
@@ -101,8 +73,7 @@ div.csl-right-inline {
 }
 div.csl-indent {
   margin-left: 2em;
-}
-</style>
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -112,8 +83,8 @@ div.csl-indent {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../content/02-04-paradigms.html" rel="next">
-<link href="../content/02-02-git.html" rel="prev">
+<link href="../content/03-02-models-of-eda.html" rel="next">
+<link href="../content/02-03-functions.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -139,10 +110,12 @@ div.csl-indent {
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
@@ -151,11 +124,16 @@ div.csl-indent {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-    <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-title">Warnings, Errors, and Getting Help</span></h1>
-      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
-        <i class="bi bi-chevron-right"></i>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../content/02-02-git.html">Some fundamental tools</a></li><li class="breadcrumb-item"><a href="../content/02-04-getting-help.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Warnings, Errors, and Getting Help</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
       </button>
     </div>
   </nav>
@@ -163,28 +141,30 @@ div.csl-indent {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Methods of Data Science</a> 
     </div>
       </div>
-      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
         </div>
-      </div>
+        </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../index.html" class="sidebar-item-text sidebar-link">Preface</a>
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Introduction</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Introduction</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -208,8 +188,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Some fundamental tools</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Some fundamental tools</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -221,20 +202,21 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../content/02-03-getting-help.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Warnings, Errors, and Getting Help</span></a>
+  <a href="../content/02-03-functions.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Functions and functional programming</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../content/02-04-paradigms.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Programming Paradigms</span></a>
+  <a href="../content/02-04-getting-help.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Warnings, Errors, and Getting Help</span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">Exploratory data analysis</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Exploratory data analysis</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -258,8 +240,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">Replicability &amp; reproducibility</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text">Replicability &amp; reproducibility</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -284,26 +267,18 @@ div.csl-indent {
   <a href="../content/04-05-data-management.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Managing and publishing data</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../content/04-06-make.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Make</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../content/04-07-renv.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Tracking package versions with <code>renv</code></span></a>
-  </div>
-</li>
       </ul>
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../references.html" class="sidebar-item-text sidebar-link">References</a>
+  <a href="../references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
   </div>
 </li>
     </ul>
     </div>
 </nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
@@ -313,14 +288,15 @@ div.csl-indent {
   <li><a href="#reading" id="toc-reading" class="nav-link active" data-scroll-target="#reading">Reading</a></li>
   <li><a href="#dependencies" id="toc-dependencies" class="nav-link" data-scroll-target="#dependencies">Dependencies</a></li>
   <li><a href="#messages-warnings-and-errors" id="toc-messages-warnings-and-errors" class="nav-link" data-scroll-target="#messages-warnings-and-errors">Messages, warnings, and errors</a></li>
-  <li><a href="#where-to-go-for-help" id="toc-where-to-go-for-help" class="nav-link" data-scroll-target="#where-to-go-for-help">Where to go for help</a></li>
   <li><a href="#example-dates-are-often-problems" id="toc-example-dates-are-often-problems" class="nav-link" data-scroll-target="#example-dates-are-often-problems">Example: Dates are often problems</a></li>
-  <li><a href="#to-catch-warnings" id="toc-to-catch-warnings" class="nav-link" data-scroll-target="#to-catch-warnings">To catch warnings</a></li>
+  <li><a href="#warning-this-is-a-warning-not-an-error" id="toc-warning-this-is-a-warning-not-an-error" class="nav-link" data-scroll-target="#warning-this-is-a-warning-not-an-error">Warning: This is a warning, not an error</a></li>
+  <li><a href="#a-debugging-mindset" id="toc-a-debugging-mindset" class="nav-link" data-scroll-target="#a-debugging-mindset">A debugging mindset</a></li>
+  <li><a href="#some-debugging-tactics" id="toc-some-debugging-tactics" class="nav-link" data-scroll-target="#some-debugging-tactics">Some debugging tactics</a></li>
   <li><a href="#debugging" id="toc-debugging" class="nav-link" data-scroll-target="#debugging">Debugging</a></li>
   <li><a href="#another-example-more-fun-with-dates" id="toc-another-example-more-fun-with-dates" class="nav-link" data-scroll-target="#another-example-more-fun-with-dates">Another example: More fun with dates</a></li>
   <li><a href="#writing-a-reproducible-example-reprex" id="toc-writing-a-reproducible-example-reprex" class="nav-link" data-scroll-target="#writing-a-reproducible-example-reprex">Writing a reproducible example: <code>reprex</code></a></li>
   <li><a href="#do-not-do-these-things-in-your-reprex-or-anywhere-else" id="toc-do-not-do-these-things-in-your-reprex-or-anywhere-else" class="nav-link" data-scroll-target="#do-not-do-these-things-in-your-reprex-or-anywhere-else">Do not do these things in your reprex (or anywhere else)</a></li>
-  <li><a href="#debugging-in-rstudio" id="toc-debugging-in-rstudio" class="nav-link" data-scroll-target="#debugging-in-rstudio">Debugging in RStudio</a></li>
+  <li><a href="#labs" id="toc-labs" class="nav-link" data-scroll-target="#labs">Labs</a></li>
   </ul>
 </nav>
     </div>
@@ -329,7 +305,7 @@ div.csl-indent {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-title">Warnings, Errors, and Getting Help</span></h1>
+<h1 class="title"><span class="chapter-title">Warnings, Errors, and Getting Help</span></h1>
 </div>
 
 
@@ -355,16 +331,23 @@ div.csl-indent {
 <section id="dependencies" class="level2">
 <h2 class="anchored" data-anchor-id="dependencies">Dependencies</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">'lubridate'</span>, <span class="st">'assertthat'</span>, <span class="st">'reprex'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"lubridate"</span>, <span class="st">"reprex"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="messages-warnings-and-errors" class="level2">
 <h2 class="anchored" data-anchor-id="messages-warnings-and-errors">Messages, warnings, and errors</h2>
-<ul>
-<li><em>Message</em>: Things are fine, but here’s some information you should know</li>
-<li><em>Warning</em>: Uhhhh I’m gonna keep going, but maybe this isn’t what you want</li>
-<li><em>Error</em>: Nope. I’m stopping here. You need to fix the thing.</li>
-</ul>
+<dl>
+<dt>Message</dt>
+<dd>
+Things are fine, but here’s some information you should know Warning
+</dd>
+<dd>
+Uhhhh I’m gonna keep going, but maybe this isn’t what you want Error
+</dd>
+<dd>
+Nope. I’m stopping here. You need to fix the thing.
+</dd>
+</dl>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">message</span>(<span class="st">'Hey, just FYI'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
@@ -380,21 +363,13 @@ div.csl-indent {
 </div>
 </div>
 </section>
-<section id="where-to-go-for-help" class="level2">
-<h2 class="anchored" data-anchor-id="where-to-go-for-help">Where to go for help</h2>
-<ul>
-<li><a href="https://en.wikipedia.org/wiki/Rubber_duck_debugging">Rubber duck debugging</a></li>
-<li>Isolate the problem</li>
-<li>Restart your session: Session <span class="math inline">\(\to\)</span> Restart R</li>
-<li>Local help: <code>?fun</code></li>
-<li>StackOverflow: <a href="https://stackoverflow.com/questions/tagged/r" class="uri">https://stackoverflow.com/questions/tagged/r</a></li>
-<li>CRAN <span class="math inline">\(\to\)</span> BugReports (usually GitHub Issues)</li>
-</ul>
-</section>
 <section id="example-dates-are-often-problems" class="level2">
 <h2 class="anchored" data-anchor-id="example-dates-are-often-problems">Example: Dates are often problems</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: timechange</code></pre>
+</div>
 <div class="cell-output cell-output-stderr">
 <pre><code>
 Attaching package: 'lubridate'</code></pre>
@@ -404,13 +379,13 @@ Attaching package: 'lubridate'</code></pre>
 
     date, intersect, setdiff, union</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>add_six_months <span class="ot">=</span> <span class="cf">function</span>(date_str) {</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    parsed_dates <span class="ot">=</span> <span class="fu">parse_date_time</span>(date_str, <span class="at">orders =</span> <span class="st">'mdY'</span>)</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    parsed_dates <span class="sc">%m+%</span> <span class="fu">months</span>(<span class="dv">6</span>) </span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>some_data <span class="ot">=</span> <span class="fu">c</span>(<span class="st">'June 2002'</span>, <span class="st">'May 15, 2007'</span>, <span class="st">'August 2007'</span>)</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="fu">add_six_months</span>(some_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>add_six_months <span class="ot">=</span> <span class="cf">function</span>(date_str) {</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    parsed_dates <span class="ot">=</span> <span class="fu">parse_date_time</span>(date_str, <span class="at">orders =</span> <span class="st">'mdY'</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    parsed_dates <span class="sc">%m+%</span> <span class="fu">months</span>(<span class="dv">6</span>) </span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>some_data <span class="ot">=</span> <span class="fu">c</span>(<span class="st">'June 2002'</span>, <span class="st">'May 15, 2007'</span>, <span class="st">'August 2007'</span>)</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="fu">add_six_months</span>(some_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: 2 failed to parse.</code></pre>
 </div>
@@ -418,41 +393,39 @@ Attaching package: 'lubridate'</code></pre>
 <pre><code>[1] NA               "2007-11-15 UTC" NA              </code></pre>
 </div>
 </div>
-<hr>
-<ul>
-<li>Note that this is a warning, not an error
+</section>
+<section id="warning-this-is-a-warning-not-an-error" class="level2">
+<h2 class="anchored" data-anchor-id="warning-this-is-a-warning-not-an-error">Warning: This is a warning, not an error</h2>
 <ul>
 <li>R won’t stop running here (unless we tell it to)</li>
 <li>Errors might not show up until much later in our code, making it hard to identify the root cause</li>
 <li>Or they might cause invisible problems, eg, by default <code>lm()</code> silently drops observations with missing values</li>
-</ul></li>
 </ul>
 </section>
-<section id="to-catch-warnings" class="level2">
-<h2 class="anchored" data-anchor-id="to-catch-warnings">To catch warnings</h2>
+<section id="a-debugging-mindset" class="level2">
+<h2 class="anchored" data-anchor-id="a-debugging-mindset">A debugging mindset</h2>
+<p><em>[https://jvns.ca/blog/2022/12/08/a-debugging-manifesto/]</em></p>
+<ol type="1">
+<li>Inspect, don’t squash</li>
+<li>Being stuck is temporary</li>
+<li>Trust nobody and nothing</li>
+<li>It’s probably your code</li>
+<li>Don’t go it alone</li>
+<li>There’s always a reason</li>
+<li>Build your toolkit</li>
+<li>It can be an adventure</li>
+</ol>
+</section>
+<section id="some-debugging-tactics" class="level2">
+<h2 class="anchored" data-anchor-id="some-debugging-tactics">Some debugging tactics</h2>
 <ul>
-<li>Set <code>options(warn = 2)</code> to turn all warnings into errors</li>
-<li>Use <code>tryCatch()</code> with the <code>warning</code> argument
-<ul>
-<li>Example: <a href="https://stackoverflow.com/questions/8217901/breaking-loop-when-warnings-appear-in-r/8218794#8218794" class="uri">https://stackoverflow.com/questions/8217901/breaking-loop-when-warnings-appear-in-r/8218794#8218794</a></li>
-</ul></li>
-<li>Write a unit test</li>
-<li>My preferred approach: Add an <strong>assertion</strong> to your primary code</li>
+<li><a href="https://en.wikipedia.org/wiki/Rubber_duck_debugging">Rubber duck debugging</a></li>
+<li>Restart your session: Session <span class="math inline">\(\to\)</span> Restart R</li>
+<li>Local help: <code>?fun</code></li>
+<li>Isolate the problem</li>
+<li>StackOverflow: <a href="https://stackoverflow.com/questions/tagged/r" class="uri">https://stackoverflow.com/questions/tagged/r</a></li>
+<li>CRAN <span class="math inline">\(\to\)</span> BugReports (usually GitHub Issues)</li>
 </ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Using an assertion to prevent warnings from cascading</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(assertthat)</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>six_months_later <span class="ot">=</span> <span class="fu">add_six_months</span>(some_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: 2 failed to parse.</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">assert_that</span>(<span class="fu">all</span>(<span class="sc">!</span><span class="fu">is.na</span>(six_months_later)), </span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">msg =</span> <span class="st">'Missing values in `six_months_later`'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-error">
-<pre><code>Error: Missing values in `six_months_later`</code></pre>
-</div>
-</div>
 </section>
 <section id="debugging" class="level2">
 <h2 class="anchored" data-anchor-id="debugging">Debugging</h2>
@@ -460,8 +433,8 @@ Attaching package: 'lubridate'</code></pre>
 <li>Let’s start by using the RStudio debugger to <strong>isolate the problem</strong></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">debugonce</span>(add_six_months)</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">add_six_months</span>(some_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">debugonce</span>(add_six_months)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">add_six_months</span>(some_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>debugging in: add_six_months(some_data)
 debug at &lt;text&gt;#3: {
@@ -490,10 +463,10 @@ exiting from: add_six_months(some_data)</code></pre>
 </ul></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>?parse_date_time</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>?parse_date_time</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">parse_date_time</span>(some_data, <span class="at">orders =</span> <span class="st">'mdY'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">parse_date_time</span>(some_data, <span class="at">orders =</span> <span class="st">'mdY'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: 2 failed to parse.</code></pre>
 </div>
@@ -506,7 +479,7 @@ exiting from: add_six_months(some_data)</code></pre>
 <li>Let’s try SO: <a href="https://stackoverflow.com/search?q=%5BR%5D+lubridate+month-year" class="uri">https://stackoverflow.com/search?q=%5BR%5D+lubridate+month-year</a></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">parse_date_time</span>(some_data, <span class="at">orders =</span> <span class="fu">c</span>(<span class="st">'mY'</span>, <span class="st">'mdY'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">parse_date_time</span>(some_data, <span class="at">orders =</span> <span class="fu">c</span>(<span class="st">'mY'</span>, <span class="st">'mdY'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "2002-06-01 UTC" "2007-05-15 UTC" "2007-08-01 UTC"</code></pre>
 </div>
@@ -518,8 +491,8 @@ exiting from: add_six_months(some_data)</code></pre>
 <section id="another-example-more-fun-with-dates" class="level2">
 <h2 class="anchored" data-anchor-id="another-example-more-fun-with-dates">Another example: More fun with dates</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>more_data <span class="ot">=</span> <span class="fu">c</span>(<span class="st">'May 7, 2017'</span>, <span class="st">'May 19, 2017'</span>, <span class="st">'May Fifth, 2017'</span>)</span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mdy</span>(more_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>more_data <span class="ot">=</span> <span class="fu">c</span>(<span class="st">'May 7, 2017'</span>, <span class="st">'May 19, 2017'</span>, <span class="st">'May Fifth, 2017'</span>)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mdy</span>(more_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "2017-05-07" "2017-05-19" "2017-05-20"</code></pre>
 </div>
@@ -534,7 +507,7 @@ exiting from: add_six_months(some_data)</code></pre>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/02-basics/lubridate_cran.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Screenshot of <code>lubridate</code> on CRAN, highlighting the BugReports field</figcaption><p></p>
+<figcaption class="figure-caption">Screenshot of <code>lubridate</code> on CRAN, highlighting the BugReports field</figcaption>
 </figure>
 </div>
 <hr>
@@ -544,7 +517,7 @@ exiting from: add_six_months(some_data)</code></pre>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/02-basics/lubridate_issues.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Screenshot of <code>lubridate</code> issues page, showing a relevant search result (August 2021)</figcaption><p></p>
+<figcaption class="figure-caption">Screenshot of <code>lubridate</code> issues page, showing a relevant search result (August 2021)</figcaption>
 </figure>
 </div>
 <hr>
@@ -573,12 +546,12 @@ exiting from: add_six_months(some_data)</code></pre>
 <li><code>rm(list=ls())</code>
 <ul>
 <li>Used because people think it clears out the global environment</li>
-<li>Unnecessary if you’re regularly using Session <span class="math inline">\(\to\)</span> Restart R</li>
-<li>Also unnecessary at the top of a <code>Rmd</code> file, which is always knit in a new session</li>
 <li>Doesn’t actually clear out the global environment
 <ul>
 <li>eg, doesn’t unload packages or reset <code>options()</code></li>
 </ul></li>
+<li>Unnecessary if you’re regularly using Session <span class="math inline">\(\to\)</span> Restart R</li>
+<li>Also unnecessary at the top of a <code>Rmd</code> file, which is always knit in a new session</li>
 </ul></li>
 </ul>
 <p>Not on Bryan’s list, but also don’t do it:</p>
@@ -599,19 +572,26 @@ exiting from: add_six_months(some_data)</code></pre>
 </ul></li>
 </ul>
 </section>
-<section id="debugging-in-rstudio" class="level2">
-<h2 class="anchored" data-anchor-id="debugging-in-rstudio">Debugging in RStudio</h2>
-<p><a href="https://github.com/data-science-methods/lab-w03-debugging">This week’s lab</a> introduces you to some of RStudio’s debugging tools.</p>
+<section id="labs" class="level2">
+<h2 class="anchored" data-anchor-id="labs">Labs</h2>
+<p><a href="https://github.com/data-science-methods/lab-2-debugging">Lab 2</a> introduces you to some of RStudio’s debugging tools.</p>
+<p><a href="https://github.com/data-science-methods/lab-3-paradigms">Lab 3</a> explores functional programming in R:</p>
+<ul>
+<li>Assembling pipes using tidyverse functions</li>
+<li>Writing code that respects immutability</li>
+<li>Using the <code>map()</code> functional to apply a function to each element of a list</li>
+<li>Writing a function factory to change the way a function behaves</li>
+</ul>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
-<div id="ref-BryanObjectTypeClosure2020" class="csl-entry" role="doc-biblioentry">
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-BryanObjectTypeClosure2020" class="csl-entry" role="listitem">
 Bryan, Jenny. 2020. <span>“Object of Type <span>‘Closure’</span> Is Not Subsettable.”</span> Presented at the <span>RSTUDIO</span>::<span>CONF</span> 2020, January 31. <a href="https://rstudio.com/resources/rstudioconf-2020/object-of-type-closure-is-not-subsettable/">https://rstudio.com/resources/rstudioconf-2020/object-of-type-closure-is-not-subsettable/</a>.
 </div>
-<div id="ref-FaqHowMake" class="csl-entry" role="doc-biblioentry">
+<div id="ref-FaqHowMake" class="csl-entry" role="listitem">
 <span>“R Faq - <span>How</span> to Make a Great <span>R</span> Reproducible Example.”</span> n.d. <span>Stack Overflow</span>. Accessed August 31, 2018. <a href="https://stackoverflow.com/questions/5963269/how-to-make-a-great-r-reproducible-example">https://stackoverflow.com/questions/5963269/how-to-make-a-great-r-reproducible-example</a>.
 </div>
-<div id="ref-WickhamDebugging2019" class="csl-entry" role="doc-biblioentry">
+<div id="ref-WickhamDebugging2019" class="csl-entry" role="listitem">
 Wickham, Hadley. 2019. <span>“Debugging.”</span> In <em>Advanced <span>R</span>, <span>Second Edition</span></em>, ch. 22. <span>CRC Press</span>. <a href="https://adv-r.hadley.nz/debugging.html">https://adv-r.hadley.nz/debugging.html</a>.
 </div>
 </div>
@@ -645,9 +625,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -712,6 +706,92 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {
@@ -753,13 +833,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../content/02-02-git.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Git for version control</span></span>
+      <a href="../content/02-03-functions.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Functions and functional programming</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../content/02-04-paradigms.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-title">Programming Paradigms</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../content/03-02-models-of-eda.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-title">Exploratory Data Analysis</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
