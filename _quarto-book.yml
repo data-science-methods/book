@@ -22,9 +22,6 @@ book:
         - content/03-02-models-of-eda.qmd
         - content/03-03-checklists.qmd
         - content/03-04-oakland-eda.qmd
-        # - content/03-05-graphs.qmd
-        # - content/03-06-grammar-of-graphics.qmd
-        # - content/03-07-covid-eda.qmd
     - part: "Replicability & reproducibility"
       chapters:
         - content/04-02-readability.qmd

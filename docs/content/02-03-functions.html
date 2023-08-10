@@ -291,7 +291,9 @@ div.csl-indent {
   <li><a href="#r-is-both-object-oriented-and-functional" id="toc-r-is-both-object-oriented-and-functional" class="nav-link" data-scroll-target="#r-is-both-object-oriented-and-functional">R is both object-oriented <em>and</em> functional</a></li>
   <li><a href="#functional-programming" id="toc-functional-programming" class="nav-link" data-scroll-target="#functional-programming">Functional programming</a></li>
   <li><a href="#writing-functions-in-r" id="toc-writing-functions-in-r" class="nav-link" data-scroll-target="#writing-functions-in-r">Writing functions in R</a></li>
+  <li><a href="#some-terminology" id="toc-some-terminology" class="nav-link" data-scroll-target="#some-terminology">Some terminology</a></li>
   <li><a href="#features-of-functional-programming" id="toc-features-of-functional-programming" class="nav-link" data-scroll-target="#features-of-functional-programming">Features of functional programming</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
 </nav>
     </div>
@@ -329,7 +331,6 @@ div.csl-indent {
 <li>Ways of writing a piece of software</li>
 </ul>
 <hr>
-<p>{.smaller}</p>
 <dl>
 <dt>Procedural or imperative</dt>
 <dd>
@@ -390,6 +391,9 @@ Software is made up of functions, which are run sequentially on the inputs.<br>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Lambda syntax (R &gt;= 4.1.0)</span></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>normalize <span class="ot">&lt;-</span> \(x){(x <span class="sc">-</span> <span class="fu">mean</span>(x)) <span class="sc">/</span> <span class="fu">sd</span>(x)}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p><br>
+</p>
+<div class="fragment">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">normalize</span>(mtcars<span class="sc">$</span>mpg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -401,7 +405,10 @@ Software is made up of functions, which are run sequentially on the inputs.<br>
 [31] -0.84464392  0.21725341</code></pre>
 </div>
 </div>
-<hr>
+</div>
+</section>
+<section id="some-terminology" class="level2">
+<h2 class="anchored" data-anchor-id="some-terminology">Some terminology</h2>
 <dl>
 <dt>arguments</dt>
 <dd>
@@ -421,8 +428,8 @@ The output of the function. Either (a) the argument passed to <code>return</code
 </dd>
 </dl>
 </section>
-<section id="features-of-functional-programming" class="level2 smaller">
-<h2 class="smaller anchored" data-anchor-id="features-of-functional-programming">Features of functional programming</h2>
+<section id="features-of-functional-programming" class="level2">
+<h2 class="anchored" data-anchor-id="features-of-functional-programming">Features of functional programming</h2>
 <dl>
 <dt>first-class functions</dt>
 <dd>
@@ -448,6 +455,9 @@ Once a variable is assigned a value, that value cannot be changed
 <li>R doesn’t enforce determinism, no side effects, or immutability</li>
 <li>But writing your own code around them makes it easier to reason about how your code works</li>
 </ul>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
@@ -461,6 +471,44 @@ Springate, David. 2013. <span>“Functional Programming in <span>R</span>.”</s
 </section>
 
 </main> <!-- /main -->
+
+<script>
+  // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+  // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+  // slide changes (different for each slide format).
+  (function () {
+    // dispatch for htmlwidgets
+    function fireSlideEnter() {
+      const event = window.document.createEvent("Event");
+      event.initEvent("slideenter", true, true);
+      window.document.dispatchEvent(event);
+    }
+
+    function fireSlideChanged(previousSlide, currentSlide) {
+      fireSlideEnter();
+
+      // dispatch for shiny
+      if (window.jQuery) {
+        if (previousSlide) {
+          window.jQuery(previousSlide).trigger("hidden");
+        }
+        if (currentSlide) {
+          window.jQuery(currentSlide).trigger("shown");
+        }
+      }
+    }
+
+    // hookup for slidy
+    if (window.w3c_slidy) {
+      window.w3c_slidy.add_observer(function (slide_num) {
+        // slide_num starts at position 1
+        fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+      });
+    }
+
+  })();
+</script>
+
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

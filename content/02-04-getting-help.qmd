@@ -17,8 +17,10 @@ install.packages("lubridate", "reprex")
 
 Message
   ~ Things are fine, but here's some information you should know
+
 Warning
   ~ Uhhhh I'm gonna keep going, but maybe this isn't what you want
+
 Error
   ~ Nope.  I'm stopping here.  You need to fix the thing. 
 
@@ -51,8 +53,14 @@ add_six_months(some_data)
 
 ## A debugging mindset
 
-*[https://jvns.ca/blog/2022/12/08/a-debugging-manifesto/]*
 
+:::: columns
+::: {.column width="40%"}
+!["A debugging manifesto," Julia Evans, <https://jvns.ca/blog/2022/12/08/a-debugging-manifesto/>](https://jvns.ca/images/manifesto.png){width="100%"}
+:::
+::: {.column width="10%"}
+:::
+::: {.column width="40%"}
 1. Inspect, don't squash
 2. Being stuck is temporary
 3. Trust nobody and nothing
@@ -61,20 +69,29 @@ add_six_months(some_data)
 6. There's always a reason
 7. Build your toolkit
 8. It can be an adventure
+:::
+::::
 
 
 ## Some debugging tactics
 
 - [Rubber duck debugging](https://en.wikipedia.org/wiki/Rubber_duck_debugging)
 - Restart your session: Session $\to$ Restart R
-- Local help: `?fun`
-- Isolate the problem
+- Check the documentation: `?fun`
+- Isolate the problem by creating a MWE/reprex
 - StackOverflow: <https://stackoverflow.com/questions/tagged/r>
 - CRAN $\to$ BugReports (usually GitHub Issues)
 
 ## Debugging 
 
-- Let's start by using the RStudio debugger to **isolate the problem**
+```{r}
+some_data = c('June 2002', 'May 15, 2007', 'August 2007')
+add_six_months(some_data)
+```
+
+---
+
+Let's start by using the RStudio debugger to **isolate the problem**
 
 ```{r}
 #| error: true
@@ -82,27 +99,38 @@ debugonce(add_six_months)
 add_six_months(some_data)
 ```
 
+--- 
+
 - The problem is in `lubridate::parse_date_time()`.  
-- *Spend a few minutes reading the documentation for this function and playing around with the call.* 
-    - What does the argument `orders` do? 
 
 ```{r}
 #| eval: false
 ?parse_date_time
 ```
+- *Spend a few minutes reading the documentation for this function and playing around with the call.*
+
+</br>
+
+- What does the argument `orders` do? 
 ```{r}
 parse_date_time(some_data, orders = 'mdY')
 ```
-
----
+\
 
 - Let's try SO: <https://stackoverflow.com/search?q=%5BR%5D+lubridate+month-year>
+
+---
 
 ```{r}
 parse_date_time(some_data, orders = c('mY', 'mdY'))
 ```
 
-- *Make this change in `add_six_months()` and confirm it no longer trips the assertion.* 
+</br>
+
+- *Make this change in `add_six_months()`*
+- *Confirm it no longer trips the assertion* 
+- *Explain to your partner why this fixed things*
+
 
 ## Another example: More fun with dates
 
@@ -153,7 +181,9 @@ This is a known bug; it looks like they're thinking about doing something about 
         - eg, doesn't unload packages or reset `options()`
     - Unnecessary if you're regularly using Session $\to$ Restart R
     - Also unnecessary at the top of a `Rmd` file, which is always knit in a new session
-        
+
+---
+
 Not on Bryan's list, but also don't do it: 
 
 - `require(package)`
@@ -164,10 +194,6 @@ Not on Bryan's list, but also don't do it:
         - Annoying to debug because I have no idea where the function is supposed to come from
     - If `library()` can't find the package, it immediately raises an error
         - I can tell right away what package needs to be installed
-
-
-
-
 
 
 ## Labs
@@ -182,4 +208,5 @@ Not on Bryan's list, but also don't do it:
 - Writing a function factory to change the way a function behaves
 
 
+## References
 

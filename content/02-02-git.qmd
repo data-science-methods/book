@@ -40,7 +40,7 @@ You're working on a paper with two coauthors.  You prepare the final draft to se
 - We're going to use the [GitKraken GUI](https://www.gitkraken.com/) to ease into things
 
 
-## Initial commit ##
+## Initial commit 
 
 ![Location of the new local repository button in GitKraken](images/02-basics/new_local_repo.png){width="80%"}
 
@@ -49,17 +49,22 @@ You're working on a paper with two coauthors.  You prepare the final draft to se
 - Create a new local repository
     - New Tab -> Repositories -> Create a Repository -> Laptop symbol
 
-----
+---- 
 
+:::{.nostretch}
 ![Creating a new local repository in `learning-git` with GitKraken](images/02-basics/learning-git.png){width="80%"}
+:::
 
 - Name the new repo `learning-git`
 - Outside of GitKraken, create a folder for materials for this class, and then a subfolder for livecoding exercises.  Use this livecoding folder for "Initialize in." 
 
 ---
 
+:::{.nostretch}
 ![Open your OS's file browser to the new repo](images/02-basics/open-folder.png){width="80%"}
+:::
 
+::: {.smaller}
 - GitKraken creates a new folder, `learning-git`, with the file `README.md`
     - `md` is Markdown, a plain-text format that can be read by any text editor
 - The context (right-click) menu for a file has shortcuts to open the file or show it in your OS's file browser
@@ -68,12 +73,16 @@ You're working on a paper with two coauthors.  You prepare the final draft to se
     - Then click "Edit this file"
 - Add some text and save (command/control-S)
 - GitKraken automatically opens up the file stage pane
+:::
 
 
 ## Tracking changes 
 
+:::{.nostretch}
 ![Making your initial commit](images/02-basics/initial_commit.png){width="80%"}
+:::
 
+::: {.smaller}
 - Tracking changes to a file involves two steps:  **Staging** and **committing**
 - **Stage**: You can stage files one at a time, or use the "Stage all changes" button
     - This tells git that we want to store these changes to the file in its archive
@@ -82,6 +91,7 @@ You're working on a paper with two coauthors.  You prepare the final draft to se
 - The commit is now displayed in the history panel
 
 *Make a few more changes to the file.  Practice adding text, removing text, and committing them.  Note how the changes accumulate in the history panel, and that you can view each change using Diff View.*
+:::
 
 ## Time travel ##
 
@@ -111,8 +121,11 @@ You're working on a paper with two coauthors.  You prepare the final draft to se
 
 ---
 
+::: nostretch
 ![Merging `fixing-mistake` into `main`](images/02-basics/merge.png){width="80%"}
+:::
 
+::: smaller
 - After checking out the previous commit, click on Branch in the toolbar  
     - Name your new branch `fixing-mistake` (no spaces!)
 - Start to work on fixing the mistake in the file, then add and commit as usual
@@ -123,6 +136,7 @@ You're working on a paper with two coauthors.  You prepare the final draft to se
 - After we've finished fixing the mistake, we want to **merge** these changes back into `main`
     - Make sure you're on `main`
     - Right-click on `fixing-mistake` and select "Merge fixing-mistake into main"
+:::
 
 ---
 
@@ -192,8 +206,11 @@ A **remote** is a copy of a repository that lives on a server somewhere else
 
 ---
 
+::: nostretch
 ![Cloning the lab repo. The screenshot shows two copies of the lab: the original course version, and the fork to my personal account.](images/02-basics/cloning.png){width="80%"}
+:::
 
+::: smaller
 - **Clone**: After creating the fork, you need to download a copy to your machine. 
 - In GitKraken, open a New Tab, then click "Clone a repo"
     - Select GitHub.com
@@ -203,5 +220,6 @@ A **remote** is a copy of a repository that lives on a server somewhere else
 
 - After opening the repo, click the "View All Files" checkbox or open the folder in your OS file browser
 - Open `lab.html` in your web browser and `lab.Rmd` in RStudio
+:::
 
 

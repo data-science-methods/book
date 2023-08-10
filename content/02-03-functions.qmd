@@ -12,8 +12,6 @@
 
 --- 
 
-{.smaller}
-
 Procedural or imperative
 : Software is a series of instructions ("procedures"), which the computer carries out in order.  Special instructions (if-then, loops) are used to change the order based on inputs or other conditions.  
     - Examples: FORTRAN, BASIC, C, a calculator
@@ -62,11 +60,15 @@ normalize <- function(x) {
 ## Lambda syntax (R >= 4.1.0)
 normalize <- \(x){(x - mean(x)) / sd(x)}
 ```
+\
+
+::: {.fragment}
 ```{r}
 normalize(mtcars$mpg)
 ```
+:::
 
----
+## Some terminology
 
 arguments
  ~ The inputs to the function, the things inside the parentheses
@@ -82,7 +84,7 @@ return
 
 
 
-## Features of functional programming {.smaller}
+## Features of functional programming
 
 first-class functions
 :  Functions can be used like any other data type, including as inputs to and outputs from other functions (functionals; function factories)
@@ -102,4 +104,5 @@ immutability
 - R doesn't enforce determinism, no side effects, or immutability
 - But writing your own code around them makes it easier to reason about how your code works
 
+## References
 
