@@ -8,7 +8,6 @@
 - [ ] git and GitKraken
 - [ ] pandoc or Quarto
 - [ ] GitHub account
-- [ ] Sourcetree
 
 
 ## Hardware 

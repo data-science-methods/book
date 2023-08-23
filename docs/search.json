@@ -67,7 +67,7 @@
     "href": "content/01-02-setup.html#checklist",
     "title": "Software, hardware, and accounts",
     "section": "Checklist",
-    "text": "Checklist\n\nR 4.1 or higher\nRStudio\nPackage manager for your OS\ngit and GitKraken\npandoc or Quarto\nGitHub account\nSourcetree"
+    "text": "Checklist\n\nR 4.1 or higher\nRStudio\nPackage manager for your OS\ngit and GitKraken\npandoc or Quarto\nGitHub account"
   },
   {
     "objectID": "content/01-02-setup.html#hardware",
