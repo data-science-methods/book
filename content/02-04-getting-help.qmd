@@ -47,7 +47,7 @@ add_six_months(some_data)
 
 ## Warning: This is a warning, not an error
 
-- R won't stop running here (unless we tell it to)
+- R won't stop running here
 - Errors might not show up until much later in our code, making it hard to identify the root cause
 - Or they might cause invisible problems, eg, by default `lm()` silently drops observations with missing values
 

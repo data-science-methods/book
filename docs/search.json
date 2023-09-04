@@ -312,21 +312,21 @@
     "href": "content/02-04-getting-help.html#messages-warnings-and-errors",
     "title": "Warnings, Errors, and Getting Help",
     "section": "Messages, warnings, and errors",
-    "text": "Messages, warnings, and errors\n\nMessage\n\nThings are fine, but here’s some information you should know\n\nWarning\n\nUhhhh I’m gonna keep going, but maybe this isn’t what you want\n\nError\n\nNope. I’m stopping here. You need to fix the thing.\n\n\n\nmessage('Hey, just FYI')\nwarning('Uhhhh might want to check this out')\nstop('Noooooo')\n\nError in eval(expr, envir, enclos): Noooooo"
+    "text": "Messages, warnings, and errors\n\nMessage\n\nThings are fine, but here’s some information you should know\n\nWarning\n\nUhhhh I’m gonna keep going, but maybe this isn’t what you want\n\nError\n\nNope. I’m stopping here. You need to fix the thing.\n\n\n\nmessage('Hey, just FYI')\n\nHey, just FYI\n\nwarning('Uhhhh might want to check this out')\n\nWarning: Uhhhh might want to check this out\n\nstop('Noooooo')\n\nError in eval(expr, envir, enclos): Noooooo"
   },
   {
     "objectID": "content/02-04-getting-help.html#example-dates-are-often-problems",
     "href": "content/02-04-getting-help.html#example-dates-are-often-problems",
     "title": "Warnings, Errors, and Getting Help",
     "section": "Example: Dates are often problems",
-    "text": "Example: Dates are often problems\n\nlibrary(lubridate)\n\nadd_six_months = function(date_str) {\n    parsed_dates = parse_date_time(date_str, orders = 'mdY')\n    parsed_dates %m+% months(6) \n}\n\nsome_data = c('June 2002', 'May 15, 2007', 'August 2007')\nadd_six_months(some_data)\n\n[1] NA               \"2007-11-15 UTC\" NA"
+    "text": "Example: Dates are often problems\n\nlibrary(lubridate)\n\n\nAttaching package: 'lubridate'\n\n\nThe following objects are masked from 'package:base':\n\n    date, intersect, setdiff, union\n\nadd_six_months = function(date_str) {\n    parsed_dates = parse_date_time(date_str, orders = 'mdY')\n    parsed_dates %m+% months(6) \n}\n\nsome_data = c('June 2002', 'May 15, 2007', 'August 2007')\nadd_six_months(some_data)\n\nWarning: 2 failed to parse.\n\n\n[1] NA               \"2007-11-15 UTC\" NA"
   },
   {
     "objectID": "content/02-04-getting-help.html#warning-this-is-a-warning-not-an-error",
     "href": "content/02-04-getting-help.html#warning-this-is-a-warning-not-an-error",
     "title": "Warnings, Errors, and Getting Help",
     "section": "Warning: This is a warning, not an error",
-    "text": "Warning: This is a warning, not an error\n\nR won’t stop running here (unless we tell it to)\nErrors might not show up until much later in our code, making it hard to identify the root cause\nOr they might cause invisible problems, eg, by default lm() silently drops observations with missing values"
+    "text": "Warning: This is a warning, not an error\n\nR won’t stop running here\nErrors might not show up until much later in our code, making it hard to identify the root cause\nOr they might cause invisible problems, eg, by default lm() silently drops observations with missing values"
   },
   {
     "objectID": "content/02-04-getting-help.html#a-debugging-mindset",
@@ -347,7 +347,7 @@
     "href": "content/02-04-getting-help.html#debugging",
     "title": "Warnings, Errors, and Getting Help",
     "section": "Debugging",
-    "text": "Debugging\n\nsome_data = c('June 2002', 'May 15, 2007', 'August 2007')\nadd_six_months(some_data)\n\n[1] NA               \"2007-11-15 UTC\" NA              \n\n\n\nLet’s start by using the RStudio debugger to isolate the problem\n\ndebugonce(add_six_months)\nadd_six_months(some_data)\n\ndebugging in: add_six_months(some_data)\ndebug at &lt;text&gt;#3: {\n    parsed_dates = parse_date_time(date_str, orders = \"mdY\")\n    parsed_dates %m+% months(6)\n}\ndebug at &lt;text&gt;#4: parsed_dates = parse_date_time(date_str, orders = \"mdY\")\ndebug at &lt;text&gt;#5: parsed_dates %m+% months(6)\nexiting from: add_six_months(some_data)\n\n\n[1] NA               \"2007-11-15 UTC\" NA              \n\n\n\n\nThe problem is in lubridate::parse_date_time().\n\n\n?parse_date_time\n\n\nSpend a few minutes reading the documentation for this function and playing around with the call.\n\n\n\nWhat does the argument orders do?\n\n\nparse_date_time(some_data, orders = 'mdY')\n\n[1] NA               \"2007-05-15 UTC\" NA              \n\n\n\n\n\nLet’s try SO: https://stackoverflow.com/search?q=%5BR%5D+lubridate+month-year\n\n\n\nparse_date_time(some_data, orders = c('mY', 'mdY'))\n\n[1] \"2002-06-01 UTC\" \"2007-05-15 UTC\" \"2007-08-01 UTC\"\n\n\n\n\nMake this change in add_six_months()\nConfirm it no longer trips the assertion\nExplain to your partner why this fixed things"
+    "text": "Debugging\n\nsome_data = c('June 2002', 'May 15, 2007', 'August 2007')\nadd_six_months(some_data)\n\nWarning: 2 failed to parse.\n\n\n[1] NA               \"2007-11-15 UTC\" NA              \n\n\n\nLet’s start by using the RStudio debugger to isolate the problem\n\ndebugonce(add_six_months)\nadd_six_months(some_data)\n\ndebugging in: add_six_months(some_data)\ndebug at &lt;text&gt;#3: {\n    parsed_dates = parse_date_time(date_str, orders = \"mdY\")\n    parsed_dates %m+% months(6)\n}\ndebug at &lt;text&gt;#4: parsed_dates = parse_date_time(date_str, orders = \"mdY\")\n\n\nWarning: 2 failed to parse.\n\n\ndebug at &lt;text&gt;#5: parsed_dates %m+% months(6)\nexiting from: add_six_months(some_data)\n\n\n[1] NA               \"2007-11-15 UTC\" NA              \n\n\n\n\nThe problem is in lubridate::parse_date_time().\n\n\n?parse_date_time\n\n\nSpend a few minutes reading the documentation for this function and playing around with the call.\n\n\n\nWhat does the argument orders do?\n\n\nparse_date_time(some_data, orders = 'mdY')\n\nWarning: 2 failed to parse.\n\n\n[1] NA               \"2007-05-15 UTC\" NA              \n\n\n\n\n\nLet’s try SO: https://stackoverflow.com/search?q=%5BR%5D+lubridate+month-year\n\n\n\nparse_date_time(some_data, orders = c('mY', 'mdY'))\n\n[1] \"2002-06-01 UTC\" \"2007-05-15 UTC\" \"2007-08-01 UTC\"\n\n\n\n\nMake this change in add_six_months()\nConfirm it no longer trips the assertion\nExplain to your partner why this fixed things"
   },
   {
     "objectID": "content/02-04-getting-help.html#another-example-more-fun-with-dates",

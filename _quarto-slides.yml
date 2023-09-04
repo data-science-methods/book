@@ -11,5 +11,6 @@ format:
     css: slides.css
     width: 1440
     height: 1080
+    slide-number: true
     execute:
       freeze: auto
