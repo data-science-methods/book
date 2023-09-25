@@ -3,9 +3,20 @@
 ## </br>
 
 - For this EDA, we'll work with data on police stops in Oakland, California, that have been pre-cleaned and released by the [Stanford Open Policing Project](https://openpolicing.stanford.edu/) [@PiersonLargescaleAnalysisRacial2020]. 
-- Because this analysis focuses on categorical data and counts of observations, most of the elements in @HuebnerSystematicApproachInitial2016 don't really fit.  
-    - So we'll follow the checklist from @PengArtDataScience2016. 
+- We'll be following the checklist from @PengArtDataScience2016. 
 - We'll also be learning to use the `skimr` and `visdat` packages
+
+## @PengArtDataScience2016 ##
+
+1. Formulate your question
+2. Read in your data
+3. Check the packaging
+4. Look at the top and the bottom of your data
+5. Check your “n”s
+6. Validate with at least one external data source 
+7. Make a plot
+8. Try the easy solution first
+9. Follow up
 
 
 ## 1. Formulate your question ##
@@ -21,25 +32,25 @@
 
 
 
-## Reflexivity {.smaller}
+<!-- ## Reflexivity {.smaller} -->
 
-1. Whether Black people in Oakland might be more likely to be stopped than White people
-2. Whether Black people who are stopped might be more likely to have contraband
+<!-- 1. Whether Black people in Oakland might be more likely to be stopped than White people -->
+<!-- 2. Whether Black people who are stopped might be more likely to have contraband -->
 
-- Once we have a rough idea of *what* we want to know, we need to take a moment to think about *why* we want to know it
-    - Clarify what "success" means to us
-    - Share with others to whom we're accountable
-    - Recognize that we (academic researchers) often lack accountability to people who might be affected by our work
-    - **especially when we claim to be acting for their benefit**
+<!-- - Once we have a rough idea of *what* we want to know, we need to take a moment to think about *why* we want to know it -->
+<!--     - Clarify what "success" means to us -->
+<!--     - Share with others to whom we're accountable -->
+<!--     - Recognize that we (academic researchers) often lack accountability to people who might be affected by our work -->
+<!--     - **especially when we claim to be acting for their benefit** -->
 
-- We'll spend 3 minutes writing responses to each of these questions: 
+<!-- - We'll spend 3 minutes writing responses to each of these questions:  -->
 
-1. What do I already know about this subject? 
-2. Why am I studying this? 
-3. What do I expect or hope to find/learn, and why? 
-4. Who and what is affected by this topic? How can I respect them through the work I’m about to do? 
+<!-- 1. What do I already know about this subject?  -->
+<!-- 2. Why am I studying this?  -->
+<!-- 3. What do I expect or hope to find/learn, and why?  -->
+<!-- 4. Who and what is affected by this topic? How can I respect them through the work I’m about to do?  -->
 
-[Adapted from @TanweerWhyDataRevolution2021, 14-15, and @LiboironPollutionColonialism2021]
+<!-- [Adapted from @TanweerWhyDataRevolution2021, 14-15, and @LiboironPollutionColonialism2021] -->
 
 
 ## Set up our workspace ##

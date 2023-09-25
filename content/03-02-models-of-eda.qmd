@@ -1,3 +1,20 @@
+# Project: Data Journey Narrative
+
+## <br>
+
+
+Characterize the journey that your data took to get to you. [@BatesDataJourneysCapturing2016; @MadrigalWhyPandemicExperts2021] Some relevant questions to answer might include
+
+- Who generated these data? Why? How?
+- What measurement instruments were used to generate these data? What infrastructure has  been used to store and transmit the data?
+- What was the original intended use of these data? What are some other ways the data have been used?
+- How has the mutability/immutability of the data been important to its journey & use? How has its mutability/immutability been created and maintained?
+- How will you need to transform the data further for your project? How do the physical and material properties of the data facilitate this, and/or create friction?
+- What values have been crystallized in the data? How have power relations and values shaped what is/isn’t included in the data?
+- Based on these factors, do the data appear to be fit for purpose? That is, based on what you know so far, do the data appear to be appropriate for answering your research question?
+
+Include references for the sources you use to answer these questions. You can work on this step of the project at the same time as the EDA step, but I will ask you to turn in the data journey narrative first. A good target length for your narrative is 500-1,000 words long, not counting any references.
+
 # Exploratory Data Analysis {#eda-models}
 
 ## <br>

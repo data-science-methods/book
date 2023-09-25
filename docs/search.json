@@ -387,65 +387,65 @@
   {
     "objectID": "content/03-02-models-of-eda.html#section",
     "href": "content/03-02-models-of-eda.html#section",
-    "title": "Exploratory Data Analysis",
+    "title": "Project: Data Journey Narrative",
     "section": "",
-    "text": "This book is about exploratory data analysis, about looking at data to see what it seems to say. It concentrates on simple arithmetic and easy-to-draw pictures. It regards whatever appearances we have recognized as partial descriptions, and tries to look beneath them for new insights. Its concern is with appearance, not with confirmation. (John Wilder Tukey 1977)\n\n\nExploratory Data Analysis (EDA) is “an attitude, AND a flexibility, AND some graph paper (or transparencies, or both)” (John W. Tukey 1980)"
+    "text": "Characterize the journey that your data took to get to you. (BatesDataJourneysCapturing2016?; Madrigal and Meyer 2021) Some relevant questions to answer might include\n\nWho generated these data? Why? How?\nWhat measurement instruments were used to generate these data? What infrastructure has been used to store and transmit the data?\nWhat was the original intended use of these data? What are some other ways the data have been used?\nHow has the mutability/immutability of the data been important to its journey & use? How has its mutability/immutability been created and maintained?\nHow will you need to transform the data further for your project? How do the physical and material properties of the data facilitate this, and/or create friction?\nWhat values have been crystallized in the data? How have power relations and values shaped what is/isn’t included in the data?\nBased on these factors, do the data appear to be fit for purpose? That is, based on what you know so far, do the data appear to be appropriate for answering your research question?\n\nInclude references for the sources you use to answer these questions. You can work on this step of the project at the same time as the EDA step, but I will ask you to turn in the data journey narrative first. A good target length for your narrative is 500-1,000 words long, not counting any references."
   },
   {
     "objectID": "content/03-02-models-of-eda.html#exploratory-and-confirmatory-research",
     "href": "content/03-02-models-of-eda.html#exploratory-and-confirmatory-research",
-    "title": "Exploratory Data Analysis",
+    "title": "Project: Data Journey Narrative",
     "section": "Exploratory and Confirmatory Research",
     "text": "Exploratory and Confirmatory Research\nEspecially in the wake of the replication crisis, one common distinction is between exploratory and confirmatory research (Wagenmakers et al. 2012)\n\n\n\nWagenmakers et al. (2012) figure 1. The caption reads, in part: “A continuum of experimental exploration and the corresponding continuum of statistical wonkiness. On the far left of the continuum, researchers find their hypothesis in the data by post-hoc theorizing, and the corresponding statistics are ‘wonky,’ dramatically overestimating the evidence for the hypothesis.”\n\n\n\n\nExploratory vs. confirmatory research\n\n\n\n\n\n\nConfirmatory\nExploratory\n\n\n\n\nhypothesis testing\nhypothesis development\n\n\nspecified in advance\nadaptable\n\n\nalgorithmic\nfree, creative\n\n\nmechanical objectivity\n(Daston and Galison 2007)\npure subjectivity?\n\n\navoids inferential errors\nmakes errors?\n\n\nrigorous\nlacking rigor?\n\n\nreal science??\nh*cking around with data??\n\n\nassumes experimental methods\nrelevant to all methods\n\n\n\n\nI agree that it’s important to\n\nbe thoughtful about how much confidence we’re placing in our conclusions\ninterpret findings from one study in light of other studies\n\n\nBut the confirmatory/exploratory distinction can overhype the confirmatory side\n\nMaking us too rigid and narrow-minded about what counts as good science"
   },
   {
     "objectID": "content/03-02-models-of-eda.html#better-models-for-eda-i-developing-phenomena",
     "href": "content/03-02-models-of-eda.html#better-models-for-eda-i-developing-phenomena",
-    "title": "Exploratory Data Analysis",
+    "title": "Project: Data Journey Narrative",
     "section": "Better Models for EDA I: Developing Phenomena",
     "text": "Better Models for EDA I: Developing Phenomena\nBogen and Woodward (1988) by way of Brown (2002)\n\nThe data/phenomena/theory distinction\n\n\n\n\n\n\n\nData\nPhenomena\nTheories/ Causal processes\n\n\n\n\nEx: Spreadsheet of numbers, downloaded from Qualtrics\nEx: Correlation between partisanship and sharing Covid misinformation\nEx: Conservative susceptibility to anxiety hypothesis\n\n\n\n\n\n\n\n\ncollected\nabstracted or extracted from data\npostulated\n\n\nnot explained\nexplained by theories\nexplain phenomena\n\n\nhighly local to time, place, sample, procedure\nvarying scope\nuniversal?\n\n\n“raw,” messy, unwieldy\n“processed,” clean, stylized\n“laws of nature”?"
   },
   {
     "objectID": "content/03-02-models-of-eda.html#eda-as-phenomena-development",
     "href": "content/03-02-models-of-eda.html#eda-as-phenomena-development",
-    "title": "Exploratory Data Analysis",
+    "title": "Project: Data Journey Narrative",
     "section": "EDA as phenomena development",
     "text": "EDA as phenomena development\n\ncleaning messy data\n\nidentifying and mitigating (where possible) errors and idiosyncracies\n\nidentifying local patterns (“local phenomena”)\n\n\n\n\nnot yet claiming these will be stable and appear elsewhere\nnot yet worrying (much) about explanations"
   },
   {
     "objectID": "content/03-02-models-of-eda.html#better-models-for-eda-ii-epicycle-of-analysis",
     "href": "content/03-02-models-of-eda.html#better-models-for-eda-ii-epicycle-of-analysis",
-    "title": "Exploratory Data Analysis",
+    "title": "Project: Data Journey Narrative",
     "section": "Better Models for EDA II: Epicycle of Analysis",
     "text": "Better Models for EDA II: Epicycle of Analysis\n\n\n\n\n\nEpicycle of analysis model, Peng and Matsui (2016), 5"
   },
   {
     "objectID": "content/03-02-models-of-eda.html#pengartdatascience2016",
     "href": "content/03-02-models-of-eda.html#pengartdatascience2016",
-    "title": "Exploratory Data Analysis",
+    "title": "Project: Data Journey Narrative",
     "section": "Peng and Matsui (2016)",
     "text": "Peng and Matsui (2016)\n\nData analysis is organized into 5 activities\nEach activity involves the same 3-step “epicycle” process\n\nDevelop expectations\nCollect information\nCompare and revise expectations\n\nNot “the scientific method”! (Peng and Matsui 2016, 4)\n\n“Highly iterative and non-linear”\n“information is learned at each step, which then informs\n\nwhether (and how) to refine, and redo, the [previous] step …, or\nwhether (and how) to proceed to the next step.”"
   },
   {
     "objectID": "content/03-02-models-of-eda.html#section-1",
     "href": "content/03-02-models-of-eda.html#section-1",
-    "title": "Exploratory Data Analysis",
+    "title": "Project: Data Journey Narrative",
     "section": "",
-    "text": "Aligning the goals of EDA with steps in the “epicycle of analysis” (Peng and Matsui 2016)\n\n\n\n\n\n\nGoals of EDA\nEpicycle step\n\n\n\n\nDetermine if there are problems with the data\n2. Collecting information\n\n\nDetermine whether our question can be answered with these data\n3. Comparing and revising expectations\n\n\nDevelop sketch of an answer\n1. Developing expectations"
+    "text": "This book is about exploratory data analysis, about looking at data to see what it seems to say. It concentrates on simple arithmetic and easy-to-draw pictures. It regards whatever appearances we have recognized as partial descriptions, and tries to look beneath them for new insights. Its concern is with appearance, not with confirmation. (John Wilder Tukey 1977)\n\n\nExploratory Data Analysis (EDA) is “an attitude, AND a flexibility, AND some graph paper (or transparencies, or both)” (John W. Tukey 1980)"
   },
   {
     "objectID": "content/03-02-models-of-eda.html#discussion",
     "href": "content/03-02-models-of-eda.html#discussion",
-    "title": "Exploratory Data Analysis",
+    "title": "Project: Data Journey Narrative",
     "section": "Discussion",
     "text": "Discussion\n\nFor each of these models, how well do they fit the way you’ve been taught to do science?\nHow do they challenge the way you’ve been taught to do science?"
   },
   {
     "objectID": "content/03-02-models-of-eda.html#references",
     "href": "content/03-02-models-of-eda.html#references",
-    "title": "Exploratory Data Analysis",
+    "title": "Project: Data Journey Narrative",
     "section": "References",
-    "text": "References\n\n\n\n\nBogen, James, and James Woodward. 1988. “Saving the Phenomena.” The Philosophical Review 97 (3): 303–52. http://www.jstor.org/stable/2185445.\n\n\nBrown, James Robert. 2002. Smoke and Mirrors: How Science Reflects Reality. Routledge.\n\n\nDaston, Lorraine, and Peter Galison. 2007. Objectivity. New York : Cambridge, Mass: Zone Books ; Distributed by the MIT Press.\n\n\nPeng, Roger D., and Elizabeth Matsui. 2016. The Art of Data Science: A Guide for Anyone Who Works with Data. Leanpub. http://leanpub.com/artofdatascience.\n\n\nTukey, John W. 1980. “We Need Both Exploratory and Confirmatory.” The American Statistician 34 (1): 23–25. https://doi.org/10.1080/00031305.1980.10482706.\n\n\nTukey, John Wilder. 1977. Exploratory Data Analysis. Addison-Wesley Series in Behavioral Science. Reading, Mass: Addison-Wesley Pub. Co. https://archive.org/details/exploratorydataa00tuke_0.\n\n\nWagenmakers, Eric-Jan, Ruud Wetzels, Denny Borsboom, Han L. J. van der Maas, and Rogier A. Kievit. 2012. “An Agenda for Purely Confirmatory Research.” Perspectives on Psychological Science 7 (6): 632–38. https://doi.org/10.1177/1745691612463078."
+    "text": "References\n\n\n\n\nBogen, James, and James Woodward. 1988. “Saving the Phenomena.” The Philosophical Review 97 (3): 303–52. http://www.jstor.org/stable/2185445.\n\n\nBrown, James Robert. 2002. Smoke and Mirrors: How Science Reflects Reality. Routledge.\n\n\nDaston, Lorraine, and Peter Galison. 2007. Objectivity. New York : Cambridge, Mass: Zone Books ; Distributed by the MIT Press.\n\n\nMadrigal, Alexis C., and Robinson Meyer. 2021. “Why the Pandemic Experts Failed.” The Atlantic. March 15, 2021. https://www.theatlantic.com/science/archive/2021/03/americas-coronavirus-catastrophe-began-with-data/618287/.\n\n\nPeng, Roger D., and Elizabeth Matsui. 2016. The Art of Data Science: A Guide for Anyone Who Works with Data. Leanpub. http://leanpub.com/artofdatascience.\n\n\nTukey, John W. 1980. “We Need Both Exploratory and Confirmatory.” The American Statistician 34 (1): 23–25. https://doi.org/10.1080/00031305.1980.10482706.\n\n\nTukey, John Wilder. 1977. Exploratory Data Analysis. Addison-Wesley Series in Behavioral Science. Reading, Mass: Addison-Wesley Pub. Co. https://archive.org/details/exploratorydataa00tuke_0.\n\n\nWagenmakers, Eric-Jan, Ruud Wetzels, Denny Borsboom, Han L. J. van der Maas, and Rogier A. Kievit. 2012. “An Agenda for Purely Confirmatory Research.” Perspectives on Psychological Science 7 (6): 632–38. https://doi.org/10.1177/1745691612463078."
   },
   {
     "objectID": "content/03-03-checklists.html#pengartdatascience2016",
@@ -473,7 +473,7 @@
     "href": "content/03-04-oakland-eda.html#section",
     "title": "Case Study: Police Stops in Oakland",
     "section": "",
-    "text": "For this EDA, we’ll work with data on police stops in Oakland, California, that have been pre-cleaned and released by the Stanford Open Policing Project (Pierson et al. 2020).\nBecause this analysis focuses on categorical data and counts of observations, most of the elements in Huebner, Vach, and le Cessie (2016) don’t really fit.\n\nSo we’ll follow the checklist from Peng and Matsui (2016).\n\nWe’ll also be learning to use the skimr and visdat packages"
+    "text": "For this EDA, we’ll work with data on police stops in Oakland, California, that have been pre-cleaned and released by the Stanford Open Policing Project (Pierson et al. 2020).\nWe’ll be following the checklist from Peng and Matsui (2016).\nWe’ll also be learning to use the skimr and visdat packages"
   },
   {
     "objectID": "content/03-04-oakland-eda.html#formulate-your-question",
@@ -515,7 +515,7 @@
     "href": "content/03-04-oakland-eda.html#read-in-your-data",
     "title": "Case Study: Police Stops in Oakland",
     "section": "2. Read in your data",
-    "text": "2. Read in your data\nThe dataset is a zipped csv or comma-separated value file. CSVs are structured like Excel spreadsheets, but are stored in plain text rather than Excel’s format.\n\ndataf = read_csv(target_file)"
+    "text": "2. Read in your data\nThe dataset is a zipped csv or comma-separated value file. CSVs are structured like Excel spreadsheets, but are stored in plain text rather than Excel’s format.\n\ndataf = read_csv(target_file)\n\nRows: 133407 Columns: 28\n── Column specification ────────────────────────────────────────────────────────────────────────────\nDelimiter: \",\"\nchr  (16): raw_row_number, location, beat, subject_race, subject_sex, officer_assignment, type, ...\ndbl   (3): lat, lng, subject_age\nlgl   (7): arrest_made, citation_issued, warning_issued, contraband_found, contraband_drugs, con...\ndate  (1): date\ntime  (1): time\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message."
   },
   {
     "objectID": "content/03-04-oakland-eda.html#check-the-packaging",
@@ -536,7 +536,7 @@
     "href": "content/03-04-oakland-eda.html#missing-values",
     "title": "Case Study: Police Stops in Oakland",
     "section": "Missing values",
-    "text": "Missing values\n\nLet’s use visdat::vis_miss()to\n\nvisualize missing values and\ncheck what’s up with contraband_found.\n\n\n\nBut this raises an error about large data\n\nvis_miss(dataf)\n\nError in vis_miss(dataf): Data exceeds recommended size for visualisation, please consider\n         downsampling your data, or set argument 'warn_large_data' to FALSE.\n\n\n\nSo we’ll use sample_n() to draw a subset\n\nset.seed(2021-09-28)\ndataf_smol = sample_n(dataf, 1000)\n\nvis_miss(dataf_smol)\n\n\n\n\n\nArguments in vis_miss() are useful for picking up patterns in missing values\n\n## cluster = TRUE uses hierarchical clustering to order the rows\nvis_miss(dataf_smol, cluster = TRUE) +\n    coord_flip()\n\n\n\n\n\nSeveral variables related to search outcomes are missing together\n\ncontraband_found, contraband_drugs, contraband_weapons, search_basis, use_of_force_description, raw_subject_typeofsearch, and raw_subject_resultofsearch\n\nHowever, search_conducted is complete"
+    "text": "Missing values\n\nLet’s use visdat::vis_miss()to\n\nvisualize missing values and\ncheck what’s up with contraband_found.\n\n\n\nBut this raises an error about large data\n\nvis_miss(dataf)\n\nError in `test_if_large_data()`:\n! Data exceeds recommended size for visualisation\nConsider downsampling your data with `dplyr::slice_sample()`\nOr set argument, `warn_large_data` = `FALSE`\n\n\n\nSo we’ll use sample_n() to draw a subset\n\nset.seed(2021-09-28)\ndataf_smol = sample_n(dataf, 1000)\n\nvis_miss(dataf_smol)\n\n\n\n\n\nArguments in vis_miss() are useful for picking up patterns in missing values\n\n## cluster = TRUE uses hierarchical clustering to order the rows\nvis_miss(dataf_smol, cluster = TRUE) +\n    coord_flip()\n\n\n\n\n\nSeveral variables related to search outcomes are missing together\n\ncontraband_found, contraband_drugs, contraband_weapons, search_basis, use_of_force_description, raw_subject_typeofsearch, and raw_subject_resultofsearch\n\nHowever, search_conducted is complete"
   },
   {
     "objectID": "content/03-04-oakland-eda.html#a-critical-question",
@@ -571,7 +571,7 @@
     "href": "content/03-04-oakland-eda.html#make-a-plot",
     "title": "Case Study: Police Stops in Oakland",
     "section": "7. Make a plot",
-    "text": "7. Make a plot\nPeng and Matsui note that plots are useful for both checking and setting expectations\n\nAn expectation we formed earlier: fewer stops in 2013\nWe can combine pipes with ggplot() to get the year\ngeom_bar() gives us counts\nWhat’s up with the warnings?\n\n\ndataf |&gt; \n    mutate(year = year(date)) |&gt; \n    ggplot(aes(year)) +\n    geom_bar()\n\n\n\n\n\nHow about counts per year by race/ethnicity?\n\nThis version is too hard to read\n\n\ndataf |&gt; \n    mutate(year = year(date)) |&gt; \n    ggplot(aes(year, fill = subject_race)) +\n    geom_bar()\n\n\n\n\n\nLet’s switch from bars to points and lines and change up the color palette\n\nWhy does this produce 2 warnings?\n\n\ndataf |&gt; \n    mutate(year = year(date)) |&gt; \n    ggplot(aes(year, color = subject_race)) +\n    geom_point(stat = 'count') +\n    geom_line(stat = 'count') +\n    scale_color_brewer(palette = 'Set1')\n\n\n\n\n\nplotly::ggplotly() creates an interactive version of a ggplot object\n\nWhy don’t I need to give it the plot we just created?\n\n\nggplotly()\n\n\n\n\n\n\n\nThese plots confirm our expectation of lower counts in 2013\nDo they help us develop any new expectations as we move on to addressing our research questions?"
+    "text": "7. Make a plot\nPeng and Matsui note that plots are useful for both checking and setting expectations\n\nAn expectation we formed earlier: fewer stops in 2013\nWe can combine pipes with ggplot() to get the year\ngeom_bar() gives us counts\nWhat’s up with the warnings?\n\n\ndataf |&gt; \n    mutate(year = year(date)) |&gt; \n    ggplot(aes(year)) +\n    geom_bar()\n\nWarning: Removed 2 rows containing non-finite values (`stat_count()`).\n\n\n\n\n\n\nHow about counts per year by race/ethnicity?\n\nThis version is too hard to read\n\n\ndataf |&gt; \n    mutate(year = year(date)) |&gt; \n    ggplot(aes(year, fill = subject_race)) +\n    geom_bar()\n\nWarning: Removed 2 rows containing non-finite values (`stat_count()`).\n\n\n\n\n\n\nLet’s switch from bars to points and lines and change up the color palette\n\nWhy does this produce 2 warnings?\n\n\ndataf |&gt; \n    mutate(year = year(date)) |&gt; \n    ggplot(aes(year, color = subject_race)) +\n    geom_point(stat = 'count') +\n    geom_line(stat = 'count') +\n    scale_color_brewer(palette = 'Set1')\n\nWarning: Removed 2 rows containing non-finite values (`stat_count()`).\nRemoved 2 rows containing non-finite values (`stat_count()`).\n\n\n\n\n\n\nplotly::ggplotly() creates an interactive version of a ggplot object\n\nWhy don’t I need to give it the plot we just created?\n\n\nggplotly()\n\nWarning: Removed 2 rows containing non-finite values (`stat_count()`).\nRemoved 2 rows containing non-finite values (`stat_count()`).\n\n\n\n\n\n\n\n\nThese plots confirm our expectation of lower counts in 2013\nDo they help us develop any new expectations as we move on to addressing our research questions?"
   },
   {
     "objectID": "content/03-04-oakland-eda.html#try-the-easy-solution-first",
@@ -606,7 +606,7 @@
     "href": "content/03-04-oakland-eda.html#contraband-finds-by-race",
     "title": "Case Study: Police Stops in Oakland",
     "section": "Contraband finds, by race",
-    "text": "Contraband finds, by race\n\\[ \\Pr(contraband | searched, stopped, Black) \\] We want to filter() down to only stops where a search was conducted\n\ndataf |&gt; \n    filter(search_conducted) |&gt; \n    ggplot(aes(subject_race, fill = contraband_found)) +\n    geom_bar(position = position_fill()) +\n    scale_fill_manual(values = c('transparent', 'blue')) +\n    ylim(0, .2)\n\n\n\n\n\n\ndataf |&gt; \n    filter(search_conducted) |&gt; \n    count(subject_race, contraband_found) |&gt; \n    group_by(subject_race) |&gt; \n    mutate(rate = n / sum(n)) |&gt; \n    ungroup() |&gt; \n    filter(contraband_found) |&gt; \n    mutate(rate = scales::percent(rate, accuracy = 1))\n\n# A tibble: 5 × 4\n  subject_race           contraband_found     n rate \n  &lt;chr&gt;                  &lt;lgl&gt;            &lt;int&gt; &lt;chr&gt;\n1 asian/pacific islander TRUE               176 13%  \n2 black                  TRUE              4364 15%  \n3 hispanic               TRUE              1116 17%  \n4 other                  TRUE                85 12%  \n5 white                  TRUE               411 17%  \n\n\n\nFor Black subjects who were searched, contraband was found 15% of the time\nFor White subjects, 17% of the time"
+    "text": "Contraband finds, by race\n\\[ \\Pr(contraband | searched, stopped, Black) \\] We want to filter() down to only stops where a search was conducted\n\ndataf |&gt; \n    filter(search_conducted) |&gt; \n    ggplot(aes(subject_race, fill = contraband_found)) +\n    geom_bar(position = position_fill()) +\n    scale_fill_manual(values = c('transparent', 'blue')) +\n    ylim(0, .2)\n\nWarning: Removed 5 rows containing missing values (`geom_bar()`).\n\n\n\n\n\n\n\ndataf |&gt; \n    filter(search_conducted) |&gt; \n    count(subject_race, contraband_found) |&gt; \n    group_by(subject_race) |&gt; \n    mutate(rate = n / sum(n)) |&gt; \n    ungroup() |&gt; \n    filter(contraband_found) |&gt; \n    mutate(rate = scales::percent(rate, accuracy = 1))\n\n# A tibble: 5 × 4\n  subject_race           contraband_found     n rate \n  &lt;chr&gt;                  &lt;lgl&gt;            &lt;int&gt; &lt;chr&gt;\n1 asian/pacific islander TRUE               176 13%  \n2 black                  TRUE              4364 15%  \n3 hispanic               TRUE              1116 17%  \n4 other                  TRUE                85 12%  \n5 white                  TRUE               411 17%  \n\n\n\nFor Black subjects who were searched, contraband was found 15% of the time\nFor White subjects, 17% of the time"
   },
   {
     "objectID": "content/03-04-oakland-eda.html#results",
@@ -641,7 +641,7 @@
     "href": "content/03-04-oakland-eda.html#references",
     "title": "Case Study: Police Stops in Oakland",
     "section": "References",
-    "text": "References\n\n\n\n\nHuebner, Marianne, Werner Vach, and Saskia le Cessie. 2016. “A Systematic Approach to Initial Data Analysis Is Good Research Practice.” The Journal of Thoracic and Cardiovascular Surgery 151 (1): 25–27. https://doi.org/10.1016/j.jtcvs.2015.09.085.\n\n\nLiboiron, Max. 2021. Pollution Is Colonialism. Duke University Press. https://books.google.com?id=NL4lEAAAQBAJ.\n\n\nPeng, Roger D., and Elizabeth Matsui. 2016. The Art of Data Science: A Guide for Anyone Who Works with Data. Leanpub. http://leanpub.com/artofdatascience.\n\n\nPierson, Emma, Camelia Simoiu, Jan Overgoor, Sam Corbett-Davies, Daniel Jenson, Amy Shoemaker, Vignesh Ramachandran, et al. 2020. “A Large-Scale Analysis of Racial Disparities in Police Stops Across the United States.” Nature Human Behaviour, May, 1–10. https://doi.org/10.1038/s41562-020-0858-1.\n\n\nTanweer, Anissa, Emily Kalah Gade, P. M. Krafft, and Sarah K. Dreier. 2021. “Why the Data Revolution Needs Qualitative Thinking.” Harvard Data Science Review, July. https://doi.org/10.1162/99608f92.eee0b0da."
+    "text": "References\n\n\n\n\nPeng, Roger D., and Elizabeth Matsui. 2016. The Art of Data Science: A Guide for Anyone Who Works with Data. Leanpub. http://leanpub.com/artofdatascience.\n\n\nPierson, Emma, Camelia Simoiu, Jan Overgoor, Sam Corbett-Davies, Daniel Jenson, Amy Shoemaker, Vignesh Ramachandran, et al. 2020. “A Large-Scale Analysis of Racial Disparities in Police Stops Across the United States.” Nature Human Behaviour, May, 1–10. https://doi.org/10.1038/s41562-020-0858-1."
   },
   {
     "objectID": "content/04-02-readability.html#reading",
@@ -943,5 +943,26 @@
     "title": "References",
     "section": "",
     "text": "Bailey, David H., and Jonathan Borwein (Jon). n.d. “The\nReinhart-Rogoff Error – or How Not to Excel at\nEconomics.” The Conversation. Accessed May 16, 2020.\nhttp://theconversation.com/the-reinhart-rogoff-error-or-how-not-to-excel-at-economics-13646.\n\n\nBogen, James, and James Woodward. 1988. “Saving the\nPhenomena.” The Philosophical Review 97\n(3): 303–52. http://www.jstor.org/stable/2185445.\n\n\nBrown, James Robert. 2002. Smoke and Mirrors: How\nScience Reflects Reality. Routledge.\n\n\nBryan, Jenny. 2018. “Code Smells and Feels.” Presented at\nthe useR 2018, July 21. https://www.youtube.com/watch?v=7oyiPBjLAWY.\n\n\n———. 2020. “Object of Type ‘Closure’ Is Not\nSubsettable.” Presented at the\nRSTUDIO::CONF 2020, January 31. https://rstudio.com/resources/rstudioconf-2020/object-of-type-closure-is-not-subsettable/.\n\n\nBuckens, Wouter. 2019. “Self-Documenting Is a Myth, and How to\nMake Your Code Self-Documenting.” woubuc. August 3,\n2019. https://blog.woubuc.be/post/self-documenting-code-is-a-myth/.\n\n\nCassidy, John. n.d. “The Reinhart and Rogoff\nControversy: A Summing Up.” The New\nYorker. Accessed September 27, 2020. https://www.newyorker.com/news/john-cassidy/the-reinhart-and-rogoff-controversy-a-summing-up.\n\n\nChambers, John M. 2014. “Object-Oriented Programming,\nFunctional Programming and R.”\nStatistical Science 29 (2): 167–80. https://doi.org/10.1214/13-STS452.\n\n\nChin, Monica. 2021. “Students Who Grew up with Search Engines\nMight Change STEM Education Forever.” The\nVerge. September 22, 2021. https://www.theverge.com/22684730/students-file-folder-directory-structure-education-gen-z.\n\n\nDaston, Lorraine, and Peter Galison. 2007. Objectivity.\nNew York : Cambridge, Mass: Zone Books ; Distributed\nby the MIT Press.\n\n\nHerndon, Thomas, Michael Ash, and Robert Pollin. 2014. “Does High\nPublic Debt Consistently Stifle Economic Growth? A Critique\nof Reinhart and Rogoff.” Cambridge\nJournal of Economics 38 (2): 257–79. https://doi.org/10.1093/cje/bet075.\n\n\n“How Excel May Have Caused Loss of 16,000\nCovid Tests in England.” 2020.\nThe Guardian. October 5, 2020. http://www.theguardian.com/politics/2020/oct/05/how-excel-may-have-caused-loss-of-16000-covid-tests-in-england.\n\n\nHudon, Caitlin. 2018. “Field Notes: Building\nData Dictionaries.” Haystacks. October 30,\n2018. https://caitlinhudon.com/2018/10/30/data-dictionaries/.\n\n\nHuebner, Marianne, Werner Vach, and Saskia le Cessie. 2016. “A\nSystematic Approach to Initial Data Analysis Is Good Research\nPractice.” The Journal of Thoracic and Cardiovascular\nSurgery 151 (1): 25–27. https://doi.org/10.1016/j.jtcvs.2015.09.085.\n\n\nLaskowski, Kate. n.d. “What to Do When You Don’t Trust Your Data\nAnymore – Laskowski Lab at UC Davis.”\nAccessed January 29, 2020. https://laskowskilab.faculty.ucdavis.edu/2020/01/29/retractions/.\n\n\nMcElreath, Richard, dir. 2020. Science as Amateur Software\nDevelopment. https://www.youtube.com/watch?v=zwRdO9_GGhY.\n\n\nNoble, William Stafford. 2009. “A Quick Guide to\nOrganizing Computational Biology Projects.” PLOS\nComputational Biology 5 (7): e1000424. https://doi.org/10.1371/journal.pcbi.1000424.\n\n\nPeng, Roger D., and Elizabeth Matsui. 2016. The Art of\nData Science: A Guide for Anyone Who\nWorks with Data. Leanpub. http://leanpub.com/artofdatascience.\n\n\nPennisi, Elizabeth. 2020. “Prominent Spider Biologist Spun a Web\nof Questionable Data.” Science 367 (6478): 613–14. https://doi.org/10.1126/science.367.6478.613.\n\n\nPierson, Emma, Camelia Simoiu, Jan Overgoor, Sam Corbett-Davies, Daniel\nJenson, Amy Shoemaker, Vignesh Ramachandran, et al. 2020. “A\nLarge-Scale Analysis of Racial Disparities in Police Stops Across the\nUnited States.” Nature Human Behaviour,\nMay, 1–10. https://doi.org/10.1038/s41562-020-0858-1.\n\n\nPostolovski, Tash. 2020. “Your Code Review Checklist:\n14 Things to Include.” July 6, 2020. https://www.codementor.io/blog/code-review-checklist-76q7ovkaqj.\n\n\n“R Faq - How to Make a Great R\nReproducible Example.” n.d. Stack Overflow. Accessed\nAugust 31, 2018. https://stackoverflow.com/questions/5963269/how-to-make-a-great-r-reproducible-example.\n\n\nReinhart & Rogoff - Growth in a\nTime of Debt - EXERCISE!\n2019. https://www.youtube.com/watch?v=ItGMz0ERvcw.\n\n\nSpringate, David. 2013. “Functional Programming in\nR.” DataJujitsu. May 16, 2013. https://www.datajujitsu.co.uk/blog/2013/05/16/functional-programming-in-r/.\n\n\nTanweer, Anissa, Emily Kalah Gade, P. M. Krafft, and Sarah K. Dreier.\n2021. “Why the Data Revolution Needs Qualitative\nThinking.” Harvard Data Science Review, July. https://doi.org/10.1162/99608f92.eee0b0da.\n\n\nThe Economist. 2011. “An Array of Errors,”\nSeptember 10, 2011. https://www.economist.com/science-and-technology/2011/09/10/an-array-of-errors.\n\n\nTukey, John W. 1980. “We Need Both Exploratory and\nConfirmatory.” The American Statistician 34\n(1): 23–25. https://doi.org/10.1080/00031305.1980.10482706.\n\n\nTukey, John Wilder. 1977. Exploratory Data Analysis.\nAddison-Wesley Series in Behavioral Science. Reading,\nMass: Addison-Wesley Pub. Co. https://archive.org/details/exploratorydataa00tuke_0.\n\n\n“Video: Keith Baggerly, \"When Is\nReproducibility an Ethical Issue?\nGenomics, Personalized Medicine, and\nHuman Error\".” n.d. Accessed September 23, 2020. http://www.birs.ca/events/2013/5-day-workshops/13w5083/videos/watch/201308141121-Baggerly.html.\n\n\nViglione, Giuliana. 2020. “‘Avalanche’\nof Spider-Paper Retractions Shakes Behavioural-Ecology\nCommunity.” Nature, February. https://doi.org/10.1038/d41586-020-00287-y.\n\n\nWagenmakers, Eric-Jan, Ruud Wetzels, Denny Borsboom, Han L. J. van der\nMaas, and Rogier A. Kievit. 2012. “An Agenda for\nPurely Confirmatory Research.” Perspectives on\nPsychological Science 7 (6): 632–38. https://doi.org/10.1177/1745691612463078.\n\n\nWickham, Hadley. 2019. “Debugging.” In Advanced\nR, Second Edition, ch. 22. CRC\nPress. https://adv-r.hadley.nz/debugging.html.\n\n\nWilkinson, Mark D., Michel Dumontier, IJsbrand Jan Aalbersberg,\nGabrielle Appleton, Myles Axton, Arie Baak, Niklas Blomberg, et al.\n2016. “The FAIR Guiding Principles for Scientific\nData Management and Stewardship.” Scientific Data 3 (1,\n1): 1–9. https://doi.org/10.1038/sdata.2016.18.\n\n\nWilson, Greg, Jennifer Bryan, Karen Cranston, Justin Kitzes, Lex\nNederbragt, and Tracy K. Teal. 2017. “Good Enough Practices in\nScientific Computing.” PLOS Computational Biology 13\n(6): e1005510. https://doi.org/10.1371/journal.pcbi.1005510."
+  },
+  {
+    "objectID": "content/03-02-models-of-eda.html",
+    "href": "content/03-02-models-of-eda.html",
+    "title": "Project: Data Journey Narrative",
+    "section": "",
+    "text": "Exploratory Data Analysis"
+  },
+  {
+    "objectID": "content/03-02-models-of-eda.html#section-2",
+    "href": "content/03-02-models-of-eda.html#section-2",
+    "title": "Project: Data Journey Narrative",
+    "section": "",
+    "text": "Aligning the goals of EDA with steps in the “epicycle of analysis” (Peng and Matsui 2016)\n\n\n\n\n\n\nGoals of EDA\nEpicycle step\n\n\n\n\nDetermine if there are problems with the data\n2. Collecting information\n\n\nDetermine whether our question can be answered with these data\n3. Comparing and revising expectations\n\n\nDevelop sketch of an answer\n1. Developing expectations"
+  },
+  {
+    "objectID": "content/03-04-oakland-eda.html#pengartdatascience2016",
+    "href": "content/03-04-oakland-eda.html#pengartdatascience2016",
+    "title": "Case Study: Police Stops in Oakland",
+    "section": "Peng and Matsui (2016)",
+    "text": "Peng and Matsui (2016)\n\nFormulate your question\nRead in your data\nCheck the packaging\nLook at the top and the bottom of your data\nCheck your “n”s\nValidate with at least one external data source\nMake a plot\nTry the easy solution first\nFollow up"
   }
 ]

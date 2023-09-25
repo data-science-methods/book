@@ -20,7 +20,6 @@ book:
     - part: "Exploratory data analysis"
       chapters:
         - content/03-02-models-of-eda.qmd
-        - content/03-03-checklists.qmd
         - content/03-04-oakland-eda.qmd
     - part: "Replicability & reproducibility"
       chapters:
