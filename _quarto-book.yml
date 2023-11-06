@@ -24,7 +24,6 @@ book:
     - part: "Replicability & reproducibility"
       chapters:
         - content/04-02-readability.qmd
-        - content/04-03-code-review.qmd
         - content/04-04-project-organization.qmd
         - content/04-05-data-management.qmd
     - references.qmd

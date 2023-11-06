@@ -3,8 +3,30 @@
 ## Reading 
 
 - @BryanCodeSmellsFeels2018
-- @PostolovskiYourCodeReview2020
-- @BuckensSelfdocumentingMythHow2019
+- @WhatLookCode
+- @LambBuildingInclusiveCode2018
+- @WickhamTidyverseStyleGuidea
+
+## Replicability, reproducibility, reliability
+
+replicability
+  ~ Qualitatively similar results when we repeat the experiment\
+    (gather new data; may or may not use the same code)
+  
+reproducibility
+  ~ Quantitatively identical outputs when we run the same code on the same data\
+    (same data, same code)
+  
+reliability
+  ~ The code performs the analysis that we think it's performing\
+    (compare construct validity)
+    
+## Checking reliability
+
+reliability
+  ~ The code performs the analysis that we think it's performing
+
+*Can reliability be checked computationally?*
 
 
 ## Writing code is writing
@@ -17,7 +39,7 @@
 
 > Any code of your own that you haven't looked at for six or more months might as well have been written by someone else. ("Eagleson's Law")
 
-- Your code is *readable* to the extent that people can use it to easily and reliably 
+- Your code is *readable* to the extent that people can easily assess reliability: 
     - predict, 
     - diagnose, and
     - extend your code
@@ -25,8 +47,14 @@
 
 ## Code style ##
 
-- iNéwritteNélanguagEáconventionSéfoRîpunctuatioNøcapitalizatioNîaiDécompr\
-  ehensioNébYéindicatinGéstructurE
+iNéwritteNélanguagEáconventionSéfoRîpunctuatioNøcapitalizatioNîaiDéco\
+mprehensioNébYéindicatinGéstructurE
+
+----
+
+
+- iNéwritteNélanguagEáconventionSéfoRîpunctuatioNøcapitalizatioNîaiDéco\
+  mprehensioNébYéindicatinGéstructurE
     - this is what it's like to read poorly-styled code
     - conventions only work if they're *shared* conventions
 
@@ -36,7 +64,7 @@
     - Indentation corresponds to structure of complex expressions
     - Common conventions for naming, assignment reduce cognitive load
 
-- Tidyverse style guide:  <https://style.tidyverse.org/>
+- Tidyverse style guide:  <https://style.tidyverse.org/> [@WickhamTidyverseStyleGuidea]
 
 
 ## Highlights from the Tidyverse style guide ##
@@ -52,79 +80,15 @@
 long_function_name <- function(a = "a long argument",
                                b = "another argument",
                                c = "another long argument") {
-  # As usual code is indented by two spaces.
+    # As usual code is indented by four spaces.
 }
 ```
-
-## Using comments to explain why and indicate structure {.smaller}
-
-```{r}
-#| eval: false
-loading_table = function(model, 
-                         threshold = .3, 
-                         quiet = FALSE, 
-                         path = NULL, 
-                         overwrite = FALSE) {
-    loadings_unfltd = model |> 
-        ## Extract loadings and tidy
-        loadings() |> 
-        unclass() |> 
-        as_tibble(rownames = 'item') |> 
-        ## loadings() returns a wide item x factor matrix
-        pivot_longer(-item, names_to = 'factor', values_to = 'loading')
-        ## Will filter based on `threshold` below
-    
-    ## Dropped items
-    if (!quiet) {
-        loadings_df = filter(loadings_unfltd, abs(loading) > threshold)
-        dropped_df = loadings_unfltd |> 
-            pivot_wider(names_from = 'factor', values_from = 'loading') |> 
-            anti_join(pivot_wider(loadings_df, 
-                                  names_from = 'factor', 
-                                  values_from = 'loading'), 
-                      by = 'item')
-        message('Dropped items')
-        print(dropped_df)
-    }
-    
-    ## Cross-loaded items
-    if (!quiet) {
-        xload_df = loadings_df |>
-            add_count(item) |>
-            filter(n > 1) |>
-            select(-n) |>
-            pivot_wider(names_from = 'factor', values_from = 'loading')
-        message('Cross-loaded items')
-        print(xload_df)
-    }
-    
-    loadings_clean = loadings_df |>
-        anti_join(xload_df, by = 'item') |>
-        ## Spread back out to item x factor for presentation
-        pivot_wider(names_from = 'factor', values_from = 'loading') |>
-        arrange(across(starts_with('MR'), desc)) |> 
-        left_join(vis_labels, by = c('item' = 'tag')) |> 
-        select(-item.y)
-    
-    if (!is.null(path)) {
-        if (!file.exists(path) || overwrite) {
-            write_csv(loadings_clean, path, na = '')
-        }
-        if (file.exists(path) && !overwrite) {
-            warning('CSV already exists; skipping overwrite')
-        }
-    }
-    
-    return(loadings_clean)
-}
-```
-
 
 ## Spaces: Let your code  b r e a t h e
 
 - Always put spaces after commas, and never before (like English)
-- But not between a function name and the parentheses (like math)
-- And surrounding infix operators (`==`, `+`, `-`, `<-`, `=`)
+- No space between a function name and the parentheses (like math)
+- Spaces on both sides of infix operators (`==`, `+`, `-`, `<-`, `=`)
 - Pipes `%>%` `|>` should have a space before and be at the end of the line
 
 
@@ -154,6 +118,65 @@ if (y == 0) {
 - Functions that return a single value: 
     - `&&`, `||`, `identical`
 - `if (x) a else b` only looks at the first (hopefully single) value of `x`
+
+
+## Code review is peer feedback on your writing
+
+- *May* be done formally as part of journal review
+    - But this is super rare
+- Informally, with collaborators
+- Informally, as a stage of writing
+
+
+## Goals of code review
+
+- Make the code more reliable
+- Integrate your code into the collaborative code base
+- Learning and growth for both author and reviewer
+
+*Examples of things that will promote/frustrate these goals?*
+
+[@LambBuildingInclusiveCode2018]
+
+
+## What to look for in code review 
+
+- **Good things**:  What does the code do well? 
+- **Design**: The code communicates the author's intentions. 
+- **Functionality**: The code does what the author intended. 
+- **Complexity**: The code isn’t more complex than it needs to be.
+- **Over-engineering**: The developer isn’t implementing things they might need in the future but don’t know they need now.
+- **Tests**: Code has appropriate, well-designed unit tests [or uses assertions]. 
+- **Naming**: The developer used clear names for everything.
+- **Comments**: Comments are clear and useful, and mostly explain why instead of what.
+- **Style**: The code follows the group's / a standard style guide. 
+- **Documentation**:  Does the code explain what functions or long pipes do and how they're used? 
+
+[adapted from @WhatLookCode]
+
+- **Setup**:  The documentation/README explains where to get the data and any special software installation.  
+- **Dependencies**:  All of the required packages are listed at the top of the script. 
+- **Reproducibility**: The code runs, and produces the output identified elsewhere (comments, paper text)
+
+## Labs 5-6
+
+- [Lab 5](https://github.com/data-science-methods/lab-5-code-review): Code review of @ZhouExcessCOVID19Cases2021
+    - Work in *pairs*
+    - Write a rubric first
+    - Don't worry about reproducibility
+    - **Start working on this Thursday**, even if you're not finished with lab 4
+- [Lab 6](https://github.com/data-science-methods/lab-6-reproducibility): Reproducibility check of @ZhouExcessCOVID19Cases2021
+    - Specifically, the values reported in Table 1
+
+## Project: Code Review
+
+<https://data-science-methods.github.io/project.html#code-review-and-reproducibility-check>
+
+- I'll assign you to review someone else's EDA code
+- Fork and clone the code
+- Submit your feedback using a PR
+
+
 
 ## References
 

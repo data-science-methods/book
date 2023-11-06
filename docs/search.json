@@ -648,28 +648,28 @@
     "href": "content/04-02-readability.html#reading",
     "title": "Readable code is reliable code",
     "section": "Reading",
-    "text": "Reading\n\nBryan (2018)\nPostolovski (2020)\nBuckens (2019)"
+    "text": "Reading\n\nBryan (2018)\n“What to Look for in a Code Review” (n.d.)\nLamb (2018)\nWickham (n.d.)"
   },
   {
     "objectID": "content/04-02-readability.html#writing-code-is-writing",
     "href": "content/04-02-readability.html#writing-code-is-writing",
     "title": "Readable code is reliable code",
     "section": "Writing code is writing",
-    "text": "Writing code is writing\n\nMultiple audiences\n\nCollaborators\n(Some) reviewers and readers of the paper\nPeers who want to analyze and extend your methods\nYourself in six months\n\n\n\nAny code of your own that you haven’t looked at for six or more months might as well have been written by someone else. (“Eagleson’s Law”)\n\n\nYour code is readable to the extent that people can use it to easily and reliably\n\npredict,\ndiagnose, and\nextend your code"
+    "text": "Writing code is writing\n\nMultiple audiences\n\nCollaborators\n(Some) reviewers and readers of the paper\nPeers who want to analyze and extend your methods\nYourself in six months\n\n\n\nAny code of your own that you haven’t looked at for six or more months might as well have been written by someone else. (“Eagleson’s Law”)\n\n\nYour code is readable to the extent that people can easily assess reliability:\n\npredict,\ndiagnose, and\nextend your code"
   },
   {
     "objectID": "content/04-02-readability.html#code-style",
     "href": "content/04-02-readability.html#code-style",
     "title": "Readable code is reliable code",
     "section": "Code style",
-    "text": "Code style\n\niNéwritteNélanguagEáconventionSéfoRîpunctuatioNøcapitalizatioNîaiDécompr\nehensioNébYéindicatinGéstructurE\n\nthis is what it’s like to read poorly-styled code\nconventions only work if they’re shared conventions\n\nStyle guides provide shared conventions for readable code\n\nIn-line spacing makes it easier to pick out distinguish functions, operators, and variables in a line\nReturns distinguish arguments in a function call\nIndentation corresponds to structure of complex expressions\nCommon conventions for naming, assignment reduce cognitive load\n\nTidyverse style guide: https://style.tidyverse.org/"
+    "text": "Code style\niNéwritteNélanguagEáconventionSéfoRîpunctuatioNøcapitalizatioNîaiDéco\nmprehensioNébYéindicatinGéstructurE\n\n\niNéwritteNélanguagEáconventionSéfoRîpunctuatioNøcapitalizatioNîaiDéco\nmprehensioNébYéindicatinGéstructurE\n\nthis is what it’s like to read poorly-styled code\nconventions only work if they’re shared conventions\n\nStyle guides provide shared conventions for readable code\n\nIn-line spacing makes it easier to pick out distinguish functions, operators, and variables in a line\nReturns distinguish arguments in a function call\nIndentation corresponds to structure of complex expressions\nCommon conventions for naming, assignment reduce cognitive load\n\nTidyverse style guide: https://style.tidyverse.org/ (Wickham n.d.)"
   },
   {
     "objectID": "content/04-02-readability.html#highlights-from-the-tidyverse-style-guide",
     "href": "content/04-02-readability.html#highlights-from-the-tidyverse-style-guide",
     "title": "Readable code is reliable code",
     "section": "Highlights from the Tidyverse style guide",
-    "text": "Highlights from the Tidyverse style guide\n\nPlace all package() calls at the top of the script\nLimit your code to 80 characters per line\nUse at least 4 spaces for indenting multiline expression\n\nControl-I in RStudio will do automagic indenting\n\nIn multiline function calls, 1 argument = 1 line\n\n\nlong_function_name &lt;- function(a = \"a long argument\",\n                               b = \"another argument\",\n                               c = \"another long argument\") {\n  # As usual code is indented by two spaces.\n}"
+    "text": "Highlights from the Tidyverse style guide\n\nPlace all package() calls at the top of the script\nLimit your code to 80 characters per line\nUse at least 4 spaces for indenting multiline expression\n\nControl-I in RStudio will do automagic indenting\n\nIn multiline function calls, 1 argument = 1 line\n\n\nlong_function_name &lt;- function(a = \"a long argument\",\n                               b = \"another argument\",\n                               c = \"another long argument\") {\n    # As usual code is indented by four spaces.\n}"
   },
   {
     "objectID": "content/04-02-readability.html#using-comments-to-explain-why-and-indicate-structure",
@@ -683,7 +683,7 @@
     "href": "content/04-02-readability.html#spaces-let-your-code-b-r-e-a-t-h-e",
     "title": "Readable code is reliable code",
     "section": "Spaces: Let your code b r e a t h e",
-    "text": "Spaces: Let your code b r e a t h e\n\nAlways put spaces after commas, and never before (like English)\nBut not between a function name and the parentheses (like math)\nAnd surrounding infix operators (==, +, -, &lt;-, =)\nPipes %&gt;% |&gt; should have a space before and be at the end of the line"
+    "text": "Spaces: Let your code b r e a t h e\n\nAlways put spaces after commas, and never before (like English)\nNo space between a function name and the parentheses (like math)\nSpaces on both sides of infix operators (==, +, -, &lt;-, =)\nPipes %&gt;% |&gt; should have a space before and be at the end of the line"
   },
   {
     "objectID": "content/04-02-readability.html#code-blocks",
@@ -704,7 +704,7 @@
     "href": "content/04-02-readability.html#references",
     "title": "Readable code is reliable code",
     "section": "References",
-    "text": "References\n\n\n\n\nBryan, Jenny. 2018. “Code Smells and Feels.” Presented at the useR 2018, July 21. https://www.youtube.com/watch?v=7oyiPBjLAWY.\n\n\nBuckens, Wouter. 2019. “Self-Documenting Is a Myth, and How to Make Your Code Self-Documenting.” woubuc. August 3, 2019. https://blog.woubuc.be/post/self-documenting-code-is-a-myth/.\n\n\nPostolovski, Tash. 2020. “Your Code Review Checklist: 14 Things to Include.” July 6, 2020. https://www.codementor.io/blog/code-review-checklist-76q7ovkaqj."
+    "text": "References\n\n\n\n\nBryan, Jenny. 2018. “Code Smells and Feels.” Presented at the useR 2018, July 21. https://www.youtube.com/watch?v=7oyiPBjLAWY.\n\n\nLamb, Julianna. 2018. “Building an Inclusive Code Review Culture.” Plaid. July 30, 2018. https://plaid.com/blog/building-an-inclusive-code-review-culture/.\n\n\n“What to Look for in a Code Review.” n.d. eng-practices. Accessed October 23, 2023. https://google.github.io/eng-practices/review/reviewer/looking-for.html.\n\n\nWickham, Hadley. n.d. The Tidyverse Style Guide. Accessed November 6, 2023. https://style.tidyverse.org/.\n\n\nZhou, Xiaodan, Kevin Josey, Leila Kamareddine, Miah C. Caine, Tianjia Liu, Loretta J. Mickley, Matthew Cooper, and Francesca Dominici. 2021. “Excess of COVID-19 Cases and Deaths Due to Fine Particulate Matter Exposure During the 2020 Wildfires in the United States.” Science Advances 7 (33): eabi8789. https://doi.org/10.1126/sciadv.abi8789."
   },
   {
     "objectID": "content/04-03-code-review.html#reading",
@@ -964,5 +964,68 @@
     "title": "Case Study: Police Stops in Oakland",
     "section": "Peng and Matsui (2016)",
     "text": "Peng and Matsui (2016)\n\nFormulate your question\nRead in your data\nCheck the packaging\nLook at the top and the bottom of your data\nCheck your “n”s\nValidate with at least one external data source\nMake a plot\nTry the easy solution first\nFollow up"
+  },
+  {
+    "objectID": "content/04-02-readability.html#replicability-reproducibility-reliability",
+    "href": "content/04-02-readability.html#replicability-reproducibility-reliability",
+    "title": "Readable code is reliable code",
+    "section": "Replicability, reproducibility, reliability",
+    "text": "Replicability, reproducibility, reliability\n\nreplicability\n\nQualitatively similar results when we repeat the experiment\n(gather new data; may or may not use the same code)\n\nreproducibility\n\nQuantitatively identical outputs when we run the same code on the same data\n(same data, same code)\n\nreliability\n\nThe code performs the analysis that we think it’s performing\n(compare construct validity)"
+  },
+  {
+    "objectID": "content/04-02-readability.html#checking-reliability",
+    "href": "content/04-02-readability.html#checking-reliability",
+    "title": "Readable code is reliable code",
+    "section": "Checking reliability",
+    "text": "Checking reliability\n\nreliability\n\nThe code performs the analysis that we think it’s performing\n\n\nCan reliability be checked computationally?"
+  },
+  {
+    "objectID": "content/04-02-readability.html#code-review",
+    "href": "content/04-02-readability.html#code-review",
+    "title": "Readable code is reliable code",
+    "section": "Code review",
+    "text": "Code review\nGoals of code review:\n\nMake the code more reliable\nLearning and growth for both author and reviewer"
+  },
+  {
+    "objectID": "content/04-02-readability.html#goals-of-code-review",
+    "href": "content/04-02-readability.html#goals-of-code-review",
+    "title": "Readable code is reliable code",
+    "section": "Goals of code review",
+    "text": "Goals of code review\n\nMake the code more reliable\nIntegrate your code into the collaborative code base\nLearning and growth for both author and reviewer\n\nExamples of things that will promote/frustrate these goals?\n(Lamb 2018)"
+  },
+  {
+    "objectID": "content/04-02-readability.html#code-review-is-peer-feedback",
+    "href": "content/04-02-readability.html#code-review-is-peer-feedback",
+    "title": "Readable code is reliable code",
+    "section": "Code review is peer feedback",
+    "text": "Code review is peer feedback"
+  },
+  {
+    "objectID": "content/04-02-readability.html#code-review-is-peer-feedback-on-your-writing",
+    "href": "content/04-02-readability.html#code-review-is-peer-feedback-on-your-writing",
+    "title": "Readable code is reliable code",
+    "section": "Code review is peer feedback on your writing",
+    "text": "Code review is peer feedback on your writing\n\nMay be done formally as part of journal review\n\nBut this is super rare\n\nInformally, with collaborators\nInformally, as a stage of writing"
+  },
+  {
+    "objectID": "content/04-02-readability.html#what-to-look-for-in-code-review",
+    "href": "content/04-02-readability.html#what-to-look-for-in-code-review",
+    "title": "Readable code is reliable code",
+    "section": "What to look for in code review",
+    "text": "What to look for in code review\n\nGood things: What does the code do well?\nDesign: The code communicates the author’s intentions.\nFunctionality: The code does what the author intended.\nComplexity: The code isn’t more complex than it needs to be.\nOver-engineering: The developer isn’t implementing things they might need in the future but don’t know they need now.\nTests: Code has appropriate, well-designed unit tests [or uses assertions].\nNaming: The developer used clear names for everything.\nComments: Comments are clear and useful, and mostly explain why instead of what.\nStyle: The code follows the group’s / a standard style guide.\nDocumentation: Does the code explain what functions or long pipes do and how they’re used?\n\n(adapted from “What to Look for in a Code Review” n.d.)\n\nSetup: The documentation/README explains where to get the data and any special software installation.\n\nDependencies: All of the required packages are listed at the top of the script.\nReproducibility: The code runs, and produces the output identified elsewhere (comments, paper text)"
+  },
+  {
+    "objectID": "content/04-02-readability.html#labs-5-6",
+    "href": "content/04-02-readability.html#labs-5-6",
+    "title": "Readable code is reliable code",
+    "section": "Labs 5-6",
+    "text": "Labs 5-6\n\nLab 5: Code review of Zhou et al. (2021)\n\nWork in pairs\nWrite a rubric first\nDon’t worry about reproducibility\nStart working on this Thursday, even if you’re not finished with lab 4\n\nLab 6: Reproducibility check of Zhou et al. (2021)\n\nSpecifically, the values reported in Table 1"
+  },
+  {
+    "objectID": "content/04-02-readability.html#project-code-review",
+    "href": "content/04-02-readability.html#project-code-review",
+    "title": "Readable code is reliable code",
+    "section": "Project: Code Review",
+    "text": "Project: Code Review\nhttps://data-science-methods.github.io/project.html#code-review-and-reproducibility-check\n\nI’ll assign you to review someone else’s EDA code\nFork and clone the code\nSubmit your feedback using a PR"
   }
 ]
