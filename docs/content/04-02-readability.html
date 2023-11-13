@@ -83,7 +83,7 @@ div.csl-indent {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../content/04-04-project-organization.html" rel="next">
+<link href="../content/04-05-data-management.html" rel="next">
 <link href="../content/03-04-oakland-eda.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -247,12 +247,7 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../content/04-04-project-organization.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">The life-changing magic of tidying your projects</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../content/04-05-data-management.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Managing and publishing data</span></a>
+  <a href="../content/04-05-data-management.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Project and data management</span></a>
   </div>
 </li>
       </ul>
@@ -548,6 +543,44 @@ Zhou, Xiaodan, Kevin Josey, Leila Kamareddine, Miah C. Caine, Tianjia Liu, Loret
 </section>
 
 </main> <!-- /main -->
+
+<script>
+  // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+  // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+  // slide changes (different for each slide format).
+  (function () {
+    // dispatch for htmlwidgets
+    function fireSlideEnter() {
+      const event = window.document.createEvent("Event");
+      event.initEvent("slideenter", true, true);
+      window.document.dispatchEvent(event);
+    }
+
+    function fireSlideChanged(previousSlide, currentSlide) {
+      fireSlideEnter();
+
+      // dispatch for shiny
+      if (window.jQuery) {
+        if (previousSlide) {
+          window.jQuery(previousSlide).trigger("hidden");
+        }
+        if (currentSlide) {
+          window.jQuery(currentSlide).trigger("shown");
+        }
+      }
+    }
+
+    // hookup for slidy
+    if (window.w3c_slidy) {
+      window.w3c_slidy.add_observer(function (slide_num) {
+        // slide_num starts at position 1
+        fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+      });
+    }
+
+  })();
+</script>
+
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -788,8 +821,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../content/04-04-project-organization.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-title">The life-changing magic of tidying your projects</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../content/04-05-data-management.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-title">Project and data management</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

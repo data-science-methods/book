@@ -312,14 +312,14 @@
     "href": "content/02-04-getting-help.html#messages-warnings-and-errors",
     "title": "Warnings, Errors, and Getting Help",
     "section": "Messages, warnings, and errors",
-    "text": "Messages, warnings, and errors\n\nMessage\n\nThings are fine, but here’s some information you should know\n\nWarning\n\nUhhhh I’m gonna keep going, but maybe this isn’t what you want\n\nError\n\nNope. I’m stopping here. You need to fix the thing.\n\n\n\nmessage('Hey, just FYI')\n\nHey, just FYI\n\nwarning('Uhhhh might want to check this out')\n\nWarning: Uhhhh might want to check this out\n\nstop('Noooooo')\n\nError in eval(expr, envir, enclos): Noooooo"
+    "text": "Messages, warnings, and errors\n\nMessage\n\nThings are fine, but here’s some information you should know\n\nWarning\n\nUhhhh I’m gonna keep going, but maybe this isn’t what you want\n\nError\n\nNope. I’m stopping here. You need to fix the thing.\n\n\n\nmessage('Hey, just FYI')\nwarning('Uhhhh might want to check this out')\nstop('Noooooo')\n\nError in eval(expr, envir, enclos): Noooooo"
   },
   {
     "objectID": "content/02-04-getting-help.html#example-dates-are-often-problems",
     "href": "content/02-04-getting-help.html#example-dates-are-often-problems",
     "title": "Warnings, Errors, and Getting Help",
     "section": "Example: Dates are often problems",
-    "text": "Example: Dates are often problems\n\nlibrary(lubridate)\n\n\nAttaching package: 'lubridate'\n\n\nThe following objects are masked from 'package:base':\n\n    date, intersect, setdiff, union\n\nadd_six_months = function(date_str) {\n    parsed_dates = parse_date_time(date_str, orders = 'mdY')\n    parsed_dates %m+% months(6) \n}\n\nsome_data = c('June 2002', 'May 15, 2007', 'August 2007')\nadd_six_months(some_data)\n\nWarning: 2 failed to parse.\n\n\n[1] NA               \"2007-11-15 UTC\" NA"
+    "text": "Example: Dates are often problems\n\nlibrary(lubridate)\n\nadd_six_months = function(date_str) {\n    parsed_dates = parse_date_time(date_str, orders = 'mdY')\n    parsed_dates %m+% months(6) \n}\n\nsome_data = c('June 2002', 'May 15, 2007', 'August 2007')\nadd_six_months(some_data)\n\n[1] NA               \"2007-11-15 UTC\" NA"
   },
   {
     "objectID": "content/02-04-getting-help.html#warning-this-is-a-warning-not-an-error",
@@ -347,7 +347,7 @@
     "href": "content/02-04-getting-help.html#debugging",
     "title": "Warnings, Errors, and Getting Help",
     "section": "Debugging",
-    "text": "Debugging\n\nsome_data = c('June 2002', 'May 15, 2007', 'August 2007')\nadd_six_months(some_data)\n\nWarning: 2 failed to parse.\n\n\n[1] NA               \"2007-11-15 UTC\" NA              \n\n\n\nLet’s start by using the RStudio debugger to isolate the problem\n\ndebugonce(add_six_months)\nadd_six_months(some_data)\n\ndebugging in: add_six_months(some_data)\ndebug at &lt;text&gt;#3: {\n    parsed_dates = parse_date_time(date_str, orders = \"mdY\")\n    parsed_dates %m+% months(6)\n}\ndebug at &lt;text&gt;#4: parsed_dates = parse_date_time(date_str, orders = \"mdY\")\n\n\nWarning: 2 failed to parse.\n\n\ndebug at &lt;text&gt;#5: parsed_dates %m+% months(6)\nexiting from: add_six_months(some_data)\n\n\n[1] NA               \"2007-11-15 UTC\" NA              \n\n\n\n\nThe problem is in lubridate::parse_date_time().\n\n\n?parse_date_time\n\n\nSpend a few minutes reading the documentation for this function and playing around with the call.\n\n\n\nWhat does the argument orders do?\n\n\nparse_date_time(some_data, orders = 'mdY')\n\nWarning: 2 failed to parse.\n\n\n[1] NA               \"2007-05-15 UTC\" NA              \n\n\n\n\n\nLet’s try SO: https://stackoverflow.com/search?q=%5BR%5D+lubridate+month-year\n\n\n\nparse_date_time(some_data, orders = c('mY', 'mdY'))\n\n[1] \"2002-06-01 UTC\" \"2007-05-15 UTC\" \"2007-08-01 UTC\"\n\n\n\n\nMake this change in add_six_months()\nConfirm it no longer trips the assertion\nExplain to your partner why this fixed things"
+    "text": "Debugging\n\nsome_data = c('June 2002', 'May 15, 2007', 'August 2007')\nadd_six_months(some_data)\n\n[1] NA               \"2007-11-15 UTC\" NA              \n\n\n\nLet’s start by using the RStudio debugger to isolate the problem\n\ndebugonce(add_six_months)\nadd_six_months(some_data)\n\ndebugging in: add_six_months(some_data)\ndebug at &lt;text&gt;#3: {\n    parsed_dates = parse_date_time(date_str, orders = \"mdY\")\n    parsed_dates %m+% months(6)\n}\ndebug at &lt;text&gt;#4: parsed_dates = parse_date_time(date_str, orders = \"mdY\")\ndebug at &lt;text&gt;#5: parsed_dates %m+% months(6)\nexiting from: add_six_months(some_data)\n\n\n[1] NA               \"2007-11-15 UTC\" NA              \n\n\n\n\nThe problem is in lubridate::parse_date_time().\n\n\n?parse_date_time\n\n\nSpend a few minutes reading the documentation for this function and playing around with the call.\n\n\n\nWhat does the argument orders do?\n\n\nparse_date_time(some_data, orders = 'mdY')\n\n[1] NA               \"2007-05-15 UTC\" NA              \n\n\n\n\n\nLet’s try SO: https://stackoverflow.com/search?q=%5BR%5D+lubridate+month-year\n\n\n\nparse_date_time(some_data, orders = c('mY', 'mdY'))\n\n[1] \"2002-06-01 UTC\" \"2007-05-15 UTC\" \"2007-08-01 UTC\"\n\n\n\n\nMake this change in add_six_months()\nConfirm it no longer trips the assertion\nExplain to your partner why this fixed things"
   },
   {
     "objectID": "content/02-04-getting-help.html#another-example-more-fun-with-dates",
@@ -385,11 +385,25 @@
     "text": "References\n\n\n\n\nBryan, Jenny. 2020. “Object of Type ‘Closure’ Is Not Subsettable.” Presented at the RSTUDIO::CONF 2020, January 31. https://rstudio.com/resources/rstudioconf-2020/object-of-type-closure-is-not-subsettable/.\n\n\n“R Faq - How to Make a Great R Reproducible Example.” n.d. Stack Overflow. Accessed August 31, 2018. https://stackoverflow.com/questions/5963269/how-to-make-a-great-r-reproducible-example.\n\n\nWickham, Hadley. 2019. “Debugging.” In Advanced R, Second Edition, ch. 22. CRC Press. https://adv-r.hadley.nz/debugging.html."
   },
   {
+    "objectID": "content/03-02-models-of-eda.html",
+    "href": "content/03-02-models-of-eda.html",
+    "title": "Project: Data Journey Narrative",
+    "section": "",
+    "text": "Exploratory Data Analysis"
+  },
+  {
     "objectID": "content/03-02-models-of-eda.html#section",
     "href": "content/03-02-models-of-eda.html#section",
     "title": "Project: Data Journey Narrative",
     "section": "",
     "text": "Characterize the journey that your data took to get to you. (BatesDataJourneysCapturing2016?; Madrigal and Meyer 2021) Some relevant questions to answer might include\n\nWho generated these data? Why? How?\nWhat measurement instruments were used to generate these data? What infrastructure has been used to store and transmit the data?\nWhat was the original intended use of these data? What are some other ways the data have been used?\nHow has the mutability/immutability of the data been important to its journey & use? How has its mutability/immutability been created and maintained?\nHow will you need to transform the data further for your project? How do the physical and material properties of the data facilitate this, and/or create friction?\nWhat values have been crystallized in the data? How have power relations and values shaped what is/isn’t included in the data?\nBased on these factors, do the data appear to be fit for purpose? That is, based on what you know so far, do the data appear to be appropriate for answering your research question?\n\nInclude references for the sources you use to answer these questions. You can work on this step of the project at the same time as the EDA step, but I will ask you to turn in the data journey narrative first. A good target length for your narrative is 500-1,000 words long, not counting any references."
+  },
+  {
+    "objectID": "content/03-02-models-of-eda.html#section-1",
+    "href": "content/03-02-models-of-eda.html#section-1",
+    "title": "Project: Data Journey Narrative",
+    "section": "",
+    "text": "This book is about exploratory data analysis, about looking at data to see what it seems to say. It concentrates on simple arithmetic and easy-to-draw pictures. It regards whatever appearances we have recognized as partial descriptions, and tries to look beneath them for new insights. Its concern is with appearance, not with confirmation. (John Wilder Tukey 1977)\n\n\nExploratory Data Analysis (EDA) is “an attitude, AND a flexibility, AND some graph paper (or transparencies, or both)” (John W. Tukey 1980)"
   },
   {
     "objectID": "content/03-02-models-of-eda.html#exploratory-and-confirmatory-research",
@@ -427,11 +441,11 @@
     "text": "Peng and Matsui (2016)\n\nData analysis is organized into 5 activities\nEach activity involves the same 3-step “epicycle” process\n\nDevelop expectations\nCollect information\nCompare and revise expectations\n\nNot “the scientific method”! (Peng and Matsui 2016, 4)\n\n“Highly iterative and non-linear”\n“information is learned at each step, which then informs\n\nwhether (and how) to refine, and redo, the [previous] step …, or\nwhether (and how) to proceed to the next step.”"
   },
   {
-    "objectID": "content/03-02-models-of-eda.html#section-1",
-    "href": "content/03-02-models-of-eda.html#section-1",
+    "objectID": "content/03-02-models-of-eda.html#section-2",
+    "href": "content/03-02-models-of-eda.html#section-2",
     "title": "Project: Data Journey Narrative",
     "section": "",
-    "text": "This book is about exploratory data analysis, about looking at data to see what it seems to say. It concentrates on simple arithmetic and easy-to-draw pictures. It regards whatever appearances we have recognized as partial descriptions, and tries to look beneath them for new insights. Its concern is with appearance, not with confirmation. (John Wilder Tukey 1977)\n\n\nExploratory Data Analysis (EDA) is “an attitude, AND a flexibility, AND some graph paper (or transparencies, or both)” (John W. Tukey 1980)"
+    "text": "Aligning the goals of EDA with steps in the “epicycle of analysis” (Peng and Matsui 2016)\n\n\n\n\n\n\nGoals of EDA\nEpicycle step\n\n\n\n\nDetermine if there are problems with the data\n2. Collecting information\n\n\nDetermine whether our question can be answered with these data\n3. Comparing and revising expectations\n\n\nDevelop sketch of an answer\n1. Developing expectations"
   },
   {
     "objectID": "content/03-02-models-of-eda.html#discussion",
@@ -448,27 +462,6 @@
     "text": "References\n\n\n\n\nBogen, James, and James Woodward. 1988. “Saving the Phenomena.” The Philosophical Review 97 (3): 303–52. http://www.jstor.org/stable/2185445.\n\n\nBrown, James Robert. 2002. Smoke and Mirrors: How Science Reflects Reality. Routledge.\n\n\nDaston, Lorraine, and Peter Galison. 2007. Objectivity. New York : Cambridge, Mass: Zone Books ; Distributed by the MIT Press.\n\n\nMadrigal, Alexis C., and Robinson Meyer. 2021. “Why the Pandemic Experts Failed.” The Atlantic. March 15, 2021. https://www.theatlantic.com/science/archive/2021/03/americas-coronavirus-catastrophe-began-with-data/618287/.\n\n\nPeng, Roger D., and Elizabeth Matsui. 2016. The Art of Data Science: A Guide for Anyone Who Works with Data. Leanpub. http://leanpub.com/artofdatascience.\n\n\nTukey, John W. 1980. “We Need Both Exploratory and Confirmatory.” The American Statistician 34 (1): 23–25. https://doi.org/10.1080/00031305.1980.10482706.\n\n\nTukey, John Wilder. 1977. Exploratory Data Analysis. Addison-Wesley Series in Behavioral Science. Reading, Mass: Addison-Wesley Pub. Co. https://archive.org/details/exploratorydataa00tuke_0.\n\n\nWagenmakers, Eric-Jan, Ruud Wetzels, Denny Borsboom, Han L. J. van der Maas, and Rogier A. Kievit. 2012. “An Agenda for Purely Confirmatory Research.” Perspectives on Psychological Science 7 (6): 632–38. https://doi.org/10.1177/1745691612463078."
   },
   {
-    "objectID": "content/03-03-checklists.html#pengartdatascience2016",
-    "href": "content/03-03-checklists.html#pengartdatascience2016",
-    "title": "Two EDA “Checklists”",
-    "section": "Peng and Matsui (2016)",
-    "text": "Peng and Matsui (2016)\n\nFormulate your question\nRead in your data\nCheck the packaging\nLook at the top and the bottom of your data\nCheck your “n”s\nValidate with at least one external data source\nMake a plot\nTry the easy solution first\nFollow up"
-  },
-  {
-    "objectID": "content/03-03-checklists.html#huebnersystematicapproachinitial2016",
-    "href": "content/03-03-checklists.html#huebnersystematicapproachinitial2016",
-    "title": "Two EDA “Checklists”",
-    "section": "Huebner, Vach, and le Cessie (2016)",
-    "text": "Huebner, Vach, and le Cessie (2016)\n\nDuplicate records need to be eliminated\nDirection of numerical codes for categorical and ordinal variables\nInconsistencies in date and time stamps\nPresence of bimodal distributions\nPresence of skewed distributions\nPresence of ceilings and floors in continuous variables\nPresence of outliers\nDistribution of missing data\nIndications of recording errors in the main variables"
-  },
-  {
-    "objectID": "content/03-03-checklists.html#references",
-    "href": "content/03-03-checklists.html#references",
-    "title": "Two EDA “Checklists”",
-    "section": "References",
-    "text": "References\n\n\n\n\nHuebner, Marianne, Werner Vach, and Saskia le Cessie. 2016. “A Systematic Approach to Initial Data Analysis Is Good Research Practice.” The Journal of Thoracic and Cardiovascular Surgery 151 (1): 25–27. https://doi.org/10.1016/j.jtcvs.2015.09.085.\n\n\nPeng, Roger D., and Elizabeth Matsui. 2016. The Art of Data Science: A Guide for Anyone Who Works with Data. Leanpub. http://leanpub.com/artofdatascience."
-  },
-  {
     "objectID": "content/03-04-oakland-eda.html#section",
     "href": "content/03-04-oakland-eda.html#section",
     "title": "Case Study: Police Stops in Oakland",
@@ -476,18 +469,18 @@
     "text": "For this EDA, we’ll work with data on police stops in Oakland, California, that have been pre-cleaned and released by the Stanford Open Policing Project (Pierson et al. 2020).\nWe’ll be following the checklist from Peng and Matsui (2016).\nWe’ll also be learning to use the skimr and visdat packages"
   },
   {
+    "objectID": "content/03-04-oakland-eda.html#pengartdatascience2016",
+    "href": "content/03-04-oakland-eda.html#pengartdatascience2016",
+    "title": "Case Study: Police Stops in Oakland",
+    "section": "Peng and Matsui (2016)",
+    "text": "Peng and Matsui (2016)\n\nFormulate your question\nRead in your data\nCheck the packaging\nLook at the top and the bottom of your data\nCheck your “n”s\nValidate with at least one external data source\nMake a plot\nTry the easy solution first\nFollow up"
+  },
+  {
     "objectID": "content/03-04-oakland-eda.html#formulate-your-question",
     "href": "content/03-04-oakland-eda.html#formulate-your-question",
     "title": "Case Study: Police Stops in Oakland",
     "section": "1. Formulate your question",
     "text": "1. Formulate your question\n\nThe Black Lives Matter protests over the last several years have made us aware of the racial aspects of policing.\nHere we’re specifically interested in\n\nWhether Black people in Oakland might be more likely to be stopped than White people\nWhether Black people who are stopped might be more likely to have contraband\n\nThese aren’t very precise, but that’s okay: Part of the goal of EDA is to clarify and refine our research questions"
-  },
-  {
-    "objectID": "content/03-04-oakland-eda.html#reflexivity",
-    "href": "content/03-04-oakland-eda.html#reflexivity",
-    "title": "Case Study: Police Stops in Oakland",
-    "section": "Reflexivity",
-    "text": "Reflexivity\n\nWhether Black people in Oakland might be more likely to be stopped than White people\nWhether Black people who are stopped might be more likely to have contraband\n\n\nOnce we have a rough idea of what we want to know, we need to take a moment to think about why we want to know it\n\nClarify what “success” means to us\nShare with others to whom we’re accountable\nRecognize that we (academic researchers) often lack accountability to people who might be affected by our work\nespecially when we claim to be acting for their benefit\n\nWe’ll spend 3 minutes writing responses to each of these questions:\n\n\nWhat do I already know about this subject?\nWhy am I studying this?\nWhat do I expect or hope to find/learn, and why?\nWho and what is affected by this topic? How can I respect them through the work I’m about to do?\n\nLiboiron (2021)"
   },
   {
     "objectID": "content/03-04-oakland-eda.html#set-up-our-workspace",
@@ -515,7 +508,7 @@
     "href": "content/03-04-oakland-eda.html#read-in-your-data",
     "title": "Case Study: Police Stops in Oakland",
     "section": "2. Read in your data",
-    "text": "2. Read in your data\nThe dataset is a zipped csv or comma-separated value file. CSVs are structured like Excel spreadsheets, but are stored in plain text rather than Excel’s format.\n\ndataf = read_csv(target_file)\n\nRows: 133407 Columns: 28\n── Column specification ────────────────────────────────────────────────────────────────────────────\nDelimiter: \",\"\nchr  (16): raw_row_number, location, beat, subject_race, subject_sex, officer_assignment, type, ...\ndbl   (3): lat, lng, subject_age\nlgl   (7): arrest_made, citation_issued, warning_issued, contraband_found, contraband_drugs, con...\ndate  (1): date\ntime  (1): time\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message."
+    "text": "2. Read in your data\nThe dataset is a zipped csv or comma-separated value file. CSVs are structured like Excel spreadsheets, but are stored in plain text rather than Excel’s format.\n\ndataf = read_csv(target_file)"
   },
   {
     "objectID": "content/03-04-oakland-eda.html#check-the-packaging",
@@ -571,7 +564,7 @@
     "href": "content/03-04-oakland-eda.html#make-a-plot",
     "title": "Case Study: Police Stops in Oakland",
     "section": "7. Make a plot",
-    "text": "7. Make a plot\nPeng and Matsui note that plots are useful for both checking and setting expectations\n\nAn expectation we formed earlier: fewer stops in 2013\nWe can combine pipes with ggplot() to get the year\ngeom_bar() gives us counts\nWhat’s up with the warnings?\n\n\ndataf |&gt; \n    mutate(year = year(date)) |&gt; \n    ggplot(aes(year)) +\n    geom_bar()\n\nWarning: Removed 2 rows containing non-finite values (`stat_count()`).\n\n\n\n\n\n\nHow about counts per year by race/ethnicity?\n\nThis version is too hard to read\n\n\ndataf |&gt; \n    mutate(year = year(date)) |&gt; \n    ggplot(aes(year, fill = subject_race)) +\n    geom_bar()\n\nWarning: Removed 2 rows containing non-finite values (`stat_count()`).\n\n\n\n\n\n\nLet’s switch from bars to points and lines and change up the color palette\n\nWhy does this produce 2 warnings?\n\n\ndataf |&gt; \n    mutate(year = year(date)) |&gt; \n    ggplot(aes(year, color = subject_race)) +\n    geom_point(stat = 'count') +\n    geom_line(stat = 'count') +\n    scale_color_brewer(palette = 'Set1')\n\nWarning: Removed 2 rows containing non-finite values (`stat_count()`).\nRemoved 2 rows containing non-finite values (`stat_count()`).\n\n\n\n\n\n\nplotly::ggplotly() creates an interactive version of a ggplot object\n\nWhy don’t I need to give it the plot we just created?\n\n\nggplotly()\n\nWarning: Removed 2 rows containing non-finite values (`stat_count()`).\nRemoved 2 rows containing non-finite values (`stat_count()`).\n\n\n\n\n\n\n\n\nThese plots confirm our expectation of lower counts in 2013\nDo they help us develop any new expectations as we move on to addressing our research questions?"
+    "text": "7. Make a plot\nPeng and Matsui note that plots are useful for both checking and setting expectations\n\nAn expectation we formed earlier: fewer stops in 2013\nWe can combine pipes with ggplot() to get the year\ngeom_bar() gives us counts\nWhat’s up with the warnings?\n\n\ndataf |&gt; \n    mutate(year = year(date)) |&gt; \n    ggplot(aes(year)) +\n    geom_bar()\n\n\n\n\n\nHow about counts per year by race/ethnicity?\n\nThis version is too hard to read\n\n\ndataf |&gt; \n    mutate(year = year(date)) |&gt; \n    ggplot(aes(year, fill = subject_race)) +\n    geom_bar()\n\n\n\n\n\nLet’s switch from bars to points and lines and change up the color palette\n\nWhy does this produce 2 warnings?\n\n\ndataf |&gt; \n    mutate(year = year(date)) |&gt; \n    ggplot(aes(year, color = subject_race)) +\n    geom_point(stat = 'count') +\n    geom_line(stat = 'count') +\n    scale_color_brewer(palette = 'Set1')\n\n\n\n\n\nplotly::ggplotly() creates an interactive version of a ggplot object\n\nWhy don’t I need to give it the plot we just created?\n\n\nggplotly()\n\n\n\n\n\n\n\nThese plots confirm our expectation of lower counts in 2013\nDo they help us develop any new expectations as we move on to addressing our research questions?"
   },
   {
     "objectID": "content/03-04-oakland-eda.html#try-the-easy-solution-first",
@@ -606,7 +599,7 @@
     "href": "content/03-04-oakland-eda.html#contraband-finds-by-race",
     "title": "Case Study: Police Stops in Oakland",
     "section": "Contraband finds, by race",
-    "text": "Contraband finds, by race\n\\[ \\Pr(contraband | searched, stopped, Black) \\] We want to filter() down to only stops where a search was conducted\n\ndataf |&gt; \n    filter(search_conducted) |&gt; \n    ggplot(aes(subject_race, fill = contraband_found)) +\n    geom_bar(position = position_fill()) +\n    scale_fill_manual(values = c('transparent', 'blue')) +\n    ylim(0, .2)\n\nWarning: Removed 5 rows containing missing values (`geom_bar()`).\n\n\n\n\n\n\n\ndataf |&gt; \n    filter(search_conducted) |&gt; \n    count(subject_race, contraband_found) |&gt; \n    group_by(subject_race) |&gt; \n    mutate(rate = n / sum(n)) |&gt; \n    ungroup() |&gt; \n    filter(contraband_found) |&gt; \n    mutate(rate = scales::percent(rate, accuracy = 1))\n\n# A tibble: 5 × 4\n  subject_race           contraband_found     n rate \n  &lt;chr&gt;                  &lt;lgl&gt;            &lt;int&gt; &lt;chr&gt;\n1 asian/pacific islander TRUE               176 13%  \n2 black                  TRUE              4364 15%  \n3 hispanic               TRUE              1116 17%  \n4 other                  TRUE                85 12%  \n5 white                  TRUE               411 17%  \n\n\n\nFor Black subjects who were searched, contraband was found 15% of the time\nFor White subjects, 17% of the time"
+    "text": "Contraband finds, by race\n\\[ \\Pr(contraband | searched, stopped, Black) \\] We want to filter() down to only stops where a search was conducted\n\ndataf |&gt; \n    filter(search_conducted) |&gt; \n    ggplot(aes(subject_race, fill = contraband_found)) +\n    geom_bar(position = position_fill()) +\n    scale_fill_manual(values = c('transparent', 'blue')) +\n    ylim(0, .2)\n\n\n\n\n\n\ndataf |&gt; \n    filter(search_conducted) |&gt; \n    count(subject_race, contraband_found) |&gt; \n    group_by(subject_race) |&gt; \n    mutate(rate = n / sum(n)) |&gt; \n    ungroup() |&gt; \n    filter(contraband_found) |&gt; \n    mutate(rate = scales::percent(rate, accuracy = 1))\n\n# A tibble: 5 × 4\n  subject_race           contraband_found     n rate \n  &lt;chr&gt;                  &lt;lgl&gt;            &lt;int&gt; &lt;chr&gt;\n1 asian/pacific islander TRUE               176 13%  \n2 black                  TRUE              4364 15%  \n3 hispanic               TRUE              1116 17%  \n4 other                  TRUE                85 12%  \n5 white                  TRUE               411 17%  \n\n\n\nFor Black subjects who were searched, contraband was found 15% of the time\nFor White subjects, 17% of the time"
   },
   {
     "objectID": "content/03-04-oakland-eda.html#results",
@@ -651,6 +644,20 @@
     "text": "Reading\n\nBryan (2018)\n“What to Look for in a Code Review” (n.d.)\nLamb (2018)\nWickham (n.d.)"
   },
   {
+    "objectID": "content/04-02-readability.html#replicability-reproducibility-reliability",
+    "href": "content/04-02-readability.html#replicability-reproducibility-reliability",
+    "title": "Readable code is reliable code",
+    "section": "Replicability, reproducibility, reliability",
+    "text": "Replicability, reproducibility, reliability\n\nreplicability\n\nQualitatively similar results when we repeat the experiment\n(gather new data; may or may not use the same code)\n\nreproducibility\n\nQuantitatively identical outputs when we run the same code on the same data\n(same data, same code)\n\nreliability\n\nThe code performs the analysis that we think it’s performing\n(compare construct validity)"
+  },
+  {
+    "objectID": "content/04-02-readability.html#checking-reliability",
+    "href": "content/04-02-readability.html#checking-reliability",
+    "title": "Readable code is reliable code",
+    "section": "Checking reliability",
+    "text": "Checking reliability\n\nreliability\n\nThe code performs the analysis that we think it’s performing\n\n\nCan reliability be checked computationally?"
+  },
+  {
     "objectID": "content/04-02-readability.html#writing-code-is-writing",
     "href": "content/04-02-readability.html#writing-code-is-writing",
     "title": "Readable code is reliable code",
@@ -670,13 +677,6 @@
     "title": "Readable code is reliable code",
     "section": "Highlights from the Tidyverse style guide",
     "text": "Highlights from the Tidyverse style guide\n\nPlace all package() calls at the top of the script\nLimit your code to 80 characters per line\nUse at least 4 spaces for indenting multiline expression\n\nControl-I in RStudio will do automagic indenting\n\nIn multiline function calls, 1 argument = 1 line\n\n\nlong_function_name &lt;- function(a = \"a long argument\",\n                               b = \"another argument\",\n                               c = \"another long argument\") {\n    # As usual code is indented by four spaces.\n}"
-  },
-  {
-    "objectID": "content/04-02-readability.html#using-comments-to-explain-why-and-indicate-structure",
-    "href": "content/04-02-readability.html#using-comments-to-explain-why-and-indicate-structure",
-    "title": "Readable code is reliable code",
-    "section": "Using comments to explain why and indicate structure",
-    "text": "Using comments to explain why and indicate structure\n\nloading_table = function(model, \n                         threshold = .3, \n                         quiet = FALSE, \n                         path = NULL, \n                         overwrite = FALSE) {\n    loadings_unfltd = model |&gt; \n        ## Extract loadings and tidy\n        loadings() |&gt; \n        unclass() |&gt; \n        as_tibble(rownames = 'item') |&gt; \n        ## loadings() returns a wide item x factor matrix\n        pivot_longer(-item, names_to = 'factor', values_to = 'loading')\n        ## Will filter based on `threshold` below\n    \n    ## Dropped items\n    if (!quiet) {\n        loadings_df = filter(loadings_unfltd, abs(loading) &gt; threshold)\n        dropped_df = loadings_unfltd |&gt; \n            pivot_wider(names_from = 'factor', values_from = 'loading') |&gt; \n            anti_join(pivot_wider(loadings_df, \n                                  names_from = 'factor', \n                                  values_from = 'loading'), \n                      by = 'item')\n        message('Dropped items')\n        print(dropped_df)\n    }\n    \n    ## Cross-loaded items\n    if (!quiet) {\n        xload_df = loadings_df |&gt;\n            add_count(item) |&gt;\n            filter(n &gt; 1) |&gt;\n            select(-n) |&gt;\n            pivot_wider(names_from = 'factor', values_from = 'loading')\n        message('Cross-loaded items')\n        print(xload_df)\n    }\n    \n    loadings_clean = loadings_df |&gt;\n        anti_join(xload_df, by = 'item') |&gt;\n        ## Spread back out to item x factor for presentation\n        pivot_wider(names_from = 'factor', values_from = 'loading') |&gt;\n        arrange(across(starts_with('MR'), desc)) |&gt; \n        left_join(vis_labels, by = c('item' = 'tag')) |&gt; \n        select(-item.y)\n    \n    if (!is.null(path)) {\n        if (!file.exists(path) || overwrite) {\n            write_csv(loadings_clean, path, na = '')\n        }\n        if (file.exists(path) && !overwrite) {\n            warning('CSV already exists; skipping overwrite')\n        }\n    }\n    \n    return(loadings_clean)\n}"
   },
   {
     "objectID": "content/04-02-readability.html#spaces-let-your-code-b-r-e-a-t-h-e",
@@ -700,291 +700,11 @@
     "text": "Boolean variables vs. control flow\n\nFunctions that return vectors:\n\n&, |, ==, ifelse(), dplyr::if_else()\n\nFunctions that return a single value:\n\n&&, ||, identical\n\nif (x) a else b only looks at the first (hopefully single) value of x"
   },
   {
-    "objectID": "content/04-02-readability.html#references",
-    "href": "content/04-02-readability.html#references",
+    "objectID": "content/04-02-readability.html#code-review-is-peer-feedback-on-your-writing",
+    "href": "content/04-02-readability.html#code-review-is-peer-feedback-on-your-writing",
     "title": "Readable code is reliable code",
-    "section": "References",
-    "text": "References\n\n\n\n\nBryan, Jenny. 2018. “Code Smells and Feels.” Presented at the useR 2018, July 21. https://www.youtube.com/watch?v=7oyiPBjLAWY.\n\n\nLamb, Julianna. 2018. “Building an Inclusive Code Review Culture.” Plaid. July 30, 2018. https://plaid.com/blog/building-an-inclusive-code-review-culture/.\n\n\n“What to Look for in a Code Review.” n.d. eng-practices. Accessed October 23, 2023. https://google.github.io/eng-practices/review/reviewer/looking-for.html.\n\n\nWickham, Hadley. n.d. The Tidyverse Style Guide. Accessed November 6, 2023. https://style.tidyverse.org/.\n\n\nZhou, Xiaodan, Kevin Josey, Leila Kamareddine, Miah C. Caine, Tianjia Liu, Loretta J. Mickley, Matthew Cooper, and Francesca Dominici. 2021. “Excess of COVID-19 Cases and Deaths Due to Fine Particulate Matter Exposure During the 2020 Wildfires in the United States.” Science Advances 7 (33): eabi8789. https://doi.org/10.1126/sciadv.abi8789."
-  },
-  {
-    "objectID": "content/04-03-code-review.html#reading",
-    "href": "content/04-03-code-review.html#reading",
-    "title": "A code review checklist",
-    "section": "Reading",
-    "text": "Reading\n\nPostolovski (2020)\n\n\nReadability\nMaintainability\nSecurity\nSpeed and Performance\nDocumentation\nReinventing the Wheel\nReliability\nScalability\nReusability\nPatterns [style and readability]\nTest coverage and quality\nFit for purpose\nNotice what’s missing\nZoom out"
-  },
-  {
-    "objectID": "content/04-03-code-review.html#readability-understandability",
-    "href": "content/04-03-code-review.html#readability-understandability",
-    "title": "A code review checklist",
-    "section": "1. Readability / understandability",
-    "text": "1. Readability / understandability\n\nFile naming\n\nWhat order should the scripts be run in?\n\nFollows a style guide\n\nOr at least uses consistent style\n\nWhitespace, whitespace, whitespace\nMeaningful names / self-documenting code (Buckens 2019)\nFor data science: Functionality promotes understandability"
-  },
-  {
-    "objectID": "content/04-03-code-review.html#maintainability",
-    "href": "content/04-03-code-review.html#maintainability",
-    "title": "A code review checklist",
-    "section": "2. Maintainability",
-    "text": "2. Maintainability\n\nDRY\nAvoid hard-coded configuration\nCheck strong assumptions about structure and content of inputs\nAvoid deprecated or removed features"
-  },
-  {
-    "objectID": "content/04-03-code-review.html#security",
-    "href": "content/04-03-code-review.html#security",
-    "title": "A code review checklist",
-    "section": "3. Security",
-    "text": "3. Security\n\nHow are passwords for websites, APIs, and sensitive data handled?"
-  },
-  {
-    "objectID": "content/04-03-code-review.html#speed-and-performance",
-    "href": "content/04-03-code-review.html#speed-and-performance",
-    "title": "A code review checklist",
-    "section": "4. Speed and Performance",
-    "text": "4. Speed and Performance\n\nPerformance of the script\n\nAvoid (repeating) large downloads\nCache the results of slow calculations\n\nWith an easy way to clear the cache and re-run the calculations\nOr break them up in to separate steps of the pipeline\n\nUse tictoc for simple wall time checks\n\n\n\nResource use\n\nDoes this really need to be run on a compute cluster?\nHow much will this cost if it’s accidentally run 1,000 times?\nCache raw returns from web scraping and API queries"
-  },
-  {
-    "objectID": "content/04-03-code-review.html#documentation",
-    "href": "content/04-03-code-review.html#documentation",
-    "title": "A code review checklist",
-    "section": "5. Documentation",
-    "text": "5. Documentation\n\nScripts: Section markers, signposting what’s happening and why\nFunctions: Assumptions about inputs, explanation of output\n\nConsider using roxygen2 + R’s package infrastructure\nhttps://r-pkgs.org/man.html#man-functions\n\nData: Provenance, date and time retrieved, codebook\nProject: README, NEWS"
-  },
-  {
-    "objectID": "content/04-03-code-review.html#reinventing-the-wheel",
-    "href": "content/04-03-code-review.html#reinventing-the-wheel",
-    "title": "A code review checklist",
-    "section": "6. Reinventing the Wheel",
-    "text": "6. Reinventing the Wheel\n\nIs there a (well-maintained, checked) package for this?\nDRY"
-  },
-  {
-    "objectID": "content/04-03-code-review.html#reliability",
-    "href": "content/04-03-code-review.html#reliability",
-    "title": "A code review checklist",
-    "section": "7. Reliability",
-    "text": "7. Reliability\nWhat happens if\n\nPackages aren’t installed?\n\nReminder: require() doesn’t stop if the package is missing\n\nData can’t be found?\nData has missing values or errors?\nData has been altered or corrupted?\nA function returns a missing or zero-length value?\nOne script in the middle of the pipeline is altered?"
-  },
-  {
-    "objectID": "content/04-03-code-review.html#skipping-a-few",
-    "href": "content/04-03-code-review.html#skipping-a-few",
-    "title": "A code review checklist",
-    "section": "Skipping a few",
-    "text": "Skipping a few\nBecause I have less to say, not because they’re less important\n\nScalability\nReusability\nPatterns [style and readability]\nTest coverage and quality\nFit for purpose"
-  },
-  {
-    "objectID": "content/04-03-code-review.html#notice-whats-missing",
-    "href": "content/04-03-code-review.html#notice-whats-missing",
-    "title": "A code review checklist",
-    "section": "13. Notice what’s missing",
-    "text": "13. Notice what’s missing\n\nUsing packages that haven’t been loaded\nData validation\n\nEdge cases, unexpected inputs\nMissing values\n\nError handling"
-  },
-  {
-    "objectID": "content/04-03-code-review.html#zoom-out",
-    "href": "content/04-03-code-review.html#zoom-out",
-    "title": "A code review checklist",
-    "section": "14. Zoom out",
-    "text": "14. Zoom out\n\nDoes the code fit the analytic approach described in the paper?\nDoes the analytic approach fit the the research question?"
-  },
-  {
-    "objectID": "content/04-03-code-review.html#references",
-    "href": "content/04-03-code-review.html#references",
-    "title": "A code review checklist",
-    "section": "References",
-    "text": "References\n\n\n\n\n\nBuckens, Wouter. 2019. “Self-Documenting Is a Myth, and How to Make Your Code Self-Documenting.” woubuc. August 3, 2019. https://blog.woubuc.be/post/self-documenting-code-is-a-myth/.\n\n\nPostolovski, Tash. 2020. “Your Code Review Checklist: 14 Things to Include.” July 6, 2020. https://www.codementor.io/blog/code-review-checklist-76q7ovkaqj."
-  },
-  {
-    "objectID": "content/04-04-project-organization.html#reading",
-    "href": "content/04-04-project-organization.html#reading",
-    "title": "The life-changing magic of tidying your projects",
-    "section": "Reading",
-    "text": "Reading\n\nNoble (2009)\n\n\nSome data management disasters\n\nThe Economist (2011), “Video: Keith Baggerly, \"When Is Reproducibility an Ethical Issue? Genomics, Personalized Medicine, and Human Error\"” (n.d.)\nHerndon, Ash, and Pollin (2014), but you can just read Bailey and Borwein (Jon) (n.d.), Cassidy (n.d.), and/or watch Reinhart & Rogoff - Growth in a Time of Debt - EXERCISE! (2019)\nLaskowski (n.d.), Viglione (2020), Pennisi (2020)\n“How Excel May Have Caused Loss of 16,000 Covid Tests in England” (2020)"
-  },
-  {
-    "objectID": "content/04-04-project-organization.html#dumpster-organization",
-    "href": "content/04-04-project-organization.html#dumpster-organization",
-    "title": "The life-changing magic of tidying your projects",
-    "section": "Dumpster organization",
-    "text": "Dumpster organization\n(ref:dumpster) 😱 Source: https://pbs.twimg.com/media/DFca5SRXsAAx1NA\n\n\n\n\n\n(ref:dumpster)\n\n\n\n\n\nDump all of your files into one place\nUse search tools to find what you want\nJust assume that things aren’t getting corrupted\nThe way many Gen Z students think about their files? (Chin 2021)"
-  },
-  {
-    "objectID": "content/04-04-project-organization.html#project-organization",
-    "href": "content/04-04-project-organization.html#project-organization",
-    "title": "The life-changing magic of tidying your projects",
-    "section": "Project organization",
-    "text": "Project organization\n\nKeep your project self-contained\nLocate files quickly\nPlay nicely with version control\nSelf-document key relationships between project files\n\n\n\n\n\n\nFolder organization is your friend. I have top-level folders for teaching, coding, and writing projects. Then each project or collection of projects lives in its own folder. An ‘Archives’ folder is good for tucking old projects out of the way."
-  },
-  {
-    "objectID": "content/04-04-project-organization.html#model-1-noblequickguideorganizing2009",
-    "href": "content/04-04-project-organization.html#model-1-noblequickguideorganizing2009",
-    "title": "The life-changing magic of tidying your projects",
-    "section": "Model 1: Noble (2009)",
-    "text": "Model 1: Noble (2009)\n\n\n\n\n\nNoble’s (2009) sample folder structure is designed for experimental biologists.\n\n\n\n\n\nIncludes code for\n\nrunning experiments\ncleaning and analyzing data\ntypesetting a LaTeX file into a PDF\n\nOther features\n\nnotebook file, updated regularly\nchronological folders for experimental runs\nbin for compiled code and source for corresponding source files"
-  },
-  {
-    "objectID": "content/04-04-project-organization.html#model-2-some-of-dhs-projects",
-    "href": "content/04-04-project-organization.html#model-2-some-of-dhs-projects",
-    "title": "The life-changing magic of tidying your projects",
-    "section": "Model 2: Some of DH’s projects",
-    "text": "Model 2: Some of DH’s projects\nGitHub repo: https://github.com/dhicks/p_curve\n14 directories, 121 files\n.\n├── DESCRIPTION\n├── Makefile\n├── README.md\n├── _deploy.sh\n├── out\n│   ├── estimates_meta.png\n│   ├── estimates_study.png\n│   ├── fig_1_samples_young.png\n│   ├── fig_2_young_composite.png\n│   ├── fig_3_evidence_severity.png\n│   ├── fig_4_evidence_likelihood_zero.png\n│   ├── fig_5_evidence_likelihood_mix.png\n│   ├── likelihood.tex\n│   ├── linearity.png\n│   ├── linearity.tex\n│   ├── samples_schsp.png\n│   ├── samples_simonsohn.png\n│   ├── severity.tex\n│   ├── slopes.png\n│   ├── slopes.tex\n│   ├── slopes_scatter.png\n│   ├── test.png\n│   └── test_out.png\n├── p.curve\n│   ├── DESCRIPTION\n│   ├── NAMESPACE\n│   ├── R\n│   │   └── p-curve.R\n│   ├── man\n│   │   ├── draw_samples.Rd\n│   │   ├── draw_studies.Rd\n│   │   ├── flatten_to_chr.Rd\n│   │   ├── likelihood_ratio.Rd\n│   │   ├── many_metas.Rd\n│   │   ├── p_gap.Rd\n│   │   ├── p_value.Rd\n│   │   ├── qq_linear.Rd\n│   │   ├── qq_plot.Rd\n│   │   ├── qq_slope.Rd\n│   │   ├── schsp_curve.Rd\n│   │   ├── schsp_slope.Rd\n│   │   ├── simonsohn_curve.Rd\n│   │   ├── t_test.Rd\n│   │   ├── young_composite.Rd\n│   │   ├── young_curve.Rd\n│   │   └── young_slope.Rd\n│   └── p.curve.Rproj\n├── paper\n│   ├── *enviro\\ epi\n│   │   └── EE\\ Submission\\ Confirmation\\ for\\ Young's\\ p-value\\ plot\\ does\\ not\\ provide\\ evidence\\ against\\ air\\ pollution\\ hazards.eml\n│   ├── Young\\ papers.gsheet\n│   ├── Young.bib\n│   ├── cover\\ letter.pdf\n│   ├── diff.pdf\n│   ├── ehp\n│   │   ├── A\\ manuscript\\ number\\ has\\ been\\ assigned\\ to\\ Young's\\ p-value\\ plot\\ does\\ not\\ provide\\ evidence\\ against\\ air\\ pollution\\ hazards\\ -\\ [EMID_0ef854c3bb0b5cae].eml\n│   │   ├── Decision\\ on\\ EHP\\ Submission\\ EHP8013\\ -\\ [EMID_932e44ac2192c44f].eml\n│   │   ├── EHP-CFI-form.pdf\n│   │   ├── cover\\ letter.txt\n│   │   ├── paper_2020-07-31.docx\n│   │   └── title\\ page.md\n│   ├── example-refs.bib\n│   ├── fig_1_samples_young.png\n│   ├── fig_2_young_composite.png\n│   ├── fig_3_evidence_severity.png\n│   ├── fig_4_evidence_likelihood_zero.png\n│   ├── fig_5_evidence_likelihood_mix.png\n│   ├── header.yaml\n│   ├── paper.md\n│   ├── paper.pdf\n│   ├── paper.synctex.gz\n│   ├── paper.tex\n│   ├── paper.zip\n│   ├── paper_20201211.md\n│   ├── peerj\n│   │   ├── comments.md\n│   │   └── peerj.pdf\n│   ├── phil\\ med\n│   │   ├── [philmed]\\ Editor\\ Decision.eml\n│   │   └── [philmed]\\ Submission\\ Acknowledgement.eml\n│   ├── render.R\n│   ├── summary.md\n│   ├── summary.pdf\n│   ├── summary.tex\n│   ├── supplement.md\n│   ├── supplement.pdf\n│   ├── title.md\n│   ├── title.pdf\n│   ├── vancouver-superscript.csl\n│   └── wlpeerj.cls\n├── scripts\n│   ├── Makefile\n│   ├── run_metas.R\n│   ├── run_metas.html\n│   ├── run_metas_cache\n│   │   └── html\n│   │       ├── __packages\n│   │       ├── power_sim_9c372ce79d0c5f5a133f461070cc735c.RData\n│   │       ├── power_sim_9c372ce79d0c5f5a133f461070cc735c.rdb\n│   │       ├── power_sim_9c372ce79d0c5f5a133f461070cc735c.rdx\n│   │       ├── run\\ simulations_b1dfebf278eb300e65b865f76b2893d2.RData\n│   │       ├── run\\ simulations_b1dfebf278eb300e65b865f76b2893d2.rdb\n│   │       ├── run\\ simulations_b1dfebf278eb300e65b865f76b2893d2.rdx\n│   │       ├── vary_N_sim_7d1d09d59ab04fc75046799fcf7506f9.RData\n│   │       ├── vary_N_sim_7d1d09d59ab04fc75046799fcf7506f9.rdb\n│   │       └── vary_N_sim_7d1d09d59ab04fc75046799fcf7506f9.rdx\n│   ├── run_metas_files\n│   │   └── figure-html\n│   │       ├── QQ\\ linearity\\ tests-1.png\n│   │       ├── gaps-1.png\n│   │       ├── gaps-2.png\n│   │       ├── likelihood\\ analysis-1.png\n│   │       ├── likelihood\\ analysis-3.png\n│   │       ├── model\\ validation-1.png\n│   │       ├── model\\ validation-2.png\n│   │       ├── power_sim-1.png\n│   │       ├── power_sim-2.png\n│   │       ├── sample\\ plots-1.png\n│   │       ├── sample\\ plots-2.png\n│   │       ├── sample\\ plots-3.png\n│   │       ├── sample\\ plots-4.png\n│   │       ├── severity\\ analysis-1.png\n│   │       ├── severity\\ analysis-2.png\n│   │       ├── slopes-1.png\n│   │       ├── slopes-2.png\n│   │       ├── slopes-3.png\n│   │       ├── slopes-4.png\n│   │       ├── slopes-5.png\n│   │       ├── slopes-6.png\n│   │       ├── slopes-7.png\n│   │       ├── unnamed-chunk-2-1.png\n│   │       ├── unnamed-chunk-4-1.png\n│   │       └── unnamed-chunk-6-1.png\n│   └── scripts.Rproj\n└── tree.md"
-  },
-  {
-    "objectID": "content/04-04-project-organization.html#just-the-directories",
-    "href": "content/04-04-project-organization.html#just-the-directories",
-    "title": "The life-changing magic of tidying your projects",
-    "section": "Just the directories",
-    "text": "Just the directories\n.\n├── out\n├── p.curve\n│   ├── R\n│   └── man\n├── paper\n│   ├── *enviro\\ epi\n│   ├── ehp\n│   ├── peerj\n│   └── phil\\ med\n└── scripts\n    ├── run_metas_cache\n    │   └── html\n    └── run_metas_files\n        └── figure-html\n\nscripts, paper, and out\np.curve, a little package containing the simulation code\nsimulation and analysis automatically reproduced: https://dhicks.github.io/p_curve/"
-  },
-  {
-    "objectID": "content/04-04-project-organization.html#a-larger-text-mining-project",
-    "href": "content/04-04-project-organization.html#a-larger-text-mining-project",
-    "title": "The life-changing magic of tidying your projects",
-    "section": "A larger text-mining project",
-    "text": "A larger text-mining project\nPublished paper: https://doi.org/10.1162/qss_a_00150\nGitHub repo: https://github.com/dhicks/orus\n23 directories, 274 files (plus 160k data files)\n.\n├── Makefile\n├── ORU\\ faculty\n│   ├── ORU\\ Faculty.docx\n│   ├── ORU\\ Faculty.html\n│   ├── ORU\\ Publications.docx\n│   ├── ORU\\ Publications.fld\n│   │   ├── colorschememapping.xml\n│   │   ├── filelist.xml\n│   │   ├── header.html\n│   │   ├── image001.png\n│   │   ├── item0001.xml\n│   │   ├── props002.xml\n│   │   └── themedata.thmx\n│   ├── ORU\\ Publications.html\n│   └── auids.csv\n├── ORU\\ founding\\ dates.gsheet\n├── QSS\\ forms\n│   ├── QSS-Checklist-AcceptedManuscripts.docx\n│   ├── QSS_pub_agreement.pdf\n│   └── Quantitative\\ Science\\ Studies\\ -\\ Decision\\ on\\ Manuscript\\ ID\\ QSS-2021-0014.R2.eml\n├── R\n│   ├── api_keys.R\n│   └── hellinger.R\n├── auid\\ flow.txt\n├── data\n│   ├── *ORUs\\ -\\ DSL\\ -\\ Google\\ Drive.webloc\n│   ├── 00_UCD_2016.csv\n│   ├── 00_UCD_2017.csv\n│   ├── 00_UCD_2018.csv\n│   ├── 00_faculty_list.html\n│   ├── 00_manual_matches.csv\n│   ├── 00_publications_list.html\n│   ├── 01_departments.csv\n│   ├── 01_departments_canonical.csv\n│   ├── 01_faculty.Rds\n│   ├── 02_pubs.Rds\n│   ├── 03_codepartmentals.Rds\n│   ├── 03_dropout.Rds\n│   ├── 03_matched.Rds\n│   ├── 03_unmatched.Rds\n│   ├── 04_author_meta.Rds\n│   ├── 04_dropouts.Rds\n│   ├── 04_genderize\n│   ├── 04_namsor.Rds\n│   ├── 05_author_meta.Rds\n│   ├── 05_dept_dummies.Rds\n│   ├── 05_dropouts.Rds\n│   ├── 05_layout.Rds\n│   ├── 05_matched.Rds\n│   ├── 06_author_histories.Rds\n│   ├── 07_coauth_count.Rds\n│   ├── 07_parsed_histories.Rds\n│   ├── 08_phrases.Rds\n│   ├── 09_H.Rds\n│   ├── 09_atm.csv\n│   ├── 09_vocab.tex\n│   ├── 10_atm.csv\n│   ├── 10_atm_pc.Rds\n│   ├── 10_aytm.csv\n│   ├── 10_aytm_comp.csv\n│   ├── 10_aytm_did.csv\n│   ├── 10_model_stats.Rds\n│   ├── 10_models.Rds\n│   ├── 11_au_dept_xwalk.Rds\n│   ├── 11_departments.csv\n│   ├── 11_departments_canonical.csv\n│   ├── 11_dept_dummies.Rds\n│   ├── 11_dept_gamma.Rds\n│   ├── 11_dept_term_matrix.Rds\n│   ├── 11_oru_gamma.Rds\n│   ├── 11_oru_term_matrix.Rds\n│   ├── 11_test_train.Rds\n│   ├── 12_layout.Rds\n│   ├── author_histories [7665 entries exceeds filelimit, not opening dir]\n│   ├── authors_meta [6020 entries exceeds filelimit, not opening dir]\n│   ├── docs [145144 entries exceeds filelimit, not opening dir]\n│   ├── ldatuning_results\n│   │   ├── tuningResult_comp.Rds\n│   │   ├── tuningResult_comp.docx\n│   │   ├── tuningResult_comp.pdf\n│   │   ├── tuningResult_did.Rds\n│   │   └── tuningResult_did.pdf\n│   ├── ldatuning_results-20190415T164055Z-001.zip\n│   ├── parsed_blocks [430 entries exceeds filelimit, not opening dir]\n│   ├── pubs [282 entries exceeds filelimit, not opening dir]\n│   └── temp\n├── interdisciplinarity\\ project\\ notes.gdoc\n├── notes.txt\n├── paper\n│   ├── QSS_a_00150-Hicks_Proof1.pdf\n│   ├── apa-6th-edition.csl\n│   ├── cover\\ letter.txt\n│   ├── diff.pdf\n│   ├── header.yaml\n│   ├── img\n│   │   ├── ORU_DAG.png\n│   │   ├── cites_regression.png\n│   │   ├── coauths_regression.png\n│   │   ├── conceptual_model.png\n│   │   ├── dept_dist_fixed_reg.png\n│   │   ├── dept_dist_reg.png\n│   │   ├── dept_gamma.png\n│   │   ├── dept_hell_net.png\n│   │   ├── dept_hell_net_50.png\n│   │   ├── entropies.png\n│   │   ├── entropies_selected.png\n│   │   ├── entropy_regression.png\n│   │   ├── gender.png\n│   │   ├── mds.png\n│   │   ├── mds_dept.png\n│   │   ├── network.png\n│   │   ├── oru_dept_entropy.png\n│   │   ├── oru_dept_min_dist.png\n│   │   ├── oru_dept_min_dist_ridges.png\n│   │   ├── oru_dept_network.png\n│   │   ├── oru_dept_org_dist.png\n│   │   ├── oru_dept_org_dist_ridges.png\n│   │   ├── oru_gamma.png\n│   │   ├── pub_regression.png\n│   │   └── sample.png\n│   ├── lit\\ review\\ notes.txt\n│   ├── oru_paper.aux\n│   ├── oru_paper.log\n│   ├── oru_paper.md\n│   ├── oru_paper.out\n│   ├── oru_paper.pdf\n│   ├── oru_paper.synctex.gz\n│   ├── oru_paper.tex\n│   ├── oru_paper.zip\n│   ├── oru_paper_20200616.pdf\n│   ├── oru_paper_20210805.pdf\n│   ├── oru_project.bib\n│   ├── oru_project.yaml\n│   ├── response1.gdoc\n│   ├── response1.pdf\n│   ├── response2.gdoc\n│   ├── response2.pdf\n│   ├── scraps\n│   │   ├── Hellinger.md\n│   │   ├── Holbrook.md\n│   │   ├── table.md\n│   │   └── table.pdf\n│   ├── supplement.md\n│   └── supplement.pdf\n├── plots\n│   ├── 12_beta.tex\n│   ├── 12_cites_regression.png\n│   ├── 12_coauths_regression.png\n│   ├── 12_dept_dist_fixed_reg.png\n│   ├── 12_dept_dist_reg.png\n│   ├── 12_dept_gamma.png\n│   ├── 12_dept_hell_net.png\n│   ├── 12_dept_hell_net_50.png\n│   ├── 12_dept_topics.png\n│   ├── 12_entropies.png\n│   ├── 12_entropies_selected.png\n│   ├── 12_entropy_regression.png\n│   ├── 12_gender.png\n│   ├── 12_mds.png\n│   ├── 12_mds_dept.png\n│   ├── 12_mds_wide.png\n│   ├── 12_network.png\n│   ├── 12_oru_dept_entropy.png\n│   ├── 12_oru_dept_mean_dist.png\n│   ├── 12_oru_dept_mean_dist_ridges.png\n│   ├── 12_oru_dept_min_dist.png\n│   ├── 12_oru_dept_min_dist_ridges.png\n│   ├── 12_oru_dept_network.png\n│   ├── 12_oru_dept_org_dist.png\n│   ├── 12_oru_dept_org_dist_ridges.png\n│   ├── 12_oru_entropy.png\n│   ├── 12_oru_gamma.png\n│   ├── 12_pub_regression.png\n│   ├── 12_sample.png\n│   └── ORU_DAG.png\n├── presentations\n│   └── 2019-06-07\\ for\\ Paul\\ Dodd.gslides\n├── questions\\ for\\ jane.md\n├── scripts\n│   ├── 01_parse_faculty_list.R\n│   ├── 02_Scopus_search_results.R\n│   ├── 03_match.R\n│   ├── 03_matched.csv\n│   ├── 04_author_meta.R\n│   ├── 05_filtering.R\n│   ├── 06_author_histories.R\n│   ├── 07_complete_histories.R\n│   ├── 08_text_annotation.R\n│   ├── 09_build_vocab.R\n│   ├── 10_topic_modeling.R\n│   ├── 11_depts.R\n│   ├── 11_depts.html\n│   ├── 12_analysis\\ copy.html\n│   ├── 12_analysis-matched.html\n│   ├── 12_analysis.R\n│   ├── 12_analysis.html\n│   ├── 12_analysis_cache\n│   │   └── html\n│   │       ├── __packages\n│   │       ├── mds_viz_efd9009c794d667852b2549df2bccf96.RData\n│   │       ├── mds_viz_efd9009c794d667852b2549df2bccf96.rdb\n│   │       ├── mds_viz_efd9009c794d667852b2549df2bccf96.rdx\n│   │       ├── network_c410cd78a4c339cdc4acd1d66c6c5e07.RData\n│   │       ├── network_c410cd78a4c339cdc4acd1d66c6c5e07.rdb\n│   │       ├── network_c410cd78a4c339cdc4acd1d66c6c5e07.rdx\n│   │       ├── silhouette_3170ef648aba325d2ce8c9be48c52e53.RData\n│   │       ├── silhouette_3170ef648aba325d2ce8c9be48c52e53.rdb\n│   │       ├── silhouette_3170ef648aba325d2ce8c9be48c52e53.rdx\n│   │       ├── topic_viz_41d0cb157a88d4ec41810a16e769f5d5.RData\n│   │       ├── topic_viz_41d0cb157a88d4ec41810a16e769f5d5.rdb\n│   │       └── topic_viz_41d0cb157a88d4ec41810a16e769f5d5.rdx\n│   ├── 12_analysis_files\n│   │   └── figure-html\n│   │       ├── author-dept\\ distance-1.png\n│   │       ├── author-dept\\ distance-2.png\n│   │       ├── author-dept\\ distance-3.png\n│   │       ├── author-dept\\ distance-4.png\n│   │       ├── author-dept\\ distance-5.png\n│   │       ├── desc_plots_tabs-1.png\n│   │       ├── desc_plots_tabs-2.png\n│   │       ├── desc_plots_tabs-3.png\n│   │       ├── desc_plots_tabs-4.png\n│   │       ├── h3-1.png\n│   │       ├── h3-2.png\n│   │       ├── h3-3.png\n│   │       ├── h3-4.png\n│   │       ├── h3-5.png\n│   │       ├── h3-6.png\n│   │       ├── mds_viz-1.png\n│   │       ├── mds_viz-10.png\n│   │       ├── mds_viz-11.png\n│   │       ├── mds_viz-12.png\n│   │       ├── mds_viz-13.png\n│   │       ├── mds_viz-14.png\n│   │       ├── mds_viz-2.png\n│   │       ├── mds_viz-3.png\n│   │       ├── mds_viz-4.png\n│   │       ├── mds_viz-5.png\n│   │       ├── mds_viz-6.png\n│   │       ├── mds_viz-7.png\n│   │       ├── mds_viz-8.png\n│   │       ├── mds_viz-9.png\n│   │       ├── network-1.png\n│   │       ├── network-2.png\n│   │       ├── productivity-1.png\n│   │       ├── productivity-2.png\n│   │       ├── productivity-3.png\n│   │       ├── productivity-4.png\n│   │       ├── productivity-5.png\n│   │       ├── productivity-6.png\n│   │       ├── productivity-7.png\n│   │       ├── productivity-8.png\n│   │       ├── productivity-9.png\n│   │       ├── silhouette-1.png\n│   │       ├── topic_models-1.png\n│   │       ├── topic_models-10.png\n│   │       ├── topic_models-11.png\n│   │       ├── topic_models-12.png\n│   │       ├── topic_models-13.png\n│   │       ├── topic_models-2.png\n│   │       ├── topic_models-3.png\n│   │       ├── topic_models-4.png\n│   │       ├── topic_models-5.png\n│   │       ├── topic_models-6.png\n│   │       ├── topic_models-7.png\n│   │       ├── topic_models-8.png\n│   │       ├── topic_models-9.png\n│   │       ├── topic_viz-1.png\n│   │       └── topic_viz-2.png\n│   ├── api_key.R\n│   └── scraps\n│       ├── 02_parse_pubs_list.R\n│       ├── 03_coe_pubs.R\n│       ├── 03_match_auids.R\n│       ├── 07.R\n│       ├── 12_regressions.R\n│       ├── BML-CMSI\\ deep\\ dive.R\n│       ├── Hellinger_low_memory.R\n│       ├── dept_hell_net.R\n│       ├── divergence\\ against\\ lagged\\ distributions.R\n│       ├── exploring\\ topics.R\n│       ├── fractional_authorship.R\n│       ├── hellinger.R\n│       ├── model_scratch.R\n│       ├── multicore.R\n│       ├── net_viz.R\n│       ├── prcomp.R\n│       ├── propensity.R\n│       ├── rs_diversity.R\n│       ├── spacyr.R\n│       ├── topic\\ counts\\ rather\\ than\\ entropies.R\n│       ├── topic_cosine_sim.R\n│       ├── unit-level.R\n│       ├── weighted\\ regression.R\n│       ├── word-topic_distance.R\n│       ├── xx_construct_samples.R\n│       └── xx_oru_complete_histories.R\n└── tree.md"
-  },
-  {
-    "objectID": "content/04-04-project-organization.html#just-the-directories-1",
-    "href": "content/04-04-project-organization.html#just-the-directories-1",
-    "title": "The life-changing magic of tidying your projects",
-    "section": "Just the directories",
-    "text": "Just the directories\n.\n├── ORU\\ faculty\n│   └── ORU\\ Publications.fld\n├── QSS\\ forms\n├── R\n├── data\n│   ├── author_histories\n│   ├── authors_meta\n│   ├── docs\n│   ├── ldatuning_results\n│   ├── parsed_blocks\n│   ├── pubs\n│   └── temp\n├── paper\n│   ├── img\n│   └── scraps\n├── plots\n├── presentations\n└── scripts\n    ├── 12_analysis_cache\n    │   └── html\n    ├── 12_analysis_files\n    │   └── figure-html\n    └── scraps"
-  },
-  {
-    "objectID": "content/04-04-project-organization.html#dhs-project-template",
-    "href": "content/04-04-project-organization.html#dhs-project-template",
-    "title": "The life-changing magic of tidying your projects",
-    "section": "DH’s Project Template",
-    "text": "DH’s Project Template\n\nhttps://github.com/dhicks/project_template\nConfigured as a GitHub “template,” making it easy to create new repositories for new projects\nDesignated folders for data, plots/outputs, and utility functions"
-  },
-  {
-    "objectID": "content/04-04-project-organization.html#a-reminder-on-paths",
-    "href": "content/04-04-project-organization.html#a-reminder-on-paths",
-    "title": "The life-changing magic of tidying your projects",
-    "section": "A reminder on paths",
-    "text": "A reminder on paths\n\nWindows and Unix-based systems write paths differently\nUse file.path() or the here package to construct paths\n.. in a path means “go up to the parent folder”\n\nso ../data/00_raw_data.csv goes up one level (eg, from the scripts folder), then down to the data folder, then the file 00_raw_data.csv"
-  },
-  {
-    "objectID": "content/04-04-project-organization.html#references",
-    "href": "content/04-04-project-organization.html#references",
-    "title": "The life-changing magic of tidying your projects",
-    "section": "References",
-    "text": "References\n\n\n\n\nBailey, David H., and Jonathan Borwein (Jon). n.d. “The Reinhart-Rogoff Error – or How Not to Excel at Economics.” The Conversation. Accessed May 16, 2020. http://theconversation.com/the-reinhart-rogoff-error-or-how-not-to-excel-at-economics-13646.\n\n\nCassidy, John. n.d. “The Reinhart and Rogoff Controversy: A Summing Up.” The New Yorker. Accessed September 27, 2020. https://www.newyorker.com/news/john-cassidy/the-reinhart-and-rogoff-controversy-a-summing-up.\n\n\nChin, Monica. 2021. “Students Who Grew up with Search Engines Might Change STEM Education Forever.” The Verge. September 22, 2021. https://www.theverge.com/22684730/students-file-folder-directory-structure-education-gen-z.\n\n\nHerndon, Thomas, Michael Ash, and Robert Pollin. 2014. “Does High Public Debt Consistently Stifle Economic Growth? A Critique of Reinhart and Rogoff.” Cambridge Journal of Economics 38 (2): 257–79. https://doi.org/10.1093/cje/bet075.\n\n\n“How Excel May Have Caused Loss of 16,000 Covid Tests in England.” 2020. The Guardian. October 5, 2020. http://www.theguardian.com/politics/2020/oct/05/how-excel-may-have-caused-loss-of-16000-covid-tests-in-england.\n\n\nLaskowski, Kate. n.d. “What to Do When You Don’t Trust Your Data Anymore – Laskowski Lab at UC Davis.” Accessed January 29, 2020. https://laskowskilab.faculty.ucdavis.edu/2020/01/29/retractions/.\n\n\nNoble, William Stafford. 2009. “A Quick Guide to Organizing Computational Biology Projects.” PLOS Computational Biology 5 (7): e1000424. https://doi.org/10.1371/journal.pcbi.1000424.\n\n\nPennisi, Elizabeth. 2020. “Prominent Spider Biologist Spun a Web of Questionable Data.” Science 367 (6478): 613–14. https://doi.org/10.1126/science.367.6478.613.\n\n\nReinhart & Rogoff - Growth in a Time of Debt - EXERCISE! 2019. https://www.youtube.com/watch?v=ItGMz0ERvcw.\n\n\nThe Economist. 2011. “An Array of Errors,” September 10, 2011. https://www.economist.com/science-and-technology/2011/09/10/an-array-of-errors.\n\n\n“Video: Keith Baggerly, \"When Is Reproducibility an Ethical Issue? Genomics, Personalized Medicine, and Human Error\".” n.d. Accessed September 23, 2020. http://www.birs.ca/events/2013/5-day-workshops/13w5083/videos/watch/201308141121-Baggerly.html.\n\n\nViglione, Giuliana. 2020. “‘Avalanche’ of Spider-Paper Retractions Shakes Behavioural-Ecology Community.” Nature, February. https://doi.org/10.1038/d41586-020-00287-y."
-  },
-  {
-    "objectID": "content/04-05-data-management.html#reading",
-    "href": "content/04-05-data-management.html#reading",
-    "title": "Project and data management",
-    "section": "Reading",
-    "text": "Reading\n\nLaskowski (n.d.)\nNoble (2009)\nWilkinson et al. (2016)\nJennings et al. (2023)"
-  },
-  {
-    "objectID": "content/04-05-data-management.html#the-first-rule-of-data-management",
-    "href": "content/04-05-data-management.html#the-first-rule-of-data-management",
-    "title": "Managing and publishing data",
-    "section": "The first rule of data management",
-    "text": "The first rule of data management\nDo not edit your data."
-  },
-  {
-    "objectID": "content/04-05-data-management.html#documentation",
-    "href": "content/04-05-data-management.html#documentation",
-    "title": "Project and data management",
-    "section": "Documentation",
-    "text": "Documentation\n\nMany social science fields have a tradition of writing codebooks for their data\n\nStanford Open Policing codebook\n“Codebook-like summary” of the covdata package, automatically generated using skimr\nCaitlin Hudon’s approach (Hudon 2018)\n\nTable and field name, both verbatim\nField example value\nNotes for both table and field\n\n\n\n(ref:Hudson-tbl) Example of Caitlin Hudon’s approach to building a data dictionary. Source: https://caitlinhudon.com/2018/10/30/data-dictionaries/\n\n\n\n\n\n(ref:Hudson-tbl)"
-  },
-  {
-    "objectID": "content/04-05-data-management.html#questions-a-codebook-should-answer",
-    "href": "content/04-05-data-management.html#questions-a-codebook-should-answer",
-    "title": "Project and data management",
-    "section": "Questions a codebook should answer",
-    "text": "Questions a codebook should answer\n\nWhat does this field mean? How should I use it?\nWhat is the data [journey]?\n\nWhere does this data come from?\nHow exactly is it collected?\nHow often is it updated?\nWhere does it go next?\n\nWhat does the data in this field actually look like?\nAre there any caveats to keep in mind when using this data?\nWhere can I go for more information?\n\n(Hudon 2018)"
-  },
-  {
-    "objectID": "content/04-05-data-management.html#major-codebook-elements",
-    "href": "content/04-05-data-management.html#major-codebook-elements",
-    "title": "Project and data management",
-    "section": "Major codebook elements",
-    "text": "Major codebook elements\n(https://afit-r.github.io/codebook)\n\nOriginal source of the data\nSampling information\n\nWhere and how the data were generated\n\nVariable-level metadata and summaries\nStructure of the data"
-  },
-  {
-    "objectID": "content/04-05-data-management.html#data-management-plans",
-    "href": "content/04-05-data-management.html#data-management-plans",
-    "title": "Project and data management",
-    "section": "Data management plans",
-    "text": "Data management plans\n\nMuch like a research plan, data management plans provide an overview of the steps you’ll take to gather, publish, and maintain your data\n\nSince 2011, NSF has required a 2-page data management plan for most types of proposals\n\n\n\nCommon elements\n\nWho is responsible for data management\nWho else will have access to which data\nHow data will be collected\nData formatting standards\nWhether and how data will be archived and made available for reuse"
-  },
-  {
-    "objectID": "content/04-05-data-management.html#data-management-plan-common-elements",
-    "href": "content/04-05-data-management.html#data-management-plan-common-elements",
-    "title": "Project and data management",
-    "section": "Data management plan: Common elements",
-    "text": "Data management plan: Common elements"
-  },
-  {
-    "objectID": "content/04-05-data-management.html#fair-principles-for-published-data",
-    "href": "content/04-05-data-management.html#fair-principles-for-published-data",
-    "title": "Project and data management",
-    "section": "FAIR principles for published data",
-    "text": "FAIR principles for published data\n\nFindable\n\nF1. (meta)data are assigned a globally unique and persistent identifier\nF2. data are described with rich metadata (defined by R1 below)\nF3. metadata clearly and explicitly include the identifier of the data it describes\nF4. (meta)data are registered or indexed in a searchable resource\n\nAccessible\n\nA1. (meta)data are retrievable by their identifier using a standardized communications protocol\n\nA1.1 the protocol is open, free, and universally implementable\nA1.2 the protocol allows for an authentication and authorization procedure, where necessary\n\nA2. metadata are accessible, even when the data are no longer available\n\nInteroperable\n\nI1. (meta)data use a formal, accessible, shared, and broadly applicable language for knowledge representation.\nI2. (meta)data use vocabularies that follow FAIR principles\nI3. (meta)data include qualified references to other (meta)data\n\nReusable\n\nR1. meta(data) are richly described with a plurality of accurate and relevant attributes\n\nR1.1. (meta)data are released with a clear and accessible data usage license\nR1.2. (meta)data are associated with detailed provenance\nR1.3. (meta)data meet domain-relevant community standards"
-  },
-  {
-    "objectID": "content/04-05-data-management.html#dois-for-data",
-    "href": "content/04-05-data-management.html#dois-for-data",
-    "title": "Project and data management",
-    "section": "DOIs for data",
-    "text": "DOIs for data\n\nInstructions for OSF\nNotes for Zenodo\n\nZenodo also plays nicely with GitHub for minting DOIs for code\n\nCitation models at Harvard Dataverse"
-  },
-  {
-    "objectID": "content/04-05-data-management.html#references",
-    "href": "content/04-05-data-management.html#references",
-    "title": "Project and data management",
-    "section": "References",
-    "text": "References\n\n\n\n\nBailey, David H., and Jonathan Borwein (Jon). n.d. “The Reinhart-Rogoff Error – or How Not to Excel at Economics.” The Conversation. Accessed May 16, 2020. http://theconversation.com/the-reinhart-rogoff-error-or-how-not-to-excel-at-economics-13646.\n\n\nCassidy, John. n.d. “The Reinhart and Rogoff Controversy: A Summing Up.” The New Yorker. Accessed September 27, 2020. https://www.newyorker.com/news/john-cassidy/the-reinhart-and-rogoff-controversy-a-summing-up.\n\n\nChin, Monica. 2021. “Students Who Grew up with Search Engines Might Change STEM Education Forever.” The Verge. September 22, 2021. https://www.theverge.com/22684730/students-file-folder-directory-structure-education-gen-z.\n\n\nHerndon, Thomas, Michael Ash, and Robert Pollin. 2014. “Does High Public Debt Consistently Stifle Economic Growth? A Critique of Reinhart and Rogoff.” Cambridge Journal of Economics 38 (2): 257–79. https://doi.org/10.1093/cje/bet075.\n\n\n“How Excel May Have Caused Loss of 16,000 Covid Tests in England.” 2020. The Guardian. October 5, 2020. http://www.theguardian.com/politics/2020/oct/05/how-excel-may-have-caused-loss-of-16000-covid-tests-in-england.\n\n\nJennings, Lydia, Talia Anderson, Andrew Martinez, Rogena Sterling, Dominique David Chavez, Ibrahim Garba, Maui Hudson, Nanibaa’ A. Garrison, and Stephanie Russo Carroll. 2023. “Applying the ‘CARE Principles for Indigenous Data Governance’ to Ecology and Biodiversity Research.” Nature Ecology & Evolution, August, 1–5. https://doi.org/10.1038/s41559-023-02161-2.\n\n\nLaskowski, Kate. n.d. “What to Do When You Don’t Trust Your Data Anymore – Laskowski Lab at UC Davis.” Accessed January 29, 2020. https://laskowskilab.faculty.ucdavis.edu/2020/01/29/retractions/.\n\n\nNoble, William Stafford. 2009. “A Quick Guide to Organizing Computational Biology Projects.” PLOS Computational Biology 5 (7): e1000424. https://doi.org/10.1371/journal.pcbi.1000424.\n\n\nPennisi, Elizabeth. 2020. “Prominent Spider Biologist Spun a Web of Questionable Data.” Science 367 (6478): 613–14. https://doi.org/10.1126/science.367.6478.613.\n\n\nReinhart & Rogoff - Growth in a Time of Debt - EXERCISE! 2019. https://www.youtube.com/watch?v=ItGMz0ERvcw.\n\n\nThe Economist. 2011. “An Array of Errors,” September 10, 2011. https://www.economist.com/science-and-technology/2011/09/10/an-array-of-errors.\n\n\n“Video: Keith Baggerly, \"When Is Reproducibility an Ethical Issue? Genomics, Personalized Medicine, and Human Error\".” n.d. Accessed September 23, 2020. http://www.birs.ca/events/2013/5-day-workshops/13w5083/videos/watch/201308141121-Baggerly.html.\n\n\nViglione, Giuliana. 2020. “‘Avalanche’ of Spider-Paper Retractions Shakes Behavioural-Ecology Community.” Nature, February. https://doi.org/10.1038/d41586-020-00287-y.\n\n\nWilkinson, Mark D., Michel Dumontier, IJsbrand Jan Aalbersberg, Gabrielle Appleton, Myles Axton, Arie Baak, Niklas Blomberg, et al. 2016. “The FAIR Guiding Principles for Scientific Data Management and Stewardship.” Scientific Data 3 (1, 1): 1–9. https://doi.org/10.1038/sdata.2016.18."
-  },
-  {
-    "objectID": "references.html",
-    "href": "references.html",
-    "title": "References",
-    "section": "",
-    "text": "Bailey, David H., and Jonathan Borwein (Jon). n.d. “The\nReinhart-Rogoff Error – or How Not to Excel at\nEconomics.” The Conversation. Accessed May 16, 2020.\nhttp://theconversation.com/the-reinhart-rogoff-error-or-how-not-to-excel-at-economics-13646.\n\n\nBogen, James, and James Woodward. 1988. “Saving the\nPhenomena.” The Philosophical Review 97\n(3): 303–52. http://www.jstor.org/stable/2185445.\n\n\nBrown, James Robert. 2002. Smoke and Mirrors: How\nScience Reflects Reality. Routledge.\n\n\nBryan, Jenny. 2018. “Code Smells and Feels.” Presented at\nthe useR 2018, July 21. https://www.youtube.com/watch?v=7oyiPBjLAWY.\n\n\n———. 2020. “Object of Type ‘Closure’ Is Not\nSubsettable.” Presented at the\nRSTUDIO::CONF 2020, January 31. https://rstudio.com/resources/rstudioconf-2020/object-of-type-closure-is-not-subsettable/.\n\n\nBuckens, Wouter. 2019. “Self-Documenting Is a Myth, and How to\nMake Your Code Self-Documenting.” woubuc. August 3,\n2019. https://blog.woubuc.be/post/self-documenting-code-is-a-myth/.\n\n\nCassidy, John. n.d. “The Reinhart and Rogoff\nControversy: A Summing Up.” The New\nYorker. Accessed September 27, 2020. https://www.newyorker.com/news/john-cassidy/the-reinhart-and-rogoff-controversy-a-summing-up.\n\n\nChambers, John M. 2014. “Object-Oriented Programming,\nFunctional Programming and R.”\nStatistical Science 29 (2): 167–80. https://doi.org/10.1214/13-STS452.\n\n\nChin, Monica. 2021. “Students Who Grew up with Search Engines\nMight Change STEM Education Forever.” The\nVerge. September 22, 2021. https://www.theverge.com/22684730/students-file-folder-directory-structure-education-gen-z.\n\n\nDaston, Lorraine, and Peter Galison. 2007. Objectivity.\nNew York : Cambridge, Mass: Zone Books ; Distributed\nby the MIT Press.\n\n\nHerndon, Thomas, Michael Ash, and Robert Pollin. 2014. “Does High\nPublic Debt Consistently Stifle Economic Growth? A Critique\nof Reinhart and Rogoff.” Cambridge\nJournal of Economics 38 (2): 257–79. https://doi.org/10.1093/cje/bet075.\n\n\n“How Excel May Have Caused Loss of 16,000\nCovid Tests in England.” 2020.\nThe Guardian. October 5, 2020. http://www.theguardian.com/politics/2020/oct/05/how-excel-may-have-caused-loss-of-16000-covid-tests-in-england.\n\n\nHudon, Caitlin. 2018. “Field Notes: Building\nData Dictionaries.” Haystacks. October 30,\n2018. https://caitlinhudon.com/2018/10/30/data-dictionaries/.\n\n\nHuebner, Marianne, Werner Vach, and Saskia le Cessie. 2016. “A\nSystematic Approach to Initial Data Analysis Is Good Research\nPractice.” The Journal of Thoracic and Cardiovascular\nSurgery 151 (1): 25–27. https://doi.org/10.1016/j.jtcvs.2015.09.085.\n\n\nLaskowski, Kate. n.d. “What to Do When You Don’t Trust Your Data\nAnymore – Laskowski Lab at UC Davis.”\nAccessed January 29, 2020. https://laskowskilab.faculty.ucdavis.edu/2020/01/29/retractions/.\n\n\nMcElreath, Richard, dir. 2020. Science as Amateur Software\nDevelopment. https://www.youtube.com/watch?v=zwRdO9_GGhY.\n\n\nNoble, William Stafford. 2009. “A Quick Guide to\nOrganizing Computational Biology Projects.” PLOS\nComputational Biology 5 (7): e1000424. https://doi.org/10.1371/journal.pcbi.1000424.\n\n\nPeng, Roger D., and Elizabeth Matsui. 2016. The Art of\nData Science: A Guide for Anyone Who\nWorks with Data. Leanpub. http://leanpub.com/artofdatascience.\n\n\nPennisi, Elizabeth. 2020. “Prominent Spider Biologist Spun a Web\nof Questionable Data.” Science 367 (6478): 613–14. https://doi.org/10.1126/science.367.6478.613.\n\n\nPierson, Emma, Camelia Simoiu, Jan Overgoor, Sam Corbett-Davies, Daniel\nJenson, Amy Shoemaker, Vignesh Ramachandran, et al. 2020. “A\nLarge-Scale Analysis of Racial Disparities in Police Stops Across the\nUnited States.” Nature Human Behaviour,\nMay, 1–10. https://doi.org/10.1038/s41562-020-0858-1.\n\n\nPostolovski, Tash. 2020. “Your Code Review Checklist:\n14 Things to Include.” July 6, 2020. https://www.codementor.io/blog/code-review-checklist-76q7ovkaqj.\n\n\n“R Faq - How to Make a Great R\nReproducible Example.” n.d. Stack Overflow. Accessed\nAugust 31, 2018. https://stackoverflow.com/questions/5963269/how-to-make-a-great-r-reproducible-example.\n\n\nReinhart & Rogoff - Growth in a\nTime of Debt - EXERCISE!\n2019. https://www.youtube.com/watch?v=ItGMz0ERvcw.\n\n\nSpringate, David. 2013. “Functional Programming in\nR.” DataJujitsu. May 16, 2013. https://www.datajujitsu.co.uk/blog/2013/05/16/functional-programming-in-r/.\n\n\nTanweer, Anissa, Emily Kalah Gade, P. M. Krafft, and Sarah K. Dreier.\n2021. “Why the Data Revolution Needs Qualitative\nThinking.” Harvard Data Science Review, July. https://doi.org/10.1162/99608f92.eee0b0da.\n\n\nThe Economist. 2011. “An Array of Errors,”\nSeptember 10, 2011. https://www.economist.com/science-and-technology/2011/09/10/an-array-of-errors.\n\n\nTukey, John W. 1980. “We Need Both Exploratory and\nConfirmatory.” The American Statistician 34\n(1): 23–25. https://doi.org/10.1080/00031305.1980.10482706.\n\n\nTukey, John Wilder. 1977. Exploratory Data Analysis.\nAddison-Wesley Series in Behavioral Science. Reading,\nMass: Addison-Wesley Pub. Co. https://archive.org/details/exploratorydataa00tuke_0.\n\n\n“Video: Keith Baggerly, \"When Is\nReproducibility an Ethical Issue?\nGenomics, Personalized Medicine, and\nHuman Error\".” n.d. Accessed September 23, 2020. http://www.birs.ca/events/2013/5-day-workshops/13w5083/videos/watch/201308141121-Baggerly.html.\n\n\nViglione, Giuliana. 2020. “‘Avalanche’\nof Spider-Paper Retractions Shakes Behavioural-Ecology\nCommunity.” Nature, February. https://doi.org/10.1038/d41586-020-00287-y.\n\n\nWagenmakers, Eric-Jan, Ruud Wetzels, Denny Borsboom, Han L. J. van der\nMaas, and Rogier A. Kievit. 2012. “An Agenda for\nPurely Confirmatory Research.” Perspectives on\nPsychological Science 7 (6): 632–38. https://doi.org/10.1177/1745691612463078.\n\n\nWickham, Hadley. 2019. “Debugging.” In Advanced\nR, Second Edition, ch. 22. CRC\nPress. https://adv-r.hadley.nz/debugging.html.\n\n\nWilkinson, Mark D., Michel Dumontier, IJsbrand Jan Aalbersberg,\nGabrielle Appleton, Myles Axton, Arie Baak, Niklas Blomberg, et al.\n2016. “The FAIR Guiding Principles for Scientific\nData Management and Stewardship.” Scientific Data 3 (1,\n1): 1–9. https://doi.org/10.1038/sdata.2016.18.\n\n\nWilson, Greg, Jennifer Bryan, Karen Cranston, Justin Kitzes, Lex\nNederbragt, and Tracy K. Teal. 2017. “Good Enough Practices in\nScientific Computing.” PLOS Computational Biology 13\n(6): e1005510. https://doi.org/10.1371/journal.pcbi.1005510."
-  },
-  {
-    "objectID": "content/03-02-models-of-eda.html",
-    "href": "content/03-02-models-of-eda.html",
-    "title": "Project: Data Journey Narrative",
-    "section": "",
-    "text": "Exploratory Data Analysis"
-  },
-  {
-    "objectID": "content/03-02-models-of-eda.html#section-2",
-    "href": "content/03-02-models-of-eda.html#section-2",
-    "title": "Project: Data Journey Narrative",
-    "section": "",
-    "text": "Aligning the goals of EDA with steps in the “epicycle of analysis” (Peng and Matsui 2016)\n\n\n\n\n\n\nGoals of EDA\nEpicycle step\n\n\n\n\nDetermine if there are problems with the data\n2. Collecting information\n\n\nDetermine whether our question can be answered with these data\n3. Comparing and revising expectations\n\n\nDevelop sketch of an answer\n1. Developing expectations"
-  },
-  {
-    "objectID": "content/03-04-oakland-eda.html#pengartdatascience2016",
-    "href": "content/03-04-oakland-eda.html#pengartdatascience2016",
-    "title": "Case Study: Police Stops in Oakland",
-    "section": "Peng and Matsui (2016)",
-    "text": "Peng and Matsui (2016)\n\nFormulate your question\nRead in your data\nCheck the packaging\nLook at the top and the bottom of your data\nCheck your “n”s\nValidate with at least one external data source\nMake a plot\nTry the easy solution first\nFollow up"
-  },
-  {
-    "objectID": "content/04-02-readability.html#replicability-reproducibility-reliability",
-    "href": "content/04-02-readability.html#replicability-reproducibility-reliability",
-    "title": "Readable code is reliable code",
-    "section": "Replicability, reproducibility, reliability",
-    "text": "Replicability, reproducibility, reliability\n\nreplicability\n\nQualitatively similar results when we repeat the experiment\n(gather new data; may or may not use the same code)\n\nreproducibility\n\nQuantitatively identical outputs when we run the same code on the same data\n(same data, same code)\n\nreliability\n\nThe code performs the analysis that we think it’s performing\n(compare construct validity)"
-  },
-  {
-    "objectID": "content/04-02-readability.html#checking-reliability",
-    "href": "content/04-02-readability.html#checking-reliability",
-    "title": "Readable code is reliable code",
-    "section": "Checking reliability",
-    "text": "Checking reliability\n\nreliability\n\nThe code performs the analysis that we think it’s performing\n\n\nCan reliability be checked computationally?"
-  },
-  {
-    "objectID": "content/04-02-readability.html#code-review",
-    "href": "content/04-02-readability.html#code-review",
-    "title": "Readable code is reliable code",
-    "section": "Code review",
-    "text": "Code review\nGoals of code review:\n\nMake the code more reliable\nLearning and growth for both author and reviewer"
+    "section": "Code review is peer feedback on your writing",
+    "text": "Code review is peer feedback on your writing\n\nMay be done formally as part of journal review\n\nBut this is super rare\n\nInformally, with collaborators\nInformally, as a stage of writing"
   },
   {
     "objectID": "content/04-02-readability.html#goals-of-code-review",
@@ -992,20 +712,6 @@
     "title": "Readable code is reliable code",
     "section": "Goals of code review",
     "text": "Goals of code review\n\nMake the code more reliable\nIntegrate your code into the collaborative code base\nLearning and growth for both author and reviewer\n\nExamples of things that will promote/frustrate these goals?\n(Lamb 2018)"
-  },
-  {
-    "objectID": "content/04-02-readability.html#code-review-is-peer-feedback",
-    "href": "content/04-02-readability.html#code-review-is-peer-feedback",
-    "title": "Readable code is reliable code",
-    "section": "Code review is peer feedback",
-    "text": "Code review is peer feedback"
-  },
-  {
-    "objectID": "content/04-02-readability.html#code-review-is-peer-feedback-on-your-writing",
-    "href": "content/04-02-readability.html#code-review-is-peer-feedback-on-your-writing",
-    "title": "Readable code is reliable code",
-    "section": "Code review is peer feedback on your writing",
-    "text": "Code review is peer feedback on your writing\n\nMay be done formally as part of journal review\n\nBut this is super rare\n\nInformally, with collaborators\nInformally, as a stage of writing"
   },
   {
     "objectID": "content/04-02-readability.html#what-to-look-for-in-code-review",
@@ -1027,6 +733,20 @@
     "title": "Readable code is reliable code",
     "section": "Project: Code Review",
     "text": "Project: Code Review\nhttps://data-science-methods.github.io/project.html#code-review-and-reproducibility-check\n\nI’ll assign you to review someone else’s EDA code\nFork and clone the code\nSubmit your feedback using a PR"
+  },
+  {
+    "objectID": "content/04-02-readability.html#references",
+    "href": "content/04-02-readability.html#references",
+    "title": "Readable code is reliable code",
+    "section": "References",
+    "text": "References\n\n\n\n\nBryan, Jenny. 2018. “Code Smells and Feels.” Presented at the useR 2018, July 21. https://www.youtube.com/watch?v=7oyiPBjLAWY.\n\n\nLamb, Julianna. 2018. “Building an Inclusive Code Review Culture.” Plaid. July 30, 2018. https://plaid.com/blog/building-an-inclusive-code-review-culture/.\n\n\n“What to Look for in a Code Review.” n.d. eng-practices. Accessed October 23, 2023. https://google.github.io/eng-practices/review/reviewer/looking-for.html.\n\n\nWickham, Hadley. n.d. The Tidyverse Style Guide. Accessed November 6, 2023. https://style.tidyverse.org/.\n\n\nZhou, Xiaodan, Kevin Josey, Leila Kamareddine, Miah C. Caine, Tianjia Liu, Loretta J. Mickley, Matthew Cooper, and Francesca Dominici. 2021. “Excess of COVID-19 Cases and Deaths Due to Fine Particulate Matter Exposure During the 2020 Wildfires in the United States.” Science Advances 7 (33): eabi8789. https://doi.org/10.1126/sciadv.abi8789."
+  },
+  {
+    "objectID": "content/04-05-data-management.html#reading",
+    "href": "content/04-05-data-management.html#reading",
+    "title": "Project and data management",
+    "section": "Reading",
+    "text": "Reading\n\nLaskowski (n.d.)\nNoble (2009)\nWilkinson et al. (2016)\nJennings et al. (2023)"
   },
   {
     "objectID": "content/04-05-data-management.html#some-data-management-disasters",
@@ -1078,11 +798,11 @@
     "text": "The model in action: A mid-sized text-mining project\nPublished paper: https://doi.org/10.1162/qss_a_00150\nGitHub repo: https://github.com/dhicks/orus\n23 directories, 274 files (plus 160k data files)\n.\n├── ORU\\ faculty\n│   └── ORU\\ Publications.fld\n├── QSS\\ forms\n├── R\n├── data\n│   ├── author_histories\n│   ├── authors_meta\n│   ├── docs\n│   ├── ldatuning_results\n│   ├── parsed_blocks\n│   ├── pubs\n│   └── temp\n├── paper\n│   ├── img\n│   └── scraps\n├── plots\n├── presentations\n└── scripts\n    ├── 12_analysis_cache\n    │   └── html\n    ├── 12_analysis_files\n    │   └── figure-html\n    └── scraps"
   },
   {
-    "objectID": "content/04-05-data-management.html#just-the-directories",
-    "href": "content/04-05-data-management.html#just-the-directories",
+    "objectID": "content/04-05-data-management.html#the-analysis-pipeline",
+    "href": "content/04-05-data-management.html#the-analysis-pipeline",
     "title": "Project and data management",
-    "section": "Just the directories",
-    "text": "Just the directories\n.\n├── ORU\\ faculty\n│   └── ORU\\ Publications.fld\n├── QSS\\ forms\n├── R\n├── data\n│   ├── author_histories\n│   ├── authors_meta\n│   ├── docs\n│   ├── ldatuning_results\n│   ├── parsed_blocks\n│   ├── pubs\n│   └── temp\n├── paper\n│   ├── img\n│   └── scraps\n├── plots\n├── presentations\n└── scripts\n    ├── 12_analysis_cache\n    │   └── html\n    ├── 12_analysis_files\n    │   └── figure-html\n    └── scraps"
+    "section": "The analysis pipeline",
+    "text": "The analysis pipeline\n├── scripts\n│   ├── 01_parse_faculty_list.R\n│   ├── 02_Scopus_search_results.R\n│   ├── 03_match.R\n│   ├── 03_matched.csv\n│   ├── 04_author_meta.R\n│   ├── 05_filtering.R\n│   ├── 06_author_histories.R\n│   ├── 07_complete_histories.R\n│   ├── 08_text_annotation.R\n│   ├── 09_build_vocab.R\n│   ├── 10_topic_modeling.R\n│   ├── 11_depts.R\n│   ├── 11_depts.html\n│   ├── 12_analysis\\ copy.html\n│   ├── 12_analysis-matched.html\n│   ├── 12_analysis.R\n│   ├── 12_analysis.html\n│   ├── 12_analysis_cache\n│   │   └── html\n│   │       ├── __packages\n│   │       ...\n│   │       └── topic_viz_41d0cb157a88d4ec41810a16e769f5d5.rdx\n│   ├── 12_analysis_files\n│   │   └── figure-html\n│   │       ├── author-dept\\ distance-1.png\n│   │       ...\n│   │       └── topic_viz-2.png\n│   ├── api_key.R\n│   └── scraps\n│       ├── 02_parse_pubs_list.R\n│       ├── 03_coe_pubs.R\n│       ├── 03_match_auids.R\n│       ├── 07.R\n│       ├── 12_regressions.R\n│       ├── BML-CMSI\\ deep\\ dive.R\n│       ├── Hellinger_low_memory.R\n│       ├── dept_hell_net.R\n│       ├── divergence\\ against\\ lagged\\ distributions.R\n│       ├── exploring\\ topics.R\n│       ├── fractional_authorship.R\n│       ├── hellinger.R\n│       ├── model_scratch.R\n│       ├── multicore.R\n│       ├── net_viz.R\n│       ├── prcomp.R\n│       ├── propensity.R\n│       ├── rs_diversity.R\n│       ├── spacyr.R\n│       ├── topic\\ counts\\ rather\\ than\\ entropies.R\n│       ├── topic_cosine_sim.R\n│       ├── unit-level.R\n│       ├── weighted\\ regression.R\n│       ├── word-topic_distance.R\n│       ├── xx_construct_samples.R\n│       └── xx_oru_complete_histories.R"
   },
   {
     "objectID": "content/04-05-data-management.html#intermediate-data-files",
@@ -1106,11 +826,25 @@
     "text": "Exercise: Organize your EDA\n.\n├── R\n├── data\n├── paper\n├── plots\n├── readme.md\n├── scripts\n└── talk"
   },
   {
+    "objectID": "content/04-05-data-management.html#data-management-plans",
+    "href": "content/04-05-data-management.html#data-management-plans",
+    "title": "Project and data management",
+    "section": "Data management plans",
+    "text": "Data management plans\n\nMuch like a research plan, data management plans provide an overview of the steps you’ll take to gather, publish, and maintain your data\n\nSince 2011, NSF has required a 2-page data management plan for most types of proposals\n\n\n\nCommon elements\n\nWho is responsible for data management\nWho else will have access to which data\nHow data will be collected\nData formatting standards\nWhether and how data will be archived and made available for reuse"
+  },
+  {
     "objectID": "content/04-05-data-management.html#data-management-plan-examples-and-resources",
     "href": "content/04-05-data-management.html#data-management-plan-examples-and-resources",
     "title": "Project and data management",
     "section": "Data management plan examples and resources",
     "text": "Data management plan examples and resources\n\nUCM Library\nUCSD NSF examples\n\nSBE example 1\nSBE example 2\n\nNSF policy summary\n\nSBE-specific guidance"
+  },
+  {
+    "objectID": "content/04-05-data-management.html#fair-principles-for-published-data",
+    "href": "content/04-05-data-management.html#fair-principles-for-published-data",
+    "title": "Project and data management",
+    "section": "FAIR principles for published data",
+    "text": "FAIR principles for published data\n\nFindable\n\nF1. (meta)data are assigned a globally unique and persistent identifier\nF2. data are described with rich metadata (defined by R1 below)\nF3. metadata clearly and explicitly include the identifier of the data it describes\nF4. (meta)data are registered or indexed in a searchable resource\n\nAccessible\n\nA1. (meta)data are retrievable by their identifier using a standardized communications protocol\n\nA1.1 the protocol is open, free, and universally implementable\nA1.2 the protocol allows for an authentication and authorization procedure, where necessary\n\nA2. metadata are accessible, even when the data are no longer available\n\nInteroperable\n\nI1. (meta)data use a formal, accessible, shared, and broadly applicable language for knowledge representation.\nI2. (meta)data use vocabularies that follow FAIR principles\nI3. (meta)data include qualified references to other (meta)data\n\nReusable\n\nR1. meta(data) are richly described with a plurality of accurate and relevant attributes\n\nR1.1. (meta)data are released with a clear and accessible data usage license\nR1.2. (meta)data are associated with detailed provenance\nR1.3. (meta)data meet domain-relevant community standards"
   },
   {
     "objectID": "content/04-05-data-management.html#care-principles",
@@ -1120,31 +854,17 @@
     "text": "CARE principles\n\nApplications of FAIR Principles have the potential to neglect the rights of Indigenous Peoples and their protocols for cultural, spiritual and ecological information. (Jennings et al. 2023)\n\n\nCollective benefit\n\nC1. For inclusive development and innovation\nC2. For improved governance and citizen engagement\nC3. For equitable outcomes\n\nAuthority to control\n\nA1. Recognizing rights and interests\nA2. Data for governance [self-governance and self-determination]\nA3. Governance of data\n\nResponsibility\n\nR1. For positive relationships\nR2. For expanding capability and capacity\nR3. For Indigenous languages and worldviews\n\nEthics\n\nE1. For minimizing harm and maximizing benefit\nE2. For justice\nE3. For future use\n\n\nhttps://www.gida-global.org/care"
   },
   {
-    "objectID": "content/04-05-data-management.html",
-    "href": "content/04-05-data-management.html",
+    "objectID": "content/04-05-data-management.html#references",
+    "href": "content/04-05-data-management.html#references",
     "title": "Project and data management",
+    "section": "References",
+    "text": "References\n\n\n\n\nBailey, David H., and Jonathan Borwein (Jon). n.d. “The Reinhart-Rogoff Error – or How Not to Excel at Economics.” The Conversation. Accessed May 16, 2020. http://theconversation.com/the-reinhart-rogoff-error-or-how-not-to-excel-at-economics-13646.\n\n\nCassidy, John. n.d. “The Reinhart and Rogoff Controversy: A Summing Up.” The New Yorker. Accessed September 27, 2020. https://www.newyorker.com/news/john-cassidy/the-reinhart-and-rogoff-controversy-a-summing-up.\n\n\nChin, Monica. 2021. “Students Who Grew up with Search Engines Might Change STEM Education Forever.” The Verge. September 22, 2021. https://www.theverge.com/22684730/students-file-folder-directory-structure-education-gen-z.\n\n\nHerndon, Thomas, Michael Ash, and Robert Pollin. 2014. “Does High Public Debt Consistently Stifle Economic Growth? A Critique of Reinhart and Rogoff.” Cambridge Journal of Economics 38 (2): 257–79. https://doi.org/10.1093/cje/bet075.\n\n\n“How Excel May Have Caused Loss of 16,000 Covid Tests in England.” 2020. The Guardian. October 5, 2020. http://www.theguardian.com/politics/2020/oct/05/how-excel-may-have-caused-loss-of-16000-covid-tests-in-england.\n\n\nJennings, Lydia, Talia Anderson, Andrew Martinez, Rogena Sterling, Dominique David Chavez, Ibrahim Garba, Maui Hudson, Nanibaa’ A. Garrison, and Stephanie Russo Carroll. 2023. “Applying the ‘CARE Principles for Indigenous Data Governance’ to Ecology and Biodiversity Research.” Nature Ecology & Evolution, August, 1–5. https://doi.org/10.1038/s41559-023-02161-2.\n\n\nLaskowski, Kate. n.d. “What to Do When You Don’t Trust Your Data Anymore – Laskowski Lab at UC Davis.” Accessed January 29, 2020. https://laskowskilab.faculty.ucdavis.edu/2020/01/29/retractions/.\n\n\nNoble, William Stafford. 2009. “A Quick Guide to Organizing Computational Biology Projects.” PLOS Computational Biology 5 (7): e1000424. https://doi.org/10.1371/journal.pcbi.1000424.\n\n\nPennisi, Elizabeth. 2020. “Prominent Spider Biologist Spun a Web of Questionable Data.” Science 367 (6478): 613–14. https://doi.org/10.1126/science.367.6478.613.\n\n\nReinhart & Rogoff - Growth in a Time of Debt - EXERCISE! 2019. https://www.youtube.com/watch?v=ItGMz0ERvcw.\n\n\nThe Economist. 2011. “An Array of Errors,” September 10, 2011. https://www.economist.com/science-and-technology/2011/09/10/an-array-of-errors.\n\n\n“Video: Keith Baggerly, \"When Is Reproducibility an Ethical Issue? Genomics, Personalized Medicine, and Human Error\".” n.d. Accessed September 23, 2020. http://www.birs.ca/events/2013/5-day-workshops/13w5083/videos/watch/201308141121-Baggerly.html.\n\n\nViglione, Giuliana. 2020. “‘Avalanche’ of Spider-Paper Retractions Shakes Behavioural-Ecology Community.” Nature, February. https://doi.org/10.1038/d41586-020-00287-y.\n\n\nWilkinson, Mark D., Michel Dumontier, IJsbrand Jan Aalbersberg, Gabrielle Appleton, Myles Axton, Arie Baak, Niklas Blomberg, et al. 2016. “The FAIR Guiding Principles for Scientific Data Management and Stewardship.” Scientific Data 3 (1, 1): 1–9. https://doi.org/10.1038/sdata.2016.18."
+  },
+  {
+    "objectID": "references.html",
+    "href": "references.html",
+    "title": "References",
     "section": "",
-    "text": "The first rule of data management Do not edit your data"
-  },
-  {
-    "objectID": "content/04-05-data-management.html#the-first-rule-of-data-management-do-not-edit-your-data-.center-font-size12",
-    "href": "content/04-05-data-management.html#the-first-rule-of-data-management-do-not-edit-your-data-.center-font-size12",
-    "title": "Project and data management",
-    "section": "The first rule of data management Do not edit your data {.center font-size:12}",
-    "text": "The first rule of data management Do not edit your data {.center font-size:12}"
-  },
-  {
-    "objectID": "content/04-05-data-management.html#the-first-rule-of-data-management-do-not-edit-your-data-.center-stylefont-size-200",
-    "href": "content/04-05-data-management.html#the-first-rule-of-data-management-do-not-edit-your-data-.center-stylefont-size-200",
-    "title": "Project and data management",
-    "section": "The first rule of data management Do not edit your data {.center style=“font-size: 200%}",
-    "text": "The first rule of data management Do not edit your data {.center style=“font-size: 200%}"
-  },
-  {
-    "objectID": "content/04-05-data-management.html#the-analysis-pipeline",
-    "href": "content/04-05-data-management.html#the-analysis-pipeline",
-    "title": "Project and data management",
-    "section": "The analysis pipeline",
-    "text": "The analysis pipeline\n├── scripts\n│   ├── 01_parse_faculty_list.R\n│   ├── 02_Scopus_search_results.R\n│   ├── 03_match.R\n│   ├── 03_matched.csv\n│   ├── 04_author_meta.R\n│   ├── 05_filtering.R\n│   ├── 06_author_histories.R\n│   ├── 07_complete_histories.R\n│   ├── 08_text_annotation.R\n│   ├── 09_build_vocab.R\n│   ├── 10_topic_modeling.R\n│   ├── 11_depts.R\n│   ├── 11_depts.html\n│   ├── 12_analysis\\ copy.html\n│   ├── 12_analysis-matched.html\n│   ├── 12_analysis.R\n│   ├── 12_analysis.html\n│   ├── 12_analysis_cache\n│   │   └── html\n│   │       ├── __packages\n│   │       ...\n│   │       └── topic_viz_41d0cb157a88d4ec41810a16e769f5d5.rdx\n│   ├── 12_analysis_files\n│   │   └── figure-html\n│   │       ├── author-dept\\ distance-1.png\n│   │       ...\n│   │       └── topic_viz-2.png\n│   ├── api_key.R\n│   └── scraps\n│       ├── 02_parse_pubs_list.R\n│       ├── 03_coe_pubs.R\n│       ├── 03_match_auids.R\n│       ├── 07.R\n│       ├── 12_regressions.R\n│       ├── BML-CMSI\\ deep\\ dive.R\n│       ├── Hellinger_low_memory.R\n│       ├── dept_hell_net.R\n│       ├── divergence\\ against\\ lagged\\ distributions.R\n│       ├── exploring\\ topics.R\n│       ├── fractional_authorship.R\n│       ├── hellinger.R\n│       ├── model_scratch.R\n│       ├── multicore.R\n│       ├── net_viz.R\n│       ├── prcomp.R\n│       ├── propensity.R\n│       ├── rs_diversity.R\n│       ├── spacyr.R\n│       ├── topic\\ counts\\ rather\\ than\\ entropies.R\n│       ├── topic_cosine_sim.R\n│       ├── unit-level.R\n│       ├── weighted\\ regression.R\n│       ├── word-topic_distance.R\n│       ├── xx_construct_samples.R\n│       └── xx_oru_complete_histories.R"
+    "text": "Bailey, David H., and Jonathan Borwein (Jon). n.d. “The\nReinhart-Rogoff Error – or How Not to Excel at\nEconomics.” The Conversation. Accessed May 16, 2020.\nhttp://theconversation.com/the-reinhart-rogoff-error-or-how-not-to-excel-at-economics-13646.\n\n\nBogen, James, and James Woodward. 1988. “Saving the\nPhenomena.” The Philosophical Review 97\n(3): 303–52. http://www.jstor.org/stable/2185445.\n\n\nBrown, James Robert. 2002. Smoke and Mirrors: How\nScience Reflects Reality. Routledge.\n\n\nBryan, Jenny. 2018. “Code Smells and Feels.” Presented at\nthe useR 2018, July 21. https://www.youtube.com/watch?v=7oyiPBjLAWY.\n\n\n———. 2020. “Object of Type ‘Closure’ Is Not\nSubsettable.” Presented at the\nRSTUDIO::CONF 2020, January 31. https://rstudio.com/resources/rstudioconf-2020/object-of-type-closure-is-not-subsettable/.\n\n\nCassidy, John. n.d. “The Reinhart and Rogoff\nControversy: A Summing Up.” The New\nYorker. Accessed September 27, 2020. https://www.newyorker.com/news/john-cassidy/the-reinhart-and-rogoff-controversy-a-summing-up.\n\n\nChambers, John M. 2014. “Object-Oriented Programming,\nFunctional Programming and R.”\nStatistical Science 29 (2): 167–80. https://doi.org/10.1214/13-STS452.\n\n\nChin, Monica. 2021. “Students Who Grew up with Search Engines\nMight Change STEM Education Forever.” The\nVerge. September 22, 2021. https://www.theverge.com/22684730/students-file-folder-directory-structure-education-gen-z.\n\n\nDaston, Lorraine, and Peter Galison. 2007. Objectivity.\nNew York : Cambridge, Mass: Zone Books ; Distributed\nby the MIT Press.\n\n\nHerndon, Thomas, Michael Ash, and Robert Pollin. 2014. “Does High\nPublic Debt Consistently Stifle Economic Growth? A Critique\nof Reinhart and Rogoff.” Cambridge\nJournal of Economics 38 (2): 257–79. https://doi.org/10.1093/cje/bet075.\n\n\n“How Excel May Have Caused Loss of 16,000\nCovid Tests in England.” 2020.\nThe Guardian. October 5, 2020. http://www.theguardian.com/politics/2020/oct/05/how-excel-may-have-caused-loss-of-16000-covid-tests-in-england.\n\n\nJennings, Lydia, Talia Anderson, Andrew Martinez, Rogena Sterling,\nDominique David Chavez, Ibrahim Garba, Maui Hudson, Nanibaa’ A.\nGarrison, and Stephanie Russo Carroll. 2023. “Applying the\n‘CARE Principles for Indigenous Data\nGovernance’ to Ecology and Biodiversity Research.”\nNature Ecology & Evolution, August, 1–5. https://doi.org/10.1038/s41559-023-02161-2.\n\n\nLamb, Julianna. 2018. “Building an Inclusive Code Review\nCulture.” Plaid. July 30, 2018. https://plaid.com/blog/building-an-inclusive-code-review-culture/.\n\n\nLaskowski, Kate. n.d. “What to Do When You Don’t Trust Your Data\nAnymore – Laskowski Lab at UC Davis.”\nAccessed January 29, 2020. https://laskowskilab.faculty.ucdavis.edu/2020/01/29/retractions/.\n\n\nMadrigal, Alexis C., and Robinson Meyer. 2021. “Why the\nPandemic Experts Failed.” The Atlantic.\nMarch 15, 2021. https://www.theatlantic.com/science/archive/2021/03/americas-coronavirus-catastrophe-began-with-data/618287/.\n\n\nMcElreath, Richard, dir. 2020. Science as Amateur Software\nDevelopment. https://www.youtube.com/watch?v=zwRdO9_GGhY.\n\n\nNoble, William Stafford. 2009. “A Quick Guide to\nOrganizing Computational Biology Projects.” PLOS\nComputational Biology 5 (7): e1000424. https://doi.org/10.1371/journal.pcbi.1000424.\n\n\nPeng, Roger D., and Elizabeth Matsui. 2016. The Art of\nData Science: A Guide for Anyone Who\nWorks with Data. Leanpub. http://leanpub.com/artofdatascience.\n\n\nPennisi, Elizabeth. 2020. “Prominent Spider Biologist Spun a Web\nof Questionable Data.” Science 367 (6478): 613–14. https://doi.org/10.1126/science.367.6478.613.\n\n\nPierson, Emma, Camelia Simoiu, Jan Overgoor, Sam Corbett-Davies, Daniel\nJenson, Amy Shoemaker, Vignesh Ramachandran, et al. 2020. “A\nLarge-Scale Analysis of Racial Disparities in Police Stops Across the\nUnited States.” Nature Human Behaviour,\nMay, 1–10. https://doi.org/10.1038/s41562-020-0858-1.\n\n\n“R Faq - How to Make a Great R\nReproducible Example.” n.d. Stack Overflow. Accessed\nAugust 31, 2018. https://stackoverflow.com/questions/5963269/how-to-make-a-great-r-reproducible-example.\n\n\nReinhart & Rogoff - Growth in a\nTime of Debt - EXERCISE!\n2019. https://www.youtube.com/watch?v=ItGMz0ERvcw.\n\n\nSpringate, David. 2013. “Functional Programming in\nR.” DataJujitsu. May 16, 2013. https://www.datajujitsu.co.uk/blog/2013/05/16/functional-programming-in-r/.\n\n\nThe Economist. 2011. “An Array of Errors,”\nSeptember 10, 2011. https://www.economist.com/science-and-technology/2011/09/10/an-array-of-errors.\n\n\nTukey, John W. 1980. “We Need Both Exploratory and\nConfirmatory.” The American Statistician 34\n(1): 23–25. https://doi.org/10.1080/00031305.1980.10482706.\n\n\nTukey, John Wilder. 1977. Exploratory Data Analysis.\nAddison-Wesley Series in Behavioral Science. Reading,\nMass: Addison-Wesley Pub. Co. https://archive.org/details/exploratorydataa00tuke_0.\n\n\n“Video: Keith Baggerly, \"When Is\nReproducibility an Ethical Issue?\nGenomics, Personalized Medicine, and\nHuman Error\".” n.d. Accessed September 23, 2020. http://www.birs.ca/events/2013/5-day-workshops/13w5083/videos/watch/201308141121-Baggerly.html.\n\n\nViglione, Giuliana. 2020. “‘Avalanche’\nof Spider-Paper Retractions Shakes Behavioural-Ecology\nCommunity.” Nature, February. https://doi.org/10.1038/d41586-020-00287-y.\n\n\nWagenmakers, Eric-Jan, Ruud Wetzels, Denny Borsboom, Han L. J. van der\nMaas, and Rogier A. Kievit. 2012. “An Agenda for\nPurely Confirmatory Research.” Perspectives on\nPsychological Science 7 (6): 632–38. https://doi.org/10.1177/1745691612463078.\n\n\n“What to Look for in a Code Review.” n.d.\neng-practices. Accessed October 23, 2023. https://google.github.io/eng-practices/review/reviewer/looking-for.html.\n\n\nWickham, Hadley. 2019. “Debugging.” In Advanced\nR, Second Edition, ch. 22. CRC\nPress. https://adv-r.hadley.nz/debugging.html.\n\n\n———. n.d. The Tidyverse Style Guide. Accessed November 6, 2023.\nhttps://style.tidyverse.org/.\n\n\nWilkinson, Mark D., Michel Dumontier, IJsbrand Jan Aalbersberg,\nGabrielle Appleton, Myles Axton, Arie Baak, Niklas Blomberg, et al.\n2016. “The FAIR Guiding Principles for Scientific\nData Management and Stewardship.” Scientific Data 3 (1,\n1): 1–9. https://doi.org/10.1038/sdata.2016.18.\n\n\nWilson, Greg, Jennifer Bryan, Karen Cranston, Justin Kitzes, Lex\nNederbragt, and Tracy K. Teal. 2017. “Good Enough Practices in\nScientific Computing.” PLOS Computational Biology 13\n(6): e1005510. https://doi.org/10.1371/journal.pcbi.1005510.\n\n\nZhou, Xiaodan, Kevin Josey, Leila Kamareddine, Miah C. Caine, Tianjia\nLiu, Loretta J. Mickley, Matthew Cooper, and Francesca Dominici. 2021.\n“Excess of COVID-19 Cases and Deaths Due to Fine\nParticulate Matter Exposure During the 2020 Wildfires in the\nUnited States.” Science Advances 7 (33):\neabi8789. https://doi.org/10.1126/sciadv.abi8789."
   }
 ]
