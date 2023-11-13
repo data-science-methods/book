@@ -337,9 +337,15 @@ Nope. I’m stopping here. You need to fix the thing.
 </dd>
 </dl>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">message</span>(<span class="st">'Hey, just FYI'</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">warning</span>(<span class="st">'Uhhhh might want to check this out'</span>)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">stop</span>(<span class="st">'Noooooo'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">message</span>(<span class="st">'Hey, just FYI'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Hey, just FYI</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">warning</span>(<span class="st">'Uhhhh might want to check this out'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Uhhhh might want to check this out</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stop</span>(<span class="st">'Noooooo'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
 <pre><code>Error in eval(expr, envir, enclos): Noooooo</code></pre>
 </div>
@@ -348,15 +354,26 @@ Nope. I’m stopping here. You need to fix the thing.
 <section id="example-dates-are-often-problems" class="level2">
 <h2 class="anchored" data-anchor-id="example-dates-are-often-problems">Example: Dates are often problems</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>add_six_months <span class="ot">=</span> <span class="cf">function</span>(date_str) {</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    parsed_dates <span class="ot">=</span> <span class="fu">parse_date_time</span>(date_str, <span class="at">orders =</span> <span class="st">'mdY'</span>)</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    parsed_dates <span class="sc">%m+%</span> <span class="fu">months</span>(<span class="dv">6</span>) </span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>some_data <span class="ot">=</span> <span class="fu">c</span>(<span class="st">'June 2002'</span>, <span class="st">'May 15, 2007'</span>, <span class="st">'August 2007'</span>)</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="fu">add_six_months</span>(some_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'lubridate'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:base':
+
+    date, intersect, setdiff, union</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>add_six_months <span class="ot">=</span> <span class="cf">function</span>(date_str) {</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    parsed_dates <span class="ot">=</span> <span class="fu">parse_date_time</span>(date_str, <span class="at">orders =</span> <span class="st">'mdY'</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    parsed_dates <span class="sc">%m+%</span> <span class="fu">months</span>(<span class="dv">6</span>) </span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>some_data <span class="ot">=</span> <span class="fu">c</span>(<span class="st">'June 2002'</span>, <span class="st">'May 15, 2007'</span>, <span class="st">'August 2007'</span>)</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="fu">add_six_months</span>(some_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: 2 failed to parse.</code></pre>
+</div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] NA               "2007-11-15 UTC" NA              </code></pre>
 </div>
@@ -410,8 +427,11 @@ Nope. I’m stopping here. You need to fix the thing.
 <section id="debugging" class="level2">
 <h2 class="anchored" data-anchor-id="debugging">Debugging</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>some_data <span class="ot">=</span> <span class="fu">c</span>(<span class="st">'June 2002'</span>, <span class="st">'May 15, 2007'</span>, <span class="st">'August 2007'</span>)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">add_six_months</span>(some_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>some_data <span class="ot">=</span> <span class="fu">c</span>(<span class="st">'June 2002'</span>, <span class="st">'May 15, 2007'</span>, <span class="st">'August 2007'</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">add_six_months</span>(some_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: 2 failed to parse.</code></pre>
+</div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] NA               "2007-11-15 UTC" NA              </code></pre>
 </div>
@@ -419,16 +439,21 @@ Nope. I’m stopping here. You need to fix the thing.
 <hr>
 <p>Let’s start by using the RStudio debugger to <strong>isolate the problem</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">debugonce</span>(add_six_months)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">add_six_months</span>(some_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">debugonce</span>(add_six_months)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">add_six_months</span>(some_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>debugging in: add_six_months(some_data)
 debug at &lt;text&gt;#3: {
     parsed_dates = parse_date_time(date_str, orders = "mdY")
     parsed_dates %m+% months(6)
 }
-debug at &lt;text&gt;#4: parsed_dates = parse_date_time(date_str, orders = "mdY")
-debug at &lt;text&gt;#5: parsed_dates %m+% months(6)
+debug at &lt;text&gt;#4: parsed_dates = parse_date_time(date_str, orders = "mdY")</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: 2 failed to parse.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>debug at &lt;text&gt;#5: parsed_dates %m+% months(6)
 exiting from: add_six_months(some_data)</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
@@ -440,7 +465,7 @@ exiting from: add_six_months(some_data)</code></pre>
 <li>The problem is in <code>lubridate::parse_date_time()</code>.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>?parse_date_time</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>?parse_date_time</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li><em>Spend a few minutes reading the documentation for this function and playing around with the call.</em></li>
@@ -450,7 +475,10 @@ exiting from: add_six_months(some_data)</code></pre>
 <li>What does the argument <code>orders</code> do?</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">parse_date_time</span>(some_data, <span class="at">orders =</span> <span class="st">'mdY'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">parse_date_time</span>(some_data, <span class="at">orders =</span> <span class="st">'mdY'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: 2 failed to parse.</code></pre>
+</div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] NA               "2007-05-15 UTC" NA              </code></pre>
 </div>
@@ -462,7 +490,7 @@ exiting from: add_six_months(some_data)</code></pre>
 </ul>
 <hr>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">parse_date_time</span>(some_data, <span class="at">orders =</span> <span class="fu">c</span>(<span class="st">'mY'</span>, <span class="st">'mdY'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">parse_date_time</span>(some_data, <span class="at">orders =</span> <span class="fu">c</span>(<span class="st">'mY'</span>, <span class="st">'mdY'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "2002-06-01 UTC" "2007-05-15 UTC" "2007-08-01 UTC"</code></pre>
 </div>
@@ -477,8 +505,8 @@ exiting from: add_six_months(some_data)</code></pre>
 <section id="another-example-more-fun-with-dates" class="level2">
 <h2 class="anchored" data-anchor-id="another-example-more-fun-with-dates">Another example: More fun with dates</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>more_data <span class="ot">=</span> <span class="fu">c</span>(<span class="st">'May 7, 2017'</span>, <span class="st">'May 19, 2017'</span>, <span class="st">'May Fifth, 2017'</span>)</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mdy</span>(more_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>more_data <span class="ot">=</span> <span class="fu">c</span>(<span class="st">'May 7, 2017'</span>, <span class="st">'May 19, 2017'</span>, <span class="st">'May Fifth, 2017'</span>)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mdy</span>(more_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "2017-05-07" "2017-05-19" "2017-05-20"</code></pre>
 </div>
@@ -588,44 +616,6 @@ Wickham, Hadley. 2019. <span>“Debugging.”</span> In <em>Advanced <span>R</sp
 </section>
 
 </main> <!-- /main -->
-
-<script>
-  // htmlwidgets need to know to resize themselves when slides are shown/hidden.
-  // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
-  // slide changes (different for each slide format).
-  (function () {
-    // dispatch for htmlwidgets
-    function fireSlideEnter() {
-      const event = window.document.createEvent("Event");
-      event.initEvent("slideenter", true, true);
-      window.document.dispatchEvent(event);
-    }
-
-    function fireSlideChanged(previousSlide, currentSlide) {
-      fireSlideEnter();
-
-      // dispatch for shiny
-      if (window.jQuery) {
-        if (previousSlide) {
-          window.jQuery(previousSlide).trigger("hidden");
-        }
-        if (currentSlide) {
-          window.jQuery(currentSlide).trigger("shown");
-        }
-      }
-    }
-
-    // hookup for slidy
-    if (window.w3c_slidy) {
-      window.w3c_slidy.add_observer(function (slide_num) {
-        // slide_num starts at position 1
-        fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
-      });
-    }
-
-  })();
-</script>
-
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
