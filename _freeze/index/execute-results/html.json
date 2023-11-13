@@ -1,7 +1,7 @@
 {
   "hash": "0b14d721bd2835d4336a7934987c3e2a",
   "result": {
-    "markdown": "# Preface {.unnumbered}\n\nThis document is a set of notes (and perhaps later a textbook) for a course on data science methods for graduate students in social and behavioral sciences, taught by Professor Dan Hicks (they/them), UC Merced. \n\nThe course site is available [here](..). \n\n-----\n\nThese notes were written in [RStudio](http://www.rstudio.com/ide/) using\nR version 4.1.2 (2021-11-01) and [Quarto](https://quarto.org/) version 1.2.151. The complete source is available on [GitHub](https://github.com/data-science-methods/book/). \n\n\n\n\n",
+    "markdown": "# Preface {.unnumbered}\n\nThis document is a set of notes (and perhaps later a textbook) for a course on data science methods for graduate students in social and behavioral sciences, taught by Professor Dan Hicks (they/them), UC Merced. \n\nThe course site is available [here](..). \n\n-----\n\nThese notes were written in [RStudio](http://www.rstudio.com/ide/) using\nR version 4.3.1 (2023-06-16) and [Quarto](https://quarto.org/) version 1.3.450. The complete source is available on [GitHub](https://github.com/data-science-methods/book/). \n\n\n\n\n",
     "supporting": [],
     "filters": [
       "rmarkdown/pagebreak.lua"
