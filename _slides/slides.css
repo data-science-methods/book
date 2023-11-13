@@ -1,5 +1,6 @@
 code {
   font-size: 80%;
+  max-height: 650px!important;
 }
 
 pre {
@@ -39,8 +40,4 @@ img {
 
 .smaller {
     font-size: 80%!important;
-}
-
-.reveal pre.sourceCode code {
-        max-height: 100%; // default 500
 }

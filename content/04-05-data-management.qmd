@@ -1,77 +1,281 @@
-# Managing and publishing data 
+# Project and data management
 
 ## Reading
 
-- @HudonFieldNotesBuilding2018
+- @LaskowskiWhatWhenYou
+- @NobleQuickGuideOrganizing2009
 - @WilkinsonFAIRGuidingPrinciples2016
+- @JenningsApplyingCAREPrinciples2023
 
-## The first rule of data management
+## Some data management disasters
 
-*Do not edit your data.*
+- @ArrayErrors2011, @VideoKeithBaggerly
+- @HerndonDoesHighPublic2014, but you can just read @BaileyReinhartRogoffErrorHow, @CassidyReinhartRogoffControversy, and/or watch @ReinhartRogoffGrowth2019
+- @LaskowskiWhatWhenYou, @ViglioneAvalancheSpiderpaperRetractions2020, @PennisiProminentSpiderBiologist2020
+- @HowExcelMay2020
 
-## Documentation ##
+## Dumpster organization
 
-- Many social science fields have a tradition of writing codebooks for their data
-    - [Stanford Open Policing codebook](https://github.com/stanford-policylab/opp/blob/master/data_readme.md)
-    - ["Codebook-like summary" of the `covdata` package, automatically generated using `skimr`](https://kjhealy.github.io/covdata/articles/codebook.html)
-    - Caitlin Hudon's approach [@HudonFieldNotesBuilding2018]
-        - Table and field name, both verbatim
-        - Field example value
-        - Notes for both table and field
+![😱 Source: <https://pbs.twimg.com/media/DFca5SRXsAAx1NA>](images/04-reproducibility/dumpster.jpg)
 
-(ref:Hudson-tbl) Example of Caitlin Hudon's approach to building a data dictionary. Source: <https://caitlinhudon.com/2018/10/30/data-dictionaries/>
-        
-```{r, echo = FALSE, out.width = '80%', fig.cap = "(ref:Hudson-tbl)"}
-knitr::include_graphics('images/04-reproducibility/Hudon.png')
+- Dump all of your files into one place
+- Use search tools to find what you want
+- Just assume that things aren't getting corrupted
+- The way many Gen Z students think about their files?  [@ChinStudentsWhoGrew2021]
+
+## The first rule of data management</br></br> Do not edit your data {.center style="font-size: 200%; text-align: center;"}
+
+
+## Project organization
+
+![Noble's [-@NobleQuickGuideOrganizing2009] sample folder structure is designed for experimental biologists](images/04-reproducibility/noble.png)
+
+- Keep your project self-contained
+- Locate files quickly
+- Play nicely with version control
+- *Self-document key relationships between project files*
+- *Work with your data without editing it*
+
+## A model for computational social science projects
+
+```
+.
+├── R
+├── data
+├── paper
+│   ├── _quarto.yml
+│   ├── paper.qmd
+├── plots
+├── readme.md
+├── scripts
+└── talk
 ```
 
-## Questions a codebook should answer
+- <https://github.com/dhicks/project_template>
 
-1. What does this field mean? How should I use it? 
-2. What is the data [journey]? 
-    - Where does this data come from? 
-    - How exactly is it collected? 
-    - How often is it updated? 
-    - Where does it go next? 
-3. What does the data in this field actually look like? 
-4. Are there any caveats to keep in mind when using this data? 
-5. Where can I go for more information? 
+- Configured as a GitHub "template," making it easy to create new repositories for new projects
 
-[@HudonFieldNotesBuilding2018]
+- Designated folders for data, plots/outputs, and utility functions
 
- 
-## Major codebook elements 
+## File naming convention
 
-(<https://afit-r.github.io/codebook>)
+Files in `scripts`, `data`, and `plots` should generally use a sequential naming convention:  
 
-1. Original source of the data
-2. Sampling information
-    - Where and how the data were generated
-3. Variable-level metadata and summaries
-4. Structure of the data
+- Scripts in `scripts` should have filenames starting with `01_`:
+	- `01_scrape.R`
+	- `02_parse.R`
+	- `03_eda.R`, and so on
+	
+- Data and plot files (`data` and `plots`) should use a parallel naming convention:  
+	- `00_` indicates raw data (produced or gathered outside of the pipeline in `scripts`)
+	- `01_` indicates plots and intermediate data files produced by script number `01`, and so on
+
+
+## The model in action: A mid-sized text-mining project
+
+Published paper: <https://doi.org/10.1162/qss_a_00150>\
+GitHub repo: <https://github.com/dhicks/orus>\
+23 directories, 274 files (plus 160k data files)
+
+```
+.
+├── ORU\ faculty
+│   └── ORU\ Publications.fld
+├── QSS\ forms
+├── R
+├── data
+│   ├── author_histories
+│   ├── authors_meta
+│   ├── docs
+│   ├── ldatuning_results
+│   ├── parsed_blocks
+│   ├── pubs
+│   └── temp
+├── paper
+│   ├── img
+│   └── scraps
+├── plots
+├── presentations
+└── scripts
+    ├── 12_analysis_cache
+    │   └── html
+    ├── 12_analysis_files
+    │   └── figure-html
+    └── scraps
+```
+
+## The analysis pipeline
+
+```
+├── scripts
+│   ├── 01_parse_faculty_list.R
+│   ├── 02_Scopus_search_results.R
+│   ├── 03_match.R
+│   ├── 03_matched.csv
+│   ├── 04_author_meta.R
+│   ├── 05_filtering.R
+│   ├── 06_author_histories.R
+│   ├── 07_complete_histories.R
+│   ├── 08_text_annotation.R
+│   ├── 09_build_vocab.R
+│   ├── 10_topic_modeling.R
+│   ├── 11_depts.R
+│   ├── 11_depts.html
+│   ├── 12_analysis\ copy.html
+│   ├── 12_analysis-matched.html
+│   ├── 12_analysis.R
+│   ├── 12_analysis.html
+│   ├── 12_analysis_cache
+│   │   └── html
+│   │       ├── __packages
+│   │       ...
+│   │       └── topic_viz_41d0cb157a88d4ec41810a16e769f5d5.rdx
+│   ├── 12_analysis_files
+│   │   └── figure-html
+│   │       ├── author-dept\ distance-1.png
+│   │       ...
+│   │       └── topic_viz-2.png
+│   ├── api_key.R
+│   └── scraps
+│       ├── 02_parse_pubs_list.R
+│       ├── 03_coe_pubs.R
+│       ├── 03_match_auids.R
+│       ├── 07.R
+│       ├── 12_regressions.R
+│       ├── BML-CMSI\ deep\ dive.R
+│       ├── Hellinger_low_memory.R
+│       ├── dept_hell_net.R
+│       ├── divergence\ against\ lagged\ distributions.R
+│       ├── exploring\ topics.R
+│       ├── fractional_authorship.R
+│       ├── hellinger.R
+│       ├── model_scratch.R
+│       ├── multicore.R
+│       ├── net_viz.R
+│       ├── prcomp.R
+│       ├── propensity.R
+│       ├── rs_diversity.R
+│       ├── spacyr.R
+│       ├── topic\ counts\ rather\ than\ entropies.R
+│       ├── topic_cosine_sim.R
+│       ├── unit-level.R
+│       ├── weighted\ regression.R
+│       ├── word-topic_distance.R
+│       ├── xx_construct_samples.R
+│       └── xx_oru_complete_histories.R
+```
+
+
+## Intermediate data files
+
+```
+data
+├── *ORUs\ -\ DSL\ -\ Google\ Drive.webloc
+├── 00_UCD_2016.csv
+├── 00_UCD_2017.csv
+├── 00_UCD_2018.csv
+├── 00_faculty_list.html
+├── 00_manual_matches.csv
+├── 00_publications_list.html
+├── 01_departments.csv
+├── 01_departments_canonical.csv
+├── 01_faculty.Rds
+├── 02_pubs.Rds
+├── 03_codepartmentals.Rds
+├── 03_dropout.Rds
+├── 03_matched.Rds
+├── 03_unmatched.Rds
+├── 04_author_meta.Rds
+├── 04_dropouts.Rds
+├── 04_genderize
+├── 04_namsor.Rds
+├── 05_author_meta.Rds
+├── 05_dept_dummies.Rds
+├── 05_dropouts.Rds
+├── 05_layout.Rds
+├── 05_matched.Rds
+├── 06_author_histories.Rds
+├── 07_coauth_count.Rds
+├── 07_parsed_histories.Rds
+├── 08_phrases.Rds
+├── 09_H.Rds
+├── 09_atm.csv
+├── 09_vocab.tex
+├── 10_atm.csv
+├── 10_atm_pc.Rds
+├── 10_aytm.csv
+├── 10_aytm_comp.csv
+├── 10_aytm_did.csv
+├── 10_model_stats.Rds
+├── 10_models.Rds
+├── 11_au_dept_xwalk.Rds
+├── 11_departments.csv
+├── 11_departments_canonical.csv
+├── 11_dept_dummies.Rds
+├── 11_dept_gamma.Rds
+├── 11_dept_term_matrix.Rds
+├── 11_oru_gamma.Rds
+├── 11_oru_term_matrix.Rds
+├── 11_test_train.Rds
+├── 12_layout.Rds
+├── author_histories [7665 entries exceeds filelimit, not opening dir]
+├── authors_meta [6020 entries exceeds filelimit, not opening dir]
+├── docs [145144 entries exceeds filelimit, not opening dir]
+├── ldatuning_results
+│   ├── tuningResult_comp.Rds
+│   ├── tuningResult_comp.docx
+│   ├── tuningResult_comp.pdf
+│   ├── tuningResult_did.Rds
+│   └── tuningResult_did.pdf
+├── ldatuning_results-20190415T164055Z-001.zip
+├── parsed_blocks [430 entries exceeds filelimit, not opening dir]
+├── pubs [282 entries exceeds filelimit, not opening dir]
+└── temp
+```
+
+## A reminder on paths
+
+- Windows and Unix-based systems write paths differently
+- Use `file.path()` or (even better) the `here` package to construct paths
+
+## Exercise: Organize your EDA
+
+
+```
+.
+├── R
+├── data
+├── paper
+├── plots
+├── readme.md
+├── scripts
+└── talk
+```
 
 
 ## Data management plans ##
 
 - Much like a research plan, data management plans provide an overview of the steps you'll take to gather, publish, and maintain your data
     - Since 2011, NSF has required a 2-page data management plan for most types of proposals
-
-- Examples and resources
-    - [UCM Library](https://library.ucmerced.edu/research/researchers/research-data-management/data-management-plans)
-    <!-- - [UCM IT support](https://it.ucmerced.edu/content/research-data-management-consultation-service) -->
-    - [UCSD NSF examples](https://library.ucsd.edu/lpw-staging/research-and-collections/data-curation/data-management/dmp-samples.html)
-        - [SBE example 1](https://library.ucsd.edu/lpw-staging/research-and-collections/data-curation/data-management/dmpsample/DMP-Example-Ayelet-Gneezy.pdf)
-        - [SBE example 2](https://library.ucsd.edu/lpw-staging/research-and-collections/data-curation/data-management/dmpsample/DMP-Example-Wixted.pdf)
-    - [NSF policy summary](https://www.nsf.gov/bfa/dias/policy/dmp.jsp)
-        - [SBE-specific guidance](https://www.nsf.gov/sbe/DMP/SBE_DataMgmtPlanPolicy_RevisedApril2018.pdf)
     
-## Data management plan: Common elements 
+### Common elements
 
 - Who is responsible for data management
 - Who else will have access to which data
 - How data will be collected
 - Data formatting standards
 - Whether and how data will be archived and made available for reuse
+
+
+## Data management plan examples and resources
+
+- [UCM Library](https://library.ucmerced.edu/research/researchers/research-data-management/data-management-plans)
+- [UCSD NSF examples](https://library.ucsd.edu/lpw-staging/research-and-collections/data-curation/data-management/dmp-samples.html)
+    - [SBE example 1](https://library.ucsd.edu/lpw-staging/research-and-collections/data-curation/data-management/dmpsample/DMP-Example-Ayelet-Gneezy.pdf)
+    - [SBE example 2](https://library.ucsd.edu/lpw-staging/research-and-collections/data-curation/data-management/dmpsample/DMP-Example-Wixted.pdf)
+- [NSF policy summary](https://www.nsf.gov/bfa/dias/policy/dmp.jsp)
+    - [SBE-specific guidance](https://www.nsf.gov/sbe/DMP/SBE_DataMgmtPlanPolicy_RevisedApril2018.pdf)
+    
 
 
 ## FAIR principles for published data ##
@@ -96,41 +300,29 @@ knitr::include_graphics('images/04-reproducibility/Hudon.png')
         - R1.2. (meta)data are associated with detailed provenance
         - R1.3. (meta)data meet domain-relevant community standards
 
+## CARE principles 
 
-## DOIs for data
+> Applications of FAIR Principles have the potential to neglect the rights of Indigenous Peoples and their protocols for cultural, spiritual and ecological information. [@JenningsApplyingCAREPrinciples2023]
 
-- [Instructions for OSF](https://help.osf.io/hc/en-us/articles/360019931013-Create-DOIs)
-- [Notes for Zenodo](https://help.zenodo.org/#versioning)
-    - [Zenodo also plays nicely with GitHub for minting DOIs for code](https://guides.github.com/activities/citable-code/)
-- [Citation models at Harvard Dataverse](https://dataverse.org/best-practices/data-citation)
+- *Collective benefit*
+    - C1. For inclusive development and innovation
+    - C2. For improved governance and citizen engagement
+    - C3. For equitable outcomes
+- *Authority to control*
+    - A1. Recognizing rights and interests
+    - A2. Data for governance [self-governance and self-determination]
+    - A3. Governance of data
+- *Responsibility*
+    - R1. For positive relationships
+    - R2. For expanding capability and capacity
+    - R3. For Indigenous languages and worldviews
+- *Ethics*
+    - E1. For minimizing harm and maximizing benefit
+    - E2. For justice
+    - E3. For future use
 
-<!--
-## Hazards of open data ##
+[<https://www.gida-global.org/care>]{.tiny}
 
-- Legal
-    - Privacy
-        - Personally identifiable information (PII): "information which can be used to **distinguish or trace an individual's identity**, such as their name, social security number, biometric records, etc. *alone, or when combined with other ... information*" [Source](https://www.osec.doc.gov/opog/privacy/PII_BII.html)
-        - Sensitive information: "if the loss, compromission [sic], or disclosure without authorization of this data could **result in harm, embarrassment, inconvenience, or unfairness** to an individual" [Source](https://techgdpr.com/blog/difference-between-pii-and-personal-data/)
-        - IRB will require you to
-            - indicate what PII and sensitive information you're collecting
-            - explain why you need to collect it
-            - outline a plan to keep it secure
-            - notify or mitigate issues with participants if security is compromised
-
-    - Copyright
-        - Data that you've bought from a broker
-        - Journal article text, *but also* article metadata if you used a private service to retrieve it
-    
-- Community-level hazards
-    - Location of endangered species [@OpenDataOffer2018]
-    - Indigenous community sacred sites
-    - Antiquities
-    - Identifying the Golden State Killer through GEDmatch [@ZhangHowTinyWebsite2018]
- 
-- Public-but-inaccessible data
-    - OKCupid data scrape [@McCookPubliclyAvailableData2016]
-        - [Emil O. Kierkegaard is a racist asshole; don't be like Emil O. Kierkegaard](https://rationalwiki.org/wiki/Emil_Kirkegaard)
--->
 
 ## References 
 

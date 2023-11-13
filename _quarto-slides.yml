@@ -14,3 +14,5 @@ format:
     slide-number: true
     execute:
       freeze: auto
+      
+engine: knitr

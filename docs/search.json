@@ -870,9 +870,9 @@
   {
     "objectID": "content/04-05-data-management.html#reading",
     "href": "content/04-05-data-management.html#reading",
-    "title": "Managing and publishing data",
+    "title": "Project and data management",
     "section": "Reading",
-    "text": "Reading\n\nHudon (2018)\nWilkinson et al. (2016)"
+    "text": "Reading\n\nLaskowski (n.d.)\nNoble (2009)\nWilkinson et al. (2016)\nJennings et al. (2023)"
   },
   {
     "objectID": "content/04-05-data-management.html#the-first-rule-of-data-management",
@@ -884,58 +884,58 @@
   {
     "objectID": "content/04-05-data-management.html#documentation",
     "href": "content/04-05-data-management.html#documentation",
-    "title": "Managing and publishing data",
+    "title": "Project and data management",
     "section": "Documentation",
     "text": "Documentation\n\nMany social science fields have a tradition of writing codebooks for their data\n\nStanford Open Policing codebook\n“Codebook-like summary” of the covdata package, automatically generated using skimr\nCaitlin Hudon’s approach (Hudon 2018)\n\nTable and field name, both verbatim\nField example value\nNotes for both table and field\n\n\n\n(ref:Hudson-tbl) Example of Caitlin Hudon’s approach to building a data dictionary. Source: https://caitlinhudon.com/2018/10/30/data-dictionaries/\n\n\n\n\n\n(ref:Hudson-tbl)"
   },
   {
     "objectID": "content/04-05-data-management.html#questions-a-codebook-should-answer",
     "href": "content/04-05-data-management.html#questions-a-codebook-should-answer",
-    "title": "Managing and publishing data",
+    "title": "Project and data management",
     "section": "Questions a codebook should answer",
     "text": "Questions a codebook should answer\n\nWhat does this field mean? How should I use it?\nWhat is the data [journey]?\n\nWhere does this data come from?\nHow exactly is it collected?\nHow often is it updated?\nWhere does it go next?\n\nWhat does the data in this field actually look like?\nAre there any caveats to keep in mind when using this data?\nWhere can I go for more information?\n\n(Hudon 2018)"
   },
   {
     "objectID": "content/04-05-data-management.html#major-codebook-elements",
     "href": "content/04-05-data-management.html#major-codebook-elements",
-    "title": "Managing and publishing data",
+    "title": "Project and data management",
     "section": "Major codebook elements",
     "text": "Major codebook elements\n(https://afit-r.github.io/codebook)\n\nOriginal source of the data\nSampling information\n\nWhere and how the data were generated\n\nVariable-level metadata and summaries\nStructure of the data"
   },
   {
     "objectID": "content/04-05-data-management.html#data-management-plans",
     "href": "content/04-05-data-management.html#data-management-plans",
-    "title": "Managing and publishing data",
+    "title": "Project and data management",
     "section": "Data management plans",
-    "text": "Data management plans\n\nMuch like a research plan, data management plans provide an overview of the steps you’ll take to gather, publish, and maintain your data\n\nSince 2011, NSF has required a 2-page data management plan for most types of proposals\n\nExamples and resources\n\nUCM Library \nUCSD NSF examples\n\nSBE example 1\nSBE example 2\n\nNSF policy summary\n\nSBE-specific guidance"
+    "text": "Data management plans\n\nMuch like a research plan, data management plans provide an overview of the steps you’ll take to gather, publish, and maintain your data\n\nSince 2011, NSF has required a 2-page data management plan for most types of proposals\n\n\n\nCommon elements\n\nWho is responsible for data management\nWho else will have access to which data\nHow data will be collected\nData formatting standards\nWhether and how data will be archived and made available for reuse"
   },
   {
     "objectID": "content/04-05-data-management.html#data-management-plan-common-elements",
     "href": "content/04-05-data-management.html#data-management-plan-common-elements",
-    "title": "Managing and publishing data",
+    "title": "Project and data management",
     "section": "Data management plan: Common elements",
-    "text": "Data management plan: Common elements\n\nWho is responsible for data management\nWho else will have access to which data\nHow data will be collected\nData formatting standards\nWhether and how data will be archived and made available for reuse"
+    "text": "Data management plan: Common elements"
   },
   {
     "objectID": "content/04-05-data-management.html#fair-principles-for-published-data",
     "href": "content/04-05-data-management.html#fair-principles-for-published-data",
-    "title": "Managing and publishing data",
+    "title": "Project and data management",
     "section": "FAIR principles for published data",
     "text": "FAIR principles for published data\n\nFindable\n\nF1. (meta)data are assigned a globally unique and persistent identifier\nF2. data are described with rich metadata (defined by R1 below)\nF3. metadata clearly and explicitly include the identifier of the data it describes\nF4. (meta)data are registered or indexed in a searchable resource\n\nAccessible\n\nA1. (meta)data are retrievable by their identifier using a standardized communications protocol\n\nA1.1 the protocol is open, free, and universally implementable\nA1.2 the protocol allows for an authentication and authorization procedure, where necessary\n\nA2. metadata are accessible, even when the data are no longer available\n\nInteroperable\n\nI1. (meta)data use a formal, accessible, shared, and broadly applicable language for knowledge representation.\nI2. (meta)data use vocabularies that follow FAIR principles\nI3. (meta)data include qualified references to other (meta)data\n\nReusable\n\nR1. meta(data) are richly described with a plurality of accurate and relevant attributes\n\nR1.1. (meta)data are released with a clear and accessible data usage license\nR1.2. (meta)data are associated with detailed provenance\nR1.3. (meta)data meet domain-relevant community standards"
   },
   {
     "objectID": "content/04-05-data-management.html#dois-for-data",
     "href": "content/04-05-data-management.html#dois-for-data",
-    "title": "Managing and publishing data",
+    "title": "Project and data management",
     "section": "DOIs for data",
     "text": "DOIs for data\n\nInstructions for OSF\nNotes for Zenodo\n\nZenodo also plays nicely with GitHub for minting DOIs for code\n\nCitation models at Harvard Dataverse"
   },
   {
     "objectID": "content/04-05-data-management.html#references",
     "href": "content/04-05-data-management.html#references",
-    "title": "Managing and publishing data",
+    "title": "Project and data management",
     "section": "References",
-    "text": "References\n\n\n\n\nHudon, Caitlin. 2018. “Field Notes: Building Data Dictionaries.” Haystacks. October 30, 2018. https://caitlinhudon.com/2018/10/30/data-dictionaries/.\n\n\nWilkinson, Mark D., Michel Dumontier, IJsbrand Jan Aalbersberg, Gabrielle Appleton, Myles Axton, Arie Baak, Niklas Blomberg, et al. 2016. “The FAIR Guiding Principles for Scientific Data Management and Stewardship.” Scientific Data 3 (1, 1): 1–9. https://doi.org/10.1038/sdata.2016.18."
+    "text": "References\n\n\n\n\nBailey, David H., and Jonathan Borwein (Jon). n.d. “The Reinhart-Rogoff Error – or How Not to Excel at Economics.” The Conversation. Accessed May 16, 2020. http://theconversation.com/the-reinhart-rogoff-error-or-how-not-to-excel-at-economics-13646.\n\n\nCassidy, John. n.d. “The Reinhart and Rogoff Controversy: A Summing Up.” The New Yorker. Accessed September 27, 2020. https://www.newyorker.com/news/john-cassidy/the-reinhart-and-rogoff-controversy-a-summing-up.\n\n\nChin, Monica. 2021. “Students Who Grew up with Search Engines Might Change STEM Education Forever.” The Verge. September 22, 2021. https://www.theverge.com/22684730/students-file-folder-directory-structure-education-gen-z.\n\n\nHerndon, Thomas, Michael Ash, and Robert Pollin. 2014. “Does High Public Debt Consistently Stifle Economic Growth? A Critique of Reinhart and Rogoff.” Cambridge Journal of Economics 38 (2): 257–79. https://doi.org/10.1093/cje/bet075.\n\n\n“How Excel May Have Caused Loss of 16,000 Covid Tests in England.” 2020. The Guardian. October 5, 2020. http://www.theguardian.com/politics/2020/oct/05/how-excel-may-have-caused-loss-of-16000-covid-tests-in-england.\n\n\nJennings, Lydia, Talia Anderson, Andrew Martinez, Rogena Sterling, Dominique David Chavez, Ibrahim Garba, Maui Hudson, Nanibaa’ A. Garrison, and Stephanie Russo Carroll. 2023. “Applying the ‘CARE Principles for Indigenous Data Governance’ to Ecology and Biodiversity Research.” Nature Ecology & Evolution, August, 1–5. https://doi.org/10.1038/s41559-023-02161-2.\n\n\nLaskowski, Kate. n.d. “What to Do When You Don’t Trust Your Data Anymore – Laskowski Lab at UC Davis.” Accessed January 29, 2020. https://laskowskilab.faculty.ucdavis.edu/2020/01/29/retractions/.\n\n\nNoble, William Stafford. 2009. “A Quick Guide to Organizing Computational Biology Projects.” PLOS Computational Biology 5 (7): e1000424. https://doi.org/10.1371/journal.pcbi.1000424.\n\n\nPennisi, Elizabeth. 2020. “Prominent Spider Biologist Spun a Web of Questionable Data.” Science 367 (6478): 613–14. https://doi.org/10.1126/science.367.6478.613.\n\n\nReinhart & Rogoff - Growth in a Time of Debt - EXERCISE! 2019. https://www.youtube.com/watch?v=ItGMz0ERvcw.\n\n\nThe Economist. 2011. “An Array of Errors,” September 10, 2011. https://www.economist.com/science-and-technology/2011/09/10/an-array-of-errors.\n\n\n“Video: Keith Baggerly, \"When Is Reproducibility an Ethical Issue? Genomics, Personalized Medicine, and Human Error\".” n.d. Accessed September 23, 2020. http://www.birs.ca/events/2013/5-day-workshops/13w5083/videos/watch/201308141121-Baggerly.html.\n\n\nViglione, Giuliana. 2020. “‘Avalanche’ of Spider-Paper Retractions Shakes Behavioural-Ecology Community.” Nature, February. https://doi.org/10.1038/d41586-020-00287-y.\n\n\nWilkinson, Mark D., Michel Dumontier, IJsbrand Jan Aalbersberg, Gabrielle Appleton, Myles Axton, Arie Baak, Niklas Blomberg, et al. 2016. “The FAIR Guiding Principles for Scientific Data Management and Stewardship.” Scientific Data 3 (1, 1): 1–9. https://doi.org/10.1038/sdata.2016.18."
   },
   {
     "objectID": "references.html",
@@ -1027,5 +1027,124 @@
     "title": "Readable code is reliable code",
     "section": "Project: Code Review",
     "text": "Project: Code Review\nhttps://data-science-methods.github.io/project.html#code-review-and-reproducibility-check\n\nI’ll assign you to review someone else’s EDA code\nFork and clone the code\nSubmit your feedback using a PR"
+  },
+  {
+    "objectID": "content/04-05-data-management.html#some-data-management-disasters",
+    "href": "content/04-05-data-management.html#some-data-management-disasters",
+    "title": "Project and data management",
+    "section": "Some data management disasters",
+    "text": "Some data management disasters\n\nThe Economist (2011), “Video: Keith Baggerly, \"When Is Reproducibility an Ethical Issue? Genomics, Personalized Medicine, and Human Error\"” (n.d.)\nHerndon, Ash, and Pollin (2014), but you can just read Bailey and Borwein (Jon) (n.d.), Cassidy (n.d.), and/or watch Reinhart & Rogoff - Growth in a Time of Debt - EXERCISE! (2019)\nLaskowski (n.d.), Viglione (2020), Pennisi (2020)\n“How Excel May Have Caused Loss of 16,000 Covid Tests in England” (2020)"
+  },
+  {
+    "objectID": "content/04-05-data-management.html#dumpster-organization",
+    "href": "content/04-05-data-management.html#dumpster-organization",
+    "title": "Project and data management",
+    "section": "Dumpster organization",
+    "text": "Dumpster organization\n\n\n\n😱 Source: https://pbs.twimg.com/media/DFca5SRXsAAx1NA\n\n\n\nDump all of your files into one place\nUse search tools to find what you want\nJust assume that things aren’t getting corrupted\nThe way many Gen Z students think about their files? (Chin 2021)"
+  },
+  {
+    "objectID": "content/04-05-data-management.html#the-first-rule-of-data-management-do-not-edit-your-data",
+    "href": "content/04-05-data-management.html#the-first-rule-of-data-management-do-not-edit-your-data",
+    "title": "Project and data management",
+    "section": "The first rule of data management Do not edit your data",
+    "text": "The first rule of data management Do not edit your data"
+  },
+  {
+    "objectID": "content/04-05-data-management.html#project-organization",
+    "href": "content/04-05-data-management.html#project-organization",
+    "title": "Project and data management",
+    "section": "Project organization",
+    "text": "Project organization\n\n\n\nNoble’s (2009) sample folder structure is designed for experimental biologists\n\n\n\nKeep your project self-contained\nLocate files quickly\nPlay nicely with version control\nSelf-document key relationships between project files\nWork with your data without editing it"
+  },
+  {
+    "objectID": "content/04-05-data-management.html#a-model-for-computational-social-science-projects",
+    "href": "content/04-05-data-management.html#a-model-for-computational-social-science-projects",
+    "title": "Project and data management",
+    "section": "A model for computational social science projects",
+    "text": "A model for computational social science projects\n.\n├── R\n├── data\n├── paper\n│   ├── _quarto.yml\n│   ├── paper.qmd\n├── plots\n├── readme.md\n├── scripts\n└── talk\n\nhttps://github.com/dhicks/project_template\nConfigured as a GitHub “template,” making it easy to create new repositories for new projects\nDesignated folders for data, plots/outputs, and utility functions"
+  },
+  {
+    "objectID": "content/04-05-data-management.html#file-naming-convention",
+    "href": "content/04-05-data-management.html#file-naming-convention",
+    "title": "Project and data management",
+    "section": "File naming convention",
+    "text": "File naming convention\nFiles in scripts, data, and plots should generally use a sequential naming convention:\n\nScripts in scripts should have filenames starting with 01_:\n\n01_scrape.R\n02_parse.R\n03_eda.R, and so on\n\nData and plot files (data and plots) should use a parallel naming convention:\n\n00_ indicates raw data (produced or gathered outside of the pipeline in scripts)\n01_ indicates plots and intermediate data files produced by script number 01, and so on"
+  },
+  {
+    "objectID": "content/04-05-data-management.html#the-model-in-action-a-mid-sized-text-mining-project",
+    "href": "content/04-05-data-management.html#the-model-in-action-a-mid-sized-text-mining-project",
+    "title": "Project and data management",
+    "section": "The model in action: A mid-sized text-mining project",
+    "text": "The model in action: A mid-sized text-mining project\nPublished paper: https://doi.org/10.1162/qss_a_00150\nGitHub repo: https://github.com/dhicks/orus\n23 directories, 274 files (plus 160k data files)\n.\n├── ORU\\ faculty\n│   └── ORU\\ Publications.fld\n├── QSS\\ forms\n├── R\n├── data\n│   ├── author_histories\n│   ├── authors_meta\n│   ├── docs\n│   ├── ldatuning_results\n│   ├── parsed_blocks\n│   ├── pubs\n│   └── temp\n├── paper\n│   ├── img\n│   └── scraps\n├── plots\n├── presentations\n└── scripts\n    ├── 12_analysis_cache\n    │   └── html\n    ├── 12_analysis_files\n    │   └── figure-html\n    └── scraps"
+  },
+  {
+    "objectID": "content/04-05-data-management.html#just-the-directories",
+    "href": "content/04-05-data-management.html#just-the-directories",
+    "title": "Project and data management",
+    "section": "Just the directories",
+    "text": "Just the directories\n.\n├── ORU\\ faculty\n│   └── ORU\\ Publications.fld\n├── QSS\\ forms\n├── R\n├── data\n│   ├── author_histories\n│   ├── authors_meta\n│   ├── docs\n│   ├── ldatuning_results\n│   ├── parsed_blocks\n│   ├── pubs\n│   └── temp\n├── paper\n│   ├── img\n│   └── scraps\n├── plots\n├── presentations\n└── scripts\n    ├── 12_analysis_cache\n    │   └── html\n    ├── 12_analysis_files\n    │   └── figure-html\n    └── scraps"
+  },
+  {
+    "objectID": "content/04-05-data-management.html#intermediate-data-files",
+    "href": "content/04-05-data-management.html#intermediate-data-files",
+    "title": "Project and data management",
+    "section": "Intermediate data files",
+    "text": "Intermediate data files\ndata\n├── *ORUs\\ -\\ DSL\\ -\\ Google\\ Drive.webloc\n├── 00_UCD_2016.csv\n├── 00_UCD_2017.csv\n├── 00_UCD_2018.csv\n├── 00_faculty_list.html\n├── 00_manual_matches.csv\n├── 00_publications_list.html\n├── 01_departments.csv\n├── 01_departments_canonical.csv\n├── 01_faculty.Rds\n├── 02_pubs.Rds\n├── 03_codepartmentals.Rds\n├── 03_dropout.Rds\n├── 03_matched.Rds\n├── 03_unmatched.Rds\n├── 04_author_meta.Rds\n├── 04_dropouts.Rds\n├── 04_genderize\n├── 04_namsor.Rds\n├── 05_author_meta.Rds\n├── 05_dept_dummies.Rds\n├── 05_dropouts.Rds\n├── 05_layout.Rds\n├── 05_matched.Rds\n├── 06_author_histories.Rds\n├── 07_coauth_count.Rds\n├── 07_parsed_histories.Rds\n├── 08_phrases.Rds\n├── 09_H.Rds\n├── 09_atm.csv\n├── 09_vocab.tex\n├── 10_atm.csv\n├── 10_atm_pc.Rds\n├── 10_aytm.csv\n├── 10_aytm_comp.csv\n├── 10_aytm_did.csv\n├── 10_model_stats.Rds\n├── 10_models.Rds\n├── 11_au_dept_xwalk.Rds\n├── 11_departments.csv\n├── 11_departments_canonical.csv\n├── 11_dept_dummies.Rds\n├── 11_dept_gamma.Rds\n├── 11_dept_term_matrix.Rds\n├── 11_oru_gamma.Rds\n├── 11_oru_term_matrix.Rds\n├── 11_test_train.Rds\n├── 12_layout.Rds\n├── author_histories [7665 entries exceeds filelimit, not opening dir]\n├── authors_meta [6020 entries exceeds filelimit, not opening dir]\n├── docs [145144 entries exceeds filelimit, not opening dir]\n├── ldatuning_results\n│   ├── tuningResult_comp.Rds\n│   ├── tuningResult_comp.docx\n│   ├── tuningResult_comp.pdf\n│   ├── tuningResult_did.Rds\n│   └── tuningResult_did.pdf\n├── ldatuning_results-20190415T164055Z-001.zip\n├── parsed_blocks [430 entries exceeds filelimit, not opening dir]\n├── pubs [282 entries exceeds filelimit, not opening dir]\n└── temp"
+  },
+  {
+    "objectID": "content/04-05-data-management.html#a-reminder-on-paths",
+    "href": "content/04-05-data-management.html#a-reminder-on-paths",
+    "title": "Project and data management",
+    "section": "A reminder on paths",
+    "text": "A reminder on paths\n\nWindows and Unix-based systems write paths differently\nUse file.path() or (even better) the here package to construct paths"
+  },
+  {
+    "objectID": "content/04-05-data-management.html#exercise-organize-your-eda",
+    "href": "content/04-05-data-management.html#exercise-organize-your-eda",
+    "title": "Project and data management",
+    "section": "Exercise: Organize your EDA",
+    "text": "Exercise: Organize your EDA\n.\n├── R\n├── data\n├── paper\n├── plots\n├── readme.md\n├── scripts\n└── talk"
+  },
+  {
+    "objectID": "content/04-05-data-management.html#data-management-plan-examples-and-resources",
+    "href": "content/04-05-data-management.html#data-management-plan-examples-and-resources",
+    "title": "Project and data management",
+    "section": "Data management plan examples and resources",
+    "text": "Data management plan examples and resources\n\nUCM Library\nUCSD NSF examples\n\nSBE example 1\nSBE example 2\n\nNSF policy summary\n\nSBE-specific guidance"
+  },
+  {
+    "objectID": "content/04-05-data-management.html#care-principles",
+    "href": "content/04-05-data-management.html#care-principles",
+    "title": "Project and data management",
+    "section": "CARE principles",
+    "text": "CARE principles\n\nApplications of FAIR Principles have the potential to neglect the rights of Indigenous Peoples and their protocols for cultural, spiritual and ecological information. (Jennings et al. 2023)\n\n\nCollective benefit\n\nC1. For inclusive development and innovation\nC2. For improved governance and citizen engagement\nC3. For equitable outcomes\n\nAuthority to control\n\nA1. Recognizing rights and interests\nA2. Data for governance [self-governance and self-determination]\nA3. Governance of data\n\nResponsibility\n\nR1. For positive relationships\nR2. For expanding capability and capacity\nR3. For Indigenous languages and worldviews\n\nEthics\n\nE1. For minimizing harm and maximizing benefit\nE2. For justice\nE3. For future use\n\n\nhttps://www.gida-global.org/care"
+  },
+  {
+    "objectID": "content/04-05-data-management.html",
+    "href": "content/04-05-data-management.html",
+    "title": "Project and data management",
+    "section": "",
+    "text": "The first rule of data management Do not edit your data"
+  },
+  {
+    "objectID": "content/04-05-data-management.html#the-first-rule-of-data-management-do-not-edit-your-data-.center-font-size12",
+    "href": "content/04-05-data-management.html#the-first-rule-of-data-management-do-not-edit-your-data-.center-font-size12",
+    "title": "Project and data management",
+    "section": "The first rule of data management Do not edit your data {.center font-size:12}",
+    "text": "The first rule of data management Do not edit your data {.center font-size:12}"
+  },
+  {
+    "objectID": "content/04-05-data-management.html#the-first-rule-of-data-management-do-not-edit-your-data-.center-stylefont-size-200",
+    "href": "content/04-05-data-management.html#the-first-rule-of-data-management-do-not-edit-your-data-.center-stylefont-size-200",
+    "title": "Project and data management",
+    "section": "The first rule of data management Do not edit your data {.center style=“font-size: 200%}",
+    "text": "The first rule of data management Do not edit your data {.center style=“font-size: 200%}"
+  },
+  {
+    "objectID": "content/04-05-data-management.html#the-analysis-pipeline",
+    "href": "content/04-05-data-management.html#the-analysis-pipeline",
+    "title": "Project and data management",
+    "section": "The analysis pipeline",
+    "text": "The analysis pipeline\n├── scripts\n│   ├── 01_parse_faculty_list.R\n│   ├── 02_Scopus_search_results.R\n│   ├── 03_match.R\n│   ├── 03_matched.csv\n│   ├── 04_author_meta.R\n│   ├── 05_filtering.R\n│   ├── 06_author_histories.R\n│   ├── 07_complete_histories.R\n│   ├── 08_text_annotation.R\n│   ├── 09_build_vocab.R\n│   ├── 10_topic_modeling.R\n│   ├── 11_depts.R\n│   ├── 11_depts.html\n│   ├── 12_analysis\\ copy.html\n│   ├── 12_analysis-matched.html\n│   ├── 12_analysis.R\n│   ├── 12_analysis.html\n│   ├── 12_analysis_cache\n│   │   └── html\n│   │       ├── __packages\n│   │       ...\n│   │       └── topic_viz_41d0cb157a88d4ec41810a16e769f5d5.rdx\n│   ├── 12_analysis_files\n│   │   └── figure-html\n│   │       ├── author-dept\\ distance-1.png\n│   │       ...\n│   │       └── topic_viz-2.png\n│   ├── api_key.R\n│   └── scraps\n│       ├── 02_parse_pubs_list.R\n│       ├── 03_coe_pubs.R\n│       ├── 03_match_auids.R\n│       ├── 07.R\n│       ├── 12_regressions.R\n│       ├── BML-CMSI\\ deep\\ dive.R\n│       ├── Hellinger_low_memory.R\n│       ├── dept_hell_net.R\n│       ├── divergence\\ against\\ lagged\\ distributions.R\n│       ├── exploring\\ topics.R\n│       ├── fractional_authorship.R\n│       ├── hellinger.R\n│       ├── model_scratch.R\n│       ├── multicore.R\n│       ├── net_viz.R\n│       ├── prcomp.R\n│       ├── propensity.R\n│       ├── rs_diversity.R\n│       ├── spacyr.R\n│       ├── topic\\ counts\\ rather\\ than\\ entropies.R\n│       ├── topic_cosine_sim.R\n│       ├── unit-level.R\n│       ├── weighted\\ regression.R\n│       ├── word-topic_distance.R\n│       ├── xx_construct_samples.R\n│       └── xx_oru_complete_histories.R"
   }
 ]

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Methods of Data Science - Managing and publishing data</title>
+<title>Methods of Data Science - Project and data management</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -50,7 +50,7 @@ div.csl-indent {
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
 <link href="../references.html" rel="next">
-<link href="../content/04-04-project-organization.html" rel="prev">
+<link href="../content/04-02-readability.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -93,7 +93,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../content/04-02-readability.html">Replicability &amp; reproducibility</a></li><li class="breadcrumb-item"><a href="../content/04-05-data-management.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Managing and publishing data</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../content/04-02-readability.html">Replicability &amp; reproducibility</a></li><li class="breadcrumb-item"><a href="../content/04-05-data-management.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Project and data management</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -187,12 +187,7 @@ div.csl-indent {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../content/03-02-models-of-eda.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Exploratory Data Analysis</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../content/03-03-checklists.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Two EDA “Checklists”</span></a>
+  <a href="../content/03-02-models-of-eda.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Project: Data Journey Narrative</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -218,17 +213,7 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../content/04-03-code-review.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">A code review checklist</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../content/04-04-project-organization.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">The life-changing magic of tidying your projects</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../content/04-05-data-management.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Managing and publishing data</span></a>
+  <a href="../content/04-05-data-management.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Project and data management</span></a>
   </div>
 </li>
       </ul>
@@ -250,14 +235,24 @@ div.csl-indent {
    
   <ul>
   <li><a href="#reading" id="toc-reading" class="nav-link active" data-scroll-target="#reading">Reading</a></li>
-  <li><a href="#the-first-rule-of-data-management" id="toc-the-first-rule-of-data-management" class="nav-link" data-scroll-target="#the-first-rule-of-data-management">The first rule of data management</a></li>
-  <li><a href="#documentation" id="toc-documentation" class="nav-link" data-scroll-target="#documentation">Documentation</a></li>
-  <li><a href="#questions-a-codebook-should-answer" id="toc-questions-a-codebook-should-answer" class="nav-link" data-scroll-target="#questions-a-codebook-should-answer">Questions a codebook should answer</a></li>
-  <li><a href="#major-codebook-elements" id="toc-major-codebook-elements" class="nav-link" data-scroll-target="#major-codebook-elements">Major codebook elements</a></li>
-  <li><a href="#data-management-plans" id="toc-data-management-plans" class="nav-link" data-scroll-target="#data-management-plans">Data management plans</a></li>
-  <li><a href="#data-management-plan-common-elements" id="toc-data-management-plan-common-elements" class="nav-link" data-scroll-target="#data-management-plan-common-elements">Data management plan: Common elements</a></li>
+  <li><a href="#some-data-management-disasters" id="toc-some-data-management-disasters" class="nav-link" data-scroll-target="#some-data-management-disasters">Some data management disasters</a></li>
+  <li><a href="#dumpster-organization" id="toc-dumpster-organization" class="nav-link" data-scroll-target="#dumpster-organization">Dumpster organization</a></li>
+  <li><a href="#the-first-rule-of-data-management-do-not-edit-your-data" id="toc-the-first-rule-of-data-management-do-not-edit-your-data" class="nav-link" data-scroll-target="#the-first-rule-of-data-management-do-not-edit-your-data">The first rule of data management<br><br> Do not edit your data</a></li>
+  <li><a href="#project-organization" id="toc-project-organization" class="nav-link" data-scroll-target="#project-organization">Project organization</a></li>
+  <li><a href="#a-model-for-computational-social-science-projects" id="toc-a-model-for-computational-social-science-projects" class="nav-link" data-scroll-target="#a-model-for-computational-social-science-projects">A model for computational social science projects</a></li>
+  <li><a href="#file-naming-convention" id="toc-file-naming-convention" class="nav-link" data-scroll-target="#file-naming-convention">File naming convention</a></li>
+  <li><a href="#the-model-in-action-a-mid-sized-text-mining-project" id="toc-the-model-in-action-a-mid-sized-text-mining-project" class="nav-link" data-scroll-target="#the-model-in-action-a-mid-sized-text-mining-project">The model in action: A mid-sized text-mining project</a></li>
+  <li><a href="#the-analysis-pipeline" id="toc-the-analysis-pipeline" class="nav-link" data-scroll-target="#the-analysis-pipeline">The analysis pipeline</a></li>
+  <li><a href="#intermediate-data-files" id="toc-intermediate-data-files" class="nav-link" data-scroll-target="#intermediate-data-files">Intermediate data files</a></li>
+  <li><a href="#a-reminder-on-paths" id="toc-a-reminder-on-paths" class="nav-link" data-scroll-target="#a-reminder-on-paths">A reminder on paths</a></li>
+  <li><a href="#exercise-organize-your-eda" id="toc-exercise-organize-your-eda" class="nav-link" data-scroll-target="#exercise-organize-your-eda">Exercise: Organize your EDA</a></li>
+  <li><a href="#data-management-plans" id="toc-data-management-plans" class="nav-link" data-scroll-target="#data-management-plans">Data management plans</a>
+  <ul class="collapse">
+  <li><a href="#common-elements" id="toc-common-elements" class="nav-link" data-scroll-target="#common-elements">Common elements</a></li>
+  </ul></li>
+  <li><a href="#data-management-plan-examples-and-resources" id="toc-data-management-plan-examples-and-resources" class="nav-link" data-scroll-target="#data-management-plan-examples-and-resources">Data management plan examples and resources</a></li>
   <li><a href="#fair-principles-for-published-data" id="toc-fair-principles-for-published-data" class="nav-link" data-scroll-target="#fair-principles-for-published-data">FAIR principles for published data</a></li>
-  <li><a href="#dois-for-data" id="toc-dois-for-data" class="nav-link" data-scroll-target="#dois-for-data">DOIs for data</a></li>
+  <li><a href="#care-principles" id="toc-care-principles" class="nav-link" data-scroll-target="#care-principles">CARE principles</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
 </nav>
@@ -267,7 +262,7 @@ div.csl-indent {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-title">Managing and publishing data</span></h1>
+<h1 class="title"><span class="chapter-title">Project and data management</span></h1>
 </div>
 
 
@@ -285,70 +280,261 @@ div.csl-indent {
 <section id="reading" class="level2">
 <h2 class="anchored" data-anchor-id="reading">Reading</h2>
 <ul>
-<li><span class="citation" data-cites="HudonFieldNotesBuilding2018">Hudon (<a href="../references.html#ref-HudonFieldNotesBuilding2018" role="doc-biblioref">2018</a>)</span></li>
+<li><span class="citation" data-cites="LaskowskiWhatWhenYou">Laskowski (<a href="../references.html#ref-LaskowskiWhatWhenYou" role="doc-biblioref">n.d.</a>)</span></li>
+<li><span class="citation" data-cites="NobleQuickGuideOrganizing2009">Noble (<a href="../references.html#ref-NobleQuickGuideOrganizing2009" role="doc-biblioref">2009</a>)</span></li>
 <li><span class="citation" data-cites="WilkinsonFAIRGuidingPrinciples2016">Wilkinson et al. (<a href="../references.html#ref-WilkinsonFAIRGuidingPrinciples2016" role="doc-biblioref">2016</a>)</span></li>
+<li><span class="citation" data-cites="JenningsApplyingCAREPrinciples2023">Jennings et al. (<a href="../references.html#ref-JenningsApplyingCAREPrinciples2023" role="doc-biblioref">2023</a>)</span></li>
 </ul>
 </section>
-<section id="the-first-rule-of-data-management" class="level2">
-<h2 class="anchored" data-anchor-id="the-first-rule-of-data-management">The first rule of data management</h2>
-<p><em>Do not edit your data.</em></p>
-</section>
-<section id="documentation" class="level2">
-<h2 class="anchored" data-anchor-id="documentation">Documentation</h2>
+<section id="some-data-management-disasters" class="level2">
+<h2 class="anchored" data-anchor-id="some-data-management-disasters">Some data management disasters</h2>
 <ul>
-<li>Many social science fields have a tradition of writing codebooks for their data
-<ul>
-<li><a href="https://github.com/stanford-policylab/opp/blob/master/data_readme.md">Stanford Open Policing codebook</a></li>
-<li><a href="https://kjhealy.github.io/covdata/articles/codebook.html">“Codebook-like summary” of the <code>covdata</code> package, automatically generated using <code>skimr</code></a></li>
-<li>Caitlin Hudon’s approach <span class="citation" data-cites="HudonFieldNotesBuilding2018">(<a href="../references.html#ref-HudonFieldNotesBuilding2018" role="doc-biblioref">Hudon 2018</a>)</span>
-<ul>
-<li>Table and field name, both verbatim</li>
-<li>Field example value</li>
-<li>Notes for both table and field</li>
-</ul></li>
-</ul></li>
+<li><span class="citation" data-cites="ArrayErrors2011"><em>The Economist</em> (<a href="../references.html#ref-ArrayErrors2011" role="doc-biblioref">2011</a>)</span>, <span class="citation" data-cites="VideoKeithBaggerly"><span>“Video: <span>Keith Baggerly</span>, "<span>When</span> Is <span>Reproducibility</span> an <span>Ethical Issue</span>? <span>Genomics</span>, <span>Personalized Medicine</span>, and <span>Human Error</span>"”</span> (<a href="../references.html#ref-VideoKeithBaggerly" role="doc-biblioref">n.d.</a>)</span></li>
+<li><span class="citation" data-cites="HerndonDoesHighPublic2014">Herndon, Ash, and Pollin (<a href="../references.html#ref-HerndonDoesHighPublic2014" role="doc-biblioref">2014</a>)</span>, but you can just read <span class="citation" data-cites="BaileyReinhartRogoffErrorHow">Bailey and Borwein (Jon) (<a href="../references.html#ref-BaileyReinhartRogoffErrorHow" role="doc-biblioref">n.d.</a>)</span>, <span class="citation" data-cites="CassidyReinhartRogoffControversy">Cassidy (<a href="../references.html#ref-CassidyReinhartRogoffControversy" role="doc-biblioref">n.d.</a>)</span>, and/or watch <span class="citation" data-cites="ReinhartRogoffGrowth2019"><em>Reinhart &amp; <span>Rogoff</span> - <span>Growth</span> in a <span>Time</span> of <span>Debt</span> - <span>EXERCISE</span>!</em> (<a href="../references.html#ref-ReinhartRogoffGrowth2019" role="doc-biblioref">2019</a>)</span></li>
+<li><span class="citation" data-cites="LaskowskiWhatWhenYou">Laskowski (<a href="../references.html#ref-LaskowskiWhatWhenYou" role="doc-biblioref">n.d.</a>)</span>, <span class="citation" data-cites="ViglioneAvalancheSpiderpaperRetractions2020">Viglione (<a href="../references.html#ref-ViglioneAvalancheSpiderpaperRetractions2020" role="doc-biblioref">2020</a>)</span>, <span class="citation" data-cites="PennisiProminentSpiderBiologist2020">Pennisi (<a href="../references.html#ref-PennisiProminentSpiderBiologist2020" role="doc-biblioref">2020</a>)</span></li>
+<li><span class="citation" data-cites="HowExcelMay2020"><span>“How <span>Excel</span> May Have Caused Loss of 16,000 <span>Covid</span> Tests in <span>England</span>”</span> (<a href="../references.html#ref-HowExcelMay2020" role="doc-biblioref">2020</a>)</span></li>
 </ul>
-<p>(ref:Hudson-tbl) Example of Caitlin Hudon’s approach to building a data dictionary. Source: <a href="https://caitlinhudon.com/2018/10/30/data-dictionaries/" class="uri">https://caitlinhudon.com/2018/10/30/data-dictionaries/</a></p>
-<div class="cell">
-<div class="cell-output-display">
+</section>
+<section id="dumpster-organization" class="level2">
+<h2 class="anchored" data-anchor-id="dumpster-organization">Dumpster organization</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images/04-reproducibility/Hudon.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<figcaption class="figure-caption">(ref:Hudson-tbl)</figcaption>
+<p><img src="images/04-reproducibility/dumpster.jpg" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">😱 Source: <a href="https://pbs.twimg.com/media/DFca5SRXsAAx1NA" class="uri">https://pbs.twimg.com/media/DFca5SRXsAAx1NA</a></figcaption>
 </figure>
 </div>
-</div>
-</div>
-</section>
-<section id="questions-a-codebook-should-answer" class="level2">
-<h2 class="anchored" data-anchor-id="questions-a-codebook-should-answer">Questions a codebook should answer</h2>
-<ol type="1">
-<li>What does this field mean? How should I use it?</li>
-<li>What is the data [journey]?
 <ul>
-<li>Where does this data come from?</li>
-<li>How exactly is it collected?</li>
-<li>How often is it updated?</li>
-<li>Where does it go next?</li>
-</ul></li>
-<li>What does the data in this field actually look like?</li>
-<li>Are there any caveats to keep in mind when using this data?</li>
-<li>Where can I go for more information?</li>
-</ol>
-<p><span class="citation" data-cites="HudonFieldNotesBuilding2018">(<a href="../references.html#ref-HudonFieldNotesBuilding2018" role="doc-biblioref">Hudon 2018</a>)</span></p>
+<li>Dump all of your files into one place</li>
+<li>Use search tools to find what you want</li>
+<li>Just assume that things aren’t getting corrupted</li>
+<li>The way many Gen Z students think about their files? <span class="citation" data-cites="ChinStudentsWhoGrew2021">(<a href="../references.html#ref-ChinStudentsWhoGrew2021" role="doc-biblioref">Chin 2021</a>)</span></li>
+</ul>
 </section>
-<section id="major-codebook-elements" class="level2">
-<h2 class="anchored" data-anchor-id="major-codebook-elements">Major codebook elements</h2>
-<p>(<a href="https://afit-r.github.io/codebook" class="uri">https://afit-r.github.io/codebook</a>)</p>
-<ol type="1">
-<li>Original source of the data</li>
-<li>Sampling information
+<section id="the-first-rule-of-data-management-do-not-edit-your-data" class="level2 center" style="font-size: 200%; text-align: center;">
+<h2 class="center anchored" style="font-size: 200%; text-align: center;" data-anchor-id="the-first-rule-of-data-management-do-not-edit-your-data">The first rule of data management<br><br> Do not edit your data</h2>
+</section>
+<section id="project-organization" class="level2">
+<h2 class="anchored" data-anchor-id="project-organization">Project organization</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/04-reproducibility/noble.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Noble’s <span class="citation" data-cites="NobleQuickGuideOrganizing2009">(<a href="../references.html#ref-NobleQuickGuideOrganizing2009" role="doc-biblioref">2009</a>)</span> sample folder structure is designed for experimental biologists</figcaption>
+</figure>
+</div>
 <ul>
-<li>Where and how the data were generated</li>
+<li>Keep your project self-contained</li>
+<li>Locate files quickly</li>
+<li>Play nicely with version control</li>
+<li><em>Self-document key relationships between project files</em></li>
+<li><em>Work with your data without editing it</em></li>
+</ul>
+</section>
+<section id="a-model-for-computational-social-science-projects" class="level2">
+<h2 class="anchored" data-anchor-id="a-model-for-computational-social-science-projects">A model for computational social science projects</h2>
+<pre><code>.
+├── R
+├── data
+├── paper
+│&nbsp;&nbsp; ├── _quarto.yml
+│&nbsp;&nbsp; ├── paper.qmd
+├── plots
+├── readme.md
+├── scripts
+└── talk</code></pre>
+<ul>
+<li><p><a href="https://github.com/dhicks/project_template" class="uri">https://github.com/dhicks/project_template</a></p></li>
+<li><p>Configured as a GitHub “template,” making it easy to create new repositories for new projects</p></li>
+<li><p>Designated folders for data, plots/outputs, and utility functions</p></li>
+</ul>
+</section>
+<section id="file-naming-convention" class="level2">
+<h2 class="anchored" data-anchor-id="file-naming-convention">File naming convention</h2>
+<p>Files in <code>scripts</code>, <code>data</code>, and <code>plots</code> should generally use a sequential naming convention:</p>
+<ul>
+<li>Scripts in <code>scripts</code> should have filenames starting with <code>01_</code>:
+<ul>
+<li><code>01_scrape.R</code></li>
+<li><code>02_parse.R</code></li>
+<li><code>03_eda.R</code>, and so on</li>
 </ul></li>
-<li>Variable-level metadata and summaries</li>
-<li>Structure of the data</li>
-</ol>
+<li>Data and plot files (<code>data</code> and <code>plots</code>) should use a parallel naming convention:
+<ul>
+<li><code>00_</code> indicates raw data (produced or gathered outside of the pipeline in <code>scripts</code>)</li>
+<li><code>01_</code> indicates plots and intermediate data files produced by script number <code>01</code>, and so on</li>
+</ul></li>
+</ul>
+</section>
+<section id="the-model-in-action-a-mid-sized-text-mining-project" class="level2">
+<h2 class="anchored" data-anchor-id="the-model-in-action-a-mid-sized-text-mining-project">The model in action: A mid-sized text-mining project</h2>
+<p>Published paper: <a href="https://doi.org/10.1162/qss_a_00150" class="uri">https://doi.org/10.1162/qss_a_00150</a><br>
+GitHub repo: <a href="https://github.com/dhicks/orus" class="uri">https://github.com/dhicks/orus</a><br>
+23 directories, 274 files (plus 160k data files)</p>
+<pre><code>.
+├── ORU\ faculty
+│&nbsp;&nbsp; └── ORU\ Publications.fld
+├── QSS\ forms
+├── R
+├── data
+│&nbsp;&nbsp; ├── author_histories
+│&nbsp;&nbsp; ├── authors_meta
+│&nbsp;&nbsp; ├── docs
+│&nbsp;&nbsp; ├── ldatuning_results
+│&nbsp;&nbsp; ├── parsed_blocks
+│&nbsp;&nbsp; ├── pubs
+│&nbsp;&nbsp; └── temp
+├── paper
+│&nbsp;&nbsp; ├── img
+│&nbsp;&nbsp; └── scraps
+├── plots
+├── presentations
+└── scripts
+    ├── 12_analysis_cache
+    │&nbsp;&nbsp; └── html
+    ├── 12_analysis_files
+    │&nbsp;&nbsp; └── figure-html
+    └── scraps</code></pre>
+</section>
+<section id="the-analysis-pipeline" class="level2">
+<h2 class="anchored" data-anchor-id="the-analysis-pipeline">The analysis pipeline</h2>
+<pre><code>├── scripts
+│&nbsp;&nbsp; ├── 01_parse_faculty_list.R
+│&nbsp;&nbsp; ├── 02_Scopus_search_results.R
+│&nbsp;&nbsp; ├── 03_match.R
+│&nbsp;&nbsp; ├── 03_matched.csv
+│&nbsp;&nbsp; ├── 04_author_meta.R
+│&nbsp;&nbsp; ├── 05_filtering.R
+│&nbsp;&nbsp; ├── 06_author_histories.R
+│&nbsp;&nbsp; ├── 07_complete_histories.R
+│&nbsp;&nbsp; ├── 08_text_annotation.R
+│&nbsp;&nbsp; ├── 09_build_vocab.R
+│&nbsp;&nbsp; ├── 10_topic_modeling.R
+│&nbsp;&nbsp; ├── 11_depts.R
+│&nbsp;&nbsp; ├── 11_depts.html
+│&nbsp;&nbsp; ├── 12_analysis\ copy.html
+│&nbsp;&nbsp; ├── 12_analysis-matched.html
+│&nbsp;&nbsp; ├── 12_analysis.R
+│&nbsp;&nbsp; ├── 12_analysis.html
+│&nbsp;&nbsp; ├── 12_analysis_cache
+│&nbsp;&nbsp; │&nbsp;&nbsp; └── html
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── __packages
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ...
+│&nbsp;&nbsp; │&nbsp;&nbsp;     └── topic_viz_41d0cb157a88d4ec41810a16e769f5d5.rdx
+│&nbsp;&nbsp; ├── 12_analysis_files
+│&nbsp;&nbsp; │&nbsp;&nbsp; └── figure-html
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── author-dept\ distance-1.png
+│&nbsp;&nbsp; │&nbsp;&nbsp;     ...
+│&nbsp;&nbsp; │&nbsp;&nbsp;     └── topic_viz-2.png
+│&nbsp;&nbsp; ├── api_key.R
+│&nbsp;&nbsp; └── scraps
+│&nbsp;&nbsp;     ├── 02_parse_pubs_list.R
+│&nbsp;&nbsp;     ├── 03_coe_pubs.R
+│&nbsp;&nbsp;     ├── 03_match_auids.R
+│&nbsp;&nbsp;     ├── 07.R
+│&nbsp;&nbsp;     ├── 12_regressions.R
+│&nbsp;&nbsp;     ├── BML-CMSI\ deep\ dive.R
+│&nbsp;&nbsp;     ├── Hellinger_low_memory.R
+│&nbsp;&nbsp;     ├── dept_hell_net.R
+│&nbsp;&nbsp;     ├── divergence\ against\ lagged\ distributions.R
+│&nbsp;&nbsp;     ├── exploring\ topics.R
+│&nbsp;&nbsp;     ├── fractional_authorship.R
+│&nbsp;&nbsp;     ├── hellinger.R
+│&nbsp;&nbsp;     ├── model_scratch.R
+│&nbsp;&nbsp;     ├── multicore.R
+│&nbsp;&nbsp;     ├── net_viz.R
+│&nbsp;&nbsp;     ├── prcomp.R
+│&nbsp;&nbsp;     ├── propensity.R
+│&nbsp;&nbsp;     ├── rs_diversity.R
+│&nbsp;&nbsp;     ├── spacyr.R
+│&nbsp;&nbsp;     ├── topic\ counts\ rather\ than\ entropies.R
+│&nbsp;&nbsp;     ├── topic_cosine_sim.R
+│&nbsp;&nbsp;     ├── unit-level.R
+│&nbsp;&nbsp;     ├── weighted\ regression.R
+│&nbsp;&nbsp;     ├── word-topic_distance.R
+│&nbsp;&nbsp;     ├── xx_construct_samples.R
+│&nbsp;&nbsp;     └── xx_oru_complete_histories.R</code></pre>
+</section>
+<section id="intermediate-data-files" class="level2">
+<h2 class="anchored" data-anchor-id="intermediate-data-files">Intermediate data files</h2>
+<pre><code>data
+├── *ORUs\ -\ DSL\ -\ Google\ Drive.webloc
+├── 00_UCD_2016.csv
+├── 00_UCD_2017.csv
+├── 00_UCD_2018.csv
+├── 00_faculty_list.html
+├── 00_manual_matches.csv
+├── 00_publications_list.html
+├── 01_departments.csv
+├── 01_departments_canonical.csv
+├── 01_faculty.Rds
+├── 02_pubs.Rds
+├── 03_codepartmentals.Rds
+├── 03_dropout.Rds
+├── 03_matched.Rds
+├── 03_unmatched.Rds
+├── 04_author_meta.Rds
+├── 04_dropouts.Rds
+├── 04_genderize
+├── 04_namsor.Rds
+├── 05_author_meta.Rds
+├── 05_dept_dummies.Rds
+├── 05_dropouts.Rds
+├── 05_layout.Rds
+├── 05_matched.Rds
+├── 06_author_histories.Rds
+├── 07_coauth_count.Rds
+├── 07_parsed_histories.Rds
+├── 08_phrases.Rds
+├── 09_H.Rds
+├── 09_atm.csv
+├── 09_vocab.tex
+├── 10_atm.csv
+├── 10_atm_pc.Rds
+├── 10_aytm.csv
+├── 10_aytm_comp.csv
+├── 10_aytm_did.csv
+├── 10_model_stats.Rds
+├── 10_models.Rds
+├── 11_au_dept_xwalk.Rds
+├── 11_departments.csv
+├── 11_departments_canonical.csv
+├── 11_dept_dummies.Rds
+├── 11_dept_gamma.Rds
+├── 11_dept_term_matrix.Rds
+├── 11_oru_gamma.Rds
+├── 11_oru_term_matrix.Rds
+├── 11_test_train.Rds
+├── 12_layout.Rds
+├── author_histories [7665 entries exceeds filelimit, not opening dir]
+├── authors_meta [6020 entries exceeds filelimit, not opening dir]
+├── docs [145144 entries exceeds filelimit, not opening dir]
+├── ldatuning_results
+│&nbsp;&nbsp; ├── tuningResult_comp.Rds
+│&nbsp;&nbsp; ├── tuningResult_comp.docx
+│&nbsp;&nbsp; ├── tuningResult_comp.pdf
+│&nbsp;&nbsp; ├── tuningResult_did.Rds
+│&nbsp;&nbsp; └── tuningResult_did.pdf
+├── ldatuning_results-20190415T164055Z-001.zip
+├── parsed_blocks [430 entries exceeds filelimit, not opening dir]
+├── pubs [282 entries exceeds filelimit, not opening dir]
+└── temp</code></pre>
+</section>
+<section id="a-reminder-on-paths" class="level2">
+<h2 class="anchored" data-anchor-id="a-reminder-on-paths">A reminder on paths</h2>
+<ul>
+<li>Windows and Unix-based systems write paths differently</li>
+<li>Use <code>file.path()</code> or (even better) the <code>here</code> package to construct paths</li>
+</ul>
+</section>
+<section id="exercise-organize-your-eda" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-organize-your-eda">Exercise: Organize your EDA</h2>
+<pre><code>.
+├── R
+├── data
+├── paper
+├── plots
+├── readme.md
+├── scripts
+└── talk</code></pre>
 </section>
 <section id="data-management-plans" class="level2">
 <h2 class="anchored" data-anchor-id="data-management-plans">Data management plans</h2>
@@ -357,9 +543,22 @@ div.csl-indent {
 <ul>
 <li>Since 2011, NSF has required a 2-page data management plan for most types of proposals</li>
 </ul></li>
-<li>Examples and resources
+</ul>
+<section id="common-elements" class="level3">
+<h3 class="anchored" data-anchor-id="common-elements">Common elements</h3>
 <ul>
-<li><a href="https://library.ucmerced.edu/research/researchers/research-data-management/data-management-plans">UCM Library</a> <!-- - [UCM IT support](https://it.ucmerced.edu/content/research-data-management-consultation-service) --></li>
+<li>Who is responsible for data management</li>
+<li>Who else will have access to which data</li>
+<li>How data will be collected</li>
+<li>Data formatting standards</li>
+<li>Whether and how data will be archived and made available for reuse</li>
+</ul>
+</section>
+</section>
+<section id="data-management-plan-examples-and-resources" class="level2">
+<h2 class="anchored" data-anchor-id="data-management-plan-examples-and-resources">Data management plan examples and resources</h2>
+<ul>
+<li><a href="https://library.ucmerced.edu/research/researchers/research-data-management/data-management-plans">UCM Library</a></li>
 <li><a href="https://library.ucsd.edu/lpw-staging/research-and-collections/data-curation/data-management/dmp-samples.html">UCSD NSF examples</a>
 <ul>
 <li><a href="https://library.ucsd.edu/lpw-staging/research-and-collections/data-curation/data-management/dmpsample/DMP-Example-Ayelet-Gneezy.pdf">SBE example 1</a></li>
@@ -369,17 +568,6 @@ div.csl-indent {
 <ul>
 <li><a href="https://www.nsf.gov/sbe/DMP/SBE_DataMgmtPlanPolicy_RevisedApril2018.pdf">SBE-specific guidance</a></li>
 </ul></li>
-</ul></li>
-</ul>
-</section>
-<section id="data-management-plan-common-elements" class="level2">
-<h2 class="anchored" data-anchor-id="data-management-plan-common-elements">Data management plan: Common elements</h2>
-<ul>
-<li>Who is responsible for data management</li>
-<li>Who else will have access to which data</li>
-<li>How data will be collected</li>
-<li>Data formatting standards</li>
-<li>Whether and how data will be archived and made available for reuse</li>
 </ul>
 </section>
 <section id="fair-principles-for-published-data" class="level2">
@@ -418,51 +606,82 @@ div.csl-indent {
 </ul></li>
 </ul>
 </section>
-<section id="dois-for-data" class="level2">
-<h2 class="anchored" data-anchor-id="dois-for-data">DOIs for data</h2>
+<section id="care-principles" class="level2">
+<h2 class="anchored" data-anchor-id="care-principles">CARE principles</h2>
+<blockquote class="blockquote">
+<p>Applications of FAIR Principles have the potential to neglect the rights of Indigenous Peoples and their protocols for cultural, spiritual and ecological information. <span class="citation" data-cites="JenningsApplyingCAREPrinciples2023">(<a href="../references.html#ref-JenningsApplyingCAREPrinciples2023" role="doc-biblioref">Jennings et al. 2023</a>)</span></p>
+</blockquote>
 <ul>
-<li><a href="https://help.osf.io/hc/en-us/articles/360019931013-Create-DOIs">Instructions for OSF</a></li>
-<li><a href="https://help.zenodo.org/#versioning">Notes for Zenodo</a>
+<li><em>Collective benefit</em>
 <ul>
-<li><a href="https://guides.github.com/activities/citable-code/">Zenodo also plays nicely with GitHub for minting DOIs for code</a></li>
+<li>C1. For inclusive development and innovation</li>
+<li>C2. For improved governance and citizen engagement</li>
+<li>C3. For equitable outcomes</li>
 </ul></li>
-<li><a href="https://dataverse.org/best-practices/data-citation">Citation models at Harvard Dataverse</a></li>
+<li><em>Authority to control</em>
+<ul>
+<li>A1. Recognizing rights and interests</li>
+<li>A2. Data for governance [self-governance and self-determination]</li>
+<li>A3. Governance of data</li>
+</ul></li>
+<li><em>Responsibility</em>
+<ul>
+<li>R1. For positive relationships</li>
+<li>R2. For expanding capability and capacity</li>
+<li>R3. For Indigenous languages and worldviews</li>
+</ul></li>
+<li><em>Ethics</em>
+<ul>
+<li>E1. For minimizing harm and maximizing benefit</li>
+<li>E2. For justice</li>
+<li>E3. For future use</li>
+</ul></li>
 </ul>
-<!--
-## Hazards of open data ##
-
-- Legal
-    - Privacy
-        - Personally identifiable information (PII): "information which can be used to **distinguish or trace an individual's identity**, such as their name, social security number, biometric records, etc. *alone, or when combined with other ... information*" [Source](https://www.osec.doc.gov/opog/privacy/PII_BII.html)
-        - Sensitive information: "if the loss, compromission [sic], or disclosure without authorization of this data could **result in harm, embarrassment, inconvenience, or unfairness** to an individual" [Source](https://techgdpr.com/blog/difference-between-pii-and-personal-data/)
-        - IRB will require you to
-            - indicate what PII and sensitive information you're collecting
-            - explain why you need to collect it
-            - outline a plan to keep it secure
-            - notify or mitigate issues with participants if security is compromised
-
-    - Copyright
-        - Data that you've bought from a broker
-        - Journal article text, *but also* article metadata if you used a private service to retrieve it
-    
-- Community-level hazards
-    - Location of endangered species [@OpenDataOffer2018]
-    - Indigenous community sacred sites
-    - Antiquities
-    - Identifying the Golden State Killer through GEDmatch [@ZhangHowTinyWebsite2018]
- 
-- Public-but-inaccessible data
-    - OKCupid data scrape [@McCookPubliclyAvailableData2016]
-        - [Emil O. Kierkegaard is a racist asshole; don't be like Emil O. Kierkegaard](https://rationalwiki.org/wiki/Emil_Kirkegaard)
--->
+<p><span class="tiny"><a href="https://www.gida-global.org/care" class="uri">https://www.gida-global.org/care</a></span></p>
 </section>
 <section id="references" class="level2">
 <h2 class="anchored" data-anchor-id="references">References</h2>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
-<div id="ref-HudonFieldNotesBuilding2018" class="csl-entry" role="listitem">
-Hudon, Caitlin. 2018. <span>“Field <span>Notes</span>: <span>Building Data Dictionaries</span>.”</span> <span>Haystacks</span>. October 30, 2018. <a href="https://caitlinhudon.com/2018/10/30/data-dictionaries/">https://caitlinhudon.com/2018/10/30/data-dictionaries/</a>.
+<div id="ref-BaileyReinhartRogoffErrorHow" class="csl-entry" role="listitem">
+Bailey, David H., and Jonathan Borwein (Jon). n.d. <span>“The <span>Reinhart-Rogoff</span> Error – or How Not to <span>Excel</span> at Economics.”</span> <span>The Conversation</span>. Accessed May 16, 2020. <a href="http://theconversation.com/the-reinhart-rogoff-error-or-how-not-to-excel-at-economics-13646">http://theconversation.com/the-reinhart-rogoff-error-or-how-not-to-excel-at-economics-13646</a>.
+</div>
+<div id="ref-CassidyReinhartRogoffControversy" class="csl-entry" role="listitem">
+Cassidy, John. n.d. <span>“The <span>Reinhart</span> and <span>Rogoff Controversy</span>: <span>A Summing Up</span>.”</span> <span>The New Yorker</span>. Accessed September 27, 2020. <a href="https://www.newyorker.com/news/john-cassidy/the-reinhart-and-rogoff-controversy-a-summing-up">https://www.newyorker.com/news/john-cassidy/the-reinhart-and-rogoff-controversy-a-summing-up</a>.
+</div>
+<div id="ref-ChinStudentsWhoGrew2021" class="csl-entry" role="listitem">
+Chin, Monica. 2021. <span>“Students Who Grew up with Search Engines Might Change <span>STEM</span> Education Forever.”</span> <span>The Verge</span>. September 22, 2021. <a href="https://www.theverge.com/22684730/students-file-folder-directory-structure-education-gen-z">https://www.theverge.com/22684730/students-file-folder-directory-structure-education-gen-z</a>.
+</div>
+<div id="ref-HerndonDoesHighPublic2014" class="csl-entry" role="listitem">
+Herndon, Thomas, Michael Ash, and Robert Pollin. 2014. <span>“Does High Public Debt Consistently Stifle Economic Growth? <span>A</span> Critique of <span>Reinhart</span> and <span>Rogoff</span>.”</span> <em>Cambridge Journal of Economics</em> 38 (2): 257–79. <a href="https://doi.org/10.1093/cje/bet075">https://doi.org/10.1093/cje/bet075</a>.
+</div>
+<div id="ref-HowExcelMay2020" class="csl-entry" role="listitem">
+<span>“How <span>Excel</span> May Have Caused Loss of 16,000 <span>Covid</span> Tests in <span>England</span>.”</span> 2020. <span>The Guardian</span>. October 5, 2020. <a href="http://www.theguardian.com/politics/2020/oct/05/how-excel-may-have-caused-loss-of-16000-covid-tests-in-england">http://www.theguardian.com/politics/2020/oct/05/how-excel-may-have-caused-loss-of-16000-covid-tests-in-england</a>.
+</div>
+<div id="ref-JenningsApplyingCAREPrinciples2023" class="csl-entry" role="listitem">
+Jennings, Lydia, Talia Anderson, Andrew Martinez, Rogena Sterling, Dominique David Chavez, Ibrahim Garba, Maui Hudson, Nanibaa’ A. Garrison, and Stephanie Russo Carroll. 2023. <span>“Applying the <span>‘<span>CARE Principles</span> for <span>Indigenous Data Governance</span>’</span> to Ecology and Biodiversity Research.”</span> <em>Nature Ecology &amp; Evolution</em>, August, 1–5. <a href="https://doi.org/10.1038/s41559-023-02161-2">https://doi.org/10.1038/s41559-023-02161-2</a>.
+</div>
+<div id="ref-LaskowskiWhatWhenYou" class="csl-entry" role="listitem">
+Laskowski, Kate. n.d. <span>“What to Do When You Don’t Trust Your Data Anymore – <span>Laskowski Lab</span> at <span>UC Davis</span>.”</span> Accessed January 29, 2020. <a href="https://laskowskilab.faculty.ucdavis.edu/2020/01/29/retractions/">https://laskowskilab.faculty.ucdavis.edu/2020/01/29/retractions/</a>.
+</div>
+<div id="ref-NobleQuickGuideOrganizing2009" class="csl-entry" role="listitem">
+Noble, William Stafford. 2009. <span>“A <span>Quick Guide</span> to <span>Organizing Computational Biology Projects</span>.”</span> <em>PLOS Computational Biology</em> 5 (7): e1000424. <a href="https://doi.org/10.1371/journal.pcbi.1000424">https://doi.org/10.1371/journal.pcbi.1000424</a>.
+</div>
+<div id="ref-PennisiProminentSpiderBiologist2020" class="csl-entry" role="listitem">
+Pennisi, Elizabeth. 2020. <span>“Prominent Spider Biologist Spun a Web of Questionable Data.”</span> <em>Science</em> 367 (6478): 613–14. <a href="https://doi.org/10.1126/science.367.6478.613">https://doi.org/10.1126/science.367.6478.613</a>.
+</div>
+<div id="ref-ReinhartRogoffGrowth2019" class="csl-entry" role="listitem">
+<em>Reinhart &amp; <span>Rogoff</span> - <span>Growth</span> in a <span>Time</span> of <span>Debt</span> - <span>EXERCISE</span>!</em> 2019. <a href="https://www.youtube.com/watch?v=ItGMz0ERvcw">https://www.youtube.com/watch?v=ItGMz0ERvcw</a>.
+</div>
+<div id="ref-ArrayErrors2011" class="csl-entry" role="listitem">
+<em>The Economist</em>. 2011. <span>“An Array of Errors,”</span> September 10, 2011. <a href="https://www.economist.com/science-and-technology/2011/09/10/an-array-of-errors">https://www.economist.com/science-and-technology/2011/09/10/an-array-of-errors</a>.
+</div>
+<div id="ref-VideoKeithBaggerly" class="csl-entry" role="listitem">
+<span>“Video: <span>Keith Baggerly</span>, "<span>When</span> Is <span>Reproducibility</span> an <span>Ethical Issue</span>? <span>Genomics</span>, <span>Personalized Medicine</span>, and <span>Human Error</span>".”</span> n.d. Accessed September 23, 2020. <a href="http://www.birs.ca/events/2013/5-day-workshops/13w5083/videos/watch/201308141121-Baggerly.html">http://www.birs.ca/events/2013/5-day-workshops/13w5083/videos/watch/201308141121-Baggerly.html</a>.
+</div>
+<div id="ref-ViglioneAvalancheSpiderpaperRetractions2020" class="csl-entry" role="listitem">
+Viglione, Giuliana. 2020. <span>“<span>‘<span>Avalanche</span>’</span> of Spider-Paper Retractions Shakes Behavioural-Ecology Community.”</span> <em>Nature</em>, February. <a href="https://doi.org/10.1038/d41586-020-00287-y">https://doi.org/10.1038/d41586-020-00287-y</a>.
 </div>
 <div id="ref-WilkinsonFAIRGuidingPrinciples2016" class="csl-entry" role="listitem">
 Wilkinson, Mark D., Michel Dumontier, IJsbrand Jan Aalbersberg, Gabrielle Appleton, Myles Axton, Arie Baak, Niklas Blomberg, et al. 2016. <span>“The <span>FAIR Guiding Principles</span> for Scientific Data Management and Stewardship.”</span> <em>Scientific Data</em> 3 (1, 1): 1–9. <a href="https://doi.org/10.1038/sdata.2016.18">https://doi.org/10.1038/sdata.2016.18</a>.
@@ -706,8 +925,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../content/04-04-project-organization.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">The life-changing magic of tidying your projects</span></span>
+      <a href="../content/04-02-readability.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Readable code is reliable code</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
