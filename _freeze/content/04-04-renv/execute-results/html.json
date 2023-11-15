@@ -1,0 +1,14 @@
+{
+  "hash": "911afa22a236eb37b13d9e5253ea1fbe",
+  "result": {
+    "markdown": "# Tracking package versions with `renv` \n\n## `renv`\n\n- [`renv` homepage](https://rstudio.github.io/renv/articles/renv.html)\n- Two date-based alternatives\n    - [`checkpoint`](https://github.com/RevolutionAnalytics/checkpoint)\n    - [`groundhog`](https://groundhogr.com/)\n    \n## The problem `renv` tries to solve\n\n![`dplyr` 0.5.0 introduced a breaking change to `distinct()` in June 2016. Source: <https://datacolada.org/95>](images/04-reproducibility/dplyr.png)\n\n    \n## `renv` workflow\n\n1. Initialize `renv` for a project with `renv::init()`\n2. Track `renv.lock` in version control\n3. `renv::snapshot()` to update the lockfile\n4. `renv::restore()` to install local copies of the packages to match the lockfile\n\n## Example: Reproducing the analysis of @HicksValuesDisclosuresTrust2022 \n\n1. Bring up the paper: <https://tinyurl.com/yvccb85z>\\\n   (10.3389/fcomm.2022.1017362)\n2. Fork and clone the repo: <https://github.com/dhicks/transparency>\n3. Wrong version of R? \n    - Install [rig](https://github.com/r-lib/rig#%EF%B8%8F-installing-rig-)\n    - *[TODO: download R 4.1.2]* \n4. `renv::restore()`\n5. Open `scripts/03_dag.R` and run or knit\n6. Compare `out/03_part_values.png` to figure 2 of the paper\n7. Compare `out/03_bc_tbl.pdf` with table 2 in the paper\n\n\n## How R locates packages\n\n\n::: {.cell}\n\n```{.r .cell-code}\n.libPaths()\n```\n\n::: {.cell-output .cell-output-stdout}\n```\n[1] \"/Library/Frameworks/R.framework/Versions/4.3-x86_64/Resources/library\"\n```\n:::\n:::\n\n\n## In your EDA \n\n- Check `.libPaths()`\n- `renv::init()` (and `snapshot()`?)\n- What did this do? \n    - `.libPaths()`\n    - `git status`\n\n## References",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

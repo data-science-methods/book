@@ -1,0 +1,50 @@
+# Tracking package versions with `renv` 
+
+## `renv`
+
+- [`renv` homepage](https://rstudio.github.io/renv/articles/renv.html)
+- Two date-based alternatives
+    - [`checkpoint`](https://github.com/RevolutionAnalytics/checkpoint)
+    - [`groundhog`](https://groundhogr.com/)
+    
+## The problem `renv` tries to solve
+
+![`dplyr` 0.5.0 introduced a breaking change to `distinct()` in June 2016. Source: <https://datacolada.org/95>](images/04-reproducibility/dplyr.png)
+
+    
+## `renv` workflow
+
+1. Initialize `renv` for a project with `renv::init()`
+2. Track `renv.lock` in version control
+3. `renv::snapshot()` to update the lockfile
+4. `renv::restore()` to install local copies of the packages to match the lockfile
+
+## Example: Reproducing the analysis of @HicksValuesDisclosuresTrust2022 
+
+1. Bring up the paper: <https://tinyurl.com/yvccb85z>\
+   (10.3389/fcomm.2022.1017362)
+2. Fork and clone the repo: <https://github.com/dhicks/transparency>
+3. Wrong version of R? 
+    - Install [rig](https://github.com/r-lib/rig#%EF%B8%8F-installing-rig-)
+    - *[TODO: download R 4.1.2]* 
+4. `renv::restore()`
+5. Open `scripts/03_dag.R` and run or knit
+6. Compare `out/03_part_values.png` to figure 2 of the paper
+7. Compare `out/03_bc_tbl.pdf` with table 2 in the paper
+
+
+## How R locates packages
+
+```{r}
+.libPaths()
+```
+
+## In your EDA 
+
+- Check `.libPaths()`
+- `renv::init()` (and `snapshot()`?)
+- What did this do? 
+    - `.libPaths()`
+    - `git status`
+
+## References
